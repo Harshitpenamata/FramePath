@@ -22,7 +22,7 @@ A responsive full-stack prototype of the Framepath v3 learning model.
 
 ## Runtime
 Vinext / React, Cloudflare Worker, D1 DB and R2 BUCKET.
-Platform-owned Sign in with ChatGPT provides identity. No app-owned password or OAuth system is implemented.
+Google sign-in (OpenID Connect with PKCE) provides identity via app/auth/* routes and a signed HttpOnly session cookie (app/session.ts). Platform oai-authenticated-* headers are ignored outside local dev. Requires GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET and SESSION_SECRET.
 The public catalogue is anonymous-accessible; persistent learner actions require sign-in.
 Production secrets are stored using Sites runtime secrets, not browser code.
 OPENAI_API_KEY is required for AI, OPENAI_MODEL defaults to gpt-4.1-mini.

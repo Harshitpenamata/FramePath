@@ -6,3 +6,4 @@ declare namespace Cloudflare {
 }
 
 declare namespace Cloudflare { interface Env { OPENAI_API_KEY?: string; OPENAI_MODEL?: string; } }
+declare namespace Cloudflare { interface Env { GOOGLE_CLIENT_ID?: string; GOOGLE_CLIENT_SECRET?: string; SESSION_SECRET?: string; } }

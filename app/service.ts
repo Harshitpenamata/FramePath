@@ -1,11 +1,11 @@
 import {env} from 'cloudflare:workers';
-import {getChatGPTUser} from './chatgpt-auth';
+import {getUser} from './user';
 import {freshState,mentors,paths,weeks} from './catalog';
 import {isFreePath,moduleInfo,blockingModule} from './learning-rules';
 export function db(){if(!env.DB)throw new Error('Learning storage is unavailable. Please try again.');return env.DB}
 export function bucket(){if(!env.BUCKET)throw new Error('Upload storage is unavailable. Please try again.');return env.BUCKET}
 export function fail(message:string,status=400){return Response.json({error:message},{status,headers:{'Cache-Control':'no-store'}})}
-export async function identity(){const u=await getChatGPTUser();if(!u)throw Object.assign(new Error('Sign in to save your learning.'),{status:401});return u}
+export async function identity(){const u=await getUser();if(!u)throw Object.assign(new Error('Sign in to save your learning.'),{status:401});return u}
 export function checkOrigin(req:Request){const origin=req.headers.get('origin');if(origin&&origin!==new URL(req.url).origin)throw Object.assign(new Error('This request is not allowed.'),{status:403})}
 export async function readState(id:string){await db().prepare('INSERT OR IGNORE INTO learners(user_id,data,revision,updated_at) VALUES(?,?,0,?)').bind(id,JSON.stringify(freshState()),Date.now()).run();const row:any=await db().prepare('SELECT data,revision FROM learners WHERE user_id=?').bind(id).first();return {state:JSON.parse(row.data),revision:row.revision}}
 export async function saveState(id:string,state:any,revision:number){const r=await db().prepare('UPDATE learners SET data=?,revision=revision+1,updated_at=? WHERE user_id=? AND revision=?').bind(JSON.stringify(state),Date.now(),id,revision).run();if(!r.meta.changes)throw Object.assign(new Error('Your learning changed in another tab. Refresh and try again.'),{status:409});return revision+1}
