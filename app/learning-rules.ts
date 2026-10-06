@@ -1,0 +1,36 @@
+import {paths,weeks} from './catalog';
+export const phases=[{id:'pre',name:'Pre-production',verb:'Plan',description:'Find the idea. Plan the shots.'},{id:'production',name:'Production',verb:'Shoot',description:'Work with framing, light and sound.'},{id:'post',name:'Post-production',verb:'Edit',description:'Shape, refine and share the film.'}] as const;
+export type Phase=typeof phases[number]['id'];
+export const freePathIds=['product-reel','everyday-story'];
+export const isFreePath=(id:string)=>freePathIds.includes(id);
+// Stable module IDs preserve saved learner work while the course is organised by phase.
+export const craftOrder=[0,5,8,1,2,4,9,6,3,7,10,11];
+export const craftPhase=(index:number):Phase=>[0,5,8].includes(index)?'pre':[1,2,4,9].includes(index)?'production':'post';
+export const phaseFor=(pathId:string,index:number,craft=false):Phase=>craft?craftPhase(index):pathId==='natural-light'?(index===0?'pre':index===3?'post':'production'):pathId==='first-edit'?'post':index<2?'pre':index===2?'production':'post';
+export function moduleInfo(key:string){
+ if(/^craft-(?:[1-9]|1[0-2])$/.test(key)){const index=Number(key.split('-')[1])-1;return {key,index,pathId:'craft',craft:true,lesson:weeks[index],phase:craftPhase(index)}}
+ for(const p of paths){if(key.startsWith(p.id+'-')){const suffix=key.slice(p.id.length+1);if(!/^(0|[1-9]\d*)$/.test(suffix))break;const index=Number(suffix);if(p.lessons[index])return {key,index,pathId:p.id,craft:false,lesson:p.lessons[index],phase:phaseFor(p.id,index)}}}
+ throw new Error('That module does not exist.');
+}
+export function sequenceFor(pathId:string){return pathId==='craft'?craftOrder.map(i=>'craft-'+(i+1)):paths.find(p=>p.id===pathId)!.lessons.map((_,i)=>pathId+'-'+i)}
+export function passed(s:any,key:string){return !!s.progress?.[key]}
+export function nextModule(s:any,pathId:string){return sequenceFor(pathId).find(k=>!passed(s,k))||null}
+export function blockingModule(s:any,key:string){const info=moduleInfo(key);if(passed(s,key)||s.drafts?.[key]||s.submissions?.some((v:any)=>v.key===key))return null;const sequence=sequenceFor(info.pathId);return sequence.slice(0,sequence.indexOf(key)).find(k=>!passed(s,k))||null}
+export function moduleHref(key:string){const info=moduleInfo(key);return info.craft?'/craft/week/'+(info.index+1):'/explore/'+info.pathId+'/'+info.index}
+export const threshold=75;
+export function assignmentRubric(key:string){const info=moduleInfo(key);const weights=info.phase==='pre'?[45,35,20]:info.phase==='production'?[40,40,20]:[40,30,30];return info.lesson.checks.map((label,i)=>({label,weight:weights[i]}))}
+
+const retryTips:Record<string,string[]>={
+ 'product-reel-0':['Name one person who would use the product. Speak your opening line as if talking to them.','Refilm the product in use so the benefit is visible without a written explanation.','End the test with one simple action you want the viewer to take.'],
+ 'product-reel-1':['Compare your five stills. Replace any frame that repeats the same information.','Show the whole product clearly in your opening test frame.','Leave uncluttered space for a short closing caption in the last frame.'],
+ 'product-reel-2':['Tap to focus on the product, steady the phone, then record another short take.','Move away from harsh light or lower exposure until the brightest details return.','Choose portrait or landscape and reshoot any clips that use the other orientation.'],
+ 'product-reel-3':['Move the clearest product shot to the first two seconds of the edit.','Preview on your phone and move captions away from the screen edges.','Listen with headphones, reduce loud peaks and check permission for each audio track.'],
+ 'product-reel-4':['Time the exported reel. Trim pauses or repeated shots to reach 15–30 seconds.','Watch without sound. Reorder the shots until the product benefit is clear.','Write one specific change you would repeat or avoid in the next shoot.'],
+ 'everyday-story-0':['Choose an action you can film safely and get permission from anyone in frame.','Record the start and finish of the action, not just its middle.','Name one feeling and change your framing or pace to support it.'],
+ 'everyday-story-1':['Add one wide view, one action view and one close detail to your test stills.','Remove a repeated frame and replace it with a missing moment.','Put your stills in order and check that each follows naturally from the previous action.'],
+ 'everyday-story-2':['Clean your lens, tap to focus and repeat the soft or blurry shot.','Pick one orientation and reshoot any clips that do not match.','Record a few seconds before and after the action so the edit has room to breathe.'],
+ 'everyday-story-3':['Watch the sequence without explaining it. Add the missing moment or cut a confusing shot.','Zoom into the timeline and remove black frames or unintended gaps.','Replace unlicensed music with your own sound or an audio track you have permission to use.'],
+ 'everyday-story-4':['Make one visible change to the draft and compare the two versions.','Play the exported file from start to finish on your phone.','Write one concrete skill to practise next, such as steadier focus or cleaner cuts.']
+};
+export function scoreAttempt(key:string,ratings:unknown){const criteria=assignmentRubric(key);if(!Array.isArray(ratings)||ratings.length!==criteria.length||ratings.some(v=>!Number.isInteger(v)||v<0||v>4))throw new Error('Rate all three assignment criteria from 0 to 4.');const scores=ratings as number[];const total=Math.round(scores.reduce((sum,v,i)=>sum+v/4*criteria[i].weight,0));const pass=total>=threshold&&scores.every(v=>v>=2);const feedback=criteria.map((c,i)=>({...c,rating:scores[i],points:Math.round(scores[i]/4*c.weight),feedback:scores[i]>=3?'You report this is working. Keep it in your next attempt.':(retryTips[key]?.[i]||'Repeat the tryout with this criterion as your focus. Compare the two results before rating it again.')}));return {total,passed:pass,ratings:scores,criteria:feedback,basis:'self-check' as const}}
+export function practiceSteps(key:string){const info=moduleInfo(key);return info.lesson.do.split(/(?<=[.!?])\s+/).filter(Boolean)}
