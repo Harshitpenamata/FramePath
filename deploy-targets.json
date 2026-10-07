@@ -1,0 +1,16 @@
+{
+  "production": {
+    "worker": "framepath",
+    "domain": "framepath.avinyainteractive.com",
+    "branch": "main",
+    "d1": { "name": "framepath-db", "id": "8fb068f5-9325-4498-ae8a-65a757e08e25" },
+    "r2": "framepath-uploads"
+  },
+  "staging": {
+    "worker": "framepath-staging",
+    "domain": "framepath-staging.avinyainteractive.com",
+    "branch": null,
+    "d1": { "name": "framepath-staging-db", "id": "59c2d29f-adec-4bb5-ad7f-083a07759831" },
+    "r2": "framepath-staging-uploads"
+  }
+}
