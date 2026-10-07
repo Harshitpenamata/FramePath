@@ -36,6 +36,22 @@ const localBindingConfig = {
     : [],
 };
 
+// Self-hosted production on Cloudflare (framepath.avinyainteractive.com).
+// Local dev keeps the placeholder IDs above so .wrangler/state stays valid.
+const productionConfig = {
+  name: "framepath",
+  workers_dev: false,
+  routes: [{ pattern: "framepath.avinyainteractive.com", custom_domain: true }],
+  d1_databases: [
+    {
+      binding: d1,
+      database_name: "framepath-db",
+      database_id: "8fb068f5-9325-4498-ae8a-65a757e08e25",
+    },
+  ],
+  r2_buckets: [{ binding: r2, bucket_name: "framepath-uploads" }],
+};
+
 export default defineConfig(async ({ command }) => {
   // Use Miniflare's local Request.cf placeholder unless fetching is requested.
   process.env.CLOUDFLARE_CF_FETCH_ENABLED ??= "false";
@@ -69,6 +85,7 @@ export default defineConfig(async ({ command }) => {
         inspectorPort: false,
         config: {
           ...localBindingConfig,
+          ...(command === "build" ? productionConfig : {}),
           ...(command === "serve"
             ? {
                 services: [
