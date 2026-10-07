@@ -29,7 +29,8 @@ export async function createSession(user:SessionUser){return sign({...user,exp:M
 export async function readSession(token:string|undefined):Promise<SessionUser|null>{const p=await verify<Payload>(token);return p?{userId:p.userId,email:p.email,fullName:p.fullName}:null}
 
 export function readCookie(header:string|null,name:string){for(const part of (header||'').split(';')){const i=part.indexOf('=');if(i>0&&part.slice(0,i).trim()===name)return part.slice(i+1).trim()}return undefined}
-export function cookie(name:string,value:string,url:string,maxAge:number){const secure=new URL(url).protocol==='https:'?'; Secure':'';return `${name}=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secure}`}
+// Secure everywhere except plain-http local dev, so a cookie can never be issued over http in production.
+export function cookie(name:string,value:string,url:string,maxAge:number){const {hostname}=new URL(url);const secure=hostname==='127.0.0.1'||hostname==='localhost'?'':'; Secure';return `${name}=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secure}`}
 
 export function safeReturnTo(value:string|null):string{
   if(!value||!value.startsWith('/')||value.startsWith('//'))return '/';
