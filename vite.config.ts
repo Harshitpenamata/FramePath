@@ -1,6 +1,7 @@
 import vinext from "vinext";
 import { defineConfig } from "vite";
 import hostingConfig from "./.openai/hosting.json";
+import deployTargets from "./deploy-targets.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
 import { sites } from "./build/sites-vite-plugin";
 import { connectorPreview } from "./build/connector-preview-plugin.mjs";
@@ -36,20 +37,18 @@ const localBindingConfig = {
     : [],
 };
 
-// Self-hosted production on Cloudflare (framepath.avinyainteractive.com).
+// Self-hosted deploy targets (deploy-targets.json). `npm run build` alone builds
+// production; scripts/deploy.mjs sets FRAMEPATH_ENV=staging for the test site.
 // Local dev keeps the placeholder IDs above so .wrangler/state stays valid.
-const productionConfig = {
-  name: "framepath",
+const deployEnv = (process.env.FRAMEPATH_ENV ?? "production") as keyof typeof deployTargets;
+const target = deployTargets[deployEnv];
+if (!target) throw new Error(`Unknown FRAMEPATH_ENV "${deployEnv}". Use production or staging.`);
+const deployConfig = {
+  name: target.worker,
   workers_dev: false,
-  routes: [{ pattern: "framepath.avinyainteractive.com", custom_domain: true }],
-  d1_databases: [
-    {
-      binding: d1,
-      database_name: "framepath-db",
-      database_id: "8fb068f5-9325-4498-ae8a-65a757e08e25",
-    },
-  ],
-  r2_buckets: [{ binding: r2, bucket_name: "framepath-uploads" }],
+  routes: [{ pattern: target.domain, custom_domain: true }],
+  d1_databases: [{ binding: d1, database_name: target.d1.name, database_id: target.d1.id }],
+  r2_buckets: [{ binding: r2, bucket_name: target.r2 }],
 };
 
 export default defineConfig(async ({ command }) => {
@@ -85,7 +84,7 @@ export default defineConfig(async ({ command }) => {
         inspectorPort: false,
         config: {
           ...localBindingConfig,
-          ...(command === "build" ? productionConfig : {}),
+          ...(command === "build" ? deployConfig : {}),
           ...(command === "serve"
             ? {
                 services: [

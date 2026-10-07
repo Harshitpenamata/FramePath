@@ -64,3 +64,27 @@ Real payment processing, real mentors, WhatsApp delivery and successful funded A
 The Sites project_id is stored in .openai/hosting.json.
 Use the Sites workflow to build, push the exact source state, package, save a version and deploy it.
 Never add credentials to command arguments, tracked files or source archives.
+
+## Environments
+| | Production | Staging |
+|---|---|---|
+| URL | https://framepath.avinyainteractive.com | https://framepath-staging.avinyainteractive.com |
+| Worker / D1 / R2 | framepath / framepath-db / framepath-uploads | framepath-staging / framepath-staging-db / framepath-staging-uploads |
+| Branch | main | develop (or any branch) |
+
+Names and IDs live in deploy-targets.json. Each environment has its own secrets (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SESSION_SECRET, OPENAI_API_KEY, optional OPENAI_MODEL), set with `npx wrangler secret put NAME --name <worker>`. Use a different SESSION_SECRET per environment.
+
+Workflow for changes (including AI prompt or model changes):
+1. Work on develop, then `npm run deploy:staging` and test on the staging URL.
+2. Merge develop into main and push.
+3. On a clean, up-to-date main: `npm run deploy:production` (it refuses any other branch or uncommitted work).
+4. If live misbehaves: `npx wrangler rollback --name framepath`.
+
+Schema changes: `npm run db:generate`, then `npm run db:migrate:local`, `db:migrate:staging`, and after release `db:migrate:production`.
+
+## Setting up a new machine
+1. Install Git and Node.js >= 22.13, then `git clone https://github.com/Harshitpenamata/FramePath.git && cd FramePath && npm install`.
+2. Create .env.local (never committed) with GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET and a SESSION_SECRET of 64 random hex characters. Copy the client secret via a password manager.
+3. `npx wrangler login`, then `npm run db:migrate:local`.
+4. `npm run dev` and open http://127.0.0.1:5173.
+Always `git pull` before starting and `git push` before switching machines.
