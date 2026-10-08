@@ -1,0 +1,11 @@
+import {scenarioVersion,normalizeScenarioProfile} from './scenario-engine';
+import {safeText} from './service';
+import {levels,recommendedLevel} from './selfpaced-curriculum';
+import {diagnosticVersion,diagnosticResult,validAnswer} from './diagnostic-engine';
+import {goalKind,goalKinds} from './personalization';
+export function normalizeProfile(input:any){if(input?.diagnosticVersion===scenarioVersion)return normalizeScenarioProfile(input);const p=input||{},hours=Number(p.hours);if(!Number.isFinite(hours)||hours<1||hours>20)throw new Error('Choose 1–20 hours per week.');const visual=p.diagnosticVersion===diagnosticVersion;const answers=Array.isArray(p.answers)&&p.answers.length===3?p.answers:[];
+ if(visual){if(!Array.isArray(p.diagnosticAnswers)||p.diagnosticAnswers.length!==9||p.diagnosticAnswers.some((a:any,i:number)=>!validAnswer(i,a)))throw new Error('Finish the nine visual activities, or mark an activity as not tried.');if(![4,6,8,12].includes(Number(p.weeks)))throw new Error('Choose a 4, 6, 8 or 12 week learning window.');if(!['Smartphone','Smartphone and computer','Camera and computer'].includes(p.gear))throw new Error('Choose your available equipment.');}
+ else if(answers.length!==3||answers.some((x:any)=>!Number.isInteger(x)||x<0||x>2))throw new Error('Answer all three diagnostic questions.');
+ const result=visual?diagnosticResult(p.diagnosticAnswers):null;const legacy=visual?[Number(result!.scores.lighting)>=50?1:0,Number(result!.scores.editing)>=50?0:1,Number(result!.scores.planning)>=50?2:0]:answers;
+ return {goal:safeText(p.goal,500,5),goalKind:goalKind(p),gear:safeText(p.gear,80,1),hours,weeks:visual?Number(p.weeks):6,experience:safeText(p.experience||'Starting fresh',80,1),name:safeText(p.name,60,1),answers:legacy,score:legacy.reduce((n:number,x:number,i:number)=>n+(x===[1,0,2][i]?1:0),0),subject:safeText(p.subject||'',120),people:safeText(p.people||'Ask permission',120),paceDays:[3,7,14].includes(p.paceDays)?p.paceDays:7,practiceMode:['gentle','core','stretch'].includes(p.practiceMode)?p.practiceMode:'core',level:visual?result!.level:levels.includes(p.level)?p.level:recommendedLevel(p),...(visual?{diagnosticVersion,diagnosticAnswers:p.diagnosticAnswers,diagnosticScore:result!.total,skillSignals:result!.scores,levelOverride:''}:{}),updatedAt:new Date().toISOString()};
+}

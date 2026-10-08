@@ -1,0 +1,83 @@
+{
+  "researchedAt": "2026-10-07",
+  "reason": "Replace the two proposed CapCut demonstrations with distinct VN demonstrations for the Indian learner audience. The original report remains unchanged for provenance.",
+  "verification": {
+    "sources": "Selected-video identity, creator, duration, publish date, chapter boundaries and caption-track metadata were read from official YouTube oEmbed and watch pages. The 2025 video also has a matching guide on the creator's own website. Secondary discovery pages were not used as final timing evidence.",
+    "embeddability": "Official YouTube oEmbed returned an iframe for both videos. Playback in Framepath and region-specific availability were not tested.",
+    "captions": "Both public watch-page responses contained captionTracks metadata. Caption accuracy, language and live rendering remain unverified.",
+    "duplicates": "Neither ID matched the current app, lib, docs, tests, scripts, CURRICULUM.md or public/templates source with --no-ignore. Both are distinct from the original report and all parent-provided used IDs.",
+    "costAndSoftware": "The excerpts demonstrate basic VN importing and trimming. No software purchase is part of the proposed learning task. Do not promise that every feature or version is free, or that the app is available in every region. The text alternative should allow the learner's existing editor.",
+    "researchOnly": "No media downloads or checkout source edits."
+  },
+  "replacements": [
+    {
+      "lesson": "first-edit-0",
+      "replacesId": "VUMVsGm0xOE",
+      "id": "yb7-ab-6MO8",
+      "title": "VN Video Editor - COMPLETE Tutorial for Beginners! (iPhone, Android & Mac)",
+      "suggestedLessonTitle": "Bring selected clips into your first timeline",
+      "creator": "Justin Brown \u00b7 Primal Video",
+      "creatorChannel": "https://www.youtube.com/@PrimalVideo",
+      "source": "https://www.youtube.com/watch?v=yb7-ab-6MO8",
+      "youtube": "https://www.youtube.com/watch?v=yb7-ab-6MO8",
+      "start": 110,
+      "end": 220,
+      "durationSeconds": 110,
+      "fullDurationSeconds": 1517,
+      "publishedAt": "2021-07-18T03:09:46-07:00",
+      "preview": false,
+      "chapterEvidence": [
+        {
+          "seconds": 110,
+          "label": "Importing footage"
+        },
+        {
+          "seconds": 220,
+          "label": "Editing begins"
+        }
+      ],
+      "timingEvidence": "Creator's official YouTube description places importing at 01:50 and the next editing chapter at 03:40.",
+      "purpose": "Import chosen footage and locate the timeline before making the first three-shot assembly.",
+      "fitLimit": "2021 interface. The exact three-shot exercise is Framepath's application, not a claimed creator assignment. Use an editor already available to the learner.",
+      "captionTracksFound": true,
+      "transcript": null,
+      "note": "Creator's VN importing chapter, recorded in 2021. Controls may differ in your version; the same selection and timeline decisions work in an editor you already use.",
+      "reading": "Choose three clips that show context, action and result. Make a new editing project and add only those clips. Find the timeline and play the rough sequence once. At this stage, keep the task small: a clear beginning, middle and ending are enough."
+    },
+    {
+      "lesson": "first-edit-2",
+      "replacesId": "1xEDL7ZF97c",
+      "id": "_fYSZob_0ik",
+      "title": "How to Edit Video on iPhone (COMPLETE Beginner's Guide for 2025)",
+      "suggestedLessonTitle": "Trim clips for a clearer sequence",
+      "creator": "Justin Brown \u00b7 Primal Video",
+      "creatorChannel": "https://www.youtube.com/@PrimalVideo",
+      "source": "https://primalvideo.com/guides/how-to-edit-video-on-iphone-complete-beginners-guide-for-2025/",
+      "youtube": "https://www.youtube.com/watch?v=_fYSZob_0ik",
+      "start": 263,
+      "end": 418,
+      "durationSeconds": 155,
+      "fullDurationSeconds": 1227,
+      "publishedAt": "2025-09-15T21:00:43-07:00",
+      "preview": false,
+      "chapterEvidence": [
+        {
+          "seconds": 263,
+          "label": "Trimming and cutting"
+        },
+        {
+          "seconds": 418,
+          "label": "Reordering begins"
+        }
+      ],
+      "timingEvidence": "Creator's official YouTube description starts the trimming/cutting chapter at 04:23 and the reordering chapter at 06:58.",
+      "purpose": "Trim the start/end of a take, split around unwanted material and remove pauses or mistakes so the sequence is clearer.",
+      "fitLimit": "VN on iPhone in 2025. Android controls can differ. Framepath should connect each trim to clarity and pacing rather than teach the controls alone.",
+      "captionTracksFound": true,
+      "transcript": null,
+      "primaryCompanionEvidence": "The creator's guide explicitly names VN, explains trimming with clip handles or the split tool, and says the workflow transfers to another editor. The guide is an AI-assisted summary, not a verbatim transcript.",
+      "note": "Creator's trimming chapter in VN on iPhone, recorded in 2025. Apply the same remove\u2013play\u2013check decisions in your phone editor; controls may differ.",
+      "reading": "Play a clip and find when its useful action begins. Trim the waiting before it and after the action finishes. Split around an unwanted pause or mistake when needed. Play across the join and check that the action still makes sense. Compare a shorter and longer version before choosing the pace."
+    }
+  ]
+}

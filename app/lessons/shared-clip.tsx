@@ -1,0 +1,8 @@
+'use client';
+import React,{useState} from 'react';
+import {Button} from '@/components/ui/button';
+import {sharedUnits} from './shared';
+import {labSpecs} from './lab-specs';
+import type {VisualLesson} from './content';
+export const sharedVideoName=(id:string)=>id.replace(':','-');
+export function SharedClip({lesson:l}:{lesson:VisualLesson}){const [play,setPlay]=useState(false),[failed,setFailed]=useState(false),u=sharedUnits[l.canonicalModule!],spec=labSpecs[u.family]||labSpecs.sequence,name=sharedVideoName(l.canonicalModule!);return <><div className="vl-video shared-video">{play&&!failed?<video controls autoPlay playsInline preload="none" width="720" height="430" onError={()=>setFailed(true)} aria-label={u.title+' — original silent diagram demonstration'}><source src={'/shared/videos/'+name+'.webm'} type="video/webm"/><track kind="captions" src={'/shared/videos/'+name+'.vtt'} srcLang="en" label="English descriptions" default/>Your browser cannot play this video. Use the illustrated concept and text alternative below.</video>:<div className="vl-video-cover"><span className="eyebrow">FRAMEPATH ORIGINAL · 12 SECONDS</span><h3>{spec.title}</h3><p>A silent animated diagram. All teaching information is also available as text.</p><Button onClick={()=>{setFailed(false);setPlay(true)}}>{failed?'Retry demonstration':'Play visual demonstration'}</Button><small>Loads only when you play.</small></div>}</div><details className="vl-reading" open={failed||undefined}><summary>Read the demonstration</summary><p>{spec.instruction}</p><p>{spec.takeaway}</p><p className="small">Original Framepath instructional animation. It illustrates a relationship, not a measurement of real equipment or a substitute for reviewing your actual recording.</p></details></>}

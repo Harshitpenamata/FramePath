@@ -1,0 +1,31 @@
+STAGE 2 ONBOARDING — LOCAL REVIEW CHECKPOINT
+Scope: existing Framepath site. No hosting publication or remote database migration performed.
+
+Main files:
+app/onboarding/experience.tsx: goal, first frame, setup, checks, result, mode, dashboard.
+app/onboarding/goals.ts: 18-category search, synonyms, intent priorities, custom goal classification.
+app/onboarding/question-bank.ts: backend-only 270-item bank; 70 common + 20 archetypes x 10.
+app/onboarding/assessment.ts: adaptive scheduling, grading, evidence and recipe-engine bridge.
+app/onboarding/visuals.tsx: functional diagrams, responsive diagnostic images, audio, hotspot, skill radar.
+app/onboarding/still-feedback.tsx: optional one-image feedback using existing protected services and limits.
+app/api/onboarding/route.ts: private guest drafts, sign-in adoption, revision checks, history export and profile sync.
+app/api/goal-review/route.ts: owner-only goal log query. FRAMEPATH_ADMIN_IDS is a comma-separated allowlist of trusted authenticated user IDs; deny by default.
+db/schema.ts and drizzle/0002_chunky_sleeper.sql: additive onboarding_attempts and goal_logs tables. Generated with Drizzle. Local migration applied only.
+media/onboarding-registry.json and public/onboarding/: eight new photographs, four original synthetic audio clips, responsive renditions.
+
+Persistence:
+Guest capability cookie is HttpOnly, SameSite=Lax, Secure on HTTPS and lasts 30 days. Only its SHA-256 hash is stored. A draft claimed by a signed-in account is inaccessible to other accounts and signed-out requests. Durable state lives in D1, not localStorage. Still uploads retain existing R2 ownership/screening.
+Answers store item ID, selected value, confidence, optional rationale, timestamp and response duration. Profiles retain raw practical evidence and separate self-adjustments. Earlier profile snapshots are archived in learner.profileHistory. Account export includes all owned diagnostic attempts.
+Old module IDs, progress, drafts, portfolios, receipts, memberships and assigned free-path IDs remain. An older profile with implicit basic-w1/basic-w2 access retains that assignment. Retaking does not reset quotas or grant new free pathways.
+
+Validation:
+28 tests in tests/foundation.test.mjs and tests/onboarding.test.mjs.
+work/stage2-assets/api-qa.cjs: five personas, stale revisions, origin check, privacy, fixed access and saved-profile history.
+work/stage2-assets/final-qa.cjs: 13 routes x 4 widths, hotspot, custom goals, cross-device resume, cross-account denial, history, still-screening failure and standalone offline flow.
+TypeScript and framework compilation pass. New media validation passes with --onboarding. Default build deliberately remains blocked by existing whole-catalogue media duplicates. Do not add exemptions or publish this review as a completed lesson rebuild.
+Compiled onboarding JS plus shared dependencies is about 322 KB gzip. CSS about 47 KB. Full cold-cache HTML/RSC transfer, real 4G timing, human completion time and curriculum calibration remain Stage 4 checks.
+
+Review artifact:
+Framepath-Stage-2-Interactive-Review.html bundles the actual UI and assessment engine with an explicitly labelled in-memory adapter. It has no accounts, persistent saving, purchasing, upload or AI service. It embeds its eight photographs and four audio clips; it makes no external requests. Its navigation ends at Stage 2. This adapter is outside the deployed app source.
+
+Next: wait for the owner to say continue. Stage 3 starts with the two free pathways; do not expand onboarding again or silently publish. Full old lesson media repeat/provenance repairs and action-based unlocks are still outstanding.

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "fp-diagram-shotdiagram",
+    "component": "ShotDiagram",
+    "sha256": "89c8887de613e203933415d3c54a700419a60760f6951185b1f77979b43577bb",
+    "kind": "functional-svg",
+    "source": "app/foundation/interactives.tsx#ShotDiagram",
+    "licence": "Original Framepath teaching diagram",
+    "credit": "Framepath",
+    "ownerSlot": "foundation:diagram:ShotDiagram",
+    "alt": "Each rendered SVG has a contextual accessible title or label",
+    "status": "reviewed",
+    "note": "Functional diagrams represent relationships. They are separate from the photograph registry. Reuse in a new lesson requires a new slot and reviewed variant."
+  },
+  {
+    "id": "fp-diagram-storyboard",
+    "component": "Storyboard",
+    "sha256": "ed325ba382aaf197da3b3f2bd19aba06e9127ca778defc6d6de8d4ff3b971420",
+    "kind": "functional-svg",
+    "source": "app/foundation/interactives.tsx#Storyboard",
+    "licence": "Original Framepath teaching diagram",
+    "credit": "Framepath",
+    "ownerSlot": "foundation:diagram:Storyboard",
+    "alt": "Each rendered SVG has a contextual accessible title or label",
+    "status": "reviewed",
+    "note": "Functional diagrams represent relationships. They are separate from the photograph registry. Reuse in a new lesson requires a new slot and reviewed variant."
+  },
+  {
+    "id": "fp-diagram-audioab",
+    "component": "AudioAB",
+    "sha256": "eab1deb5c592b120a7749dca3b709279fd89482ef3fef20febbab1704437aa3f",
+    "kind": "functional-svg",
+    "source": "app/foundation/interactives.tsx#AudioAB",
+    "licence": "Original Framepath teaching diagram",
+    "credit": "Framepath",
+    "ownerSlot": "foundation:diagram:AudioAB",
+    "alt": "Each rendered SVG has a contextual accessible title or label",
+    "status": "reviewed",
+    "note": "Functional diagrams represent relationships. They are separate from the photograph registry. Reuse in a new lesson requires a new slot and reviewed variant."
+  },
+  {
+    "id": "fp-diagram-thirds",
+    "component": "Thirds",
+    "sha256": "76e5bf18e5c594a1f98c4942f3f3d4fb20fdc35357b294f98006c0b0b06bc5d6",
+    "kind": "functional-svg",
+    "source": "app/foundation/interactives.tsx#Thirds",
+    "licence": "Original Framepath teaching diagram",
+    "credit": "Framepath",
+    "ownerSlot": "foundation:diagram:Thirds",
+    "alt": "Each rendered SVG has a contextual accessible title or label",
+    "status": "reviewed",
+    "note": "Functional diagrams represent relationships. They are separate from the photograph registry. Reuse in a new lesson requires a new slot and reviewed variant."
+  },
+  {
+    "id": "fp-diagram-axis",
+    "component": "Axis",
+    "sha256": "d86a30c305319548d5bc381d23d960248328bcffb525733adf31938037e4f0ab",
+    "kind": "functional-svg",
+    "source": "app/foundation/interactives.tsx#Axis",
+    "licence": "Original Framepath teaching diagram",
+    "credit": "Framepath",
+    "ownerSlot": "foundation:diagram:Axis",
+    "alt": "Each rendered SVG has a contextual accessible title or label",
+    "status": "reviewed",
+    "note": "Functional diagrams represent relationships. They are separate from the photograph registry. Reuse in a new lesson requires a new slot and reviewed variant."
+  },
+  {
+    "id": "fp-diagram-captionproofreader",
+    "component": "CaptionProofreader",
+    "sha256": "e168230ef9beb41c0c2b415af04b7f2d6d454eb66a1bb1eb2a79d74ea481c33a",
+    "kind": "functional-svg",
+    "source": "app/foundation/interactives.tsx#CaptionProofreader",
+    "licence": "Original Framepath teaching diagram",
+    "credit": "Framepath",
+    "ownerSlot": "foundation:diagram:CaptionProofreader",
+    "alt": "Each rendered SVG has a contextual accessible title or label",
+    "status": "reviewed",
+    "note": "Functional diagrams represent relationships. They are separate from the photograph registry. Reuse in a new lesson requires a new slot and reviewed variant."
+  }
+]

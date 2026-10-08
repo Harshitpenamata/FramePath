@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "fp-diagnostic-frame-basic",
+      "kind": "image",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:framing-1:image",
+      "status": "reviewed",
+      "source": "Original generation; media/onboarding-provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Complete readable framing versus clutter and cut edges. Two illustrative views, A on the left and B on the right.",
+      "sha256": "91238471c4baef77d292a940a5754ca2fcf9225d0b2868527c53a64634f8c7b9",
+      "dhash": "2131352424242520",
+      "canonicalUrl": "/onboarding/frame-basic-960.webp",
+      "width": 1774,
+      "height": 887,
+      "renditions": [
+        {
+          "src": "/onboarding/frame-basic-480.webp",
+          "width": 480,
+          "height": 240,
+          "bytes": 5376,
+          "sha256": "25a7cc9bab9b695cdf72ce8f97dd25363f693d443072c8b767309147e0a26d16"
+        },
+        {
+          "src": "/onboarding/frame-basic-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 18638,
+          "sha256": "eb0986d7ab051e97b6f7bad0775e02ad1122682d1b1ca3de79ac386a1f0e2f54"
+        },
+        {
+          "src": "/onboarding/frame-basic-1440.webp",
+          "width": 1440,
+          "height": 720,
+          "bytes": 42530,
+          "sha256": "6d42e7f6b2906709964044a835c958effd89a57a5bf7cd1c9eb77f86df225cc9"
+        }
+      ]
+    },
+    {
+      "id": "fp-diagnostic-frame-medium",
+      "kind": "image",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:framing-4:image",
+      "status": "reviewed",
+      "source": "Original generation; media/onboarding-provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Directional breathing room versus a cramped crop. Two illustrative views, A on the left and B on the right.",
+      "sha256": "05109437b50c5f76c0120df22f0f65245c95f1c15089df3bdaac202c093514b6",
+      "dhash": "d0581c4c6e191212",
+      "canonicalUrl": "/onboarding/frame-medium-960.webp",
+      "width": 1774,
+      "height": 887,
+      "renditions": [
+        {
+          "src": "/onboarding/frame-medium-480.webp",
+          "width": 480,
+          "height": 240,
+          "bytes": 9396,
+          "sha256": "fb3dbf12c49ce295361f4570b12a642cb832322258b565b56d8d07334f0d68a4"
+        },
+        {
+          "src": "/onboarding/frame-medium-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 29248,
+          "sha256": "4ee88a49105a6c6b8fdb5f5c510d556f5630f7c8e0f77b2110ee6df789c7d49a"
+        },
+        {
+          "src": "/onboarding/frame-medium-1440.webp",
+          "width": 1440,
+          "height": 720,
+          "bytes": 54364,
+          "sha256": "74500e81326245b6efffb01113d6a25a5a7a8ac0894a6a78f34293136b6ae08e"
+        }
+      ]
+    },
+    {
+      "id": "fp-diagnostic-frame-advanced",
+      "kind": "image",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:framing-8:image",
+      "status": "reviewed",
+      "source": "Original generation; media/onboarding-provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Controlled visual hierarchy versus a dominant bright background. Two illustrative views, A on the left and B on the right.",
+      "sha256": "525b6aa9fbe0eae83c98555dd885fe2c4f75855cd080ddf84152f7fdd52e956d",
+      "dhash": "181818181a1a9c98",
+      "canonicalUrl": "/onboarding/frame-advanced-960.webp",
+      "width": 1774,
+      "height": 887,
+      "renditions": [
+        {
+          "src": "/onboarding/frame-advanced-480.webp",
+          "width": 480,
+          "height": 240,
+          "bytes": 6052,
+          "sha256": "42b9c6fbe97e72bee59d65db06a51ebca19a364c08560f1c8c5293290b47d235"
+        },
+        {
+          "src": "/onboarding/frame-advanced-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 17072,
+          "sha256": "703c7e61044b31de8c12b1fa9ff2aadeeb7c08d94fcdace5304fee4ffba8b319"
+        },
+        {
+          "src": "/onboarding/frame-advanced-1440.webp",
+          "width": 1440,
+          "height": 720,
+          "bytes": 32248,
+          "sha256": "3b208b715582f9338cbc17392a7750dc1a9790ebb46a0416381a603f2db1eb86"
+        }
+      ]
+    },
+    {
+      "id": "fp-diagnostic-light-basic",
+      "kind": "image",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:light-1:image",
+      "status": "reviewed",
+      "source": "Original generation; media/onboarding-provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Readable wooden texture versus severe underexposure. Two illustrative views, A on the left and B on the right.",
+      "sha256": "0cf5ee8a0640ce99bc70b40bb8d7d11dc93d9fcc9294152f30f0d3bebd71884e",
+      "dhash": "8767270505260407",
+      "canonicalUrl": "/onboarding/light-basic-960.webp",
+      "width": 1774,
+      "height": 887,
+      "renditions": [
+        {
+          "src": "/onboarding/light-basic-480.webp",
+          "width": 480,
+          "height": 240,
+          "bytes": 6276,
+          "sha256": "a0c0d98a4c2d1e96519ea65715e31dd6532d56359c97d9b092e64cdb1ab3eaa8"
+        },
+        {
+          "src": "/onboarding/light-basic-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 24838,
+          "sha256": "aabcb33437c43bbdf31ee49b6da5822a411fcddd00452cc7606a0945b1ee7bdf"
+        },
+        {
+          "src": "/onboarding/light-basic-1440.webp",
+          "width": 1440,
+          "height": 720,
+          "bytes": 52810,
+          "sha256": "4d2bced9bc2fb29f906b9e789afc9e31914597dee34aa174edcb9644f0da0dc5"
+        }
+      ]
+    },
+    {
+      "id": "fp-diagnostic-light-medium",
+      "kind": "image",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:light-4:image",
+      "status": "reviewed",
+      "source": "Original generation; media/onboarding-provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Retained highlight texture versus clipped fabric highlights. Two illustrative views, A on the left and B on the right.",
+      "sha256": "6f100910037f55020c01de6fe5b15a893207c1e07e0543affd63894cc2b95f11",
+      "dhash": "7b19b888cad8de5e",
+      "canonicalUrl": "/onboarding/light-medium-960.webp",
+      "width": 1774,
+      "height": 887,
+      "renditions": [
+        {
+          "src": "/onboarding/light-medium-480.webp",
+          "width": 480,
+          "height": 240,
+          "bytes": 5806,
+          "sha256": "e30648f4c04a8e7ba95283b04dc9fc49240f6a7490507e5959ae29927918f92e"
+        },
+        {
+          "src": "/onboarding/light-medium-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 18318,
+          "sha256": "a2c70fee44d698c82a8c0f7fbb1da4410aa369184eeefbc6673e006049f142b6"
+        },
+        {
+          "src": "/onboarding/light-medium-1440.webp",
+          "width": 1440,
+          "height": 720,
+          "bytes": 38212,
+          "sha256": "d1641b959ce67e41da0153cb63cc7dda019019891a4ba4651065453f3585bf61"
+        }
+      ]
+    },
+    {
+      "id": "fp-diagnostic-light-advanced",
+      "kind": "image",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:light-8:image",
+      "status": "reviewed",
+      "source": "Original generation; media/onboarding-provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Coherent neutral illumination versus conflicting colour casts. Two illustrative views, A on the left and B on the right.",
+      "sha256": "c50411946796ba4b1750e379a3686eb55f4e61444bce79b1987bc629807eb806",
+      "dhash": "e0e0226060e0e0e1",
+      "canonicalUrl": "/onboarding/light-advanced-960.webp",
+      "width": 1774,
+      "height": 887,
+      "renditions": [
+        {
+          "src": "/onboarding/light-advanced-480.webp",
+          "width": 480,
+          "height": 240,
+          "bytes": 4046,
+          "sha256": "68fa6961e1f9da233880a5806593013d81dca4d5264e8f143bbde5c0aeb6e9f4"
+        },
+        {
+          "src": "/onboarding/light-advanced-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 10520,
+          "sha256": "4bf00b4dc20a485e565f65c869deeb80ceb143e62940e6f6456436e8490bd38c"
+        },
+        {
+          "src": "/onboarding/light-advanced-1440.webp",
+          "width": 1440,
+          "height": 720,
+          "bytes": 18376,
+          "sha256": "78ad26c0e501cd0eba0913d03708b586f3049bd2c1cbd76dcad7a07203971e82"
+        }
+      ]
+    },
+    {
+      "id": "fp-diagnostic-story-medium",
+      "kind": "image",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:story-4:image",
+      "status": "reviewed",
+      "source": "Original generation; media/onboarding-provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Visible evidence of a repair versus an attractive unrelated detail. Two illustrative views, A on the left and B on the right.",
+      "sha256": "2b474ead290e6ddb3926482b19b44f083eea190bbb9c4c3aee51ebec5ec3206d",
+      "dhash": "9a9a1c9c18981888",
+      "canonicalUrl": "/onboarding/story-medium-960.webp",
+      "width": 1774,
+      "height": 887,
+      "renditions": [
+        {
+          "src": "/onboarding/story-medium-480.webp",
+          "width": 480,
+          "height": 240,
+          "bytes": 16078,
+          "sha256": "c0ac81b7aada6ed4bb943039152fa81c84a9f4a1f04f12d0b1b2e74c9011b601"
+        },
+        {
+          "src": "/onboarding/story-medium-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 42710,
+          "sha256": "371e4fc1e4cc0bd8d4ec1af455ddd3433775b71f3bad5d2d27da24be5b48f525"
+        },
+        {
+          "src": "/onboarding/story-medium-1440.webp",
+          "width": 1440,
+          "height": 720,
+          "bytes": 73066,
+          "sha256": "f63fd3382a89ce2d6b2c3ec28abda1a95b8d217c1627891d90c05538d8d10425"
+        }
+      ]
+    },
+    {
+      "id": "fp-diagnostic-focus-medium",
+      "kind": "image",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:framing-5:image",
+      "status": "reviewed",
+      "source": "Original generation; media/onboarding-provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A sharp subject with separated background versus misplaced focus. Two illustrative views, A on the left and B on the right.",
+      "sha256": "efd230e963dd48263d12044e13dec637e219b0a3654bd6d1f9bdb88ada862cf9",
+      "dhash": "6323a3e6aaa36363",
+      "canonicalUrl": "/onboarding/focus-medium-960.webp",
+      "width": 1774,
+      "height": 887,
+      "renditions": [
+        {
+          "src": "/onboarding/focus-medium-480.webp",
+          "width": 480,
+          "height": 240,
+          "bytes": 11508,
+          "sha256": "3c51733afcc424a3646015d78ae182b613c413feaf29478c98fe51ccc19f574d"
+        },
+        {
+          "src": "/onboarding/focus-medium-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 29286,
+          "sha256": "da22d985a45fc52a0bcedf4a8cb1fc9f3c59e9b44978d3bcf40f44097f879e81"
+        },
+        {
+          "src": "/onboarding/focus-medium-1440.webp",
+          "width": 1440,
+          "height": 720,
+          "bytes": 49958,
+          "sha256": "7043e57e10c3680f05344e0886a3a72322d06bfb58afaa0b894d8149ceff7171"
+        }
+      ]
+    },
+    {
+      "id": "fp-diagnostic-taps-a",
+      "kind": "audio",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:sound-4:audio-a",
+      "status": "reviewed",
+      "source": "Original synthetic signal; work/stage2-assets/prepare.py",
+      "licence": "Original Framepath synthetic audio",
+      "credit": "Framepath original sound demonstration",
+      "alt": "Three short synthetic taps; comparison A. No speech.",
+      "sha256": "7609e563b34a5eeb9b354ef4d539df90aca387364fee8d49d39267172c7aa57b",
+      "canonicalUrl": "/onboarding/taps-a.wav",
+      "bytes": 96044,
+      "renditions": []
+    },
+    {
+      "id": "fp-diagnostic-taps-b",
+      "kind": "audio",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:sound-4:audio-b",
+      "status": "reviewed",
+      "source": "Original synthetic signal; work/stage2-assets/prepare.py",
+      "licence": "Original Framepath synthetic audio",
+      "credit": "Framepath original sound demonstration",
+      "alt": "Three short synthetic taps; comparison B. No speech.",
+      "sha256": "048750fe193fe0dac206ce449275e47c3fe86d4914b315365c8b6e8632e1e62a",
+      "canonicalUrl": "/onboarding/taps-b.wav",
+      "bytes": 96044,
+      "renditions": []
+    },
+    {
+      "id": "fp-diagnostic-peaks-a",
+      "kind": "audio",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:sound-8:audio-a",
+      "status": "reviewed",
+      "source": "Original synthetic signal; work/stage2-assets/prepare.py",
+      "licence": "Original Framepath synthetic audio",
+      "credit": "Framepath original sound demonstration",
+      "alt": "Three short synthetic taps; comparison A. No speech.",
+      "sha256": "2b3d66b8f915378813e18f62b048da2b219efc9be1915e55da1128ca0e512f94",
+      "canonicalUrl": "/onboarding/peaks-a.wav",
+      "bytes": 96044,
+      "renditions": []
+    },
+    {
+      "id": "fp-diagnostic-peaks-b",
+      "kind": "audio",
+      "namespace": "diagnostic",
+      "ownerSlot": "diagnostic:sound-8:audio-b",
+      "status": "reviewed",
+      "source": "Original synthetic signal; work/stage2-assets/prepare.py",
+      "licence": "Original Framepath synthetic audio",
+      "credit": "Framepath original sound demonstration",
+      "alt": "Three short synthetic taps; comparison B. No speech.",
+      "sha256": "1a0551e65d5aab23fd29e8a0ac599e0efea76daae5be330362bb5a277ad59753",
+      "canonicalUrl": "/onboarding/peaks-b.wav",
+      "bytes": 96044,
+      "renditions": []
+    }
+  ],
+  "slots": [
+    {
+      "id": "diagnostic:framing-1:image",
+      "assetId": "fp-diagnostic-frame-basic",
+      "owner": "app/onboarding/question-bank.ts#framing-1"
+    },
+    {
+      "id": "diagnostic:framing-4:image",
+      "assetId": "fp-diagnostic-frame-medium",
+      "owner": "app/onboarding/question-bank.ts#framing-4"
+    },
+    {
+      "id": "diagnostic:framing-8:image",
+      "assetId": "fp-diagnostic-frame-advanced",
+      "owner": "app/onboarding/question-bank.ts#framing-8"
+    },
+    {
+      "id": "diagnostic:light-1:image",
+      "assetId": "fp-diagnostic-light-basic",
+      "owner": "app/onboarding/question-bank.ts#light-1"
+    },
+    {
+      "id": "diagnostic:light-4:image",
+      "assetId": "fp-diagnostic-light-medium",
+      "owner": "app/onboarding/question-bank.ts#light-4"
+    },
+    {
+      "id": "diagnostic:light-8:image",
+      "assetId": "fp-diagnostic-light-advanced",
+      "owner": "app/onboarding/question-bank.ts#light-8"
+    },
+    {
+      "id": "diagnostic:story-4:image",
+      "assetId": "fp-diagnostic-story-medium",
+      "owner": "app/onboarding/question-bank.ts#story-4"
+    },
+    {
+      "id": "diagnostic:framing-5:image",
+      "assetId": "fp-diagnostic-focus-medium",
+      "owner": "app/onboarding/question-bank.ts#framing-5"
+    },
+    {
+      "id": "diagnostic:sound-4:audio-a",
+      "assetId": "fp-diagnostic-taps-a",
+      "owner": "app/onboarding/question-bank.ts#sound-4"
+    },
+    {
+      "id": "diagnostic:sound-4:audio-b",
+      "assetId": "fp-diagnostic-taps-b",
+      "owner": "app/onboarding/question-bank.ts#sound-4"
+    },
+    {
+      "id": "diagnostic:sound-8:audio-a",
+      "assetId": "fp-diagnostic-peaks-a",
+      "owner": "app/onboarding/question-bank.ts#sound-8"
+    },
+    {
+      "id": "diagnostic:sound-8:audio-b",
+      "assetId": "fp-diagnostic-peaks-b",
+      "owner": "app/onboarding/question-bank.ts#sound-8"
+    }
+  ],
+  "videos": []
+}

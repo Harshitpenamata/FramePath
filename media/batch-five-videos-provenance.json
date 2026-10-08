@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "batch": "stage3-batch5",
+  "purpose": "Four unique school-event starter and prepare video references; asset research only",
+  "duplicateCheck": {
+    "sourceDirectory": "work/framepath-site",
+    "command": "rg --no-ignore --hidden -l -- 'qJf_aWFYchY|2pjYP9xpApc|ottnH427Fr8|nixu1tYgp_Q' work/framepath-site",
+    "result": "No matches before integration (exit 1, zero output). The final search included the full checkout with --no-ignore --hidden, covering current and legacy files, ignored source, media records, build output, dependencies and hidden files."
+  },
+  "overallLimits": [
+    "Official YouTube oEmbed returned the title and channel credit for all four. Public watch-page player metadata returned OK, which is not a playback or embedding guarantee.",
+    "The selections are 181, 114, 214 and 99 seconds. Two are complete short videos; two use verified creator-written chapter starts and the next creator chapter or verified full-video end. No internal timestamps were invented.",
+    "Full playback was not reviewed. India-specific playback, embedding, school-network restrictions, advertisements and regional availability were not independently tested.",
+    "Caption presence is reported from metadata and does not establish accuracy. The readiness chapter caption request returned an empty body; its individual spoken checklist items remain unverified.",
+    "Reading alternatives are newly authored exercises, not transcripts. School-event framing, uninterrupted coverage, permission distinctions, readiness tests, storage estimates/calculator and fallback choices are explicitly authored adaptations with primary supporting guidance.",
+    "Practice uses objects, fictional scenarios or consenting adults. No minors, private records or permission forms need to be uploaded. Event recording depends on the organiser's permitted areas and agreements, and permission to record is separate from permission to share.",
+    "No new purchase, paid service, app installation or account registration is a prerequisite. Use the phone, charger, stable support and storage already available."
+  ],
+  "videos": [
+    {
+      "lessonSlot": "need-c01-03-starter-0",
+      "lessonTopic": "Choose a permitted event recording position with a clear view of the whole action",
+      "videoId": "qJf_aWFYchY",
+      "title": "Tips for a Professional Look with Little to No Equipment",
+      "creator": "YouTube Creators",
+      "creatorURL": "https://www.youtube.com/@youtubecreators",
+      "start": 0,
+      "end": 181,
+      "fullDurationSeconds": 181,
+      "evidence": {
+        "timingBasis": "Complete video. Official YouTube player videoDetails.lengthSeconds is 181; no invented internal boundary.",
+        "contentBasis": "The official YouTube creator description identifies framing, lighting and setup using little or no equipment. YouTube's primary filming guide embeds this exact ID and discusses location preparation. The school-event checks for a permitted position, unobstructed aisles and a view of the entire action are authored adaptations, not claimed contents of this home-setup clip.",
+        "primarySourceURL": "https://support.google.com/youtube/answer/12340105?co=YOUTUBE._YTVideoType%3Dvideo&hl=en",
+        "supportingReadingURL": "https://digital.stlawu.edu/resources/smartphone-video-production/"
+      },
+      "captionStatus": "Official player metadata exposes English non-ASR captions, English (United Kingdom) non-ASR captions and English auto-generated captions. Caption text, timing and rendering were not audited.",
+      "verificationLimits": [
+        "This is a home filming setup lesson, not school-event or Indian legal guidance. It does not establish permission to film any event.",
+        "Full playback and individual demonstrations were not reviewed. Do not imply that the video specifically teaches keeping school aisles clear or continuous event coverage.",
+        "Use only an organiser-approved place and equipment already available. No purchase, app installation, account or upload is needed for the authored exercise."
+      ],
+      "readingAlternative": "Ask the organiser where recording is permitted. From that place, check the phone screen: can you see the full action without blocking an aisle, exit or another person's view? Rehearse with objects or consenting adults. Keep entrances and likely movement inside the frame. If the view fails, choose another permitted position before the event begins. Stay within the agreed area.",
+      "checkedAtUTC": "2026-10-07T15:12:39.2151584Z",
+      "suggestedNote": "Complete 3:01 YouTube Creators setup lesson. Our event exercise adapts its framing idea to an organiser-approved position with clear aisles and a view of the whole action.",
+      "sourceURL": "https://www.youtube.com/watch?v=qJf_aWFYchY",
+      "clipDurationSeconds": 181,
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DqJf_aWFYchY&format=json",
+      "officialPlayerStatus": "OK",
+      "readingAlternativeWordCount": 60
+    },
+    {
+      "lessonSlot": "need-c01-03-starter-1",
+      "lessonTopic": "Rehearse a phone recording that starts before and continues after an important moment",
+      "videoId": "2pjYP9xpApc",
+      "title": "How to Film like a PRO with Android Smartphones [Updated Guide!]",
+      "creator": "Justin Brown - Primal Video",
+      "creatorURL": "https://www.youtube.com/@PrimalVideo",
+      "start": 916,
+      "end": 1030,
+      "fullDurationSeconds": 1052,
+      "evidence": {
+        "timingBasis": "Creator-written YouTube description supplies 15:16 Record a test video, 16:32 Hit the record button and 17:10 Filming Checklist (Free Guide). The selected 15:16–17:10 segment contains two complete adjacent creator chapters, 114 seconds. Official player videoDetails.lengthSeconds is 1052.",
+        "contentBasis": "The creator's primary guide embeds this exact video and explains rehearsing a 10–20 second recording with the intended setup, playing it back and correcting problems before recording. St Lawrence University's primary smartphone guide explicitly recommends starting a few seconds before action and continuing a few seconds after. The continuous school-event rehearsal is our adaptation of these sources.",
+        "primarySourceURL": "https://primalvideo.com/guides/how-to-film-like-a-pro-with-android-smartphones/",
+        "chapterSourceURL": "https://www.youtube.com/watch?v=2pjYP9xpApc",
+        "supportingReadingURL": "https://digital.stlawu.edu/resources/smartphone-video-production/"
+      },
+      "captionStatus": "Official player metadata exposes an English non-ASR track labelled English - Default and a separate English auto-generated track. Caption accuracy, synchronization and rendering were not audited.",
+      "verificationLimits": [
+        "The selected chapters concern testing and beginning a phone recording, not filming a school event. The start-before/hold-after timing and whole-action requirement are separately supported authored practice.",
+        "The creator's article concerns filming oneself. Do not transfer its look-at-the-lens instruction to the event camera operator, who should monitor the recording and surroundings.",
+        "Full playback of the segment was not reviewed. Chapter boundaries were verified from the creator's description; the exact spoken wording was not audited.",
+        "The full source includes optional equipment, apps and commercial links outside these chapters. Use the existing phone camera; no purchase, paid app or guide registration is required."
+      ],
+      "readingAlternative": "Rehearse with a consenting adult moving an object across your planned frame. Begin recording a few seconds before the movement, confirm the recording indicator, keep the whole action visible, then continue for a few seconds after it ends. Replay from start to finish. Check that nothing important was missed and sound is present. Repeat once if you stopped early, lost the subject or never actually recorded.",
+      "checkedAtUTC": "2026-10-07T15:18:31.980663Z",
+      "suggestedNote": "Creator chapters 15:16–17:10 cover testing and starting an Android recording. The uninterrupted event rehearsal and before/after margin below are our adaptation, supported by St Lawrence University's filming guidance.",
+      "sourceURL": "https://www.youtube.com/watch?v=2pjYP9xpApc",
+      "clipDurationSeconds": 114,
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D2pjYP9xpApc&format=json",
+      "officialPlayerStatus": "OK",
+      "readingAlternativeWordCount": 66
+    },
+    {
+      "lessonSlot": "need-c01-03-prepare-0",
+      "lessonTopic": "Separate permission to record from permission to share and protect privacy",
+      "videoId": "ottnH427Fr8",
+      "title": "Teen Voices: Oversharing and Your Digital Footprint",
+      "creator": "Common Sense Education",
+      "creatorURL": "https://www.youtube.com/@CommonSenseEducation",
+      "start": 0,
+      "end": 214,
+      "fullDurationSeconds": 214,
+      "evidence": {
+        "timingBasis": "Complete video. Official YouTube player videoDetails.lengthSeconds is 214; Common Sense's own video curation also lists 3:34. No invented internal boundary.",
+        "contentBasis": "The creator's official description frames the video as reflection on sharing information about oneself and others. Its primary curation confirms the exact ID and runtime. eSafety's primary consent guidance independently distinguishes asking before taking a photo/video, asking before sharing, and following school or group rules. Applying those distinctions to a private school-event recording is authored practice, not Indian legal advice.",
+        "primarySourceURL": "https://www.commonsense.org/education/youtube-curations-advisory",
+        "creatorLessonURL": "https://www.commonsense.org/education/digital-citizenship/lesson/social-media-and-digital-footprints-our-responsibilities",
+        "supportingReadingURLs": [
+          "https://www.esafety.gov.au/young-people/consent-sharing-photos-videos",
+          "https://www.commonsense.org/education/articles/keeping-your-students-and-yourself-safe-on-social-media-a-checklist"
+        ]
+      },
+      "captionStatus": "Official player metadata exposes an English non-ASR caption track. Caption text, timing and rendering were not audited.",
+      "verificationLimits": [
+        "This is a broader digital-footprint discussion, not a school-event permission procedure. The two-permission checklist is our adaptation, supported separately by eSafety.",
+        "eSafety is an Australian source. Do not present its law, age restrictions, reporting routes or other jurisdiction-specific rules as Indian legal advice.",
+        "Full playback and the exact spoken examples were not reviewed.",
+        "Practice the decision using objects, fictional scenarios or consenting adults. Do not upload minors, school records, contact details or permission forms. The clip does not require accessing the creator's gated lesson materials."
+      ],
+      "readingAlternative": "Before filming, confirm the organiser's rules and who may be recorded. Separately agree who may see the finished clip and how it may be shared. Permission to record does not automatically settle sharing. Check backgrounds for names, records and people outside that agreement. Practise the decisions with a fictional scene or consenting adults. Keep practice footage on your device; do not upload children or private records.",
+      "checkedAtUTC": "2026-10-07T15:12:38.1609389Z",
+      "suggestedNote": "Complete 3:34 Common Sense Education discussion about sharing and digital footprints. Our school-event permission checklist is an adaptation supported by eSafety guidance; it is not Indian legal advice.",
+      "sourceURL": "https://www.youtube.com/watch?v=ottnH427Fr8",
+      "clipDurationSeconds": 214,
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DottnH427Fr8&format=json",
+      "officialPlayerStatus": "OK",
+      "readingAlternativeWordCount": 66
+    },
+    {
+      "lessonSlot": "need-c01-03-prepare-1",
+      "lessonTopic": "Test actual phone readiness: power, storage, saved playback and a fallback",
+      "videoId": "nixu1tYgp_Q",
+      "title": "How To Film Brilliant Videos For Your Business (Beginners Smartphone Filming Tips - Part 3)",
+      "creator": "The Authority Engine – with Jeremy Mason",
+      "creatorURL": "https://www.youtube.com/@TheAuthorityEngine",
+      "start": 441,
+      "end": 540,
+      "fullDurationSeconds": 540,
+      "evidence": {
+        "timingBasis": "Creator-written YouTube description supplies 07:21 Tip 12 : Final Check. The selected chapter runs from that verified boundary to the official video's full length, 540 seconds (9:00), giving 99 seconds. The end is the verified end of the video, not an invented internal cut.",
+        "contentBasis": "The creator's official description identifies a final pre-filming checklist and provides this chapter boundary. Its individual spoken checks were not verified. St Lawrence University's primary guide separately supports checking battery, storage, settings and test audio. The practical event readiness test, storage estimate/calculator and fallback plan are authored adaptations.",
+        "primarySourceURL": "https://www.youtube.com/watch?v=nixu1tYgp_Q",
+        "supportingReadingURLs": [
+          "https://digital.stlawu.edu/resources/smartphone-video-production/",
+          "https://www.uni-hamburg.de/en/elearning/anleitungen/smartphone-video.html",
+          "https://www.wifv.org/filming-with-your-phone-101/"
+        ]
+      },
+      "captionStatus": "Official player metadata exposes English auto-generated captions and an English non-ASR track labelled English - Default. The public caption URL returned an empty body when checked; caption content, accuracy and synchronization were not verified.",
+      "verificationLimits": [
+        "The creator labels the chapter Final Check, but the individual checklist items spoken in it were not audited. Do not claim that this clip explicitly covers battery, storage, playback or each fallback step.",
+        "Full playback was not reviewed. Because the segment ends with the video, it may include the creator's outro or promotion.",
+        "Storage use varies by phone, resolution, frame rate and encoding. Any lesson calculator is an authored estimate, not a source claim or a guarantee of uninterrupted recording.",
+        "A short successful test does not prove the phone can record the full event without heat, battery or storage limits. Use the planned settings and conditions and keep a permitted fallback.",
+        "The full source includes optional tripods, accessories and commercial links. The exercise uses an existing phone, charger and available space; no purchase, app or registration is required."
+      ],
+      "readingAlternative": "Charge the phone and check free storage. Using the settings planned for the event, record a short test with movement and sound. Stop, find the saved file and play it through. Check the picture, sound and recording indicator. Estimate space from your own test, leaving headroom; an estimate cannot guarantee recording time. Agree a fallback, such as shorter permitted coverage or the organiser's approved recording.",
+      "checkedAtUTC": "2026-10-07T15:14:40.1174887Z",
+      "suggestedNote": "Creator's Final Check chapter, 7:21–9:00. The specific power, storage, playback and fallback checks below are our authored exercise; each spoken item in this chapter was not verified.",
+      "sourceURL": "https://www.youtube.com/watch?v=nixu1tYgp_Q",
+      "clipDurationSeconds": 99,
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dnixu1tYgp_Q&format=json",
+      "officialPlayerStatus": "OK",
+      "readingAlternativeWordCount": 65
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "batch": "stage3-batch4",
+  "purpose": "Five unique teaching-videography foundations and stretch video references; asset research only",
+  "duplicateCheck": {
+    "sourceDirectory": "work/framepath-site",
+    "command": "rg --no-ignore -l 'yi3NykJ1yoU|SgfICec18Gw|ZbKwwgnGF98|KxxK-kRs6Cw|-bn2euyKhJo' work/framepath-site",
+    "result": "No matches before integration (exit 1, zero output). Search included the full checkout with ignored source, legacy files, media records, build output and dependencies rather than only app/lessons/videos.ts."
+  },
+  "overallLimits": [
+    "Official YouTube oEmbed returned title and channel credit for all five. Public watch-page player metadata returned OK for all five, but that is not a playback or embedding guarantee.",
+    "All five selections use the complete verified video and are 16, 112, 186, 140 and 204 seconds long, respectively. No internal chapter timestamps were invented.",
+    "India-specific playback, embedding, school-network restrictions, advertisements and regional availability were not independently tested.",
+    "Full playback was not reviewed. Caption presence is reported from metadata and does not establish accuracy. The background-sound clip has no exposed caption track.",
+    "Reading alternatives are newly authored teaching exercises, not transcripts. Source-specific limitations distinguish clip content from lesson adaptations.",
+    "The activities use an existing phone, its available microphone, stable household support, and paper or existing editing tools. No new purchase, paid service, app installation or account registration is a prerequisite."
+  ],
+  "videos": [
+    {
+      "lessonSlot": "need-c05-01-foundations-0",
+      "lessonTopic": "Listen for background and foreground sound before a spoken lesson",
+      "videoId": "yi3NykJ1yoU",
+      "title": "Background Sounds",
+      "creator": "Dustin Blakey",
+      "creatorURL": "https://www.youtube.com/@dwblakey",
+      "start": 0,
+      "end": 16,
+      "fullDurationSeconds": 16,
+      "evidence": {
+        "timingBasis": "Complete video. Official YouTube player videoDetails.lengthSeconds is 16; no invented internal boundary.",
+        "contentBasis": "UC Agriculture and Natural Resources' primary how-to-video recording guide embeds this exact video under Checking Audio and identifies it as an example of problematic background sound. Its adjacent procedure instructs recording and listening to a test, diagnosing unusual noise and repeating the test.",
+        "primarySourceURL": "https://ucanr.edu/dept/communications-toolkit/recording"
+      },
+      "captionStatus": "No caption tracks were exposed in the checked official player metadata. Do not label captions as verified; the authored reading alternative carries the practice instructions.",
+      "verificationLimits": [
+        "This is a 16-second listening example, not a narrated tutorial; the surrounding UC ANR guide supplies the sound-check procedure.",
+        "The exact sound events and words were not independently listened to, and playback was not reviewed. Avoid naming a specific noise in the lesson without listening first.",
+        "No external microphone is a prerequisite; use the phone or microphone already available."
+      ],
+      "readingAlternative": "Before recording, stand where you will teach and listen. Name the voice or action the learner needs to hear, then notice competing sounds such as traffic, a fan or handling noise. Record ten seconds of room sound and one spoken instruction. Replay both. Move to a quieter position or remove a controllable noise safely, then repeat the same instruction. Choose the take with clearer words.",
+      "checkedAtUTC": "2026-10-07T14:51:44.7482335Z",
+      "suggestedNote": "Complete 16-second background-sound example linked by UC ANR. No captions were found in the checked metadata. Use the reading exercise for the sound-check steps.",
+      "sourceURL": "https://www.youtube.com/watch?v=yi3NykJ1yoU",
+      "clipDurationSeconds": 16,
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dyi3NykJ1yoU&format=json",
+      "officialPlayerStatus": "OK",
+      "readingAlternativeWordCount": 65
+    },
+    {
+      "lessonSlot": "need-c05-01-foundations-1",
+      "lessonTopic": "Describe visual actions and provide captions and a written alternative",
+      "videoId": "SgfICec18Gw",
+      "title": "Integrated Audio Description: At a Glance",
+      "creator": "MSFTEnable",
+      "creatorURL": "https://www.youtube.com/@MSFTEnable",
+      "start": 0,
+      "end": 112,
+      "fullDurationSeconds": 112,
+      "evidence": {
+        "timingBasis": "Complete video. Official YouTube player videoDetails.lengthSeconds is 112; no invented internal boundary.",
+        "contentBasis": "Microsoft's official accessibility channel describes this lesson as an introduction to integrated audio description with writing tips. Microsoft's primary article links the exact video. W3C's primary resources separately support captions and descriptive text alternatives.",
+        "primarySourceURL": "https://blogs.microsoft.com/on-the-issues/2021/11/05/what-is-visual-description-as-events-evolve-greater-accessibility-for-the-disability-community-emerges/",
+        "supportingReadingURLs": [
+          "https://www.w3.org/WAI/media/av/description/",
+          "https://www.w3.org/WAI/media/av/captions/",
+          "https://www.w3.org/WAI/media/av/transcripts/"
+        ]
+      },
+      "captionStatus": "Official player metadata exposes an English non-ASR caption track and a separate English auto-generated track. Caption text, timing and rendering were not audited.",
+      "verificationLimits": [
+        "The clip specifically teaches integrated audio description. Captions and written steps are complementary checks authored for this lesson, supported by the linked W3C guidance; do not imply the clip covers every check.",
+        "Full playback and the exact wording of the demonstration were not independently reviewed.",
+        "No Microsoft product, new app, paid captioning service or course is required."
+      ],
+      "readingAlternative": "Say the essential action as you show it: name the object, movement and visible result instead of saying only 'do this'. Read aloud important on-screen words. Add accurate captions for speech and meaningful sounds, checking names and timing. Supply the steps in text, including visual details needed to complete the task. Test once without looking and once muted; repair information that disappears in either check.",
+      "checkedAtUTC": "2026-10-07T14:53:09.5991068Z",
+      "suggestedNote": "Complete 1:52 Microsoft accessibility lesson on describing important visuals within narration. Caption and written-step checks below complement that technique.",
+      "sourceURL": "https://www.youtube.com/watch?v=SgfICec18Gw",
+      "clipDurationSeconds": 112,
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSgfICec18Gw&format=json",
+      "officialPlayerStatus": "OK",
+      "readingAlternativeWordCount": 65
+    },
+    {
+      "lessonSlot": "need-c05-01-foundations-2",
+      "lessonTopic": "Use a steady phone position and safe support for a teaching demonstration",
+      "videoId": "ZbKwwgnGF98",
+      "title": "Smartphone recording tips",
+      "creator": "Visual Culture",
+      "creatorURL": "https://www.youtube.com/@VisualcultureAust",
+      "start": 0,
+      "end": 186,
+      "fullDurationSeconds": 186,
+      "evidence": {
+        "timingBasis": "Complete video. Official YouTube player videoDetails.lengthSeconds is 186; no invented internal boundary.",
+        "contentBasis": "Visual Culture's primary article embeds this exact video and explains that it is for people without tripods, external microphones or lighting accessories. It explicitly teaches placing the phone on a steady surface and filming using existing equipment.",
+        "primarySourceURL": "https://www.visualculture.com.au/smartphone-video-recording-tips/",
+        "supportingReadingURL": "https://downloads.bbc.co.uk/academy/academyfiles/Smartphone_journalism_Videos_transcript.pdf"
+      },
+      "captionStatus": "Official player metadata exposes English auto-generated captions. Accuracy and synchronization were not audited.",
+      "verificationLimits": [
+        "The complete tutorial also covers location, audio, natural light, framing and presenting; no unsupported claim is made that all 186 seconds concern stabilization.",
+        "The source supports steady-surface filming. The two-hand grip, comparison and safe-placement checks below are authored practice; BBC's smartphone journalism transcript separately supports holding the phone with two hands and elbows close.",
+        "Full playback and every demonstrated support arrangement were not independently reviewed. The exercise requires only a stable existing surface or handheld grip."
+      ],
+      "readingAlternative": "Record the same short demonstration twice: first handheld with two hands and elbows close, then with the phone securely supported on a stable surface. Keep fingers off the lens and microphone. Check that the support cannot slip, fall or obstruct anyone; avoid balancing the phone above a person. Replay both takes on your phone. Choose the position that keeps the learner's important action visible and steady.",
+      "checkedAtUTC": "2026-10-07T14:51:43.8709625Z",
+      "suggestedNote": "Complete 3:06 smartphone setup tutorial using available light and a steady surface. Compare its support idea with the handheld exercise; no purchase is needed.",
+      "sourceURL": "https://www.youtube.com/watch?v=ZbKwwgnGF98",
+      "clipDurationSeconds": 186,
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZbKwwgnGF98&format=json",
+      "officialPlayerStatus": "OK",
+      "readingAlternativeWordCount": 66
+    },
+    {
+      "lessonSlot": "need-c05-01-stretch-0",
+      "lessonTopic": "Compare continuous pacing with small chunks and a learner practice pause",
+      "videoId": "KxxK-kRs6Cw",
+      "title": "Segmenting Principle | The 12 Multimedia Instructional Principles",
+      "creator": "Mike Tyler",
+      "creatorURL": "https://www.youtube.com/@miketylersport",
+      "start": 0,
+      "end": 140,
+      "fullDurationSeconds": 140,
+      "evidence": {
+        "timingBasis": "Complete video. Official YouTube player videoDetails.lengthSeconds is 140; no invented internal boundary. A separate microformat field reports 141, a one-second metadata difference; the clip uses the player video's 140-second duration.",
+        "contentBasis": "The creator's official YouTube description explicitly recommends learner-controlled segments and tasks between video segments, with learners continuing when ready.",
+        "primarySourceURL": "https://www.youtube.com/watch?v=KxxK-kRs6Cw"
+      },
+      "captionStatus": "Official player metadata exposes English auto-generated captions. Accuracy and synchronization were not audited.",
+      "verificationLimits": [
+        "Creator description and duration were checked. Full playback and the exact spoken examples were not independently reviewed.",
+        "The A/B teaching-film exercise below is an authored application of segmenting, not a claimed experiment or fixed optimum pause length from the source.",
+        "Optional Patreon and other creator links are not prerequisites."
+      ],
+      "readingAlternative": "Make two versions of the same small teaching step. In A, demonstrate continuously. In B, divide the explanation at a meaningful action, invite the learner to pause and try, then show a check before continuing. Keep the objective and essential content the same. Ask a learner to attempt the task and note hesitation, replaying and accuracy. Choose the pacing that helps completion, not simply the shorter version.",
+      "checkedAtUTC": "2026-10-07T14:51:38.4879866Z",
+      "suggestedNote": "Complete 2:20 lesson on user-paced segments. Our comparison exercise applies the idea to a short teaching film; there is no fixed ideal pause length.",
+      "sourceURL": "https://www.youtube.com/watch?v=KxxK-kRs6Cw",
+      "clipDurationSeconds": 140,
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DKxxK-kRs6Cw&format=json",
+      "officialPlayerStatus": "OK",
+      "readingAlternativeWordCount": 67
+    },
+    {
+      "lessonSlot": "need-c05-01-stretch-1",
+      "lessonTopic": "Separate observation from assumption before making one controlled revision",
+      "videoId": "-bn2euyKhJo",
+      "title": "Data vs. Findings vs. Insights",
+      "creator": "NNgroup",
+      "creatorURL": "https://www.youtube.com/@NNgroup",
+      "start": 0,
+      "end": 204,
+      "fullDurationSeconds": 204,
+      "evidence": {
+        "timingBasis": "Complete video. Official YouTube player videoDetails.lengthSeconds is 204; no invented internal boundary.",
+        "contentBasis": "Nielsen Norman Group's primary video page credits Sara Paul and explains the distinction between raw observations, patterns and actionable interpretations. The linked primary article gives further examples. This supports recording evidence before deciding what a teaching-video revision should address.",
+        "primarySourceURL": "https://www.nngroup.com/videos/data-findings-insights/",
+        "creatorArticleURL": "https://www.nngroup.com/articles/data-findings-insights-differences/",
+        "supportingReadingURL": "https://www.nngroup.com/articles/usability-testing-101/"
+      },
+      "captionStatus": "Official player metadata exposes an English non-ASR caption track. Caption text, timing and rendering were not audited.",
+      "verificationLimits": [
+        "The source concerns UX research rather than teaching-video production. The same-objective, one-change retest below is an authored adaptation, not a claim that this video teaches that entire procedure.",
+        "Full playback and the exact spoken examples were not independently reviewed.",
+        "One learner's result is limited evidence. Repeating with the same person may reflect practice as well as the edit; do not claim that one retest proves the revision caused improvement.",
+        "Optional NNgroup training links are not prerequisites."
+      ],
+      "readingAlternative": "Keep two columns: what you observed and what you think caused it. 'The learner replayed step two' is evidence; 'the shot was too wide' is a hypothesis. Change one feature that could help, then test the same objective with the same success check and conditions. Record the result, including anything worse. If the same learner repeats, note possible practice effects. Keep, revise or reject the change using that evidence.",
+      "checkedAtUTC": "2026-10-07T14:52:23.0459212Z",
+      "suggestedNote": "Complete 3:24 NNgroup lesson, presented by Sara Paul, on observations and interpretations. The one-change teaching test is our adaptation; a single retest cannot establish causation.",
+      "sourceURL": "https://www.youtube.com/watch?v=-bn2euyKhJo",
+      "clipDurationSeconds": 204,
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-bn2euyKhJo&format=json",
+      "officialPlayerStatus": "OK",
+      "readingAlternativeWordCount": 69
+    }
+  ]
+}
