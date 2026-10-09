@@ -7,6 +7,7 @@ import {normalizeProfile} from '../../profile-validation';
 import {buildPersonalPlan,isPersonalized} from '../../personalization';
 import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../selfpaced-curriculum';
 import {validateReview} from '../../assignment-review';
+import {buildProgramme} from '../../videography/programme';
 import {basicPaths,basicKeys,basicContext,curriculumVersion,journalTypes} from '../../beginner-curriculum';
 import {scoreAttempt,moduleInfo,sequenceFor,assignmentRubric} from '../../learning-rules';
 import {identity,readState,saveState,usage,checkOrigin,safeText,safeUrl,mentorFor,requireLesson,activeExplore,craftEnrolled,db,errorResponse} from '../../service';
@@ -39,6 +40,8 @@ case 'visual_session_complete':{
  }
  break;
 }
+case 'programme_save':{s.programme=buildProgramme(b.programme,s.programme);break;}
+case 'programme_update':{if(!s.programme)throw new Error('Make your plan first.');const u=b.update||{};s.programme=buildProgramme({...s.programme,hoursPerWeek:u.hoursPerWeek??s.programme.schedule.hoursPerWeek,startDate:u.startDate??s.programme.schedule.startDate,daysPerWeek:u.daysPerWeek??s.programme.schedule.daysPerWeek,mode:u.mode??s.programme.mode},s.programme);break;}
 case 'attach':{const key=safeText(b.key,80,1);requireLesson(s,key);const uploadId=b.uploadId?safeText(b.uploadId,100):'';let uploadType='';if(uploadId){const owned:any=await db().prepare('SELECT type FROM uploads WHERE id=? AND user_id=?').bind(uploadId,user.userId).first();if(!owned)throw new Error('This upload is not available in your account.');uploadType=owned.type}s.drafts[key]={...(s.drafts[key]||{}),uploadId,uploadType,updatedAt:now};break;}
 case 'assignment_save':{const key=safeText(b.key,80,1);requireLesson(s,key);const notes=safeText(b.notes,4000);const uploadId=safeText(b.uploadId||'',100);let uploadType='';if(uploadId){const own:any=await db().prepare('SELECT type FROM uploads WHERE id=? AND user_id=?').bind(uploadId,user.userId).first();if(!own)throw new Error('That upload is not available in your account.');uploadType=own.type}s.drafts[key]={...(s.drafts[key]||{}),notes,url:safeUrl(b.url||''),uploadId,uploadType,updatedAt:now};break;}
 case 'lesson_save':{const key=safeText(b.key,80,1);const info=requireLesson(s,key);const checks=Array.isArray(b.checks)?b.checks:[];if(checks.length!==info.lesson.checks.length||checks.some((x:any)=>typeof x!=='boolean'))throw new Error('Check your lesson checklist.');const notes=safeText(b.notes,4000);s.drafts[key]={...(s.drafts[key]||{}),notes,checks,updatedAt:now};if(b.complete){if(!s.progress[key])throw new Error('Complete the scored Reflect checkpoint to unlock the next module.');}else if(b.undo){if(isCourseKey(key)||isVisualKey(key))throw new Error('An earned course pass stays available. You can record another attempt.');delete s.progress[key]}break;}

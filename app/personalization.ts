@@ -1,3 +1,4 @@
+import {isFreeModule} from './videography/programme';
 import {isVisualKey} from './lessons/content';
 import {isScenarioProfile,buildScenarioPlan,isScenarioKey,scenarioLesson} from './scenario-engine';
 import {coursePaths,CourseLesson,Level,activeLevel,levelNames} from './selfpaced-curriculum';
@@ -45,5 +46,5 @@ export function curatedLesson(profile:any,key:string):CourseLesson & {hook:strin
 }
 export function personalKeys(s:any,pathId?:string){const p=s?.profile;if(isScenarioProfile(p)){const plan=buildScenarioPlan(p);if(!pathId||plan.paths.some(x=>x.id===pathId))return plan.keys;}if(isPersonalized(p)){const plan=buildPersonalPlan(p);if(!pathId||plan.paths.some(x=>x.id===pathId))return plan.keys}return null}
 export function freePathsFor(s:any):string[]{return s?.trialPathIds?.length?s.trialPathIds:['basic-w1','basic-w2']}
-export function freeLessonKey(s:any,key:string){return ['product-reel','everyday-story'].some(id=>key.startsWith(id+'-')&&isVisualKey(key))||freePathsFor(s).some(id=>key.startsWith(id+'-'))}
+export function freeLessonKey(s:any,key:string){return isFreeModule(key)||['product-reel','everyday-story'].some(id=>key.startsWith(id+'-')&&isVisualKey(key))||freePathsFor(s).some(id=>key.startsWith(id+'-'))}
 export function currentPlan(s:any):PersonalPlan|null{return isScenarioProfile(s?.profile)?buildScenarioPlan(s.profile) as unknown as PersonalPlan:isPersonalized(s?.profile)?buildPersonalPlan(s.profile):null}

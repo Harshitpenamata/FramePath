@@ -2,6 +2,14 @@
 
 A responsive full-stack prototype of the Framepath v3 learning model.
 
+## Videography programme (phase 1, Oct 2026)
+- Home course carousel: Videography is active; Photography, Filmmaking, Animation, Motion Graphics, Gaming, VFX & Post-production are shown as coming soon.
+- /start: interests (first = pathway project) → 12-question level check (Beginner / Intermediate / Advanced, six skill areas) → time plan (recommended hours/week from the level; learners can only add hours) → review. Guests keep a local draft and finish after Google sign-in.
+- /workspace: diagnostic report with pathway infographic, skill heat map, start/end dates with delay controls, and Free / Self-paced (₹999/yr) / Mentor-led (₹30,000) mode cards.
+- Curriculum: 42 modules from Video_Production_Curriculum.xlsx (app/videography/curriculum.json), each with outcome, topics, credited videos (app/videography/media.ts, IDs verified via oEmbed), an owned illustration, assignment, three assessment checks and evidence.
+- Free plan: every module's videos and context, plus assignments (and 2 AI reviews each) on the first two modules of each level. Self-paced and Mentor-led unlock all assignments. Checkout and mentors remain simulated.
+- Tests: tests/videography.test.mjs. Previous v15 learning stays reachable at /workspace/previous.
+
 ## Included
 - Learning model v15 (8 Oct 2026): goal search over 176 real video tasks in 18 categories, mapped to 20 need archetypes. Guest-friendly diagnostic (two context questions, 18–22 adaptive checks), goal-and-skills report, then weekly time, mode and dashboard. See SCENARIO-CHANGELOG.md, CURRICULUM.md and docs/PILOT-RELEASE.md.
 - Recipe engine (app/scenario-engine.ts, app/personalization.ts) builds routes from task, per-skill evidence, equipment and time; short windows yield a scoped starter.
@@ -14,7 +22,7 @@ A responsive full-stack prototype of the Framepath v3 learning model.
 - Diagnostic, consent, mentor request, 48-hour reservation, simulated checkout, draft plan and mentor approval.
 - Saved assignments, uploads, rubric reviews, revisions, private conversation, check-ins and calendar reminders.
 - Private portfolios with explicit public publishing / unpublishing.
-- OpenAI Responses integration for questions, pathway adaptation and first-pass text/still feedback.
+- Claude (claude-opus-5-5, Anthropic Messages API with default refusal fallback) for questions, plans, first-pass text/still assignment reviews and image screening (app/claude.ts).
 
 ## Prototype boundaries
 - Payments, Maya / Arjun mentor personas, calls and mentor actions are explicitly simulated.
@@ -30,7 +38,7 @@ Vinext / React, Cloudflare Worker, D1 DB and R2 BUCKET.
 Google sign-in (OpenID Connect with PKCE) provides identity via app/auth/* routes and a signed HttpOnly session cookie (app/session.ts). Platform oai-authenticated-* headers are ignored outside local dev. Requires GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET and SESSION_SECRET.
 The public catalogue is anonymous-accessible; persistent learner actions require sign-in.
 Production secrets are stored using Sites runtime secrets, not browser code.
-OPENAI_API_KEY is required for AI, OPENAI_MODEL defaults to gpt-4.1-mini.
+ANTHROPIC_API_KEY is required for AI questions, assignment reviews and image uploads (images are screened by Claude before storage).
 The local .env.local is ignored and must never be committed or copied into a deliverable.
 
 ## Data
@@ -41,7 +49,7 @@ Migrations are generated with Drizzle and applied with npm run db:migrate:* (see
 Keep published migrations immutable; append later schema changes.
 R2 stores upload bytes; D1 stores ownership and file metadata.
 Uploads: images <=5 MB, videos <=25 MB, <=100 MB per learner. Larger videos use HTTPS viewing links.
-Uploads require a safe-content declaration and a file-signature check. Images are screened with OpenAI moderation before storage, so image uploads need OPENAI_API_KEY; videos are not automatically reviewed.
+Uploads require a safe-content declaration and a file-signature check. Images are screened by Claude vision before storage, so image uploads need ANTHROPIC_API_KEY; videos are not automatically reviewed.
 
 ## AI allowances
 Explore year: 12 adaptations, 120 questions, 12 feedback checks across all Explore paths.
@@ -78,7 +86,7 @@ Never add credentials to command arguments, tracked files or source archives.
 | Worker / D1 / R2 | framepath / framepath-db / framepath-uploads | framepath-staging / framepath-staging-db / framepath-staging-uploads |
 | Branch | main | develop (or any branch) |
 
-Names and IDs live in deploy-targets.json. Each environment has its own secrets (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SESSION_SECRET, OPENAI_API_KEY, optional OPENAI_MODEL, optional FRAMEPATH_ADMIN_IDS for /goal-review), set with `npx wrangler secret put NAME --name <worker>`. Use a different SESSION_SECRET per environment.
+Names and IDs live in deploy-targets.json. Each environment has its own secrets (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SESSION_SECRET, ANTHROPIC_API_KEY, optional FRAMEPATH_ADMIN_IDS for /goal-review), set with `npx wrangler secret put NAME --name <worker>`. Use a different SESSION_SECRET per environment.
 
 Workflow for changes (including AI prompt or model changes):
 1. Work on develop, then `npm run deploy:staging` and test on the staging URL.

@@ -3,14 +3,15 @@ import {personalKeys,freePathsFor,curatedLesson,isPersonalized} from './personal
 import {coursePaths as basicPaths,courseKeys as basicKeys,isCoursePath,isCourseKey,keysForLevel,levelForPath} from './selfpaced-curriculum';
 import {paths,weeks} from './catalog';
 import {visualCriteria,visualLesson} from './lessons/content';
-export const phases=[{id:'pre',name:'Pre-production',verb:'Plan',description:'Find the idea. Plan the shots.'},{id:'production',name:'Production',verb:'Shoot',description:'Work with framing, light and sound.'},{id:'post',name:'Post-production',verb:'Edit',description:'Shape, refine and share the film.'}] as const;
+import {isVideoPath,parseVideoKey,stagePhase} from './videography/programme';
+export const phases=[{id:'pre',name:'Planning',verb:'Plan',description:'Find the idea. Plan the shots.'},{id:'production',name:'Filming',verb:'Shoot',description:'Work with framing, light and sound.'},{id:'post',name:'Editing',verb:'Edit',description:'Shape, improve and share the film.'}] as const;
 export type Phase=typeof phases[number]['id'];
 export const freePathIds=['basic-w1','basic-w2','product-reel','everyday-story'];
 export const isFreePath=(id:string,s?:any)=>s?.trialPathIds?freePathsFor(s).includes(id)||['product-reel','everyday-story'].includes(id):freePathIds.includes(id);
 // Stable module IDs preserve saved learner work while the course is organised by phase.
 export const craftOrder=[0,5,8,1,2,4,9,6,3,7,10,11];
 export const craftPhase=(index:number):Phase=>[0,5,8].includes(index)?'pre':[1,2,4,9].includes(index)?'production':'post';
-export const phaseFor=(pathId:string,index:number,craft=false):Phase=>visualLesson(pathId+'-'+index)?.phase||(isCoursePath(pathId)?basicPaths.find(p=>p.id===pathId)!.lessons[index].phase:craft?craftPhase(index):pathId==='natural-light'?(index===0?'pre':index===3?'post':'production'):pathId==='first-edit'?'post':index<2?'pre':index===2?'production':'post');
+export const phaseFor=(pathId:string,index:number,craft=false):Phase=>(isVideoPath(pathId)?stagePhase(parseVideoKey(pathId+'-'+index)?.module.stage||''):null)||visualLesson(pathId+'-'+index)?.phase||(isCoursePath(pathId)?basicPaths.find(p=>p.id===pathId)!.lessons[index].phase:craft?craftPhase(index):pathId==='natural-light'?(index===0?'pre':index===3?'post':'production'):pathId==='first-edit'?'post':index<2?'pre':index===2?'production':'post');
 export function moduleInfo(key:string,profile?:any){
  const scenario=parseScenarioKey(key);if(scenario){const lesson=scenarioLesson(key,profile);return {key,index:scenario.index,pathId:scenario.pathId,craft:false,lesson,phase:lesson.phase};}
  if(/^craft-(?:[1-9]|1[0-2])$/.test(key)){const index=Number(key.split('-')[1])-1;return {key,index,pathId:'craft',craft:true,lesson:weeks[index],phase:craftPhase(index)}}

@@ -1,5 +1,6 @@
 import {pathLessons} from './lessons/content';
 import {coursePaths as basicPaths} from './selfpaced-curriculum';
+import {videoPaths} from './videography/programme';
 export type Lesson={title:string;minutes:number;learn:string;do:string;checks:string[];resource:number};
 export const resources=[
  {title:'Framing and composition',by:'StudioBinder',videoId:'qQNiqzuXjoM',url:'https://www.youtube.com/watch?v=qQNiqzuXjoM',type:'YouTube lesson',note:'Place, action, detail.'},
@@ -62,4 +63,4 @@ export function freshState(){return {profile:null,membership:null,craft:null,pro
 export type State=ReturnType<typeof freshState> & any;
 
 
-export const paths=[...basicPaths,...legacyPaths];
+export const paths=[...basicPaths,...legacyPaths,...videoPaths];

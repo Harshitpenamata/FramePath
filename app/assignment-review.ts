@@ -9,3 +9,5 @@ export function validateReview(value:any,key:string,profile?:any){
  const scored=value.ratings.every((v:any)=>v!==null)?scoreAttempt(key,value.ratings,profile):null;
  return {...value,total:scored?.total??null,passed:scored?.passed??false,criteria:assignmentRubric(key,profile).map((c,i)=>({label:c.label,weight:c.weight,rating:value.ratings[i],feedback:value.reasons[i]}))};
 }
+// Claude structured-output schema: same fields as reviewSchema; array length is enforced by validateReview.
+export const claudeReviewSchema={type:'object',additionalProperties:false,properties:{summary:{type:'string'},strength:{type:'string'},improvement:{type:'string'},nextStep:{type:'string'},evidenceLimit:{type:'string'},ratings:{type:'array',items:{anyOf:[{type:'integer'},{type:'null'}]}},reasons:{type:'array',items:{type:'string'}}},required:['summary','strength','improvement','nextStep','evidenceLimit','ratings','reasons']};
