@@ -153,3 +153,48 @@
  .vg-carousel-nav{display:none}
 }
 @media (prefers-reduced-motion:reduce){.vg-course.active,.vg-progress span{transition:none}}
+
+/* Module page: Make (hand-in) and Reflect (AI review) */
+.vg-lesson{display:grid;gap:18px;max-width:900px;margin:0 auto}
+.vg-lesson h1{margin:0}
+.vg-make,.vg-reflect{display:grid;gap:16px}
+.vg-task p{margin:.4em 0}
+.vg-form-block{display:grid;gap:14px}
+.vg-form-block h2{display:flex;align-items:center;gap:8px;margin:0;font-size:1.2rem}
+.vg-form-block label{display:grid;gap:6px}
+.vg-form-block textarea,.vg-form-block input[type=url]{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--input);background:var(--background);color:inherit;font:inherit}
+.vg-files{display:grid;gap:10px}
+.vg-label{font-weight:600}
+.vg-files ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.vg-files li{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:var(--surface-raised);overflow-wrap:anywhere}
+.vg-files li button{margin-left:auto;background:none;border:0;color:inherit;cursor:pointer;display:inline-flex}
+.vg-rate{border:0;margin:0;padding:0;display:grid;gap:8px}
+.vg-rate legend{font-weight:600;margin-bottom:6px}
+.vg-rate div{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.vg-rate button{display:grid;gap:2px;justify-items:center;padding:8px 4px;border-radius:10px;border:1px solid var(--border);background:transparent;color:inherit;font:inherit;font-size:.78rem;cursor:pointer;text-align:center}
+.vg-rate button strong{font-size:1.05rem}
+.vg-rate button.selected{border-color:var(--primary);background:var(--primary);color:var(--primary-foreground)}
+.vg-locked{display:grid;gap:10px;justify-items:start}
+.vg-ai-review{display:grid;gap:14px}
+.vg-ai-review h2{display:flex;align-items:center;gap:8px;margin:0}
+.vg-ai-score{font-size:2.2rem;line-height:1;color:var(--primary)}
+.vg-ai-score small{font-size:.9rem;color:var(--muted-foreground)}
+.vg-compare{width:100%;border-collapse:collapse}
+.vg-compare th{text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-foreground);padding:6px 8px}
+.vg-compare td{padding:10px 8px;border-top:1px solid var(--border);vertical-align:top}
+.vg-compare td:first-child{display:grid;gap:4px}
+.vg-compare td:not(:first-child){white-space:nowrap;font-weight:700;width:56px}
+.vg-compare tr.gap td{background:color-mix(in srgb,var(--vg-s3) 12%,transparent)}
+.vg-gap{color:var(--vg-s3)}
+.vg-review-notes p{margin:.4em 0}
+
+/* My Work: one folder per module */
+.vg-folders{display:grid;gap:14px}
+.vg-folder>summary{display:flex;align-items:center;gap:10px;cursor:pointer;list-style:none;font-weight:700}
+.vg-folder>summary::-webkit-details-marker{display:none}
+.vg-folder[open]>summary{margin-bottom:12px}
+.vg-piece{display:grid;gap:8px;padding:14px;border-radius:12px;background:var(--surface-raised)}
+.vg-piece ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.vg-piece li{display:flex;align-items:center;gap:8px;overflow-wrap:anywhere}
+.vg-piece li button{margin-left:auto}
+@media (max-width:760px){.vg-rate div{grid-template-columns:repeat(5,minmax(0,1fr))}.vg-rate button{font-size:.68rem;padding:6px 2px}}

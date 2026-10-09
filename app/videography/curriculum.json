@@ -15,6 +15,7 @@
   ],
   "assignment": "Watch two short videos and note how they tell their story. Then put six photos or clips in order to show an activity. Add two lines about what you want people to understand.",
   "evidence": "Someone can watch your sequence and say what happens.",
+  "handIn": "media",
   "checks": [
    "Someone can tell what happens from your pictures",
    "You explain what you wanted to show and why",
@@ -38,6 +39,7 @@
   ],
   "assignment": "Write a one-page plan for your activity video. Include the topic, your main message, how long it is, the shots you need and anything people will say.",
   "evidence": "Your plan says what people will see and learn, not just the topic.",
+  "handIn": "text",
   "checks": [
    "Your plan has a topic, one message and a viewer",
    "It says what people will see, not just the topic",
@@ -62,6 +64,7 @@
   ],
   "assignment": "Make a list of 6 to 10 shots, a gear checklist and a simple schedule. Ask permission from anyone you will film. Record a short test, copy it to your computer and check it plays.",
   "evidence": "You are ready, you have permission and your test file is safely backed up.",
+  "handIn": "text",
   "checks": [
    "You have a 6 to 10 shot list, a gear list and a schedule",
    "People and places in your shoot have given permission",
@@ -85,6 +88,7 @@
   ],
   "assignment": "Film something indoors, outdoors and something moving. Watch each clip. Fix one problem and film it again. Share both versions.",
   "evidence": "You can spot a blurry, shaky or badly lit shot and fix it.",
+  "handIn": "media",
   "checks": [
    "Your subject is sharp",
    "The shot is steady and not too bright or dark",
@@ -108,6 +112,7 @@
   ],
   "assignment": "Film an activity in 5 to 8 shots. Include one wide shot, the action, and one close-up detail. Share your clips and shot list.",
   "evidence": "People can follow the activity and nothing important is missing.",
+  "handIn": "media",
   "checks": [
    "You have a wide shot, the action and a close-up",
    "People can follow the activity from your 5 to 8 shots",
@@ -131,6 +136,7 @@
   ],
   "assignment": "Film a shot where the light looks bad. Then move the subject, the camera or the light to fix it. Share the before and after.",
   "evidence": "The after shot looks clearly better and you can say why.",
+  "handIn": "media",
   "checks": [
    "The after shot looks clearly better",
    "You say what change made it better",
@@ -155,6 +161,7 @@
   ],
   "assignment": "Record a 20 to 30 second introduction and some natural background sound. Listen back, find a problem and record again if needed.",
   "evidence": "The speech is easy to understand and you checked it before you left.",
+  "handIn": "media",
   "checks": [
    "The speech is clear and easy to understand",
    "You listened back and re-recorded if needed",
@@ -178,6 +185,7 @@
   ],
   "assignment": "Copy your clips into named folders. Start an editing project, close it and open it again. Share a picture of your folders and project.",
   "evidence": "Your files are easy to find and your project opens without missing clips.",
+  "handIn": "media",
   "checks": [
    "Clips are copied and the originals are kept safe",
    "Folders and the project have clear names",
@@ -202,6 +210,7 @@
   ],
   "assignment": "Edit a 45 to 60 second video of your activity. Show it to someone, then fix one part that was confusing or too long. Share both versions.",
   "evidence": "A viewer can follow the activity and your second version is better.",
+  "handIn": "media",
   "checks": [
    "The edit has a clear start, middle and end",
    "Important parts stay and mistakes are cut",
@@ -226,6 +235,7 @@
   ],
   "assignment": "Add a voice, some natural sound and music if it helps. Share the finished video and say why you used each sound.",
   "evidence": "Music never covers the voice and sound changes are smooth.",
+  "handIn": "media",
   "checks": [
    "Music never covers the voice",
    "Sound changes are smooth",
@@ -249,6 +259,7 @@
   ],
   "assignment": "Fix three shots that don’t match. Share before and after pictures.",
   "evidence": "Your shots match better and you can say what you changed.",
+  "handIn": "media",
   "checks": [
    "Three shots now match better",
    "Details are still easy to see",
@@ -272,6 +283,7 @@
   ],
   "assignment": "Export your video with a title and captions. Watch the final file and fill in a short checklist.",
   "evidence": "The file plays, the text is easy to read and captions match the speech.",
+  "handIn": "media",
   "checks": [
    "The final file plays all the way through",
    "Titles and captions are easy to read and correct",
@@ -293,6 +305,7 @@
   ],
   "assignment": "Make one short video in your chosen style. Share the video, your plan and your original clips.",
   "evidence": "Your video fits the brief, with clear pictures, clear sound and a simple edit.",
+  "handIn": "media",
   "checks": [
    "Your video fits your chosen style",
    "Pictures are clear and the voice is easy to hear",
@@ -315,6 +328,7 @@
   ],
   "assignment": "Make a new 60 to 90 second video. Share your plan, shot list, original clips, project and final video.",
   "evidence": "Clear message, steady and sharp shots, clear voice and a final file that plays.",
+  "handIn": "media",
   "checks": [
    "Your video has one clear message",
    "Shots are sharp and steady, and the voice is clear",
@@ -339,6 +353,7 @@
   ],
   "assignment": "Plan one subject two ways, like a bakery as a founder’s story and as an advert. Pick one and explain why. Make a short sequence to test it.",
   "evidence": "You name your viewer and the pictures that help them understand or feel.",
+  "handIn": "media",
   "checks": [
    "You plan two versions for a named viewer",
    "You explain why you picked one",
@@ -362,6 +377,7 @@
   ],
   "assignment": "A client says “make a video about our business”. Write a one-page brief, a creative plan and your research notes.",
   "evidence": "Your brief covers the goal, viewer, message, size of the job, limits and who says yes.",
+  "handIn": "text",
   "checks": [
    "The brief covers the goal, viewer, message and size of the job",
    "Your plan explains the idea, structure, pictures and sound",
@@ -386,6 +402,7 @@
   ],
   "assignment": "Share your shot plan, schedule, gear list, budget, permissions and a backup plan. Then update the plan after one thing changes.",
   "evidence": "The important shots are protected and the plan still works when something changes.",
+  "handIn": "text",
   "checks": [
    "Your shot plan, schedule and gear list are realistic",
    "Permissions and a backup plan protect key shots",
@@ -410,6 +427,7 @@
   ],
   "assignment": "Film one sequence indoors and one in tricky outdoor light. Share camera tests and explain your settings.",
   "evidence": "Important details stay clear and shots don’t jump in brightness or colour.",
+  "handIn": "media",
   "checks": [
    "Brightness, colour and focus stay steady between shots",
    "You explain the settings you chose",
@@ -434,6 +452,7 @@
   ],
   "assignment": "Film an activity you can repeat, using a limited number of shots. Share your clips and a 45 to 60 second edit.",
   "evidence": "People can follow the action and every camera move has a reason.",
+  "handIn": "media",
   "checks": [
    "People can follow the action without explanation",
    "You have wide, close, reaction and extra shots",
@@ -458,6 +477,7 @@
   ],
   "assignment": "Create two different looks for one subject with simple gear. Share clips, a light sketch and a still from each.",
   "evidence": "You can repeat the look and explain each choice.",
+  "handIn": "media",
   "checks": [
    "You made two clearly different looks",
    "A light sketch and still explain each look",
@@ -482,6 +502,7 @@
   ],
   "assignment": "Record an interview and an activity. Also record room sound and background sound. Find and fix one sound problem.",
   "evidence": "Speech is clear and you fixed problems before you left.",
+  "handIn": "media",
   "checks": [
    "Interview speech is clean and clear",
    "You recorded room and background sound",
@@ -506,6 +527,7 @@
   ],
   "assignment": "Organise your project, sync the interview sound and pick your best takes. Check that you can relink missing files.",
   "evidence": "Someone else can open the project and find what they need.",
+  "handIn": "media",
   "checks": [
    "Files are checked, named and in bins",
    "Interview sound is synced with the picture",
@@ -530,6 +552,7 @@
   ],
   "assignment": "Make a rough edit and try two different openings. Show it to others, then share a better version with notes on what you changed.",
   "evidence": "You explain your choices and the new version is clearly better.",
+  "handIn": "media",
   "checks": [
    "The edit follows a clear story line",
    "The pace fits the message",
@@ -554,6 +577,7 @@
   ],
   "assignment": "Finish the sound for your project. Share a before and after, and check it on headphones and normal speakers.",
   "evidence": "Voices are clear and the mix sounds good on different speakers.",
+  "handIn": "media",
   "checks": [
    "Voices stay clear above music and effects",
    "Sound edits are smooth",
@@ -577,6 +601,7 @@
   ],
   "assignment": "Share a fixed version and a styled version of your project, with before and after stills.",
   "evidence": "Shots match, details are clear and you can tell fixing from styling.",
+  "handIn": "media",
   "checks": [
    "Shots are fixed and match each other",
    "Skin tones and details look natural",
@@ -601,6 +626,7 @@
   ],
   "assignment": "Deliver your main video, a short version, captions and a quality checklist. Get feedback once and make the changes.",
   "evidence": "No missing parts, wrong names or caption mistakes, and the short version has a clear purpose.",
+  "handIn": "media",
   "checks": [
    "The main and short versions both meet the brief",
    "Captions are correct and well timed",
@@ -622,6 +648,7 @@
   ],
   "assignment": "Complete the project for your chosen style. Share your plan, original clips, edit and any extra versions.",
   "evidence": "Your work fits the brief and shows you can run a small shoot on your own.",
+  "handIn": "media",
   "checks": [
    "Your work fits the brief for your style",
    "Your plan, shots and edit suit that style",
@@ -644,6 +671,7 @@
   ],
   "assignment": "Share your production plan, main video, one extra version, your project and a short reflection.",
   "evidence": "The video fits the brief and you solved key picture, sound, permission and delivery problems.",
+  "handIn": "media",
   "checks": [
    "The video fits a new brief, made on your own",
    "You solved key picture, sound, permission and delivery problems",
@@ -668,6 +696,7 @@
   ],
   "assignment": "Develop two very different ideas for one brief. Share both plans, reference pictures, sound ideas, and why you chose one.",
   "evidence": "You explain your choice, the risks, and why the other idea fits less well.",
+  "handIn": "text",
   "checks": [
    "You developed two very different ideas",
    "You explain why your choice fits the audience",
@@ -692,6 +721,7 @@
   ],
   "assignment": "Share a researched plan. Test one key idea with a site visit, interview, test shot or rehearsal. Note what you learned.",
   "evidence": "You spot weak ideas and change the plan when the facts don’t support it.",
+  "handIn": "text",
   "checks": [
    "Research supports your story",
    "You tested one key idea before filming",
@@ -716,6 +746,7 @@
   ],
   "assignment": "Share a full production pack. Then deal with a change, like less time or a missing person. Note the effect on cost, time and quality.",
   "evidence": "The key results are protected and every change is clear to everyone.",
+  "handIn": "text",
   "checks": [
    "A full plan with budget, schedule and roles",
    "You handled a change and explained the trade-offs",
@@ -740,6 +771,7 @@
   ],
   "assignment": "Test your camera setup in two conditions, from filming to export. Share the settings, results and limits.",
   "evidence": "Results are consistent and you find the real cause of problems.",
+  "handIn": "media",
   "checks": [
    "Your setup gives consistent results",
    "You noted settings and tests in two conditions",
@@ -764,6 +796,7 @@
   ],
   "assignment": "Direct a scene, demo or interview with several camera angles. Do it again with less time. Share your plans and clips.",
   "evidence": "Directions are clear, key moments are captured and nothing important is missing.",
+  "handIn": "media",
   "checks": [
    "Your directions are clear and people feel confident",
    "Key moments are covered from several angles",
@@ -788,6 +821,7 @@
   ],
   "assignment": "Plan two connected light setups. Change the location a little and adapt. Share sketches, stills and notes.",
   "evidence": "The look stays the same and you explain what you changed and why.",
+  "handIn": "media",
   "checks": [
    "Both setups share one look",
    "Sketches and stills let you repeat the setup",
@@ -812,6 +846,7 @@
   ],
   "assignment": "Record a two-person talk or event with a main and a backup recording. Then fix a pretend failure using copies.",
   "evidence": "You find the fault, choose usable sound and plan a fix.",
+  "handIn": "media",
   "checks": [
    "You used a main and a backup recording",
    "You found the fault using copies",
@@ -837,6 +872,7 @@
   ],
   "assignment": "Hand your project to another learner. Do a recovery test. Check the final edit uses the right files.",
   "evidence": "The handover works without extra help and the right files are used.",
+  "handIn": "media",
   "checks": [
    "Someone else can open your project without help",
    "Your recovery test worked",
@@ -861,6 +897,7 @@
   ],
   "assignment": "Make two versions with different structures. Show them, do two rounds of changes, and keep a log of feedback.",
   "evidence": "Changes make the video better and you can explain each decision.",
+  "handIn": "media",
   "checks": [
    "You compared two structures with viewers",
    "Two rounds of changes improved the video",
@@ -885,6 +922,7 @@
   ],
   "assignment": "Finish the sound on a tricky scene. Share the mix, the separate sound parts and notes on any fixes.",
   "evidence": "The sound supports the story, voices are clear and you meet the loudness target.",
+  "handIn": "media",
   "checks": [
    "Voices are clear and the sound supports the story",
    "Noise fixes don’t leave odd sounds",
@@ -909,6 +947,7 @@
   ],
   "assignment": "Match clips from different cameras and create an approved look. Compare the edit with the exported file.",
   "evidence": "The video looks consistent and you check any difference in the export.",
+  "handIn": "media",
   "checks": [
    "Clips from different cameras match",
    "Your look is separate from basic fixes",
@@ -933,6 +972,7 @@
   ],
   "assignment": "Share your main film, a shorter version, captions and a clear handover note.",
   "evidence": "Files meet the brief, names are clear and someone else understands the package.",
+  "handIn": "media",
   "checks": [
    "Files meet the brief and have clear names",
    "You delivered a short version and captions",
@@ -955,6 +995,7 @@
   ],
   "assignment": "Complete an advanced project in your chosen style. Share tests, original clips, all versions and why you made key choices.",
   "evidence": "Your work meets the style’s standards and handles real limits well.",
+  "handIn": "media",
   "checks": [
    "Your work meets your style’s standards",
    "You shared tests and reasons for key choices",
@@ -978,6 +1019,7 @@
   ],
   "assignment": "Share your plan, production pack, tests, clips, project, final versions, change log and a short case study.",
   "evidence": "You led the key work, kept the idea strong and delivered a package others can use.",
+  "handIn": "media",
   "checks": [
    "You led the production through problems",
    "Your idea stayed strong through changes",

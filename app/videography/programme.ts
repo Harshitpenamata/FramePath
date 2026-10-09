@@ -189,3 +189,25 @@ export function moduleLesson(m:CurriculumModule,project?:string):Lesson{
 }
 export const videoPaths=levels.map(level=>({id:videoPathId(level),title:'Videography · '+levelNames[level],short:levelNames[level],description:levelSummary[level],outcome:levelSummary[level],duration:rhythm[level].weeks+' WEEKS · '+rhythm[level].hours+' HOURS',number:String(levels.indexOf(level)+1).padStart(2,'0'),lessons:modulesFor(level).map(m=>moduleLesson(m))}));
 export const curriculumModules=curriculum;
+
+// ---- Hand-in (Make) ----
+// Self-rating scale for the three checks, and the two reflection questions.
+export const ratingScale=['Not yet','Started','Getting there','Good','Great'];
+export const reflectionQuestions=[{id:'well',label:'What went well?'},{id:'change',label:'What would you change next time?'}] as const;
+export const maxHandInFiles=3;
+// Beginners hand in their first three modules without self-rating, so the first tasks stay simple. Self-rating starts at beginner module 4.
+export const selfCheckFromBeginnerModule=4;
+export const needsSelfCheck=(key:string)=>{const v=parseVideoKey(key);return !!v&&(v.level!=='beginner'||v.index+1>=selfCheckFromBeginnerModule)};
+export type HandIn={answer:string;notes:string;url:string;uploadIds:string[];ratings:number[];reflections:{well:string;change:string}};
+// What is still missing before work can be handed in ([] when ready). Used by the Make form and the server.
+export function handInMissing(m:CurriculumModule,h:HandIn,selfCheck=true):string[]{
+ const missing:string[]=[];
+ if(m.handIn==='text'){if(h.answer.trim().length<80)missing.push('write your answer (at least 80 characters)')}
+ else{if(!h.uploadIds.length&&!h.url.trim())missing.push('upload your work or add a video link');if(h.notes.trim().length<20)missing.push('add a short note about your work (at least 20 characters)')}
+ if(h.uploadIds.length>maxHandInFiles)missing.push('use up to '+maxHandInFiles+' files');
+ if(selfCheck){
+  if(h.ratings.length!==3||h.ratings.some(r=>!Number.isInteger(r)||r<0||r>4))missing.push('rate your work on all three checks');
+  for(const q of reflectionQuestions)if((h.reflections[q.id]||'').trim().length<10)missing.push('answer “'+q.label+'”');
+ }
+ return missing;
+}

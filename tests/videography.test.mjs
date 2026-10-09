@@ -110,3 +110,27 @@ test('course carousel: only Videography is active in phase 1',()=>{
  assert.deepEqual(P.courses.filter(c=>c.active).map(c=>c.id),['videography']);
  for(const name of ['Photography','Filmmaking','Motion Graphics','Gaming'])assert.ok(P.courses.some(c=>c.title.includes(name)),name);
 });
+
+test('hand-in: written tasks need an answer; media tasks need a file or link and a note',()=>{
+ const textModule=P.curriculumModules.find(m=>m.id==='B02'),mediaModule=P.curriculumModules.find(m=>m.id==='B04');
+ assert.equal(textModule.handIn,'text');assert.equal(mediaModule.handIn,'media');
+ const base={answer:'',notes:'',url:'',uploadIds:[],ratings:[3,3,3],reflections:{well:'The plan was clear.',change:'Add more close-up shots.'}};
+ assert.ok(P.handInMissing(textModule,base).some(x=>x.includes('write your answer')));
+ assert.deepEqual(P.handInMissing(textModule,{...base,answer:'x'.repeat(80)}),[],'no upload needed for a written task');
+ assert.ok(P.handInMissing(mediaModule,{...base,notes:'I filmed three shots.'}).some(x=>x.includes('upload your work')));
+ assert.deepEqual(P.handInMissing(mediaModule,{...base,notes:'I filmed three shots today.',url:'https://example.com/v'}),[]);
+ assert.ok(P.handInMissing(mediaModule,{...base,notes:'I filmed three shots today.',uploadIds:['a','b','c','d']}).some(x=>x.includes('up to 3')));
+});
+
+test('self-check: beginner modules 1–3 skip it; it starts at beginner module 4 and is always on for higher levels',()=>{
+ for(const i of [0,1,2])assert.equal(P.needsSelfCheck('video-beginner-'+i),false,'beginner module '+(i+1));
+ for(const i of [3,4,13])assert.equal(P.needsSelfCheck('video-beginner-'+i),true,'beginner module '+(i+1));
+ assert.equal(P.needsSelfCheck('video-intermediate-0'),true);assert.equal(P.needsSelfCheck('video-advanced-0'),true);
+ const m=P.curriculumModules.find(x=>x.id==='B01');const work={answer:'',notes:'I put six photos in order.',url:'https://example.com/v',uploadIds:[],ratings:[],reflections:{well:'',change:''}};
+ assert.deepEqual(P.handInMissing(m,work,false),[],'no ratings or reflections needed when self-check is off');
+ assert.ok(P.handInMissing(m,work,true).some(x=>x.includes('rate your work')));
+});
+
+test('free plan: only the first two modules of each level have open tasks',()=>{
+ for(const level of P.levels){assert.ok(P.isFreeModule('video-'+level+'-0'));assert.ok(P.isFreeModule('video-'+level+'-1'));assert.ok(!P.isFreeModule('video-'+level+'-2'))}
+});
