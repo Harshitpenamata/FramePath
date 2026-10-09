@@ -1,0 +1,12 @@
+export const onboardingVersion='onboarding-v3' as const;
+export type Chapter='story'|'framing'|'light'|'sound'|'editing'|'delivery'|'ethics'|'scenario';
+export type ItemKind='choice'|'image-pair'|'hotspot'|'order'|'audio'|'settings'|'caption';
+export type Item={id:string;chapter:Chapter;band:0|1|2;title:string;context?:string;kind:ItemKind;choices:string[];answer:string|number;explanation:string;visual?:string;image?:string;audio?:string;reason?:boolean;config?:Record<string,any>};
+export type PublicItem=Omit<Item,'answer'|'explanation'>;
+export type Answer={itemId:string;value:string|number|null;confidence:0|1|2|null;rationale:string;at:string;seconds:number};
+export type GoalChoice={words:string;caseId:string;custom:boolean;confidence:number;candidates:{caseId:string;name:string;score:number}[];clarification?:{subject:string;audience:string}};
+export type Setup={gear:string[];hours:number;weeks:number;modality:string;bandwidth:string;experience:string;name:string;device:string;accessibility:string[];audience:string;structure:string;pace:string;feedback:string;sequence:string;motivation:string;control:string;orientation:string;length:number|null;outdoor:boolean;authorised:boolean;localBackup:boolean;screenRecorder:boolean;specialist:boolean;spatial:boolean};
+export type SkillSignal={value:number|null;label:string;correct:number;answered:number;skipped:number;source:string;confidentWrong:number;uncertainRight:number;evidence:string};
+export type Attempt={version:typeof onboardingVersion|'onboarding-v2';id:string;revision:number;goal:GoalChoice;setup:Setup;setupStep:number;answers:Answer[];status:'first-frame'|'setup'|'questions'|'paused'|'result'|'schedule'|'mode'|'ready';returnStatus?:string;firstFrame:{note:string;made:boolean};startedAt:string;updatedAt:string;overrides:Record<string,number>;mode:'self'|'mentor'|null;mentorId?:string;callPreference?:string;shareConsentAt?:string;profile?:any;lastItemId?:string};
+export type AssessmentResult={skills:Record<Chapter,SkillSignal>;level:'beginner'|'intermediate'|'advanced';label:'Basic'|'Medium'|'Advanced';gaps:Chapter[];answered:number;correct:number;complete:boolean;rationales:number;maxQuestions:number;next?:PublicItem};
+export type OnboardingView={attempt:Attempt|null;assessment?:AssessmentResult;authenticated:boolean;plan?:any;serverSavedAt?:string};

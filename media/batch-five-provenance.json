@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "collection": "Framepath school-performance recording practice — batch 5",
+  "generation_mode": "Built-in image_gen tool",
+  "generation_date": "2026-10-07",
+  "requested_asset_count": 4,
+  "actual_asset_count": 4,
+  "calls_per_asset": 1,
+  "variants": 0,
+  "retries": 0,
+  "source": "AI-generated original output created for this task; no input reference images.",
+  "credit": "AI-generated with OpenAI image generation for Framepath.",
+  "licence": "Generated output, not licensed stock photography. No third-party photographer or stock licence is claimed. Use remains subject to applicable OpenAI terms; copyright status or exclusivity is not asserted.",
+  "assets": [
+    {
+      "id": "event-starter-0",
+      "filename": "event-starter-0.png",
+      "saved_path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage3-batch5-assets/images/event-starter-0.png",
+      "generated_path": "C:/Users/Venky/.codex/generated_images/01a116ea-4424-7ae2-9882-d932cd3d1f1e/exec-f5c62c66-9fef-4012-8ad0-74f8ac05537d.png",
+      "source": "OpenAI built-in image_gen; original text-to-image output.",
+      "prompt": "Use case: photorealistic-natural\nAsset ID: event-starter-0\nAsset type: original cinematic editorial photo for adult phone-recording practice, 3:2 landscape.\nPrimary request: a wide view of an otherwise empty modest Indian school/community auditorium with a wooden stage and closed ochre curtain. One fictional adult Indian woman is seated in a chair beside the aisle, seen from behind and side. She holds an unbranded phone horizontally at chest height, with the screen completely obscured by its angle and her hands. Her seated posture leaves the aisle completely clear.\nComposition/framing: wide establishing photo showing the whole stage and clear empty aisle running to it; woman occupies a modest area of foreground seating and does not block the stage or walkway.\nStyle/medium: realistic tactile cinematic editorial photograph with natural restrained light, calm teal seating, charcoal shadows, warm gold/ochre curtain and textured wood, credible everyday community venue.\nTeaching hook: choose a permitted view without blocking others; convey this solely through composition.\nConstraints: one adult only; empty stage; no children, no minors, no performance, no logos, no readable text or signage, no watermark, no copyrighted performance imagery, no visible identifying records, no phone UI, no celebrity. Original fictional scene. Exactly one image.",
+      "aspect_ratio": "3:2 landscape",
+      "alt": "An adult woman sits in an empty teal-seated auditorium holding a landscape phone toward a closed ochre stage curtain, beside a clear central aisle.",
+      "credit": "AI-generated with OpenAI image generation for Framepath.",
+      "licence": "Generated output; no stock licence or exclusive copyright asserted.",
+      "inspection": {
+        "method": "Visually inspected actual generated output as displayed by image_gen.",
+        "checks": [
+          "Original fictional adult-only auditorium scene; whole closed-curtain stage and clear central aisle are visible.",
+          "No readable text, logo, minors, identifying records or performance imagery observed.",
+          "Distinct wide architectural composition; calm teal seating, ochre curtain and warm wood."
+        ],
+        "weaknesses": [
+          "The dark phone screen is visibly facing the viewer, so the requested fully obscured screen is not achieved; tiny indistinct screen markings may resemble UI.",
+          "The woman is seated several seats from the central aisle, rather than immediately beside it.",
+          "The still image cannot establish venue permission."
+        ],
+        "no_regeneration": true
+      }
+    },
+    {
+      "id": "event-starter-1",
+      "filename": "event-starter-1.png",
+      "saved_path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage3-batch5-assets/images/event-starter-1.png",
+      "generated_path": "C:/Users/Venky/.codex/generated_images/01a116ea-4424-7ae2-9882-d932cd3d1f1e/exec-69998173-444a-4e93-850a-5ebc5c3db8d4.png",
+      "source": "OpenAI built-in image_gen; original text-to-image output.",
+      "prompt": "Use case: photorealistic-natural\nAsset ID: event-starter-1\nAsset type: original cinematic editorial photograph for adult phone-recording practice, 3:2 landscape.\nPrimary request: a close tabletop rehearsal at home, with one adult Indian hand slowly moving a plain natural wooden rectangular block across a textured teal cloth. Exactly two small plain gold masking-tape marks on the cloth establish the short path. A plain unbranded phone is securely supported on a stable stand to the side, facing this block action; show only part of the rear of the phone, with its entire screen facing away from the viewer.\nComposition/framing: low close oblique tabletop view emphasizing block, hand, the two path markers and tactile cloth. Include a partially visible securely supported landscape phone at the edge of the photo. The path and two marks must be clearly discernible.\nStyle/medium: realistic cinematic editorial photography, softly lit home, warm tactile wood, calm teal, charcoal, subtle gold; intimate composition distinct from an auditorium.\nTeaching hook: use an object rehearsal to start recording before the movement and keep going to its end; no text overlay.\nConstraints: adult hand only, natural anatomy; no children, no minors, no logos, no readable text, no watermark, no copyrighted performance imagery, no identifying records, no phone UI, no celebrity. No other subjects. Exactly one image.",
+      "aspect_ratio": "3:2 landscape",
+      "alt": "An adult hand moves a plain wooden block between two tape marks on teal cloth, with a landscape phone supported on a broad stand at the side.",
+      "credit": "AI-generated with OpenAI image generation for Framepath.",
+      "licence": "Generated output; no stock licence or exclusive copyright asserted.",
+      "inspection": {
+        "method": "Visually inspected actual generated output as displayed by image_gen.",
+        "checks": [
+          "Close tabletop scene with one adult hand, plain wooden block and exactly two tape marks.",
+          "Phone is on a broad support and its screen is hidden.",
+          "No readable text, logos, minors, identifying records or performance imagery observed."
+        ],
+        "weaknesses": [
+          "The rear camera points obliquely toward the viewer; alignment toward the block is ambiguous and should not be presented as a reliable camera-position diagram.",
+          "A single still cannot show recording beginning before movement or continuing afterward."
+        ],
+        "no_regeneration": true
+      }
+    },
+    {
+      "id": "event-prepare-0",
+      "filename": "event-prepare-0.png",
+      "saved_path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage3-batch5-assets/images/event-prepare-0.png",
+      "generated_path": "C:/Users/Venky/.codex/generated_images/01a116ea-4424-7ae2-9882-d932cd3d1f1e/exec-1d56eb72-2e9a-4049-9de1-60445aa567e6.png",
+      "source": "OpenAI built-in image_gen; original text-to-image output.",
+      "prompt": "Use case: photorealistic-natural\nAsset ID: event-prepare-0\nAsset type: original cinematic editorial photo for adult school-event recording preparation, 3:2 landscape.\nPrimary request: a quiet still life on a home table: an entirely blank folded invitation made of cream paper, a closed charcoal notebook, one simple unmarked envelope, and an unbranded phone lying face down. Two adult Indian hands thoughtfully sort the paper items.\nComposition/framing: slightly elevated close still-life framing; adult hands enter from edge; blank folded card, closed notebook, plain envelope and back of phone all distinct and clear. No face and no other people.\nStyle/medium: realistic cinematic editorial photograph, tactile paper fibres and linen table surface, calm teal accents, charcoal notebook, warm gold late-afternoon side light, soft shadows.\nTeaching hook: agree recording and private sharing boundaries before the event. Convey the preparatory act with blank physical items and no on-screen UI.\nConstraints: all stationery is completely blank without letterforms or symbols; phone face down with screen entirely hidden; no children, no minors, no logos, no readable text, no watermark, no copyrighted performance imagery, no visible identifying records, no phone UI, no celebrity. Natural adult hand anatomy. Original fictional scene. Exactly one image.",
+      "aspect_ratio": "3:2 landscape",
+      "alt": "Adult hands sort a blank folded card and plain envelope beside a closed charcoal notebook and face-down phone in warm window light.",
+      "credit": "AI-generated with OpenAI image generation for Framepath.",
+      "licence": "Generated output; no stock licence or exclusive copyright asserted.",
+      "inspection": {
+        "method": "Visually inspected actual generated output as displayed by image_gen.",
+        "checks": [
+          "Blank folded card, closed notebook, unmarked envelope and face-down unbranded phone all visible.",
+          "Warm tactile still-life with adult hands; phone screen entirely hidden.",
+          "No readable text, logos, minors, identifying records or performance imagery observed."
+        ],
+        "weaknesses": [
+          "Blank items illustrate preparation but cannot themselves communicate or prove agreed recording and sharing boundaries."
+        ],
+        "no_regeneration": true
+      }
+    },
+    {
+      "id": "event-prepare-1",
+      "filename": "event-prepare-1.png",
+      "saved_path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage3-batch5-assets/images/event-prepare-1.png",
+      "generated_path": "C:/Users/Venky/.codex/generated_images/01a116ea-4424-7ae2-9882-d932cd3d1f1e/exec-4a38141f-f5bd-4b41-bc97-28a94b4eb679.png",
+      "source": "OpenAI built-in image_gen; original text-to-image output.",
+      "prompt": "Use case: photorealistic-natural\nAsset ID: event-prepare-1\nAsset type: original cinematic editorial photograph for adult recording preparation, 3:2 landscape.\nPrimary request: one fictional adult Indian man checking a practical home rehearsal setup at a simple table beside a cool morning window. An unbranded phone is held horizontally securely on a small broad-based stand. A power bank and its connected cable are visible entirely and safely on the tabletop, with no cable on the floor. Beside them lie a small unused plain zipped memory-card pouch and a blank checklist sheet with no writing.\nComposition/framing: a medium environmental side view showing the adult man carefully inspecting the setup, full broad stand base and tabletop cable arrangement. The phone screen is turned away and wholly invisible. View only its back or edge. Camera height near table; different setting from warm still-life shots.\nStyle/medium: realistic cinematic editorial photograph, cool natural morning window light, restrained teal and charcoal clothes and home accents, a little gold-toned wood, tactile practical existing equipment, quiet focused mood.\nTeaching hook: rehearse battery, storage and fallback with existing equipment, no UI illustration and no visual claim of successful battery/storage checks.\nConstraints: one adult only, natural anatomy; no children, no minors, no logos, no readable text, no watermark, no copyrighted performance imagery, no identifying records, no phone UI, no celebrity; checklist and pouch completely unmarked. Original fictional scene. Exactly one image.",
+      "aspect_ratio": "3:2 landscape",
+      "alt": "An adult man checks a landscape phone secured on a broad-based stand beside a power bank, tabletop cable, closed pouch and blank sheet in cool morning light.",
+      "credit": "AI-generated with OpenAI image generation for Framepath.",
+      "licence": "Generated output; no stock licence or exclusive copyright asserted.",
+      "inspection": {
+        "method": "Visually inspected actual generated output as displayed by image_gen.",
+        "checks": [
+          "Single fictional adult man and landscape phone on a visibly broad-based stand.",
+          "Power-bank cable stays over the tabletop; phone screen is turned away and hidden.",
+          "Plain closed pouch and completely blank sheet visible; cool morning setting distinct from other images.",
+          "No readable text, logos, minors, identifying records or performance imagery observed."
+        ],
+        "weaknesses": [
+          "Pouch contents and actual battery or storage state cannot be verified visually.",
+          "The requested blank checklist is depicted as an entirely blank sheet, with no checklist structure."
+        ],
+        "no_regeneration": true
+      }
+    }
+  ]
+}

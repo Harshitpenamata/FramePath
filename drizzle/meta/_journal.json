@@ -8,6 +8,20 @@
       "when": 1790860668248,
       "tag": "0000_high_tyrannus",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791279258237,
+      "tag": "0001_odd_pretty_boy",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791376770611,
+      "tag": "0002_chunky_sleeper",
+      "breakpoints": true
     }
   ]
 }

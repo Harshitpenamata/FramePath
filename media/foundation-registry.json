@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "fp-foundation-comparison",
+      "kind": "image",
+      "namespace": "foundation",
+      "ownerSlot": "foundation:comparison:visual",
+      "status": "reviewed",
+      "source": "Original generated photograph; prompt in media/provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A teal ceramic bowl beside a window with textured orange linen.",
+      "sha256": "050268f79eaff961b1b75d2ac9e75a08125e18d11fd329ddf4dc8966f247611a",
+      "dhash": "5c5e8e1e4ee78b8b",
+      "canonicalUrl": "/foundation/before-after-teal-bowl-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "renditions": [
+        {
+          "src": "/foundation/before-after-teal-bowl-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 17518,
+          "sha256": "182f4d82875fdabb03d6d2ffd2acef4723d3e5783ad4b78d2f2cdbb88c00f94b"
+        },
+        {
+          "src": "/foundation/before-after-teal-bowl-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 56360,
+          "sha256": "847b5eadba91f9395df5e24f8756f057efcc791c3fb854eb524f148953a6e584"
+        }
+      ]
+    },
+    {
+      "id": "fp-foundation-hotspots",
+      "kind": "image",
+      "namespace": "foundation",
+      "ownerSlot": "foundation:hotspots:visual",
+      "status": "reviewed",
+      "source": "Original generated photograph; prompt in media/provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Three yellow pears on a blue table, with a bright reflection in the upper right and clutter at the left.",
+      "sha256": "5e045a1f7a85bf9ec91be7d36e14ab0873e09fc8800bfbb03097738b95366c9a",
+      "dhash": "02013414198b8480",
+      "canonicalUrl": "/foundation/spot-flaw-yellow-pears-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "renditions": [
+        {
+          "src": "/foundation/spot-flaw-yellow-pears-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 7830,
+          "sha256": "91450266c1446731859eb80de1d726de48d7233399c1f6cb68df40ea6f087f7a"
+        },
+        {
+          "src": "/foundation/spot-flaw-yellow-pears-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 22702,
+          "sha256": "fd4d12ef67d11d682ccbe3a1b1b046faa9d17cc9dc46fbcd992db9e0f0150972"
+        }
+      ]
+    },
+    {
+      "id": "fp-foundation-exposure",
+      "kind": "image",
+      "namespace": "foundation",
+      "ownerSlot": "foundation:exposure:visual",
+      "status": "reviewed",
+      "source": "Original generated photograph; prompt in media/provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A pale stone arch on a terracotta table beside a bright window, with visible light and shadow detail.",
+      "sha256": "6ab19226a672b4a3ed3ec7b7a9df4b352b3b0036ec69205313914b8d94a0a071",
+      "dhash": "e2de5a52546426ce",
+      "canonicalUrl": "/foundation/exposure-stone-arch-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "renditions": [
+        {
+          "src": "/foundation/exposure-stone-arch-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 15066,
+          "sha256": "b9cb5dbe3b053aace20379d1909210c5d62e5f8d46f3b6d7b7b7310edf1be769"
+        },
+        {
+          "src": "/foundation/exposure-stone-arch-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 48726,
+          "sha256": "fd32768f58a18eff5f2821e4ad3407a8e99511d8b766d430da0ca56c3fc8f1f7"
+        }
+      ]
+    },
+    {
+      "id": "fp-foundation-white-balance",
+      "kind": "image",
+      "namespace": "foundation",
+      "ownerSlot": "foundation:white-balance:visual",
+      "status": "reviewed",
+      "source": "Original generated photograph; prompt in media/provenance.json",
+      "licence": "Original AI-generated teaching asset; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A white pitcher and green leaves on a neutral grey table beside a blue cloth.",
+      "sha256": "7fbf89a4c6e4e1abbff6d7b1d41e521554e3396b1033c0ea4b0f7b9cfa49146d",
+      "dhash": "0218191a06061898",
+      "canonicalUrl": "/foundation/white-balance-pitcher-960.webp",
+      "width": 1536,
+      "height": 1024,
+      "renditions": [
+        {
+          "src": "/foundation/white-balance-pitcher-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 8064,
+          "sha256": "2cd0899cdcb2539028affbb402e4654b83c3ab3a51d2fca0b6e8f9cee227e4ef"
+        },
+        {
+          "src": "/foundation/white-balance-pitcher-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 25732,
+          "sha256": "12fd3f4098145b835e451ebad184f93297317e3a813f60760e1311548ed7efb1"
+        }
+      ]
+    },
+    {
+      "id": "fp-clean-taps",
+      "kind": "audio",
+      "namespace": "foundation",
+      "ownerSlot": "foundation:audio-ab:clean-taps",
+      "status": "reviewed",
+      "source": "Original deterministic signal synthesis; no recorded speaker or external sample",
+      "licence": "Framepath original synthetic teaching audio",
+      "credit": "Synthesised for Framepath",
+      "alt": "Five clear synthetic taps against a quiet background.",
+      "description": "Five clear synthetic taps against a quiet background.",
+      "sha256": "81e699fd55f2eb9c37edf88bed35e11aa3f7638231bc544b794f2e57280e3973",
+      "canonicalUrl": "/foundation/clean-taps.wav",
+      "bytes": 128044,
+      "durationSeconds": 4,
+      "renditions": []
+    },
+    {
+      "id": "fp-noisy-taps",
+      "kind": "audio",
+      "namespace": "foundation",
+      "ownerSlot": "foundation:audio-ab:noisy-taps",
+      "status": "reviewed",
+      "source": "Original deterministic signal synthesis; no recorded speaker or external sample",
+      "licence": "Framepath original synthetic teaching audio",
+      "credit": "Synthesised for Framepath",
+      "alt": "The same synthetic tap pattern mixed with steady noise and low hum.",
+      "description": "The same synthetic tap pattern mixed with steady noise and low hum.",
+      "sha256": "2c8c8e084ae83e1972d6aa225668e09146a22dc1f49224f04137127fbc6c250e",
+      "canonicalUrl": "/foundation/noisy-taps.wav",
+      "bytes": 128044,
+      "durationSeconds": 4,
+      "renditions": []
+    }
+  ],
+  "slots": [
+    {
+      "id": "foundation:comparison:visual",
+      "assetId": "fp-foundation-comparison",
+      "owner": "/review/foundation"
+    },
+    {
+      "id": "foundation:hotspots:visual",
+      "assetId": "fp-foundation-hotspots",
+      "owner": "/review/foundation"
+    },
+    {
+      "id": "foundation:exposure:visual",
+      "assetId": "fp-foundation-exposure",
+      "owner": "/review/foundation"
+    },
+    {
+      "id": "foundation:white-balance:visual",
+      "assetId": "fp-foundation-white-balance",
+      "owner": "/review/foundation"
+    },
+    {
+      "id": "foundation:audio-ab:clean-taps",
+      "assetId": "fp-clean-taps",
+      "owner": "/review/foundation"
+    },
+    {
+      "id": "foundation:audio-ab:noisy-taps",
+      "assetId": "fp-noisy-taps",
+      "owner": "/review/foundation"
+    }
+  ],
+  "videos": []
+}

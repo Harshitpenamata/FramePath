@@ -1,24 +1,30 @@
+import {parseScenarioKey,scenarioLesson,isScenarioPath,isScenarioKey,scenarioPath,scenarioRubric,isScenarioProfile} from './scenario-engine';
+import {personalKeys,freePathsFor,curatedLesson,isPersonalized} from './personalization';
+import {coursePaths as basicPaths,courseKeys as basicKeys,isCoursePath,isCourseKey,keysForLevel,levelForPath} from './selfpaced-curriculum';
 import {paths,weeks} from './catalog';
+import {visualCriteria,visualLesson} from './lessons/content';
 export const phases=[{id:'pre',name:'Pre-production',verb:'Plan',description:'Find the idea. Plan the shots.'},{id:'production',name:'Production',verb:'Shoot',description:'Work with framing, light and sound.'},{id:'post',name:'Post-production',verb:'Edit',description:'Shape, refine and share the film.'}] as const;
 export type Phase=typeof phases[number]['id'];
-export const freePathIds=['product-reel','everyday-story'];
-export const isFreePath=(id:string)=>freePathIds.includes(id);
+export const freePathIds=['basic-w1','basic-w2','product-reel','everyday-story'];
+export const isFreePath=(id:string,s?:any)=>s?.trialPathIds?freePathsFor(s).includes(id)||['product-reel','everyday-story'].includes(id):freePathIds.includes(id);
 // Stable module IDs preserve saved learner work while the course is organised by phase.
 export const craftOrder=[0,5,8,1,2,4,9,6,3,7,10,11];
 export const craftPhase=(index:number):Phase=>[0,5,8].includes(index)?'pre':[1,2,4,9].includes(index)?'production':'post';
-export const phaseFor=(pathId:string,index:number,craft=false):Phase=>craft?craftPhase(index):pathId==='natural-light'?(index===0?'pre':index===3?'post':'production'):pathId==='first-edit'?'post':index<2?'pre':index===2?'production':'post';
-export function moduleInfo(key:string){
+export const phaseFor=(pathId:string,index:number,craft=false):Phase=>visualLesson(pathId+'-'+index)?.phase||(isCoursePath(pathId)?basicPaths.find(p=>p.id===pathId)!.lessons[index].phase:craft?craftPhase(index):pathId==='natural-light'?(index===0?'pre':index===3?'post':'production'):pathId==='first-edit'?'post':index<2?'pre':index===2?'production':'post');
+export function moduleInfo(key:string,profile?:any){
+ const scenario=parseScenarioKey(key);if(scenario){const lesson=scenarioLesson(key,profile);return {key,index:scenario.index,pathId:scenario.pathId,craft:false,lesson,phase:lesson.phase};}
  if(/^craft-(?:[1-9]|1[0-2])$/.test(key)){const index=Number(key.split('-')[1])-1;return {key,index,pathId:'craft',craft:true,lesson:weeks[index],phase:craftPhase(index)}}
  for(const p of paths){if(key.startsWith(p.id+'-')){const suffix=key.slice(p.id.length+1);if(!/^(0|[1-9]\d*)$/.test(suffix))break;const index=Number(suffix);if(p.lessons[index])return {key,index,pathId:p.id,craft:false,lesson:p.lessons[index],phase:phaseFor(p.id,index)}}}
  throw new Error('That module does not exist.');
 }
-export function sequenceFor(pathId:string){return pathId==='craft'?craftOrder.map(i=>'craft-'+(i+1)):paths.find(p=>p.id===pathId)!.lessons.map((_,i)=>pathId+'-'+i)}
+export function sequenceFor(pathId:string,s?:any){const curated=personalKeys(s,pathId);if(curated)return curated;if(isScenarioPath(pathId))return scenarioPath(pathId,s?.profile)!.keys;return isCoursePath(pathId)?keysForLevel(levelForPath(pathId)):pathId==='craft'?craftOrder.map(i=>'craft-'+(i+1)):paths.find(p=>p.id===pathId)!.lessons.map((_,i)=>pathId+'-'+i)}
 export function passed(s:any,key:string){return !!s.progress?.[key]}
-export function nextModule(s:any,pathId:string){return sequenceFor(pathId).find(k=>!passed(s,k))||null}
-export function blockingModule(s:any,key:string){const info=moduleInfo(key);if(passed(s,key)||s.drafts?.[key]||s.submissions?.some((v:any)=>v.key===key))return null;const sequence=sequenceFor(info.pathId);return sequence.slice(0,sequence.indexOf(key)).find(k=>!passed(s,k))||null}
+export function nextModule(s:any,pathId:string){return sequenceFor(pathId,s).find(k=>!passed(s,k))||null}
+export function blockingModule(s:any,key:string){const info=moduleInfo(key);if(passed(s,key)||(!isCourseKey(key)&&!isScenarioKey(key)&&(s.drafts?.[key]||s.submissions?.some((v:any)=>v.key===key))))return null;const sequence=sequenceFor(info.pathId,s);if(isScenarioKey(key)&&isScenarioProfile(s?.profile)&&s.profile.request.preferences.structure==='open'){const preparation=sequence.filter(k=>k.includes('-prepare-')||k.includes('-starter-0'));const required=preparation.includes(key)?preparation.slice(0,preparation.indexOf(key)):preparation;return required.find(k=>!passed(s,k))||null;}return sequence.slice(0,sequence.indexOf(key)).find(k=>!passed(s,k))||null}
 export function moduleHref(key:string){const info=moduleInfo(key);return info.craft?'/craft/week/'+(info.index+1):'/explore/'+info.pathId+'/'+info.index}
 export const threshold=75;
-export function assignmentRubric(key:string){const info=moduleInfo(key);const weights=info.phase==='pre'?[45,35,20]:info.phase==='production'?[40,40,20]:[40,30,30];return info.lesson.checks.map((label,i)=>({label,weight:weights[i]}))}
+export type Criterion={label:string;weight:number;minimum?:string;strong?:string;retry?:string;anchors:string[];example?:string};
+export function assignmentRubric(key:string,profile?:any):Criterion[]{const visual=visualCriteria(key,profile);if(visual)return visual;if(isScenarioKey(key))return scenarioRubric(key,profile);const info=moduleInfo(key);const basic=basicPaths.find(p=>p.id===info.pathId)?.lessons[info.index];const weights=basic?[40,35,25]:info.phase==='pre'?[45,35,20]:info.phase==='production'?[40,40,20]:[40,30,30];return info.lesson.checks.map((label,i)=>({label,weight:weights[i],minimum:basic?.minimum[i],strong:basic?'Explain the decision with clear evidence and its effect on your viewer.':undefined,retry:basic?.retry[i],anchors:['No relevant evidence supplied.','An attempt is present but part of the minimum is missing.',basic?.minimum[i]||'Show evidence for this criterion.','The minimum holds consistently across the scoped assignment.','Meets 3 plus a documented comparison shows a deliberate improvement.'],example:basic?.minimum[i]||label}))}
 
 const retryTips:Record<string,string[]>={
  'product-reel-0':['Name one person who would use the product. Speak your opening line as if talking to them.','Refilm the product in use so the benefit is visible without a written explanation.','End the test with one simple action you want the viewer to take.'],
@@ -32,5 +38,5 @@ const retryTips:Record<string,string[]>={
  'everyday-story-3':['Watch the sequence without explaining it. Add the missing moment or cut a confusing shot.','Zoom into the timeline and remove black frames or unintended gaps.','Replace unlicensed music with your own sound or an audio track you have permission to use.'],
  'everyday-story-4':['Make one visible change to the draft and compare the two versions.','Play the exported file from start to finish on your phone.','Write one concrete skill to practise next, such as steadier focus or cleaner cuts.']
 };
-export function scoreAttempt(key:string,ratings:unknown){const criteria=assignmentRubric(key);if(!Array.isArray(ratings)||ratings.length!==criteria.length||ratings.some(v=>!Number.isInteger(v)||v<0||v>4))throw new Error('Rate all three assignment criteria from 0 to 4.');const scores=ratings as number[];const total=Math.round(scores.reduce((sum,v,i)=>sum+v/4*criteria[i].weight,0));const pass=total>=threshold&&scores.every(v=>v>=2);const feedback=criteria.map((c,i)=>({...c,rating:scores[i],points:Math.round(scores[i]/4*c.weight),feedback:scores[i]>=3?'You report this is working. Keep it in your next attempt.':(retryTips[key]?.[i]||'Repeat the tryout with this criterion as your focus. Compare the two results before rating it again.')}));return {total,passed:pass,ratings:scores,criteria:feedback,basis:'self-check' as const}}
-export function practiceSteps(key:string){const info=moduleInfo(key);return info.lesson.do.split(/(?<=[.!?])\s+/).filter(Boolean)}
+export function scoreAttempt(key:string,ratings:unknown,profile?:any){const criteria=assignmentRubric(key,profile);if(!Array.isArray(ratings)||ratings.length!==criteria.length||ratings.some(v=>!Number.isInteger(v)||v<0||v>4))throw new Error('Rate all three assignment criteria from 0 to 4.');const scores=ratings as number[];const rawTotal=scores.reduce((sum,v,i)=>sum+v/4*criteria[i].weight,0);const total=(isCourseKey(key)||isScenarioKey(key))?rawTotal:Math.round(rawTotal);const pass=total>=threshold&&scores.every(v=>v>=2);const feedback=criteria.map((c,i)=>({...c,rating:scores[i],points:scores[i]/4*c.weight,feedback:scores[i]>=3?'You report this is working. Keep it in your next attempt.':(c.retry||retryTips[key]?.[i]||'Repeat the tryout with this criterion as your focus. Compare the two results before rating it again.')}));return {total,passed:pass,ratings:scores,criteria:feedback,basis:'self-check' as const}}
+export function practiceSteps(key:string,profile?:any){const info=moduleInfo(key);const task=isScenarioKey(key)?scenarioLesson(key,profile).do:isCourseKey(key)&&isPersonalized(profile)?curatedLesson(profile,key).do:info.lesson.do;return task.split(/(?<=[.!?])\s+/).filter(Boolean)}

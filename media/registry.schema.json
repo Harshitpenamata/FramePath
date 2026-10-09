@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://framepath.local/schemas/media-registry-v1.json",
+  "type":"object","required":["schemaVersion","assets","slots","videos"],
+  "properties":{
+    "schemaVersion":{"const":1},
+    "assets":{"type":"array","items":{"$ref":"#/$defs/asset"}},
+    "slots":{"type":"array","items":{"type":"object","required":["id","assetId","owner"],"properties":{"id":{"type":"string","minLength":1},"assetId":{"type":"string","minLength":1},"owner":{"type":"string","minLength":1}}}},
+    "videos":{"type":"array","items":{"type":"object","required":["slot","provider","videoId","caption","credit","source","start","end"],"properties":{"slot":{"type":"string"},"provider":{"enum":["youtube","vimeo"]},"videoId":{"type":"string","minLength":1},"caption":{"type":"string","minLength":1},"credit":{"type":"string","minLength":1},"source":{"type":"string","minLength":1},"start":{"type":"number","minimum":0},"end":{"type":"number","exclusiveMinimum":0},"revisitOf":{"type":"string","minLength":1}}}}
+  },
+  "$defs":{
+    "sha":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "asset":{"type":"object","required":["id","kind","namespace","ownerSlot","status","source","licence","credit","alt","sha256","canonicalUrl","renditions"],"properties":{
+      "id":{"type":"string","minLength":1},"kind":{"enum":["image","audio"]},"namespace":{"type":"string","minLength":1},"ownerSlot":{"type":"string","minLength":1},"status":{"enum":["draft","needs-review","reviewed"]},"source":{"type":"string","minLength":1},"licence":{"type":"string","minLength":1},"credit":{"type":"string","minLength":1},"alt":{"type":"string","minLength":1},"sha256":{"$ref":"#/$defs/sha"},"canonicalUrl":{"type":"string","minLength":1},"dhash":{"type":"string","pattern":"^[a-f0-9]{16}$"},
+      "renditions":{"type":"array","items":{"type":"object","required":["src","width","height","bytes","sha256"],"properties":{"src":{"type":"string"},"width":{"type":"integer","minimum":1},"height":{"type":"integer","minimum":1},"bytes":{"type":"integer","minimum":1},"sha256":{"$ref":"#/$defs/sha"}}}}
+    }}
+  }
+}

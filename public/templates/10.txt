@@ -1,0 +1,10 @@
+FRAMEPATH / BEGINNER
+Folder and Naming Guide
+
+Source media/
+Project files/
+Audio/
+Exports/
+Name pattern: date_subject_shot_take
+Independent backup location:
+Test playback:

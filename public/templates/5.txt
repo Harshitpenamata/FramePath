@@ -1,0 +1,9 @@
+FRAMEPATH / BEGINNER
+Camera Card and Pre-flight Checklist
+
+Device:
+Resolution / fps available:
+Orientation:
+Exposure / focus / WB controls:
+Before filming: lens, battery, storage, permissions, sound, settings, test playback.
+Flicker check:

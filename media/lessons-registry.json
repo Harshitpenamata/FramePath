@@ -1,0 +1,2159 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "fp-lesson-product-01",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "product-reel-0:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An amber soap dispenser and folded towel on a teal shelf in soft window light.",
+      "sha256": "190ecef4ef00d1554e0195c81ca6e0858387f4c10615cc5acc0ed0d8df6b6f4a",
+      "dhash": "cb839b8f9e1dd7d7",
+      "canonicalUrl": "/lessons/product-01-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/product-01-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 17308,
+          "sha256": "602782c3c3842b1baa2f99a376acccd65e7a0efa07dab50246708aa8354ef45f"
+        },
+        {
+          "src": "/lessons/product-01-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 49708,
+          "sha256": "225c1c5e7eee8ce5df919e1690e322a18f0367e7cb7c3c8d524988ecceda2018"
+        },
+        {
+          "src": "/lessons/product-01-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 85892,
+          "sha256": "6b7be9dba3be5602e31885b88ebe3922062b3518c28a80e293f18af6acc96ec7"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-product-02",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "product-reel-1:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A cream coffee dripper above a glass server on a kitchen worktop.",
+      "sha256": "2047102161bdd3cbbfec720e96711aa6175ce4f590626829c1e542758744c20c",
+      "dhash": "b4ddc1b3b53476ce",
+      "canonicalUrl": "/lessons/product-02-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/product-02-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 15442,
+          "sha256": "afd78ba31ab9b5c648f6e8906fdf5788060eca414b964404bd4cf510a30fc2c5"
+        },
+        {
+          "src": "/lessons/product-02-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 43286,
+          "sha256": "3af53291debe5115bd15015ed5032b06e138bbd0f6b645c18b1dd2a0966587e2"
+        },
+        {
+          "src": "/lessons/product-02-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 75720,
+          "sha256": "1016170f887e02d836501e5fdb4fc3775b992835a94a713db13207a9db9b8b07"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-product-03",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "product-reel-2:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A seedling in a terracotta pot beside a window, showing side-lit texture and shadow.",
+      "sha256": "02a6b5e946ce379dc46158a17af69b3f964d0e96cf7a46a69bd9a7a0a4dc4186",
+      "dhash": "f604a49916959616",
+      "canonicalUrl": "/lessons/product-03-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/product-03-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 12652,
+          "sha256": "5a9b1f129a7c42cbb222546ddeb6ef676f3ab238cb8f119e857b69eaeb8f626d"
+        },
+        {
+          "src": "/lessons/product-03-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 35590,
+          "sha256": "40a3732c7b2a98b4ca18abea70752dae0a30e843d60b921dd3eb33b0a4382bd0"
+        },
+        {
+          "src": "/lessons/product-03-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 63792,
+          "sha256": "1cfacd985058a3a4243ed7a1040fc541eba15fccb861d4acb09652282ba72bec"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-product-04",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "product-reel-3:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An overhead view of a wooden desk organiser, pencils and a notebook.",
+      "sha256": "ec7fc321a8655d2600f7270e5501a1ed038bf0d58bf3e655291f4abe56eee2c8",
+      "dhash": "19cccccccccac1c2",
+      "canonicalUrl": "/lessons/product-04-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/product-04-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 9562,
+          "sha256": "be52a95d754359b2eaaddea227c7b26b549f449ee5aea5995a8d2756eeee8159"
+        },
+        {
+          "src": "/lessons/product-04-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 26030,
+          "sha256": "1918751367bc3928fe4765b9dcda5ffe73b4fc99a9161cea66e2019a0f3a37a8"
+        },
+        {
+          "src": "/lessons/product-04-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 50228,
+          "sha256": "15d325f319dab6e61608692d6dfcaaeaca83f916ba5523c4829fafbf1506d899"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-product-05",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "product-reel-4:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An open olive lunchbox with a simple meal and clear space beside it.",
+      "sha256": "ed86f805bb50bdfd535df80fc1ecbd209c5fb9e075827124343f9d15aa83f4f8",
+      "dhash": "01060e060d0c0c05",
+      "canonicalUrl": "/lessons/product-05-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/product-05-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 14898,
+          "sha256": "f6e628aa81ca714e0fcfab7e9239288eedba35418687caaf31c169a8b4a46f9b"
+        },
+        {
+          "src": "/lessons/product-05-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 59622,
+          "sha256": "c16c5fe8db52b0540ae2bd317ff8bc95346332e42bc6637983c4aeff8d746ef6"
+        },
+        {
+          "src": "/lessons/product-05-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 99352,
+          "sha256": "01456625bb45baa7ffcfb617899913e79e207d425a0512854bd065abcf6a3a46"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-product-exposure",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "product-reel-2:activity-photo",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A clear water bottle and navy cloth beside a window; bright droplets and shadow detail are visible.",
+      "sha256": "b8f895b768ca384121849218f01dcdac56565cb02b4a0f6ce633c6388c02636b",
+      "dhash": "7a7a38f8787af372",
+      "canonicalUrl": "/lessons/product-exposure-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/product-exposure-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 15188,
+          "sha256": "8bb2d09db29a7d92fe144c39a89076f40198776e79f80463f18fe9524c90b3a8"
+        },
+        {
+          "src": "/lessons/product-exposure-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 50822,
+          "sha256": "288e0fce7bc8baae07841dbc54542362c2df345fbb10fe9acc3f841efa224fb0"
+        },
+        {
+          "src": "/lessons/product-exposure-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 93532,
+          "sha256": "33f43b06de72a81509d689f972e9a6fdcc80292bd5c1327baee3c63f86a2c3c2"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-story-01",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "everyday-story-0:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Water pours from a steel kettle into a blue cup, showing a small everyday change.",
+      "sha256": "ed12279c12b9106f662d17cbef080465b708a5c564080901149db81752a700e9",
+      "dhash": "09cccc563670f0f1",
+      "canonicalUrl": "/lessons/story-01-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/story-01-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 18452,
+          "sha256": "8459e9a2b0b886d0e3214e3de5bdc6640388532a1df8b0d5e265070a4fa2c0c3"
+        },
+        {
+          "src": "/lessons/story-01-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 50260,
+          "sha256": "696b63cdb5ce883948a18640bd18bff3f44b39bceb9f8a437d3a2d9eebdc089f"
+        },
+        {
+          "src": "/lessons/story-01-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 86060,
+          "sha256": "537ebc01d13c9612a22bbfa516ac0b5edbafb157dd5b86798e79e4bf59bbacd8"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-story-02",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "everyday-story-1:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A blue bicycle and helmet beside an open sunlit doorway, showing place and context.",
+      "sha256": "1a2a7201ca8d6d590151734b7569def587e5ca9e7f95669bea1593264414fafb",
+      "dhash": "b0e0c2cac2cac8c9",
+      "canonicalUrl": "/lessons/story-02-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/story-02-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 25424,
+          "sha256": "413522cec86b212d6427ea7d9a3fa22afe1b75d183203cdc27ec03c5c5d2beff"
+        },
+        {
+          "src": "/lessons/story-02-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 72406,
+          "sha256": "de567134a935f96f037146e9dfa6c7087d54dadb54c491f9a755e095dd8478e3"
+        },
+        {
+          "src": "/lessons/story-02-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 95424,
+          "sha256": "64f6f60bc45e8ff947648edc74dc6d301a98a370e428dbf7f62214ff0bfd96ca"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-story-03",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "everyday-story-2:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Coloured thread spools and linen lit from one side by a window.",
+      "sha256": "e181b3989770f7aba677e53b053fc7ef4fc16923c44b1302c213606ee066e749",
+      "dhash": "e370696baeafafee",
+      "canonicalUrl": "/lessons/story-03-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/story-03-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 23704,
+          "sha256": "595ac8ba0429fc0251557414d034894b591c764daab37e9814d3b72989de75dc"
+        },
+        {
+          "src": "/lessons/story-03-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 76922,
+          "sha256": "e298aac05581c72d431e6f48f449461434b2193a86babb5d8a4740e499066a3f"
+        },
+        {
+          "src": "/lessons/story-03-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 99138,
+          "sha256": "c30c37ff32485e4bd18026a127062fc3757847c5ca5cf8801090293caa1e646e"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-story-04",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "everyday-story-3:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A glass mixing bowl, flour and spoon on a quiet wooden kitchen worktop.",
+      "sha256": "8c6ee4da8dffa33b086f03bc08b06568deb0b6fab42248d4b6194b2803ba6234",
+      "dhash": "192df9f8f0262e2e",
+      "canonicalUrl": "/lessons/story-04-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/story-04-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 20658,
+          "sha256": "dff1872141d39552e76999081b5b095d2239286e7db12f049b937a0b4ee544c0"
+        },
+        {
+          "src": "/lessons/story-04-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 61494,
+          "sha256": "3dabd3a047ba8a3d15f9516c14c35847ba58ea0ff98803bdd5fba11a48303b05"
+        },
+        {
+          "src": "/lessons/story-04-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 93174,
+          "sha256": "387d3c37d12b636898871d15972f8b844455435eaabd49330b58f230fc5359c9"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-story-05",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "everyday-story-4:hook",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A sketchbook with geometric studies beside a pencil and warm desk lamp.",
+      "sha256": "778bf4609f8d35a046c90013c9986d6f63a4253bf373abe3323ce216661146c8",
+      "dhash": "04f8c0c0c0c082f8",
+      "canonicalUrl": "/lessons/story-05-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/story-05-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 9592,
+          "sha256": "ec1e2f78419a6dcad57a96e2ba38baf86db4546c75b07d266b2bdc704ca2c574"
+        },
+        {
+          "src": "/lessons/story-05-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 31208,
+          "sha256": "4bef5e893536f0c77868928e6feca0080b8a34dbf18c4d728ac36b5232f2a526"
+        },
+        {
+          "src": "/lessons/story-05-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 67366,
+          "sha256": "8666cb76a9c582ef87ff2958f7697cc2f654cae0e61cb0a516e7b1a6134082c2"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-story-balance",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "everyday-story-2:activity-photo",
+      "source": "Original generation; media/lessons-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A white plate, silver spoon and neutral grey linen on dark wood in daylight.",
+      "sha256": "8436095674e7b5e3a2b718d483dab84e43fab93bf6f02845d56d62daa501f4a9",
+      "dhash": "ae4ed9f8f0f1f9ff",
+      "canonicalUrl": "/lessons/story-balance-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/story-balance-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 13964,
+          "sha256": "8eac270c01a013681dc9941449f0294ed20942bfba586ef4e9a7be45b0a9d357"
+        },
+        {
+          "src": "/lessons/story-balance-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 46984,
+          "sha256": "3428405507a53c27340edf73f97c9822450d790af0769ba5faecff430edda99b"
+        },
+        {
+          "src": "/lessons/story-balance-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 99016,
+          "sha256": "e4cfb326f427e3bce5836e9f91e92ccd4289768e5e29734d8d298134ae8818c4"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-audio-quiet",
+      "kind": "audio",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "everyday-story-3:audio-quiet",
+      "source": "Original synthetic signal; scripts/lesson-audio-provenance.txt",
+      "licence": "Original Framepath synthetic teaching audio",
+      "credit": "Framepath original audio demonstration",
+      "alt": "Four seconds of synthetic taps with quiet gaps. No speech.",
+      "sha256": "6dfe963b89044961c9465338603d589077fb5251c1dd2523dd4d35e2256ef43f",
+      "canonicalUrl": "/lessons/story-audio-quiet.wav",
+      "bytes": 128044,
+      "renditions": []
+    },
+    {
+      "id": "fp-lesson-audio-noisy",
+      "kind": "audio",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "everyday-story-3:audio-noisy",
+      "source": "Original synthetic signal; scripts/lesson-audio-provenance.txt",
+      "licence": "Original Framepath synthetic teaching audio",
+      "credit": "Framepath original audio demonstration",
+      "alt": "Four seconds of synthetic taps with added steady noise. No speech.",
+      "sha256": "309243ee80010bf46903ed28b8c34a0f0c008ddd474e266fcc35db0622e08134",
+      "canonicalUrl": "/lessons/story-audio-noisy.wav",
+      "bytes": 128044,
+      "renditions": []
+    },
+    {
+      "id": "fp-lesson-light-01",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "natural-light-0:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A terracotta bowl on a pale wood table catches morning light beside a teal-framed window.",
+      "sha256": "179718b39cf2f136a36f9ef1c640ab912edbe89131ad4c90b4dbf4330cb975bb",
+      "dhash": "fc1d1b4e0c189a98",
+      "canonicalUrl": "/lessons/light-01-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/light-01-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 17706,
+          "sha256": "83748b0d6bbab185861c031d28ee260d93352c553cdbb54015ba1121cd1faa98"
+        },
+        {
+          "src": "/lessons/light-01-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 46102,
+          "sha256": "4682056f2e34e803102619d31bac9732be68551e9d1db60498d293913fefb7d7"
+        },
+        {
+          "src": "/lessons/light-01-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 79434,
+          "sha256": "938efe09c13a6bf0c4801384aa62c1d0dcfe00c315a0255d3f91477b9c43a615"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-light-02",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "natural-light-1:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Crumpled silver paper casts a sharp afternoon shadow on pale linen beside a sheer curtain.",
+      "sha256": "32eea74e91b99250a38ff4444b2b3d559ba389c253cc84552b53a1c8ff69f2d4",
+      "dhash": "e74353032227a6a9",
+      "canonicalUrl": "/lessons/light-02-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/light-02-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 22384,
+          "sha256": "fcf1ca4d2a38e11c235353b0643e6ad897ff110c919c5ccb881a2b6545213615"
+        },
+        {
+          "src": "/lessons/light-02-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 93090,
+          "sha256": "857be21f63ccfeebdbd3661f4f609d23b4791a39ace23bd07df4ec97afea8708"
+        },
+        {
+          "src": "/lessons/light-02-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 93084,
+          "sha256": "4aa90475678ad95c89e3b289bf9caf421d7f0c4acc401c478f62b1a7f0b604f6"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-light-03",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "natural-light-2:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Dark plums and a white porcelain cup retain delicate highlights against indigo fabric.",
+      "sha256": "7d8a4c90bca856fbfd1a654d9f3a7c27c60c8419bfc5bdc2b4933930fbbac791",
+      "dhash": "64e7edede5e5c77f",
+      "canonicalUrl": "/lessons/light-03-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/light-03-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 9904,
+          "sha256": "f4ced5851d5869f4b7d39550b725c7ab85cb508ac2007e94112e0b4d042cf96c"
+        },
+        {
+          "src": "/lessons/light-03-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 32508,
+          "sha256": "5ef2820e9a03c2edfa035f87f5db99e927d49897db1627878090e1aa70121671"
+        },
+        {
+          "src": "/lessons/light-03-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 62156,
+          "sha256": "4a9c69634b6d576a807079afb65b461dcb09afef21e04aa1da6e0a34aa601014"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-light-exposure",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "natural-light-2:activity-photo",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An unlit linen lamp and folded cobalt scarf sit on dark oak in indirect window light.",
+      "sha256": "56f1fe7fa6c2b21099fc37b01f785d3d31c74c1437b71af5a5e056b4dc3f09dd",
+      "dhash": "1e1c251fbebebb2f",
+      "canonicalUrl": "/lessons/light-exposure-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/light-exposure-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 16516,
+          "sha256": "926368b2131f0d336eb3677cff6d56eeeddb9d2983d6cf15e81f2215781dd65d"
+        },
+        {
+          "src": "/lessons/light-exposure-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 50702,
+          "sha256": "37d477c219010bf06fbefbe9e90ae9a62ae59f59c6e7885da74bbaceafe6ab4b"
+        },
+        {
+          "src": "/lessons/light-exposure-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 98820,
+          "sha256": "3af61b6c0e7c019ef0a9c5edd765187d6af921d95475b38d8fa24013a635dbc2"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-light-04",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "natural-light-3:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Adult hands pin a simple window-light sketch to a corkboard above a home workbench.",
+      "sha256": "ca903aa893d11edc577a4cbc83d24df29bb0821dedc894cb41d2eaaae8d50f4d",
+      "dhash": "58696b67cbdbddb9",
+      "canonicalUrl": "/lessons/light-04-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/light-04-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 18190,
+          "sha256": "a711f5370f221ebcec7bc77130a956350b9e7b7c0a92e7ddaeed837b5a601147"
+        },
+        {
+          "src": "/lessons/light-04-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 51406,
+          "sha256": "97d76ab50bed04cd130f3e415383463828e399d11de43ae021afc929b563c313"
+        },
+        {
+          "src": "/lessons/light-04-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 88286,
+          "sha256": "a7ba6919a02037d85921293f50e103fc0733afb898b7af5ed358d12e95668043"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-edit-01",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "first-edit-0:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Adult hands arrange three blank paper cards beside a wooden toy train.",
+      "sha256": "2b89b9262ee30a2a23e441a690af0574a0ee7eba085901c0a9d772e481c667be",
+      "dhash": "5a4a6268e97de4fd",
+      "canonicalUrl": "/lessons/edit-01-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/edit-01-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 16126,
+          "sha256": "dcdebf1178f70315fb7c3962d3d473bf3fa0674c042cc211bab64477482dff77"
+        },
+        {
+          "src": "/lessons/edit-01-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 50688,
+          "sha256": "13970006c3935cdc617df9044885db09c86c7edb74458c789c889d9984500b74"
+        },
+        {
+          "src": "/lessons/edit-01-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 97302,
+          "sha256": "7b0b8930dcff5421966fc2201cc42b52a90bdb229a10e782d675006264e702d1"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-edit-02",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "first-edit-1:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A wooden metronome with a blank face sits on a teal worktable.",
+      "sha256": "50e9c9b7cc0b36d3e29723e5aa5da6008306a64609cf896c8cc3b8a7127b47d4",
+      "dhash": "7e7c5d535e069776",
+      "canonicalUrl": "/lessons/edit-02-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/edit-02-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 11578,
+          "sha256": "91d9fe86509c24d84f70c9f8561d0a1ce27e9dd489e4743ab2a4f712d9bd65b0"
+        },
+        {
+          "src": "/lessons/edit-02-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 31852,
+          "sha256": "197c1180125937a0b4cb988e181b11e7250aab9de17c4e876c420206bc7022d4"
+        },
+        {
+          "src": "/lessons/edit-02-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 56858,
+          "sha256": "c3bb95a8958e11969035285219e2a4409128297abfa96c40e21aacf8f020cae5"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-edit-03",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "first-edit-3:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Black headphones rest beside a closed silver audio recorder on dark textured fabric.",
+      "sha256": "935f309f93200eb3cddb0c102b7cf277607929247c94a3ce85d5ecb3ae2a4702",
+      "dhash": "4da6c3cbcbebf397",
+      "canonicalUrl": "/lessons/edit-03-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/edit-03-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 20222,
+          "sha256": "aa5aeb0b3af6d63cc237f23d5fcaddc6bf91c293544f9af605bce31448b83553"
+        },
+        {
+          "src": "/lessons/edit-03-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 55206,
+          "sha256": "06b1af2a9a1f629b1f27b9dc368651295f209a186c648df37f67e5714089a6cb"
+        },
+        {
+          "src": "/lessons/edit-03-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 93958,
+          "sha256": "10e4015607a83d09dec1f3d5b4b6c3c5dea25e223eb073dd1eba8032f8c75f3e"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-edit-04",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "first-edit-2:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A blank notebook with coloured tabs and neat pencils leaves open space on a wooden desk.",
+      "sha256": "8c244fd1a051a83179aa9f5979bf900e5e57b50e2d9bb50348e99a9ed1931b62",
+      "dhash": "78c90b0ca880888d",
+      "canonicalUrl": "/lessons/edit-04-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/edit-04-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 13770,
+          "sha256": "75e725d2b63369d638bedb2a2043a74946c871420456e8acdbc65136f1ae8db1"
+        },
+        {
+          "src": "/lessons/edit-04-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 37364,
+          "sha256": "adb49db40a57927293e2d3ea1c7fa2d91b7277fb2e0c59e47f042b912ea19f9e"
+        },
+        {
+          "src": "/lessons/edit-04-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 65476,
+          "sha256": "b84c7530170a8ffb3ceff3285a0f17a8eb5aea8f8ba5ccaa498cf4e8be65bb0b"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-edit-05",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "first-edit-4:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An external drive, coiled cable and plain archive box sit in golden morning light.",
+      "sha256": "3d6f43623a63d999be02c03f4593c7c5b502b347ad8513b22a9176fad0906fa4",
+      "dhash": "d9ec96fcfceccc7d",
+      "canonicalUrl": "/lessons/edit-05-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/edit-05-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 18664,
+          "sha256": "00e9a7245c3a78ba1dc37cdcfc763c91acef8743059f9a9d3fc0c5c11603e417"
+        },
+        {
+          "src": "/lessons/edit-05-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 49122,
+          "sha256": "442de01cc7a3af3e4a3af0eceb8723f703aaf0fb8bfee932eba525ab8a9209ec"
+        },
+        {
+          "src": "/lessons/edit-05-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 84454,
+          "sha256": "ad5e3a9bf5b29a608d226d370a9a259c7dc005d76dc9c34696b33dc597b96483"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-01",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-starter-0:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An adult educator arranges wooden geometric shapes on a small green table.",
+      "sha256": "f33f6a7cbe3c1c9c8df081b35c68141bf8b8898b636c9d142fc6bf2346e5d480",
+      "dhash": "2c7e763c3c3c3c3c",
+      "canonicalUrl": "/lessons/teach-01-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-01-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 9432,
+          "sha256": "24fb1c06bff6b8c7bb7fc11ae8281ff2f0ae97786f097e5aff4873e871bbed67"
+        },
+        {
+          "src": "/lessons/teach-01-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 23652,
+          "sha256": "d43e4ed86cb123cb16ef0463a65c503bd2ef40aed59584e281cb5b4e3a553149"
+        },
+        {
+          "src": "/lessons/teach-01-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 40374,
+          "sha256": "ad8a95010821c8b19f4401bc957a5edda272a506ee2f0c2cbdc530838b8b42d6"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-02",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-starter-1:hook",
+      "source": "Original generation; media/batch-two-provenance.json",
+      "licence": "Original AI-generated teaching photo; no external stock source",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Adult hands fold blue paper beneath a smartphone on a tabletop stand.",
+      "sha256": "6d643c9462ee15a4660815f85e216a9b30aa74221cd705a559ca37f83eaad6f2",
+      "dhash": "664c58c86899ddcc",
+      "canonicalUrl": "/lessons/teach-02-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-02-480.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 18430,
+          "sha256": "6279d27ae706bc2146a68537a9f96f24908da1f6f5bb08dd39334602a3c47390"
+        },
+        {
+          "src": "/lessons/teach-02-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 59150,
+          "sha256": "773dd47d12de046f69764e71fec1e79a2c628ad5397ea6a804c64fe1634db1d7"
+        },
+        {
+          "src": "/lessons/teach-02-1440.webp",
+          "width": 1440,
+          "height": 810,
+          "bytes": 95014,
+          "sha256": "9a5559ade6d35cf6176fcd37d3bc839030b1be9e31b8b39039c38110363dbd1e"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-prepare-0",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-prepare-0:hook",
+      "source": "Original generation; media/batch-three-provenance.json",
+      "licence": "Generated asset; use is subject to the applicable OpenAI terms. No third-party stock licence, Creative Commons licence, or public-domain status is asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A closed plum notebook sits beside a phone recording an adult folding orange paper.",
+      "sha256": "5913f825c1013fc2e1953416c02cec6de163e4d1c4971db3925adfe44b14ac95",
+      "dhash": "ad8f83c6ed88a99d",
+      "canonicalUrl": "/lessons/teach-prepare-0-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-prepare-0-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 19424,
+          "sha256": "5e1b6dd096e102773a45c51e84aec5a7a48cd50cb5a229c8bc9284ee2f189af8"
+        },
+        {
+          "src": "/lessons/teach-prepare-0-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 58144,
+          "sha256": "0b12d3452e03c34a558bc034d3aebf4793d2756ace7677c5167d85133498cfc3"
+        },
+        {
+          "src": "/lessons/teach-prepare-0-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 91796,
+          "sha256": "6feed34f5eea89a343fcb5a50aac9e5bf3dc5ac0e3d56abc9e7307254b198341"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-prepare-1",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-prepare-1:hook",
+      "source": "Original generation; media/batch-three-provenance.json",
+      "licence": "Generated asset; use is subject to the applicable OpenAI terms. No third-party stock licence, Creative Commons licence, or public-domain status is asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An adult hand arranges three illustrated paper-folding cards on a dark work surface.",
+      "sha256": "3d3af12c21d85edaf1694b451b60b9e9f10f2d327dcb296a55b5d40883d2127a",
+      "dhash": "e6c43c3d3f8f6298",
+      "canonicalUrl": "/lessons/teach-prepare-1-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-prepare-1-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 15672,
+          "sha256": "22fa1119f511436fb3d048271bbeb444c7378da43d71ea707c6815018af2f7b1"
+        },
+        {
+          "src": "/lessons/teach-prepare-1-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 42540,
+          "sha256": "6335a52cd681ed8e4259d687fc2584aaea90ad410b51242741e4cbbf2464d831"
+        },
+        {
+          "src": "/lessons/teach-prepare-1-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 73984,
+          "sha256": "9202e251ec8f24c366a04c21dab76680b7d7e65bae25e3be2c2b2b9afa4af402"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-practice-0",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-practice-0:hook",
+      "source": "Original generation; media/batch-three-provenance.json",
+      "licence": "Generated asset; use is subject to the applicable OpenAI terms. No third-party stock licence, Creative Commons licence, or public-domain status is asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A finished orange paper desk organiser stands beside an unfolded teal sheet.",
+      "sha256": "8b5e9a8a800bc47c359d5b3c981dccba6eecc60a1a047a2a6fa97e6a0eb70b57",
+      "dhash": "0e0e4e4fcceccecf",
+      "canonicalUrl": "/lessons/teach-practice-0-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-practice-0-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 10490,
+          "sha256": "0973af11a5d8fa4ec892ad791470b875eb5317a6e1858b64cafbec7aa12e65af"
+        },
+        {
+          "src": "/lessons/teach-practice-0-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 26948,
+          "sha256": "20b4b1f0bb7b9f13a326ceb4dc7cbfd561894b792667394535378e9d898b83d9"
+        },
+        {
+          "src": "/lessons/teach-practice-0-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 48118,
+          "sha256": "44f11fd87f5f42171c0e732c67abd4fc0482fdc114ef63e619d67bb795f7e82b"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-practice-1",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-practice-1:hook",
+      "source": "Original generation; media/batch-three-provenance.json",
+      "licence": "Generated asset; use is subject to the applicable OpenAI terms. No third-party stock licence, Creative Commons licence, or public-domain status is asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An adult educator speaks close to a microphone, with a phone tripod farther away.",
+      "sha256": "0c584d9c96c8f306229f2d85e2cbbceec23bd9f851cd7c4462188ada1fdf2a9d",
+      "dhash": "80212378f1f978e3",
+      "canonicalUrl": "/lessons/teach-practice-1-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-practice-1-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 17346,
+          "sha256": "fb0666d11d5c790ed874cdda10cccc4182d25d6eb74d87e30b334756a6dc2240"
+        },
+        {
+          "src": "/lessons/teach-practice-1-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 43548,
+          "sha256": "6f045abbab9c315432a096ce45d49b82dc9d13099723b281b37b83da6a5829b4"
+        },
+        {
+          "src": "/lessons/teach-practice-1-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 72158,
+          "sha256": "27452692eb9011d424413a01b2b4ed51dd6862220d7791558b276b21fc3181f6"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-practice-2",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-practice-2:hook",
+      "source": "Original generation; media/batch-three-provenance.json",
+      "licence": "Generated asset; use is subject to the applicable OpenAI terms. No third-party stock licence, Creative Commons licence, or public-domain status is asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Adult hands fold orange paper on a teal mat with a wide clear lower margin.",
+      "sha256": "0d8947ea77dab8a3230c8856999d7e434c60fd28e95c49d8fd6827a8bb00b537",
+      "dhash": "2db99b8f9e84d090",
+      "canonicalUrl": "/lessons/teach-practice-2-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-practice-2-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 5642,
+          "sha256": "88e04473a1b2f9620f0956caa8892b43bafcf847614be53a76ee9e6121483164"
+        },
+        {
+          "src": "/lessons/teach-practice-2-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 16778,
+          "sha256": "4d930da63e22afbefcfa6c33653b93cff4e60db5955dca084e956f15f92152a0"
+        },
+        {
+          "src": "/lessons/teach-practice-2-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 34090,
+          "sha256": "56de4ca7c2cb235c4071562d7d1f27117def67ce8cc05fda5e16113ba0d5e42f"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-finish-0",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-finish-0:hook",
+      "source": "Original generation; media/batch-three-provenance.json",
+      "licence": "Generated asset; use is subject to the applicable OpenAI terms. No third-party stock licence, Creative Commons licence, or public-domain status is asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Adult hands check a craft lesson image on a phone beside an open laptop.",
+      "sha256": "4e122ef75c69e6512dbfbbab048f0379dd003e6c24ff1e4c2b4444c37dec91d0",
+      "dhash": "73362e2f2f2f17db",
+      "canonicalUrl": "/lessons/teach-finish-0-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-finish-0-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 14696,
+          "sha256": "583249c3ab19601b07db9e538cb4429aa28811bd1a7a0bcfd7ebeef45da37307"
+        },
+        {
+          "src": "/lessons/teach-finish-0-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 34710,
+          "sha256": "7dcf6aadff246bd5b659fc9b9fda43bb62ed17c038651c18ca92a1230d447d1e"
+        },
+        {
+          "src": "/lessons/teach-finish-0-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 57476,
+          "sha256": "c0f561ce7d012e6326e0c9708fe4e18f6626c0a0ccc70f58053e745fe13fa029"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-finish-1",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-finish-1:hook",
+      "source": "Original generation; media/batch-three-provenance.json",
+      "licence": "Generated asset; use is subject to the applicable OpenAI terms. No third-party stock licence, Creative Commons licence, or public-domain status is asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An adult reviews a sheet of circles and arrows with a plum paper organiser in front.",
+      "sha256": "f8b297bd4a89317e44757ca983b9247dc237e83563916758df043e86a18b2e19",
+      "dhash": "e081a3c5a6a81c1d",
+      "canonicalUrl": "/lessons/teach-finish-1-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-finish-1-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 20798,
+          "sha256": "9e390e00c79ed77d965eaf6adeeb047bf2cb6db3c765cc85294f0fc493e564f5"
+        },
+        {
+          "src": "/lessons/teach-finish-1-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 52970,
+          "sha256": "29568c2d703c80c3d624bb262182882bc4e351cb529eb9090e5b2c8067ae65d3"
+        },
+        {
+          "src": "/lessons/teach-finish-1-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 89796,
+          "sha256": "efa02560c2b2057fdd069d2af83b4165cc893e9686f1d4dda1bc50b0b1e67051"
+        }
+      ]
+    },
+    {
+      "id": "fp-teach-room-audio-quiet",
+      "kind": "audio",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-foundations-0:audio-quiet",
+      "source": "Original procedural signal; media/batch-four-audio-provenance.txt",
+      "licence": "Original Framepath synthetic teaching audio",
+      "credit": "Framepath original audio demonstration",
+      "alt": "Four seconds of synthetic taps with quiet gaps. No speech or real room recording.",
+      "sha256": "fd68fae14923deef25665317c714ff0e3265a1a25e98e74a6822c17bacdd0bff",
+      "canonicalUrl": "/lessons/teach-room-audio-quiet.wav",
+      "bytes": 128044,
+      "renditions": []
+    },
+    {
+      "id": "fp-teach-room-audio-noisy",
+      "kind": "audio",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-foundations-0:audio-noisy",
+      "source": "Original procedural signal; media/batch-four-audio-provenance.txt",
+      "licence": "Original Framepath synthetic teaching audio",
+      "credit": "Framepath original audio demonstration",
+      "alt": "Four seconds of synthetic taps with added steady noise. No speech or real room recording.",
+      "sha256": "0afd84154af0659367630e295e04bc19a8ea9eb86e49c6c3e8a411d013abe379",
+      "canonicalUrl": "/lessons/teach-room-audio-noisy.wav",
+      "bytes": 128044,
+      "renditions": []
+    },
+    {
+      "id": "fp-lesson-teach-foundations-0",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-foundations-0:hook",
+      "source": "Original generation; media/batch-four-provenance.json",
+      "licence": "Generated output; no third-party stock licence asserted. Use is governed by the applicable service terms.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An adult Indian educator listens beside a closed charcoal curtain with a back-facing phone on the desk.",
+      "sha256": "408678902dea713590c271ec802df81ea030b9f8c14bbc189ea74340f3bc1b4d",
+      "dhash": "e6dedeb8acf63626",
+      "canonicalUrl": "/lessons/teach-foundations-0-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-foundations-0-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 13724,
+          "sha256": "b8f6dea0f4d8990ce28e534c096aea2cb2722cf9281cd5211b927c8e98fd8119"
+        },
+        {
+          "src": "/lessons/teach-foundations-0-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 35296,
+          "sha256": "9669b2e8d2879b3e65cda0ecf2bf4ecc2c22034e467cb4e879a5fe256c6c1761"
+        },
+        {
+          "src": "/lessons/teach-foundations-0-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 61712,
+          "sha256": "e4c546ffd2bfd8fee40db7ab94da21c475bdf89e1cacf5fc936e37b166f1bfa9"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-foundations-1",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-foundations-1:hook",
+      "source": "Original generation; media/batch-four-provenance.json",
+      "licence": "Generated output; no third-party stock licence asserted. Use is governed by the applicable service terms.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Overhead view of two adult hands twisting deep blue cloth strips on a light clay surface beside a dark empty margin.",
+      "sha256": "865cefca135f5a6dba3b382b48af14f69ea670cd94514e34c647914b81c9d28c",
+      "dhash": "bd9dcddcdd9c1c1d",
+      "canonicalUrl": "/lessons/teach-foundations-1-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-foundations-1-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 7212,
+          "sha256": "887f2df105d49c03b3fca5c9095941aafee48fa4b8d5f6cc46a612675b7acd2c"
+        },
+        {
+          "src": "/lessons/teach-foundations-1-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 31318,
+          "sha256": "4951d820400dae360a437289cf2e39705d76ff341f4036363d9be6fda67869fa"
+        },
+        {
+          "src": "/lessons/teach-foundations-1-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 74536,
+          "sha256": "1529992553e750db2626b050deb5e3a7f217bed62e3b7e83d83aaa89ba4e1df1"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-foundations-2",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-foundations-2:hook",
+      "source": "Original generation; media/batch-four-provenance.json",
+      "licence": "Generated output; no third-party stock licence asserted. Use is governed by the applicable service terms.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "A securely clamped landscape phone on a broad weighted tabletop stand beside adult hands tying blue fabric.",
+      "sha256": "6d3cb5c091155d552370ce43cacb1fcef27a515dd1c5d7d1bc45484c4021038f",
+      "dhash": "e1f0516d65cec630",
+      "canonicalUrl": "/lessons/teach-foundations-2-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-foundations-2-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 19390,
+          "sha256": "6210631a44850ec70260cccf30d110873dac1e316cf60996805dd62c13a1c5ca"
+        },
+        {
+          "src": "/lessons/teach-foundations-2-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 46302,
+          "sha256": "82f6f3e7f6da1e2d2fe6b157fdcc3b96c150b86e86182e7428fba6603dbb9ca3"
+        },
+        {
+          "src": "/lessons/teach-foundations-2-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 76904,
+          "sha256": "39549127767443dbc5a121140f9c87cf8f802d4d4361c520a4a6f4ad3462d779"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-stretch-0",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-stretch-0:hook",
+      "source": "Original generation; media/batch-four-provenance.json",
+      "licence": "Generated output; no third-party stock licence asserted. Use is governed by the applicable service terms.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An adult hand places two different three-frame cloth-bracelet storyboards beside a finished blue bracelet.",
+      "sha256": "9d0424d1f002106e4ea0483fe5824edd8a33296d615545cee3b05ecefe87770f",
+      "dhash": "99db4f3377673f3c",
+      "canonicalUrl": "/lessons/teach-stretch-0-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-stretch-0-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 17520,
+          "sha256": "47a54bd7dcfe0d3b976dea42e286bc195bc06a92c21d647ef5cdfa2a796ced75"
+        },
+        {
+          "src": "/lessons/teach-stretch-0-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 49904,
+          "sha256": "d5fbfc5db744552a01c3f9196167cff0763d3c3f9298d5dae713c00d4dc87321"
+        },
+        {
+          "src": "/lessons/teach-stretch-0-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 89648,
+          "sha256": "a39fc9661402a69517895f799fc883f5e1620f654081c6db9f9ac49576ace4bc"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-teach-stretch-1",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c05-01-stretch-1:hook",
+      "source": "Original generation; media/batch-four-provenance.json",
+      "licence": "Generated output; no third-party stock licence asserted. Use is governed by the applicable service terms.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Over an adult educator’s shoulder, a blue fabric knot is compared with its close-up on a landscape phone.",
+      "sha256": "02d75545d26299ecdf57c59b632099542a080b8f6fdafde65dd93ec61d47ddb9",
+      "dhash": "3a3e2e29b1b9090d",
+      "canonicalUrl": "/lessons/teach-stretch-1-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/teach-stretch-1-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 10826,
+          "sha256": "0a3342146152001de5db0a0a38c69532a0cba29175506730af9a5ac54ffee7f1"
+        },
+        {
+          "src": "/lessons/teach-stretch-1-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 31312,
+          "sha256": "ce663e50e8d2fbba70ebd36f4a7f7d03f182d373a8b8c46ae162056f23c362cb"
+        },
+        {
+          "src": "/lessons/teach-stretch-1-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 57656,
+          "sha256": "5639dcf5745f1449eb27873e8bb78ab355f96f73205748bb8432432ee3aa5d90"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-event-starter-0",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c01-03-starter-0:hook",
+      "source": "Original generation; media/batch-five-provenance.json",
+      "licence": "Generated output; no stock licence or exclusive copyright asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An adult woman sits in an empty teal-seated auditorium holding a landscape phone toward a closed ochre stage curtain, beside a clear central aisle.",
+      "sha256": "fd7b6183a14bb0090420811d7c96ca100cee5a7009dfa6b61e9b0a607aeaf88a",
+      "dhash": "e6c787a7a6074607",
+      "canonicalUrl": "/lessons/event-starter-0-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/event-starter-0-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 14292,
+          "sha256": "6c386a5683d786fc51b04d6b4c83d351b778b29d5a0b8d0ff70de0f748ef6eaa"
+        },
+        {
+          "src": "/lessons/event-starter-0-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 38992,
+          "sha256": "28eb508333c7aa07c5693ae6d48de70d80d484dde07d6bb0d4370aac4f9f326a"
+        },
+        {
+          "src": "/lessons/event-starter-0-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 67064,
+          "sha256": "0afcd7917d4e75cc8fd967d53179ff20ca0e0f0eab26d4bd14a777356a6f4ab8"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-event-starter-1",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c01-03-starter-1:hook",
+      "source": "Original generation; media/batch-five-provenance.json",
+      "licence": "Generated output; no stock licence or exclusive copyright asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An adult hand moves a plain wooden block between two tape marks on teal cloth, with a landscape phone supported on a broad stand at the side.",
+      "sha256": "4a86479015f952678b796daf5c83b1942e72f1c251b767b138e59b0bd4eda404",
+      "dhash": "3038394fce81c793",
+      "canonicalUrl": "/lessons/event-starter-1-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/event-starter-1-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 17924,
+          "sha256": "65513bc52f712caa2873095afc04dc761f28a4efbbfa8a629936fb67e021ec05"
+        },
+        {
+          "src": "/lessons/event-starter-1-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 51204,
+          "sha256": "eedfd573a4f23f7b38ed2e29871260295c0dfec99f6746836a517a86adc8cfc6"
+        },
+        {
+          "src": "/lessons/event-starter-1-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 87984,
+          "sha256": "5e887b1810cc4b7f0f1cc56e09515caf102e07bccf245f33164e751d8ba43c74"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-event-prepare-0",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c01-03-prepare-0:hook",
+      "source": "Original generation; media/batch-five-provenance.json",
+      "licence": "Generated output; no stock licence or exclusive copyright asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "Adult hands sort a blank folded card and plain envelope beside a closed charcoal notebook and face-down phone in warm window light.",
+      "sha256": "54efb6d700f4fb1d27034caa5bfbfde27c8dcbc47e78f20c19cf2ed54ace24fe",
+      "dhash": "bcbd2f1c0e1f9e0e",
+      "canonicalUrl": "/lessons/event-prepare-0-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/event-prepare-0-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 17404,
+          "sha256": "cce909b830a141bbf5fbed1baad11adc03eee175ff02cf39f380a5c6aeeb3acb"
+        },
+        {
+          "src": "/lessons/event-prepare-0-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 51406,
+          "sha256": "48f06e135209811c6338d25627b0cc6d091ed14e8abda15dff5324cf1ec78886"
+        },
+        {
+          "src": "/lessons/event-prepare-0-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 86386,
+          "sha256": "704bfcef23a593c17a5850685daf9e4182e11b56051f54b03edec1c97a5d021c"
+        }
+      ]
+    },
+    {
+      "id": "fp-lesson-event-prepare-1",
+      "kind": "image",
+      "namespace": "lessons",
+      "status": "reviewed",
+      "ownerSlot": "need-c01-03-prepare-1:hook",
+      "source": "Original generation; media/batch-five-provenance.json",
+      "licence": "Generated output; no stock licence or exclusive copyright asserted.",
+      "credit": "Created for Framepath with OpenAI image generation",
+      "alt": "An adult man checks a landscape phone secured on a broad-based stand beside a power bank, tabletop cable, closed pouch and blank sheet in cool morning light.",
+      "sha256": "9afb7b26d13940e2192b37894f55962552b0d5a7d5500a85225a4b0ac4e6b8bc",
+      "dhash": "6858d889899383e3",
+      "canonicalUrl": "/lessons/event-prepare-1-960.webp",
+      "renditions": [
+        {
+          "src": "/lessons/event-prepare-1-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 14152,
+          "sha256": "318ef5b536d7aa768d4f57d31b3b5f33d3b76dd3fa5014b1ea6335d768c6bdd6"
+        },
+        {
+          "src": "/lessons/event-prepare-1-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 35212,
+          "sha256": "b9bf385e43b5920cc222938d9aa5db7d7d54878c41bd0799e5736e6a663eb21d"
+        },
+        {
+          "src": "/lessons/event-prepare-1-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 60692,
+          "sha256": "95cb4ad6120301213f7c8b8cc1a88e0e403e9399f37baf5284263c4306f4289c"
+        }
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "id": "product-reel-0:hook",
+      "assetId": "fp-lesson-product-01",
+      "owner": "app/lessons/content.ts#product-reel-0"
+    },
+    {
+      "id": "product-reel-1:hook",
+      "assetId": "fp-lesson-product-02",
+      "owner": "app/lessons/content.ts#product-reel-1"
+    },
+    {
+      "id": "product-reel-2:hook",
+      "assetId": "fp-lesson-product-03",
+      "owner": "app/lessons/content.ts#product-reel-2"
+    },
+    {
+      "id": "product-reel-3:hook",
+      "assetId": "fp-lesson-product-04",
+      "owner": "app/lessons/content.ts#product-reel-3"
+    },
+    {
+      "id": "product-reel-4:hook",
+      "assetId": "fp-lesson-product-05",
+      "owner": "app/lessons/content.ts#product-reel-4"
+    },
+    {
+      "id": "product-reel-2:activity-photo",
+      "assetId": "fp-lesson-product-exposure",
+      "owner": "app/lessons/content.ts#product-reel-2"
+    },
+    {
+      "id": "everyday-story-0:hook",
+      "assetId": "fp-lesson-story-01",
+      "owner": "app/lessons/content.ts#everyday-story-0"
+    },
+    {
+      "id": "everyday-story-1:hook",
+      "assetId": "fp-lesson-story-02",
+      "owner": "app/lessons/content.ts#everyday-story-1"
+    },
+    {
+      "id": "everyday-story-2:hook",
+      "assetId": "fp-lesson-story-03",
+      "owner": "app/lessons/content.ts#everyday-story-2"
+    },
+    {
+      "id": "everyday-story-3:hook",
+      "assetId": "fp-lesson-story-04",
+      "owner": "app/lessons/content.ts#everyday-story-3"
+    },
+    {
+      "id": "everyday-story-4:hook",
+      "assetId": "fp-lesson-story-05",
+      "owner": "app/lessons/content.ts#everyday-story-4"
+    },
+    {
+      "id": "everyday-story-2:activity-photo",
+      "assetId": "fp-lesson-story-balance",
+      "owner": "app/lessons/content.ts#everyday-story-2"
+    },
+    {
+      "id": "everyday-story-3:audio-quiet",
+      "assetId": "fp-lesson-audio-quiet",
+      "owner": "app/lessons/interactives.tsx#everyday-story-3"
+    },
+    {
+      "id": "everyday-story-3:audio-noisy",
+      "assetId": "fp-lesson-audio-noisy",
+      "owner": "app/lessons/interactives.tsx#everyday-story-3"
+    },
+    {
+      "id": "natural-light-0:hook",
+      "assetId": "fp-lesson-light-01",
+      "owner": "app/lessons/batch-two.ts#natural-light-0"
+    },
+    {
+      "id": "natural-light-1:hook",
+      "assetId": "fp-lesson-light-02",
+      "owner": "app/lessons/batch-two.ts#natural-light-1"
+    },
+    {
+      "id": "natural-light-2:hook",
+      "assetId": "fp-lesson-light-03",
+      "owner": "app/lessons/batch-two.ts#natural-light-2"
+    },
+    {
+      "id": "natural-light-2:activity-photo",
+      "assetId": "fp-lesson-light-exposure",
+      "owner": "app/lessons/batch-two.ts#natural-light-2"
+    },
+    {
+      "id": "natural-light-3:hook",
+      "assetId": "fp-lesson-light-04",
+      "owner": "app/lessons/batch-two.ts#natural-light-3"
+    },
+    {
+      "id": "first-edit-0:hook",
+      "assetId": "fp-lesson-edit-01",
+      "owner": "app/lessons/batch-two.ts#first-edit-0"
+    },
+    {
+      "id": "first-edit-1:hook",
+      "assetId": "fp-lesson-edit-02",
+      "owner": "app/lessons/batch-two.ts#first-edit-1"
+    },
+    {
+      "id": "first-edit-3:hook",
+      "assetId": "fp-lesson-edit-03",
+      "owner": "app/lessons/batch-two.ts#first-edit-3"
+    },
+    {
+      "id": "first-edit-2:hook",
+      "assetId": "fp-lesson-edit-04",
+      "owner": "app/lessons/batch-two.ts#first-edit-2"
+    },
+    {
+      "id": "first-edit-4:hook",
+      "assetId": "fp-lesson-edit-05",
+      "owner": "app/lessons/batch-two.ts#first-edit-4"
+    },
+    {
+      "id": "need-c05-01-starter-0:hook",
+      "assetId": "fp-lesson-teach-01",
+      "owner": "app/lessons/batch-two.ts#need-c05-01-starter-0"
+    },
+    {
+      "id": "need-c05-01-starter-1:hook",
+      "assetId": "fp-lesson-teach-02",
+      "owner": "app/lessons/batch-two.ts#need-c05-01-starter-1"
+    },
+    {
+      "id": "need-c05-01-prepare-0:hook",
+      "assetId": "fp-lesson-teach-prepare-0",
+      "owner": "app/lessons/batch-three.ts"
+    },
+    {
+      "id": "need-c05-01-prepare-1:hook",
+      "assetId": "fp-lesson-teach-prepare-1",
+      "owner": "app/lessons/batch-three.ts"
+    },
+    {
+      "id": "need-c05-01-practice-0:hook",
+      "assetId": "fp-lesson-teach-practice-0",
+      "owner": "app/lessons/batch-three.ts"
+    },
+    {
+      "id": "need-c05-01-practice-1:hook",
+      "assetId": "fp-lesson-teach-practice-1",
+      "owner": "app/lessons/batch-three.ts"
+    },
+    {
+      "id": "need-c05-01-practice-2:hook",
+      "assetId": "fp-lesson-teach-practice-2",
+      "owner": "app/lessons/batch-three.ts"
+    },
+    {
+      "id": "need-c05-01-finish-0:hook",
+      "assetId": "fp-lesson-teach-finish-0",
+      "owner": "app/lessons/batch-three.ts"
+    },
+    {
+      "id": "need-c05-01-finish-1:hook",
+      "assetId": "fp-lesson-teach-finish-1",
+      "owner": "app/lessons/batch-three.ts"
+    },
+    {
+      "id": "need-c05-01-foundations-0:audio-quiet",
+      "assetId": "fp-teach-room-audio-quiet",
+      "owner": "app/lessons/batch-four.ts"
+    },
+    {
+      "id": "need-c05-01-foundations-0:audio-noisy",
+      "assetId": "fp-teach-room-audio-noisy",
+      "owner": "app/lessons/batch-four.ts"
+    },
+    {
+      "id": "need-c05-01-foundations-0:hook",
+      "assetId": "fp-lesson-teach-foundations-0",
+      "owner": "app/lessons/batch-four.ts"
+    },
+    {
+      "id": "need-c05-01-foundations-1:hook",
+      "assetId": "fp-lesson-teach-foundations-1",
+      "owner": "app/lessons/batch-four.ts"
+    },
+    {
+      "id": "need-c05-01-foundations-2:hook",
+      "assetId": "fp-lesson-teach-foundations-2",
+      "owner": "app/lessons/batch-four.ts"
+    },
+    {
+      "id": "need-c05-01-stretch-0:hook",
+      "assetId": "fp-lesson-teach-stretch-0",
+      "owner": "app/lessons/batch-four.ts"
+    },
+    {
+      "id": "need-c05-01-stretch-1:hook",
+      "assetId": "fp-lesson-teach-stretch-1",
+      "owner": "app/lessons/batch-four.ts"
+    },
+    {
+      "id": "need-c01-03-starter-0:hook",
+      "assetId": "fp-lesson-event-starter-0",
+      "owner": "app/lessons/batch-five.ts"
+    },
+    {
+      "id": "need-c01-03-starter-1:hook",
+      "assetId": "fp-lesson-event-starter-1",
+      "owner": "app/lessons/batch-five.ts"
+    },
+    {
+      "id": "need-c01-03-prepare-0:hook",
+      "assetId": "fp-lesson-event-prepare-0",
+      "owner": "app/lessons/batch-five.ts"
+    },
+    {
+      "id": "need-c01-03-prepare-1:hook",
+      "assetId": "fp-lesson-event-prepare-1",
+      "owner": "app/lessons/batch-five.ts"
+    }
+  ],
+  "videos": [
+    {
+      "slot": "product-reel-0:video",
+      "provider": "youtube",
+      "videoId": "WSHcmdEIzh4",
+      "caption": "Make the product’s value clear",
+      "credit": "Biteable",
+      "source": "https://www.youtube.com/watch?v=WSHcmdEIzh4",
+      "start": 60,
+      "end": 133,
+      "verification": "creator chapter or whole lesson verified",
+      "captions": "player captions availability unverified; authored text alternative provided"
+    },
+    {
+      "slot": "product-reel-1:video",
+      "provider": "youtube",
+      "videoId": "BdyhNmVFXdw",
+      "caption": "Shot-list lesson preview",
+      "credit": "StudioBinder Academy",
+      "source": "https://www.studiobinder.com/tutorials/visualize/intro-to-shot-list/",
+      "start": 0,
+      "end": 120,
+      "verification": "bounded opening preview; precise chapter unverified",
+      "captions": "player captions availability unverified; authored text alternative provided"
+    },
+    {
+      "slot": "product-reel-2:video",
+      "provider": "youtube",
+      "videoId": "kn-e9YlHnaM",
+      "caption": "Simple-lighting lesson preview",
+      "credit": "Justin Brown · Primal Video",
+      "source": "https://primalvideo.com/guides/video-lighting-tutorial-for-beginners/",
+      "start": 0,
+      "end": 180,
+      "verification": "bounded opening preview; precise chapter unverified",
+      "captions": "player captions availability unverified; authored text alternative provided"
+    },
+    {
+      "slot": "product-reel-3:video",
+      "provider": "youtube",
+      "videoId": "LCew4urIeUc",
+      "caption": "Trim your first edit",
+      "credit": "Justin Brown · Primal Video",
+      "source": "https://primalvideo.com/guides/how-to-edit-videos-on-android-complete-vn-video-editor-tutorial-2025/",
+      "start": 244,
+      "end": 386,
+      "verification": "creator chapter or whole lesson verified",
+      "captions": "player captions availability unverified; authored text alternative provided"
+    },
+    {
+      "slot": "product-reel-4:video",
+      "provider": "youtube",
+      "videoId": "SQVyYHvkMnA",
+      "caption": "Export your phone edit",
+      "credit": "Justin Brown · Primal Video",
+      "source": "https://www.youtube.com/watch?v=SQVyYHvkMnA",
+      "start": 1237,
+      "end": 1280,
+      "verification": "creator chapter or whole lesson verified",
+      "captions": "player captions availability unverified; authored text alternative provided"
+    },
+    {
+      "slot": "everyday-story-0:video",
+      "provider": "youtube",
+      "videoId": "1rMnzNZkIX0",
+      "caption": "Choose the feeling behind your story",
+      "credit": "Khan Academy Labs · Pixar in a Box",
+      "source": "https://www.khanacademy.org/humanities/hass-storytelling/storytelling-pixar-in-a-box/ah-piab-we-are-all-storytellers/v/storytelling-introb",
+      "start": 0,
+      "end": 177,
+      "verification": "creator chapter or whole lesson verified",
+      "captions": "creator transcript verified"
+    },
+    {
+      "slot": "everyday-story-1:video",
+      "provider": "youtube",
+      "videoId": "5g_ArBSIunA",
+      "caption": "A five-shot sequence preview",
+      "credit": "Thomson Foundation",
+      "source": "https://www.youtube.com/watch?v=5g_ArBSIunA",
+      "start": 0,
+      "end": 60,
+      "verification": "bounded opening preview; precise chapter unverified",
+      "captions": "player captions availability unverified; authored text alternative provided"
+    },
+    {
+      "slot": "everyday-story-2:video",
+      "provider": "youtube",
+      "videoId": "cDHLf7mqxDM",
+      "caption": "Lock focus and brightness",
+      "credit": "Justin Brown · Primal Video",
+      "source": "https://primalvideo.com/guides/best-iphone-camera-settings-for-video/",
+      "start": 279,
+      "end": 399,
+      "verification": "creator chapter or whole lesson verified",
+      "captions": "player captions availability unverified; authored text alternative provided"
+    },
+    {
+      "slot": "everyday-story-3:video",
+      "provider": "youtube",
+      "videoId": "LWQ1OGAvJqc",
+      "caption": "Keep natural sound continuous",
+      "credit": "StudioBinder Academy",
+      "source": "https://www.studiobinder.com/blog/what-is-room-tone/",
+      "start": 15,
+      "end": 186,
+      "verification": "creator chapter or whole lesson verified",
+      "captions": "player captions availability unverified; authored text alternative provided"
+    },
+    {
+      "slot": "everyday-story-4:video",
+      "provider": "youtube",
+      "videoId": "QxpIJeU0A9M",
+      "caption": "Copy your finished video to external storage",
+      "credit": "Justin Brown · Primal Video",
+      "source": "https://primalvideo.com/guides/mac-and-android-file-transfer/",
+      "start": 348,
+      "end": 497,
+      "verification": "creator chapter or whole lesson verified",
+      "captions": "player captions availability unverified; authored text alternative provided"
+    },
+    {
+      "slot": "natural-light-0:video",
+      "provider": "youtube",
+      "videoId": "oqnzrF78Xpo",
+      "caption": "Find useful window light",
+      "start": 0,
+      "end": 100,
+      "source": "https://howcast.com/videos/514379-how-to-use-window-lighting-portrait-photography/",
+      "credit": "Howcast · Joe Sinnott"
+    },
+    {
+      "slot": "natural-light-1:video",
+      "provider": "youtube",
+      "videoId": "1bVuicRH-J4",
+      "caption": "See hard and soft shadows",
+      "start": 227,
+      "end": 319,
+      "source": "https://www.youtube.com/watch?v=1bVuicRH-J4",
+      "credit": "Creative Path Films"
+    },
+    {
+      "slot": "natural-light-2:video",
+      "provider": "youtube",
+      "videoId": "wpV2O8xJ9CI",
+      "caption": "Adjust and lock exposure",
+      "start": 46,
+      "end": 145,
+      "source": "https://www.youtube.com/watch?v=wpV2O8xJ9CI",
+      "credit": "Foxtecc"
+    },
+    {
+      "slot": "natural-light-3:video",
+      "provider": "youtube",
+      "videoId": "9Js6ngTGBng",
+      "caption": "Work with changing daylight",
+      "start": 264,
+      "end": 366,
+      "source": "https://medium.com/@AndrewKanFilm/how-to-use-window-lighting-to-improve-your-youtube-videos-natural-lighting-tutorial-1c8da520855f",
+      "credit": "Andrew Kan"
+    },
+    {
+      "slot": "first-edit-0:video",
+      "provider": "youtube",
+      "videoId": "yb7-ab-6MO8",
+      "caption": "Bring selected clips into your first timeline",
+      "start": 110,
+      "end": 220,
+      "source": "https://www.youtube.com/watch?v=yb7-ab-6MO8",
+      "credit": "Justin Brown · Primal Video"
+    },
+    {
+      "slot": "first-edit-1:video",
+      "provider": "youtube",
+      "videoId": "SN781FlR4YM",
+      "caption": "Reorder clips and close gaps",
+      "start": 0,
+      "end": 155,
+      "source": "https://www.youtube.com/watch?v=SN781FlR4YM",
+      "credit": "EdTech Hustle"
+    },
+    {
+      "slot": "first-edit-2:video",
+      "provider": "youtube",
+      "videoId": "_fYSZob_0ik",
+      "caption": "Trim clips for a clearer sequence",
+      "start": 263,
+      "end": 418,
+      "source": "https://primalvideo.com/guides/how-to-edit-video-on-iphone-complete-beginners-guide-for-2025/",
+      "credit": "Justin Brown · Primal Video"
+    },
+    {
+      "slot": "first-edit-3:video",
+      "provider": "youtube",
+      "videoId": "mBoSJpRm7gk",
+      "caption": "Start with automatic captions",
+      "start": 186,
+      "end": 271,
+      "source": "https://www.youtube.com/watch?v=mBoSJpRm7gk",
+      "credit": "Kevin Stratvert"
+    },
+    {
+      "slot": "first-edit-4:video",
+      "provider": "youtube",
+      "videoId": "O6WzrZyBsHM",
+      "caption": "Export your viewing copy",
+      "start": 1124,
+      "end": 1193,
+      "source": "https://primalvideo.com/guides/imovie-app-video-editing-tutorial/",
+      "credit": "Justin Brown · Primal Video"
+    },
+    {
+      "slot": "need-c05-01-starter-0:video",
+      "provider": "youtube",
+      "videoId": "VWAHkHLpZ1Q",
+      "caption": "Ask before recording and sharing",
+      "start": 0,
+      "end": 84,
+      "source": "https://library.witness.org/product/interviewing-techniques-obtaining-informed-consent/",
+      "credit": "WITNESS"
+    },
+    {
+      "slot": "need-c05-01-starter-1:video",
+      "provider": "youtube",
+      "videoId": "mjA6uVB1-TA",
+      "caption": "Choose words that help a learner",
+      "start": 0,
+      "end": 170,
+      "source": "https://www.modernclassrooms.org/videos/v/teacher-tips/engaging-instructional-videos",
+      "credit": "Modern Classrooms Project · Toni Rose Deanon"
+    },
+    {
+      "slot": "need-c05-01-prepare-0:video",
+      "provider": "youtube",
+      "videoId": "r567vmL1Fcs",
+      "caption": "WITNESS: Filming & Protecting Interviewees",
+      "start": 0,
+      "end": 205,
+      "source": "https://library.witness.org/product/video-advocacy-guide-3/",
+      "credit": "WITNESS"
+    },
+    {
+      "slot": "need-c05-01-prepare-1:video",
+      "provider": "youtube",
+      "videoId": "B90v9HHyURs",
+      "caption": "How to Create a Storyboard for eLearning (Instructional Design)",
+      "start": 86,
+      "end": 250,
+      "source": "https://www.youtube.com/watch?v=B90v9HHyURs",
+      "credit": "Devlin Peck"
+    },
+    {
+      "slot": "need-c05-01-practice-0:video",
+      "provider": "youtube",
+      "videoId": "MLddkVv72Vo",
+      "caption": "Making effective educational videos",
+      "start": 115,
+      "end": 160,
+      "source": "https://www.youtube.com/watch?v=MLddkVv72Vo",
+      "credit": "Meta-Ed"
+    },
+    {
+      "slot": "need-c05-01-practice-1:video",
+      "provider": "youtube",
+      "videoId": "fCl9wfILSxY",
+      "caption": "The Proximity Effect | How It Works & How To Avoid It [With Audio Examples]",
+      "start": 20,
+      "end": 117,
+      "source": "https://audiouniversityonline.com/proximity-effect/",
+      "credit": "Audio University"
+    },
+    {
+      "slot": "need-c05-01-practice-2:video",
+      "provider": "youtube",
+      "videoId": "TzocLBCcuWs",
+      "caption": "Part 2: How To Make Accessible Online Courses",
+      "start": 92,
+      "end": 214,
+      "source": "https://esail.tamu.edu/faculty-tutorials/accessibility/make-accessible-online-courses/",
+      "credit": "TAMU Engineering Studio for Instruction & Learning"
+    },
+    {
+      "slot": "need-c05-01-finish-0:video",
+      "provider": "youtube",
+      "videoId": "BIreFXLK1rc",
+      "caption": "Microsoft Clipchamp Tutorial for Beginners (The COMPLETE Guide)",
+      "start": 1094,
+      "end": 1137,
+      "source": "https://www.youtube.com/watch?v=BIreFXLK1rc",
+      "credit": "Justin Brown - Primal Video"
+    },
+    {
+      "slot": "need-c05-01-finish-1:video",
+      "provider": "youtube",
+      "videoId": "JB6aDdq3HTI",
+      "caption": "The ADDIE Model of Instructional Design",
+      "start": 381,
+      "end": 453,
+      "source": "https://www.youtube.com/watch?v=JB6aDdq3HTI",
+      "credit": "Devlin Peck"
+    },
+    {
+      "slot": "need-c05-01-foundations-0:video",
+      "provider": "youtube",
+      "videoId": "yi3NykJ1yoU",
+      "caption": "Background Sounds",
+      "start": 0,
+      "end": 16,
+      "source": "https://ucanr.edu/dept/communications-toolkit/recording",
+      "credit": "Dustin Blakey"
+    },
+    {
+      "slot": "need-c05-01-foundations-1:video",
+      "provider": "youtube",
+      "videoId": "SgfICec18Gw",
+      "caption": "Integrated Audio Description: At a Glance",
+      "start": 0,
+      "end": 112,
+      "source": "https://blogs.microsoft.com/on-the-issues/2021/11/05/what-is-visual-description-as-events-evolve-greater-accessibility-for-the-disability-community-emerges/",
+      "credit": "MSFTEnable"
+    },
+    {
+      "slot": "need-c05-01-foundations-2:video",
+      "provider": "youtube",
+      "videoId": "ZbKwwgnGF98",
+      "caption": "Smartphone recording tips",
+      "start": 0,
+      "end": 186,
+      "source": "https://www.visualculture.com.au/smartphone-video-recording-tips/",
+      "credit": "Visual Culture"
+    },
+    {
+      "slot": "need-c05-01-stretch-0:video",
+      "provider": "youtube",
+      "videoId": "KxxK-kRs6Cw",
+      "caption": "Segmenting Principle | The 12 Multimedia Instructional Principles",
+      "start": 0,
+      "end": 140,
+      "source": "https://www.youtube.com/watch?v=KxxK-kRs6Cw",
+      "credit": "Mike Tyler"
+    },
+    {
+      "slot": "need-c05-01-stretch-1:video",
+      "provider": "youtube",
+      "videoId": "-bn2euyKhJo",
+      "caption": "Data vs. Findings vs. Insights",
+      "start": 0,
+      "end": 204,
+      "source": "https://www.nngroup.com/videos/data-findings-insights/",
+      "credit": "NNgroup"
+    },
+    {
+      "slot": "need-c01-03-starter-0:video",
+      "provider": "youtube",
+      "videoId": "qJf_aWFYchY",
+      "caption": "Tips for a Professional Look with Little to No Equipment",
+      "start": 0,
+      "end": 181,
+      "source": "https://support.google.com/youtube/answer/12340105?co=YOUTUBE._YTVideoType%3Dvideo&hl=en",
+      "credit": "YouTube Creators"
+    },
+    {
+      "slot": "need-c01-03-starter-1:video",
+      "provider": "youtube",
+      "videoId": "2pjYP9xpApc",
+      "caption": "How to Film like a PRO with Android Smartphones [Updated Guide!]",
+      "start": 916,
+      "end": 1030,
+      "source": "https://primalvideo.com/guides/how-to-film-like-a-pro-with-android-smartphones/",
+      "credit": "Justin Brown - Primal Video"
+    },
+    {
+      "slot": "need-c01-03-prepare-0:video",
+      "provider": "youtube",
+      "videoId": "ottnH427Fr8",
+      "caption": "Teen Voices: Oversharing and Your Digital Footprint",
+      "start": 0,
+      "end": 214,
+      "source": "https://www.commonsense.org/education/youtube-curations-advisory",
+      "credit": "Common Sense Education"
+    },
+    {
+      "slot": "need-c01-03-prepare-1:video",
+      "provider": "youtube",
+      "videoId": "nixu1tYgp_Q",
+      "caption": "How To Film Brilliant Videos For Your Business (Beginners Smartphone Filming Tips - Part 3)",
+      "start": 441,
+      "end": 540,
+      "source": "https://www.youtube.com/watch?v=nixu1tYgp_Q",
+      "credit": "The Authority Engine – with Jeremy Mason"
+    }
+  ]
+}

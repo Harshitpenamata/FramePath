@@ -1,0 +1,137 @@
+{
+  "generated": "2026-10-07",
+  "sources": [
+    {
+      "project": "Framepath",
+      "created": "2026-10-07",
+      "assets": [
+        {
+          "id": "product-01-amber-soap",
+          "slot": "product session 1 HOOK",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\product\\product-01-amber-soap.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-13a5-7762-bab2-7fec363e8462\\exec-447385b4-d081-4a4a-84bb-13355c07c1c7.png",
+          "prompt": "Use case: photorealistic-natural. Asset type: original teaching photograph for a product-reel lesson. Create one single landscape 3:2 raster photograph (1536 by 1024 framing), natural cinematic photography, clean practical setting, refined petrol blue and muted celery color accents. No collage, no UI, no diagram, no illustration, no text, no logos, no brands, no watermark, no visible people or hands or children. Realistic usable objects, natural material texture, believable light. Subject and scene: a plain unbranded amber glass soap dispenser with a realistic functional pump, beside a softly folded damp hand towel on a dark teal bathroom shelf. Soft morning window light, small beads of moisture, the product visibly ready to use. Close three-quarter photographic view, amber translucent glass and cloth weave clearly visible. Quiet and clean everyday bathroom, subtle celery towel tones, uncluttered.",
+          "generator": "built-in image_gen",
+          "requests": 1,
+          "output_dimensions": "1536x1024",
+          "visual_review": "Original photorealistic landscape; distinct requested subject; no visible text, logos, people or children."
+        },
+        {
+          "id": "product-02-coffee-dripper",
+          "slot": "product session 2 HOOK",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\product\\product-02-coffee-dripper.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-13a5-7762-bab2-7fec363e8462\\exec-26cc9327-925f-400e-a4ba-aa8596749fdf.png",
+          "prompt": "Use case: photorealistic-natural. Asset type: original teaching photograph for a product-reel lesson. Create one single landscape 3:2 raster photograph (1536 by 1024 framing), natural cinematic photography, clean practical setting, refined petrol blue and muted celery color accents. No collage, no UI, no diagram, no illustration, no text, no logos, no brands, no watermark, no visible people or hands or children. Realistic usable objects, natural material texture, believable light. Subject and scene: a plain cream ceramic coffee dripper seated over a clear glass coffee server, coffee visibly dripping from the cone into the server. Close tabletop detail in a warm kitchen. Hands and people outside the frame. Warm soft window light, cream ceramic ribs and transparent brown coffee visibly realistic, clean petrol-blue tabletop and a quiet muted celery accent in the out-of-focus kitchen. Intimate close-up at low three-quarter angle.",
+          "generator": "built-in image_gen",
+          "requests": 1,
+          "output_dimensions": "1536x1024",
+          "visual_review": "Original photorealistic landscape; distinct requested subject; no visible text, logos, people or children."
+        },
+        {
+          "id": "product-03-seedling-pot",
+          "slot": "product session 3 HOOK",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\product\\product-03-seedling-pot.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-13a5-7762-bab2-7fec363e8462\\exec-e724bc9e-de0f-4597-aeb6-dbd49d8a6a2b.png",
+          "prompt": "Use case: photorealistic-natural. Asset type: original teaching photograph for a product-reel lesson. Create one single landscape 3:2 raster photograph (1536 by 1024 framing), natural cinematic photography, clean practical setting, refined petrol blue and muted celery color accents. No collage, no UI, no diagram, no illustration, no text, no logos, no brands, no watermark, no visible people or hands or children. Realistic usable objects, natural material texture, believable light. Subject and scene: a single small terracotta pot holding one delicate green seedling beside a tall window, standing on textured concrete. Clear soft lateral window light producing one gentle readable shadow. The pot and seedling alone are the subject, calm roomy composition, natural terra-cotta texture and subtle concrete grain. Petrol tones in the soft background and fresh celery green in the small leaves. Eye-level still life.",
+          "generator": "built-in image_gen",
+          "requests": 1,
+          "output_dimensions": "1536x1024",
+          "visual_review": "Original photorealistic landscape; distinct requested subject; no visible text, logos, people or children."
+        },
+        {
+          "id": "product-04-desk-organiser",
+          "slot": "product session 4 HOOK",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\product\\product-04-desk-organiser.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-13a5-7762-bab2-7fec363e8462\\exec-8292af53-85df-46f7-817b-f72cbe08aefe.png",
+          "prompt": "Use case: photorealistic-natural. Asset type: original teaching photograph for a product-reel lesson. Create one single landscape 3:2 raster photograph (1536 by 1024 framing), natural cinematic photography, clean practical setting, refined petrol blue and muted celery color accents. No collage, no UI, no diagram, no illustration, no text, no logos, no brands, no watermark, no visible people or hands or children. Realistic usable objects, natural material texture, believable light. Subject and scene: an unbranded wooden desk organiser with plain pencils and a blank-cover notebook arranged neatly on a petrol-blue worktable. True overhead flat-lay photograph, rhythmic spacing between organiser, pencils and notebook to support an editing rhythm teaching exercise. Muted celery notebook, natural wood grain, soft broad daylight, balanced shapes, clean practical workspace. Absolutely no writing or labels anywhere.",
+          "generator": "built-in image_gen",
+          "requests": 1,
+          "output_dimensions": "1536x1024",
+          "visual_review": "Original photorealistic landscape; distinct requested subject; no visible text, logos, people or children."
+        },
+        {
+          "id": "product-05-open-lunchbox",
+          "slot": "product session 5 HOOK",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\product\\product-05-open-lunchbox.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-13a5-7762-bab2-7fec363e8462\\exec-95b05944-fd58-4555-b415-244682982891.png",
+          "prompt": "Use case: photorealistic-natural. Asset type: original teaching photograph for a product-reel lesson. Create one single landscape 3:2 raster photograph (1536 by 1024 framing), natural cinematic photography, clean practical setting, refined petrol blue and muted celery color accents. No collage, no UI, no diagram, no illustration, no text, no logos, no brands, no watermark, no visible people or hands or children. Realistic usable objects, natural material texture, believable light. Subject and scene: a plain olive reusable lunchbox opened to reveal a simple appetizing meal of rice, green vegetables and tomato pieces. The lunchbox is arranged as a clean vertical subject stack within the landscape frame, with its open plain lid above and meal compartment below. Leave a substantial uninterrupted blank tabletop area next to the lunchbox for a learner caption exercise, without adding any caption. Clean petrol-blue tabletop, soft daylight, olive/celery palette, natural food texture. Near-overhead photography.",
+          "generator": "built-in image_gen",
+          "requests": 1,
+          "output_dimensions": "1536x1024",
+          "visual_review": "Original photorealistic landscape; distinct requested subject; no visible text, logos, people or children."
+        },
+        {
+          "id": "product-06-exposure-bottle",
+          "slot": "product session 3 exposure simulator only",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\product\\product-06-exposure-bottle.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-13a5-7762-bab2-7fec363e8462\\exec-35807ec4-06b8-474a-93ae-1485d09e926b.png",
+          "prompt": "Use case: photorealistic-natural. Asset type: dedicated exposure-interactive teaching photograph, separate from other product lesson hook photos. Create one original landscape 3:2 raster photograph (1536 by 1024 framing). Subject and scene: an unbranded clear glass water bottle with realistic condensation beside a neatly folded navy cloth on pale lightly textured stone next to a window. Natural cinematic photography, neutral balanced midtone exposure, luminous but fully retained highlights with visible bright detail on glass, water droplets and pale stone; readable cloth texture in shadows. Soft side window light, clean practical tabletop. Quiet petrol and muted celery hints in a restrained out-of-focus background. Composition: medium close tabletop still life at a three-quarter angle, bottle fully readable with usable space around it. Constraints: exactly one plain glass water bottle and one folded navy cloth as the main subjects, no labels, no logos, no branding, no text, no watermark, no people, no hands, no children; no collage, UI, diagrams or illustration; no dramatic crushed shadows or clipped white highlights.",
+          "generator": "built-in image_gen",
+          "requests": 1,
+          "output_dimensions": "1536x1024",
+          "visual_review": "Original photorealistic landscape; distinct requested subject; no visible text, logos, people or children."
+        }
+      ]
+    },
+    {
+      "mode": "Built-in image_gen; original generation, no input images, one request per asset, no retries or variants. Originals preserved.",
+      "assets": [
+        {
+          "name": "01-kettle-pour",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original everyday-story teaching photograph, HOOK image\nPrimary request: A stream of water from a stainless steel kettle pouring into a plain blue ceramic cup in a quiet kitchen, close view with delicate visible steam, hands and people completely out of frame.\nStyle/medium: cinematic everyday editorial photography, credible natural textures, understated and unposed.\nComposition/framing: one photograph, landscape 3:2, tight close view focused on stream, cup rim, and steam; kettle enters frame naturally.\nLighting/mood: soft natural window light catches steam, quiet morning atmosphere.\nColor palette: restrained petrol blue and muted celery green surroundings, neutral warm kitchen materials.\nConstraints: believable geometry and fluid motion; no text, logos, brands, watermark, collage, UI, diagrams, people or children.",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-3dba-70c1-b737-88cbb7c3d895\\exec-ade29706-cae2-4c0c-9f51-c017af08934b.png",
+          "finalPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\story\\01-kettle-pour.png",
+          "provider": "Built-in image_gen",
+          "requestCount": 1,
+          "variants": 0
+        },
+        {
+          "name": "02-bicycle-doorway",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original everyday-story teaching photograph, HOOK image\nPrimary request: A simple unbranded bicycle leaning near an open doorway, an unbranded helmet resting naturally on the saddle, wide view of a quiet home entrance that suggests preparation for a morning ride.\nStyle/medium: cinematic everyday editorial photography, credible materials, understated and unposed.\nComposition/framing: one photograph, landscape 3:2, wide view showing bicycle, helmet, threshold and soft morning light through open doorway; no people.\nLighting/mood: natural morning light, quiet anticipatory atmosphere.\nColor palette: restrained petrol blue and muted celery green accents in a clean home entrance, soft neutral walls.\nConstraints: plausible bicycle construction and helmet placement; no text, logos, brands, watermark, collage, UI, diagrams, people or children.",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-3dba-70c1-b737-88cbb7c3d895\\exec-b49de915-fb0b-432a-b8c1-3bf0040dbb49.png",
+          "finalPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\story\\02-bicycle-doorway.png",
+          "provider": "Built-in image_gen",
+          "requestCount": 1,
+          "variants": 0
+        },
+        {
+          "name": "03-thread-linen",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original everyday-story teaching photograph, HOOK image\nPrimary request: Sewing thread spools and plain linen under side window light, intimate close-up of the thread fibers and woven linen, with a physically plausible warm-versus-cool lighting distinction.\nStyle/medium: cinematic everyday editorial still-life photography, natural tactile texture and understated composition.\nComposition/framing: one photograph, landscape 3:2, close view of a few unbranded thread spools arranged naturally on plain linen beside a window.\nLighting/mood: warm slanting late-afternoon sunlight on one side, cooler skylight in the linen shadows; subtle believable mixed natural light.\nColor palette: restrained petrol blue and muted celery green thread with neutral linen and warm wood tones.\nConstraints: no printed labels or writing on spools; no text, logos, brands, watermark, collage, UI, diagrams, people or children.",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-3dba-70c1-b737-88cbb7c3d895\\exec-b4eba575-6f90-4b1d-ae0e-7538ee4dc801.png",
+          "finalPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\story\\03-thread-linen.png",
+          "provider": "Built-in image_gen",
+          "requestCount": 1,
+          "variants": 0
+        },
+        {
+          "name": "04-flour-bowl",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original everyday-story teaching photograph, HOOK image\nPrimary request: A clear glass mixing bowl containing flour and a simple spoon on a wooden kitchen counter, quiet natural tactile still life, no person.\nStyle/medium: cinematic everyday editorial photography, credible fine flour texture, transparent glass and wood grain, understated and unposed.\nComposition/framing: one photograph, landscape 3:2, modest angled close view centered on bowl, flour and spoon with breathing room on the counter.\nLighting/mood: soft natural side window light, peaceful kitchen atmosphere.\nColor palette: understated petrol blue and muted celery green environment in softly blurred background; natural wood and off-white flour.\nConstraints: believable spoon and bowl geometry, clear glass refraction; no text, logos, brands, watermark, collage, UI, diagrams, people or children.",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-3dba-70c1-b737-88cbb7c3d895\\exec-4e845540-8fcc-4d45-81be-585cee003a64.png",
+          "finalPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\story\\04-flour-bowl.png",
+          "provider": "Built-in image_gen",
+          "requestCount": 1,
+          "variants": 0
+        },
+        {
+          "name": "05-sketchbook-twilight",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original everyday-story teaching photograph, HOOK image\nPrimary request: An unbranded open sketchbook showing only simple geometric line studies, a pencil beside it and a plain desk lamp at twilight, photographed overhead, no words.\nStyle/medium: cinematic everyday editorial photography of a real desk still life, credible paper texture and hand-drawn graphite lines.\nComposition/framing: one photograph, landscape 3:2, overhead view of sketchbook, pencil and desk lamp; sketchbook pages have sparse simple circles, squares and straight-line studies only, no letters or numbers.\nLighting/mood: cool natural twilight from a nearby window with a gentle warm pool from the desk lamp, quiet reflective atmosphere.\nColor palette: restrained petrol blue and muted celery green desk surroundings with neutral paper.\nConstraints: no readable or pseudo text, no logos, brands, watermark, collage, UI, diagrams outside the paper, people or children.",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-3dba-70c1-b737-88cbb7c3d895\\exec-e85573e2-c32f-4add-b5b3-6fc9c20d475c.png",
+          "finalPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\story\\05-sketchbook-twilight.png",
+          "provider": "Built-in image_gen",
+          "requestCount": 1,
+          "variants": 0
+        },
+        {
+          "name": "06-whitebalance-neutral",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original teaching photograph dedicated to a white-balance interactive exercise\nPrimary request: A white ceramic plate, a plain silver spoon and a small folded neutral grey linen napkin on a dark wood table by daylight. Clearly neutral reference surfaces are the main subject.\nStyle/medium: cinematic everyday editorial still-life photography, natural credible materials, clean and understated.\nComposition/framing: one photograph, landscape 3:2, simple angled overhead composition showing the entire plain white plate, silver spoon and folded grey napkin distinctly against the dark wood.\nLighting/mood: soft neutral natural daylight from a side window, accurately white-balanced, plate visibly white and napkin neutral grey, calm domestic atmosphere.\nMaterials/textures: smooth white ceramic, reflective silver metal, softly woven grey linen, dark wood grain.\nConstraints: neutral reference whites and greys, no strong color cast, no colored decorative objects; no text, logos, brands, watermark, collage, UI, diagrams, people or children.",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a11688-3dba-70c1-b737-88cbb7c3d895\\exec-62e7cf12-a267-4fe7-9e58-1a764c1783ff.png",
+          "finalPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-assets\\story\\06-whitebalance-neutral.png",
+          "provider": "Built-in image_gen",
+          "requestCount": 1,
+          "variants": 0
+        }
+      ]
+    }
+  ],
+  "visualReview": "Reviewed 12 distinct subjects. Bicycle decorative strokes are not an identifiable brand; no sourced logos or branded products. All scenes generated; not real learner work."
+}

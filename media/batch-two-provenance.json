@@ -1,0 +1,233 @@
+{
+  "created": "2026-10-07",
+  "sources": [
+    {
+      "provenance": {
+        "mode": "built-in image_gen",
+        "intent": "generate",
+        "originalAssets": true,
+        "referenceImages": [],
+        "calls": 5,
+        "variants": 0,
+        "transparentBackground": false,
+        "requestedAspectRatio": "16:9",
+        "inspection": "Each generated image visually inspected for subject, distinct composition, photographic style and absence of written text/logos."
+      },
+      "assets": [
+        {
+          "id": "light-01",
+          "placement": "natural-light-0 hook",
+          "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage3-batch2-assets/light/light-01.png",
+          "sourcePath": "C:/Users/Venky/.codex/generated_images/01a116a9-f56a-72c0-9cb1-200a08e2cafe/exec-fbdd595e-fc20-44ce-960e-bec553498901.png",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original educational photography, natural-light-0 lesson hook about finding a window.\nPrimary request: A wide airy east-facing studio corner in a modern modest Indian home, with a single matte terracotta bowl on a simple pale wood table beside an obvious open side window.\nStyle/medium: tasteful cinematic editorial photograph with believable surface texture and lens rendering, not an illustration.\nComposition/framing: 16:9 landscape, wide room corner composition, window clearly visible to one side and bowl catching its light, ample breathing room.\nLighting/mood: gentle morning window light, soft directional shadows, calm and inviting.\nColor palette: pale neutral plaster, muted teal window frame, warm natural terracotta.\nConstraints: No people. No text, letters, numerals, logos, watermark, branded devices, screenshots, or collage. One image only.",
+          "alt": "A terracotta bowl on a pale wood table catches morning light beside a teal-framed window."
+        },
+        {
+          "id": "light-02",
+          "placement": "natural-light-1 hook",
+          "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage3-batch2-assets/light/light-02.png",
+          "sourcePath": "C:/Users/Venky/.codex/generated_images/01a116a9-f56a-72c0-9cb1-200a08e2cafe/exec-9d3e8b3e-804d-4cae-8af6-0c847924c37b.png",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original photographic educational image, natural-light-1 hook about shadow softness.\nPrimary request: Close overhead photograph of pale textured linen holding one single sculptural crumpled sheet of silver paper. Long afternoon shadows sweep diagonally across the linen. A translucent curtain edge enters one side, allowing a clear visual transition between sunny hard-edged shadows and a softened edge.\nStyle/medium: tasteful cinematic still life photography, realistic paper crinkles and woven linen detail.\nComposition/framing: exact 16:9 landscape, close top-down view, only the silver paper, fabric surface and curtain edge; no room panorama.\nLighting/mood: raking natural afternoon sunlight, restrained highlights with textured silver, educationally clear shadow geometry.\nColor palette: pale neutral linen and cool silver with a subtle teal cast in shadows.\nConstraints: No people, bowls, fruit, cups or lamps. No text, letters, numerals, logos, watermark, devices or screenshots. One image only.",
+          "alt": "Crumpled silver paper casts a sharp afternoon shadow on pale linen beside a sheer curtain."
+        },
+        {
+          "id": "light-03",
+          "placement": "natural-light-2 hook",
+          "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage3-batch2-assets/light/light-03.png",
+          "sourcePath": "C:/Users/Venky/.codex/generated_images/01a116a9-f56a-72c0-9cb1-200a08e2cafe/exec-5b8bf327-072e-4b3e-90fa-74c38749d90e.png",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original educational photographic lesson hook, natural-light-2, protecting highlight detail.\nPrimary request: Intimate still life of several dark purple plums and one white porcelain cup against a rich indigo backdrop, lit softly by a nearby unseen window.\nStyle/medium: tasteful cinematic editorial photograph; convincing natural bloom on plum skins, realistic porcelain sheen.\nComposition/framing: exact 16:9 landscape, three-quarter tabletop perspective at the subjects' height, compact arrangement with quiet indigo negative space; no wider room view.\nLighting/mood: gentle broad side window light, visible gradual highlight transitions and subtle texture on the white cup, delicate highlights on dark fruit, deep but legible shadows. Exposure should clearly protect all highlight detail.\nColor palette: dark plum, indigo, cool neutral porcelain; restrained elegant contrast.\nConstraints: No people, silver paper, bowls or lamps. No text, letters, numerals, logos, watermark, branded devices or screenshots. One image only.",
+          "alt": "Dark plums and a white porcelain cup retain delicate highlights against indigo fabric."
+        },
+        {
+          "id": "light-exposure",
+          "placement": "natural-light-2 exposure-simulator activity",
+          "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage3-batch2-assets/light/light-exposure.png",
+          "sourcePath": "C:/Users/Venky/.codex/generated_images/01a116a9-f56a-72c0-9cb1-200a08e2cafe/exec-9792b5a3-6c64-45c3-8d12-2ecf2f06235c.png",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original educational photograph for a unique exposure-simulator activity in natural-light-2.\nPrimary request: An unlit table lamp with a pale linen lampshade on dark oak, with a neatly folded cobalt scarf alongside it, near an indirect-light window in a modest modern Indian home.\nStyle/medium: tasteful cinematic editorial interior photograph, realistic linen weave and dark oak grain.\nComposition/framing: exact 16:9 landscape, wide composition from a slightly elevated oblique angle, lamp at one side with generous dark oak surface and folded scarf extending the composition; this is an interior detail rather than a tight tabletop still life.\nLighting/mood: indirect natural window light only, lamp switched off, controlled brightness on the pale lampshade with preserved textile texture throughout, rich legible shadows; all highlights retain detail.\nColor palette: neutral cream linen, dark oak, deep cobalt accent, muted teal undertones in the room.\nConstraints: No people, bowls, fruit, cups, silver paper, text, letters, numerals, logos, watermark, branded devices or screenshots. One image only.",
+          "alt": "An unlit linen lamp and folded cobalt scarf sit on dark oak in indirect window light."
+        },
+        {
+          "id": "light-04",
+          "placement": "natural-light-3 hook",
+          "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage3-batch2-assets/light/light-04.png",
+          "sourcePath": "C:/Users/Venky/.codex/generated_images/01a116a9-f56a-72c0-9cb1-200a08e2cafe/exec-50b25642-385f-4360-bb2d-6fe4b91154b6.png",
+          "prompt": "Use case: photorealistic-natural\nAsset type: original photographic educational lesson hook for natural-light-3, making a light setup repeatable.\nPrimary request: Only an adult's hands pinning a tiny hand-drawn light-setup sketch onto an otherwise blank corkboard over a minimal home workbench in a modest modern Indian home. The small sketch contains only simple pictograms: a window rectangle, a tabletop circle and direction arrows. Absolutely no letters, numerals or written characters in the sketch.\nStyle/medium: tasteful cinematic editorial photograph, natural skin texture and believable hand anatomy.\nComposition/framing: exact 16:9 landscape, close side-angle workbench detail focused on the adult hands, small paper and corkboard; no face or identifiable personal details. The adult wears a simple muted teal sleeve.\nLighting/mood: soft side daylight, warm practical atmosphere, visible gentle shadows on cork.\nColor palette: natural cork and pale wood, neutral paper, muted teal fabric.\nConstraints: Two adult hands with anatomically correct fingers; no identifiable minors. No text, logos, watermark, branded devices, screens or screenshots. Corkboard blank except the tiny nontext sketch. One image only.",
+          "alt": "Adult hands pin a simple window-light sketch to a corkboard above a home workbench."
+        }
+      ]
+    },
+    {
+      "assets": [
+        {
+          "id": "edit-01",
+          "slot": "first-edit-0",
+          "role": "hook",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-batch2-assets\\edit-teach\\edit-01.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a116aa-2847-71a3-8431-8239239c2657\\exec-21dc8c12-304f-4508-88d7-14f1d6bae929.png",
+          "alt": "Adult hands arrange three blank paper cards beside a wooden toy train.",
+          "prompt": "Use case: photorealistic-natural\nAsset type: educational lesson hook photograph, landscape 16:9\nPrimary request: a directly overhead photograph of adult hands sorting exactly three blank portrait-format paper rectangles beside a tiny wooden toy train, an editorial organising concept in a modest creative workspace. All rectangles are empty paper with no photos printed.\nStyle/medium: cinematic natural editorial photography, tactile real objects, believable anatomy and subtle everyday wear.\nComposition/framing: full overhead landscape 16:9 still life, clearly separated paper rectangles and small train, hands entering naturally from the lower edge.\nLighting/mood: soft directional window light, gentle shadows, thoughtful and practical.\nColor palette: petrol tabletop, warm neutral paper and natural wood, a restrained celery accent in one paper rectangle.\nConstraints: original standalone photo; adults only; no text, letters, numbers, logos, watermarks, celebrities, branded devices, screenshots, UI, or printed photos. No collage or multiple panels.",
+          "provenance": {
+            "tool": "built-in image_gen.imagegen",
+            "type": "original generation",
+            "requests": 1,
+            "variants": 0,
+            "input_images": 0,
+            "requested_aspect_ratio": "16:9",
+            "transparent_background": false
+          },
+          "qa": "Visually inspected generated output for subject, distinct composition, adult-only people, absence of visible UI and readable text.",
+          "output": {
+            "width": 1672,
+            "height": 941,
+            "format": "png"
+          }
+        },
+        {
+          "id": "edit-02",
+          "slot": "first-edit-1",
+          "role": "hook",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-batch2-assets\\edit-teach\\edit-02.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a116aa-2847-71a3-8431-8239239c2657\\exec-3387e68a-e1aa-40b8-b70e-dbd1a1379def.png",
+          "alt": "A wooden metronome with a blank face sits on a teal worktable.",
+          "prompt": "Use case: photorealistic-natural\nAsset type: educational lesson hook photograph, landscape 16:9\nPrimary request: side macro photograph of one mechanical metronome on a teal worktable in a modest creative workspace, a tactile metaphor for rhythm.\nStyle/medium: cinematic editorial photography, realistically worn wooden metronome with brushed metal pendulum, unbranded with an entirely blank scale face, no markings.\nComposition/framing: low side angle macro, metronome occupying one side of the wide frame; the pendulum slightly off vertical suggests a beat; very shallow depth of field, soft empty workspace background.\nLighting/mood: soft cool window light and a gentle warm edge light, quiet concentrated atmosphere.\nColor palette: petrol and teal table, neutral natural wood and metal, subtle distant celery tone.\nConstraints: original standalone landscape 16:9 photo. No people, no text, letters, numbers, labels, logos, watermark, screens, screenshots, UI, or recognizable branded products. No collage or multiple panels.",
+          "provenance": {
+            "tool": "built-in image_gen.imagegen",
+            "type": "original generation",
+            "requests": 1,
+            "variants": 0,
+            "input_images": 0,
+            "requested_aspect_ratio": "16:9",
+            "transparent_background": false
+          },
+          "qa": "Visually inspected generated output for subject, distinct composition, adult-only people, absence of visible UI and readable text.",
+          "output": {
+            "width": 1672,
+            "height": 941,
+            "format": "png"
+          }
+        },
+        {
+          "id": "edit-03",
+          "slot": "first-edit-2",
+          "role": "hook",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-batch2-assets\\edit-teach\\edit-03.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a116aa-2847-71a3-8431-8239239c2657\\exec-8594874f-203a-43cd-a39d-586b35d53bc6.png",
+          "alt": "Black headphones rest beside a closed silver audio recorder on dark textured fabric.",
+          "prompt": "Use case: photorealistic-natural\nAsset type: educational lesson hook photograph, landscape 16:9\nPrimary request: unbranded over-ear headphones resting on textured dark fabric beside a closed unbranded silver audio recorder with no labels.\nStyle/medium: cinematic natural still-life photography in a modest creative workspace, convincing soft ear cushions and woven cloth texture.\nComposition/framing: intimate three-quarter close view across a low fabric-covered surface, headphones and the closed small silver recorder clearly distinct, loosely curved audio cable, generous breathing room.\nLighting/mood: restrained side lighting that grazes the dark fabric texture, gentle highlights on metal, calm attentive sound-listening mood.\nColor palette: deep petrol-charcoal fabric, neutral black headphones and brushed silver recorder, a small subtle celery fabric edge.\nConstraints: landscape 16:9 original photo; no people, text, labels, numbers, logos, watermarks, branding, readable controls, visible screens, screenshots, or UI. Recorder closed, screen absent or concealed. No collage or multiple panels.",
+          "provenance": {
+            "tool": "built-in image_gen.imagegen",
+            "type": "original generation",
+            "requests": 1,
+            "variants": 0,
+            "input_images": 0,
+            "requested_aspect_ratio": "16:9",
+            "transparent_background": false
+          },
+          "qa": "Visually inspected generated output for subject, distinct composition, adult-only people, absence of visible UI and readable text.",
+          "output": {
+            "width": 1672,
+            "height": 941,
+            "format": "png"
+          }
+        },
+        {
+          "id": "edit-04",
+          "slot": "first-edit-3",
+          "role": "hook",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-batch2-assets\\edit-teach\\edit-04.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a116aa-2847-71a3-8431-8239239c2657\\exec-c193d782-25af-4c83-a6fe-6ee179783adf.png",
+          "alt": "A blank notebook with coloured tabs and neat pencils leaves open space on a wooden desk.",
+          "prompt": "Use case: photorealistic-natural\nAsset type: educational lesson hook photograph, landscape 16:9\nPrimary request: angled open notebook with blank coloured tabs and neat coloured pencils in a modest creative workspace, a physical metaphor for caption clarity, never a UI.\nStyle/medium: cinematic natural editorial photograph, real off-white paper and finely textured desktop.\nComposition/framing: oblique diagonal view of an open blank notebook near one edge, a short orderly parallel row of coloured pencils, large clear negative space across the opposite half. Empty pages and blank tabs.\nLighting/mood: bright soft daylight, clean gentle shadows, inviting clarity.\nColor palette: warm neutral desk and off-white paper, petrol and celery tabs and pencils, restrained overall saturation.\nConstraints: original landscape 16:9 photo. No hands or people, text, letters, numbers, handwriting, logos, watermarks, screens, screenshots, printed photos, or UI. No collage or multiple panels.",
+          "provenance": {
+            "tool": "built-in image_gen.imagegen",
+            "type": "original generation",
+            "requests": 1,
+            "variants": 0,
+            "input_images": 0,
+            "requested_aspect_ratio": "16:9",
+            "transparent_background": false
+          },
+          "qa": "Visually inspected generated output for subject, distinct composition, adult-only people, absence of visible UI and readable text.",
+          "output": {
+            "width": 1672,
+            "height": 941,
+            "format": "png"
+          }
+        },
+        {
+          "id": "edit-05",
+          "slot": "first-edit-4",
+          "role": "hook",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-batch2-assets\\edit-teach\\edit-05.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a116aa-2847-71a3-8431-8239239c2657\\exec-cff5ff1e-ef85-4241-8e28-cb3958378506.png",
+          "alt": "An external drive, coiled cable and plain archive box sit in golden morning light.",
+          "prompt": "Use case: photorealistic-natural\nAsset type: educational lesson hook photograph, landscape 16:9\nPrimary request: golden morning wide desk scene with one unbranded external storage drive, a coiled cable and a plain archive box, in a modest creative workspace.\nStyle/medium: cinematic natural editorial photograph, understated everyday objects, tactile desk grain.\nComposition/framing: wide eye-level view just above the desktop, storage drive foreground, neatly coiled detached cable alongside it, closed plain archive box farther back, generous air around the three objects, no computer.\nLighting/mood: golden morning window light forming broad warm shadows across the desk, sense of completion and safekeeping.\nColor palette: warm neutral wood and kraft cardboard, matte petrol unbranded drive, restrained celery accent from a distant curtain.\nConstraints: original standalone landscape 16:9 photo; no people, screens, text, letters, numbers, labels, logos, watermark, branded devices, screenshots, or UI. Archive box completely blank. No collage or multiple panels.",
+          "provenance": {
+            "tool": "built-in image_gen.imagegen",
+            "type": "original generation",
+            "requests": 1,
+            "variants": 0,
+            "input_images": 0,
+            "requested_aspect_ratio": "16:9",
+            "transparent_background": false
+          },
+          "qa": "Visually inspected generated output for subject, distinct composition, adult-only people, absence of visible UI and readable text.",
+          "output": {
+            "width": 1672,
+            "height": 941,
+            "format": "png"
+          }
+        },
+        {
+          "id": "teach-01",
+          "slot": "need-c05-01-starter-0",
+          "role": "hook",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-batch2-assets\\edit-teach\\teach-01.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a116aa-2847-71a3-8431-8239239c2657\\exec-0e3d5c24-b9d7-4525-906e-2b64aeb6abbb.png",
+          "alt": "An adult educator arranges wooden geometric shapes on a small green table.",
+          "prompt": "Use case: photorealistic-natural\nAsset type: educational lesson hook photograph, landscape 16:9\nPrimary request: adult educator hands arranging neutral geometric classroom blocks on a small table, a camera-ready view in a modest creative teaching workspace, empty background with no learners or records.\nStyle/medium: cinematic natural educational editorial photography, believable adult hands and tactile wood.\nComposition/framing: frontal view slightly above table level as if preparing a filmed demonstration; adult hands extend naturally from sleeves at either side to place a simple cube among a cylinder, sphere and triangular prism, adult torso may be cropped at frame top; clear small table and plain uncluttered backdrop.\nLighting/mood: soft even window light, welcoming focused teaching preparation.\nColor palette: warm neutral pale wood shapes, off-white backdrop, petrol sleeve fabric, one subtle celery tabletop accent.\nConstraints: original standalone landscape 16:9 photograph; only adult hands, no visible faces, no learners, no minors, no records, no paper documents. No text, letters, numbers, labels, logos, watermark, screens, branded devices, screenshots or UI. No collage or multiple panels.",
+          "provenance": {
+            "tool": "built-in image_gen.imagegen",
+            "type": "original generation",
+            "requests": 1,
+            "variants": 0,
+            "input_images": 0,
+            "requested_aspect_ratio": "16:9",
+            "transparent_background": false
+          },
+          "qa": "Visually inspected generated output for subject, distinct composition, adult-only people, absence of visible UI and readable text.",
+          "output": {
+            "width": 1672,
+            "height": 941,
+            "format": "png"
+          }
+        },
+        {
+          "id": "teach-02",
+          "slot": "need-c05-01-starter-1",
+          "role": "hook",
+          "file": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\stage3-batch2-assets\\edit-teach\\teach-02.png",
+          "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a116aa-2847-71a3-8431-8239239c2657\\exec-dd1bd2ba-ee77-49fb-bc31-fb7003601af5.png",
+          "alt": "Adult hands fold blue paper beneath a smartphone on a tabletop stand.",
+          "prompt": "Use case: photorealistic-natural\nAsset type: educational lesson hook photograph, landscape 16:9\nPrimary request: overhead full scene of an unbranded smartphone on a tabletop stand filming adult hands demonstrating folding plain blue paper, an educational tryout in a modest creative workspace.\nStyle/medium: cinematic natural editorial photograph, believable phone stand geometry and adult hands, tactile paper.\nComposition/framing: overhead wide view showing the whole tabletop demonstration setup, two adult hands at the lower edge folding a single sheet of plain blue paper in the center; smartphone held horizontally by a small tabletop arm stand near the upper edge, lens aimed at the paper, its screen away from the viewer or completely black. The phone and stand must be separate from the hands and paper.\nLighting/mood: soft daylight, practical focused atmosphere.\nColor palette: warm neutral table, petrol blue paper, small celery accent on sleeve cuff, black unbranded phone and stand.\nConstraints: original standalone landscape 16:9 photo; adults only, no faces, no learners or records, no text, letters, numbers, labels, logos, watermarks, branded devices, screenshots or visible UI. No readable screen content, no printed markings on paper. No collage or multiple panels.",
+          "provenance": {
+            "tool": "built-in image_gen.imagegen",
+            "type": "original generation",
+            "requests": 1,
+            "variants": 0,
+            "input_images": 0,
+            "requested_aspect_ratio": "16:9",
+            "transparent_background": false
+          },
+          "qa": "Visually inspected generated output for subject, distinct composition, adult-only people, absence of visible UI and readable text.",
+          "output": {
+            "width": 1672,
+            "height": 941,
+            "format": "png"
+          }
+        }
+      ]
+    }
+  ],
+  "review": "All twelve inspected in contact sheets. No identifying learners, visible logos or repeated subjects. Files edit-03 and edit-04 assigned to sound and timing respectively to preserve historical session topics. Generated examples, not evidence of real learner work."
+}
