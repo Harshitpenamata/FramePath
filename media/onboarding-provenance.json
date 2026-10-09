@@ -1,0 +1,150 @@
+{
+  "provider": "OpenAI built-in image_gen",
+  "credit": "AI-generated with OpenAI image_gen for Framepath.",
+  "mode": "generation",
+  "requests": 8,
+  "variants": 0,
+  "retries": 0,
+  "format": "Eight individual two-panel photographic diptychs, right side preferable for each intended distinction.",
+  "inspection": "All eight visually inspected; each intended distinction is usable. No text, brands or people observed.",
+  "unusable": [],
+  "limitations": "Diagnostic visual comparisons, not calibrated physical simulations. Generated paired views may vary in incidental details.",
+  "assets": [
+    {
+      "id": "frame-basic",
+      "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage2-assets/frame-basic.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-14ae496b-67e5-4dba-a39e-3b967a943cd9.png",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original diagnostic teaching photograph, a single wide 2:1 landscape diptych consisting of exactly TWO photographic panels of equal width side by side with a straight clean vertical join. No labels, text, arrows, symbols, graphics, quiz elements, page frame, or UI. Realistic household photography with tactile natural materials, tasteful simple composition. The two views are alternatives to compare, with the RIGHT view clearly preferable for the named lesson. This is a visual illustration, not a calibrated physical simulation. Do not reuse a teal bowl, yellow pears, stone arch, or white ceramic pitcher. No logos, brands, people, or watermarks.\nSubject: a plain red notebook with no writing or printed marks. LEFT PANEL: the notebook is centered but poorly framed, with notebook corners cut off by the photograph edge and distracting household clutter crowding it. RIGHT PANEL: the complete red notebook is visible with comfortable breathing room, on a simple uncluttered neutral table, immediately readable as the main subject. Same notebook design in both panels; framing quality must be an obvious difference.",
+      "dimensions": {
+        "width": 1774,
+        "height": 887,
+        "aspectRatio": "2:1"
+      },
+      "bytes": 2452311,
+      "credit": "AI-generated with OpenAI image_gen for Framepath.",
+      "intendedDistinction": "Complete readable framing versus clutter and cut edges.",
+      "preferredSide": "right",
+      "usable": true,
+      "limitations": "Crop, background and apparent subject size vary together; this illustrates framing judgement rather than isolating one camera parameter."
+    },
+    {
+      "id": "frame-medium",
+      "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage2-assets/frame-medium.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-ba506ca8-b101-4727-bbe9-bd95f7df9fb7.png",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original diagnostic teaching photograph, a single wide 2:1 landscape diptych consisting of exactly TWO photographic panels of equal width side by side with a straight clean vertical join. No labels, text, arrows, symbols, graphics, quiz elements, page frame, or UI. Realistic household photography with tactile natural materials, tasteful simple composition. The two views are alternatives to compare, with the RIGHT view clearly preferable for the named lesson. This is a visual illustration, not a calibrated physical simulation. Do not reuse a teal bowl, yellow pears, stone arch, or white ceramic pitcher. No logos, brands, people, or watermarks.\nSubject: a tiny handmade white paper boat on a deep blue cloth, with its pointed bow aiming right. LEFT PANEL: too-tight crop, boat squeezed against the right photograph edge with almost no space ahead of its bow, cramped feeling. RIGHT PANEL: the same paper boat in a wider view, placed left of center with generous empty blue-cloth space toward its right-pointing bow. Keep soft daylight consistent and show the full boat on the right. No writing on the paper.",
+      "dimensions": {
+        "width": 1774,
+        "height": 887,
+        "aspectRatio": "2:1"
+      },
+      "bytes": 2139905,
+      "credit": "AI-generated with OpenAI image_gen for Framepath.",
+      "intendedDistinction": "Directional breathing room versus a cramped crop.",
+      "preferredSide": "right",
+      "usable": true,
+      "limitations": "Boat size and crop change along with directional space; paper-boat direction can be read from its right-pointing tip, not from motion."
+    },
+    {
+      "id": "frame-advanced",
+      "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage2-assets/frame-advanced.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-e77570f7-6894-4e41-becf-eb6e723a36bd.png",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original diagnostic teaching photograph, a single wide 2:1 landscape diptych consisting of exactly TWO photographic panels of equal width side by side with a straight clean vertical join. No labels, text, arrows, symbols, graphics, quiz elements, page frame, or UI. Realistic household photography with tactile natural materials, tasteful simple composition. The two views are alternatives to compare, with the RIGHT view clearly preferable for the named lesson. This is a visual illustration, not a calibrated physical simulation. Do not reuse a teal bowl, yellow pears, stone arch, or white ceramic pitcher. No logos, brands, people, or watermarks.\nSubjects: exactly two unbranded objects, a small matte charcoal cylindrical pencil cup in the foreground and a plain cream cylindrical tin in the background. LEFT PANEL: foreground pencil cup is overwhelmed by a glaring bright rectangular patch of daylight across the background tin and back wall; the background dominates attention. RIGHT PANEL: the same two objects arranged with the foreground cup clearly dominant in scale and readable light; the cream tin is farther back, smaller and subdued, with controlled gentle background brightness. Two photographic views, realistic still-life, no markings.",
+      "dimensions": {
+        "width": 1774,
+        "height": 887,
+        "aspectRatio": "2:1"
+      },
+      "bytes": 1801461,
+      "credit": "AI-generated with OpenAI image_gen for Framepath.",
+      "intendedDistinction": "Controlled visual hierarchy versus a dominant bright background.",
+      "preferredSide": "right",
+      "usable": true,
+      "limitations": "Subject scale, arrangement and illumination vary together. The pencil cup contains pencils; the two main tabletop subjects are the cup and tin."
+    },
+    {
+      "id": "light-basic",
+      "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage2-assets/light-basic.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-024eb9ad-9966-4e3d-a68d-d61bd1185495.png",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original diagnostic teaching photograph, a single wide 2:1 landscape diptych consisting of exactly TWO photographic panels of equal width side by side with a straight clean vertical join. No labels, text, arrows, symbols, graphics, quiz elements, page frame, or UI. Realistic household photography with tactile natural materials, tasteful simple composition. The two views are alternatives to compare, with the RIGHT view clearly preferable for the named lesson. This is a visual illustration, not a calibrated physical simulation. Do not reuse a teal bowl, yellow pears, stone arch, or white ceramic pitcher. No logos, brands, people, or watermarks.\nSubject: an unbranded carved wooden spoon resting diagonally on a simple dark neutral tabletop. LEFT PANEL: the spoon is severely underexposed, very dark and barely readable, so its wood grain is difficult to see. RIGHT PANEL: the same spoon and camera angle under gentle side window light, correctly exposed with clear readable wood grain and softly shaped shadows. Do not add a hand, food, or extra props. Make the difference obvious but naturalistic.",
+      "dimensions": {
+        "width": 1774,
+        "height": 887,
+        "aspectRatio": "2:1"
+      },
+      "bytes": 2117787,
+      "credit": "AI-generated with OpenAI image_gen for Framepath.",
+      "intendedDistinction": "Readable wooden texture versus severe underexposure.",
+      "preferredSide": "right",
+      "usable": true,
+      "limitations": "An illustrative exposure and light-direction contrast, not a measured stop difference or recoverable RAW exposure pair."
+    },
+    {
+      "id": "light-medium",
+      "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage2-assets/light-medium.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-d2781fef-b984-46d0-873d-875256a01a3f.png",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original diagnostic teaching photograph, a single wide 2:1 landscape diptych consisting of exactly TWO photographic panels of equal width side by side with a straight clean vertical join. No labels, text, arrows, symbols, graphics, quiz elements, page frame, or UI. Realistic household photography with tactile natural materials, tasteful simple composition. The two views are alternatives to compare, with the RIGHT view clearly preferable for the named lesson. This is a visual illustration, not a calibrated physical simulation. Do not reuse a teal bowl, yellow pears, stone arch, or white ceramic pitcher. No logos, brands, people, or watermarks.\nSubject: a neatly folded piece of white linen on a neutral table, its folds and weave intended as the subject. LEFT PANEL: badly overexposed photograph with a broad white fabric area rendered featureless pure white; blown highlights conceal the folds and weave. RIGHT PANEL: the same folded linen and camera angle with controlled exposure, showing distinct weave and soft folded texture throughout the bright fabric while keeping it visibly white. Clear, realistic side-by-side exposure difference.",
+      "dimensions": {
+        "width": 1774,
+        "height": 887,
+        "aspectRatio": "2:1"
+      },
+      "bytes": 1793910,
+      "credit": "AI-generated with OpenAI image_gen for Framepath.",
+      "intendedDistinction": "Retained highlight texture versus clipped fabric highlights.",
+      "preferredSide": "right",
+      "usable": true,
+      "limitations": "Visible highlight detail is illustrative; no claim is made about sensor clipping, RAW recovery or a measured exposure offset."
+    },
+    {
+      "id": "light-advanced",
+      "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage2-assets/light-advanced.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-1ae6a2f7-a504-4a1f-a340-2d46bab95202.png",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original diagnostic teaching photograph, a single wide 2:1 landscape diptych consisting of exactly TWO photographic panels of equal width side by side with a straight clean vertical join. No labels, text, arrows, symbols, graphics, quiz elements, page frame, or UI. Realistic household photography with tactile natural materials, tasteful simple composition. The two views are alternatives to compare, with the RIGHT view clearly preferable for the named lesson. This is a visual illustration, not a calibrated physical simulation. Do not reuse a teal bowl, yellow pears, stone arch, or white ceramic pitcher. No logos, brands, people, or watermarks.\nSubject: one small empty clear glass tumbler on an otherwise neutral white tabletop against a white backdrop, photographed in two lighting arrangements. LEFT PANEL: mixed cool-blue light from one side and warm amber light from the opposite side, producing visibly inconsistent blue and orange casts across the white background, tabletop, and glass reflections. RIGHT PANEL: the same glass tumbler under coherent balanced neutral daylight; white background and tabletop appear neutral with realistic gentle grey shadows and transparent glass. Clear paired still-life photographs, not swatches.",
+      "dimensions": {
+        "width": 1774,
+        "height": 887,
+        "aspectRatio": "2:1"
+      },
+      "bytes": 1665734,
+      "credit": "AI-generated with OpenAI image_gen for Framepath.",
+      "intendedDistinction": "Coherent neutral illumination versus conflicting colour casts.",
+      "preferredSide": "right",
+      "usable": true,
+      "limitations": "Mixed colour casts are deliberately pronounced. No measured Kelvin values or physically calibrated light sources are represented."
+    },
+    {
+      "id": "story-medium",
+      "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage2-assets/story-medium.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-2d567314-01f3-4bd6-b488-9451778cc225.png",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original diagnostic teaching photograph, a single wide 2:1 landscape diptych consisting of exactly TWO photographic panels of equal width side by side with a straight clean vertical join. No labels, text, arrows, symbols, graphics, quiz elements, page frame, or UI. Realistic household photography with tactile natural materials, tasteful simple composition. The two views are alternatives to compare, with the RIGHT view clearly preferable for the named lesson. This is a visual illustration, not a calibrated physical simulation. Do not reuse a teal bowl, yellow pears, stone arch, or white ceramic pitcher. No logos, brands, people, or watermarks.\nA pair of realistic photographs associated with a harmless repaired cardboard storage box in a domestic room. LEFT PANEL: a beautiful close-up of fresh green houseplant leaves near a window, an attractive image that gives no evidence of any cardboard repair; no cardboard box visible. RIGHT PANEL: a clear close-up of a plain brown cardboard box with a torn seam successfully repaired by several strips of matte paper repair tape crossing and connecting the damaged seam. The visibly torn cardboard seam remains discernible between tape strips, so the tape's repair function is immediately evident. No writing, parcel labels, addresses, shipping brands, tools, or people.",
+      "dimensions": {
+        "width": 1774,
+        "height": 887,
+        "aspectRatio": "2:1"
+      },
+      "bytes": 2182683,
+      "credit": "AI-generated with OpenAI image_gen for Framepath.",
+      "intendedDistinction": "Visible evidence of a repair versus an attractive unrelated detail.",
+      "preferredSide": "right",
+      "usable": true,
+      "limitations": "Tape visibly spans a damaged seam; the image demonstrates evidence of repair but does not establish repair strength or completeness."
+    },
+    {
+      "id": "focus-medium",
+      "path": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/stage2-assets/focus-medium.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-7d421674-45ef-4624-ba5d-ea32e1a9767e.png",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original diagnostic teaching photograph, a single wide 2:1 landscape diptych consisting of exactly TWO photographic panels of equal width side by side with a straight clean vertical join. No labels, text, arrows, symbols, graphics, quiz elements, page frame, or UI. Realistic household photography with tactile natural materials, tasteful simple composition. The two views are alternatives to compare, with the RIGHT view clearly preferable for the named lesson. This is a visual illustration, not a calibrated physical simulation. Do not reuse a teal bowl, yellow pears, stone arch, or white ceramic pitcher. No logos, brands, people, or watermarks.\nSubject: a small unglazed terracotta bud vase with no flowers, on a simple table in a domestic room. LEFT PANEL: the vase is noticeably but moderately out of focus while a busy stack of blank books and shelf objects in the background is sharply focused and distracting. RIGHT PANEL: the same terracotta vase and similar camera view, its rim and clay texture crisply focused while the background books and shelf are softly blurred, clearly separating the vase. Background books have no text or branding. Maintain matching natural daylight across both panels.",
+      "dimensions": {
+        "width": 1774,
+        "height": 887,
+        "aspectRatio": "2:1"
+      },
+      "bytes": 1814459,
+      "credit": "AI-generated with OpenAI image_gen for Framepath.",
+      "intendedDistinction": "A sharp subject with separated background versus misplaced focus.",
+      "preferredSide": "right",
+      "usable": true,
+      "limitations": "The visual focus distinction is clear, but this is not an optical simulation and does not imply a measured aperture, focus distance or depth of field."
+    }
+  ]
+}

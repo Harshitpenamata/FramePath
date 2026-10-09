@@ -8,10 +8,16 @@
   "scripts": {
     "install:ci": "node scripts/install-ci.mjs",
     "dev": "node scripts/run-framework.mjs dev",
-    "build": "node scripts/run-framework.mjs build",
+    "build": "node scripts/validate-media.mjs && node scripts/run-framework.mjs build && node scripts/check-performance.mjs",
     "start": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
+    "check:media": "node scripts/validate-media.mjs",
+    "check:foundation": "node scripts/validate-media.mjs --foundation",
+    "test:foundation": "node --test tests/foundation.test.mjs",
+    "check:performance": "node scripts/check-performance.mjs",
+    "check:lessons": "node scripts/validate-media.mjs --lessons",
+    "test:lessons": "node --test tests/lessons.test.mjs",
     "deploy:staging": "node scripts/deploy.mjs staging",
     "deploy:production": "node scripts/deploy.mjs production",
     "db:migrate:local": "node scripts/migrate.mjs local",
@@ -19,6 +25,7 @@
     "db:migrate:production": "node scripts/migrate.mjs production"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.132.1",
     "@base-ui/react": "^1.7.0",
     "@hookform/resolvers": "^5.7.1",
     "@shadcn/react": "^0.3.0",
@@ -53,6 +60,7 @@
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.2",
     "@vitejs/plugin-rsc": "0.5.26",
+    "ajv": "8.20.0",
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
     "eslint-config-next": "16.3.4",

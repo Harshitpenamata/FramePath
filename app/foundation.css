@@ -1,0 +1,6 @@
+/* Shared foundation. Existing learning layouts inherit these tokens. */
+:root { color-scheme: dark; --fp-space: clamp(20px, 4vw, 56px); --fp-reading: 64ch; }
+html { font-family: 'Segoe UI', Arial, sans-serif; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--background); }
+button, input, textarea, select { font: inherit; }
+::selection { background: var(--primary); color: var(--primary-foreground); }

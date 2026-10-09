@@ -1,0 +1,404 @@
+{
+  "assets": [
+    {
+      "id": "A01",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A01-pressed-leaf-keepsake.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-52de5056-0c1a-4ec7-9710-d877afb2807e.png",
+      "prompt": "Use case: photorealistic-natural. Asset A01: original editorial educational photograph for Framepath. Landscape 3:2 single standalone photograph. Close view of realistic Indian adult hands carefully preserving a pressed leaf and a small unmarked keepsake in an open completely blank cream album on a quiet tabletop. Natural paper and leaf textures, thoughtful archival gesture, subtle shallow depth of field. Calm cinematic deep petrol shadows and warm natural window light. No children, no text, no letters, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no collage. Photo realism and anatomically believable hands.",
+      "alt": "Adult hands arrange a pressed leaf and a stone keepsake in a blank album.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: pressed leaf and stone keepsake in blank album; plausible adult hands; no visible text or branding.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A02",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A02-cracked-ceramic-record.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-e193e718-f1eb-4277-ac48-0d19db756c34.png",
+      "prompt": "Use case: photorealistic-natural. Original editorial educational photograph for Framepath. Landscape 3:2, one clean standalone realistic photograph, calm cinematic deep petrol shadows with warm natural light. No children, no text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no watermark. Asset A02. A cracked plain cream ceramic bowl on a neutral matte table beside a simple blank paper strip serving as a scale reference. Carefully observed factual object record: clearly visible thin crack, bowl otherwise intact, harmless quiet still life, no dispute, no drama. Close three-quarter view, honest ceramic texture and soft side lighting.",
+      "alt": "Cracked cream ceramic bowl beside a blank paper scale reference on a table.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: crack clearly visible; blank paper reference and neutral tabletop; no visible text or branding.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A03",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A03-kraft-envelope-stages.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-a8f620bc-8d2e-4392-8673-7ce3ffec99e7.png",
+      "prompt": "Use case: photorealistic-natural. Original editorial educational photograph for Framepath. Landscape 3:2, one clean standalone realistic photograph, calm cinematic deep petrol shadows with warm natural light. No children, no text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no watermark. Asset A03. Realistic Indian adult hands folding a plain kraft paper envelope on a deep petrol work surface. Three separate pieces of kraft paper lie in a clear left-to-right sequence on the SAME tabletop, showing three distinct folding stages: flat with initial folds, sides folded inward, and nearly finished plain envelope being folded by the hands. Overhead-oblique close photo, coherent physical staging, no diagrams or panels. The instructional gesture and folds must be immediately legible.",
+      "alt": "Adult hands fold a kraft envelope beside two earlier folding stages.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: three distinct envelope stages on one surface, with credible folding hands; no visible text or branding.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A04",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A04-wooden-ball-movement.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-20224e42-a2e7-44f8-8b00-61050421c9a0.png",
+      "prompt": "Use case: photorealistic-natural. Original editorial educational photograph for Framepath. Landscape 3:2, one clean standalone realistic photograph, calm cinematic deep petrol shadows with warm natural light. No children, no text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no watermark. Asset A04. A plain wooden ball rolling along a straight narrow tabletop guide with subtle natural motion blur on the moving ball. A small unbranded phone mounted securely on a simple tripod is positioned beside the tabletop and turned with its back toward the camera so no screen is visible. A second matching wooden ball resting nearby provides a movement comparison. Modest Indian home study setting, close low camera angle, soft depth of field, clear physical experiment setup.",
+      "alt": "Wooden ball rolls along a tabletop guide beside a tripod-mounted phone and a resting comparison ball.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: rolling ball with motion blur, static comparison ball, tabletop guide, and unbranded phone facing away; no readable text.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A05",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A05-midnight-blue-community-hall.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-b393c0ab-1ade-4d38-a2a4-4eb1df5c717b.png",
+      "prompt": "Use case: photorealistic-natural. Original editorial educational photograph for Framepath. Landscape 3:2, one clean standalone realistic photograph, calm cinematic deep petrol shadows with warm natural light. No children, no text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no watermark. Asset A05. An empty small Indian community event hall with rows of simple vacant chairs, a wide clear central aisle leading to a small plain stage, and MIDNIGHT BLUE fabric curtains. One fictional adult Indian camera operator stands quietly at the far side with a simple unbranded tripod camera, leaving the aisle completely unobstructed. No audience. Wide architectural documentary view from the back of this modest room, warm daylight from high side windows. Blue curtains, not ochre.",
+      "alt": "Small empty community hall with midnight blue curtains, clear aisle, and one adult camera operator at the side.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: midnight blue curtains, vacant seating, clear central aisle, and single adult operator to the side; no visible signage.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A06",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A06-calm-library-interview.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-5820f1d9-9b8e-40b9-896a-e4de1a438f86.png",
+      "prompt": "Use case: photorealistic-natural. Original editorial educational photograph for Framepath. Landscape 3:2, one clean standalone realistic photograph, calm cinematic deep petrol shadows with warm natural light. No children, no text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no watermark. Asset A06. Two fictional consenting Indian adults, a woman and a man in everyday modest clothes, seated comfortably at a small wooden table for a relaxed interview in a quiet library. Candid eye-level medium-wide view of both adults engaged in friendly attentive conversation. A small plain unbranded audio recorder rests on the table with display and controls turned away from the camera. Background books have entirely plain unlettered spines, softly out of focus. Warm window light, private but ordinary and calm.",
+      "alt": "Two adults have a calm recorded conversation at a library table.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: two plausible fictional adults in a calm library, plain-spined books, small unbranded recorder; no readable text. Recorder top controls are subtly visible, without a visible display.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A07",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A07-door-shadow-teal-room.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-b93edb63-30d5-4c18-9ebf-68daf0311707.png",
+      "prompt": "Use case: photorealistic-natural. Original editorial educational photograph for Framepath. Landscape 3:2, one clean standalone realistic photograph, calm cinematic deep petrol shadows with warm natural light. No children, no text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no watermark. Asset A07. An artistic visual story told through the shadow of an opening door crossing an empty teal room. No people at all, no furniture. A partially open plain wooden door lets in warm late-afternoon sunlight that throws a long sharply readable diagonal door shadow across a matte floor and textured teal plaster wall. Spacious quiet composition, tactile architectural details, restrained cinematic atmosphere, no surrealism.",
+      "alt": "Warm light from a partly open door casts a long shadow across an empty teal room.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: empty teal room, open wooden door, warm diagonal light and shadow; no people or identifying detail.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A08",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A08-peaceful-courtyard.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-591893d9-f9a1-42f6-b80f-78b2229cbc89.png",
+      "prompt": "Use case: photorealistic-natural. Original editorial educational photograph for Framepath. Landscape 3:2, one clean standalone realistic photograph, calm cinematic deep petrol shadows with warm natural light. No children, no text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no watermark. Asset A08. A peaceful modest Indian courtyard with an inviting curving stone path and carefully tended green plants in plain earthen pots and planted borders. Warm late-afternoon sunlight grazes textured plaster walls and leaves; the shaded foreground has deep petrol tones. No people anywhere, no address, no signs, no vehicles. Eye-level wide architectural landscape photograph, grounded ordinary place, quiet and accessible atmosphere.",
+      "alt": "Quiet plant-filled courtyard with a stone path and warm afternoon light.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: peaceful courtyard with legible path, plants, and no people, addresses, or signs.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A09",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A09-herb-repotting.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-f22455e5-c022-4f4b-9373-a6889f168fab.png",
+      "prompt": "Use case: photorealistic-natural. Original editorial educational photograph for Framepath. Landscape 3:2, one clean standalone realistic photograph, calm cinematic deep petrol shadows with warm natural light. No children, no text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no watermark. Asset A09. Close view of realistic Indian adult hands demonstrating how to repot a small leafy herb into a plain terracotta pot on a clean balcony worktable. One hand gently supports the root ball over the new pot while the other steadies the rim; a small unmarked trowel and a little loose soil on a plain tray make the step clear. Calm natural creator-instruction photograph, simple safe horticulture setup, softly blurred balcony plants, no face required, anatomically believable hands.",
+      "alt": "Adult hands place a herb root ball into a terracotta pot on a clean balcony.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: herb root ball and repotting gesture clear, plausible adult hands, clean balcony setup; no branding or text.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A10",
+      "file": "C:/Users/Venky/Documents/Codex/2026-10-01/okay-let-start-fresh-again-this/work/pilot-consolidation/assets-a/A10-handmade-cloth-bag.png",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170b-c960-7750-96e6-98caa58e42b8\\exec-e1818b15-ea1d-40cd-b1b1-52c5baf53158.png",
+      "prompt": "Use case: photorealistic-natural. Original editorial educational photograph for Framepath. Landscape 3:2, one clean standalone realistic photograph, calm cinematic deep petrol shadows with warm natural light. No children, no text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no interface chrome, no watermark. Asset A10. A plain handmade natural-colour cloth tote bag in soft shop window light, shown close enough to see woven fabric and neat stitching. Exactly one realistic Indian adult hand gently lifts the bag's seam to show the handmade stitching. Deep petrol shadowed background, warm gentle daylight on natural undyed fabric, no signs, tags, labels, graphics, or branding. Restrained editorial craft product photograph, tactile and honest.",
+      "alt": "One adult hand shows the stitching on a plain handmade cloth tote bag.",
+      "provenance": {
+        "provider": "OpenAI built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "mode": "generate",
+        "generationCalls": 1,
+        "variants": 0,
+        "retries": 0,
+        "model": "Not exposed by built-in tool",
+        "generatedAt": "2026-10-07"
+      },
+      "inspection": "Pass: single plausible adult hand shows seam stitching on plain woven tote; no labels, signs, or branding.",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": "3:2"
+    },
+    {
+      "id": "A11",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: An adult Indian person's hands demonstrate a simple white folded-paper bridge resting across two small plain wooden supports on a tidy wooden desk. One hand gently points to the bridge span while the other rests nearby. Close three-quarter view at desk height, warm window light, a quiet uncluttered studio background in deep petrol shadow. The bridge is clearly the educational focus. No screens or electronic devices visible.",
+      "alt": "Adult hands demonstrating a folded-paper bridge between two wooden supports.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-5844fe48-cd03-42b0-95a4-83545971ede0.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A11-paper-bridge.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable. Clear paper bridge and adult hands, no screens, text or logos; warm natural light and deep blue/petrol background."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1932695,
+      "sha256": "BD5F30D6B823415443A59DEF33B59AC765D1BFBFB12BAC923D1C9D8F05AF2181"
+    },
+    {
+      "id": "A12",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: Close editorial photograph of an adult Indian person's hand using an unbranded laptop trackpad. Camera is positioned behind and slightly to the side of the open display, showing its plain back, hand and trackpad from a physically plausible oblique angle; the screen face and its contents are completely hidden. Warm desk lamp beside the laptop, quiet evening workspace, deep petrol shadows and warm natural light. The hand is the focal point. No visible screen.",
+      "alt": "Adult hand using a laptop trackpad beside a warm desk lamp, with the screen hidden.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-db1ec890-1d01-4599-9f4d-775f7802c495.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A12-trackpad.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable as an editorial card image with a caveat: screen contents are entirely hidden and the hand/trackpad is clear, but the oblique laptop keyboard/trackpad geometry is unconventional. Avoid using as a technical hardware diagram."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1748967,
+      "sha256": "EB044AFB59E308C498225CB8ACEBCF6DB21720C7F0BE0433B80F8F6A732A100B"
+    },
+    {
+      "id": "A13",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: A small well-organized home broadcast setup seen from the side: an unbranded microphone on a modest stable desk stand, an unbranded camera on a compact stable tripod, and neatly secured cables along the desk edge. Quiet Indian home studio with neutral wall and deep petrol shadows. Warm natural window light. All camera displays face away; no readable UI or screens. Thoughtful close medium composition showing how the equipment connects, with no people necessary.",
+      "alt": "Side view of a tidy home broadcast setup with microphone, camera and secured cables.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-feda988c-3a3a-441c-85a9-b6cdeab2a051.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A13-broadcast-setup.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable. Clear microphone, camera and secured cables with no readable UI or brand. Blank rear camera display is visible. Small indistinct background framed image does not depict recognizable copyrighted artwork."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1844887,
+      "sha256": "FFEB0FDF8A7C88270D1769CCDE338DC701801E5D5B5586667C4DD226C30F2029"
+    },
+    {
+      "id": "A14",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: An adult Indian person's hand holds a small open field notebook whose pages are entirely blank, overlooking a quiet public plaza in India. Notebook and hand in foreground, softly focused sunlit stone paving and simple public architecture beyond. No recognizable people, crowds, signs, statues or artwork. Warm morning natural light with deep petrol shadows. Calm observational editorial composition, grounded everyday scale.",
+      "alt": "Adult hand holding a blank field notebook overlooking an empty public plaza.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-5c8d62da-d338-4e36-b043-459e071fc1c3.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A14-field-notebook.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable. Blank notebook and adult hand are prominent; empty plaza contains no recognizable people or signs."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2277256,
+      "sha256": "2DD7173866A0410ED1355E3780827F5460B3AAD71BE9CE0713689C836B855128"
+    },
+    {
+      "id": "A15",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: A quiet tabletop observation experiment: several clear water droplets beading on a fresh green leaf, placed beside a simple unbranded ruler with small tick marks only and absolutely no numerals or letters. Close macro editorial photograph on a plain dark petrol tabletop, warm natural sidelight making the droplets visible. Fresh leaf texture and crisp droplet surface tension are the focus. No medicine, chemicals, syringes, laboratory branding or bottles.",
+      "alt": "Water droplets on a leaf beside an unnumbered ruler on a dark tabletop.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-210d2e5a-d594-42e5-a6bb-f85f8aacb897.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A15-leaf-observation.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable. Droplets and leaf texture are clear. Ruler has ticks with no numerals or words; no medicine or chemicals."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2419717,
+      "sha256": "79A8A93FCD4F63343EBF025BAF271974A38EC18626090E19F53E0AE27C497323"
+    },
+    {
+      "id": "A16",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: A clean small archive on a shelf or worktable: neutral unbranded portable storage drives and plain paper folders with entirely blank labels. An adult Indian person's hand carefully places one plain drive into a simple organizing tray, conveying orderly cataloguing. Close three-quarter editorial photograph, deep petrol shadows and warm natural window light, tactile folders and matte drives. No words, numbers, visible data, connector brand marks or identifying records.",
+      "alt": "Adult hand organizing blank-labelled storage drives beside plain archive folders.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-0282116a-248c-4059-b917-73a9cef590a8.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A16-storage-archive.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable. Blank folder labels and plain drives; adult hand cataloguing. Small soft-focus background landscape frame contains no identifiable artwork."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2282838,
+      "sha256": "0105671873B68D2EA438C510156B3C3F13C5832B867BDD62ACB759DCED21FB75"
+    },
+    {
+      "id": "A17",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: An unbranded small consumer drone is grounded on a wooden table outdoors beside a folded blank map. The drone's propellers are fully stationary and clearly resting, no motion blur and no flight. The map is plain light paper with fold creases and no printing. Quiet open outdoor location in India with softly blurred vegetation, no people or crowds. Calm warm natural morning light and deep petrol shadows, close three-quarter editorial equipment photograph.",
+      "alt": "A stationary small drone on an outdoor table beside a folded blank map.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-00428b05-6c78-48e0-8584-38609e342358.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A17-grounded-drone.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable. Grounded unbranded drone with visibly stationary propellers and blank folded map; no people or flight."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2357975,
+      "sha256": "A3A2ADD609B275A15B6E5CF58329A47CFF2DE84A657A01BF109E149632CA0B05"
+    },
+    {
+      "id": "A18",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: A generic unbranded small spherical 360-degree camera securely mounted on a stable three-legged tripod, standing in an empty geometric gallery. Simple architectural volumes, plain walls and a clean floor, no paintings, artworks, visitors, signs or text. Warm natural light enters from one side, deep petrol shadows, calm cinematic architectural editorial photograph. Make the spherical camera and stable tripod recognizable and physically plausible.",
+      "alt": "A spherical 360-degree camera on a tripod in an empty geometric gallery.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-8554a8a9-2fcc-41a4-a23e-cb683f5344b5.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A18-360-gallery.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable. Generic spherical camera on a stable tripod in an empty architectural gallery; no artwork, people or text."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1818403,
+      "sha256": "ED9C4A1A994504EF502D92965299A610CDE3B999C63EF634A19E1422A7716F16"
+    },
+    {
+      "id": "A19",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: A practical tabletop stop-motion workspace made only from plain colored paper circles, triangles and rectangles, arranged in several successive positions suggesting movement across the surface. A real overhead camera rig is softly out of focus near the upper edge, pointing downward at the set. Oblique tabletop editorial photograph, warm natural light and deep petrol shadows. Simple coral, ochre, cream and muted blue paper. No characters, faces, text, arrows, motion graphics or interface. The visible shapes are separate physical paper pieces in one coherent scene.",
+      "alt": "Colored paper shapes arranged across a stop-motion set beneath a blurred overhead camera.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-9427f2c2-68c3-4383-a2d9-056a140e27bb.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A19-stop-motion.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable. Physical colored paper shapes in sequential positions with overhead camera out of focus. Some circle-and-triangle arrangements loosely suggest a figure, but no faces, named characters or copyrighted characters appear."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2110558,
+      "sha256": "D340B63CBB13A64A42DDD884C1F124B3C9ED543672C92BEE58043D5D820A7FFD"
+    },
+    {
+      "id": "A20",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: original standalone editorial photograph for an educational website catalogue.\nStyle/medium: realistic editorial photography, landscape 3:2 aspect ratio, calm cinematic color grade with deep petrol shadows and warm natural light. Real textures, plausible equipment and anatomically correct adult hands where present. Clean composition with no interface chrome.\nConstraints: no children, no visible text, letters or numerals, no logos, no branded devices, no copyrighted artwork, no real identifying records, no watermark. One coherent photograph, no collage, no graphic overlays.\nPrimary request: An adult Indian person's two hands prepare a high-contrast visual communication board from plain geometric shapes. A dark matte board on a tidy worktable holds large white and warm yellow circles, squares and triangles; one hand carefully places a shape while the other steadies the board. Functional tactile educational materials, no icons or pictograms, no words or numerals, no simulated sign language. Warm natural window light and deep petrol shadows, close overhead-oblique editorial photograph.",
+      "alt": "Adult hands arranging high-contrast geometric shapes on a visual communication board.",
+      "provenance": "Original AI-generated image using the built-in image_gen tool; no reference images; one generation per asset.",
+      "sourcePath": "C:\\Users\\Venky\\.codex\\generated_images\\01a1170c-050b-76f1-b4d4-50057bc195b5\\exec-57fc93f8-587e-4027-8e39-f6cb820dddad.png",
+      "savedPath": "C:\\Users\\Venky\\Documents\\Codex\\2026-10-01\\okay-let-start-fresh-again-this\\work\\pilot-consolidation\\assets-b\\A20-visual-communication.png",
+      "generationMode": "built-in image_gen",
+      "generationCount": 1,
+      "referenceImages": [],
+      "inspection": {
+        "visuallyInspected": true,
+        "suitability": "Suitable. Two adult hands arranging plain high-contrast geometric shapes; no words, pictograms or simulated sign language."
+      },
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2250314,
+      "sha256": "1CD9F70DBFC8103EF39442AE3B3F7F1CDEE238A4AC8919397278D7E52DA6ABEF"
+    }
+  ]
+}

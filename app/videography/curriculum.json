@@ -1,0 +1,1029 @@
+[
+ {
+  "id": "B01",
+  "level": "beginner",
+  "stage": "concepts",
+  "stageLabel": "Ideas",
+  "title": "How videos tell a story",
+  "hours": 8,
+  "outcome": "Learn how a few pictures in the right order can tell a simple story.",
+  "topics": [
+   "The steps of making a video",
+   "Shots, scenes and sequences",
+   "Who will watch your video",
+   "How pictures and sound work together"
+  ],
+  "assignment": "Watch two short videos and note how they tell their story. Then put six photos or clips in order to show an activity. Add two lines about what you want people to understand.",
+  "evidence": "Someone can watch your sequence and say what happens.",
+  "handIn": "media",
+  "checks": [
+   "Someone can tell what happens from your pictures",
+   "You explain what you wanted to show and why",
+   "You noted how two videos tell their story"
+  ]
+ },
+ {
+  "id": "B02",
+  "level": "beginner",
+  "stage": "preproduction",
+  "stageLabel": "Planning",
+  "title": "Turn an idea into a simple plan",
+  "hours": 4,
+  "outcome": "Turn an idea into a short plan you can film.",
+  "topics": [
+   "Pick one main message",
+   "Know who will watch",
+   "A clear start, middle and end",
+   "Main shots and extra shots",
+   "Simple scripts and interview questions"
+  ],
+  "assignment": "Write a one-page plan for your activity video. Include the topic, your main message, how long it is, the shots you need and anything people will say.",
+  "evidence": "Your plan says what people will see and learn, not just the topic.",
+  "handIn": "text",
+  "checks": [
+   "Your plan has a topic, one message and a viewer",
+   "It says what people will see, not just the topic",
+   "The length and shots are easy to film"
+  ]
+ },
+ {
+  "id": "B03",
+  "level": "beginner",
+  "stage": "preproduction",
+  "stageLabel": "Planning",
+  "title": "Get ready for a shoot",
+  "hours": 4,
+  "outcome": "Plan a small shoot with a shot list and a checklist.",
+  "topics": [
+   "Shot lists",
+   "Quick sketches of shots",
+   "Checking light and noise where you film",
+   "Asking people before you film them",
+   "Charging batteries and freeing space",
+   "Backing up your files"
+  ],
+  "assignment": "Make a list of 6 to 10 shots, a gear checklist and a simple schedule. Ask permission from anyone you will film. Record a short test, copy it to your computer and check it plays.",
+  "evidence": "You are ready, you have permission and your test file is safely backed up.",
+  "handIn": "text",
+  "checks": [
+   "You have a 6 to 10 shot list, a gear list and a schedule",
+   "People and places in your shoot have given permission",
+   "Your test clip is copied and checked"
+  ]
+ },
+ {
+  "id": "B04",
+  "level": "beginner",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Use your camera well",
+  "hours": 6,
+  "outcome": "Film a steady shot that is sharp and not too bright or too dark.",
+  "topics": [
+   "Holding the camera steady",
+   "Recording and playing back",
+   "Brightness: aperture, shutter speed and ISO",
+   "Focus",
+   "Picture size and frame rate"
+  ],
+  "assignment": "Film something indoors, outdoors and something moving. Watch each clip. Fix one problem and film it again. Share both versions.",
+  "evidence": "You can spot a blurry, shaky or badly lit shot and fix it.",
+  "handIn": "media",
+  "checks": [
+   "Your subject is sharp",
+   "The shot is steady and not too bright or dark",
+   "You found a problem and fixed it in a new take"
+  ]
+ },
+ {
+  "id": "B05",
+  "level": "beginner",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Frame your shots and film a sequence",
+  "hours": 5,
+  "outcome": "Film a short activity with different shots that fit together.",
+  "topics": [
+   "Wide, medium and close-up shots",
+   "Where to place your subject",
+   "Space above heads and in front of faces",
+   "Keeping backgrounds clean",
+   "Extra shots for editing"
+  ],
+  "assignment": "Film an activity in 5 to 8 shots. Include one wide shot, the action, and one close-up detail. Share your clips and shot list.",
+  "evidence": "People can follow the activity and nothing important is missing.",
+  "handIn": "media",
+  "checks": [
+   "You have a wide shot, the action and a close-up",
+   "People can follow the activity from your 5 to 8 shots",
+   "Framing and shaking don’t distract"
+  ]
+ },
+ {
+  "id": "B06",
+  "level": "beginner",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Work with the light you have",
+  "hours": 4,
+  "outcome": "Make your subject look better by moving them or the light.",
+  "topics": [
+   "Where light comes from",
+   "Hard and soft light",
+   "Window light and shade",
+   "Light from behind",
+   "Bouncing light with white card"
+  ],
+  "assignment": "Film a shot where the light looks bad. Then move the subject, the camera or the light to fix it. Share the before and after.",
+  "evidence": "The after shot looks clearly better and you can say why.",
+  "handIn": "media",
+  "checks": [
+   "The after shot looks clearly better",
+   "You say what change made it better",
+   "You moved the subject, camera or light safely"
+  ]
+ },
+ {
+  "id": "B07",
+  "level": "beginner",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Record clear sound and guide a speaker",
+  "hours": 5,
+  "outcome": "Record someone speaking clearly and help them feel at ease.",
+  "topics": [
+   "Putting the mic close to the speaker",
+   "Checking sound levels",
+   "Listening with headphones",
+   "Background noise",
+   "Recording a few seconds of quiet room sound",
+   "Giving clear, kind directions"
+  ],
+  "assignment": "Record a 20 to 30 second introduction and some natural background sound. Listen back, find a problem and record again if needed.",
+  "evidence": "The speech is easy to understand and you checked it before you left.",
+  "handIn": "media",
+  "checks": [
+   "The speech is clear and easy to understand",
+   "You listened back and re-recorded if needed",
+   "You gave the speaker clear, kind directions"
+  ]
+ },
+ {
+  "id": "B08",
+  "level": "beginner",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Organise your footage",
+  "hours": 3,
+  "outcome": "Set up an editing project without losing any files.",
+  "topics": [
+   "Copying and checking your clips",
+   "Folders that make sense",
+   "Keeping the original files safe",
+   "Importing into your editor",
+   "Naming and saving versions"
+  ],
+  "assignment": "Copy your clips into named folders. Start an editing project, close it and open it again. Share a picture of your folders and project.",
+  "evidence": "Your files are easy to find and your project opens without missing clips.",
+  "handIn": "media",
+  "checks": [
+   "Clips are copied and the originals are kept safe",
+   "Folders and the project have clear names",
+   "The project opens again with no missing clips"
+  ]
+ },
+ {
+  "id": "B09",
+  "level": "beginner",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Make your first edit",
+  "hours": 7,
+  "outcome": "Edit a short video with a clear start, middle and end.",
+  "topics": [
+   "The editing screen",
+   "Choosing your best clips",
+   "Trimming clips",
+   "Putting clips in order",
+   "Removing mistakes",
+   "Simple pacing"
+  ],
+  "assignment": "Edit a 45 to 60 second video of your activity. Show it to someone, then fix one part that was confusing or too long. Share both versions.",
+  "evidence": "A viewer can follow the activity and your second version is better.",
+  "handIn": "media",
+  "checks": [
+   "The edit has a clear start, middle and end",
+   "Important parts stay and mistakes are cut",
+   "Your second version is clearly better"
+  ]
+ },
+ {
+  "id": "B10",
+  "level": "beginner",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Edit sound and music",
+  "hours": 4,
+  "outcome": "Mix voice, music and sound so people can hear what matters.",
+  "topics": [
+   "Audio tracks",
+   "Trimming sound",
+   "Fading in and out",
+   "Voice louder than music",
+   "Using natural sound",
+   "Music you are allowed to use"
+  ],
+  "assignment": "Add a voice, some natural sound and music if it helps. Share the finished video and say why you used each sound.",
+  "evidence": "Music never covers the voice and sound changes are smooth.",
+  "handIn": "media",
+  "checks": [
+   "Music never covers the voice",
+   "Sound changes are smooth",
+   "You explain why you used each sound"
+  ]
+ },
+ {
+  "id": "B11",
+  "level": "beginner",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Fix colour so shots match",
+  "hours": 3,
+  "outcome": "Make simple colour fixes so your shots look like they belong together.",
+  "topics": [
+   "Spotting shots that are too bright or dark",
+   "Spotting colour that is too warm or too blue",
+   "Basic colour tools",
+   "Comparing shots side by side",
+   "Fixing versus adding a style"
+  ],
+  "assignment": "Fix three shots that don’t match. Share before and after pictures.",
+  "evidence": "Your shots match better and you can say what you changed.",
+  "handIn": "media",
+  "checks": [
+   "Three shots now match better",
+   "Details are still easy to see",
+   "You explain each fix"
+  ]
+ },
+ {
+  "id": "B12",
+  "level": "beginner",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Add titles and captions, then export",
+  "hours": 3,
+  "outcome": "Export a video that plays well, with clear titles and captions.",
+  "topics": [
+   "Simple titles",
+   "Checking names and spelling",
+   "Captions that match the speech",
+   "Export settings",
+   "Watching the final file all the way through"
+  ],
+  "assignment": "Export your video with a title and captions. Watch the final file and fill in a short checklist.",
+  "evidence": "The file plays, the text is easy to read and captions match the speech.",
+  "handIn": "media",
+  "checks": [
+   "The final file plays all the way through",
+   "Titles and captions are easy to read and correct",
+   "You filled in the checklist"
+  ]
+ },
+ {
+  "id": "B13",
+  "level": "beginner",
+  "stage": "selected-pathway",
+  "stageLabel": "Your pathway",
+  "title": "Your pathway project",
+  "hours": 8,
+  "outcome": "Use what you learned to make a short video in the style you chose.",
+  "topics": [
+   "What makes your chosen style work",
+   "A simple message for that style",
+   "Shots you need for that style"
+  ],
+  "assignment": "Make one short video in your chosen style. Share the video, your plan and your original clips.",
+  "evidence": "Your video fits the brief, with clear pictures, clear sound and a simple edit.",
+  "handIn": "media",
+  "checks": [
+   "Your video fits your chosen style",
+   "Pictures are clear and the voice is easy to hear",
+   "You shared your plan and original clips"
+  ]
+ },
+ {
+  "id": "B14",
+  "level": "beginner",
+  "stage": "final-project",
+  "stageLabel": "Final project",
+  "title": "Beginner final project",
+  "hours": 16,
+  "outcome": "Make a new video on your own from start to finish.",
+  "topics": [
+   "A new brief in your chosen style",
+   "Planning, filming and editing",
+   "Checking and fixing your video",
+   "Exporting the final file"
+  ],
+  "assignment": "Make a new 60 to 90 second video. Share your plan, shot list, original clips, project and final video.",
+  "evidence": "Clear message, steady and sharp shots, clear voice and a final file that plays.",
+  "handIn": "media",
+  "checks": [
+   "Your video has one clear message",
+   "Shots are sharp and steady, and the voice is clear",
+   "You shared your plan, clips and a final file that plays"
+  ]
+ },
+ {
+  "id": "I01",
+  "level": "intermediate",
+  "stage": "concepts",
+  "stageLabel": "Ideas",
+  "title": "Story, audience and the look of your video",
+  "hours": 8,
+  "outcome": "Plan two ways to film one subject and pick the best one for your viewer.",
+  "topics": [
+   "Your message and purpose",
+   "Subject versus story",
+   "Point of view",
+   "Pictures that inform, not decorate",
+   "How the story builds",
+   "The feeling you want"
+  ],
+  "assignment": "Plan one subject two ways, like a bakery as a founder’s story and as an advert. Pick one and explain why. Make a short sequence to test it.",
+  "evidence": "You name your viewer and the pictures that help them understand or feel.",
+  "handIn": "media",
+  "checks": [
+   "You plan two versions for a named viewer",
+   "You explain why you picked one",
+   "Your pictures support the feeling or message"
+  ]
+ },
+ {
+  "id": "I02",
+  "level": "intermediate",
+  "stage": "preproduction",
+  "stageLabel": "Planning",
+  "title": "Write a brief and a creative plan",
+  "hours": 6,
+  "outcome": "Turn a vague request into a clear brief and plan.",
+  "topics": [
+   "Goals and viewers",
+   "Good questions to ask a client",
+   "What to include and what to leave out",
+   "Research and references",
+   "What you will deliver"
+  ],
+  "assignment": "A client says “make a video about our business”. Write a one-page brief, a creative plan and your research notes.",
+  "evidence": "Your brief covers the goal, viewer, message, size of the job, limits and who says yes.",
+  "handIn": "text",
+  "checks": [
+   "The brief covers the goal, viewer, message and size of the job",
+   "Your plan explains the idea, structure, pictures and sound",
+   "Limits, sign-off and how to judge success are written down"
+  ]
+ },
+ {
+  "id": "I03",
+  "level": "intermediate",
+  "stage": "preproduction",
+  "stageLabel": "Planning",
+  "title": "Plan a shoot and manage risks",
+  "hours": 8,
+  "outcome": "Make a shoot plan that someone else could follow.",
+  "topics": [
+   "Visiting the location first",
+   "Which shots matter most",
+   "Schedules and call sheets",
+   "Who does what",
+   "Gear and budget",
+   "A backup plan"
+  ],
+  "assignment": "Share your shot plan, schedule, gear list, budget, permissions and a backup plan. Then update the plan after one thing changes.",
+  "evidence": "The important shots are protected and the plan still works when something changes.",
+  "handIn": "text",
+  "checks": [
+   "Your shot plan, schedule and gear list are realistic",
+   "Permissions and a backup plan protect key shots",
+   "The plan still works after one change"
+  ]
+ },
+ {
+  "id": "I04",
+  "level": "intermediate",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Keep your shots consistent",
+  "hours": 8,
+  "outcome": "Film a sequence where brightness, colour, focus and movement stay consistent.",
+  "topics": [
+   "Frame rate and shutter speed",
+   "White balance",
+   "Planning brightness",
+   "Lens choice",
+   "Auto and manual focus",
+   "Locking settings"
+  ],
+  "assignment": "Film one sequence indoors and one in tricky outdoor light. Share camera tests and explain your settings.",
+  "evidence": "Important details stay clear and shots don’t jump in brightness or colour.",
+  "handIn": "media",
+  "checks": [
+   "Brightness, colour and focus stay steady between shots",
+   "You explain the settings you chose",
+   "Details stay clear in tricky light"
+  ]
+ },
+ {
+  "id": "I05",
+  "level": "intermediate",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Shots that cut together",
+  "hours": 8,
+  "outcome": "Film enough of the right shots to edit a clear sequence.",
+  "topics": [
+   "Wide, medium, close-up and reaction shots",
+   "Cutaways",
+   "Keeping direction consistent",
+   "Eyelines",
+   "Matching action",
+   "Moving the camera with a reason"
+  ],
+  "assignment": "Film an activity you can repeat, using a limited number of shots. Share your clips and a 45 to 60 second edit.",
+  "evidence": "People can follow the action and every camera move has a reason.",
+  "handIn": "media",
+  "checks": [
+   "People can follow the action without explanation",
+   "You have wide, close, reaction and extra shots",
+   "Camera moves have a reason and the action matches"
+  ]
+ },
+ {
+  "id": "I06",
+  "level": "intermediate",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Light a scene on location",
+  "hours": 8,
+  "outcome": "Shape light into a look you can repeat.",
+  "topics": [
+   "Light direction and softness",
+   "Window light",
+   "Bouncing and softening light",
+   "Blocking light",
+   "Lamps in the shot",
+   "Separating the subject from the background"
+  ],
+  "assignment": "Create two different looks for one subject with simple gear. Share clips, a light sketch and a still from each.",
+  "evidence": "You can repeat the look and explain each choice.",
+  "handIn": "media",
+  "checks": [
+   "You made two clearly different looks",
+   "A light sketch and still explain each look",
+   "You can repeat the look when things move"
+  ]
+ },
+ {
+  "id": "I07",
+  "level": "intermediate",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Record interviews and direct people",
+  "hours": 10,
+  "outcome": "Record clean speech and guide someone through an interview.",
+  "topics": [
+   "Choosing and placing mics",
+   "Headphones and levels",
+   "Clothing and handling noise",
+   "Wind and background noise",
+   "Room sound",
+   "Helping people relax on camera"
+  ],
+  "assignment": "Record an interview and an activity. Also record room sound and background sound. Find and fix one sound problem.",
+  "evidence": "Speech is clear and you fixed problems before you left.",
+  "handIn": "media",
+  "checks": [
+   "Interview speech is clean and clear",
+   "You recorded room and background sound",
+   "You found and fixed a sound problem on the day"
+  ]
+ },
+ {
+  "id": "I08",
+  "level": "intermediate",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Organise and sync for editing",
+  "hours": 6,
+  "outcome": "Set up a project that you or someone else can reopen and change.",
+  "topics": [
+   "Folder structure",
+   "Checking your copies",
+   "Naming clips",
+   "Bins and best takes",
+   "Syncing sound and picture",
+   "Saving versions"
+  ],
+  "assignment": "Organise your project, sync the interview sound and pick your best takes. Check that you can relink missing files.",
+  "evidence": "Someone else can open the project and find what they need.",
+  "handIn": "media",
+  "checks": [
+   "Files are checked, named and in bins",
+   "Interview sound is synced with the picture",
+   "Someone else can open and use the project"
+  ]
+ },
+ {
+  "id": "I09",
+  "level": "intermediate",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Edit for story and pace",
+  "hours": 10,
+  "outcome": "Edit and improve a video so its pace fits the message.",
+  "topics": [
+   "Choosing strong moments",
+   "A clear story line",
+   "Editing around interviews",
+   "Pace and rhythm",
+   "Letting sound lead or follow a cut",
+   "Improving after feedback"
+  ],
+  "assignment": "Make a rough edit and try two different openings. Show it to others, then share a better version with notes on what you changed.",
+  "evidence": "You explain your choices and the new version is clearly better.",
+  "handIn": "media",
+  "checks": [
+   "The edit follows a clear story line",
+   "The pace fits the message",
+   "You explain what changed after feedback"
+  ]
+ },
+ {
+  "id": "I10",
+  "level": "intermediate",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Sound design and mixing",
+  "hours": 8,
+  "outcome": "Build a soundtrack where the important words are always clear.",
+  "topics": [
+   "Cleaning up voices",
+   "Smooth sound edits",
+   "Background sound",
+   "Choosing music",
+   "Sound effects",
+   "Balancing levels"
+  ],
+  "assignment": "Finish the sound for your project. Share a before and after, and check it on headphones and normal speakers.",
+  "evidence": "Voices are clear and the mix sounds good on different speakers.",
+  "handIn": "media",
+  "checks": [
+   "Voices stay clear above music and effects",
+   "Sound edits are smooth",
+   "You checked the mix on headphones and speakers"
+  ]
+ },
+ {
+  "id": "I11",
+  "level": "intermediate",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Colour matching and look",
+  "hours": 8,
+  "outcome": "Fix and match your shots, then add a simple look.",
+  "topics": [
+   "Fixing versus styling",
+   "Scopes",
+   "Matching brightness and white balance",
+   "Natural skin tones",
+   "Small, careful colour changes"
+  ],
+  "assignment": "Share a fixed version and a styled version of your project, with before and after stills.",
+  "evidence": "Shots match, details are clear and you can tell fixing from styling.",
+  "handIn": "media",
+  "checks": [
+   "Shots are fixed and match each other",
+   "Skin tones and details look natural",
+   "You show the fix and the style separately"
+  ]
+ },
+ {
+  "id": "I12",
+  "level": "intermediate",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Titles, captions and versions",
+  "hours": 8,
+  "outcome": "Deliver a checked final video and a shorter second version.",
+  "topics": [
+   "Easy-to-read text",
+   "Name titles",
+   "Captions and timing",
+   "Reframing for other screens",
+   "Shorter versions",
+   "Export settings"
+  ],
+  "assignment": "Deliver your main video, a short version, captions and a quality checklist. Get feedback once and make the changes.",
+  "evidence": "No missing parts, wrong names or caption mistakes, and the short version has a clear purpose.",
+  "handIn": "media",
+  "checks": [
+   "The main and short versions both meet the brief",
+   "Captions are correct and well timed",
+   "Your checklist shows no missing parts or mistakes"
+  ]
+ },
+ {
+  "id": "I13",
+  "level": "intermediate",
+  "stage": "selected-pathway",
+  "stageLabel": "Your pathway",
+  "title": "Your pathway project",
+  "hours": 20,
+  "outcome": "Use your skills to solve a real problem in the style you chose.",
+  "topics": [
+   "Planning for your chosen style",
+   "Shots that style needs",
+   "Editing and delivering for that style"
+  ],
+  "assignment": "Complete the project for your chosen style. Share your plan, original clips, edit and any extra versions.",
+  "evidence": "Your work fits the brief and shows you can run a small shoot on your own.",
+  "handIn": "media",
+  "checks": [
+   "Your work fits the brief for your style",
+   "Your plan, shots and edit suit that style",
+   "You shared your plan, clips, edit and versions"
+  ]
+ },
+ {
+  "id": "I14",
+  "level": "intermediate",
+  "stage": "final-project",
+  "stageLabel": "Final project",
+  "title": "Intermediate final project",
+  "hours": 28,
+  "outcome": "Plan, film, edit and deliver a short video on a new brief, on your own or with a small team.",
+  "topics": [
+   "A new brief in your chosen style",
+   "One main location",
+   "A few people",
+   "Planning to delivery"
+  ],
+  "assignment": "Share your production plan, main video, one extra version, your project and a short reflection.",
+  "evidence": "The video fits the brief and you solved key picture, sound, permission and delivery problems.",
+  "handIn": "media",
+  "checks": [
+   "The video fits a new brief, made on your own",
+   "You solved key picture, sound, permission and delivery problems",
+   "You shared your plan, extra version and reflection"
+  ]
+ },
+ {
+  "id": "A01",
+  "level": "advanced",
+  "stage": "concepts",
+  "stageLabel": "Ideas",
+  "title": "Creative direction and point of view",
+  "hours": 12,
+  "outcome": "Develop a strong creative idea and explain why it fits the audience.",
+  "topics": [
+   "Point of view",
+   "How the story builds",
+   "Repeated images and ideas",
+   "Tone",
+   "What to leave out",
+   "Openings and endings"
+  ],
+  "assignment": "Develop two very different ideas for one brief. Share both plans, reference pictures, sound ideas, and why you chose one.",
+  "evidence": "You explain your choice, the risks, and why the other idea fits less well.",
+  "handIn": "text",
+  "checks": [
+   "You developed two very different ideas",
+   "You explain why your choice fits the audience",
+   "You name the risks and the weakness of the other idea"
+  ]
+ },
+ {
+  "id": "A02",
+  "level": "advanced",
+  "stage": "preproduction",
+  "stageLabel": "Planning",
+  "title": "Research and test your story",
+  "hours": 12,
+  "outcome": "Check that your story is true, can be filmed and has enough material.",
+  "topics": [
+   "Research interviews",
+   "Checking facts",
+   "Getting access",
+   "Outlines",
+   "Planning for archive footage",
+   "Testing ideas early"
+  ],
+  "assignment": "Share a researched plan. Test one key idea with a site visit, interview, test shot or rehearsal. Note what you learned.",
+  "evidence": "You spot weak ideas and change the plan when the facts don’t support it.",
+  "handIn": "text",
+  "checks": [
+   "Research supports your story",
+   "You tested one key idea before filming",
+   "You changed the plan when the facts said so"
+  ]
+ },
+ {
+  "id": "A03",
+  "level": "advanced",
+  "stage": "preproduction",
+  "stageLabel": "Planning",
+  "title": "Produce: budget, schedule and changes",
+  "hours": 12,
+  "outcome": "Run a realistic production plan with clear roles and controlled changes.",
+  "topics": [
+   "Scope and deliverables",
+   "Budgets",
+   "Schedules",
+   "Roles",
+   "Approvals",
+   "Backup plans"
+  ],
+  "assignment": "Share a full production pack. Then deal with a change, like less time or a missing person. Note the effect on cost, time and quality.",
+  "evidence": "The key results are protected and every change is clear to everyone.",
+  "handIn": "text",
+  "checks": [
+   "A full plan with budget, schedule and roles",
+   "You handled a change and explained the trade-offs",
+   "The key results stayed protected"
+  ]
+ },
+ {
+  "id": "A04",
+  "level": "advanced",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Camera tests and workflow",
+  "hours": 12,
+  "outcome": "Choose and test a camera setup that works from filming to export.",
+  "topics": [
+   "Camera and lens tests",
+   "Planning brightness",
+   "Motion and shutter",
+   "High-contrast scenes",
+   "Matching cameras",
+   "Recording settings and file sizes"
+  ],
+  "assignment": "Test your camera setup in two conditions, from filming to export. Share the settings, results and limits.",
+  "evidence": "Results are consistent and you find the real cause of problems.",
+  "handIn": "media",
+  "checks": [
+   "Your setup gives consistent results",
+   "You noted settings and tests in two conditions",
+   "You traced problems to their cause"
+  ]
+ },
+ {
+  "id": "A05",
+  "level": "advanced",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Direct people and plan coverage",
+  "hours": 12,
+  "outcome": "Guide people and cameras to capture everything the edit needs.",
+  "topics": [
+   "Directing with simple actions",
+   "Rehearsing",
+   "Helping people feel confident",
+   "Positions and eyelines",
+   "Multi-camera shoots",
+   "Priorities when time is short"
+  ],
+  "assignment": "Direct a scene, demo or interview with several camera angles. Do it again with less time. Share your plans and clips.",
+  "evidence": "Directions are clear, key moments are captured and nothing important is missing.",
+  "handIn": "media",
+  "checks": [
+   "Your directions are clear and people feel confident",
+   "Key moments are covered from several angles",
+   "It still works with less time"
+  ]
+ },
+ {
+  "id": "A06",
+  "level": "advanced",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Lighting design and continuity",
+  "hours": 12,
+  "outcome": "Design a lighting setup and keep it consistent as things change.",
+  "topics": [
+   "Contrast",
+   "Light with a clear source",
+   "Mixed light",
+   "Softening and blocking light",
+   "Reflections",
+   "Safe setups"
+  ],
+  "assignment": "Plan two connected light setups. Change the location a little and adapt. Share sketches, stills and notes.",
+  "evidence": "The look stays the same and you explain what you changed and why.",
+  "handIn": "media",
+  "checks": [
+   "Both setups share one look",
+   "Sketches and stills let you repeat the setup",
+   "You noted what changed and why"
+  ]
+ },
+ {
+  "id": "A07",
+  "level": "advanced",
+  "stage": "production",
+  "stageLabel": "Filming",
+  "title": "Reliable sound on set",
+  "hours": 12,
+  "outcome": "Use a sound plan that protects important recordings.",
+  "topics": [
+   "Mic choices",
+   "Several speakers",
+   "Recording sound separately",
+   "Sync marks",
+   "Backup recordings",
+   "Background sound"
+  ],
+  "assignment": "Record a two-person talk or event with a main and a backup recording. Then fix a pretend failure using copies.",
+  "evidence": "You find the fault, choose usable sound and plan a fix.",
+  "handIn": "media",
+  "checks": [
+   "You used a main and a backup recording",
+   "You found the fault using copies",
+   "You chose usable sound and planned a fix"
+  ]
+ },
+ {
+  "id": "A08",
+  "level": "advanced",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Look after media and hand over projects",
+  "hours": 12,
+  "outcome": "Keep a shared editing project safe and easy to recover.",
+  "topics": [
+   "Checked copies",
+   "File information",
+   "Storage",
+   "Proxies",
+   "Shared naming rules",
+   "Relinking",
+   "Version control"
+  ],
+  "assignment": "Hand your project to another learner. Do a recovery test. Check the final edit uses the right files.",
+  "evidence": "The handover works without extra help and the right files are used.",
+  "handIn": "media",
+  "checks": [
+   "Someone else can open your project without help",
+   "Your recovery test worked",
+   "The final edit uses the right files"
+  ]
+ },
+ {
+  "id": "A09",
+  "level": "advanced",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Shape the edit and handle feedback",
+  "hours": 18,
+  "outcome": "Shape a complex edit and handle mixed feedback without losing the main idea.",
+  "topics": [
+   "Structure",
+   "How characters and facts unfold",
+   "Choosing performances",
+   "Cutting between stories",
+   "Using silence",
+   "Trying other structures"
+  ],
+  "assignment": "Make two versions with different structures. Show them, do two rounds of changes, and keep a log of feedback.",
+  "evidence": "Changes make the video better and you can explain each decision.",
+  "handIn": "media",
+  "checks": [
+   "You compared two structures with viewers",
+   "Two rounds of changes improved the video",
+   "Your log explains each feedback decision"
+  ]
+ },
+ {
+  "id": "A10",
+  "level": "advanced",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Final sound mix",
+  "hours": 12,
+  "outcome": "Build a clean soundtrack and mix it for where it will be shown.",
+  "topics": [
+   "Editing voices",
+   "Reducing noise",
+   "Background sound and effects",
+   "Music",
+   "EQ and dynamics",
+   "Loudness levels"
+  ],
+  "assignment": "Finish the sound on a tricky scene. Share the mix, the separate sound parts and notes on any fixes.",
+  "evidence": "The sound supports the story, voices are clear and you meet the loudness target.",
+  "handIn": "media",
+  "checks": [
+   "Voices are clear and the sound supports the story",
+   "Noise fixes don’t leave odd sounds",
+   "You meet the loudness target and share separate parts"
+  ]
+ },
+ {
+  "id": "A11",
+  "level": "advanced",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Colour management and look",
+  "hours": 12,
+  "outcome": "Keep colour under control and give mixed footage one look.",
+  "topics": [
+   "Colour settings in and out",
+   "Scopes",
+   "Matching shots",
+   "Main and detailed fixes",
+   "Skin tones",
+   "Checking the final file"
+  ],
+  "assignment": "Match clips from different cameras and create an approved look. Compare the edit with the exported file.",
+  "evidence": "The video looks consistent and you check any difference in the export.",
+  "handIn": "media",
+  "checks": [
+   "Clips from different cameras match",
+   "Your look is separate from basic fixes",
+   "You compared the edit with the final file"
+  ]
+ },
+ {
+  "id": "A12",
+  "level": "advanced",
+  "stage": "postproduction",
+  "stageLabel": "Editing",
+  "title": "Versions, quality checks and archiving",
+  "hours": 6,
+  "outcome": "Deliver a checked package that can be shared, changed and found later.",
+  "topics": [
+   "Delivery specs",
+   "Shapes for different screens",
+   "Captions",
+   "Checking exports",
+   "Naming files",
+   "Archiving"
+  ],
+  "assignment": "Share your main film, a shorter version, captions and a clear handover note.",
+  "evidence": "Files meet the brief, names are clear and someone else understands the package.",
+  "handIn": "media",
+  "checks": [
+   "Files meet the brief and have clear names",
+   "You delivered a short version and captions",
+   "Someone else understands your handover"
+  ]
+ },
+ {
+  "id": "A13",
+  "level": "advanced",
+  "stage": "selected-pathway",
+  "stageLabel": "Your pathway",
+  "title": "Your advanced pathway project",
+  "hours": 40,
+  "outcome": "Lead a strong project in the style you chose, with real limits.",
+  "topics": [
+   "Research for your style",
+   "Planning and directing",
+   "Coverage",
+   "Changes and delivery for that style"
+  ],
+  "assignment": "Complete an advanced project in your chosen style. Share tests, original clips, all versions and why you made key choices.",
+  "evidence": "Your work meets the style’s standards and handles real limits well.",
+  "handIn": "media",
+  "checks": [
+   "Your work meets your style’s standards",
+   "You shared tests and reasons for key choices",
+   "You handled real limits without relying on costly gear"
+  ]
+ },
+ {
+  "id": "A14",
+  "level": "advanced",
+  "stage": "final-project",
+  "stageLabel": "Final project",
+  "title": "Advanced final project",
+  "hours": 56,
+  "outcome": "Lead a production from brief to final package and keep your idea strong.",
+  "topics": [
+   "A real or practice client brief",
+   "Goals, budget and deadline",
+   "Approvals",
+   "Leading a small team",
+   "Final delivery package"
+  ],
+  "assignment": "Share your plan, production pack, tests, clips, project, final versions, change log and a short case study.",
+  "evidence": "You led the key work, kept the idea strong and delivered a package others can use.",
+  "handIn": "media",
+  "checks": [
+   "You led the production through problems",
+   "Your idea stayed strong through changes",
+   "You delivered a full package with a case study"
+  ]
+ }
+]

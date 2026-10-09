@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "initialPageCompressedBytes": 512000,
+  "clientJavaScriptCompressedBytes": 350000,
+  "stylesCompressedBytes": 60000,
+  "foundationImageRenditionBytes": 100000,
+  "foundationAudioBytes": 150000,
+  "externalVideoRequestsBeforePlay": 0,
+  "notes": "Release targets, not claims about the legacy catalogue. Images use responsive WebP; audio preloads none; video requires a click. Measure production pages at 390px with a cold cache. Development server transfer is not a production measurement."
+}

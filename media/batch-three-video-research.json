@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "batch": "stage3-batch3",
+  "purpose": "Seven unique teaching-videography lesson video references; asset research only",
+  "duplicateCheck": {
+    "sourceDirectory": "work/framepath-site",
+    "command": "rg --no-ignore -l r567vmL1Fcs|B90v9HHyURs|MLddkVv72Vo|fCl9wfILSxY|TzocLBCcuWs|BIreFXLK1rc|JB6aDdq3HTI work/framepath-site",
+    "result": "No matches before integration (exit 1, zero output). Initial broad URL/videoId inventory included legacy source, media files, build output and dependencies."
+  },
+  "overallLimits": [
+    "Official YouTube oEmbed returned title and channel credit for all seven. Public watch-page player metadata returned OK for all seven, but that is not a playback or embedding guarantee.",
+    "India-specific playback, embed permission, school-network filtering, ads and regional availability were not independently tested.",
+    "Caption track presence does not establish caption accuracy. Creator chapter labels and duration evidence support timing; the clips were not watched end-to-end.",
+    "Reading alternatives are newly authored lesson instructions, not transcripts or close paraphrases."
+  ],
+  "videos": [
+    {
+      "lessonSlot": "need-c05-01-prepare-0",
+      "lessonTopic": "Consent and privacy before recording",
+      "videoId": "r567vmL1Fcs",
+      "title": "WITNESS: Filming & Protecting Interviewees",
+      "creator": "WITNESS",
+      "creatorURL": "https://www.youtube.com/@witnessorg",
+      "sourceURL": "https://www.youtube.com/watch?v=r567vmL1Fcs",
+      "start": 0,
+      "end": 205,
+      "clipDurationSeconds": 205,
+      "fullDurationSeconds": 205,
+      "evidence": {
+        "timingBasis": "Complete video. Current official YouTube player videoDetails.lengthSeconds is 205; no invented internal chapter boundary.",
+        "contentBasis": "WITNESS's primary resource page identifies this as Video Advocacy Guide part 3, covering interviewing, additional footage and protecting the people filmed. YouTube's creator description confirms the same three topics.",
+        "primarySourceURL": "https://library.witness.org/product/video-advocacy-guide-3/",
+        "supportingReadingURL": "https://library.witness.org/product/obtaining-informed-consent/"
+      },
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dr567vmL1Fcs&format=json",
+      "officialPlayerStatus": "OK",
+      "captionStatus": "Official player metadata exposes English auto-generated captions. Accuracy and synchronization were not audited.",
+      "verificationLimits": [
+        "Full video was selected using verified duration and creator description; video playback and the exact spoken consent procedure were not independently reviewed.",
+        "This is a human-rights interviewing example. Apply its protection principle to willing adult teaching participants; it is not India-specific legal guidance.",
+        "Consent steps below are an authored lesson alternative, not a transcript or claim that every step appears in the video."
+      ],
+      "readingAlternative": "Before recording, explain what the lesson teaches, who will see it, where it will be shared and how a participant can decline. Ask permission for both recording and sharing. Offer a hands-only demonstration or an off-camera role. Clear names, messages, school details and other personal information from the frame. For a practice film, use yourself, objects or a willing adult and record the agreed limits.",
+      "readingAlternativeWordCount": 65,
+      "checkedAtUTC": "2026-10-07T14:36:59.7458913Z"
+    },
+    {
+      "lessonSlot": "need-c05-01-prepare-1",
+      "lessonTopic": "One objective, small teaching chunks and a storyboard",
+      "videoId": "B90v9HHyURs",
+      "title": "How to Create a Storyboard for eLearning (Instructional Design)",
+      "creator": "Devlin Peck",
+      "creatorURL": "https://www.youtube.com/@DevlinPeckYT",
+      "sourceURL": "https://www.youtube.com/watch?v=B90v9HHyURs",
+      "start": 86,
+      "end": 250,
+      "clipDurationSeconds": 164,
+      "fullDurationSeconds": 1651,
+      "evidence": {
+        "timingBasis": "Creator-published chapter starts: 1:26 Storyboard Source Material; next chapter 4:10 Storyboard Purpose. This selection is that complete 164-second chapter.",
+        "contentBasis": "Creator describes instructional-design storyboarding and planning source material before production.",
+        "primarySourceURL": "https://www.youtube.com/watch?v=B90v9HHyURs"
+      },
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DB90v9HHyURs&format=json",
+      "officialPlayerStatus": "OK",
+      "captionStatus": "Official player metadata exposes an English non-ASR caption track and a separate English auto-generated track. Caption text was not audited.",
+      "verificationLimits": [
+        "Chapter names and boundaries were checked in the creator's current description; full playback and transcript were not independently reviewed.",
+        "The example concerns eLearning production. The 60–120-second film and three-beat paper plan below are authored adaptations, not quoted source requirements.",
+        "The video description promotes optional courses and books; none is required for this lesson."
+      ],
+      "readingAlternative": "Choose one thing the learner should be able to do after your 60–120-second film. Write three beats: show the result, demonstrate the essential steps, and give one check. Beside each beat, note what the camera shows and what you will say. Use one idea per shot. Remove any fact or shot that does not help the learner complete the task.",
+      "readingAlternativeWordCount": 60,
+      "checkedAtUTC": "2026-10-07T14:37:00.9058479Z"
+    },
+    {
+      "lessonSlot": "need-c05-01-practice-0",
+      "lessonTopic": "Begin with the learner outcome and a concrete example",
+      "videoId": "MLddkVv72Vo",
+      "title": "Making effective educational videos",
+      "creator": "Meta-Ed",
+      "creatorURL": "https://www.youtube.com/@meta-ed4276",
+      "sourceURL": "https://www.youtube.com/watch?v=MLddkVv72Vo",
+      "start": 115,
+      "end": 160,
+      "clipDurationSeconds": 45,
+      "fullDurationSeconds": 361,
+      "evidence": {
+        "timingBasis": "Creator chapter starts: 1:55 Setting the scene – Pre-Training Principle; 2:13 How much? – Segmenting Principle; 2:40 Less is more! – Coherence Principle. The selected 45 seconds include the first two chapters.",
+        "contentBasis": "The creator labels the video as guiding principles for educational videos, including setting the scene and segmenting information.",
+        "primarySourceURL": "https://www.youtube.com/watch?v=MLddkVv72Vo"
+      },
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DMLddkVv72Vo&format=json",
+      "officialPlayerStatus": "OK",
+      "captionStatus": "Official player metadata exposes English auto-generated captions. Accuracy and synchronization were not audited.",
+      "verificationLimits": [
+        "This source supports orienting learners and managing the amount of information. It does not have a chapter explicitly named 'show the final outcome first'.",
+        "The outcome-first opening below is an authored teaching exercise. Exact spoken content and full playback were not independently reviewed."
+      ],
+      "readingAlternative": "Open with a concrete promise: 'In one minute, you will be able to fold this paper stand.' Show the finished stand so the learner knows what success looks like. Name only the materials and terms needed for the first step. Then demonstrate one action at a time, leaving a short pause to follow along. Keep the introduction brief enough that the demonstration starts promptly.",
+      "readingAlternativeWordCount": 64,
+      "checkedAtUTC": "2026-10-07T14:37:02.5286717Z"
+    },
+    {
+      "lessonSlot": "need-c05-01-practice-1",
+      "lessonTopic": "Microphone placement and near-versus-far speech",
+      "videoId": "fCl9wfILSxY",
+      "title": "The Proximity Effect | How It Works & How To Avoid It [With Audio Examples]",
+      "creator": "Audio University",
+      "creatorURL": "https://www.youtube.com/@AudioUniversity",
+      "sourceURL": "https://www.youtube.com/watch?v=fCl9wfILSxY",
+      "start": 20,
+      "end": 117,
+      "clipDurationSeconds": 97,
+      "fullDurationSeconds": 541,
+      "evidence": {
+        "timingBasis": "Creator-published chapters: 0:20 What Is The Proximity Effect? (Demonstration); next chapter 1:57 What Causes The Proximity Effect?. Selection is the complete 97-second demonstration chapter.",
+        "contentBasis": "The creator's primary article and YouTube description explain microphone-distance effects with audio examples.",
+        "primarySourceURL": "https://audiouniversityonline.com/proximity-effect/"
+      },
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DfCl9wfILSxY&format=json",
+      "officialPlayerStatus": "OK",
+      "captionStatus": "Official player metadata exposes an English non-ASR caption track and a separate English auto-generated track. Caption text was not audited.",
+      "verificationLimits": [
+        "The proximity effect specifically concerns directional microphones. Do not teach that every phone or microphone develops the same bass change.",
+        "The selected demonstration's boundaries were verified from creator chapters; listening quality and full playback were not independently audited.",
+        "No microphone purchase is required: the comparison exercise can use the learner's existing phone or headset."
+      ],
+      "readingAlternative": "Record the same short instruction from two distances using your existing phone or microphone. Keep the room and speaking voice the same. Listen for understandable words, room echo, breath noise and uneven loudness. Choose a practical distance that keeps speech clear without rubbing or blowing into the mic. Keep that distance steady during the lesson and record a short test before the full take.",
+      "readingAlternativeWordCount": 64,
+      "checkedAtUTC": "2026-10-07T14:37:03.5778833Z"
+    },
+    {
+      "lessonSlot": "need-c05-01-practice-2",
+      "lessonTopic": "Readable captions, short titles and contrast",
+      "videoId": "TzocLBCcuWs",
+      "title": "Part 2: How To Make Accessible Online Courses",
+      "creator": "TAMU Engineering Studio for Instruction & Learning",
+      "creatorURL": "https://www.youtube.com/@tamu-esail",
+      "sourceURL": "https://www.youtube.com/watch?v=TzocLBCcuWs",
+      "start": 92,
+      "end": 214,
+      "clipDurationSeconds": 122,
+      "fullDurationSeconds": 255,
+      "evidence": {
+        "timingBasis": "Creator page and YouTube description agree: 1:32 Contrast Ratio; 2:28 Closed Captioning; 3:34 Audio Transcripts. Selected 122 seconds cover contrast and captioning.",
+        "contentBasis": "Texas A&M's eSAIL primary page lists contrast, captions and transcripts as accessibility changes for online course materials.",
+        "primarySourceURL": "https://esail.tamu.edu/faculty-tutorials/accessibility/make-accessible-online-courses/",
+        "creatorTranscriptURL": "https://esail.tamu.edu/wp-content/uploads/2025/04/Accessibility-Tips-to-Improve-Your-Online-Courses-2025.pdf"
+      },
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DTzocLBCcuWs&format=json",
+      "officialPlayerStatus": "OK",
+      "captionStatus": "No English caption track was returned in the checked official player metadata. Do not label captions as verified. The creator page provides a downloadable transcript PDF; its link was verified, but the PDF's text was not audited.",
+      "verificationLimits": [
+        "Current creator chapter times and the public transcript link were verified. Full playback and caption rendering were not reviewed.",
+        "The source concerns online courses generally; the phone-screen title check below is an authored adaptation.",
+        "An optional paid captioning service appears in the source resources; purchasing it is not required."
+      ],
+      "readingAlternative": "Use a short title that names the task. Put important text on a plain, strongly contrasting background, away from the action and player controls. Add captions for speech and meaningful sounds, then correct names and technical words. Check the film on a phone at normal size and once with sound off. If a learner misses a step, enlarge or simplify the text and keep it visible longer.",
+      "readingAlternativeWordCount": 67,
+      "checkedAtUTC": "2026-10-07T14:37:04.9882203Z"
+    },
+    {
+      "lessonSlot": "need-c05-01-finish-0",
+      "lessonTopic": "Export, test accessible delivery and preserve originals",
+      "videoId": "BIreFXLK1rc",
+      "title": "Microsoft Clipchamp Tutorial for Beginners (The COMPLETE Guide)",
+      "creator": "Justin Brown - Primal Video",
+      "creatorURL": "https://www.youtube.com/@PrimalVideo",
+      "sourceURL": "https://www.youtube.com/watch?v=BIreFXLK1rc",
+      "start": 1094,
+      "end": 1137,
+      "clipDurationSeconds": 43,
+      "fullDurationSeconds": 1150,
+      "evidence": {
+        "timingBasis": "Creator-published chapter starts: 18:14 How to Export Your Video (Free Version); next chapter 18:57 Get Your FREE Video Editing Guide & AI Prompt. Selected 43 seconds end before the promotional chapter.",
+        "contentBasis": "The clip is specifically an export demonstration. Microsoft documentation verifies that Clipchamp exports an MP4; WITNESS's archive guide separately supports keeping originals and a full-quality master.",
+        "primarySourceURL": "https://www.youtube.com/watch?v=BIreFXLK1rc",
+        "supportingReadingURLs": [
+          "https://support.microsoft.com/en-us/clipchamp/exporting-and-saving-a-video-in-clipchamp",
+          "https://archiving.witness.org/archive-guide/"
+        ]
+      },
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DBIreFXLK1rc&format=json",
+      "officialPlayerStatus": "OK",
+      "captionStatus": "Official player metadata exposes English auto-generated captions. Accuracy and synchronization were not audited.",
+      "verificationLimits": [
+        "The clip demonstrates export in one editor; it does not verify learner testing, accessibility delivery or preservation of originals. Those are authored checks below.",
+        "Watch the example without installing or purchasing anything. Learners should export from an editor they already have; current interfaces can differ.",
+        "Creator chapter timing was verified; full playback and the exported artifact were not reviewed."
+      ],
+      "readingAlternative": "Export a separate viewing copy from the editor you already use. Play that exported file from beginning to end on a phone: check speech, captions, text size, picture orientation and the final frame. Share a short written version of the steps alongside it. Keep the original recordings and editable project separately, with a second copy in a trusted location. Use clear filenames so a later revision is easy to find.",
+      "readingAlternativeWordCount": 70,
+      "checkedAtUTC": "2026-10-07T14:37:07.3307441Z"
+    },
+    {
+      "lessonSlot": "need-c05-01-finish-1",
+      "lessonTopic": "Use a learner test to make one focused revision",
+      "videoId": "JB6aDdq3HTI",
+      "title": "The ADDIE Model of Instructional Design",
+      "creator": "Devlin Peck",
+      "creatorURL": "https://www.youtube.com/@DevlinPeckYT",
+      "sourceURL": "https://www.youtube.com/watch?v=JB6aDdq3HTI",
+      "start": 381,
+      "end": 453,
+      "clipDurationSeconds": 72,
+      "fullDurationSeconds": 522,
+      "evidence": {
+        "timingBasis": "Creator-published chapter starts: 6:21 Evaluation; next chapter 7:33 Conclusion. Selection is the complete 72-second evaluation chapter.",
+        "contentBasis": "Creator describes evaluation as a phase of the ADDIE instructional-design process.",
+        "primarySourceURL": "https://www.youtube.com/watch?v=JB6aDdq3HTI",
+        "creatorArticleURL": "https://www.devlinpeck.com/posts/addie-instructional-design"
+      },
+      "oEmbedVerified": true,
+      "oEmbedURL": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DJB6aDdq3HTI&format=json",
+      "officialPlayerStatus": "OK",
+      "captionStatus": "Official player metadata exposes an English non-ASR caption track and a separate English auto-generated track. Caption text was not audited.",
+      "verificationLimits": [
+        "The source explains instructional evaluation broadly. The single-learner film test and one-change revision below are authored adaptations.",
+        "Creator chapter boundaries were verified; full playback and the precise spoken explanation were not independently reviewed.",
+        "Optional courses and book links in the creator description are not prerequisites."
+      ],
+      "readingAlternative": "Ask one learner to watch your film and try the task without extra coaching. Notice the first place they hesitate, rewind or misunderstand. Ask what they expected to see or hear there. Choose one change: a clearer close-up, slower action, corrected caption or missing explanation. Export a new version and repeat the same task test. Keep the revision that makes the learner's action clearer.",
+      "readingAlternativeWordCount": 64,
+      "checkedAtUTC": "2026-10-07T14:37:08.6119847Z"
+    }
+  ]
+}

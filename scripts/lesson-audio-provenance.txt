@@ -1,0 +1,1 @@
+Original synthetic taps. 16kHz mono PCM16, 4 seconds. 510Hz + 0.24*985Hz decaying over 0.22s every0.82s. Comparison adds seeded uniform noise and70Hz hum. No recordings or copyrighted source audio. Generator: work/stage3-assets/prepare.py.

@@ -1,0 +1,9 @@
+{
+  "source": "Deterministic original synthesis",
+  "seed": 1729,
+  "sampleRate": 16000,
+  "seconds": 4,
+  "signals": "Five exponentially decaying 540/1020 Hz taps. B adds deterministic noise and 100 Hz hum. Normalised below full scale.",
+  "purpose": "Illustrative clarity/noise A/B, not speech intelligibility or microphone measurement.",
+  "externalSamples": false
+}

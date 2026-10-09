@@ -1,3 +1,6 @@
+import {pathLessons} from './lessons/content';
+import {coursePaths as basicPaths} from './selfpaced-curriculum';
+import {videoPaths} from './videography/programme';
 export type Lesson={title:string;minutes:number;learn:string;do:string;checks:string[];resource:number};
 export const resources=[
  {title:'Framing and composition',by:'StudioBinder',videoId:'qQNiqzuXjoM',url:'https://www.youtube.com/watch?v=qQNiqzuXjoM',type:'YouTube lesson',note:'Place, action, detail.'},
@@ -6,7 +9,7 @@ export const resources=[
  {title:'Introduction to editing · DaVinci Resolve 17',by:'Blackmagic Design',videoId:'fYlwId_z_yU',url:'https://www.blackmagicdesign.com/products/davinciresolve/training',type:'YouTube lesson',note:'An introduction to editing principles. Software controls may differ in newer versions.'},
  {title:'The basics of light for video',by:'Cinecom.net',videoId:'hGEsOcF3PoM',url:'https://www.youtube.com/watch?v=hGEsOcF3PoM',type:'YouTube lesson',note:'Learn light direction, then try it with your window.'}
 ];
-export const paths:{id:string;title:string;short:string;description:string;outcome:string;duration:string;number:string;lessons:Lesson[]}[]=[
+export const legacyPaths:{id:string;title:string;short:string;description:string;outcome:string;duration:string;number:string;lessons:Lesson[]}[]=[
 {id:'product-reel',title:'Your first product reel',short:'Make something worth stopping for.',description:'Turn one product, your phone and a window into a 15–30 second video.',outcome:'A finished vertical product reel',duration:'5 sessions · about 4 hours',number:'01',lessons:[
 {title:'Find the one thing worth saying',minutes:25,learn:'A useful product video makes one clear promise. Pick one viewer and one reason this product matters to them. Avoid trying to explain every feature in the same reel.',do:'Pick a real product beside you. Shoot two 5-second tests: the product sitting still, then someone using it. Watch both and write three lines: your viewer, the visible benefit and the closing action.',checks:['I named one specific viewer','My benefit can be shown on camera','I have one clear closing action'],resource:2},
 {title:'Build a five-shot story',minutes:35,learn:'A wide shot introduces the setting. A medium shot shows use. Close shots reveal texture or detail. A simple beginning, middle and end makes separate clips feel connected.',do:'Use your phone to capture five test stills: introduction, detail, product in use, result and closing hero shot. Arrange them in story order. Label each frame with its action and intended 3–6 second duration.',checks:['Each shot has a different purpose','My opening makes the product clear','My last shot leaves room for a caption'],resource:0},
@@ -35,6 +38,8 @@ export const paths:{id:string;title:string;short:string;description:string;outco
 {title:'Export with intention',minutes:45,learn:'Match the export to the place you intend to show it. A vertical reel and a widescreen story have different framing needs. Review the exported file, not only the timeline.',do:'Export a 20–40 second video, watch it from beginning to end and attach a viewing link or upload a file. Record your biggest improvement and one next experiment.',checks:['The aspect ratio fits my destination','The exported file plays correctly','I reviewed the final sound and captions'],resource:3}
 ]}
 ];
+// Rebuilt sessions keep their historical keys so saved work remains attached.
+for(const path of legacyPaths){const lessons=pathLessons(path.id);if(!lessons.length)continue;path.duration=`${lessons.length} sessions · ${lessons.reduce((n,l)=>n+l.minutes,0)} minutes of guided practice`;path.lessons=lessons.map((l,i)=>({...path.lessons[i],title:l.title,minutes:l.minutes,learn:l.concept.text,do:l.make.steps.join(' '),checks:[...l.reflect]}));}
 export const weeks:Lesson[]=[
 {title:'See your starting point',minutes:360,learn:'Good filming begins with observation. Learn how framing, steadiness and a clear subject change a shot before adding equipment.',do:'Film a 20–30 second everyday action with a beginning and ending. Write your intention, equipment and biggest difficulty. This is your baseline for week 12.',checks:['I recorded a baseline','My subject is clear','I wrote a short reflection'],resource:2},
 {title:'Cover one simple action',minutes:360,learn:'Wide, medium and close shots help a viewer understand place, action and detail. Coverage gives your edit choices.',do:'Film a five-shot sequence of a simple action such as making tea. Include a wide shot, medium shot and meaningful close-ups.',checks:['I used three shot sizes','I kept screen direction consistent','My sequence makes sense'],resource:0},
@@ -57,3 +62,5 @@ export const rubric=[['Story & intent',25],['Framing & coverage',20],['Light & e
 export function freshState(){return {profile:null,membership:null,craft:null,progress:{},assessments:{},drafts:{},submissions:[],messages:[],checkins:[],bookings:[],receipts:[],portfolio:{title:'My videography journey',bio:'',ids:[],token:null}}}
 export type State=ReturnType<typeof freshState> & any;
 
+
+export const paths=[...basicPaths,...legacyPaths,...videoPaths];

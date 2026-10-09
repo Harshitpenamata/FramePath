@@ -1,0 +1,48 @@
+{
+  "provider": "OpenAI built-in image_gen",
+  "mode": "generation",
+  "requests": 4,
+  "variants": 0,
+  "retries": 0,
+  "transparent_background": false,
+  "inspected": true,
+  "assets": [
+    {
+      "slug": "before-after-teal-bowl",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original photograph for an interactive photography lesson; photograph only, not UI or a mockup.\nPrimary request: Handmade deep teal ceramic bowl on a dark slate table beside a folded burnt-orange linen. A single large side window casts soft directional natural light. Natural midtone exposure with rich readable shadows and detailed highlights; texture is visible in both. This will be used for an exposure before/after comparison, so render one naturally exposed image without any split view.\nStyle/medium: Tasteful cinematic naturalistic still-life photography, authentic glaze imperfections, linen weave, subtle slate texture, understated editorial polish.\nComposition/framing: Landscape 3:2 photograph, carefully balanced simple arrangement with the bowl as focal point.\nConstraints: No text, logos, brands, watermarks, people, celebrity likenesses, borders, labels, graphics, collage, or film-still references. One original photograph.",
+      "file": "before-after-teal-bowl.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-8f8dab98-66c9-49a1-bb19-37250f2825d5.png"
+    },
+    {
+      "slug": "spot-flaw-yellow-pears",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original photograph for a spot-the-distraction teaching exercise; photograph only, no UI or mockup.\nPrimary request: Lovely analogue still-life of exactly three small yellow pears on a matte midnight-blue surface. Deliberately include one glaring bright rectangular reflection in the UPPER-RIGHT QUADRANT, approximately centered 80 percent from the left and 23 percent from the top: unmistakably distracting and much brighter than the pears. Include moderate incidental clutter in the far-left background, kept secondary. Otherwise the scene is quietly and professionally composed.\nStyle/medium: Tasteful cinematic naturalistic photography, analog texture and delicate grain, tactile pear skins.\nComposition/framing: Landscape 3:2 photograph; pears clustered lower center-left; bright rectangle well separated upper-right so a learner can click it.\nConstraints: The bright reflection is intentional and must remain obvious. No text, logos, brands, watermarks, people, borders, labels, graphics, collage, or film-still references. One original photograph.",
+      "file": "spot-flaw-yellow-pears.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-20c974c5-d39a-47b2-9d39-db0ed94adc3f.png"
+    },
+    {
+      "slug": "exposure-stone-arch",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original photograph for an interactive exposure lesson; photograph only, no UI or mockup.\nPrimary request: Pale stone sculpture in the form of a simple abstract arch on a terracotta tabletop near a bright window. Broad brightness range with distinct unblown texture in the pale highlights and dark but readable shadows. Naturally balanced exposure, fixed camera view. The arch opening and its cast shadow create a clear shape.\nStyle/medium: Tasteful cinematic naturalistic editorial still-life photography, authentic softly textured pale stone and terracotta.\nComposition/framing: Landscape 3:2 image, simple composition with a single arch as the main subject and daylight entering from the side.\nConstraints: Preserve highlight detail and readable shadow texture. No text, logos, brands, watermarks, people, borders, labels, graphics, collage, or film-still references. One original photograph.",
+      "file": "exposure-stone-arch.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-10a30879-5035-4737-8c13-f480746cb3f2.png"
+    },
+    {
+      "slug": "white-balance-pitcher",
+      "prompt": "Use case: photorealistic-natural\nAsset type: original photograph for an interactive white-balance lesson; photograph only, no UI or mockup.\nPrimary request: White ceramic pitcher containing one branch of green leaves, placed on a pale neutral grey surface beside an understated blue cloth. Soft balanced daylight with truthful neutral colour, visibly white ceramic and neutral grey reference areas. The UI will apply colour casts, so keep this source photograph neutral with no warm or cool grade.\nStyle/medium: Tasteful naturalistic editorial still-life photography, subtle cinematic composition while keeping true neutral colour, tactile ceramic and cloth.\nComposition/framing: Landscape 3:2 photograph, pitcher and graceful leaf branch clearly visible, restrained uncluttered arrangement with white and grey areas of ample size.\nConstraints: No text, logos, brands, watermarks, people, borders, labels, graphics, collage, or film-still references. One original photograph.",
+      "file": "white-balance-pitcher.png",
+      "source": "C:\\Users\\Venky\\.codex\\generated_images\\01a1161c-9982-77b0-9a44-58e15cbaad51\\exec-34a5ef04-8573-419d-9a4a-e22b1cd04bc3.png"
+    }
+  ],
+  "spotFlawTarget": {
+    "center": {
+      "xPercent": 83,
+      "yPercent": 22
+    },
+    "suggestedBoundsPercent": {
+      "left": 70,
+      "top": 12,
+      "right": 97,
+      "bottom": 34
+    },
+    "note": "Observed on the generated 3:2 image; use normalized coordinates with the whole image visible."
+  }
+}
