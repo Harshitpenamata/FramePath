@@ -11,7 +11,7 @@ test('curriculum matches the spreadsheet: 42 modules, 80/144/240 hours, 14 per l
 });
 
 test('module text uses short, simple sentences (20 words or fewer)',()=>{
- for(const m of P.curriculumModules)for(const text of [m.outcome,m.assignment,m.evidence,...m.checks,...m.topics])for(const sentence of text.split(/(?<=[.!?])s+/))assert.ok(sentence.split(/s+/).length<=20,m.id+': '+sentence);
+ for(const m of P.curriculumModules)for(const text of [m.outcome,m.assignment,m.evidence,...m.checks,...m.topics])for(const sentence of text.split(/(?<=[.!?])\s+/))assert.ok(sentence.split(/\s+/).length<=20,m.id+': '+sentence);
 });
 
 test('every module has three assessment checks and becomes a scoreable lesson',()=>{
@@ -133,4 +133,34 @@ test('self-check: beginner modules 1–3 skip it; it starts at beginner module 4
 
 test('free plan: only the first two modules of each level have open tasks',()=>{
  for(const level of P.levels){assert.ok(P.isFreeModule('video-'+level+'-0'));assert.ok(P.isFreeModule('video-'+level+'-1'));assert.ok(!P.isFreeModule('video-'+level+'-2'))}
+});
+
+const Les=load(path.join(root,'app/videography/lessons.ts'));
+test('beginner modules: one lesson per topic, each with an idea and a working tool',()=>{
+ for(const m of P.modulesFor('beginner')){
+  const ls=Les.lessonsFor(m.id);assert.equal(ls.length,m.topics.length,m.id);
+  ls.forEach((l,i)=>{assert.equal(l.title,m.topics[i],m.id+' lesson '+(i+1));assert.ok(l.idea.length>20);
+   for(const sentence of l.idea.split(/(?<=[.!?])\s+/))assert.ok(sentence.split(/\s+/).length<=20,m.id+': '+sentence);
+   for(const ref of l.videos||[])assert.ok(ref.startsWith('pathway')||M.V[ref],m.id+' video '+ref);
+   const t=l.tool;assert.ok(t.prompt.length>10);
+   if(t.kind==='order')assert.ok(t.items.length>=3&&new Set(t.items).size===t.items.length);
+   if(t.kind==='sort'){assert.ok(t.groups.length>=2);assert.ok(t.items.every(([,g])=>g>=0&&g<t.groups.length));assert.ok(t.groups.every((_,g)=>t.items.some(([,x])=>x===g)),m.id+' empty group')}
+   if(t.kind==='pick')assert.equal(t.options.filter(o=>o[1]).length,1,m.id+' pick needs one right answer');
+   if(t.kind==='spot')assert.ok(t.items.some(x=>x[1])&&t.items.some(x=>!x[1]),m.id+' spot');
+  });
+ }
+ assert.ok(Les.lessonVideos(Les.lessonsFor('B13')[0],'Wedding')[0].title.length>5);
+ assert.equal(Les.lessonsFor('I01').length,0);
+});
+
+test('B01 starts with the Philipp Humm storytelling video, then Directing Without Words',()=>{
+ const vs=M.moduleVideos.B01;assert.equal(vs[0].youtubeId,'hNuAv-42jzY');assert.equal(vs[1].youtubeId,'WMcWLFtGnAs');
+ assert.deepEqual(Les.lessonsFor('B01').flatMap(l=>l.videos||[]).slice(0,2),['humm','storytelling']);
+});
+
+test('every task has a short name, and every style has an outcome',()=>{
+ for(const m of P.curriculumModules)assert.ok(m.taskName&&m.taskName.length<=32,m.id);
+ assert.equal(new Set(P.curriculumModules.map(m=>m.taskName)).size,42);
+ for(const p of P.pathways)assert.ok(P.pathwayOutcomes[p].length>20,p);
+ for(const l of P.levels)assert.ok(P.finalProject[l].length>10);
 });

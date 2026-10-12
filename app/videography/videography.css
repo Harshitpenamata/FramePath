@@ -198,3 +198,116 @@
 .vg-piece li{display:flex;align-items:center;gap:8px;overflow-wrap:anywhere}
 .vg-piece li button{margin-left:auto}
 @media (max-width:760px){.vg-rate div{grid-template-columns:repeat(5,minmax(0,1fr))}.vg-rate button{font-size:.68rem;padding:6px 2px}}
+
+/* Lessons inside a module: lesson steps, Watch + Reflect, interactive tools. */
+.vg-lessons{display:grid;gap:16px;scroll-margin-top:90px}
+.vg-lesson-steps{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.vg-lesson-steps button{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted-foreground);font:inherit;font-size:.88rem;cursor:pointer;text-align:left}
+.vg-lesson-steps button span{display:grid;place-items:center;width:22px;height:22px;flex:none;border-radius:50%;border:1px solid var(--border);font-size:.75rem}
+.vg-lesson-steps button.current{color:var(--foreground);border-color:var(--primary)}
+.vg-lesson-steps button.done span{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)}
+.vg-lesson-card{display:grid;gap:20px;padding:clamp(18px,3vw,28px);border:1px solid var(--border);border-radius:calc(var(--radius) + 4px);background:var(--card);min-width:0}
+.vg-lesson-card h2{margin:.1em 0 0}
+.vg-lesson-part{display:grid;gap:12px;min-width:0}
+.vg-lesson-part h3{display:flex;align-items:center;gap:8px;margin:0;font-size:1rem;color:var(--primary)}
+.vg-idea{font-size:1.08rem;line-height:1.55;margin:0}
+.vg-tool{display:grid;gap:14px;padding:16px;border-radius:var(--radius);background:var(--surface-raised);border:1px solid var(--border);min-width:0}
+.vg-tool-prompt{margin:0;font-weight:600}
+.vg-tool-result{display:flex;gap:8px;align-items:flex-start;margin:0;padding:10px 12px;border-radius:var(--radius)}
+.vg-tool-result svg{flex:none;margin-top:3px}
+.vg-tool-result.ok{background:color-mix(in srgb,var(--primary) 18%,transparent)}
+.vg-tool-result.no{background:color-mix(in srgb,#f3a3a0 20%,transparent)}
+.vg-order,.vg-sort{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.vg-order{counter-reset:step}
+.vg-order li{display:flex;align-items:center;gap:4px;padding:6px 6px 6px 14px;border-radius:var(--radius);border:1px solid var(--border);background:var(--card);counter-increment:step}
+.vg-order li::before{content:counter(step);font-weight:700;color:var(--muted-foreground);margin-right:8px}
+.vg-order li span{flex:1}
+.vg-order li.ok,.vg-sort li.ok{border-color:var(--primary)}
+.vg-order li.no,.vg-sort li.no{border-color:#f3a3a0}
+.vg-sort li{display:grid;gap:8px;padding:10px 12px;border-radius:var(--radius);border:1px solid var(--border);background:var(--card)}
+.vg-chips button{padding:7px 12px;border-radius:999px;border:1px solid var(--border);background:transparent;color:inherit;font:inherit;font-size:.88rem;cursor:pointer;display:inline-flex;flex-direction:column;align-items:flex-start}
+.vg-chips button small{color:var(--muted-foreground);font-size:.75rem}
+.vg-chips button.selected{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)}
+.vg-chips button.selected small{color:inherit}
+.vg-pick{display:grid;gap:8px}
+.vg-pick button,.vg-spot button{text-align:left;padding:12px 14px;border-radius:var(--radius);border:1px solid var(--border);background:var(--card);color:inherit;font:inherit;cursor:pointer}
+.vg-pick button.ok{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary) inset}
+.vg-pick button.no{border-color:#f3a3a0}
+.vg-spot.list{display:grid;gap:8px}
+.vg-spot button.selected{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,var(--card))}
+.vg-spot button.no{border-color:#f3a3a0;box-shadow:0 0 0 1px #f3a3a0 inset}
+.vg-spot.timeline{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px}
+.vg-spot.timeline button{flex:1 0 120px;min-height:70px;font-size:.85rem;background:color-mix(in srgb,var(--vg-s2) 22%,var(--card));display:flex;gap:4px;align-items:flex-start}
+.vg-spot.timeline button.selected{background:repeating-linear-gradient(45deg,transparent 0 6px,color-mix(in srgb,#f3a3a0 25%,transparent) 6px 12px);text-decoration:line-through}
+.vg-sim{position:relative;overflow:hidden;border-radius:var(--radius);aspect-ratio:3/2;background:#000;width:100%;max-width:560px}
+.vg-sim img{display:block;width:100%;height:100%;object-fit:cover;transition:filter .2s}
+.vg-grain{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+.vg-tint{position:absolute;inset:0;pointer-events:none;mix-blend-mode:color}
+.vg-sim-tag{position:absolute;left:10px;top:10px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff;font-size:.8rem}
+.vg-frame{background-repeat:no-repeat}
+.vg-grid{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to right,transparent calc(33.33% - 1px),rgba(255,255,255,.7) calc(33.33% - 1px) 33.33%,transparent 33.33% calc(66.66% - 1px),rgba(255,255,255,.7) calc(66.66% - 1px) 66.66%,transparent 66.66%),linear-gradient(to bottom,transparent calc(33.33% - 1px),rgba(255,255,255,.7) calc(33.33% - 1px) 33.33%,transparent 33.33% calc(66.66% - 1px),rgba(255,255,255,.7) calc(66.66% - 1px) 66.66%,transparent 66.66%)}
+.vg-slider{display:grid;gap:4px}
+.vg-slider input{width:100%;accent-color:var(--primary)}
+.vg-meter{display:block;height:10px;border-radius:5px;background:var(--border);overflow:hidden}
+.vg-meter span{display:block;height:100%;background:#8fd3c8}
+.vg-meter span.good{background:var(--primary)}
+.vg-meter span.hot{background:#f3a3a0}
+.vg-locked-inline{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:14px;border-radius:var(--radius);border:1px dashed var(--border);background:var(--surface-raised)}
+.vg-locked-inline>div{flex:1 1 220px}
+.vg-locked-inline p{margin:.2em 0 0}
+.vg-assignment-preview.locked>p,.vg-assignment-preview.locked>h3{opacity:.45;filter:grayscale(1)}
+.vg-assignment-preview .eyebrow{display:block}
+
+/* Task tab: the brief is the main thing; handing in is quieter. */
+.vg-task-brief{display:grid;gap:14px;padding:clamp(20px,4vw,32px);border-radius:calc(var(--radius) + 6px);border:1px solid var(--primary);background:linear-gradient(160deg,color-mix(in srgb,var(--primary) 12%,var(--card)),var(--card))}
+.vg-task-brief h2{font-size:clamp(1.6rem,4vw,2.2rem);margin:0}
+.vg-task-do{font-size:clamp(1.05rem,2.4vw,1.25rem);line-height:1.55;margin:0}
+.vg-task-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.vg-task-meta p,.vg-task-meta ul{margin:.3em 0 0}
+.vg-handin{background:transparent}
+.vg-handin h2{font-size:1.1rem}
+
+/* Feedback waiting state. */
+.vg-waiting{display:grid;gap:12px}
+.vg-waiting p{margin:0;display:flex;gap:10px;align-items:center}
+.vg-waiting .vg-tip{flex-direction:column;align-items:flex-start;font-size:1.05rem;min-height:3.2em}
+.vg-spinner{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);border-top-color:var(--primary);animation:vg-spin 1s linear infinite;flex:none}
+@keyframes vg-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.vg-spinner{animation:none}}
+.learning-tabs.four button{font-size:.82rem}
+
+/* Level closure. */
+.vg-closure{display:grid;gap:16px}
+.vg-closure-head{display:flex;gap:16px;align-items:flex-start;color:var(--primary)}
+.vg-closure-head>svg{flex:none}
+.vg-closure-head>div{color:var(--foreground)}
+.vg-closure-head h2{margin:.2em 0}
+.vg-closure-stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.vg-closure-stages ul{list-style:none;padding:0;margin:.4em 0 0;display:grid;gap:4px}
+.vg-closure-stages li{display:flex;gap:6px;align-items:center;color:var(--muted-foreground)}
+.vg-closure-stages li svg{flex:none}
+.vg-closure-stages li.ok{color:var(--foreground)}
+.vg-closure-stages li.ok svg{color:var(--primary)}
+.vg-best{display:grid;gap:8px;padding-left:20px}
+
+/* My Work: header, overview and feedback per piece. */
+.vg-back{display:inline-flex;gap:8px;align-items:center;margin-bottom:16px;font-weight:600}
+.vg-work-overview{margin-bottom:20px}
+.vg-work-overview h2{margin:0}
+.vg-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:14px 0}
+.vg-stats div{display:grid;padding:12px;border-radius:var(--radius);background:var(--surface-raised)}
+.vg-stats strong{font-size:1.6rem}
+.vg-stats span{font-size:.85rem;color:var(--muted-foreground)}
+.vg-progress{height:8px;border-radius:4px;background:var(--surface-raised);overflow:hidden}
+.vg-progress span{display:block;height:100%;background:var(--primary)}
+.vg-piece-review{border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px}
+.vg-piece-review summary{display:flex;gap:8px;align-items:center;cursor:pointer;font-weight:600}
+.vg-piece-review summary strong{margin-left:auto;color:var(--primary)}
+.vg-piece-review ul{padding-left:18px}
+
+/* Dashboard: outcome card and start date. */
+.vg-outcome-card .lede{margin:.2em 0 .6em}
+.vg-outcomes{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.vg-outcomes li{display:flex;gap:8px;align-items:flex-start}
+.vg-outcomes svg{flex:none;margin-top:4px;color:var(--primary)}
+.vg-delay .vg-chips{margin:8px 0}

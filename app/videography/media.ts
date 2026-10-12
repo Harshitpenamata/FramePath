@@ -8,7 +8,8 @@ export type ModuleImage={base:string;alt:string};
 const v=(youtubeId:string,title:string,creator:string,focus:string):ModuleVideo=>({youtubeId,title,creator,focus});
 const vm=(vimeoId:string,title:string,focus:string):ModuleVideo=>({vimeoId,title,creator:'Blackmagic Design',focus});
 
-const V={
+export const V={
+ humm:v('hNuAv-42jzY','Give me 9min, and I’ll improve your storytelling skills by 176%','Philipp Humm','Zoom into one moment: place, action, thought, feeling and words.'),
  storytelling:v('WMcWLFtGnAs','Directing Without Words: Visual Storytelling in Film','StudioBinder','Notice the intended feeling and the visual evidence that creates it.'),
  shotSizes:v('AyML8xuKfoc','Every Shot Size Explained','StudioBinder','Connect each shot size to what the viewer needs to see.'),
  editingCuts:v('FVR8zz8ci2k','Six Essential Film Editing Techniques','StudioBinder','Watch how each cut moves the story or the viewer’s attention.'),
@@ -56,7 +57,7 @@ const V={
 };
 
 export const moduleVideos:Record<string,ModuleVideo[]>={
- B01:[V.storytelling,V.shortFilm],B02:[V.threeActs,V.shotList],B03:[V.shotList,V.storyboard],B04:[V.shutter,V.iso],
+ B01:[V.humm,V.storytelling,V.shortFilm],B02:[V.threeActs,V.shotList],B03:[V.shotList,V.storyboard],B04:[V.shutter,V.iso],
  B05:[V.shotSizes,V.framing],B06:[V.lightBasics,V.lightTypes],B07:[V.betterSound,V.wind],B08:[V.bins,V.organise],
  B09:[V.resolveIntro,V.editingCuts],B10:[V.resolveAudio,V.betterSound],B11:[V.resolveColour,V.whiteBalance],B12:[V.resolveDelivery,V.aspect],
  B14:[V.threeActs,V.shotList],

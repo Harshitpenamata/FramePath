@@ -7,7 +7,7 @@ import {normalizeProfile} from '../../profile-validation';
 import {buildPersonalPlan,isPersonalized} from '../../personalization';
 import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../selfpaced-curriculum';
 import {validateReview} from '../../assignment-review';
-import {buildProgramme,parseVideoKey,handInMissing,needsSelfCheck} from '../../videography/programme';
+import {buildProgramme,parseVideoKey,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,type Level} from '../../videography/programme';
 // Public portfolio data: only the pieces the learner picked to share.
 function publicPortfolio(s:any){const items=s.portfolio.ids.map((x:string)=>s.submissions.find((v:any)=>v.id===x)).filter(Boolean).map((v:any)=>({key:v.key,notes:v.notes,answer:v.answer||'',url:v.url,uploadId:v.uploadId,uploadIds:v.uploadIds||[],status:v.status,total:v.total}));return JSON.stringify({title:s.portfolio.title,bio:s.portfolio.bio,name:s.profile?.name||'Framepath learner',items,simulatedReviews:true})}
 // Keeps a published portfolio in step when a piece or file is removed.
@@ -45,7 +45,11 @@ case 'visual_session_complete':{
  break;
 }
 case 'programme_save':{s.programme=buildProgramme(b.programme,s.programme);break;}
-case 'programme_update':{if(!s.programme)throw new Error('Make your plan first.');const u=b.update||{};s.programme=buildProgramme({...s.programme,hoursPerWeek:u.hoursPerWeek??s.programme.schedule.hoursPerWeek,startDate:u.startDate??s.programme.schedule.startDate,daysPerWeek:u.daysPerWeek??s.programme.schedule.daysPerWeek,mode:u.mode??s.programme.mode},s.programme);break;}
+case 'programme_update':{if(!s.programme)throw new Error('Make your plan first.');const u=b.update||{};
+ // Moving up a level: only to the next one, once every module of the current level is handed in. The new plan starts today.
+ let level=s.programme.level,startDate=u.startDate??s.programme.schedule.startDate;
+ if(u.level!==undefined&&u.level!==level){const cur=level as Level;if(u.level!==videoLevels[videoLevels.indexOf(cur)+1]||modulesFor(cur).some((_,i)=>!s.progress[moduleKey(cur,i)]))throw new Error('Finish every module in this level first.');level=u.level;startDate=today()}
+ s.programme=buildProgramme({...s.programme,level,hoursPerWeek:u.level&&u.level!==s.programme.level?undefined:u.hoursPerWeek??s.programme.schedule.hoursPerWeek,startDate,daysPerWeek:u.daysPerWeek??s.programme.schedule.daysPerWeek,mode:u.mode??s.programme.mode},s.programme);break;}
 case 'video_submit':{
  // Hand in a Videography module: the work, a self-rating and two reflections. It goes straight into My Work.
  const key=safeText(b.key,80,1),video=parseVideoKey(key);if(!video)throw new Error('Choose a Videography module.');requireLesson(s,key);
