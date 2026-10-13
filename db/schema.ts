@@ -1,8 +1,14 @@
-import {sqliteTable,text,integer,index} from 'drizzle-orm/sqlite-core';
+import {sqliteTable,text,integer,index,uniqueIndex,primaryKey} from 'drizzle-orm/sqlite-core';
 export const learners=sqliteTable('learners',{userId:text('user_id').primaryKey(),data:text('data').notNull(),revision:integer('revision').notNull().default(0),updatedAt:integer('updated_at').notNull()});
 export const uploads=sqliteTable('uploads',{id:text('id').primaryKey(),userId:text('user_id').notNull(),name:text('name').notNull(),type:text('type').notNull(),size:integer('size').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_uploads_owner').on(t.userId)]);
 export const aiJobs=sqliteTable('ai_jobs',{id:text('id').primaryKey(),userId:text('user_id').notNull(),scope:text('scope').notNull(),kind:text('kind').notNull(),status:text('status').notNull(),answer:text('answer'),createdAt:integer('created_at').notNull()},t=>[index('idx_ai_user_scope_date').on(t.userId,t.scope,t.createdAt),index('idx_ai_date').on(t.createdAt)]);
-export const portfolios=sqliteTable('portfolios',{token:text('token').primaryKey(),userId:text('user_id').notNull(),data:text('data').notNull()},t=>[index('idx_portfolio_owner').on(t.userId)]);
+// visibility: 'unlisted' (anyone with the link) or 'public' (also listed in the community gallery).
+export const portfolios=sqliteTable('portfolios',{token:text('token').primaryKey(),userId:text('user_id').notNull(),data:text('data').notNull(),visibility:text('visibility').notNull().default('unlisted'),updatedAt:integer('updated_at').notNull().default(0)},t=>[index('idx_portfolio_owner').on(t.userId),index('idx_portfolio_public').on(t.visibility,t.updatedAt)]);
+// Community: likes and comments on pieces in shared portfolios, and reports on comments.
+export const portfolioLikes=sqliteTable('portfolio_likes',{token:text('token').notNull(),pieceId:text('piece_id').notNull(),userId:text('user_id').notNull(),createdAt:integer('created_at').notNull()},t=>[primaryKey({columns:[t.token,t.pieceId,t.userId]}),index('idx_likes_piece').on(t.token,t.pieceId)]);
+// status: 'visible', 'reported' (hidden until reviewed) or 'removed'.
+export const portfolioComments=sqliteTable('portfolio_comments',{id:text('id').primaryKey(),token:text('token').notNull(),pieceId:text('piece_id').notNull(),userId:text('user_id').notNull(),author:text('author').notNull(),body:text('body').notNull(),status:text('status').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_comments_piece').on(t.token,t.pieceId,t.createdAt),index('idx_comments_user_date').on(t.userId,t.createdAt)]);
+export const commentReports=sqliteTable('comment_reports',{id:text('id').primaryKey(),commentId:text('comment_id').notNull(),userId:text('user_id').notNull(),reason:text('reason').notNull(),createdAt:integer('created_at').notNull()},t=>[uniqueIndex('idx_reports_once').on(t.commentId,t.userId)]);
 
 
 export const reflectionAttempts=sqliteTable('reflection_attempts',{id:text('id').primaryKey(),userId:text('user_id').notNull(),moduleKey:text('module_key').notNull(),data:text('data').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_reflection_owner_module_date').on(t.userId,t.moduleKey,t.createdAt)]);

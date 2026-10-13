@@ -1,6 +1,6 @@
 'use client';
 import React,{useEffect,useState} from 'react';
-import {ArrowRight,Check,Copy,FileText,Film,Image as ImageIcon,Link2,Sparkles,Trash2,X} from 'lucide-react';
+import {ArrowRight,FileText,Film,Image as ImageIcon,Link2,Sparkles,Trash2,X} from 'lucide-react';
 import {toast} from 'sonner';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Action,CheckField,Gate,PageHead,DateText} from '../ui';
@@ -86,10 +86,10 @@ function ModuleCard({level,index,reviews,ids,setIds,isNext}:{level:Level;index:n
 
 function PortfolioPanel({ids}:{ids:string[]}){
  const {s,mutate}=useLearning();
- const [title,setTitle]=useState(s.portfolio.title||'My videography journey'),[bio,setBio]=useState(s.portfolio.bio||''),[consent,setConsent]=useState(false);
+ const [title,setTitle]=useState(s.portfolio.title||'My videography journey'),[bio,setBio]=useState(s.portfolio.bio||'');
  useEffect(()=>{setTitle(s.portfolio.title||'My videography journey');setBio(s.portfolio.bio||'')},[s.portfolio.title,s.portfolio.bio]);
  const dirty=title!==(s.portfolio.title||'')||bio!==(s.portfolio.bio||'')||ids.join()!==(s.portfolio.ids||[]).join();
- const link=s.portfolio.token?window.location.origin+'/p/'+s.portfolio.token:'';
+ const sharing=s.portfolio.token?(s.portfolio.visibility==='public'?'Public':'Unlisted'):'Private';
  return <section className="st-card st-portfolio">
   <div className="st-row"><div><span className="st-kicker">Make it yours</span><h2>Build your portfolio.</h2></div><p className="small">Give your work a name, tell your story, and pick what you want to share.</p></div>
   <div className="st-portfolio-grid">
@@ -101,13 +101,9 @@ function PortfolioPanel({ids}:{ids:string[]}){
    <Action outline disabled={!title.trim()} onClick={()=>mutate('portfolio_save',{title,bio,ids})}>Save portfolio</Action>
   </div>
   <div className="st-row st-portfolio-actions">
-   <CheckField checked={consent} onChange={setConsent}>I have permission to share this work and want a link.</CheckField>
-   <Action disabled={!consent||dirty||!s.portfolio.ids.length} onClick={()=>mutate('portfolio_publish',{consent})}>{s.portfolio.token?'Update published portfolio':'Publish portfolio'} →</Action>
+   <span className="small">Sharing: <strong>{sharing}</strong>{dirty?' · save your changes first':''}</span>
+   <Go href="/my-portfolio">Open your portfolio page →</Go>
   </div>
-  {dirty&&<p className="small">Save your changes before publishing.</p>}
-  {link&&<div className="st-share"><input readOnly value={link} onFocus={e=>e.target.select()} aria-label="Portfolio link"/>
-   <Button variant="outline" onClick={async()=>{try{await navigator.clipboard.writeText(link);toast.success('Portfolio link copied')}catch{toast.info('Select the link and copy it.')}}}><Copy size={16}/>Copy link</Button>
-   <Go href={'/p/'+s.portfolio.token} outline>View</Go><Action outline onClick={()=>mutate('portfolio_unpublish')}>Unpublish</Action></div>}
   <p className="small">This is practice work. AI reviews are not official qualifications.</p>
  </section>;
 }
