@@ -9,7 +9,8 @@ import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../
 import {validateReview} from '../../assignment-review';
 import {buildProgramme,parseVideoKey,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,type Level} from '../../videography/programme';
 // Public portfolio data: only the pieces the learner picked to share.
-function publicPortfolio(s:any){const items=s.portfolio.ids.map((x:string)=>s.submissions.find((v:any)=>v.id===x)).filter(Boolean).map((v:any)=>({key:v.key,notes:v.notes,answer:v.answer||'',url:v.url,uploadId:v.uploadId,uploadIds:v.uploadIds||[],status:v.status,total:v.total}));return JSON.stringify({title:s.portfolio.title,bio:s.portfolio.bio,name:s.profile?.name||'Framepath learner',items,simulatedReviews:true})}
+// What a shared portfolio shows. File names stay private; only each file's id and type are shared, so images and videos can be shown.
+function publicPortfolio(s:any){const items=s.portfolio.ids.map((x:string)=>s.submissions.find((v:any)=>v.id===x)).filter(Boolean).map((v:any)=>({key:v.key,moduleId:v.moduleId||'',createdAt:v.createdAt,notes:v.notes,answer:v.answer||'',url:v.url,uploadId:v.uploadId,uploadIds:v.uploadIds||[],uploads:(v.uploads||[]).map((f:any)=>({id:f.id,type:f.type})),status:v.status,total:v.total}));return JSON.stringify({title:s.portfolio.title,bio:s.portfolio.bio,name:s.profile?.name||'Framepath learner',items,simulatedReviews:true})}
 // Keeps a published portfolio in step when a piece or file is removed.
 function republish(s:any){if(!s.portfolio.token)return null;if(!s.portfolio.ids.length){const removeToken=s.portfolio.token;s.portfolio.token=null;return {removeToken}}return {token:s.portfolio.token,data:publicPortfolio(s)}}
 import {basicPaths,basicKeys,basicContext,curriculumVersion,journalTypes} from '../../beginner-curriculum';

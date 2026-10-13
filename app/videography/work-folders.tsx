@@ -6,6 +6,7 @@ import {Button} from '@/components/ui/button';
 import {useLearning,Panel,CheckField,SubmissionCard,DateText,labelForKey} from '../ui';
 import {parseVideoKey,modulesFor,moduleKey,levelNames,type Level} from './programme';
 import {moduleHref} from '../learning-rules';
+import {Showcase,itemsFromSubmissions} from './showcase';
 
 // Orders folders by level and module (B01 … A14), then any older lesson work.
 function folderOrder(key:string){const v=parseVideoKey(key);return v?['beginner','intermediate','advanced'].indexOf(v.level)*100+v.index:1000}
@@ -75,4 +76,16 @@ export function WorkFolders({ids,setIds}:{ids:string[];setIds:(fn:(prev:string[]
    <div><Button variant="outline" size="sm" disabled={busy} onClick={()=>removePiece(p.id)}><Trash2 size={14}/>Remove from My Work</Button></div>
   </div>)}</div>
  </details></Panel>})}</div>;
+}
+
+// My Work: the showcase first, then a tab to manage, remove and share pieces.
+export function WorkTabs({manage}:{manage:React.ReactNode}){
+ const {s}=useLearning(),reviews=useVideoReviews();
+ const [tab,setTab]=useState<'showcase'|'manage'>('showcase');
+ useEffect(()=>{if(new URLSearchParams(window.location.search).get('from'))setTab('manage')},[]);
+ const items=itemsFromSubmissions(s.submissions,reviews);
+ return <div className="vg-work-tabs">
+  <div className="vg-chips" role="tablist" aria-label="My Work view">{([['showcase','Showcase'],['manage','Manage & share']] as const).map(([id,label])=><button type="button" role="tab" key={id} aria-selected={tab===id} className={tab===id?'selected':''} onClick={()=>setTab(id)}>{label}</button>)}</div>
+  {tab==='showcase'?<Showcase items={items} empty={<Panel className="empty"><h2>Nothing to show yet.</h2><p>Hand in a task. Your photos and videos will appear here.</p></Panel>}/>:manage}
+ </div>;
 }
