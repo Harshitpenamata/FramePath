@@ -97,7 +97,7 @@ test('free tier: assignments only on the first two modules of each level',()=>{
 test('every module has videos and an existing illustration; pathway modules follow the interest',()=>{
  for(const m of P.curriculumModules){
   const vids=M.videosFor(m.id,'Wedding');assert.ok(vids.length>=1,m.id+' has videos');
-  for(const v of vids)assert.ok(v.youtubeId||v.vimeoId,m.id);
+  for(const v of vids)assert.ok(v.youtubeId||v.vimeoId||/^https:/.test(v.url),m.id);
   const img=M.moduleImages[m.id];assert.ok(img,m.id+' image');
   for(const w of [480,960,1440])assert.ok(fs.existsSync(path.join(root,'public',img.base+'-'+w+'.webp')),img.base+'-'+w);
  }
@@ -141,7 +141,6 @@ test('beginner modules: one lesson per topic, each with an idea and a working to
   const ls=Les.lessonsFor(m.id);assert.equal(ls.length,m.topics.length,m.id);
   ls.forEach((l,i)=>{assert.equal(l.title,m.topics[i],m.id+' lesson '+(i+1));assert.ok(l.idea.length>20);
    for(const sentence of l.idea.split(/(?<=[.!?])\s+/))assert.ok(sentence.split(/\s+/).length<=20,m.id+': '+sentence);
-   for(const ref of l.videos||[])assert.ok(ref.startsWith('pathway')||M.V[ref],m.id+' video '+ref);
    const t=l.tool;assert.ok(t.prompt.length>10);
    if(t.kind==='order')assert.ok(t.items.length>=3&&new Set(t.items).size===t.items.length);
    if(t.kind==='sort'){assert.ok(t.groups.length>=2);assert.ok(t.items.every(([,g])=>g>=0&&g<t.groups.length));assert.ok(t.groups.every((_,g)=>t.items.some(([,x])=>x===g)),m.id+' empty group')}
@@ -149,13 +148,13 @@ test('beginner modules: one lesson per topic, each with an idea and a working to
    if(t.kind==='spot')assert.ok(t.items.some(x=>x[1])&&t.items.some(x=>!x[1]),m.id+' spot');
   });
  }
- assert.ok(Les.lessonVideos(Les.lessonsFor('B13')[0],'Wedding')[0].title.length>5);
+ assert.ok(Les.lessonVideos('B13',0,'Wedding')[0].title.length>5);
  assert.equal(Les.lessonsFor('I01').length,0);
 });
 
 test('B01 starts with the Philipp Humm storytelling video, then Directing Without Words',()=>{
  const vs=M.moduleVideos.B01;assert.equal(vs[0].youtubeId,'hNuAv-42jzY');assert.equal(vs[1].youtubeId,'WMcWLFtGnAs');
- assert.deepEqual(Les.lessonsFor('B01').flatMap(l=>l.videos||[]).slice(0,2),['humm','storytelling']);
+ assert.deepEqual(Les.lessonVideos('B01',0,'Wedding').slice(0,2).map(v=>v.youtubeId),['hNuAv-42jzY','WMcWLFtGnAs']);
 });
 
 test('every task has a short name, and every style has an outcome',()=>{
@@ -167,4 +166,17 @@ test('every task has a short name, and every style has an outcome',()=>{
 
 test('every beginner lesson has its sketchbook clip and poster',()=>{
  for(const m of P.modulesFor('beginner'))Les.lessonsFor(m.id).forEach((_,i)=>{for(const ext of ['mp4','webp']){const f=path.join(root,'public/sketches',`${m.id}-${i+1}.${ext}`);assert.ok(fs.existsSync(f),f);assert.ok(fs.statSync(f).size<300000,f+' is too big')}});
+});
+
+test('video library: every Beginner row is used on a lesson, and every module has library videos',()=>{
+ const used=new Set();
+ for(const m of P.modulesFor('beginner')){
+  const refs=Les.lessonVideoRefs[m.id];assert.equal(refs.length,Les.lessonsFor(m.id).length,m.id+' one video list per lesson');
+  for(const ref of refs.flat()){if(ref.startsWith('lib:')){const id=ref.slice(4).split('@')[0];assert.ok(M.videoLibrary.some(v=>v.id===id),ref);used.add(id)}else if(ref!=='path')assert.ok(ref.startsWith('pathway')||M.V[ref],m.id+' '+ref)}
+ }
+ for(const v of M.videoLibrary)if(v.module.startsWith('B')&&!v.module.endsWith('13'))assert.ok(used.has(v.id),v.id+' '+v.title+' is not on any lesson');
+ for(const m of P.curriculumModules)assert.ok(M.videosFor(m.id,'Wedding').length>0,m.id);
+ for(const p of P.pathways)for(const lv of ['B13','I13','A13'])assert.ok(M.pathwayLibrary(lv,p).length>0,lv+' '+p);
+ for(const v of M.videoLibrary){assert.ok(v.youtubeId||/^https:\/\//.test(v.url),v.id);assert.ok(v.title&&v.creator,v.id)}
+ const timed=Les.lessonVideos('B05',2,'Wedding')[0];assert.equal(timed.start,417);
 });

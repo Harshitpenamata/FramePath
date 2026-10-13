@@ -1,6 +1,6 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,Check,Play,Target,ListChecks,Gift,LockKeyhole,BookOpen,Puzzle} from 'lucide-react';
+import {ArrowLeft,ArrowRight,Check,ExternalLink,Play,Target,ListChecks,Gift,LockKeyhole,BookOpen,Puzzle} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
@@ -20,19 +20,24 @@ function StageDiagram({current}:{current:string}){
  return <ol className="vg-stage-steps">{stages.map((s,i)=><li key={s} className={s===current?'current':''} aria-current={s===current?'step':undefined}><span>{i+1}</span>{s}</li>)}</ol>;
 }
 
-function embedUrl(v:ModuleVideo){return v.youtubeId?`https://www.youtube-nocookie.com/embed/${v.youtubeId}?autoplay=1&rel=0`:`https://player.vimeo.com/video/${v.vimeoId}?autoplay=1`}
+function embedUrl(v:ModuleVideo){return v.youtubeId?`https://www.youtube-nocookie.com/embed/${v.youtubeId}?autoplay=1&rel=0${v.start?'&start='+v.start:''}`:`https://player.vimeo.com/video/${v.vimeoId}?autoplay=1${v.start?'#t='+v.start+'s':''}`}
+const clock=(s:number)=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
 
-// Click-to-load player: only the thumbnail image loads until the learner presses Play.
+// Videos that play here (YouTube, Vimeo) go in a click-to-load player; lessons on other sites are link cards.
 export function VideoPanel({videos}:{videos:ModuleVideo[]}){
+ const playable=videos.filter(v=>v.youtubeId||v.vimeoId),links=videos.filter(v=>v.url);
  const [active,setActive]=useState(0),[playing,setPlaying]=useState(false);
  useEffect(()=>{setActive(0);setPlaying(false)},[videos[0]?.title]);
- if(!videos.length)return null;const v=videos[active]||videos[0];
+ if(!videos.length)return null;const v=playable[active]||playable[0];
  return <div className="vg-video">
-  <div className="vg-video-frame">{playing
+  {v&&<><div className="vg-video-frame">{playing
    ?<iframe src={embedUrl(v)} title={v.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen loading="lazy"/>
-   :<button type="button" className="vg-video-cover" onClick={()=>setPlaying(true)} style={v.youtubeId?{backgroundImage:`url(https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg)`}:undefined} aria-label={'Play '+v.title}><span className="vg-play"><Play size={30}/></span><span className="vg-video-title">{v.title}<small>{v.creator}</small></span></button>}</div>
+   :<button type="button" className="vg-video-cover" onClick={()=>setPlaying(true)} style={v.youtubeId?{backgroundImage:`url(https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg)`}:undefined} aria-label={'Play '+v.title}><span className="vg-play"><Play size={30}/></span><span className="vg-video-title">{v.title}<small>{v.creator}{v.start?' · starts at '+clock(v.start):''}</small></span></button>}</div>
   <p className="vg-video-focus"><Target size={15}/> Watch for: {v.focus}</p>
-  {videos.length>1&&<div className="vg-video-list">{videos.map((x,i)=><button type="button" key={x.title} className={i===active?'active':''} onClick={()=>{setActive(i);setPlaying(false)}}><Play size={14}/><span>{x.title}<small>{x.creator} · {x.youtubeId?'YouTube':'Vimeo'}</small></span></button>)}</div>}
+  {playable.length>1&&<div className="vg-video-list">{playable.map((x,i)=><button type="button" key={x.title+i} className={i===active?'active':''} onClick={()=>{setActive(i);setPlaying(false)}}><Play size={14}/><span>{x.title}<small>{x.creator}{x.start?' · from '+clock(x.start):''}</small></span></button>)}</div>}</>}
+  {links.length>0&&<div className="vg-video-links">{links.map(x=><a key={x.title+x.url} className="vg-link-card" href={x.url} target="_blank" rel="noopener noreferrer">
+   <span><strong>{x.title}</strong><small>{x.creator}{x.section?' · '+x.section:''}</small><small>{x.focus}</small></span>
+   <span className="vg-link-side">{x.paid?<Badge>Optional · paid</Badge>:<Badge tone="green">Free</Badge>}<ExternalLink size={16}/></span></a>)}</div>}
  </div>;
 }
 
@@ -87,7 +92,7 @@ export function LessonsTab({moduleKey,onTask}:{moduleKey:string;onTask:()=>void}
    <article className="vg-lesson-card">
     <span className="eyebrow">LESSON {index+1} OF {lessons.length}</span><h2>{item.title}</h2>
     <LessonSketch key={m.id+index} src={`/sketches/${m.id}-${index+1}`} title={item.title}/>
-    <div className="vg-lesson-part"><h3><BookOpen size={18}/> Watch</h3><p className="vg-idea">{item.idea}</p><VideoPanel videos={lessonVideos(item,pathway)}/></div>
+    <div className="vg-lesson-part"><h3><BookOpen size={18}/> Watch</h3><p className="vg-idea">{item.idea}</p><VideoPanel videos={lessonVideos(m.id,Math.min(index,lessons.length-1),pathway)}/></div>
     <div className="vg-lesson-part"><h3><Puzzle size={18}/> Reflect: try it</h3>{open?<LessonTool key={moduleKey+index} tool={item.tool} onSolved={()=>mark(index)}/>:<SelfPacedLock moduleKey={moduleKey} what="Practice tools"/>}</div>
     <div className="button-row between">{index>0?<Button variant="outline" onClick={()=>go(index-1)}><ArrowLeft size={16}/>Previous lesson</Button>:<span/>}{index<lessons.length-1?<Button onClick={()=>go(index+1)}>Next lesson<ArrowRight size={16}/></Button>:<Button onClick={onTask}>Go to the task<ArrowRight size={16}/></Button>}</div>
    </article>

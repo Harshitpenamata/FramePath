@@ -1,4 +1,4 @@
-import {V,pathwayVideos,type ModuleVideo} from './media';
+import {V,pathwayVideos,videoLibrary,fromLibrary,pathwayLibrary,type ModuleVideo} from './media';
 import type {Pathway} from './programme';
 
 // Lessons inside a module: one per curriculum topic. Each lesson has Watch (an idea and videos)
@@ -274,8 +274,34 @@ export const moduleLessons:Record<string,ModuleLessonItem[]>={
 };
 
 export const lessonsFor=(moduleId:string)=>moduleLessons[moduleId]||[];
-export function lessonVideos(item:ModuleLessonItem,pathway:Pathway):ModuleVideo[]{
- return (item.videos||[]).map(ref=>ref==='pathway0'?pathwayVideos[pathway][0]:ref==='pathway1'?pathwayVideos[pathway][1]:V[ref]).filter(Boolean);
+
+// Which videos each Beginner lesson shows, lesson by lesson. 'lib:<id>' is a row of the curated video library
+// ('@<seconds>' starts it at that section); 'path' is the library's rows for the learner's style; other names are
+// the earlier hand-picked videos in media.ts, kept where the library has nothing for that lesson.
+export const lessonVideoRefs:Record<string,string[][]>={
+ B01:[['humm','storytelling','lib:B01-4'],['lib:B01-2','lib:B01-1'],['lib:B01-3'],['shortFilm']],
+ B02:[['lib:B02-2'],[],['lib:B02-3','threeActs'],['shotList'],['lib:B02-1']],
+ B03:[['lib:B03-1'],['storyboard'],['lib:B03-2'],['lib:B03-3'],[],['lib:B03-4']],
+ B04:[[],[],['lib:B04-2','lib:B04-3'],['lib:B04-4'],['lib:B04-1@65']],
+ B05:[['lib:B05-1'],['lib:B05-2@119'],['lib:B05-2@417'],['lib:B05-2@499'],['lib:B05-3','lib:B05-4']],
+ B06:[['lightBasics'],['lightTypes'],['lib:B06-1'],[],['lib:B06-2']],
+ B07:[['lib:B07-1'],[],[],['lib:B07-3','wind'],[],['lib:B07-2']],
+ B08:[['lib:B08-3'],[],[],['lib:B08-1','lib:B08-2'],[]],
+ B09:[['resolveIntro'],['lib:B09-1'],['lib:B09-2'],['editingCuts'],[],['lib:B09-3']],
+ B10:[['resolveAudio'],[],['lib:B10-3'],['lib:B10-1','lib:B10-2'],[],[]],
+ B11:[['lib:B11-1'],['whiteBalance'],['lib:B11-1@29'],['lib:B11-2'],[]],
+ B12:[['lib:B12-1'],[],['lib:B12-2'],['lib:B12-3'],[]],
+ B13:[['path'],[],['pathway1']],
+ B14:[['threeActs'],['lib:B14-1','lib:B14-2'],['lib:B14-3'],['lib:B14-4']],
+};
+export function lessonVideos(moduleId:string,index:number,pathway:Pathway):ModuleVideo[]{
+ const refs=lessonVideoRefs[moduleId]?.[index]??moduleLessons[moduleId]?.[index]?.videos??[];
+ return refs.flatMap((ref):ModuleVideo[]=>{
+  if(ref==='path')return pathwayLibrary(moduleId,pathway).map(v=>fromLibrary(v));
+  if(ref==='pathway0'||ref==='pathway1')return [pathwayVideos[pathway][ref==='pathway0'?0:1]];
+  if(ref.startsWith('lib:')){const [id,at]=ref.slice(4).split('@'),v=videoLibrary.find(x=>x.id===id);return v?[fromLibrary(v,at?Number(at):undefined)]:[]}
+  const v=V[ref as keyof typeof V];return v?[v]:[];
+ });
 }
 
 // Shown while the AI reviews a hand-in.
