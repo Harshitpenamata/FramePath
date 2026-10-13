@@ -55,10 +55,10 @@ export function WorkHeader(){
 }
 
 // My Work: everything handed in, one folder per module. Learners can remove a piece or a single file.
-export function WorkFolders({ids,setIds}:{ids:string[];setIds:(fn:(prev:string[])=>string[])=>void}){
+export function WorkFolders({ids,setIds,keys:only}:{ids:string[];setIds:(fn:(prev:string[])=>string[])=>void;keys?:string[]}){
  const {s,mutate,busy}=useLearning();
  const reviews=useVideoReviews(),from=useFromKey();
- const keys=[...new Set<string>(s.submissions.map((x:any)=>x.key))].sort((a,b)=>folderOrder(a)-folderOrder(b));
+ const keys=[...new Set<string>(s.submissions.map((x:any)=>x.key))].filter(k=>!only||only.includes(k)).sort((a,b)=>folderOrder(a)-folderOrder(b));
  useEffect(()=>{if(from)document.getElementById('folder-'+from)?.scrollIntoView({block:'start'})},[from]);
  async function removePiece(id:string){if(!window.confirm('Remove this piece from My Work? This can’t be undone.'))return;if(await mutate('submission_remove',{id}))setIds(prev=>prev.filter(x=>x!==id))}
  async function removeFile(id:string,uploadId:string){if(window.confirm('Remove this file from the piece?'))await mutate('submission_file_remove',{id,uploadId})}
