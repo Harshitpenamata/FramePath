@@ -3,11 +3,12 @@ import React,{useEffect,useMemo,useRef,useState} from 'react';
 import {ArrowLeft,ArrowRight,Check,ChevronLeft,ChevronRight,Clock,Lock,Plus,Star,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go} from '../ui';
-import {courses,interests,interestFor,questionCount,nextQuestion,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,type Level,type Answer} from './programme';
+import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,type Level,type Answer,type Visual} from './programme';
 
-const draftKey='fp-programme-draft-v2';
-type Draft={interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
-const emptyDraft=():Draft=>({interests:[],answers:[],daysPerWeek:5,startDate:today()});
+const draftKey='fp-programme-draft-v3';
+// seed: shuffles each question's answer order for this learner, so the position of an answer gives nothing away.
+type Draft={seed:string;interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
+const emptyDraft=():Draft=>({seed:Math.random().toString(36).slice(2),interests:[],answers:[],daysPerWeek:5,startDate:today()});
 function readDraft():Draft{try{const d=JSON.parse(localStorage.getItem(draftKey)||'null');if(d&&Array.isArray(d.answers))return {...emptyDraft(),...d}}catch{}return emptyDraft()}
 function writeDraft(d:Draft){try{localStorage.setItem(draftKey,JSON.stringify(d))}catch{}}
 export function clearDraft(){try{localStorage.removeItem(draftKey)}catch{}}
@@ -37,6 +38,10 @@ export function VideographyHome(){
  </div>;
 }
 
+// A picture answer: a lesson image with a brightness filter, a colour tint, a crop and an optional thirds grid.
+function OptionPicture({v}:{v:Visual}){
+ return <span className="vg-q-visual" style={{backgroundImage:`url(${v.src})`,backgroundSize:(v.zoom??1)*100+'%',backgroundPosition:`${v.x??50}% ${v.y??50}%`,filter:v.filter}} aria-hidden="true">{v.tint&&<i style={{background:v.tint}}/>}{v.grid&&<b/>}</span>;
+}
 const steps=['Interests','12 questions','Your time','Review'] as const;
 
 export function ProgrammeStart(){
@@ -81,9 +86,10 @@ export function ProgrammeStart(){
    <div className="row between"><span className="eyebrow">LEVEL CHECK · QUESTION {Math.min(draft.answers.length+1,questionCount)} OF {questionCount}</span></div>
    <div className="vg-progress" role="progressbar" aria-label="Level check progress" aria-valuemin={0} aria-valuemax={questionCount} aria-valuenow={draft.answers.length}><span style={{width:`${draft.answers.length/questionCount*100}%`}}/></div>
    {current?<>
+    {current.kind==='check'&&<span className="vg-check-tag">Quick skill check</span>}
     <h2 className="vg-question">{current.prompt}</h2>
-    <div className="vg-options" role="group" aria-label={current.prompt}>{current.options.map((o,i)=><button type="button" key={current.id+i} className="vg-option" onClick={()=>answer(i)}><span>{String.fromCharCode(65+i)}</span>{o}</button>)}</div>
-    <p className="small">Pick the answer most like you. There are no wrong answers. Questions get easier or harder as you go.</p>
+    <div className={'vg-options'+(current.options.some(o=>o.visual)?' visual':'')} role="group" aria-label={current.prompt}>{optionOrder(current,draft.seed).map((i,k)=>{const o=current.options[i];return <button type="button" key={current.id+i} className="vg-option" onClick={()=>answer(i)}>{o.visual?<><OptionPicture v={o.visual}/>{'Picture '+String.fromCharCode(65+k)}</>:<><span>{String.fromCharCode(65+k)}</span>{o.text}</>}</button>})}</div>
+    <p className="small">{current.kind==='check'?'One answer is right. If you don’t know, pick “Not sure”. Guessing only gives you a plan that’s too hard.':'Pick what you really did, not what sounds best. Honest answers give you a plan that isn’t too easy or too hard.'}</p>
    </>:<><h2 className="vg-question">All done. Let’s see your level.</h2></>}
    <div className="button-row"><Button variant="outline" onClick={back}><ArrowLeft size={16}/>Back</Button>{done&&<Button onClick={()=>setStep(2)}>See my level <ArrowRight size={16}/></Button>}</div>
   </Panel>}
@@ -92,6 +98,7 @@ export function ProgrammeStart(){
    <span className="eyebrow">STEP 3 · YOUR TIME</span>
    <h1>Your level: <span className="vg-level">{levelNames[level]}</span></h1>
    <p className="lede">{levelSummary[level]}. You can pick a different level if you like.</p>
+   <p className="small">Skill checks: {result.checks.right} of {result.checks.total} right.</p>
    <div className="vg-level-switch" role="radiogroup" aria-label="Starting level">{(['beginner','intermediate','advanced'] as Level[]).map(l=><button type="button" role="radio" aria-checked={level===l} key={l} className={level===l?'selected':''} onClick={()=>update({level:l===result.level?undefined:l,hoursPerWeek:undefined})}>{levelNames[l]}{l===result.level&&<small>Recommended</small>}</button>)}</div>
    <div className="vg-time-grid">
     <div className="vg-stat"><Clock size={20}/><strong>{plan.recommendedHoursPerWeek} h / week</strong><span>Suggested for {rhythm[level].hours} hours of learning</span></div>

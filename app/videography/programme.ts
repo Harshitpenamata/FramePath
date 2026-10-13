@@ -73,80 +73,123 @@ export const skillAreas=[
 ] as const;
 export type SkillArea=typeof skillAreas[number]['id'];
 
-// Adaptive level check: 12 questions, two per skill area. Each answer moves the
-// learner's recent score (last three answers), and the next question comes from the matching tier
-// (easy, medium or hard). Every option carries a score from 0 to 100.
+// Adaptive level check: 12 questions, two per skill area. In each area the learner first answers a
+// "what did you do" question about a real past shoot (every option is a reasonable choice), then a quick
+// skill check with one right answer. Answer order is shuffled on screen, so position gives nothing away.
+// The next question's tier (easy, medium, hard) follows the learner's last three answers.
 export type Tier='start'|'easy'|'medium'|'hard';
-export type Question={id:string;area:SkillArea;tier:Tier;prompt:string;options:string[];scores:number[]};
-const tierScores:Record<Tier,number[]>={start:[0,30,60,90],easy:[0,12,25,40],medium:[20,35,50,65],hard:[40,60,80,100]};
-const q=(id:string,area:SkillArea,tier:Tier,prompt:string,options:string[]):Question=>({id,area,tier,prompt,options,scores:tierScores[tier]});
+export type Kind='habit'|'check';
+// A picture made from a lesson image: brightness filter, colour tint, crop (zoom + position) and a thirds grid.
+export type Visual={src:string;filter?:string;tint?:string;zoom?:number;x?:number;y?:number;grid?:boolean};
+// last: stays at the end when options are shuffled ("Not sure", "I haven't done this yet").
+export type Option={text:string;score:number;visual?:Visual;last?:boolean};
+export type Question={id:string;area:SkillArea;tier:Tier;kind:Kind;prompt:string;options:Option[]};
+const habitScores:Record<Tier,number[]>={start:[0,30,60,90],easy:[0,12,25,40],medium:[20,35,50,65],hard:[40,60,80,100]};
+// A skill check scores the tier's top mark when right, and a low mark when wrong or "Not sure".
+const checkScores:Record<Exclude<Tier,'start'>,[number,number]>={easy:[40,0],medium:[65,15],hard:[100,35]};
+// Habit options are listed from least to most experienced; the first may be "not yet" and stays last on screen.
+const habit=(id:string,area:SkillArea,tier:Tier,prompt:string,options:string[],notYet=false):Question=>({id,area,tier,kind:'habit',prompt,
+ options:options.map((text,i)=>({text,score:habitScores[tier][i],last:notYet&&i===0}))});
+type Choice=string|Omit<Option,'score'>;
+const check=(id:string,area:SkillArea,tier:Exclude<Tier,'start'>,prompt:string,right:Choice,wrong:Choice[]):Question=>{
+ const [yes,no]=checkScores[tier],opt=(o:Choice,score:number):Option=>typeof o==='string'?{text:o,score}:{...o,score};
+ return {id,area,tier,kind:'check',prompt,options:[opt(right,yes),...wrong.map(w=>opt(w,no)),{text:'Not sure',score:no,last:true}]};
+};
+const img='/lessons/story-01-960.webp';
 export const questionCount=12;
 export const questions:Question[]=[
- q('start','story','start','Have you made a video before?',['No, never','Yes, short clips on my phone','Yes, a short video I edited, with sound','Yes, videos for clients or an audience']),
- q('story-e1','story','easy','You want to film a friend cooking. What do you do first?',['Just start filming','Think about which part looks nice','Decide what the video should show','Decide who will watch it and what they should learn']),
- q('story-m1','story','medium','Before you film, how do you decide what the video is about?',['I see what happens','I pick a topic, like food or travel','I write one main message for one type of viewer','I plan the start, middle and end around that message']),
- q('story-h1','story','hard','A brand asks for a 60-second film. How do you shape the idea?',['I copy a style I like','I write one message and a rough plan','I write two different ideas and pick one for the audience','I test the idea with references and explain why it fits the brand']),
- q('plan-e1','planning','easy','Before you film, do you make a list of shots?',['No','Sometimes, in my head','Yes, a short list','Yes, a list and the things I need to bring']),
- q('plan-e2','planning','easy','Your phone battery dies while filming. How could you stop that?',['I can’t stop it','Use a different phone','Charge it before I go','Charge it, bring a power bank and check storage']),
- q('plan-m1','planning','medium','How do you get ready for a shoot?',['I just turn up','I think about the shots','I write a shot list and a gear list','I make a plan with times, shots, gear and a backup plan']),
- q('plan-m2','planning','medium','Do you ask people before you film them?',['No','Only if they look at the camera','Yes, I ask them','Yes, and I keep a record that they said yes']),
- q('plan-h1','planning','hard','A client says “make a video about our business”. What do you do first?',['Start filming the business','Ask what music they like','Ask about the audience, goal, deadline and what they need','Write a brief and a plan, and agree who signs it off']),
- q('plan-h2','planning','hard','How do you plan a full shoot day?',['A list of shots','A shot list and a gear list','A schedule, call sheet and permissions','A schedule, budget, risks and a backup plan']),
- q('cam-e1','camera','easy','When you film on your phone, how do you make the picture sharp?',['I just film','I hope it is sharp','I tap the screen on my subject','I tap to focus and lock it']),
- q('cam-e2','camera','easy','How do you hold the camera when you film?',['Any way, while walking','With one hand','With two hands, close to my body','On a stand, or resting on something steady']),
- q('cam-m1','camera','medium','How do you control how bright your video is?',['The camera does it','I tap and slide the brightness','I set aperture, shutter speed and ISO myself','I set them for each shot and keep shots matching']),
- q('cam-m2','camera','medium','When you film something happening, what shots do you take?',['One long shot','A few shots from one spot','Wide, medium and close-up shots','Wide, medium, close-up and extra shots for editing']),
- q('cam-h1','camera','hard','How do you keep shots matching across a whole scene?',['I don’t think about it','I keep the same settings','I lock white balance, exposure and frame rate','I test my setup and keep notes so another camera can match']),
- q('cam-h2','camera','hard','You film a moving subject in changing light. What do you do?',['Use auto mode','Change settings as I go','Plan exposure and focus for the move, and test it','Test the camera’s limits first, then plan shots and backups']),
- q('ls-e1','light-sound','easy','Your friend’s face looks too dark next to a window. What do you do?',['Film it anyway','Make it brighter later','Turn them to face the window','Turn them to the light and use white card to brighten shadows']),
- q('ls-e2','light-sound','easy','How do you record someone talking?',['Phone mic, from far away','Move a little closer','Move close and film in a quiet place','Use a small clip-on mic and listen back to check']),
- q('ls-m1','light-sound','medium','How do you light a person?',['I use whatever light is there','I move them near a window','I use one main light and soften the shadows','I plan main, fill and back light for a look I can repeat']),
- q('ls-m2','light-sound','medium','How do you check sound while you record?',['I don’t','I watch the sound meter','I listen with headphones','I use headphones, check levels and record some room sound']),
- q('ls-h1','light-sound','hard','The light keeps changing during an outdoor interview. What do you do?',['Keep filming','Change settings between takes','Use diffusers and reflectors to control it','Plan a setup that still works when the light or angle changes']),
- q('ls-h2','light-sound','hard','How do you protect sound on an important shoot?',['One good mic','One mic and checking levels','Two recordings at once, like a clip-on mic and a boom mic','A main and a backup recording, sync marks and a plan if one fails']),
- q('edit-e1','editing','easy','Have you edited a video?',['No, never','I trimmed a clip on my phone','I joined a few clips together','I made a short video with a start, middle and end']),
- q('edit-e2','editing','easy','Where do you keep your videos after filming?',['Only on my phone','I send them to myself','I copy them to one folder','I copy them to a computer and keep a backup']),
- q('edit-m1','editing','medium','How do you edit a short video?',['I keep most clips','I cut out mistakes','I build a clear start, middle and end','I cut for story and pace, then improve it after someone watches']),
- q('edit-m2','editing','medium','How do you organise clips for an edit?',['All in one place','In one folder','In named folders, with saved versions of my project','In named folders, with backups and a project someone else can open']),
- q('edit-h1','editing','hard','Someone says your edit feels slow. What do you do?',['Speed up every clip','Cut a few shots','Find where attention drops and tighten those parts','Try two structures, show viewers and keep the one that works']),
- q('edit-h2','editing','hard','How do you look after files on a big project?',['One drive','Folders and bins','Checked backups, proxies and relinking','A setup another editor can pick up and recover from']),
- q('fin-e1','finishing','easy','Before you share a video, what do you do?',['Share it straight away','Watch a little of it','Watch it all the way through','Watch it and check the text and sound']),
- q('fin-e2','finishing','easy','Do you add music to your videos?',['No','Yes, any song','Yes, and I keep voices louder than the music','Yes, music I’m allowed to use, quieter than voices']),
- q('fin-m1','finishing','medium','How do you fix colour in a video?',['I don’t','I add a filter','I fix brightness and colour so shots match','I fix it first, then add a simple look']),
- q('fin-m2','finishing','medium','What do you check before you share?',['Nothing','I watch it once in the editor','I watch the final file and check captions and spelling','I use a checklist and make versions for different screens']),
- q('fin-h1','finishing','hard','How do you match colour across several cameras?',['By eye','The same preset on every clip','Scopes, and matching shot by shot','A colour-managed setup, checked on the final export']),
- q('fin-h2','finishing','hard','How do you finish sound for a client video?',['Turn the music down','Balance voice and music','Clean the voices, add effects and mix','Mix to the platform’s loudness level and deliver separate tracks']),
+ habit('start','story','start','Have you made a video before?',['No, never','Yes, short clips on my phone','Yes, a short video I edited, with sound','Yes, videos for clients or an audience']),
+ // Story and ideas
+ habit('story-he','story','easy','The last time you filmed something, how did you choose what to film?',['I haven’t filmed anything yet','Whatever looked nice','The main thing that was happening','What I wanted people to see first'],true),
+ habit('story-hm','story','medium','In your last video, did you plan a start, middle and end before filming?',['No, I found it in the edit','A rough idea in my head','A few lines written down','Planned shot by shot']),
+ habit('story-hh','story','hard','On your last video for a client or audience, how did you choose the idea?',['The client told me exactly what to make','I picked a style I liked','I wrote a couple of ideas and chose one','I tested ideas against the audience and the goal']),
+ check('story-ce','story','easy','Which of these is a message, not just a topic?','Slow bread is worth the wait',['Food','My kitchen']),
+ check('story-cm','story','medium','Your video is for parents watching on their phones. Which opening works best?','A child’s face lighting up as the bread comes out',['A 20-second logo animation','A wide shot of the building']),
+ check('story-ch','story','hard','A 60-second brand film has to show “we care”. Which is the strongest choice?','One small, real moment of a worker fixing a customer’s problem',['A narrator saying “we care”','A fast montage of products with music']),
+ // Planning
+ habit('plan-he','planning','easy','Before your last shoot, what did you get ready?',['I haven’t done a shoot yet','I checked the phone had space','I charged it and checked the space','I charged it, checked space and wrote what to film'],true),
+ habit('plan-hm','planning','medium','How did you plan your last shoot?',['I knew roughly what I wanted','A list of shots','A shot list and a gear list','A plan with times, shots and a backup']),
+ habit('plan-hh','planning','hard','Before your last bigger shoot, what did you send the people involved?',['A message with the time','The time and the address','A call sheet with times and jobs','A call sheet, risks and a backup plan']),
+ check('plan-ce','planning','easy','Which line is useful in a shot list?','Close-up: hands pour the tea',['Something nice','Maybe some other shots']),
+ check('plan-cm','planning','medium','You want to film a stranger in a café. What do you need first?','Their permission',['A better camera','Background music']),
+ check('plan-ch','planning','hard','Rain is forecast on your only outdoor shoot day. What is the best plan?','Book an indoor option and pack rain covers',['Go anyway and hope it clears','Start editing old footage instead']),
+ // Camera and framing
+ habit('cam-he','camera','easy','When you last filmed on your phone, how did you get it sharp?',['I haven’t filmed on my phone yet','The phone did it','I tapped on the subject','I tapped and held to lock focus'],true),
+ habit('cam-hm','camera','medium','How did you set the brightness on your last shoot?',['Left it on auto','Slid the brightness on the screen','Set it by hand once','Set shutter, aperture and ISO for each shot']),
+ habit('cam-hh','camera','hard','On your last scene with many shots, how did you keep them matching?',['Fixed it in the edit','Mostly the same settings','Locked white balance, shutter and frame rate','Tested first and noted settings so another camera could match']),
+ check('cam-ce','camera','easy','Which picture is too bright?',{text:'Picture B',visual:{src:img,filter:'brightness(1.9) saturate(0.6)'}},[{text:'Picture A',visual:{src:img}},{text:'Picture C',visual:{src:img,filter:'brightness(0.45)'}}]),
+ check('cam-cm','camera','medium','You film at 25 frames per second. Which shutter speed gives natural motion?','1/50',['1/1000','1/25']),
+ check('cam-ch','camera','hard','Which frame puts the cup on a rule-of-thirds crossing?',{text:'Frame B',visual:{src:img,zoom:1.5,x:35,y:77,grid:true}},[{text:'Frame A',visual:{src:img,zoom:1.5,x:72,y:60,grid:true}},{text:'Frame C',visual:{src:img,zoom:1.5,x:5,y:20,grid:true}}]),
+ // Light and sound
+ habit('ls-he','light-sound','easy','The last time you recorded someone talking, where was the phone?',['I haven’t recorded anyone yet','Across the room','About an arm’s length away','Close to them, in a quiet spot'],true),
+ habit('ls-hm','light-sound','medium','On your last shoot, how did you check the sound?',['I didn’t check it','Watched the level meter','Listened with headphones','Headphones, levels and some room sound']),
+ habit('ls-hh','light-sound','hard','On your last interview, how did you light the face?',['Used whatever light was there','Moved them near a window','One main light, softened','Main, fill and back light planned for the look']),
+ check('ls-ce','light-sound','easy','Which picture has an orange colour cast?',{text:'Picture C',visual:{src:img,tint:'rgba(255,138,0,0.38)'}},[{text:'Picture A',visual:{src:img}},{text:'Picture B',visual:{src:img,tint:'rgba(47,109,255,0.32)'}}]),
+ check('ls-cm','light-sound','medium','A bright window is behind your friend, so their face is dark. What is the best fix?','Turn them to face the window',['Add a filter later','Zoom in more']),
+ check('ls-ch','light-sound','hard','Outdoors, your clip-on mic picks up wind. What works best?','A furry windshield, and shelter from the wind',['Turn the gain up','Fix it in the edit']),
+ // Editing
+ habit('edit-he','editing','easy','Have you edited a video yet?',['Not yet','I trimmed one clip','I joined a few clips','I made a short video with a start, middle and end'],true),
+ habit('edit-hm','editing','medium','How did you organise the clips for your last edit?',['All in one place','In one folder','Named folders and saved versions','Named folders, backups and saved versions']),
+ habit('edit-hh','editing','hard','The last time someone said your edit felt slow, what did you do?',['Nobody has said that yet','Cut a few shots','Found where attention dropped and tightened it','Tried two structures and kept the one that worked']),
+ check('edit-ce','editing','easy','Which part of a clip do you usually trim away?','The seconds before and after the action',['The main action','The middle of the clip']),
+ check('edit-cm','editing','medium','Hearing the next scene before we see it is called…','A J-cut',['A jump cut','A fade']),
+ check('edit-ch','editing','hard','Two editors both saved changes to version 05. What is the safest next step?','Merge into version 06 and note what changed',['Keep both as version 05','Delete the older one']),
+ // Colour, sound and sharing
+ habit('fin-he','finishing','easy','Before you last shared a video, what did you do?',['I haven’t shared one yet','Shared it straight away','Watched part of it','Watched it all the way through'],true),
+ habit('fin-hm','finishing','medium','In your last video with music, how loud was the music?',['I didn’t use music','I left it as it came','Turned down under voices','Mixed so the voice was always on top']),
+ habit('fin-hh','finishing','hard','How did you deliver your last client video?',['One file by link','One file, checked once','Versions for each screen, checked','Versions, captions and a checklist against a spec']),
+ check('fin-ce','finishing','easy','Which title is easiest to read on a phone?','A short title in big, clear letters',['A long sentence in thin, curly letters','Spinning 3D text']),
+ check('fin-cm','finishing','medium','Music covers the words in your video. What do you do?','Turn the music down under the voice',['Turn everything up','Only add captions']),
+ check('fin-ch','finishing','hard','Online platforms usually aim for a loudness of about…','−14 LUFS',['0 dB','−40 LUFS']),
 ];
 const areaOrder=skillAreas.flatMap(a=>[a.id,a.id]);
 export type Answer={q:string;a:number};
 const questionById=(id:string)=>questions.find(x=>x.id===id);
-const runningScore=(answers:Answer[])=>answers.reduce((n,x)=>n+questionById(x.q)!.scores[x.a],0)/answers.length;
-// Picks the next question from the average of the last three answers; null when all 12 are answered.
+const scoreOf=(x:Answer)=>questionById(x.q)!.options[x.a].score;
+const mean=(ns:number[])=>ns.reduce((n,v)=>n+v,0)/ns.length;
+export const isRightCheck=(x:Answer)=>{const q=questionById(x.q)!;return q.kind==='check'&&x.a===0};
+// Picks the next question: habit first in each area, then a skill check. Null when all 12 are answered.
 export function nextQuestion(answers:Answer[]):Question|null{
  if(answers.length>=questionCount)return null;
  if(!answers.length)return questionById('start')!;
- const recent=runningScore(answers.slice(-3)),tier:Tier=recent<35?'easy':recent<70?'medium':'hard';
- const area=areaOrder[answers.length],asked=new Set(answers.map(x=>x.q));
- const pool=questions.filter(x=>x.area===area&&!asked.has(x.id));
- return pool.find(x=>x.tier===tier)||pool.find(x=>x.tier!=='start')!;
+ const recent=mean(answers.slice(-3).map(scoreOf)),tier:Tier=recent<35?'easy':recent<70?'medium':'hard';
+ const area=areaOrder[answers.length],kind:Kind=answers.length%2?'check':'habit',asked=new Set(answers.map(x=>x.q));
+ const pool=questions.filter(x=>x.area===area&&x.kind===kind&&x.tier!=='start'&&!asked.has(x.id));
+ return pool.find(x=>x.tier===tier)||pool[0]!;
+}
+// Display order for a question's options: shuffled per learner, with "Not sure" / "not yet" kept last.
+export function optionOrder(q:Question,seed:string):number[]{
+ let h=0;for(const c of seed+q.id)h=(h*31+c.charCodeAt(0))|0;
+ const free=q.options.map((_,i)=>i).filter(i=>!q.options[i].last),tail=q.options.map((_,i)=>i).filter(i=>q.options[i].last);
+ for(let i=free.length-1;i>0;i--){h=(h*1103515245+12345)|0;const j=Math.abs(h)%(i+1);[free[i],free[j]]=[free[j],free[i]]}
+ return [...free,...tail];
 }
 
-export type Assessment={answers:Answer[];areas:Record<SkillArea,number>;score:number;level:Level};
+// A missed skill check caps that area: hard → below Advanced, medium → below Intermediate, easy → low.
+const checkCap:Record<Tier,number>={start:100,easy:25,medium:39,hard:69};
+export type Assessment={answers:Answer[];areas:Record<SkillArea,number>;score:number;level:Level;checks:{right:number;total:number}};
 // Replays the adaptive order so the server only accepts a sequence it would have asked.
 export function assess(input:unknown):Assessment{
  if(!Array.isArray(input)||input.length!==questionCount)throw new Error('Answer all twelve level questions.');
  const answers:Answer[]=[];
  for(const item of input){
   const expected=nextQuestion(answers);
-  if(!item||item.q!==expected?.id||!Number.isInteger(item.a)||item.a<0||item.a>3)throw new Error('Something went wrong with your answers. Please start the 12 questions again.');
+  if(!item||!expected||item.q!==expected.id||!Number.isInteger(item.a)||item.a<0||item.a>=expected.options.length)throw new Error('Something went wrong with your answers. Please start the 12 questions again.');
   answers.push({q:item.q,a:item.a});
  }
- const areas=Object.fromEntries(skillAreas.map(area=>{const own=answers.filter(x=>questionById(x.q)!.area===area.id);return [area.id,Math.round(runningScore(own))]})) as Record<SkillArea,number>;
- const score=Math.round(runningScore(answers));
+ const areas=Object.fromEntries(skillAreas.map(area=>{
+  const own=answers.filter(x=>questionById(x.q)!.area===area.id);
+  let s=Math.round(mean(own.map(scoreOf)));
+  for(const x of own){const q=questionById(x.q)!;if(q.kind==='check'&&!isRightCheck(x))s=Math.min(s,checkCap[q.tier])}
+  return [area.id,s];
+ })) as Record<SkillArea,number>;
+ const score=Math.round(mean(Object.values(areas)));
+ const checks={right:answers.filter(isRightCheck).length,total:answers.filter(x=>questionById(x.q)!.kind==='check').length};
  // A finished, edited video (start answer 2+) is the curriculum's entry requirement for Intermediate.
- const start=answers[0].a;
- const level:Level=score>=70&&start>=3?'advanced':score>=40&&start>=2?'intermediate':'beginner';
- return {answers,areas,score,level};
+ // Advanced also needs nearly every skill check right; Intermediate needs half.
+ const start=scoreOf(answers[0]);
+ const level:Level=score>=70&&start>=90&&checks.right>=5?'advanced':score>=40&&start>=60&&checks.right>=3?'intermediate':'beginner';
+ return {answers,areas,score,level,checks};
 }
 
 export const maxHoursPerWeek=30;

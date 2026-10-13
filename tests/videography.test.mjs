@@ -19,50 +19,63 @@ test('every module has three assessment checks and becomes a scoreable lesson',(
  assert.equal(P.videoPaths.length,3);assert.ok(P.videoPaths.every(p=>p.lessons.length===14));
 });
 
-test('question bank: start question plus easy, medium and hard questions for every skill area',()=>{
+const best=q=>q.options.reduce((b,o,i,a)=>o.score>a[b].score?i:b,0),worst=q=>q.options.reduce((b,o,i,a)=>o.score<a[b].score?i:b,0);
+const notSure=q=>q.options.findIndex(o=>o.text==='Not sure');
+const mid=q=>q.kind==='check'?0:q.tier==='start'?2:Math.min(2,q.options.length-1);
+test('question bank: habit and skill-check questions at every tier for every skill area',()=>{
  assert.equal(P.questionCount,12);
- for(const a of P.skillAreas)for(const tier of ['easy','medium','hard'])assert.ok(P.questions.some(q=>q.area===a.id&&q.tier===tier),a.id+' '+tier);
- assert.ok(P.questions.every(q=>q.options.length===4&&q.scores.length===4));
+ for(const a of P.skillAreas)for(const kind of ['habit','check'])for(const tier of ['easy','medium','hard'])assert.ok(P.questions.some(q=>q.area===a.id&&q.kind===kind&&q.tier===tier),a.id+' '+kind+' '+tier);
  assert.equal(new Set(P.questions.map(q=>q.id)).size,P.questions.length,'ids are unique');
+ for(const q of P.questions.filter(q=>q.kind==='check')){assert.equal(q.options[0].score,Math.max(...q.options.map(o=>o.score)),q.id+' right answer is first in data');assert.ok(notSure(q)>0,q.id+' has Not sure')}
+ for(const q of P.questions)for(const o of q.options)for(const sentence of [q.prompt,o.text])assert.ok(sentence.split(/\s+/).length<=20,q.id);
 });
 
-test('adaptive: a brand-new learner only gets easy questions and starts at Beginner',()=>{
- const path=answers(0);assert.equal(path.length,12);
- const tiers=path.slice(1).map(x=>P.questions.find(q=>q.id===x.q).tier);
- assert.ok(tiers.every(t=>t==='easy'),tiers.join(','));
- const r=P.assess(path);assert.equal(r.level,'beginner');assert.equal(r.score,0);
+test('answer order is shuffled per learner, with "Not sure" kept last',()=>{
+ const q=P.questions.find(q=>q.id==='cam-cm');
+ const orders=['a','b','c','d','e','f'].map(seed=>P.optionOrder(q,seed));
+ for(const o of orders){assert.deepEqual([...o].sort(),[0,1,2,3]);assert.equal(o[o.length-1],notSure(q))}
+ assert.ok(new Set(orders.map(o=>o.join())).size>1,'different learners see different orders');
+ assert.ok(orders.some(o=>o[0]!==0),'the right answer is not always first');
 });
 
-test('adaptive: a professional gets hard questions and starts at Advanced',()=>{
- const path=answers(3);
- const tiers=path.slice(1).map(x=>P.questions.find(q=>q.id===x.q).tier);
- assert.ok(tiers.every(t=>t==='hard'),tiers.join(','));
- const r=P.assess(path);assert.equal(r.level,'advanced');assert.ok(Object.values(r.areas).every(v=>v>=95),JSON.stringify(r.areas));
+test('adaptive: a brand-new learner gets easy questions and starts at Beginner',()=>{
+ const path=answers(worst);assert.equal(path.length,12);
+ assert.ok(path.slice(1).every(x=>P.questions.find(q=>q.id===x.q).tier==='easy'));
+ const r=P.assess(path);assert.equal(r.level,'beginner');assert.equal(r.checks.right,0);
 });
 
-test('adaptive: middle answers get medium questions and start at Intermediate',()=>{
- const path=answers(2);
- const tiers=path.slice(1).map(x=>P.questions.find(q=>q.id===x.q).tier);
- assert.ok(tiers.includes('medium'),tiers.join(','));
- assert.equal(P.assess(path).level,'intermediate');
+test('adaptive: a real professional gets hard questions and starts at Advanced',()=>{
+ const path=answers(best);
+ assert.ok(path.slice(1).every(x=>P.questions.find(q=>q.id===x.q).tier==='hard'));
+ const r=P.assess(path);assert.equal(r.level,'advanced');assert.equal(r.checks.right,6);
 });
 
-test('adaptive: questions get harder after strong answers and easier after weak ones',()=>{
- // Strong start, then weak answers: the check should step down to easy questions.
- const path=answers(q=>q.id==='start'?3:0);
+test('claiming pro habits but missing the skill checks does not give Advanced',()=>{
+ const bluff=answers(q=>q.kind==='check'?notSure(q):best(q));
+ const r=P.assess(bluff);assert.notEqual(r.level,'advanced');
+ assert.ok(Object.values(r.areas).every(v=>v<70),JSON.stringify(r.areas));
+ const guess=answers(q=>q.kind==='check'?1:best(q));assert.notEqual(P.assess(guess).level,'advanced');
+});
+
+test('adaptive: some experience and correct checks start at Intermediate',()=>{
+ const path=answers(mid);
+ assert.equal(P.assess(path).level,'intermediate',JSON.stringify(P.assess(path)));
+});
+
+test('adaptive: questions get easier after weak answers',()=>{
+ const path=answers(q=>q.id==='start'?best(q):worst(q));
  const tiers=path.map(x=>P.questions.find(q=>q.id===x.q).tier);
  assert.equal(tiers[1],'hard');assert.ok(tiers.slice(-3).every(t=>t==='easy'),tiers.join(','));
  assert.equal(P.assess(path).level,'beginner');
 });
 
 test('assessment rejects tampered or incomplete answer lists',()=>{
- const good=answers(1);
+ const good=answers(best);
  assert.throws(()=>P.assess(good.slice(0,11)));
- const swapped=good.map((x,i)=>i===3?{...x,q:'plan-h2'}:x);assert.throws(()=>P.assess(swapped),/Something went wrong/);
+ const swapped=good.map((x,i)=>i===3?{...x,q:'plan-hm'}:x);assert.throws(()=>P.assess(swapped),/Something went wrong/);
  assert.throws(()=>P.assess(good.map((x,i)=>i===5?{...x,a:7}:x)));
  assert.throws(()=>P.assess([1,2,3]));
- // A high level can't be faked by answering the start question low and the rest high.
- const noFilm=answers(q=>q.id==='start'?0:3);assert.equal(P.assess(noFilm).level,'beginner');
+ const noFilm=answers(q=>q.id==='start'?worst(q):best(q));assert.equal(P.assess(noFilm).level,'beginner');
 });
 
 test('schedule follows the recommended rhythm and only lets learners add hours',()=>{
@@ -75,12 +88,12 @@ test('schedule follows the recommended rhythm and only lets learners add hours',
 
 test('server-side programme build validates input and recomputes derived values',()=>{
  const today=P.today();
- const p=P.buildProgramme({course:'videography',interests:['wildlife','wedding'],answers:answers(2),hoursPerWeek:12,startDate:P.addDays(today,7),daysPerWeek:6});
+ const p=P.buildProgramme({course:'videography',interests:['wildlife','wedding'],answers:answers(mid),hoursPerWeek:12,startDate:P.addDays(today,7),daysPerWeek:6});
  assert.equal(p.level,'intermediate');assert.equal(p.primaryPathway,'Documentary');assert.equal(p.schedule.hoursPerWeek,12);assert.equal(p.schedule.weeks,12);assert.equal(p.mode,null);
- assert.throws(()=>P.buildProgramme({course:'photography',interests:['wedding'],answers:answers(1)}));
- assert.throws(()=>P.buildProgramme({course:'videography',interests:[],answers:answers(1)}));
- assert.throws(()=>P.buildProgramme({course:'videography',interests:['not-real'],answers:answers(1)}));
- const far=P.buildProgramme({course:'videography',interests:['travel'],answers:answers(1),startDate:'2099-01-01'});assert.equal(far.schedule.startDate,today,'out-of-range start falls back to today');
+ assert.throws(()=>P.buildProgramme({course:'photography',interests:['wedding'],answers:answers(best)}));
+ assert.throws(()=>P.buildProgramme({course:'videography',interests:[],answers:answers(best)}));
+ assert.throws(()=>P.buildProgramme({course:'videography',interests:['not-real'],answers:answers(best)}));
+ const far=P.buildProgramme({course:'videography',interests:['travel'],answers:answers(best),startDate:'2099-01-01'});assert.equal(far.schedule.startDate,today,'out-of-range start falls back to today');
  const updated=P.buildProgramme({...p,mode:'self'},p);assert.deepEqual(updated.assessment,p.assessment,'updates keep the saved assessment');
  // Regression: changing hours after the start date has passed must not reset the start date to today.
  const started={...p,schedule:{...p.schedule,startDate:P.addDays(today,-21)}};const moreHours=P.buildProgramme({...started,hoursPerWeek:14,startDate:started.schedule.startDate},started);assert.equal(moreHours.schedule.startDate,P.addDays(today,-21));assert.equal(moreHours.schedule.hoursPerWeek,14);
