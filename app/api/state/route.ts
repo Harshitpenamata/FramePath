@@ -13,7 +13,7 @@ import {buildProgramme,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,l
 function publicPortfolio(s:any){const items=s.portfolio.ids.map((x:string)=>s.submissions.find((v:any)=>v.id===x)).filter(Boolean).map((v:any)=>({key:v.key,moduleId:v.moduleId||'',createdAt:v.createdAt,notes:v.notes,answer:v.answer||'',url:v.url,uploadId:v.uploadId,uploadIds:v.uploadIds||[],uploads:(v.uploads||[]).map((f:any)=>({id:f.id,type:f.type})),status:v.status,total:v.total}));return JSON.stringify({title:s.portfolio.title,bio:s.portfolio.bio,name:s.profile?.name||'Framepath learner',items,simulatedReviews:true})}
 // Keeps a published portfolio in step when a piece or file is removed.
 function republish(s:any){if(!s.portfolio.token)return null;if(!s.portfolio.ids.length){const removeToken=s.portfolio.token;s.portfolio.token=null;return {removeToken}}return {token:s.portfolio.token,data:publicPortfolio(s)}}
-import {lessonsFor,lessonNeeds,lessonsStatus,type LessonMark} from '../../videography/lessons';
+import {lessonsFor,lessonNeeds,lessonsStatus,requireLessonsForTask,type LessonMark} from '../../videography/lessons';
 import {basicPaths,basicKeys,basicContext,curriculumVersion,journalTypes} from '../../beginner-curriculum';
 import {scoreAttempt,moduleInfo,sequenceFor,assignmentRubric} from '../../learning-rules';
 import {identity,readState,saveState,usage,checkOrigin,safeText,safeUrl,mentorFor,requireLesson,activeExplore,craftEnrolled,db,errorResponse} from '../../service';
@@ -67,7 +67,7 @@ case 'video_submit':{
  // Hand in a Videography module: the work, a self-rating and two reflections. It goes straight into My Work.
  const key=safeText(b.key,80,1),video=parseVideoKey(key);if(!video)throw new Error('Choose a Videography module.');requireLesson(s,key);
  const lessons=lessonsStatus(video.module.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[key]);
- if(lessons.done<lessons.total)throw new Error(`Finish the lessons first: ${lessons.done} of ${lessons.total} done. Watch each video and try each practice tool.`);
+ if(requireLessonsForTask&&lessons.done<lessons.total)throw new Error(`Finish the lessons first: ${lessons.done} of ${lessons.total} done. Watch each video and try each practice tool.`);
  const ids:string[]=Array.isArray(b.uploadIds)?[...new Set<string>(b.uploadIds.map((x:unknown)=>safeText(x,100,1)))]:[];
  const handIn={answer:safeText(b.answer||'',6000),notes:safeText(b.notes||'',2000),url:safeUrl(b.url||''),uploadIds:ids,ratings:Array.isArray(b.ratings)?b.ratings:[],reflections:{well:safeText(b.reflections?.well||'',600),change:safeText(b.reflections?.change||'',600)}};
  const selfCheck=needsSelfCheck(key),missing=handInMissing(video.module,handIn,selfCheck);if(missing.length)throw new Error('Before you hand in: '+missing.join(', ')+'.');

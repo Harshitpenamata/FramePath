@@ -967,6 +967,9 @@ Object.assign(lessonVideoRefs,{
 // A lesson is finished when each of its videos has been watched (YouTube/Vimeo: played for at least 70%;
 // videos on other sites: opened) and its practice tool has been solved.
 export const watchShare=0.7;
+// Switch for locking each module's task until its lessons are finished. Off during testing; progress is still
+// tracked, so turning it on later counts lessons already finished.
+export const requireLessonsForTask=false;
 export const videoId=(v:ModuleVideo)=>v.youtubeId?'yt:'+v.youtubeId+'@'+(v.start||0):v.vimeoId?'vm:'+v.vimeoId:'url:'+v.url;
 export type LessonMark={v:string[];t:boolean};
 export function lessonNeeds(moduleId:string,index:number,pathway:Pathway){return lessonVideos(moduleId,index,pathway).map(videoId)}

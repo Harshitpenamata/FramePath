@@ -6,7 +6,7 @@ import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
 import {parseVideoKey,moduleLesson,projectLabel,freeModuleCount,isFreeModule,type Pathway} from './programme';
 import {videosFor,moduleImages,imageSrcSet,type ModuleVideo} from './media';
-import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,type LessonMark} from './lessons';
+import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
 import {LessonTool} from './tools';
 
 const stages=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
@@ -139,7 +139,7 @@ export function LessonsTab({moduleKey,onTask}:{moduleKey:string;onTask:()=>void}
   <section className={'vg-assignment-preview'+(open?'':' locked')}>
    <span className="eyebrow">{taskLabel(m.id)}</span><h3><ListChecks size={18}/> {m.taskName}</h3>
    <p>{lesson.do}</p>
-   {!open?<SelfPacedLock moduleKey={moduleKey} what="This task"/>:status.done<status.total?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Finish all {status.total} lessons to unlock this task.</strong><p className="small">{status.done} of {status.total} done. Watch each video and try each practice tool.</p></div></div>:<Button onClick={onTask}>Start the task</Button>}
+   {!open?<SelfPacedLock moduleKey={moduleKey} what="This task"/>:requireLessonsForTask&&status.done<status.total?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Finish all {status.total} lessons to unlock this task.</strong><p className="small">{status.done} of {status.total} done. Watch each video and try each practice tool.</p></div></div>:<Button onClick={onTask}>Start the task</Button>}
   </section>
  </div>;
 }

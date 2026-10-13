@@ -4,6 +4,8 @@ Branch: `feat/lessons-unlock-task` (based on `feat/portfolio-showcase`)
 
 ## Summary
 
+> **Currently switched off for testing.** `requireLessonsForTask` in `app/videography/lessons.ts` is `false`. Tasks are open as before, but lesson progress (watched videos, solved tools) is still tracked and saved. Set it to `true` to turn the lock on.
+
 A module's task stays locked until every lesson in that module is finished. A lesson is finished when the learner has:
 1. **watched each video:**
    - YouTube or Vimeo videos must actually play for at least 70% of their length; skipping ahead doesn't count
