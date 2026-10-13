@@ -41,15 +41,20 @@ export function VideoPanel({videos}:{videos:ModuleVideo[]}){
  </div>;
 }
 
-// The lesson's sketchbook picture: a short silent clip that draws itself on, then holds.
-// With reduced motion it shows the finished page. Click to watch it draw again.
+// The lesson's sketchbook picture: a short silent clip that draws itself on, looping like a GIF.
+// It is muted before it loads (browsers only autoplay muted video), then played and kept playing while on screen.
 function LessonSketch({src,title}:{src:string;title:string}){
- const ref=useRef<HTMLVideoElement>(null),[still,setStill]=useState(false);
- useEffect(()=>{setStill(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)},[]);
- // React leaves out the muted attribute, which blocks autoplay; set it and start the clip here.
- useEffect(()=>{const v=ref.current;if(v){v.muted=true;v.play().catch(()=>{})}},[still,src]);
- if(still)return <img className="vg-sketch" src={src+'.webp'} alt={'Sketch: '+title} loading="lazy"/>;
- return <video ref={ref} className="vg-sketch" src={src+'.mp4'} poster={src+'.webp'} muted playsInline autoPlay preload="metadata" aria-label={'Sketch: '+title} onClick={()=>{const v=ref.current;if(v){v.currentTime=0;v.play().catch(()=>{})}}}/>;
+ const ref=useRef<HTMLVideoElement>(null);
+ useEffect(()=>{
+  const v=ref.current;if(!v)return;
+  v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.loop=true;v.playsInline=true;
+  v.src=src+'.mp4';v.load();
+  const play=()=>{v.play().catch(()=>{})};
+  v.addEventListener('canplay',play);play();
+  const io=new IntersectionObserver(([e])=>{if(e.isIntersecting)play()});io.observe(v);
+  return ()=>{v.removeEventListener('canplay',play);io.disconnect()};
+ },[src]);
+ return <video ref={ref} className="vg-sketch" poster={src+'.webp'} muted loop playsInline autoPlay preload="auto" aria-label={'Sketch: '+title}/>;
 }
 
 // Lesson ticks are kept on this device.

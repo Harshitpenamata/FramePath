@@ -24,6 +24,8 @@
     "kit/core.js",
     "style",
     "src/scenes.js",
+    "src/scenes-intermediate.js",
+    "src/scenes-advanced.js",
     "src/timeline.js",
     "src/bridges.js",
     "kit/morph.js",

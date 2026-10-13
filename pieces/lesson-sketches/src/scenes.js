@@ -223,6 +223,43 @@ function fpFile(x, y, s, name, t) {
 }
 function fpHeart(x, y, t) { fade(t, () => { ctx.fillStyle = SK.red; ctx.beginPath(); ctx.moveTo(x, y + 30); ctx.bezierCurveTo(x - 50, y - 5, x - 20, y - 40, x, y - 12); ctx.bezierCurveTo(x + 20, y - 40, x + 50, y - 5, x, y + 30); ctx.fill(); }); }
 
+function fpSoftbox(x, y, s, t) {                         // a softbox on a stand, facing left
+  const P = [[x - 70 * s, y - 60 * s], [x + 30 * s, y - 40 * s], [x + 30 * s, y + 40 * s], [x - 70 * s, y + 60 * s]];
+  FL(P, SK.sheet, t + 0.06, { off: [3, 3] }); L(closeP(P), t, { d: 0.1 });
+  L([[x + 30 * s, y], [x + 50 * s, y], [x + 50 * s, y + 200 * s]], t + 0.08, { w: 3.5, second: false, d: 0.06 });
+  L([[x + 20 * s, y + 230 * s], [x + 50 * s, y + 200 * s], [x + 80 * s, y + 230 * s]], t + 0.12, { w: 3.5, second: false, d: 0.04 });
+}
+function fpClapper(x, y, s, t) {
+  const P = box(x - 80 * s, y - 30 * s, 160 * s, 90 * s, 6 * s, 0); FL(P, SK.sheet, t + 0.06); L(P, t, { closed: true, d: 0.1 });
+  const top = [[x - 80 * s, y - 34 * s], [x + 80 * s, y - 70 * s], [x + 84 * s, y - 50 * s], [x - 76 * s, y - 14 * s]]; FL(top, SK.ink, t + 0.1, { a: 0.9 }); L(closeP(top), t + 0.08, { d: 0.06 });
+  for (let i = 0; i < 4; i++) L([[x - 50 * s + i * 40 * s, y - 40 * s - i * 9 * s], [x - 34 * s + i * 40 * s, y - 22 * s - i * 9 * s]], t + 0.14, { w: 4, col: SK.sheet, second: false, d: 0.03 });
+}
+function fpCalendar(x, y, s, t, mark = 2) {
+  const P = box(x - 90 * s, y - 70 * s, 180 * s, 150 * s, 8 * s); FL(P, SK.sheet, t + 0.05); L(P, t, { closed: true, d: 0.1 });
+  FL([[x - 90 * s, y - 70 * s], [x + 90 * s, y - 70 * s], [x + 90 * s, y - 36 * s], [x - 90 * s, y - 36 * s]], SK.red, t + 0.08, { a: 0.85, off: [0, 0] });
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) PC(box(x - 76 * s + c * 40 * s, y - 24 * s + r * 32 * s, 28 * s, 22 * s, 3, 0), t + 0.1 + (r * 4 + c) * 0.005, { closed: true, w: 2 });
+  if (mark >= 0) PC(circ(x - 62 * s + (mark % 4) * 40 * s, y - 13 * s + Math.floor(mark / 4) * 32 * s, 20 * s), t + 0.2, { closed: true, col: SK.red, w: 3, a: 1 });
+}
+function fpScope(x, y, w, h, t, kind = 'wave') {        // a waveform or vectorscope panel
+  const P = box(x - w / 2, y - h / 2, w, h, 8); FL(P, '#2a2420', t + 0.04, { off: [4, 4], a: 0.92 }); L(P, t, { closed: true, d: 0.1 });
+  fade(t + 0.12, () => {
+    ctx.save(); ctx.fillStyle = '#9ad08a';
+    const R = RNG('scope', x, y);
+    if (kind === 'wave') for (let i = 0; i < 700; i++) { const u = R.f(), base = 0.25 + 0.5 * Math.abs(Math.sin(u * 7)); ctx.globalAlpha = 0.6; ctx.fillRect(x - w / 2 + 10 + u * (w - 20), y + h / 2 - 12 - (base + R.n(0.08)) * (h - 24), 2, 2); }
+    else { ctx.strokeStyle = 'rgba(154,208,138,0.5)'; ctx.beginPath(); ctx.arc(x, y, h * 0.4, 0, TAU); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - h * 0.22, y - h * 0.33); ctx.stroke(); for (let i = 0; i < 400; i++) { const a = -2.2 + R.n(0.25), r = Math.abs(R.n(h * 0.22)); ctx.globalAlpha = 0.6; ctx.fillRect(x + Math.cos(a) * r, y + Math.sin(a) * r, 2, 2); } }
+    ctx.restore();
+  });
+}
+function fpRecorder(x, y, s, t) { const P = box(x - 50 * s, y - 70 * s, 100 * s, 140 * s, 12 * s); FL(P, '#d8d2c6', t + 0.06); HT(P, t + 0.1); L(P, t, { closed: true, d: 0.1 }); L(box(x - 34 * s, y - 54 * s, 68 * s, 40 * s, 4 * s), t + 0.1, { closed: true, w: 3, d: 0.04 }); for (const dx of [-20, 20]) L(circ(x + dx * s, y + 20 * s, 12 * s), t + 0.12, { closed: true, w: 3, d: 0.04 }); }
+function fpList(x, y, w, title, items, t = 0.02, o = {}) {      // a card with a title and ticked lines; t may be left out
+  if (typeof t === 'object') { o = t; t = 0.02; }
+  const h = 110 + items.length * 56; fpCard3(x, y + h / 2 - 50, w, h, t, { bar: o.bar ?? SK.terra, title });
+  items.forEach((n, i) => { label(n, x - w / 2 + 34, y + 70 + i * 56, t + 0.12 + i * 0.05, { size: 32, align: 'left', col: o.cross?.includes(i) ? SK.graph : SK.ink }); if (o.cross?.includes(i)) cross(x + w / 2 - 40, y + 60 + i * 56, 0.45, t + 0.3 + i * 0.04); else if (o.check !== false) check(x + w / 2 - 40, y + 60 + i * 56, 0.42, t + 0.3 + i * 0.04); });
+}
+function fpCoins(x, y, s, t) { for (let i = 0; i < 4; i++) { const yy = y - i * 16 * s; FL(loopPts(x, yy, 50 * s, 14 * s, 0), SK.yellow, t + 0.04 + i * 0.03, { off: [0, 0] }); L(loopPts(x, yy, 50 * s, 14 * s, 0.05), t + i * 0.03, { closed: true, w: 3, d: 0.04 }); } }
+function fpTrack(x, y, w, name, t, o = {}) { L(box(x, y - 40, w, 80, 8), t, { closed: true, w: 3.5, d: 0.1 }); label(name, x - 20, y + 12, t + 0.04, { size: 32, face: 'marker', align: 'right' }); fpWave(x + 20, y, w - 40, o.amp ?? 28, t + 0.08, o); }
+function fpHeadphones(x, y, r, t) { L(arcPts(x, y, r * 1.25, Math.PI * 1.05, TAU * 0.95, 20), t, { w: 8, second: false, d: 0.08 }); for (const s of [-1, 1]) { const P = box(x + s * r * 1.25 - 20, y - 30, 40, 70, 12); FL(P, SK.ink, t + 0.06); L(P, t + 0.04, { closed: true, d: 0.04 }); } }
+
 // =====================================================================
 //  B01: How videos tell a story
 // =====================================================================
