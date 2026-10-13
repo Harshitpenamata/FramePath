@@ -164,3 +164,7 @@ test('every task has a short name, and every style has an outcome',()=>{
  for(const p of P.pathways)assert.ok(P.pathwayOutcomes[p].length>20,p);
  for(const l of P.levels)assert.ok(P.finalProject[l].length>10);
 });
+
+test('every beginner lesson has its sketchbook clip and poster',()=>{
+ for(const m of P.modulesFor('beginner'))Les.lessonsFor(m.id).forEach((_,i)=>{for(const ext of ['mp4','webp']){const f=path.join(root,'public/sketches',`${m.id}-${i+1}.${ext}`);assert.ok(fs.existsSync(f),f);assert.ok(fs.statSync(f).size<300000,f+' is too big')}});
+});

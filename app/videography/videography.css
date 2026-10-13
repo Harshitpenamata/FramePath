@@ -141,7 +141,6 @@
 .vg-video-list button.active{border-color:var(--primary);background:var(--surface-raised)}
 .vg-video-list span{display:grid}
 .vg-video-list small{color:var(--muted-foreground)}
-.vg-source{display:inline-flex;align-items:center;gap:4px}
 .vg-assignment-preview{display:grid;gap:8px;padding:18px;border-radius:var(--radius);border:1px dashed var(--primary)}
 .vg-assignment-preview p{margin:0}
 
@@ -311,3 +310,5 @@
 .vg-outcomes li{display:flex;gap:8px;align-items:flex-start}
 .vg-outcomes svg{flex:none;margin-top:4px;color:var(--primary)}
 .vg-delay .vg-chips{margin:8px 0}
+.vg-head-side{display:grid;gap:10px;justify-items:end;align-content:start}
+.vg-sketch{display:block;width:100%;aspect-ratio:16/9;border-radius:var(--radius);background:#f2ead8;object-fit:cover;cursor:pointer}

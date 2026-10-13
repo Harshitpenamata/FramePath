@@ -71,6 +71,7 @@ const modes:{id:Mode;title:string;price:string;Icon:any;points:string[]}[]=[
 export function ProgrammeDashboard(){
  const {s,user,loaded,mutate,busy}=useLearning();
  const [hours,setHours]=useState<number|null>(null);
+ const [upgrading,setUpgrading]=useState(false);
  if(!loaded)return <Panel><p role="status">Opening your plan…</p></Panel>;
  const p:Programme|undefined=s.programme;
  if(!p)return <Panel className="vg-empty"><span className="eyebrow">YOUR PROGRAMME</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}</div></Panel>;
@@ -79,12 +80,17 @@ export function ProgrammeDashboard(){
  const nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(p.level,i)]);
  const update=(u:any)=>mutate('programme_update',{update:u});
  async function chooseMode(m:Mode){const saved=await update({mode:m});if(!saved)return;if(m==='self'&&!selfActive)window.location.assign('/membership?return_to=%2Fworkspace');if(m==='mentor'&&!mentorActive)window.location.assign('/mentors')}
+ // Once a mode is settled (Free chosen, or a paid mode active), the choice moves behind an Upgrade button.
+ const decided=mentorActive||selfActive&&p.mode!=='mentor'||p.mode==='free';
+ const rank:Record<Mode,number>={free:0,self:1,mentor:2},current:Mode=mentorActive?'mentor':selfActive?'self':'free';
+ const shown=decided?modes.filter(m=>rank[m.id]>rank[current]):modes;
  const preview=(hours:number)=>schedule(p.level,hours,p.schedule.startDate,p.schedule.daysPerWeek);
  return <div className="vg-dashboard">
   <section className="vg-report-head">
    <div><span className="eyebrow">YOUR LEVEL REPORT · VIDEOGRAPHY</span><h1>Your {levelNames[p.level]} plan</h1><p className="lede">{levelSummary[p.level]}</p>
     <div className="vg-tags">{p.interests.map((id,i)=><Badge key={id} tone={i===0?'green':''}>{i===0&&'★ '}{interestFor(id)?.label}</Badge>)}</div></div>
-   <div className="vg-score"><strong>{done}/{mods.length}</strong><span>modules done</span></div>
+   <div className="vg-head-side"><div className="vg-score"><strong>{done}/{mods.length}</strong><span>modules done</span></div>
+    {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>{current==='free'?'Upgrade':'Get a mentor'}</Button>}</div>
   </section>
 
   <div className="vg-report-grid">
@@ -101,15 +107,16 @@ export function ProgrammeDashboard(){
    </Panel>
   </div>
 
-  <section><span className="eyebrow">HOW YOU LEARN</span><h2>How do you want to learn?</h2>
-   <div className="vg-modes">{modes.map(m=>{const active=m.id==='self'?selfActive:m.id==='mentor'?mentorActive:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}>
+  {(!decided||upgrading)&&shown.length>0&&<section id="vg-modes"><span className="eyebrow">HOW YOU LEARN</span><h2>{decided?'Upgrade your learning':'How do you want to learn?'}</h2>
+   <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?selfActive:m.id==='mentor'?mentorActive:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}>
     <div className="row between"><m.Icon size={26}/>{chosen&&<Badge tone="green">Your mode</Badge>}</div><h3>{m.title}</h3><strong className="vg-price">{m.price}</strong>
     <ul>{m.points.map(x=><li key={x}><Check size={15}/>{x}</li>)}</ul>
     {m.id!=='free'&&chosen&&!active&&<p className="small">{m.id==='self'?'Finish the practice checkout to unlock every task.':'Choose your mentor to continue.'}</p>}
     <Button variant={chosen?'default':'outline'} disabled={busy} onClick={()=>chooseMode(m.id)}>{chosen?(active?'Selected':m.id==='self'?'Complete checkout':'Choose a mentor'):m.id==='free'?'Learn free':m.id==='self'?'Go self-paced':'Choose a mentor'}</Button>
    </Panel>})}</div>
    <p className="small">This is a test version. Checkout takes no money and mentors are made up.</p>
-  </section>
+   {decided&&<Button variant="ghost" onClick={()=>setUpgrading(false)}>Not now</Button>}
+  </section>}
 
   <ModuleList p={p}/>
   {nextIndex>=0&&<div className="vg-sticky-next"><Go href={`/explore/${'video-'+p.level}/${nextIndex}`}><PlayCircle size={18}/>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}</Go></div>}

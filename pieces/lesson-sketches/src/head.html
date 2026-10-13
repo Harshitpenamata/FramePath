@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FramePath lesson sketches</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #1d1a17; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { width: min(100vw, calc(100vh * 16 / 9)); height: auto; aspect-ratio: 16 / 9; display: block; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1600" height="900"></canvas>
+<script>
+"use strict";
+// =====================================================================
+//  LESSON SKETCHES: 16:9 stills, one per FramePath lesson. Each lesson is a 1-second era that draws itself on
+//  (pencil, ink, colour) and is exported as a short clip plus a poster of its settled last frame.
+//  Build: node <skill>/tools/build.mjs pieces/lesson-sketches
+// =====================================================================
+const FPS = 24, W = 1600, H = 900;
+const BPM = 120, BEAT = 60 / BPM, E8 = BEAT / 2, E16 = BEAT / 4;
+const SAFE = { top: 90, bottom: 60, right: 60 };
+const HAND = '"Ink Free", "Segoe Print", "Bradley Hand", "Comic Sans MS", "Chalkboard SE", cursive';
+const CX = 800;
+
+// Each lesson is a LESSON_T-second clip: drawn on over its first ~2.2s, then held.
+const LESSON_T = 3, SLOW = 2.4;
+// [lesson id, draw function]; filled in by scenes.js
+const LESSONS = [];
+const lesson = (id, fn) => LESSONS.push([id, fn]);
