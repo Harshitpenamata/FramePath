@@ -7,12 +7,13 @@ import {normalizeProfile} from '../../profile-validation';
 import {buildPersonalPlan,isPersonalized} from '../../personalization';
 import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../selfpaced-curriculum';
 import {validateReview} from '../../assignment-review';
-import {buildProgramme,parseVideoKey,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,type Level} from '../../videography/programme';
+import {buildProgramme,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,type Level} from '../../videography/programme';
 // Public portfolio data: only the pieces the learner picked to share.
 // What a shared portfolio shows. File names stay private; only each file's id and type are shared, so images and videos can be shown.
 function publicPortfolio(s:any){const items=s.portfolio.ids.map((x:string)=>s.submissions.find((v:any)=>v.id===x)).filter(Boolean).map((v:any)=>({key:v.key,moduleId:v.moduleId||'',createdAt:v.createdAt,notes:v.notes,answer:v.answer||'',url:v.url,uploadId:v.uploadId,uploadIds:v.uploadIds||[],uploads:(v.uploads||[]).map((f:any)=>({id:f.id,type:f.type})),status:v.status,total:v.total}));return JSON.stringify({title:s.portfolio.title,bio:s.portfolio.bio,name:s.profile?.name||'Framepath learner',items,simulatedReviews:true})}
 // Keeps a published portfolio in step when a piece or file is removed.
 function republish(s:any){if(!s.portfolio.token)return null;if(!s.portfolio.ids.length){const removeToken=s.portfolio.token;s.portfolio.token=null;return {removeToken}}return {token:s.portfolio.token,data:publicPortfolio(s)}}
+import {lessonsFor,lessonNeeds,lessonsStatus,type LessonMark} from '../../videography/lessons';
 import {basicPaths,basicKeys,basicContext,curriculumVersion,journalTypes} from '../../beginner-curriculum';
 import {scoreAttempt,moduleInfo,sequenceFor,assignmentRubric} from '../../learning-rules';
 import {identity,readState,saveState,usage,checkOrigin,safeText,safeUrl,mentorFor,requireLesson,activeExplore,craftEnrolled,db,errorResponse} from '../../service';
@@ -51,9 +52,22 @@ case 'programme_update':{if(!s.programme)throw new Error('Make your plan first.'
  let level=s.programme.level,startDate=u.startDate??s.programme.schedule.startDate;
  if(u.level!==undefined&&u.level!==level){const cur=level as Level;if(u.level!==videoLevels[videoLevels.indexOf(cur)+1]||modulesFor(cur).some((_,i)=>!s.progress[moduleKey(cur,i)]))throw new Error('Finish every module in this level first.');level=u.level;startDate=today()}
  s.programme=buildProgramme({...s.programme,level,hoursPerWeek:u.level&&u.level!==s.programme.level?undefined:u.hoursPerWeek??s.programme.schedule.hoursPerWeek,startDate,daysPerWeek:u.daysPerWeek??s.programme.schedule.daysPerWeek,mode:u.mode??s.programme.mode},s.programme);break;}
+case 'lesson_progress':{
+ // Marks one lesson's video as watched, or its practice tool as solved. The task unlocks when every lesson is finished.
+ const key=safeText(b.key,80,1),video=parseVideoKey(key);if(!video)throw new Error('Choose a Videography module.');
+ // Lessons can be done ahead of earlier tasks, so only the plan is checked here (Free covers modules 1–2).
+ if(!isFreeModule(key)&&!activeExplore(s)&&!craftEnrolled(s))throw new Error('This lesson’s practice is part of Self-paced.');
+ const index=Number(b.index);if(!Number.isInteger(index)||index<0||index>=lessonsFor(video.module.id).length)throw new Error('That lesson doesn’t exist.');
+ const pathway=s.programme?.primaryPathway||'Documentary';
+ s.lessonProgress=s.lessonProgress||{};const marks=(s.lessonProgress[key]=s.lessonProgress[key]||{});const mark:LessonMark=(marks[index]=marks[index]||{v:[],t:false});
+ if(b.video!==undefined){const id=safeText(b.video,300,1);if(!lessonNeeds(video.module.id,index,pathway).includes(id))throw new Error('That video isn’t part of this lesson.');if(!mark.v.includes(id))mark.v.push(id)}
+ if(b.tool===true)mark.t=true;
+ break;}
 case 'video_submit':{
  // Hand in a Videography module: the work, a self-rating and two reflections. It goes straight into My Work.
  const key=safeText(b.key,80,1),video=parseVideoKey(key);if(!video)throw new Error('Choose a Videography module.');requireLesson(s,key);
+ const lessons=lessonsStatus(video.module.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[key]);
+ if(lessons.done<lessons.total)throw new Error(`Finish the lessons first: ${lessons.done} of ${lessons.total} done. Watch each video and try each practice tool.`);
  const ids:string[]=Array.isArray(b.uploadIds)?[...new Set<string>(b.uploadIds.map((x:unknown)=>safeText(x,100,1)))]:[];
  const handIn={answer:safeText(b.answer||'',6000),notes:safeText(b.notes||'',2000),url:safeUrl(b.url||''),uploadIds:ids,ratings:Array.isArray(b.ratings)?b.ratings:[],reflections:{well:safeText(b.reflections?.well||'',600),change:safeText(b.reflections?.change||'',600)}};
  const selfCheck=needsSelfCheck(key),missing=handInMissing(video.module,handIn,selfCheck);if(missing.length)throw new Error('Before you hand in: '+missing.join(', ')+'.');

@@ -371,3 +371,8 @@
  .vg-show-info{grid-row:auto;grid-column:1}
  .vg-show-nav{top:auto;bottom:12px;transform:none}
 }
+.vg-watch-state.ok,.vg-lesson-status.ok{color:var(--primary);display:flex;gap:6px;align-items:center}
+.vg-unlock-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:8px}
+.vg-unlock-list li{display:flex;gap:10px;align-items:center}
+.vg-unlock-list li span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--border);font-size:.8rem}
+.vg-unlock-list li.ok{color:var(--primary)}

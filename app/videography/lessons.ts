@@ -962,3 +962,19 @@ Object.assign(lessonVideoRefs,{
  A13:[['path'],[],[],[]],
  A14:[[],['lib:A14-1'],['lib:A14-3','lib:A14-4'],['lib:A14-2'],['lib:A14-5']],
 });
+
+// ---- Lesson completion: the task unlocks once every lesson in the module is finished.
+// A lesson is finished when each of its videos has been watched (YouTube/Vimeo: played for at least 70%;
+// videos on other sites: opened) and its practice tool has been solved.
+export const watchShare=0.7;
+export const videoId=(v:ModuleVideo)=>v.youtubeId?'yt:'+v.youtubeId+'@'+(v.start||0):v.vimeoId?'vm:'+v.vimeoId:'url:'+v.url;
+export type LessonMark={v:string[];t:boolean};
+export function lessonNeeds(moduleId:string,index:number,pathway:Pathway){return lessonVideos(moduleId,index,pathway).map(videoId)}
+export function lessonFinished(moduleId:string,index:number,pathway:Pathway,mark?:LessonMark){
+ return !!mark?.t&&lessonNeeds(moduleId,index,pathway).every(id=>mark.v.includes(id));
+}
+// How far a learner is through a module's lessons (marks come from state.lessonProgress[moduleKey]).
+export function lessonsStatus(moduleId:string,pathway:Pathway,marks:Record<string,LessonMark>|undefined){
+ const total=lessonsFor(moduleId).length,finished=lessonsFor(moduleId).map((_,i)=>lessonFinished(moduleId,i,pathway,marks?.[i]));
+ return {total,done:finished.filter(Boolean).length,finished};
+}

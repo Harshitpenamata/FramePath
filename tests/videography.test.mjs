@@ -192,3 +192,17 @@ test('video library: every row is used on a lesson, and every module has library
  for(const v of M.videoLibrary){assert.ok(v.youtubeId||/^https:\/\//.test(v.url),v.id);assert.ok(v.title&&v.creator,v.id)}
  const timed=Les.lessonVideos('B05',2,'Wedding')[0];assert.equal(timed.start,417);
 });
+
+test('a lesson is finished only when every video is watched and the tool is solved',()=>{
+ const needs=Les.lessonNeeds('B01',0,'Wedding');assert.ok(needs.length>=2,'B01 lesson 1 has several videos');
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',undefined),false);
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs,t:false}),false,'tool not solved');
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs.slice(1),t:true}),false,'a video not watched');
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs,t:true}),true);
+ const noVideo=P.modulesFor('beginner').flatMap(m=>Les.lessonsFor(m.id).map((_,i)=>[m.id,i])).find(([id,i])=>Les.lessonNeeds(id,i,'Wedding').length===0);
+ assert.ok(noVideo,'some lessons have no video');assert.equal(Les.lessonFinished(noVideo[0],noVideo[1],'Wedding',{v:[],t:true}),true,'tool alone finishes a lesson with no video');
+ const marks=Object.fromEntries(Les.lessonsFor('B02').map((_,i)=>[i,{v:Les.lessonNeeds('B02',i,'Wedding'),t:true}]));
+ assert.deepEqual(Les.lessonsStatus('B02','Wedding',marks),{total:5,done:5,finished:[true,true,true,true,true]});
+ delete marks[2];assert.equal(Les.lessonsStatus('B02','Wedding',marks).done,4);
+ assert.ok(Les.lessonNeeds('B13',0,'Wedding').join()!==Les.lessonNeeds('B13',0,'Travel').join(),'style lessons follow the learner’s pathway');
+});
