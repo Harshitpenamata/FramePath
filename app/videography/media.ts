@@ -1,14 +1,18 @@
 import type {Pathway} from './programme';
+import library from './video-library.json';
 
 // Curated, credited videos per curriculum module. Every YouTube ID was checked
 // against YouTube's oEmbed endpoint (public + embeddable) on 9 Oct 2026.
-export type ModuleVideo={title:string;creator:string;youtubeId?:string;vimeoId?:string;focus:string};
+// A video for a lesson. YouTube and Vimeo play in the page; anything else (url) opens on its own site.
+export type ModuleVideo={title:string;creator:string;youtubeId?:string;vimeoId?:string;url?:string;start?:number;section?:string;paid?:boolean;focus:string};
+export type LibraryVideo=typeof library[number];
 export type ModuleImage={base:string;alt:string};
 
 const v=(youtubeId:string,title:string,creator:string,focus:string):ModuleVideo=>({youtubeId,title,creator,focus});
 const vm=(vimeoId:string,title:string,focus:string):ModuleVideo=>({vimeoId,title,creator:'Blackmagic Design',focus});
 
-const V={
+export const V={
+ humm:v('hNuAv-42jzY','Give me 9min, and I’ll improve your storytelling skills by 176%','Philipp Humm','Zoom into one moment: place, action, thought, feeling and words.'),
  storytelling:v('WMcWLFtGnAs','Directing Without Words: Visual Storytelling in Film','StudioBinder','Notice the intended feeling and the visual evidence that creates it.'),
  shotSizes:v('AyML8xuKfoc','Every Shot Size Explained','StudioBinder','Connect each shot size to what the viewer needs to see.'),
  editingCuts:v('FVR8zz8ci2k','Six Essential Film Editing Techniques','StudioBinder','Watch how each cut moves the story or the viewer’s attention.'),
@@ -56,7 +60,7 @@ const V={
 };
 
 export const moduleVideos:Record<string,ModuleVideo[]>={
- B01:[V.storytelling,V.shortFilm],B02:[V.threeActs,V.shotList],B03:[V.shotList,V.storyboard],B04:[V.shutter,V.iso],
+ B01:[V.humm,V.storytelling,V.shortFilm],B02:[V.threeActs,V.shotList],B03:[V.shotList,V.storyboard],B04:[V.shutter,V.iso],
  B05:[V.shotSizes,V.framing],B06:[V.lightBasics,V.lightTypes],B07:[V.betterSound,V.wind],B08:[V.bins,V.organise],
  B09:[V.resolveIntro,V.editingCuts],B10:[V.resolveAudio,V.betterSound],B11:[V.resolveColour,V.whiteBalance],B12:[V.resolveDelivery,V.aspect],
  B14:[V.threeActs,V.shotList],
@@ -82,7 +86,20 @@ export const pathwayVideos:Record<Pathway,ModuleVideo[]>={
  Advertising:[v('n8o4ON2vePA','8 Tips to Make Better Product Videos','Austen Paul','Every shot should show a product benefit.'),v('jt6DVwCwZPk','5 Tips to Make Cinematic Product Commercials','Austen Paul','Use light and movement to reveal the product.')],
 };
 
-export function videosFor(moduleId:string,pathway:Pathway):ModuleVideo[]{return /13$/.test(moduleId)?pathwayVideos[pathway]:moduleVideos[moduleId]||[]}
+// ---- The curated video library (Video_Library_Module_by_Module_Merged.xlsx, imported by scripts/import-video-library.py)
+export const videoLibrary=library;
+const firstSentence=(s:string)=>(s.match(/^.*?[.!?](\s|$)/)?.[0]||s).trim();
+const wholeLesson=(s:string)=>!s||/^whole focused lesson/i.test(s);
+export function fromLibrary(v:LibraryVideo,start?:number):ModuleVideo{
+ return {title:v.title,creator:v.creator,youtubeId:v.youtubeId||undefined,url:v.youtubeId?undefined:v.url,start:start??v.start,section:wholeLesson(v.section)?undefined:v.section,paid:v.paid,focus:firstSentence(v.why)};
+}
+export const libraryFor=(moduleId:string)=>library.filter(v=>v.module===moduleId);
+// Style-pathway modules (B13 / I13 / A13) show only the rows for the learner's style.
+export const pathwayLibrary=(moduleId:string,pathway:Pathway)=>libraryFor(moduleId).filter(v=>v.pathway.toLowerCase().startsWith(pathway.toLowerCase()));
+export function videosFor(moduleId:string,pathway:Pathway):ModuleVideo[]{
+ const rows=/13$/.test(moduleId)?pathwayLibrary(moduleId,pathway):libraryFor(moduleId);
+ return rows.length?rows.map(v=>fromLibrary(v)):/13$/.test(moduleId)?pathwayVideos[pathway]:moduleVideos[moduleId]||[];
+}
 
 // Owned illustrations (v15 media library), chosen per stage/topic.
 const img=(base:string,alt:string):ModuleImage=>({base,alt});

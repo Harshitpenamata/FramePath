@@ -1,9 +1,9 @@
 'use client';
 import React,{useState} from 'react';
-import {ArrowRight,BookOpen,CalendarClock,Check,Gift,Lock,PlayCircle,Sparkles,UserRound} from 'lucide-react';
+import {ArrowRight,BookOpen,CalendarClock,Check,Gift,Lock,PlayCircle,Sparkles,Target,UserRound} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Badge,isExplore} from '../ui';
-import {levelNames,levelSummary,levels,skillAreas,interestFor,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,type Programme,type Level,type Mode} from './programme';
+import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
 
 const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
@@ -38,6 +38,30 @@ function PathwayInfographic({p}:{p:Programme}){
  </div>;
 }
 
+// What the learner gains: the main skill from each stage, plus the style project and final video.
+function PathwayOutcome({p}:{p:Programme}){
+ const mods=modulesFor(p.level);
+ const skills=['Ideas','Planning','Filming','Editing'].map(stage=>mods.filter(m=>m.stageLabel===stage).sort((a,b)=>b.hours-a.hours)[0]).filter(Boolean);
+ return <Panel className="vg-card wide vg-outcome-card"><h2><Target size={20}/> What you’ll be able to do</h2>
+  <p className="lede">By the end, you will make {pathwayOutcomes[p.primaryPathway]}, and {finalProject[p.level]}.</p>
+  <ul className="vg-outcomes">{skills.map(m=><li key={m.id}><Check size={16}/><span><strong>{m.stageLabel}:</strong> {m.outcome}</span></li>)}</ul>
+ </Panel>;
+}
+
+// Start date: quick choices or any date in the next six months.
+function nextMonday(){const d=new Date(today()+'T00:00:00Z');const add=((8-d.getUTCDay())%7)||7;return addDays(today(),add)}
+function firstOfNextMonth(){const d=new Date(today()+'T00:00:00Z');return new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,1)).toISOString().slice(0,10)}
+function daysUntil(date:string){return Math.round((Date.parse(date)-Date.parse(today()))/86400000)}
+function StartDate({p,busy,update}:{p:Programme;busy:boolean;update:(u:any)=>Promise<any>}){
+ const start=p.schedule.startDate,n=daysUntil(start);
+ const choices=[['Today',today()],['Next Monday',nextMonday()],['1st of next month',firstOfNextMonth()]];
+ return <div className="vg-delay"><span className="vg-label">Start date</span>
+  <p className="small">{n>0?`Your plan starts in ${n} day${n>1?'s':''}, on ${formatDate(start)}.`:n===0?'Your plan starts today.':`You started on ${formatDate(start)}.`} Change it if you need more time.</p>
+  <div className="vg-chips" role="group" aria-label="Pick a start date">{choices.map(([label,date])=><button type="button" key={label} disabled={busy} aria-pressed={start===date} className={start===date?'selected':''} onClick={()=>update({startDate:date})}>{label}<small>{formatDate(date)}</small></button>)}</div>
+  <label className="vg-field">Or pick a date <input type="date" min={today()} max={addDays(today(),180)} value={start>=today()?start:''} disabled={busy} onChange={e=>{if(e.target.value)update({startDate:e.target.value})}}/></label>
+ </div>;
+}
+
 const modes:{id:Mode;title:string;price:string;Icon:any;points:string[]}[]=[
  {id:'free',title:'Free',price:'₹0',Icon:BookOpen,points:['A learning path made for you','Videos, notes and pictures for every module',`Tasks in the first ${freeModuleCount} modules`]},
  {id:'self',title:'Self-paced',price:'₹999 / year',Icon:Sparkles,points:['Every task, with your work saved','AI checks and feedback on your work','Build a portfolio and track progress']},
@@ -46,8 +70,8 @@ const modes:{id:Mode;title:string;price:string;Icon:any;points:string[]}[]=[
 
 export function ProgrammeDashboard(){
  const {s,user,loaded,mutate,busy}=useLearning();
- const [delay,setDelay]=useState('');
  const [hours,setHours]=useState<number|null>(null);
+ const [upgrading,setUpgrading]=useState(false);
  if(!loaded)return <Panel><p role="status">Opening your plan…</p></Panel>;
  const p:Programme|undefined=s.programme;
  if(!p)return <Panel className="vg-empty"><span className="eyebrow">YOUR PROGRAMME</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}</div></Panel>;
@@ -56,15 +80,21 @@ export function ProgrammeDashboard(){
  const nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(p.level,i)]);
  const update=(u:any)=>mutate('programme_update',{update:u});
  async function chooseMode(m:Mode){const saved=await update({mode:m});if(!saved)return;if(m==='self'&&!selfActive)window.location.assign('/membership?return_to=%2Fworkspace');if(m==='mentor'&&!mentorActive)window.location.assign('/mentors')}
+ // Once a mode is settled (Free chosen, or a paid mode active), the choice moves behind an Upgrade button.
+ const decided=mentorActive||selfActive&&p.mode!=='mentor'||p.mode==='free';
+ const rank:Record<Mode,number>={free:0,self:1,mentor:2},current:Mode=mentorActive?'mentor':selfActive?'self':'free';
+ const shown=decided?modes.filter(m=>rank[m.id]>rank[current]):modes;
  const preview=(hours:number)=>schedule(p.level,hours,p.schedule.startDate,p.schedule.daysPerWeek);
  return <div className="vg-dashboard">
   <section className="vg-report-head">
    <div><span className="eyebrow">YOUR LEVEL REPORT · VIDEOGRAPHY</span><h1>Your {levelNames[p.level]} plan</h1><p className="lede">{levelSummary[p.level]}</p>
     <div className="vg-tags">{p.interests.map((id,i)=><Badge key={id} tone={i===0?'green':''}>{i===0&&'★ '}{interestFor(id)?.label}</Badge>)}</div></div>
-   <div className="vg-score"><strong>{done}/{mods.length}</strong><span>modules done</span></div>
+   <div className="vg-head-side"><div className="vg-score"><strong>{done}/{mods.length}</strong><span>modules done</span></div>
+    {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>{current==='free'?'Upgrade':'Get a mentor'}</Button>}</div>
   </section>
 
   <div className="vg-report-grid">
+   <PathwayOutcome p={p}/>
    <Panel className="vg-card wide"><h2>Your learning plan</h2><p>{overview(p)}</p><PathwayInfographic p={p}/></Panel>
    <Panel className="vg-card"><h2>Your level in each skill</h2><HeatMap p={p}/><p className="small">Based on your 12 answers. Your tasks will show more.</p></Panel>
    <Panel className="vg-card"><h2><CalendarClock size={20}/> Your dates</h2>
@@ -73,20 +103,20 @@ export function ProgrammeDashboard(){
     <label className="vg-field">Hours per week: <strong>{hours??p.schedule.hoursPerWeek} h</strong> → ends {formatDate(preview(hours??p.schedule.hoursPerWeek).endDate)}
      <input type="range" min={p.schedule.recommendedHoursPerWeek} max={maxHoursPerWeek} value={hours??p.schedule.hoursPerWeek} disabled={busy} onChange={e=>setHours(Number(e.target.value))}/></label>
     {hours!==null&&hours!==p.schedule.hoursPerWeek&&<div className="button-row"><Button size="sm" disabled={busy} onClick={async()=>{if(await update({hoursPerWeek:hours}))setHours(null)}}>Save {hours} h/week</Button><Button size="sm" variant="outline" onClick={()=>setHours(null)}>Cancel</Button></div>}
-    <div className="vg-delay"><span className="small">Start later</span><div className="button-row">{[7,14,28].map(d=><Button key={d} variant="outline" size="sm" disabled={busy} onClick={()=>update({startDate:addDays(p.schedule.startDate>today()?p.schedule.startDate:today(),d)})}>+{d/7} week{d>7?'s':''}</Button>)}</div>
-     <div className="vg-field-row"><input type="date" aria-label="New start date" min={today()} max={addDays(today(),180)} value={delay} onChange={e=>setDelay(e.target.value)}/><Button size="sm" disabled={!delay||busy} onClick={()=>{update({startDate:delay});setDelay('')}}>Set start date</Button></div></div>
+    <StartDate p={p} busy={busy} update={update}/>
    </Panel>
   </div>
 
-  <section><span className="eyebrow">HOW YOU LEARN</span><h2>How do you want to learn?</h2>
-   <div className="vg-modes">{modes.map(m=>{const active=m.id==='self'?selfActive:m.id==='mentor'?mentorActive:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}>
+  {(!decided||upgrading)&&shown.length>0&&<section id="vg-modes"><span className="eyebrow">HOW YOU LEARN</span><h2>{decided?'Upgrade your learning':'How do you want to learn?'}</h2>
+   <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?selfActive:m.id==='mentor'?mentorActive:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}>
     <div className="row between"><m.Icon size={26}/>{chosen&&<Badge tone="green">Your mode</Badge>}</div><h3>{m.title}</h3><strong className="vg-price">{m.price}</strong>
     <ul>{m.points.map(x=><li key={x}><Check size={15}/>{x}</li>)}</ul>
     {m.id!=='free'&&chosen&&!active&&<p className="small">{m.id==='self'?'Finish the practice checkout to unlock every task.':'Choose your mentor to continue.'}</p>}
     <Button variant={chosen?'default':'outline'} disabled={busy} onClick={()=>chooseMode(m.id)}>{chosen?(active?'Selected':m.id==='self'?'Complete checkout':'Choose a mentor'):m.id==='free'?'Learn free':m.id==='self'?'Go self-paced':'Choose a mentor'}</Button>
    </Panel>})}</div>
    <p className="small">This is a test version. Checkout takes no money and mentors are made up.</p>
-  </section>
+   {decided&&<Button variant="ghost" onClick={()=>setUpgrading(false)}>Not now</Button>}
+  </section>}
 
   <ModuleList p={p}/>
   {nextIndex>=0&&<div className="vg-sticky-next"><Go href={`/explore/${'video-'+p.level}/${nextIndex}`}><PlayCircle size={18}/>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}</Go></div>}
@@ -101,7 +131,7 @@ export function ModuleList({p,level}:{p?:Programme;level?:Level}){
  return <section className="vg-modules"><span className="eyebrow">YOUR MODULES · {levelNames[lv].toUpperCase()}</span><h2>Start here and work down</h2>
   <ol>{mods.map((m,i)=>{const key=moduleKey(lv,i),done=!!s.progress?.[key],free=i<freeModuleCount;return <li key={m.id} className={done?'done':''}>
    <a href={`/explore/video-${lv}/${i}`}><span className="vg-mod-id" style={{background:stageColor[m.stageLabel]}}>{done?<Check size={16}/>:m.id}</span>
-    <span className="vg-mod-body"><strong>{moduleLesson(m,projectLabel(p)).title}</strong><span className="small">{m.stageLabel} · {m.hours} h</span></span>
+    <span className="vg-mod-body"><strong>{moduleLesson(m,projectLabel(p)).title}</strong><span className="small">{m.stageLabel} · {m.hours} h · Task: {m.taskName}</span></span>
     <span className="vg-mod-access">{free?<Badge tone="green"><Gift size={12}/> Free task</Badge>:entitled?<Badge>Task</Badge>:<span className="small"><Lock size={12}/> Task in Self-paced</span>}</span></a></li>})}</ol></section>;
 }
 

@@ -50,3 +50,6 @@ next-env.d.ts
 # TypeScript incremental build cache
 *.tsbuildinfo
 .gstack/
+
+# Built preview of the lesson sketches (rebuild with the animate skill)
+pieces/*/index.html

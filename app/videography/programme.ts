@@ -48,6 +48,19 @@ export const interests:{id:string;label:string;pathway:Pathway}[]=[
  {id:'short-film',label:'Short films',pathway:'Documentary'},
 ];
 export const interestFor=(id:string)=>interests.find(i=>i.id===id);
+// What the learner's style project becomes (shown on the plan dashboard).
+export const pathwayOutcomes:Record<Pathway,string>={
+ Wedding:'a wedding film that keeps the moments a couple will want to remember',
+ Events:'an event video that shows the energy, the people and the key moments',
+ Corporate:'a brand video that shows what a business does and why it matters',
+ Documentary:'a short documentary that tells a real person’s story',
+ 'Social media':'a vertical reel made for phones, that works even with the sound off',
+ YouTube:'a YouTube video with a strong start that keeps people watching',
+ Travel:'a travel film that shows a place, its people and its small details',
+ Advertising:'a product video that shows why the product is worth buying',
+};
+// The final project at each level, from the B14 / I14 / A14 tasks.
+export const finalProject:Record<Level,string>={beginner:'a new 60 to 90 second video, made on your own',intermediate:'a main video plus a shorter version, with a production plan',advanced:'a full production with every version, a change log and a case study'};
 
 // Skill areas shown on the heat map, tied to curriculum stages.
 export const skillAreas=[
