@@ -2,12 +2,9 @@
 
 Branch: `feat/reflect-questions` (based on `feat/portfolio-community`)
 
-> **Partly drafted.** The Anthropic API ran out of credits mid-run. Questions exist for **all of Beginner (B01–B14) and I01–I05**. I06–I14 and all of Advanced keep their earlier activity until they're drafted:
-> `node scripts/draft-reflect-questions.cjs I06 I07 I08 I09 I10 I11 I12 I13 I14 A01 A02 A03 A04 A05 A06 A07 A08 A09 A10 A11 A12 A13 A14`
-
 ## Summary
 
-The 13 Oct review asked for Reflect to cover the whole lesson, including what its videos teach. It also pointed out that the old Reflect activity could be answered just by looking at the lesson's sketch. Reflect is now **2 or 3 multiple-choice questions per lesson**, for every lesson. So far that's 215 questions across 99 lessons:
+The 13 Oct review asked for Reflect to cover the whole lesson, including what its videos teach. It also pointed out that the old Reflect activity could be answered just by looking at the lesson's sketch. Reflect is now **2 or 3 multiple-choice questions per lesson**, for every lesson: 493 questions across all 229 lessons in the three levels:
 - **one applied question:** a short, real situation (a family function, a street market, a small shop's reel) where the learner picks what they'd do
 - **one or two video questions** on what the lesson's videos teach. Each names its video (*"from 'Visual Storytelling in Filmmaking'"*). Lessons without videos get two applied questions.
 
@@ -52,7 +49,7 @@ The hands-on simulators (exposure, white balance, sound mix, framing) stay. In t
   - no all/none of the above
   - the right answer isn't much longer than the others
   - the right answer isn't the idea sentence the sketch draws
-  - all of Beginner has questions
+  - every lesson in all 42 modules has questions
 - Browser, B01 lesson 1:
   - three questions show, two of them naming their video
   - a wrong answer shows its feedback and *Try another answer*

@@ -210,10 +210,8 @@ test('a lesson is finished only when every video is watched and the tool is solv
 test('Reflect: every lesson has 2 or 3 sound questions about the lesson or its videos',()=>{
  const Les=load(path.join(root,'app/videography/lessons.ts'));
  const bank=Object.assign({},...['beginner','intermediate','advanced'].map(l=>JSON.parse(fs.readFileSync(path.join(root,'app/videography/reflect/'+l+'.json'),'utf8'))));
- // Beginner is complete; other modules are checked once drafted (until then they keep their earlier tool).
  for(const [id,lessons] of Object.entries(Les.moduleLessons)){
-  if(!bank[id]){assert.ok(!id.startsWith('B'),id+': Beginner needs questions');continue}
-  assert.equal(bank[id].length,lessons.length,id+': one question set per lesson');
+  assert.equal(bank[id]?.length,lessons.length,id+': one question set per lesson');
   bank[id].forEach((qs,i)=>{
    assert.ok(qs.length>=2&&qs.length<=3,id+' lesson '+(i+1)+': 2 or 3 questions');
    for(const q of qs){

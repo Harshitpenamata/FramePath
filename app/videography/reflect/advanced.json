@@ -1,1 +1,3557 @@
-{}
+{
+ "A01": [
+  [
+   {
+    "q": "Your rough cut about a Varanasi weaver whose trade is dying gives equal time to her, a mall owner, a tourist and an official. Test viewers call it informative but flat. What do you do?",
+    "options": [
+     [
+      "Choose whose experience the film lives inside, and rebuild the cut around her, using the others only where they touch her life.",
+      ""
+     ],
+     [
+      "Add two more interviews so every side of the issue is covered, and balance their screen time exactly.",
+      "More balance makes it even flatter, because the viewer still has no one to stand with."
+     ],
+     [
+      "Give it a richer colour grade and a stronger music score so the same cut feels more cinematic.",
+      "Polish cannot fix a film that has not decided what it feels about its subject."
+     ]
+    ],
+    "why": "Flatness comes from refusing to take a side. Anchoring the film in one person's experience gives the viewer something to feel.",
+    "video": ""
+   },
+   {
+    "q": "In the framing choices section, how does StudioBinder link composition to the film's outlook?",
+    "options": [
+     [
+      "Where the camera sits and what the frame shows or hides tell the viewer whose side to feel and how.",
+      ""
+     ],
+     [
+      "Composition mainly keeps the frame balanced and pleasing, and the film's outlook comes from the script.",
+      "The video shows framing doing story work, not just making pretty pictures."
+     ],
+     [
+      "Wide, neutral frames suit most scenes, and close framing is saved only for big action moments.",
+      "The video treats every framing choice as a statement, not a rule about shot size."
+     ]
+    ],
+    "why": "Framing is never neutral. Each choice of angle, distance and what is left out pushes the viewer toward a way of seeing.",
+    "video": "Cinematic Film Composition — Blocking, Staging & Composition"
+   },
+   {
+    "q": "In the Sundance session, Roger Ross Williams talks about finding your view and then your visual style. What order does that suggest?",
+    "options": [
+     [
+      "Work out what you personally believe about the subject first, then let the look of the film grow from it.",
+      ""
+     ],
+     [
+      "Pick a strong visual style first, then find a subject and story that suit that look.",
+      "Style chosen first often feels like decoration with nothing behind it."
+     ],
+     [
+      "Stay neutral while filming, then decide what the film believes once you reach the edit.",
+      "Without a view in the field you often miss the shots that would carry it."
+     ]
+    ],
+    "why": "The look of a documentary works best when it expresses the filmmaker's stance, so the stance has to come first.",
+    "video": "Documentary: Finding and Shaping Your Story"
+   }
+  ],
+  [
+   {
+    "q": "In a brand film for a Jaipur bakery, the owner says early on that her grandmother's recipe failed for years. The film ends on a montage of happy customers. Viewers say the ending feels empty. What is the best fix?",
+    "options": [
+     [
+      "End on the moment she finally gets the recipe right, so the problem raised at the start gets its answer.",
+      ""
+     ],
+     [
+      "Move the customer montage earlier and add a voiceover summing up what the bakery stands for.",
+      "A summary explains the film but still leaves the opening question hanging."
+     ],
+     [
+      "Cut her line about the failed recipe so the film no longer leaves anything unresolved.",
+      "This removes the hook that gave the viewer a reason to keep watching."
+     ]
+    ],
+    "why": "The opening line set up a question. The ending feels empty because it never answers it.",
+    "video": ""
+   },
+   {
+    "q": "Editing a wedding film, you have the bride's father saying in the first minute that he is sure he won't cry. Later you have him wiping his eyes at the bidaai. How do you use these?",
+    "options": [
+     [
+      "Keep his line near the start and hold the tearful shot for the closing stretch of the film.",
+      ""
+     ],
+     [
+      "Cut straight from his line to the tearful shot so the funny contrast lands right away.",
+      "Paying it off at once wastes the tension that could carry the whole film."
+     ],
+     [
+      "Drop his line from the film, since the family might find it embarrassing to watch.",
+      "Without the line, the tears lose the meaning that makes them land so hard."
+     ]
+    ],
+    "why": "An early statement makes the viewer wait for the answer. Holding the payoff till the end gives the film a spine.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are making a film about a Kerala family selling their ancestral house. You filmed the front door at many points across the shoot. How do you use these shots?",
+    "options": [
+     [
+      "Bring the door back at a few key moments: open for guests, later locked, finally a stranger's hand on it.",
+      ""
+     ],
+     [
+      "Pick the single most beautiful door shot and use it once as a strong opening image.",
+      "Used once, the door is just a nice shot and never builds meaning."
+     ],
+     [
+      "Use the door opening and closing as a transition between scenes all through the film.",
+      "As a mechanical transition it becomes a device, not something the viewer feels."
+     ]
+    ],
+    "why": "When the door returns in a new state, it carries the memory of earlier scenes, so each return says more.",
+    "video": ""
+   },
+   {
+    "q": "In a short film about a mother, a pressure cooker whistle is heard in several scenes. Your editor wants to remove it from the later scenes because it feels repetitive. What do you say?",
+    "options": [
+     [
+      "Keep a few returns, placed where it means something new, like a whistle in the empty kitchen after she is gone.",
+      ""
+     ],
+     [
+      "Agree, and keep it only in the first scene so the sound does not become tiring for viewers.",
+      "Cutting the returns throws away the meaning the sound could build over the film."
+     ],
+     [
+      "Keep it in every scene at the same level so the sound stays steady and familiar throughout.",
+      "Unchanged repetition does feel tiring, because the sound never means anything new."
+     ]
+    ],
+    "why": "A returning sound earns its place when each return lands in a new context and adds feeling.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are cutting a calm, gentle film for a hospice in Pune. The client asks for an upbeat stock track and fast cuts in the middle donor-appeal section. What do you do?",
+    "options": [
+     [
+      "Explain that a sudden shift will jar viewers, and offer a lift that fits, like warmer music and a hopeful face.",
+      ""
+     ],
+     [
+      "Do it as asked, since the client knows their donors better than you and has the final say.",
+      "You are hired for your judgement, and a jarring section can lose the very donors they want."
+     ],
+     [
+      "Make the whole film more upbeat so the donor section no longer stands out from the rest.",
+      "This fixes the jump by throwing away the feeling that suits the subject."
+     ]
+    ],
+    "why": "An unplanned change in feeling breaks trust with the viewer. A good lift works inside the film's mood.",
+    "video": ""
+   },
+   {
+    "q": "In Robin Piree's section on what to write in a director's treatment, what job does the treatment do for the feel of the film?",
+    "options": [
+     [
+      "It puts the intended feeling into words and reference images before the shoot, so crew and client share it.",
+      ""
+     ],
+     [
+      "It is mainly a schedule and budget document that the producer uses to plan the shoot days.",
+      "That is a production plan, not the creative vision the video describes."
+     ],
+     [
+      "It is written after the edit to describe the finished film when pitching it to festivals.",
+      "The treatment comes before the shoot, to guide the choices that create the feel."
+     ]
+    ],
+    "why": "Writing down image, feeling and execution early lets everyone make small choices that point the same way.",
+    "video": "How To Write A Director's Treatment (FAST)?"
+   }
+  ],
+  [
+   {
+    "q": "Your two-minute portrait of a Kolkata tabla teacher runs 40 seconds long. You have two moving answers about his guru that say the same thing, and a gorgeous drone shot of Howrah Bridge that has nothing to do with him. What do you do?",
+    "options": [
+     [
+      "Keep the stronger of the two guru answers and drop the bridge shot, even though it looks great.",
+      ""
+     ],
+     [
+      "Keep both guru answers and the bridge shot, and trim the pauses between his lines instead.",
+      "Cutting his pauses removes breathing room while keeping material that repeats or distracts."
+     ],
+     [
+      "Keep everything and speed up the B-roll, the supporting shots, so the film fits two minutes.",
+      "Rushing every shot weakens the whole film instead of choosing what matters."
+     ]
+    ],
+    "why": "Repeated points and pretty but unrelated shots dilute a short film. Removing them makes the rest hit harder.",
+    "video": ""
+   },
+   {
+    "q": "In a film about a farmer after a crop failure, you have him explaining his debts in detail, and a long shot of him silently staring at his dry field. How do you shape this moment?",
+    "options": [
+     [
+      "Let the silent shot carry the moment and cut most of the explanation, trusting the viewer to feel it.",
+      ""
+     ],
+     [
+      "Keep the full explanation so no viewer misses any of the facts about his situation.",
+      "Too much explaining talks over the feeling the silent shot could deliver."
+     ],
+     [
+      "Put on-screen text with his debt amount over the silent shot so both work together.",
+      "Adding text explains what the image already says and breaks the silence."
+     ]
+    ],
+    "why": "What the viewer works out for themselves often lands deeper than what they are told.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "Your short film about a Lucknow girl learning to ride a cycle opens with her watching other kids ride past her doorway. Which closing shot works best?",
+    "options": [
+     [
+      "The same doorway framing, but now she rides past it while a younger child watches from the step.",
+      ""
+     ],
+     [
+      "A new scene of her family celebrating with sweets at the dinner table that evening.",
+      "A brand new setting at the end feels nice but does not connect back to where we began."
+     ],
+     [
+      "A fade to black right after the moment she first manages to stay balanced.",
+      "Stopping at the moment of success feels abrupt and gives the viewer no sense of the full journey."
+     ]
+    ],
+    "why": "Returning to the first image with her role reversed lets the viewer feel how far she has come.",
+    "video": ""
+   },
+   {
+    "q": "A brand film for a roadside chai stall opens at dawn with the owner lighting his stove. How do you close it?",
+    "options": [
+     [
+      "At night, from the same angle, he turns the stove off, with the day's used cups piled around him.",
+      ""
+     ],
+     [
+      "Repeat the exact dawn shot of him lighting the stove, so the film neatly comes full circle.",
+      "An exact repeat shows nothing has happened, so the viewer feels no journey."
+     ],
+     [
+      "End on a happy customer praising the taste of his chai straight to the camera.",
+      "A testimonial adds a new voice at the end instead of completing his day."
+     ]
+    ],
+    "why": "Mirroring the first shot, now marked by a full day's work, gives the film shape and a sense of time passed.",
+    "video": ""
+   }
+  ]
+ ],
+ "A02": [
+  [
+   {
+    "q": "A producer pitches you a film about boat families on the ghats of Varanasi. Before you book a crew, what do you do first?",
+    "options": [
+     [
+      "Spend a few days with several families, camera packed away, learning who opens up and what is really happening.",
+      ""
+     ],
+     [
+      "Film the first family you meet on day one, so you catch their fresh and honest reactions.",
+      "Filming before you understand the people often locks you into the wrong subject and the wrong story."
+     ],
+     [
+      "Write a full script from news articles, then look for families who fit the parts you wrote.",
+      "This forces real people into a story you guessed, instead of finding the one that is actually there."
+     ]
+    ],
+    "why": "Time with people, without the pressure of a camera, shows you who is open, who holds the screen, and what story the place really has. Only then do you commit crew and money.",
+    "video": ""
+   },
+   {
+    "q": "In the research chapter, what key question is early research meant to answer?",
+    "options": [
+     [
+      "Whether the subject and the access you have can carry a full-length film.",
+      ""
+     ],
+     [
+      "Which camera, lenses and sound kit will suit the story best.",
+      "Gear choices come later and are not what this research stage is testing."
+     ],
+     [
+      "How to cut a strong trailer to win money from funders.",
+      "A trailer may follow, but the research is about whether the film can exist at all."
+     ]
+    ],
+    "why": "Research tests if the people and your access are deep enough to hold up a whole film before you spend on production.",
+    "video": "Documentary: Finding and Shaping Your Story"
+   }
+  ],
+  [
+   {
+    "q": "An old mill owner in Kanpur tells you on camera that his mill employed 5,000 workers in 1980. You want to use this in narration. What do you do?",
+    "options": [
+     [
+      "Find an original record, like union or company files, confirm it with a second source, and log both.",
+      ""
+     ],
+     [
+      "Use the number as it is, because he ran the mill and clearly knows his own history.",
+      "Memories fade and people round up, so a first-hand claim still needs checking."
+     ],
+     [
+      "Add the word \"reportedly\" in the narration and move on without checking anything further.",
+      "A soft word does not protect you if the number is wrong, and it weakens trust in the film."
+     ]
+    ],
+    "why": "An original document plus a second source makes the claim solid, and logging them means you can prove it later.",
+    "video": ""
+   },
+   {
+    "q": "Weeks into the edit, the broadcaster's legal team asks where a statistic in your film came from. What would make this an easy answer?",
+    "options": [
+     [
+      "A running sheet linking each claim to its source, the date found, and who checked it.",
+      ""
+     ],
+     [
+      "Searching your browser history to find the article you read during research.",
+      "History gets cleared and links break, so this is slow and often fails."
+     ],
+     [
+      "Phoning the interviewee and asking them to confirm the number once more.",
+      "Asking the same person again is not an independent source and proves nothing new."
+     ]
+    ],
+    "why": "Keeping a sheet as you go means every claim has a trail ready for legal review.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "The owner of a small textile workshop in Surat asks, \"Will I get to approve the final film?\" You cannot offer that. What do you say?",
+    "options": [
+     [
+      "Tell her plainly she won't have final say, but explain the film's angle and where it will be shown.",
+      ""
+     ],
+     [
+      "Say yes for now, since you need the access and can sort out the details later.",
+      "A false promise breaks trust when it surfaces and can lead to legal trouble."
+     ],
+     [
+      "Avoid the question and get the release form signed quickly before she worries more.",
+      "Consent gained by dodging questions is not real consent and can collapse later."
+     ]
+    ],
+    "why": "Clear limits plus a true picture of the film and its audience build trust that lasts through release.",
+    "video": ""
+   },
+   {
+    "q": "Why does the talk stress making ethical choices before production begins?",
+    "options": [
+     [
+      "Choices about consent and fairness shape trust and are hard to fix once filming starts.",
+      ""
+     ],
+     [
+      "Ethics is mainly a legal step that you can finish after the edit is locked.",
+      "By then any harm or broken trust has already happened during the shoot."
+     ],
+     [
+      "Subjects act more naturally when they know less about what the film is about.",
+      "Keeping people in the dark damages consent and trust, which the talk treats as central."
+     ]
+    ],
+    "why": "Deciding early how you will treat and talk with subjects sets fair terms that guide the whole shoot.",
+    "video": "Documentary Filmmaking: Navigating Truth and Ethics"
+   }
+  ],
+  [
+   {
+    "q": "Halfway through a film on a Kerala football club, the star player is injured and a young reserve becomes the real heart of the story. What do you do?",
+    "options": [
+     [
+      "Rework your scene list around the reserve, keeping earlier scenes that still serve the new arc.",
+      ""
+     ],
+     [
+      "Stick to the planned scenes, since the funder already approved the original story.",
+      "Ignoring the stronger story leaves you with a film that no longer matches reality."
+     ],
+     [
+      "Drop planning altogether and just follow whatever happens on each shoot day.",
+      "Without a plan you will miss key moments and end up with footage that doesn't connect."
+     ]
+    ],
+    "why": "A good plan bends to what you discover, so you keep structure while chasing the better story.",
+    "video": ""
+   },
+   {
+    "q": "A brand client hiring you for an unscripted documentary asks to see \"the script\" before the shoot. How do you respond?",
+    "options": [
+     [
+      "Share a list of the moments you expect to capture, and explain which parts depend on real events.",
+      ""
+     ],
+     [
+      "Write full lines for the subjects to say, so the client feels sure of the result.",
+      "Scripted lines make real people sound stiff and turn the documentary into an advert."
+     ],
+     [
+      "Tell the client documentaries cannot be planned, so they will simply have to trust you.",
+      "This worries clients and gives them nothing to approve or budget around."
+     ]
+    ],
+    "why": "A list of expected moments gives the client a shape to agree on, while leaving room for what really happens.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "Your film on India's 1983 cricket World Cup win needs old Doordarshan broadcast clips. When do you deal with the rights?",
+    "options": [
+     [
+      "Contact the rights holder in pre-production to learn the cost, terms and time it will take.",
+      ""
+     ],
+     [
+      "Cut with clips from YouTube now, and clear the rights once the edit is locked.",
+      "If the clips turn out too costly or unavailable, you may have to rebuild whole sequences."
+     ],
+     [
+      "Skip clearance, since the clips are over forty years old and widely shared online.",
+      "Age and popularity do not end ownership, and broadcasters will reject uncleared material."
+     ]
+    ],
+    "why": "Asking at the start tells you if the footage is affordable and available before your story depends on it.",
+    "video": ""
+   },
+   {
+    "q": "A subject offers her late father's home movies from the 1970s for your film. Some clips have a Hindi film song playing in the background. What do you do?",
+    "options": [
+     [
+      "Get written permission from whoever holds the rights, and check the song needs its own clearance.",
+      ""
+     ],
+     [
+      "Use the clips freely, since the family has handed you the tapes to use.",
+      "Having the tapes is not written permission, and it says nothing about the song."
+     ],
+     [
+      "Credit her father on screen, which covers your use of the home movies.",
+      "A credit is a courtesy, not permission, and the music rights remain uncleared."
+     ]
+    ],
+    "why": "Footage and music are owned separately, so both need clear, written permission before you use them.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "Your documentary's key scene is the evening aarti on the ghats, shot handheld in low light with live sound. How do you prepare?",
+    "options": [
+     [
+      "Go on an earlier evening with the same camera and mic, shoot a few minutes, and review it.",
+      ""
+     ],
+     [
+      "Book the full crew for the main night and adjust your settings on the spot.",
+      "If noise, focus or sound fail, you find out only when the real moment is gone."
+     ],
+     [
+      "Hire the biggest lights you can, so the low light is no longer a worry.",
+      "Big lights may not be allowed, can spoil the mood, and still leave sound untested."
+     ]
+    ],
+    "why": "A small trial with the real kit shows you the problems while there is still time to solve them.",
+    "video": ""
+   },
+   {
+    "q": "How does Deakins use a location scout?",
+    "options": [
+     [
+      "To picture the shots in the real space and solve problems like light before shoot day.",
+      ""
+     ],
+     [
+      "To choose the best-looking place and leave lighting choices for the shoot.",
+      "He treats lighting and other problems as things to solve during the scout, not later."
+     ],
+     [
+      "Mainly to check parking, power and permits for the crew and trucks.",
+      "Logistics matter, but he describes the scout as a creative planning step."
+     ]
+    ],
+    "why": "Seeing the shots in the actual place lets him spot problems and plan fixes before the main shoot.",
+    "video": "Roger Deakins Explains Location Scouting"
+   }
+  ]
+ ],
+ "A03": [
+  [
+   {
+    "q": "A jewellery shop owner in Surat asks you for \"a few videos for Instagram\" and wants a price today. What do you do before quoting?",
+    "options": [
+     [
+      "List the number of videos, lengths, shoot days and rounds of changes, and get the owner to agree by email.",
+      ""
+     ],
+     [
+      "Give a round figure now and work out the number of videos together during the edit.",
+      "Without fixed numbers, the job can keep growing while your fee stays the same."
+     ],
+     [
+      "Agree the details on a phone call and start booking crew so you don't lose the job.",
+      "A phone call leaves no record, so both sides will remember the deal differently later."
+     ]
+    ],
+    "why": "A written list of what you will deliver and how many changes are included gives both sides one clear reference. Any request beyond it becomes a new, priced item.",
+    "video": ""
+   },
+   {
+    "q": "Halfway through editing a wedding film, the family asks for an extra reel and a third round of changes. Your signed document says one film and two rounds. What do you do?",
+    "options": [
+     [
+      "Point to the signed document kindly, and offer the reel and extra round as a paid add-on with a new date.",
+      ""
+     ],
+     [
+      "Do both for free to keep the family happy, since happy clients bring more referrals.",
+      "Free extras teach the client that the agreement doesn't matter, and your time goes unpaid."
+     ],
+     [
+      "Refuse both firmly and deliver only what is listed, with no further discussion.",
+      "A flat refusal harms the relationship when a paid option would serve both sides."
+     ]
+    ],
+    "why": "The signed document lets you say yes to extra work without arguing. You protect your time and the client still gets what they want.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In Curren Sheldon's tutorial, why are budget assumptions written down before the costs are filled in?",
+    "options": [
+     [
+      "So anyone can see what plan the numbers rest on, and what must change if that plan changes.",
+      ""
+     ],
+     [
+      "So the budget looks more detailed and professional when the client first opens it.",
+      "Assumptions are a working tool for decisions, not decoration for the client."
+     ],
+     [
+      "So you can skip detailed line items and just give a total for each department.",
+      "Assumptions explain the line items, they don't replace them."
+     ]
+    ],
+    "why": "Assumptions like shoot days and crew size drive every number. When a plan shrinks, you change the assumptions and the costs follow.",
+    "video": "How To Make A Film Budget | Tutorial + Free Download"
+   },
+   {
+    "q": "A client asks you to cut your quote by 30%. Using the method from the budget tutorial, what is the best approach?",
+    "options": [
+     [
+      "Build a smaller plan, such as fewer days or crew, budget it, and show both versions side by side.",
+      ""
+     ],
+     [
+      "Reduce every line in the existing budget by 30% and send the new total back.",
+      "Cutting numbers without changing the plan leaves you doing the same work for less money."
+     ],
+     [
+      "Keep the plan as it is and quietly remove the contingency line to hit the target.",
+      "Contingency is your cushion for surprises, and removing it only hides the real cost."
+     ]
+    ],
+    "why": "Comparing the original and reduced plans shows the client exactly what they lose for the saving. Then they can make an informed choice.",
+    "video": "How To Make A Film Budget | Tutorial + Free Download"
+   },
+   {
+    "q": "You are quoting a two-day factory shoot in Pune for a Mumbai client. Your sheet has crew fees and camera rental. What is most likely missing?",
+    "options": [
+     [
+      "Travel, stay, meals and local transport for the crew and the gear.",
+      ""
+     ],
+     [
+      "A second set of lenses in case the client wants more variety.",
+      "Extra gear is a choice, while getting the crew there is a cost you cannot avoid."
+     ],
+     [
+      "A new editing software subscription for this one project.",
+      "Software is usually part of your general running costs, not a missing project line."
+     ]
+    ],
+    "why": "Out-of-town shoots carry real costs beyond fees and gear. Leaving them out eats directly into your profit.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "According to StudioBinder's guide, what makes a call sheet useful on the day?",
+    "options": [
+     [
+      "Each person finds their call time, location details, key contacts and the day's plan in one place.",
+      ""
+     ],
+     [
+      "It lists every shot in detail so the camera team knows exactly what to frame.",
+      "That is the job of a shot list, while a call sheet coordinates people, times and places."
+     ],
+     [
+      "It replaces all other messages, so the crew never needs to be contacted again.",
+      "A call sheet is the main reference, but last checks with the crew are still needed."
+     ]
+    ],
+    "why": "A good call sheet answers where, when and who for everyone. That cuts down confusion and phone calls on the shoot day.",
+    "video": "A Producer's Guide to Call Sheets"
+   },
+   {
+    "q": "You booked a makeup artist and a drone operator for a product launch in Bengaluru. The client then moves the event by a week. What went wrong?",
+    "options": [
+     [
+      "People were booked before the client had fixed the date with their venue and team.",
+      ""
+     ],
+     [
+      "The makeup artist and drone operator should have been booked even earlier.",
+      "Booking earlier makes the problem worse if the date itself is not settled."
+     ],
+     [
+      "The call sheet was not sent early enough to the client for review.",
+      "The call sheet comes much later and cannot fix an unsettled date."
+     ]
+    ],
+    "why": "Every booking depends on the date. Settle it first, then book people, then gear and venue.",
+    "video": ""
+   },
+   {
+    "q": "It is the evening before a shoot at a car showroom in Chennai. The call sheet went out last week. What do you do now?",
+    "options": [
+     [
+      "Message each crew member and the showroom contact to check time, address and access, and wait for replies.",
+      ""
+     ],
+     [
+      "Trust that everyone read last week's call sheet and get some rest for tomorrow.",
+      "Plans change in a week, and an unread message can leave you short of crew."
+     ],
+     [
+      "Post one reminder in the group chat and treat no reply as a yes.",
+      "Silence is not an answer, so you only find out who is missing on the day."
+     ]
+    ],
+    "why": "A personal check the day before catches changes while there is still time to fix them.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In Caleb Pike's corporate video guide, why does a clear chain of command matter on the client side?",
+    "options": [
+     [
+      "So feedback comes through one agreed contact, not from everyone who happens to be in the room.",
+      ""
+     ],
+     [
+      "So the video crew can overrule the client on any creative choice on set.",
+      "The point is clear decisions on both sides, not the crew taking over."
+     ],
+     [
+      "So the most senior executive can give notes straight to the editor at any time.",
+      "Bypassing the agreed contact creates mixed messages and extra rework."
+     ]
+    ],
+    "why": "One route for decisions stops conflicting instructions. The crew knows whose word is final.",
+    "video": "Corporate Video Guide"
+   },
+   {
+    "q": "Based on the guide's section on client notes, what do you do when several managers send different notes on the same cut?",
+    "options": [
+     [
+      "Ask your main contact to merge them into one list and settle the clashes before you edit.",
+      ""
+     ],
+     [
+      "Apply each note in the order it arrived, so nobody feels ignored.",
+      "Clashing notes will undo each other and waste editing time."
+     ],
+     [
+      "Pick the notes you agree with creatively and leave the rest out.",
+      "It is not your call to decide between the client's own people."
+     ]
+    ],
+    "why": "The client must resolve its own disagreements. You then edit once from a single, clear set of notes.",
+    "video": "Corporate Video Guide"
+   },
+   {
+    "q": "On a shoot at a bank's office, a junior marketing staffer asks you to change the background, which goes against the approved brief. What do you do?",
+    "options": [
+     [
+      "Note the request politely and check with the named decision-maker before changing anything.",
+      ""
+     ],
+     [
+      "Make the change right away, since anyone from the client side speaks for the client.",
+      "The approved brief may be overruled by someone without the authority to do so."
+     ],
+     [
+      "Smile, say yes, and carry on shooting exactly as you had planned.",
+      "Pretending to agree causes trouble later when they see nothing changed."
+     ]
+    ],
+    "why": "Checking with the right person respects everyone. It also protects you from blame for changes nobody approved.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You send a rough cut of a hotel brand film to the client in Jaipur. They reply only with notes on colour and title fonts. What do you do?",
+    "options": [
+     [
+      "Save those notes for the fine cut, and ask them to confirm the story order and length in writing.",
+      ""
+     ],
+     [
+      "Fix the colour and fonts right away, since those are what the client noticed first.",
+      "Polishing now wastes time if the story order changes later."
+     ],
+     [
+      "Treat their reply as approval of the whole cut and move straight to final delivery.",
+      "Silence on structure is not agreement, and it can come back as a big change later."
+     ]
+    ],
+    "why": "A rough cut review is about structure, not polish. Getting the order and length agreed first means later notes stay small.",
+    "video": ""
+   },
+   {
+    "q": "At fine cut, the client wants to move the main interview to the start and reorder the whole story. They approved the rough cut in writing. What do you do?",
+    "options": [
+     [
+      "Remind them the order was approved at rough cut, and quote the extra time and cost to re-cut it.",
+      ""
+     ],
+     [
+      "Quietly redo the whole structure for free so the project stays friendly.",
+      "This makes the earlier approval meaningless and costs you days of unpaid work."
+     ],
+     [
+      "Refuse the change and send the fine cut exactly as it is now.",
+      "A refusal with no option leaves an unhappy client when a paid change would work."
+     ]
+    ],
+    "why": "The written approval shows this is new work. Offering it at a cost keeps the relationship and your schedule fair.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are planning an outdoor shoot on a Kochi beach in late June. What is the best preparation?",
+    "options": [
+     [
+      "Arrange a covered indoor option and agree a rain date with the client in advance.",
+      ""
+     ],
+     [
+      "Check the weather on the morning of the shoot and decide what to do then.",
+      "By the morning it is too late to book a new place or move the crew."
+     ],
+     [
+      "Pack rain covers and umbrellas and shoot in whatever weather comes.",
+      "Covers protect gear, but heavy rain can still make the footage unusable."
+     ]
+    ],
+    "why": "June is monsoon season in Kerala. A ready second location and date mean rain changes the plan, not the outcome.",
+    "video": ""
+   },
+   {
+    "q": "You are the only camera operator at a one-time product launch that cannot be repeated. What do you pack as your safety net?",
+    "options": [
+     [
+      "A spare camera body, extra charged batteries and cards, and a second audio recorder.",
+      ""
+     ],
+     [
+      "One camera with several extra lenses so you have more shot variety.",
+      "More lenses help creatively but do nothing if the camera body fails."
+     ],
+     [
+      "One camera and a promise to the client to reshoot if anything fails.",
+      "A live event cannot be reshot, so that promise cannot be kept."
+     ]
+    ],
+    "why": "For events that happen once, every key item needs a backup ready on the day. Spares turn a failure into a short pause.",
+    "video": ""
+   }
+  ]
+ ],
+ "A04": [
+  [
+   {
+    "q": "You have rented a new cinema lens for a wedding shoot next week. You have never used this model. What do you do?",
+    "options": [
+     [
+      "Pick it up early, film a test scene at your planned settings, and check the clips on a big monitor.",
+      ""
+     ],
+     [
+      "Read reviews and watch sample footage online, then use it straight away on the wedding day.",
+      "Other people's footage won't show you how this copy works with your camera and settings."
+     ],
+     [
+      "Bring it to the venue and shoot a few quick frames before the guests start to arrive.",
+      "If you find a problem at the venue, there is no time left to fix it or swap the lens."
+     ]
+    ],
+    "why": "Problems like soft focus, flare or a bad mount show up in a calm test. Then you can fix them before the day that matters.",
+    "video": ""
+   },
+   {
+    "q": "A client's ad needs you to choose between two lenses. You will test both. How do you make the comparison fair?",
+    "options": [
+     [
+      "Film the same scene, light and settings on both, and label every clip clearly as you go.",
+      ""
+     ],
+     [
+      "Film each lens on a different scene so you can see how it handles many kinds of shots.",
+      "When the scene changes, you can't tell if a difference comes from the lens or the scene."
+     ],
+     [
+      "Film both lenses, then judge them on the camera's screen while you are still on set.",
+      "A small screen hides softness and colour shifts that will show up later on a big display."
+     ]
+    ],
+    "why": "Only one thing should change between clips: the lens. Clear labels stop you from mixing up the results when you compare them later.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "At an outdoor reception, the bride wears a white saree with gold work. You are filming her close up. How do you set your exposure?",
+    "options": [
+     [
+      "Set exposure for her face, then use zebras (stripes over near-white areas) to check the saree.",
+      ""
+     ],
+     [
+      "Let auto exposure average the whole frame so the overall picture looks balanced on screen.",
+      "Auto exposure doesn't know the face matters most, and it often lets the bright saree burn out."
+     ],
+     [
+      "Make the image quite bright on purpose, then pull the saree back down in the edit later.",
+      "Once bright areas turn pure white, the detail is gone and no edit can bring it back."
+     ]
+    ],
+    "why": "The face is what people look at, so it sets the exposure. Zebras warn you if the saree is about to turn pure white and lose its gold detail.",
+    "video": ""
+   },
+   {
+    "q": "In the In Depth Cine video, what trade-off do cinematographers weigh when they set exposure?",
+    "options": [
+     [
+      "Detail in the bright areas against a well-exposed subject, measured with tools, not by eye.",
+      ""
+     ],
+     [
+      "How to keep the histogram centred in the middle so that every shot gets the same exposure.",
+      "A centred histogram ignores what matters in the frame, like a dark face or a bright sky."
+     ],
+     [
+      "How bright the image looks on the camera monitor, since that screen shows the final picture.",
+      "Monitor brightness can change, so pros rely on measuring tools like false colour instead."
+     ]
+    ],
+    "why": "Exposure is a judgement about what to protect. Tools like false colour, which paints brightness levels in set colours, help measure that choice instead of guessing.",
+    "video": "How Cinematographers Set Their Exposure"
+   }
+  ],
+  [
+   {
+    "q": "You are filming a Kathak dancer at 25fps with the shutter at 1/50. Her hands look like smears when she spins. What do you change?",
+    "options": [
+     [
+      "Set the shutter to around 1/250 or 1/500, then open the aperture or add light to keep brightness.",
+      ""
+     ],
+     [
+      "Switch to 50fps and keep the shutter at 1/50, then slow the clip down later in the edit.",
+      "Each frame is still exposed for 1/50 of a second, so the hands stay just as blurred."
+     ],
+     [
+      "Keep the same settings and add sharpening in the edit to bring back the detail in the hands.",
+      "Sharpening can't rebuild detail that motion blur has already smeared across the frame."
+     ]
+    ],
+    "why": "A shorter shutter time freezes each frame more. Because less light comes in, you must make up for it with aperture, ISO or more light.",
+    "video": ""
+   },
+   {
+    "q": "You are filming a calm talking-head interview at 25fps under indoor lights in India. Which shutter speed do you choose?",
+    "options": [
+     [
+      "Around 1/50, which gives natural motion and avoids flicker from the mains lights.",
+      ""
+     ],
+     [
+      "Around 1/1000, so every frame of the person talking is as sharp as it can possibly be.",
+      "Very short shutter times make normal movement look choppy and can cause light flicker."
+     ],
+     [
+      "Around 1/25, so more light reaches the sensor and you can keep the ISO nice and low.",
+      "Such a long shutter time makes even small head movements look smeared and soft."
+     ]
+    ],
+    "why": "About double the frame rate gives the motion blur our eyes expect. In India, mains power runs at 50Hz, so 1/50 also stays in step with the lights.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are interviewing a shop owner. A bright street doorway is right behind him, and you have no lights with you. What do you do?",
+    "options": [
+     [
+      "Turn him so the doorway is off to one side and its light falls across his face.",
+      ""
+     ],
+     [
+      "Expose for his face and let the doorway behind him go fully white in the background.",
+      "A big white patch pulls the eye away from him and looks careless in a paid video."
+     ],
+     [
+      "Expose for the bright doorway and lift his dark face back up later in the edit.",
+      "Lifting deep shadows brings up grain and muddy colour on the most important part."
+     ]
+    ],
+    "why": "Moving the subject or camera changes the contrast for free. The doorway turns from a problem behind him into soft light on his face.",
+    "video": ""
+   },
+   {
+    "q": "You are filming a haldi ceremony outdoors at noon. Harsh sun leaves half of each face in deep shadow. What is the best fix?",
+    "options": [
+     [
+      "Move the group into open shade, or bounce light into the shadows with a reflector or white sheet.",
+      ""
+     ],
+     [
+      "Underexpose to save the bright skin, then lift the dark side of each face in the grade.",
+      "Lifting dark shadows a lot adds grain and patchy colour to the skin."
+     ],
+     [
+      "Switch to auto exposure so the camera can keep adjusting as the faces move in and out.",
+      "Auto exposure keeps jumping between bright and dark, and it doesn't reduce the contrast at all."
+     ]
+    ],
+    "why": "The camera can't hold both the sunlit and shadow side well. Softer light or filled shadows bring the range down so both sides keep detail.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are shooting a two-camera interview with a Sony and a Canon. Before you roll, what do you do so the shots match?",
+    "options": [
+     [
+      "Set the same white balance in Kelvin, frame rate and shutter, then film a colour chart on both.",
+      ""
+     ],
+     [
+      "Put both cameras on auto white balance and fix any colour difference later in the edit.",
+      "Auto white balance can drift during the take, so each camera may change in a different way."
+     ],
+     [
+      "Look at each camera's screen and adjust the settings until the two pictures look the same.",
+      "Camera screens show colour differently, so matching by eye on them is not reliable."
+     ]
+    ],
+    "why": "Locked, matching settings remove most of the difference. The chart gives the colourist a shared reference to finish the match quickly.",
+    "video": ""
+   },
+   {
+    "q": "In Cullen Kelly's guide, why does he use colour space transforms (CSTs) on footage from different cameras?",
+    "options": [
+     [
+      "To convert each camera's footage from its own colour space into one shared timeline space.",
+      ""
+     ],
+     [
+      "To add a creative film look to every clip so that they all share the same style.",
+      "A look is a creative step that comes later; CSTs handle the technical conversion first."
+     ],
+     [
+      "To make the footage from the cheaper camera sharper and closer to the main camera's quality.",
+      "CSTs change how colour and brightness are read, not the sharpness or detail of the image."
+     ]
+    ],
+    "why": "Each camera records colour in its own way. Bringing all of it into one working space means the same grade affects every camera the same way.",
+    "video": "The Pro Colorist Guide to Color Management in 2024"
+   }
+  ],
+  [
+   {
+    "q": "A client wants web highlights from a three-day conference, delivered fast. Their budget for drives is small. How do you record?",
+    "options": [
+     [
+      "Use an efficient 10-bit format at a medium bitrate, and work out the storage needed per day.",
+      ""
+     ],
+     [
+      "Record in RAW at the highest setting so the footage has the most quality you can get.",
+      "RAW fills drives fast and slows the edit, which this short, quick web job doesn't need."
+     ],
+     [
+      "Record at the lowest bitrate the camera offers so you save as much space as you can.",
+      "Very low bitrates break up in dim halls and fall apart when you colour correct the footage."
+     ]
+    ],
+    "why": "Bitrate is how much data the camera saves each second. The job needs clean, gradable footage, not maximum quality, and planning storage stops you running out on day two.",
+    "video": ""
+   },
+   {
+    "q": "The Adobe video on colour management explains why the editor must know how footage was recorded. What is the reason?",
+    "options": [
+     [
+      "So the software reads the colour correctly and it shows right on the final screen, like web or TV.",
+      ""
+     ],
+     [
+      "Because it only matters when you deliver files for a cinema, not for web or TV videos.",
+      "Every output, including phones and web, needs the footage read and converted correctly."
+     ],
+     [
+      "Because a higher bitrate setting will fix any colour problems as long as it is set right.",
+      "Bitrate controls how much data is saved, not whether the colour is read and shown correctly."
+     ]
+    ],
+    "why": "Colour management links three things: how it was recorded, the space you edit in, and where it will be watched. If one link is wrong, the colours shift.",
+    "video": "Color Management"
+   }
+  ]
+ ],
+ "A05": [
+  [
+   {
+    "q": "You are filming a testimonial for a family sweet shop. The owner freezes and his answers sound stiff. What do you do?",
+    "options": [
+     [
+      "Ask him to pack a box of barfi for a regular customer while he talks.",
+      ""
+     ],
+     [
+      "Tell him to relax, smile more and just be himself on camera.",
+      "Asking for a feeling makes people watch themselves, so they get stiffer."
+     ],
+     [
+      "Show him playback of the stiff take so he can see the problem.",
+      "Seeing a bad take usually makes a nervous person more self-conscious."
+     ]
+    ],
+    "why": "A familiar task with his hands takes his mind off the camera. His real warmth shows up on its own.",
+    "video": ""
+   },
+   {
+    "q": "At a wedding you have two minutes before the next ritual. You want an emotional shot of the bride with her grandmother. How do you direct it?",
+    "options": [
+     [
+      "Ask the grandmother to fix the bride's dupatta and give her a blessing.",
+      ""
+     ],
+     [
+      "Ask them to hug and both look into the lens with a big smile.",
+      "Looking at the lens breaks the private moment, and the smile reads as posed."
+     ],
+     [
+      "Film them quietly from afar and hope a moment happens soon.",
+      "With only two minutes, hoping often gives you nothing usable."
+     ]
+    ],
+    "why": "A real gesture between them creates real feeling. The emotion comes from what they do, not from posing.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "On a corporate shoot, the CEO will walk into the office and greet staff. Your gaffer (lighting lead) wants to lay the track and set lights right away. What do you do first?",
+    "options": [
+     [
+      "Have someone walk the route and mark where the CEO stops and turns.",
+      ""
+     ],
+     [
+      "Lay the track now and ask the CEO to follow its line later.",
+      "Forcing a person to fit the gear makes the walk look stiff and unnatural."
+     ],
+     [
+      "Skip the walkthrough and shoot the first walk as a real take.",
+      "An unplanned take usually misses marks and costs more takes than it saves."
+     ]
+    ],
+    "why": "Once you know the real path and stops, you can put the camera, track and lights where they actually help. Doing it the other way means moving everything twice.",
+    "video": ""
+   },
+   {
+    "q": "In the StudioBinder blocking example, what does rehearsing the movement give the crew?",
+    "options": [
+     [
+      "A clear plan, so the actors and the camera move together.",
+      ""
+     ],
+     [
+      "A chance to perfect the actors' emotions before the shoot.",
+      "The example is about planning movement and position, not performance feeling."
+     ],
+     [
+      "Time to test the lens look and colour grade early on.",
+      "Look tests are useful, but that is not what blocking rehearsal is for."
+     ]
+    ],
+    "why": "Blocking rehearsal works out who moves where and when. Then the camera can be planned around that coordinated action.",
+    "video": "Cinematic Film Composition — Blocking, Staging & Composition"
+   }
+  ],
+  [
+   {
+    "q": "A shy pharmacy owner rushes through her lines on take two. The client is watching. What do you say?",
+    "options": [
+     [
+      "\"That was warm, I liked it. This time, pause after the shop name.\"",
+      ""
+     ],
+     [
+      "\"Okay. Slow down, smile more, and look up at the end too.\"",
+      "Three notes at once overload a nervous person and none of them stick."
+     ],
+     [
+      "\"That was great! Let's just go again and make it even better.\"",
+      "Kind, but she still has no idea what to change, so the next take repeats the problem."
+     ]
+    ],
+    "why": "Kind words first lower her guard. One clear, specific note is easy to act on, so the next take improves.",
+    "video": ""
+   },
+   {
+    "q": "In Caleb Pike's corporate video guide, what helps most when the talent is shy and not a trained presenter?",
+    "options": [
+     [
+      "Chatting casually before rolling and keeping the set calm.",
+      ""
+     ],
+     [
+      "Bringing in more crew so the set feels more professional.",
+      "More people watching makes a shy person more nervous, not less."
+     ],
+     [
+      "Handing them a full script to learn word for word.",
+      "Memorising lines adds pressure, and non-actors tend to sound robotic."
+     ]
+    ],
+    "why": "Shy people relax when it feels like a conversation, not a performance. A calm, friendly set gets more natural answers.",
+    "video": "Corporate Video Guide"
+   }
+  ],
+  [
+   {
+    "q": "You are shooting a doctor's interview alone, with the camera on a tripod. Where do you place yourself to ask the questions?",
+    "options": [
+     [
+      "Sit right beside the lens, at the doctor's eye height.",
+      ""
+     ],
+     [
+      "Sit across the room so you can watch the whole frame.",
+      "Her eyes will drift far from the lens and she will look disconnected."
+     ],
+     [
+      "Stand behind the camera so she looks over the top of it.",
+      "She will look upward, which reads oddly and shows the whites of her eyes."
+     ]
+    ],
+    "why": "Sitting close to the lens keeps her gaze just off camera. It looks natural and connected to the viewer.",
+    "video": ""
+   },
+   {
+    "q": "Based on the StudioBinder blocking tutorial, you want one person in a two-person scene to feel more powerful. Which staging choice helps?",
+    "options": [
+     [
+      "Place them closer to camera or higher, with the other further back.",
+      ""
+     ],
+     [
+      "Keep both side by side and add music to show who leads.",
+      "Music can help, but the blocking itself then tells no story."
+     ],
+     [
+      "Frame both the same size in the centre to stay balanced.",
+      "Equal framing makes the two people feel equal, which is the opposite goal."
+     ]
+    ],
+    "why": "Where people stand and how the camera sees them shows status. Size, height and depth in frame do the storytelling.",
+    "video": "Film Blocking Tutorial"
+   }
+  ],
+  [
+   {
+    "q": "You have two cameras for a sangeet dance performance on stage. How do you set them up?",
+    "options": [
+     [
+      "One wide on the whole stage, one tight following the lead dancer.",
+      ""
+     ],
+     [
+      "One wide on the stage, one on the audience the whole time.",
+      "Crowd shots are nice, but you have no backup angle of the dance itself."
+     ],
+     [
+      "Both medium from the front, side by side, with the same lens.",
+      "Matching frames give the editor nothing new to cut to."
+     ]
+    ],
+    "why": "A wide and a tight shot of the same dance show different things. The editor can cut between them freely and hide mistakes.",
+    "video": ""
+   },
+   {
+    "q": "A startup wants a podcast with two hosts. You have three cameras. How do you use them?",
+    "options": [
+     [
+      "A wide of both hosts, plus a close single on each host.",
+      ""
+     ],
+     [
+      "All three on the wide from slightly different angles.",
+      "Three near-identical wides cut together badly and miss faces."
+     ],
+     [
+      "Two on the main host and one wide, since he talks most.",
+      "The second host's reactions get no clean shot to cut to."
+     ]
+    ],
+    "why": "Each camera covers something the others cannot. You can always cut to whoever speaks or reacts.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "On a brand shoot for a handloom saree business, a power cut costs two hours. You can only finish three of the eight shots left. What do you keep?",
+    "options": [
+     [
+      "The weaver's hands at the loom and the founder's main line.",
+      ""
+     ],
+     [
+      "The drone shot of the village you planned as the opener.",
+      "It looks great, but the film still works without it."
+     ],
+     [
+      "A second take of the product shot you already got well.",
+      "You already have a good take, so this adds very little."
+     ]
+    ],
+    "why": "Shots that carry the story come first. Style shots and safety takes go when time runs out.",
+    "video": ""
+   },
+   {
+    "q": "You have one day to film a promo for a small restaurant, built around the chef telling his story. Which shot do you schedule first?",
+    "options": [
+     [
+      "The chef's interview, since the whole film hangs on it.",
+      ""
+     ],
+     [
+      "The dish close-ups, while the window light is still soft.",
+      "Pretty food shots can be grabbed later, but no interview means no film."
+     ],
+     [
+      "The outside of the restaurant, since it is quick to get.",
+      "Easy shots feel productive, but they can be dropped if the day runs late."
+     ]
+    ],
+    "why": "Putting the story's backbone first protects it if the day slips. Everything else can be cut or rushed without ruining the film.",
+    "video": ""
+   }
+  ]
+ ],
+ "A06": [
+  [
+   {
+    "q": "A wedding planner wants a warm, friendly testimonial for her website. Your key light leaves one side of her face in deep shadow. What do you change?",
+    "options": [
+     [
+      "Bounce light into the shadow side so it sits closer to the bright side",
+      ""
+     ],
+     [
+      "Add a strong backlight behind her so she stands out from the wall",
+      "A backlight separates her from the background but leaves the heavy face shadow as it is."
+     ],
+     [
+      "Leave it and lift the shadow side later in colour correction",
+      "Lifting deep shadows in the edit adds noise and often looks flat and muddy."
+     ]
+    ],
+    "why": "A smaller gap between the bright and dark sides of the face feels open and gentle. Bouncing light into the shadow side does this on set, where it looks cleanest.",
+    "video": ""
+   },
+   {
+    "q": "In Mark Bone's interview system, why does he stress-test and document the setup at the end?",
+    "options": [
+     [
+      "So he can trust it holds up and rebuild or match it on another day",
+      ""
+     ],
+     [
+      "So the client can sign off on the lighting before the shoot",
+      "His steps are about his own reliability, not getting client approval."
+     ],
+     [
+      "So the guest gets used to the bright lights before filming starts",
+      "Helping the guest relax is useful, but it is not why he checks and records the setup."
+     ]
+    ],
+    "why": "Checking the setup under real conditions catches problems early. Notes and photos let him match the same look later, for another interview or a reshoot.",
+    "video": "How I Light Every Interview (my 10-step system)"
+   }
+  ],
+  [
+   {
+    "q": "You are filming a night scene in a Chennai home. A table lamp sits beside the actor in the frame. Where do you place your key light?",
+    "options": [
+     [
+      "On the lamp's side, at a similar height and warm colour",
+      ""
+     ],
+     [
+      "Straight in front of the actor so the face is fully lit",
+      "Light from the front does not match the lamp, so the scene looks fake."
+     ],
+     [
+      "Behind the actor on the far side as a strong rim light",
+      "A rim from the far side has no reason to be there if the lamp is beside them."
+     ]
+    ],
+    "why": "Viewers believe light that seems to come from the lamp they can see. Matching its side, height and colour sells the scene.",
+    "video": ""
+   },
+   {
+    "q": "In the Aputure continuity demo, what must stay the same when cutting from the wide shot to the reverse angles (shots from the opposite side)?",
+    "options": [
+     [
+      "The direction the key light seems to come from in the scene",
+      ""
+     ],
+     [
+      "The exact physical position of every light on set",
+      "Lights often move for close-ups; what matters is how the light reads on screen."
+     ],
+     [
+      "The brightness of each light, with no changes for close-ups",
+      "The demo shows close-ups can be adjusted in strength while staying consistent."
+     ]
+    ],
+    "why": "If the key flips sides between shots, the cut feels wrong. You can move and tweak lights for each angle as long as the light still seems to come from the same place.",
+    "video": "Filmmaking 101: Lighting Continuity"
+   }
+  ],
+  [
+   {
+    "q": "You are filming an interview in an office with big windows and warm ceiling bulbs. You have one bicolour LED panel (it can switch between warm and cool). What do you do?",
+    "options": [
+     [
+      "Switch off the bulbs and set the LED and camera to match the daylight",
+      ""
+     ],
+     [
+      "Set the camera to auto white balance so it sorts out the colours",
+      "Auto cannot fix two colours on one face and may shift during the take."
+     ],
+     [
+      "Set the camera halfway between warm and cool and keep all lights on",
+      "A middle setting still leaves one side blue and the other orange."
+     ]
+    ],
+    "why": "Window light is the strongest source and the hardest to change, so build around it. Removing or matching the other sources gives one clean colour on the face.",
+    "video": ""
+   },
+   {
+    "q": "At an evening sangeet, the stage lights are warm orange. Your on-camera LED is set to daylight and faces look blue next to the stage. What is the best fix?",
+    "options": [
+     [
+      "Warm your LED with an orange gel (coloured filter) to match the stage",
+      ""
+     ],
+     [
+      "Set the camera white balance to daylight to keep the LED neutral",
+      "Then the whole stage turns very orange and the mix is still there."
+     ],
+     [
+      "Keep shooting and fix the two colours separately in the edit",
+      "Separating mixed colours on moving faces in the edit is slow and rarely clean."
+     ]
+    ],
+    "why": "Matching your light to the room's light means one white balance setting works for everything. A gel or the warm setting on a bicolour light does this quickly.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are lighting an interview in a small room with white walls. The shadow side of the face looks flat because the walls bounce light back. What do you do?",
+    "options": [
+     [
+      "Hang a black cloth close on the shadow side to soak up the bounce",
+      ""
+     ],
+     [
+      "Turn up the key light so the bright side stands out more",
+      "The walls bounce the extra light too, so the face stays flat."
+     ],
+     [
+      "Add a second soft light on the shadow side to even it out",
+      "More light on the shadow side makes the face even flatter."
+     ]
+    ],
+    "why": "Black cloth absorbs light instead of reflecting it. Taking light away from the shadow side brings back shape in a bright room.",
+    "video": ""
+   },
+   {
+    "q": "You are filming a bride at an outdoor haldi at noon. Harsh sun leaves hard shadows under her eyes. You have a small crew. What helps most?",
+    "options": [
+     [
+      "Hold a thin white diffusion cloth above her to spread the sunlight",
+      ""
+     ],
+     [
+      "Point a strong LED at her face to fill the eye shadows",
+      "A small LED cannot compete with noon sun and adds glare in her eyes."
+     ],
+     [
+      "Close the aperture a lot so the shadows look less dark",
+      "Changing exposure does not change how hard the shadows fall."
+     ]
+    ],
+    "why": "A diffusion cloth turns a small hard source like the sun into a large soft one. The shadows become gentle without fighting the sun.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are interviewing a professor who wears glasses. Your soft key light shows up as a bright patch in his lenses. Which move usually fixes it?",
+    "options": [
+     [
+      "Raise the key and angle it down so the reflection bounces away",
+      ""
+     ],
+     [
+      "Move the key closer to the camera so it sits behind the lens",
+      "Light near the camera reflects almost straight back into the lens."
+     ],
+     [
+      "Keep the key where it is and turn its brightness down a lot",
+      "A dimmer light still shows a patch and leaves the face underlit."
+     ]
+    ],
+    "why": "Light bounces off glass at the same angle it hits. Raising and angling the key sends the reflection down and out of the camera's view.",
+    "video": ""
+   },
+   {
+    "q": "In the Aputure product video, why does the size and shape of the light matter so much for a glossy bottle?",
+    "options": [
+     [
+      "The light itself shows up as the highlight on the bottle's surface",
+      ""
+     ],
+     [
+      "Bigger lights make the label colours look brighter",
+      "The point is what the shiny surface reflects, not label brightness."
+     ],
+     [
+      "A small hard light is needed to make the glass look sharp",
+      "A small hard source gives a tiny harsh spot, not a clean highlight."
+     ]
+    ],
+    "why": "A shiny surface acts like a mirror, so the viewer sees the shape of the source. Choosing that shape and moving the light or camera controls how the highlight looks.",
+    "video": "Product Lighting — Commercial Cinematography 101"
+   }
+  ],
+  [
+   {
+    "q": "You are filming a sweet shop owner in a busy Mumbai market lane. Your light stand is on the pavement and people keep walking past. What do you do first?",
+    "options": [
+     [
+      "Weigh the stand with a sandbag and tape or cover every cable",
+      ""
+     ],
+     [
+      "Raise the light higher so people can walk under it",
+      "A taller stand with no weight tips over more easily in a crowd."
+     ],
+     [
+      "Shoot quickly and ask people to be careful around the gear",
+      "Busy passers-by will not notice, and one trip can hurt someone."
+     ]
+    ],
+    "why": "Weight keeps a stand from falling if it is bumped. Taped or covered cables stop people tripping on a crowded pavement.",
+    "video": ""
+   },
+   {
+    "q": "At a family function in an old house, you plug three lights into one extension board. The power keeps tripping. What is the right move?",
+    "options": [
+     [
+      "Spread the lights across separate circuits and check what each can handle",
+      ""
+     ],
+     [
+      "Keep resetting the switch and finish the shoot quickly",
+      "Repeated tripping is a warning of overload and can cause heat or fire."
+     ],
+     [
+      "Use a bigger extension board so all lights fit on one plug",
+      "More sockets do not add capacity, so the wall circuit is still overloaded."
+     ]
+    ],
+    "why": "Each wall circuit can only carry so much power. Spreading the load stops trips and keeps old wiring from overheating.",
+    "video": ""
+   }
+  ]
+ ],
+ "A07": [
+  [
+   {
+    "q": "Two actors walk and talk around a small kitchen in medium shots. Both wear silk kurtas that rustle when they move. Which mic setup gives you the cleanest dialogue?",
+    "options": [
+     [
+      "A boom held above them, just out of frame, following each line",
+      ""
+     ],
+     [
+      "A lav taped under each kurta, close to the chest",
+      "Silk rubbing on a hidden lav creates rustle that is very hard to remove later."
+     ],
+     [
+      "A shotgun mic mounted on top of the camera",
+      "The camera follows the frame, not the voice, so the mic is often too far and off target."
+     ]
+    ],
+    "why": "A boom stays close to the mouths without touching the clothes, and it can follow the actors as they move. It is the usual choice for scripted scenes with movement.",
+    "video": ""
+   },
+   {
+    "q": "In Curtis Judd's comparisons, which change cut down the harsh \"s\" sounds in speech?",
+    "options": [
+     [
+      "Aiming the mic a little off the mouth instead of straight at it",
+      ""
+     ],
+     [
+      "Pointing the mic straight at the mouth from closer up",
+      "Aiming dead on at the mouth makes the sharp \"s\" sounds stronger, not softer."
+     ],
+     [
+      "Taking the foam cover off the mic for a cleaner tone",
+      "Removing the foam does not solve sibilance and leaves the mic open to breath pops."
+     ]
+    ],
+    "why": "Sibilance, the hissy \"s\" sound, is strongest right in front of the mouth. Small changes in angle and height move the mic out of that path while keeping the voice full.",
+    "video": "Mic Placement Matters!"
+   }
+  ],
+  [
+   {
+    "q": "You are filming a podcast for a Pune startup with three guests at one table. One guest laughs loudly and often talks over the others. Which setup lets you fix this best in the edit?",
+    "options": [
+     [
+      "A lav on each guest, each recorded to a separate channel",
+      ""
+     ],
+     [
+      "Two lavs mixed together onto one channel to save space",
+      "Once voices share one channel, you cannot lower one person without lowering the other."
+     ],
+     [
+      "One shotgun mic on a stand in the middle of the table",
+      "One mic picks up the loud guest strongly and the quiet ones weakly, with no way to rebalance them."
+     ]
+    ],
+    "why": "When every voice lives on its own channel, you can turn down the loud guest and lift the quiet ones without touching anyone else.",
+    "video": ""
+   },
+   {
+    "q": "In the edit, you hear a faint hollow echo whenever one guest speaks, because the other guests' lavs also pick up that voice. What do you do?",
+    "options": [
+     [
+      "Lower or mute the channels of guests who are not speaking then",
+      ""
+     ],
+     [
+      "Keep every channel at full level so no word is ever missed",
+      "Leaving all mics open is exactly what makes the same voice arrive twice and sound hollow."
+     ],
+     [
+      "Add a little reverb to all channels to blend the echo away",
+      "Reverb adds more space to the sound and makes the hollow effect worse, not better."
+     ]
+    ],
+    "why": "Each lav hears the speaker a fraction of a second apart, which causes phasing, a hollow sound. Bringing down the unused channels leaves one clean copy of the voice.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are filming a couple's pre-wedding interview on a mirrorless camera. The camera's audio input adds a lot of hiss. The client wants clean sound. What is your setup?",
+    "options": [
+     [
+      "Run the mic into a dedicated recorder and keep scratch sound on the camera",
+      ""
+     ],
+     [
+      "Plug the mic into the camera and turn the input gain up high",
+      "Raising the camera's gain raises its hiss too, so the voice is louder but still noisy."
+     ],
+     [
+      "Use the dedicated recorder and switch the camera's audio off fully",
+      "Without any camera sound, you lose an easy guide for matching the files in the edit."
+     ]
+    ],
+    "why": "A dedicated recorder usually has cleaner preamps, the circuits that boost the mic signal. The camera's scratch track gives you a reference and a second copy.",
+    "video": ""
+   },
+   {
+    "q": "Halfway through a CEO interview, you notice the camera's audio crackles from a loose cable. The recorder's levels look clean. What do you do?",
+    "options": [
+     [
+      "Confirm the recorder files are fine, then fix the cable at the next natural pause",
+      ""
+     ],
+     [
+      "Stop the CEO mid-answer and restart the whole interview from the top",
+      "The clean recorder already has the answer, so stopping wastes the client's limited time."
+     ],
+     [
+      "Ignore it and leave both recordings unchecked until the edit",
+      "If the recorder also had a problem, you would only find out when it is too late to fix."
+     ]
+    ],
+    "why": "Because the recorder holds the main sound, the camera problem is not an emergency. You check your main copy and repair the backup when it will not interrupt.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "During a documentary shoot, a take starts before anyone marks it. The moment is real and you cannot stop it. How do you help the editor match picture and sound?",
+    "options": [
+     [
+      "Mark the end of the take instead, holding the slate upside down",
+      ""
+     ],
+     [
+      "Leave it unmarked and trust the editor to line up waveforms",
+      "Waveform matching can fail with noisy audio, so a mark is still the safer choice."
+     ],
+     [
+      "Stop the action and ask everyone to start the moment again",
+      "In documentary work you would lose a real moment that may never happen again."
+     ]
+    ],
+    "why": "A tail slate, a mark at the end, works just as well for syncing. Holding it upside down tells the editor the mark is at the end, not the start.",
+    "video": ""
+   },
+   {
+    "q": "In the Deity video, all cameras and the recorder share timecode. Why does the crew still use a slate?",
+    "options": [
+     [
+      "As a fallback in case a device drifts or loses its timecode",
+      ""
+     ],
+     [
+      "Because editing software cannot read timecode from audio files",
+      "Editing software reads timecode from audio files easily, so that is not the reason."
+     ],
+     [
+      "Because timecode only works on cameras and never on recorders",
+      "Timecode is designed to link cameras and recorders, which is the whole point of the video."
+     ]
+    ],
+    "why": "Timecode can slip if a device is reset or its battery runs out. A visible mark gives a second way to sync if that happens.",
+    "video": "Timecode for Multiple Cameras"
+   },
+   {
+    "q": "At the end of the production example in the Deity video, what is the main purpose of the sound report handed over with the files?",
+    "options": [
+     [
+      "To show which files and takes go together, and note any problems",
+      ""
+     ],
+     [
+      "To prove to the client how many hours the sound crew worked",
+      "The report is a technical guide for the edit, not a timesheet."
+     ],
+     [
+      "To list the brand and model of every mic used on the day",
+      "Gear details may appear, but the key job is to explain files, takes and issues."
+     ]
+    ],
+    "why": "A good report saves the editor hours of guessing. It links takes to files and flags anything that went wrong on set.",
+    "video": "Timecode for Multiple Cameras"
+   }
+  ],
+  [
+   {
+    "q": "You record a stand-up comedian at a small Bengaluru venue. You split one mic to both channels of a 24-bit recorder. How far below the main channel do you set the second one?",
+    "options": [
+     [
+      "About 6 to 10 dB lower, so it stays clean but still usable",
+      ""
+     ],
+     [
+      "About 1 dB lower, so both channels match each other closely",
+      "A peak loud enough to distort the main channel will almost surely distort this one too."
+     ],
+     [
+      "About 30 dB lower, so nothing on stage could ever distort it",
+      "It is so quiet that boosting it later brings up heavy hiss and makes it hard to use."
+     ]
+    ],
+    "why": "A gap of around 6 to 10 dB catches sudden laughs and shouts that clip the main channel, while staying loud enough to match it cleanly when you swap it in.",
+    "video": ""
+   },
+   {
+    "q": "In the edit of a 40 minute set, the main channel distorts on one loud shout at the 12 minute mark. You have a lower safety channel. What do you do?",
+    "options": [
+     [
+      "Replace just that shout from the safety channel and match its level",
+      ""
+     ],
+     [
+      "Replace the whole set with the safety channel to be safe",
+      "Boosting the quieter channel for 40 minutes adds hiss everywhere when only one moment needed fixing."
+     ],
+     [
+      "Mix the safety channel in under the main one for the whole set",
+      "The distorted shout is still there in the main channel, so you will still hear it."
+     ]
+    ],
+    "why": "Clipping, when the sound goes over the maximum level, cannot be undone. Swapping only the damaged moment with the clean copy fixes it and keeps the rest at its best.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You finish a dialogue scene in a Jaipur haveli. A ceiling fan ran during every take and street noise came through the window. What do you record before moving on?",
+    "options": [
+     [
+      "A minute of the room in silence, with the fan and window as in the takes",
+      ""
+     ],
+     [
+      "A minute of the room in silence, with the fan off for cleaner sound",
+      "It will not match the takes, so the gaps in the edit will sound different from the dialogue."
+     ],
+     [
+      "Nothing extra, since the editor can add a library ambience track later",
+      "A library track will not match this room's exact hum and street sound."
+     ]
+    ],
+    "why": "Room tone must sound exactly like the background of the takes. The editor uses it to fill gaps and smooth cuts without the sound changing.",
+    "video": ""
+   },
+   {
+    "q": "In the StudioBinder interior section, a nearly empty room with bare walls makes voices sound hollow. What is the suggested fix?",
+    "options": [
+     [
+      "Add blankets or soft furnishings to soak up sound bouncing off walls",
+      ""
+     ],
+     [
+      "Raise the recorder gain so the voice is louder than the echo",
+      "Raising gain raises the echo too, so the room still sounds hollow."
+     ],
+     [
+      "Move the mic further back so it hears the whole room evenly",
+      "Moving the mic away picks up even more echo compared to the voice."
+     ]
+    ],
+    "why": "Hard walls reflect sound back into the mic. Soft materials absorb those reflections, so the voice sounds closer and cleaner.",
+    "video": "Recording Sound for Film — How to Get Pristine Audio"
+   },
+   {
+    "q": "In the StudioBinder exterior section, what is the main protection against wind noise outdoors?",
+    "options": [
+     [
+      "A furry windshield over the mic, often called a dead cat",
+      ""
+     ],
+     [
+      "The thin foam cover that comes in the box with the mic",
+      "Basic foam works indoors but is usually not enough for real outdoor wind."
+     ],
+     [
+      "A low-cut filter added later in the edit to remove it",
+      "A filter can reduce some rumble, but strong wind bursts recorded on set cannot be fully removed."
+     ]
+    ],
+    "why": "The furry cover slows the wind before it hits the mic. Stopping wind noise at the source is far better than trying to fix it later.",
+    "video": "Recording Sound for Film — How to Get Pristine Audio"
+   }
+  ]
+ ],
+ "A08": [
+  [
+   {
+    "q": "After a wedding shoot in Lucknow, you copy six camera cards to your edit drive. The couple's family wants the cards back tonight. What do you do before formatting them?",
+    "options": [
+     [
+      "Run checksum software that compares every card file with its copy",
+      ""
+     ],
+     [
+      "Open a few clips from each card and scrub through them",
+      "A spot check can miss a damaged or missing file that you never opened."
+     ],
+     [
+      "Confirm that the folder size on the drive matches the card",
+      "Two folders can be the same size and still hold a corrupted file."
+     ]
+    ],
+    "why": "A checksum is a short code worked out from a file's data. If the codes match, the copy is identical, so the card is safe to wipe.",
+    "video": ""
+   },
+   {
+    "q": "You hand a client a drive of raw footage from a factory shoot. Weeks later they say some clips are broken. What would have protected you?",
+    "options": [
+     [
+      "Sending a checksum list with the drive so they could test it on arrival",
+      ""
+     ],
+     [
+      "Sending a screenshot of the folder showing all the file names",
+      "A list of names does not prove the data inside each file was intact."
+     ],
+     [
+      "Asking them to play every clip once when the drive arrived",
+      "Playing clips is slow and still misses small errors in the data."
+     ]
+    ],
+    "why": "A checksum list lets both sides prove the files arrived exactly as they left, so you can show where any damage happened.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You filmed an interview on a phone with a survivor of abuse, inside her home in Pune. The NGO will post it publicly. What do you do with the file?",
+    "options": [
+     [
+      "Strip GPS and device details from the public copy, and archive the untouched original",
+      ""
+     ],
+     [
+      "Blur her face in the edit and upload the original file as it is",
+      "The file can still carry the GPS position of her home, which can expose her."
+     ],
+     [
+      "Wipe all hidden data from every copy, including your own archive",
+      "You lose the date, place and device details that may later prove the footage is real."
+     ]
+    ],
+    "why": "The public file should not reveal where she lives. Your untouched archive keeps the full record in case the footage must be verified later.",
+    "video": ""
+   },
+   {
+    "q": "According to the WITNESS video, why does metadata matter when you hand footage to a lawyer or a news desk?",
+    "options": [
+     [
+      "It helps them confirm when, where and on what device it was recorded",
+      ""
+     ],
+     [
+      "It keeps the picture quality high when the clip is shared onward",
+      "Metadata is information about the file, not the image quality itself."
+     ],
+     [
+      "It is mainly useful for sorting clips into bins inside an editor",
+      "Sorting is a small use, and the video stresses proving the source of footage."
+     ]
+    ],
+    "why": "Metadata is data stored inside the file, like time, date and location. It helps others check that the footage is genuine and trace its source.",
+    "video": "What Is Video Metadata?"
+   }
+  ],
+  [
+   {
+    "q": "A small Jaipur studio edits from one SSD and backs up to a second SSD kept in the same desk drawer. What single change protects them most?",
+    "options": [
+     [
+      "Add a cloud copy or a drive kept at someone's home",
+      ""
+     ],
+     [
+      "Buy a third SSD and keep it in the same drawer",
+      "A fire, flood or theft at the studio would still take every copy at once."
+     ],
+     [
+      "Make a second folder copy on the editing SSD itself",
+      "If that one drive fails, both folders are lost together."
+     ]
+    ],
+    "why": "Copies in one building share the same risks. A copy in another place survives a fire, theft or water damage at the studio.",
+    "video": ""
+   },
+   {
+    "q": "Your two backups are identical hard drives from the same shop, bought on the same day. Why is this risky?",
+    "options": [
+     [
+      "Drives from one batch can fail around the same time, so mix in cloud or another type",
+      ""
+     ],
+     [
+      "Identical drives copy slower, so the backup will take too long each night",
+      "Matching drives do not slow copying, and the real worry is failing together."
+     ],
+     [
+      "Identical drives confuse the computer, so files may save to the wrong one",
+      "Computers tell drives apart by name, so this is not the real danger."
+     ]
+    ],
+    "why": "Same model, same batch and same age means the same weak points. Using a different type, like cloud or tape, spreads the risk.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are cutting 6K footage from a corporate shoot on a laptop. Playback stutters and the deadline is in two days. What is the best approach?",
+    "options": [
+     [
+      "Edit on low-resolution stand-ins, then switch to full files for grading and export",
+      ""
+     ],
+     [
+      "Convert the camera files to small files and delete the originals to save space",
+      "You lose the full-quality footage you need for the final grade and export."
+     ],
+     [
+      "Edit on low-resolution stand-ins and export the final straight from them",
+      "The client would get a soft, low-quality film instead of the 6K quality you shot."
+     ]
+    ],
+    "why": "Small edit files keep playback smooth. Switching back to the camera files at the end gives full quality in the finished film.",
+    "video": ""
+   },
+   {
+    "q": "In Adobe's Premiere demo, why do proxies make teamwork easier?",
+    "options": [
+     [
+      "Small files move easily between editors, and the edit can still swap back to camera files",
+      ""
+     ],
+     [
+      "They replace the camera files, so the team has less footage to archive",
+      "Proxies are temporary stand-ins and never replace the originals."
+     ],
+     [
+      "Each editor rebuilds the timeline on their own proxies before sharing",
+      "The same timeline works with proxies or full files, so no rebuild is needed."
+     ]
+    ],
+    "why": "Proxies are light enough to share and play on any machine. Premiere can toggle back to full-quality media whenever it is needed.",
+    "video": "Create proxies in Premiere"
+   }
+  ],
+  [
+   {
+    "q": "Two camera operators and three editors will work on a three-day shoot for a jewellery brand. When should the file names be agreed?",
+    "options": [
+     [
+      "Before the shoot, in a short written guide shared with everyone",
+      ""
+     ],
+     [
+      "After the shoot, when an assistant renames everything in one go",
+      "Renaming later is slow, causes errors and can break links in early edits."
+     ],
+     [
+      "Never formally, since each person can explain their own names",
+      "People forget, leave or fall sick, and then nobody can read the files."
+     ]
+    ],
+    "why": "A rule agreed early means files are named right from the first card. Everyone can find anything without asking.",
+    "video": ""
+   },
+   {
+    "q": "Your team puts the shoot date at the start of every file name. Which format should you pick?",
+    "options": [
+     [
+      "20240315, with year, month, then day",
+      ""
+     ],
+     [
+      "15-03-24, with day, month, then year",
+      "Files sort by day first, so 2 April would land before 15 March."
+     ],
+     [
+      "15Mar2024, with the month as a short word",
+      "Files sort by day first, and month words sort alphabetically, so the order breaks."
+     ]
+    ],
+    "why": "Year, month, day sorts in true time order on every computer, so files line up correctly in any folder.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "A freelancer sends you a Premiere project and a drive of media. When you open it, every clip shows as offline. What do you do first?",
+    "options": [
+     [
+      "Use Link Media, find one clip on the drive and let it locate the rest",
+      ""
+     ],
+     [
+      "Import all the clips again and rebuild the timeline from scratch",
+      "You throw away the freelancer's cuts and waste hours redoing their work."
+     ],
+     [
+      "Replace each offline clip by hand, one at a time, from the drive",
+      "This is slow and easy to get wrong when the folders are already in order."
+     ]
+    ],
+    "why": "When the folder structure is kept, pointing to one file lets Premiere find the others in the same place.",
+    "video": ""
+   },
+   {
+    "q": "Karl Soule's setup advice suggests testing a project before you hand it over. What is a good test?",
+    "options": [
+     [
+      "Move the project and media to another drive and open it there",
+      ""
+     ],
+     [
+      "Save the project twice so there is a spare copy on your desktop",
+      "A spare project file does not show whether media links survive a move."
+     ],
+     [
+      "Trust that the project file stores the clips inside itself",
+      "A project only points to media files and does not contain them."
+     ]
+    ],
+    "why": "Opening the moved project shows if any clip goes offline. You fix problems before the next person finds them.",
+    "video": "Project setup & media import"
+   }
+  ],
+  [
+   {
+    "q": "A client says, \"Go back to the music we had two cuts ago.\" What makes this a quick fix?",
+    "options": [
+     [
+      "Each saved cut has a number and a short note of what was edited",
+      ""
+     ],
+     [
+      "Each saved cut is named by its mood, like final, final_new, final_ok",
+      "Names like these do not show order, so nobody knows which was two cuts ago."
+     ],
+     [
+      "Only the latest cut is kept, so the drive stays tidy",
+      "The older cut with the music the client wants is gone."
+     ]
+    ],
+    "why": "Numbers show the order of cuts, and the notes show where the music changed. You can open the right file in seconds.",
+    "video": ""
+   },
+   {
+    "q": "In Adobe's Productions video, what problem does this workflow mainly solve?",
+    "options": [
+     [
+      "It lets editors share linked projects and locks any project in use",
+      ""
+     ],
+     [
+      "It suggests a story structure for long films so editors cut faster",
+      "Productions handles how projects are shared, not the story of the film."
+     ],
+     [
+      "It merges two editors' changes to one timeline automatically",
+      "It avoids clashes by locking projects, not by merging edits together."
+     ]
+    ],
+    "why": "Splitting a big job into linked projects with locking stops two people overwriting each other's work.",
+    "video": "Productions — collaborative long-form editing"
+   }
+  ]
+ ],
+ "A09": [
+  [
+   {
+    "q": "You are cutting an 8-minute wedding film from a Lucknow shaadi. Your first cut runs from haldi to vidaai in the order things happened, and it feels flat. What do you try first?",
+    "options": [
+     [
+      "Open on the father's emotional toast, then go back and build toward the pheras.",
+      ""
+     ],
+     [
+      "Keep the real order but trim every clip so the film moves faster.",
+      "Shorter clips change speed, but the film still has no shape or hook."
+     ],
+     [
+      "Put the best moments together in the first two minutes to grab attention.",
+      "Spending all your strongest moments early leaves nothing to build toward."
+     ]
+    ],
+    "why": "Moving a strong moment to the front gives the viewer a reason to watch. Arranging the rest to rise toward the pheras gives the film a shape that real time alone does not.",
+    "video": ""
+   },
+   {
+    "q": "In the pacing framework from Inside The Edit, what is the main job of thinking about pacing?",
+    "options": [
+     [
+      "Planning how energy rises and falls across the whole film.",
+      ""
+     ],
+     [
+      "Making each clip as short as it can be without losing sense.",
+      "The video treats pacing as a whole-film shape, not just trimming single clips."
+     ],
+     [
+      "Keeping every scene at one steady speed so nothing feels jarring.",
+      "An even speed throughout flattens the film, which is the opposite of an arc."
+     ]
+    ],
+    "why": "The video shows pacing as an arc over the full piece. The worked scene comparisons show how fast and slow sections work together.",
+    "video": "Pacing in Film Editing — The Framework Pro Editors Use"
+   }
+  ],
+  [
+   {
+    "q": "For a 12-minute documentary about a Varanasi weaver, his interview opens with many facts at once: family history, the loom's age, his debts, and that the loom will be sold next month. The buyers' visit comes at minute 9. How do you use these facts?",
+    "options": [
+     [
+      "Spread them through the film, placing the sale news shortly before the buyers' visit.",
+      ""
+     ],
+     [
+      "Keep them together at the start, in the order he said them, to stay true to him.",
+      "So many facts at once are hard to hold, and the sale news fades before the visit."
+     ],
+     [
+      "Hold all of them back and reveal them together after the buyers have left.",
+      "Without the sale news, viewers watch the visit without knowing why it matters."
+     ]
+    ],
+    "why": "Viewers can only hold a few facts at a time. Spacing them out, with the sale news just before the visit, turns an ordinary scene into a tense one.",
+    "video": ""
+   },
+   {
+    "q": "In the postproduction chapters of Roger Ross Williams's Sundance Collab session, how is the story shaped?",
+    "options": [
+     [
+      "It is found and reshaped through working cuts, with the editor as a creative partner.",
+      ""
+     ],
+     [
+      "It is fixed in a script before shooting, and the editor follows that plan.",
+      "The session shows documentary story being discovered in the edit, not locked in advance."
+     ],
+     [
+      "The director cuts alone and brings in an editor only for the final polish.",
+      "The session stresses close teamwork with the editor during structure, not only at the end."
+     ]
+    ],
+    "why": "In documentary, the real story often only appears in the edit room. Testing working cuts with an editor is how the order of facts and characters gets decided.",
+    "video": "Documentary: Finding and Shaping Your Story"
+   }
+  ],
+  [
+   {
+    "q": "For a sweet shop's brand film, the owner recorded her story eight times. Take 3 is word-perfect but sounds rehearsed. In take 7 her voice catches and she pauses while talking about her late father, who started the shop. Which do you use?",
+    "options": [
+     [
+      "Take 7, using a cutaway to cover the stumble if needed.",
+      ""
+     ],
+     [
+      "Take 3, because a business film should sound clean and confident.",
+      "A polished but rehearsed take can leave viewers unmoved, which defeats the purpose."
+     ],
+     [
+      "Join the best lines from several takes into one clean answer.",
+      "Stitching takes often breaks the voice and loses the feeling that made take 7 work."
+     ]
+    ],
+    "why": "Viewers connect with honest emotion more than with perfect wording. A cutaway (a short shot of something else) can hide a small stumble without losing the moment.",
+    "video": ""
+   },
+   {
+    "q": "The StudioBinder video on Walter Murch lists six things an editor weighs when choosing a cut. Which one does Murch rank lowest, and give up first?",
+    "options": [
+     [
+      "Keeping where people stand in the space consistent across the cut.",
+      ""
+     ],
+     [
+      "Making sure the cut moves the story forward in a clear way.",
+      "Murch ranks story second, just below emotion, so it is near the top."
+     ],
+     [
+      "Making the cut land at a good moment in the scene's rhythm.",
+      "Rhythm comes third for Murch, well above matching the space."
+     ]
+    ],
+    "why": "Murch's rule of six puts emotion first and keeping the space consistent last. If a cut feels true, viewers rarely notice small spatial mismatches.",
+    "video": "The Book Every Editor Has to Read — Walter Murch and In the Blink of an Eye"
+   }
+  ],
+  [
+   {
+    "q": "Your wedding film switches between the baraat arriving and the bride waiting upstairs. When is the best moment to switch from the baraat to the bride?",
+    "options": [
+     [
+      "When the procession stops at the gate and the outcome is open.",
+      ""
+     ],
+     [
+      "After the baraat sequence has fully finished playing out.",
+      "Finishing one thread completely removes the pull that makes switching worthwhile."
+     ],
+     [
+      "Every few seconds, so both threads stay equally fresh.",
+      "Switching that fast is hard to follow and each cut loses its effect."
+     ]
+    ],
+    "why": "Leaving one thread at an open moment makes viewers want to return to it. That pull is what makes crosscutting exciting.",
+    "video": ""
+   },
+   {
+    "q": "A client film moves between a Nashik grape farmer's dawn and a Mumbai buyer's morning. Test viewers say it is confusing. What do you change?",
+    "options": [
+     [
+      "Switch less often, and land each switch on a clear link or sharp difference.",
+      ""
+     ],
+     [
+      "Add a text title naming the place at every single switch.",
+      "Titles label the place but do not fix switches that have no purpose."
+     ],
+     [
+      "Speed up the switches so the energy hides the confusion.",
+      "Faster switching usually makes a confusing film harder to follow."
+     ]
+    ],
+    "why": "Each switch should mean something, such as a matched action or a strong difference between the two lives. Fewer, purposeful switches are easier to follow.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In an interview, a mother says, \"I never saw him again.\" Your next clip has music swelling in. How do you handle the cut?",
+    "options": [
+     [
+      "Hold a few seconds on her face with only the room's natural sound, then bring in music.",
+      ""
+     ],
+     [
+      "Bring the music in right on her last word to lift the emotion.",
+      "Music arriving instantly tells viewers how to feel and steps on her line."
+     ],
+     [
+      "Cut straight to the next interview to keep the pace tight.",
+      "Moving on at once gives viewers no time to take in what she said."
+     ]
+    ],
+    "why": "A short pause with only the quiet natural sound of the place gives the line space to sink in. Music can come after.",
+    "video": ""
+   },
+   {
+    "q": "Watching your rough cut, a client says the four-second pause after the proposal \"looks like a mistake.\" What do you do?",
+    "options": [
+     [
+      "Keep the pause, but add room tone and a reaction shot so it feels chosen.",
+      ""
+     ],
+     [
+      "Remove the pause completely so the client stays happy.",
+      "Cutting it loses the moment instead of fixing why it felt wrong."
+     ],
+     [
+      "Fill the gap with soft music so there is no dead air.",
+      "Music fills the space the pause was meant to give the moment."
+     ]
+    ],
+    "why": "Pure digital silence can sound like a dropout, which reads as an error. Room tone (the quiet natural sound of the place) and a reaction shot show the pause is deliberate.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "Your brand film for a Jaipur jewellery shop runs in order, from raw gold to finished necklace. You think opening on the finished piece might be stronger. Delivery is in two days. What do you do?",
+    "options": [
+     [
+      "Copy the sequence, rough out the new order, and watch both versions.",
+      ""
+     ],
+     [
+      "Rebuild the main timeline in the new order and judge it from there.",
+      "Working on your only cut risks losing a version that may have been better."
+     ],
+     [
+      "Describe the idea to the client and let them decide before trying it.",
+      "Clients judge better from a version they can watch than from a description."
+     ]
+    ],
+    "why": "A quick rough version on a copy lets you compare by watching, not guessing. Your original cut stays safe if the new idea does not work.",
+    "video": ""
+   },
+   {
+    "q": "In Inside The Edit's video cutting the same scene two ways, what do the two versions mainly show?",
+    "options": [
+     [
+      "The same footage can mean different things based on editing choices.",
+      ""
+     ],
+     [
+      "One version is correct and the other shows common errors.",
+      "Both versions are valid; the video compares choices, not right and wrong."
+     ],
+     [
+      "Most of the difference comes from the colour grade and music.",
+      "The video focuses on structure, tone, pacing and spacing, not finishing touches."
+     ]
+    ],
+    "why": "By keeping the footage the same, the video isolates decisions about order, tone and spacing. It shows how much the edit itself shapes the story.",
+    "video": "How Editors Cut the Same Scene in 2 Completely Different Ways"
+   }
+  ]
+ ],
+ "A10": [
+  [
+   {
+    "q": "You cut an 'umm' out of a shop owner's interview for a small business promo. On headphones you now hear a tiny pop right at the cut. What do you do?",
+    "options": [
+     [
+      "Add a very short crossfade across the cut and listen again.",
+      ""
+     ],
+     [
+      "Raise the background music so the pop gets masked.",
+      "The pop is still there, and louder music will start to fight the voice."
+     ],
+     [
+      "Run noise reduction over the whole interview clip.",
+      "Noise reduction treats steady hiss, not a single click caused by a hard cut."
+     ]
+    ],
+    "why": "A pop at a cut usually comes from the waveform jumping suddenly. A crossfade of a few milliseconds smooths the join so the edit cannot be heard.",
+    "video": ""
+   },
+   {
+    "q": "The workshop treats editing and mixing as separate, deliberate steps. Which order of work does it support?",
+    "options": [
+     [
+      "Fix and tidy each clip first, then balance levels across the mix.",
+      ""
+     ],
+     [
+      "Set the final loudness first, then go back and fix each edit.",
+      "Any later edit or fix changes the levels, so the loudness work has to be redone."
+     ],
+     [
+      "Add effects to every clip first, then decide what needs fixing.",
+      "Processing before listening hides problems and wastes effort on clips that may change."
+     ]
+    ],
+    "why": "Clean, problem-free clips give you a stable base. Balancing comes after, so each decision only has to be made once.",
+    "video": "Audio editing & mixing"
+   }
+  ],
+  [
+   {
+    "q": "A wedding speech has a ceiling fan hum behind it. You open the noise reduction tool. How do you decide on the right setting?",
+    "options": [
+     [
+      "Switch the effect on and off while listening to speech on headphones.",
+      ""
+     ],
+     [
+      "Watch the waveform and raise it until the gaps look flat.",
+      "A flat-looking waveform tells you nothing about how damaged the voice now sounds."
+     ],
+     [
+      "Listen on laptop speakers at low volume to judge the overall effect.",
+      "Small speakers at low volume hide the swirly artefacts that headphones reveal."
+     ]
+    ],
+    "why": "Comparing with and without the effect, on headphones, shows the point where the hum drops but the voice still sounds natural. Stop there, even if a little hum remains.",
+    "video": ""
+   },
+   {
+    "q": "Your noise reduction tool asks for a sample of the noise before it works. Which part of the clip do you give it?",
+    "options": [
+     [
+      "A few seconds where only the background noise plays, with no speech.",
+      ""
+     ],
+     [
+      "The loudest section of speech, so it learns the voice well.",
+      "The tool would treat parts of the voice as noise and remove them."
+     ],
+     [
+      "The whole clip, including the speech and any music.",
+      "A mixed sample confuses the tool, so it cuts things you want to keep."
+     ]
+    ],
+    "why": "The tool learns what to remove from the sample. A clean noise-only stretch lets it target the hum and leave the voice alone.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You tightened a street market interview by cutting pauses. Now the background sound drops to dead silence at every gap. What do you do?",
+    "options": [
+     [
+      "Lay a track of room tone under the voice to fill the gaps.",
+      ""
+     ],
+     [
+      "Put the cut pauses back in so the gaps sound normal.",
+      "That undoes your edit and brings back the slow pacing you removed."
+     ],
+     [
+      "Raise the music in each gap so nobody notices the silence.",
+      "The jumps in background sound are still there, and the music now bounces up and down."
+     ]
+    ],
+    "why": "Room tone is a recording of the location with nobody talking. A steady bed of it under the dialogue hides the cuts and keeps the space sounding continuous.",
+    "video": ""
+   },
+   {
+    "q": "The automation lesson covers changing levels over time. Your music should dip whenever the host speaks and rise in the gaps. How do you do it?",
+    "options": [
+     [
+      "Draw volume automation that lowers the music under each spoken line.",
+      ""
+     ],
+     [
+      "Lower the music clip once so it stays quiet for the whole film.",
+      "The gaps between lines will feel empty and flat with no music lift."
+     ],
+     [
+      "Put a heavy compressor on the music track to keep it down.",
+      "A plain compressor evens out the music itself and does not react to the host's speech."
+     ]
+    ],
+    "why": "Automation records level moves at exact moments, so the music can step back for speech and come forward between lines.",
+    "video": "Fundamentals of Mixing Sound in Fairlight — selected lessons"
+   },
+   {
+    "q": "In the sound design lesson, effects are added to make scenes feel real. A door slams on screen but there is no sound. What do you do?",
+    "options": [
+     [
+      "Add a door effect synced to the frame, at a level that suits the room.",
+      ""
+     ],
+     [
+      "Add the effect at full level so the moment really stands out.",
+      "An effect louder than the scene sounds fake and pulls viewers out of it."
+     ],
+     [
+      "Leave it silent, since the music already carries the moment.",
+      "A visible action with no sound feels wrong to viewers, even if they cannot say why."
+     ]
+    ],
+    "why": "Good sound design matches timing and level to what we see, so the effect feels like it was recorded on location.",
+    "video": "Fundamentals of Mixing Sound in Fairlight — selected lessons"
+   }
+  ],
+  [
+   {
+    "q": "A client picked a Hindi film song with lyrics for their corporate film. Under the narration, the sung words clash with the spoken words. What do you suggest?",
+    "options": [
+     [
+      "Use an instrumental version of the track while the narrator speaks.",
+      ""
+     ],
+     [
+      "Push the narration louder until it is clearly on top.",
+      "The lyrics still compete for attention, and the voice may start to distort."
+     ],
+     [
+      "Keep it as it is, since the client chose this song.",
+      "A good editor explains the problem and offers a fix the client can approve."
+     ]
+    ],
+    "why": "Sung words and spoken words compete for the same attention. An instrumental keeps the feel of the song without blocking the message.",
+    "video": ""
+   },
+   {
+    "q": "Your narration peaks around −12 dB on the meter. Roughly where should the music peak while the narrator is talking?",
+    "options": [
+     [
+      "Around −22 dB or lower, well under the voice.",
+      ""
+     ],
+     [
+      "Around −14 dB, close to the voice so it feels full.",
+      "That leaves the music nearly as loud as the voice, so words get lost."
+     ],
+     [
+      "Around −40 dB, so it is almost silent.",
+      "At that level the music adds nothing and the film feels empty."
+     ]
+    ],
+    "why": "A gap of about 10 dB or more keeps every word clear while the music is still felt.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You recorded a speaker at a function with a lapel mic. A deep rumble from the generator sits under the voice. Which tool fixes it?",
+    "options": [
+     [
+      "An EQ high-pass filter that cuts the lowest frequencies.",
+      ""
+     ],
+     [
+      "A compressor with a fast attack to hold the rumble down.",
+      "A compressor controls loudness changes and will not remove a steady low tone."
+     ],
+     [
+      "More recording gain so the voice rises above the rumble.",
+      "Raising gain makes the rumble louder by the same amount as the voice."
+     ]
+    ],
+    "why": "Rumble lives in very low frequencies the voice barely uses. A high-pass filter around 80 Hz removes it without hurting speech.",
+    "video": ""
+   },
+   {
+    "q": "After compressing a narration, the breaths between lines are now loud and the voice sounds squashed and lifeless. What do you change?",
+    "options": [
+     [
+      "Lower the ratio or raise the threshold so it compresses less.",
+      ""
+     ],
+     [
+      "Add more make-up gain so the voice sounds fuller.",
+      "Make-up gain lifts everything, including the breaths, and leaves the squashed sound."
+     ],
+     [
+      "Boost the low end with EQ to bring back some body.",
+      "EQ changes tone but does not undo the over-compression causing the problem."
+     ]
+    ],
+    "why": "Too much compression flattens natural ups and downs and drags quiet sounds like breaths up. Easing the ratio or threshold brings the life back.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "Your brand film for YouTube measures −8 LUFS over the whole video. LUFS is a unit of loudness measured across the full film. What do you do before uploading?",
+    "options": [
+     [
+      "Bring the full mix down to about −14 LUFS, with peaks below −1 dB.",
+      ""
+     ],
+     [
+      "Leave it loud so it stands out against other videos.",
+      "The platform will turn it down anyway, and the over-squashed sound will remain."
+     ],
+     [
+      "Lower each clip until the meter never goes above −14 dB.",
+      "That mixes up peak level with overall loudness, and the film will end up too quiet."
+     ]
+    ],
+    "why": "Platforms like YouTube turn videos to about −14 LUFS. Mixing to it yourself means you control how it sounds, with no surprise turn-down.",
+    "video": ""
+   },
+   {
+    "q": "The finishing lessons cover cleanup and then loudness normalising, which means setting the whole mix to a target level. What should happen before you normalise?",
+    "options": [
+     [
+      "Level and clean every clip so the mix is balanced, then normalise the whole.",
+      ""
+     ],
+     [
+      "Normalise every clip on its own to the target before mixing.",
+      "Each clip hitting the target alone does not make the full mix land on target."
+     ],
+     [
+      "Normalise first, then do the cleanup and levelling afterwards.",
+      "Any cleanup after normalising changes the loudness, so the measurement is no longer right."
+     ]
+    ],
+    "why": "Loudness is measured across the finished whole. Balance and cleanup must be done first, so the final step only sets the overall level.",
+    "video": "Fundamentals of Mixing Sound in Fairlight — selected lessons"
+   }
+  ]
+ ],
+ "A11": [
+  [
+   {
+    "q": "You are grading a wedding film. Clips came from a Sony shooting S-Log3, an iPhone recording HLG, and a drone in its normal profile. What do you do before any grading?",
+    "options": [
+     [
+      "Give each clip its own camera's input setting so all of them land in one shared space.",
+      ""
+     ],
+     [
+      "Apply one popular LUT to every clip so they all start looking similar.",
+      "A LUT made for one camera will push the other cameras' footage the wrong way."
+     ],
+     [
+      "Grade the iPhone clips first by eye, then copy those settings to the rest.",
+      "Each camera stores colour differently, so copied settings will not land the same."
+     ]
+    ],
+    "why": "When the software knows each source, all clips arrive in one shared space. Then your grade behaves the same on every camera.",
+    "video": ""
+   },
+   {
+    "q": "A client sends a clip with no metadata. You cannot tell which camera profile it used. What does the colorist suggest?",
+    "options": [
+     [
+      "Try the likely input options and keep the one where greys and contrast look natural.",
+      ""
+     ],
+     [
+      "Leave the input unset and fix everything later with saturation and curves.",
+      "Skipping the input step means you fight the wrong starting point in every later node."
+     ],
+     [
+      "Always treat unknown footage as the camera log that most people use today.",
+      "A guess without testing can be badly wrong and break skin and highlights."
+     ]
+    ],
+    "why": "Unknown sources need a careful test. Natural neutrals and sensible contrast are the best signs of the right choice.",
+    "video": "The Pro Colorist Guide to Color Management in 2024"
+   },
+   {
+    "q": "Your film will play on YouTube and also on a projector at the reception. How do you handle the two deliveries?",
+    "options": [
+     [
+      "Keep one grade and change only the final transform for each screen.",
+      ""
+     ],
+     [
+      "Change the timeline working space for each screen, then touch up the grade.",
+      "The working space should stay fixed, or your grade shifts every time you change it."
+     ],
+     [
+      "Build a fresh grade from scratch for each screen the film will play on.",
+      "Regrading from zero wastes time when a correct output transform handles most of it."
+     ]
+    ],
+    "why": "A managed pipeline keeps the grade in one working space. Only the last step changes for each screen.",
+    "video": "Color Management"
+   }
+  ],
+  [
+   {
+    "q": "You grade a shot of a bride in a bright red saree. On the vectorscope the trace stretches far toward red, past the target box. What does this tell you?",
+    "options": [
+     [
+      "The red is very saturated and may smear or clip, so pull it back a little.",
+      ""
+     ],
+     [
+      "The red is too bright, so lower the exposure of the whole shot.",
+      "The vectorscope does not show brightness; that is the waveform's job."
+     ],
+     [
+      "The shot is fine, because a longer trace simply means richer colour.",
+      "Going past the target boxes often means colour that breaks up on screens and on TV."
+     ]
+    ],
+    "why": "Distance from the centre shows how strong a colour is. A trace past the boxes is a warning to reduce saturation.",
+    "video": ""
+   },
+   {
+    "q": "You shoot a plain grey wall in a shop. On the vectorscope the small blob sits off the centre, toward orange. What does that mean?",
+    "options": [
+     [
+      "The shot has a warm cast, so fix white balance until the blob is centred.",
+      ""
+     ],
+     [
+      "The wall is too dark, so raise lift (the shadow level) until it moves.",
+      "Lift changes brightness, while the blob's position shows a colour cast."
+     ],
+     [
+      "The wall has strong colour, so boost saturation to match the scope.",
+      "A grey wall should have no colour, so more saturation makes the cast worse."
+     ]
+    ],
+    "why": "Neutral greys and whites should sit in the centre of the vectorscope. Any pull to one side is a colour cast.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You cut a two-camera interview for a small sweet shop. Camera B looks cooler and slightly green next to Camera A. How do you match them?",
+    "options": [
+     [
+      "Pick A as the reference, then adjust B while comparing both side by side on scopes.",
+      ""
+     ],
+     [
+      "Grade each camera on its own until each one looks good by itself.",
+      "Two shots can each look fine alone and still jump when cut together."
+     ],
+     [
+      "Grade B until it looks right on the edit monitor in a single view.",
+      "Without a side-by-side reference, your eye adjusts and small differences stay hidden."
+     ]
+    ],
+    "why": "Matching works best against a fixed reference. Side-by-side viewing and scopes show differences your eye misses.",
+    "video": ""
+   },
+   {
+    "q": "Before you use Color Match to match two shots, what should already be in place?",
+    "options": [
+     [
+      "Each clip's colour settings set correctly, so both shots sit in the same space.",
+      ""
+     ],
+     [
+      "A strong creative look on the reference shot, so the match copies it.",
+      "Matching works better on balanced shots, with the look added after."
+     ],
+     [
+      "Extra saturation on both shots, so the tool has more colour to read.",
+      "Boosting colour first gives the match tool a false picture of the shots."
+     ]
+    ],
+    "why": "Auto matching needs a controlled starting point. If clips are interpreted wrongly, the match chases the wrong numbers.",
+    "video": "Create a professional look using Color Match and Curves"
+   },
+   {
+    "q": "After Color Match, the shots are close but the shadows still feel different. What do you do next?",
+    "options": [
+     [
+      "Fine-tune with Curves, adjusting the shadow area until the two cuts sit together.",
+      ""
+     ],
+     [
+      "Run Color Match again and again until the shadows happen to line up.",
+      "Repeating the same automatic step rarely fixes one tonal range."
+     ],
+     [
+      "Accept it, because the automatic match is always more accurate than you.",
+      "Auto tools give a starting point, and a working colorist still finishes by hand."
+     ]
+    ],
+    "why": "The match gets you close. Curves let you correct a specific tonal range that the match did not fix.",
+    "video": "Create a professional look using Color Match and Curves"
+   }
+  ],
+  [
+   {
+    "q": "Client notes on a street market shot: the grass is a bit yellow, the whole shot is too dark, and a sign in the back is distracting. Which do you tackle first?",
+    "options": [
+     [
+      "The darkness, because changing it shifts how every other part looks.",
+      ""
+     ],
+     [
+      "The yellow grass, because it is the most obvious problem in frame.",
+      "Lifting the exposure later will change the grass again, so you redo the work."
+     ],
+     [
+      "The distracting sign, because it will take the longest to fix.",
+      "How long a fix takes does not decide the order; what it affects does."
+     ]
+    ],
+    "why": "An exposure change touches every pixel, including the grass and the sign. Doing it first keeps your later small fixes accurate.",
+    "video": ""
+   },
+   {
+    "q": "A wedding shot is already balanced. The client now wants the garden grass a little greener. What do you do?",
+    "options": [
+     [
+      "Use a qualifier (a tool that selects by colour) to pick just the greens.",
+      ""
+     ],
+     [
+      "Shift the whole image toward green with the main colour wheel.",
+      "That turns skin and the white decor green as well."
+     ],
+     [
+      "Raise overall saturation until the grass looks as green as wanted.",
+      "Skin and clothing get too strong long before the grass is right."
+     ]
+    ],
+    "why": "Once the base is balanced, small requests need small tools. A qualifier changes one colour range and leaves the rest.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "At a sangeet under mixed LED lights, faces look slightly pink. On the vectorscope the face area sits off toward magenta. What do you do?",
+    "options": [
+     [
+      "Select just the skin and rotate its hue back toward orange, then check by eye.",
+      ""
+     ],
+     [
+      "Lower saturation of the whole shot until the faces stop looking pink.",
+      "This dulls the whole frame and the hue of the skin is still wrong."
+     ],
+     [
+      "Add warmth to the whole frame until the faces look more orange.",
+      "Warming moves the decor and clothes too, and does not remove a magenta tint."
+     ]
+    ],
+    "why": "Skin needs the right hue first. Moving only the skin back toward the skin-tone line fixes faces without hurting the rest.",
+    "video": ""
+   },
+   {
+    "q": "A festival group shot has people with very fair and very deep skin. On the vectorscope how should you treat them?",
+    "options": [
+     [
+      "Keep every face at a similar hue, and let brightness and saturation differ.",
+      ""
+     ],
+     [
+      "Brighten the darker faces until every face looks about the same tone.",
+      "This changes how people really look, and clients will notice and dislike it."
+     ],
+     [
+      "Give each person a different hue so the range of skin reads clearly.",
+      "Human skin shares a similar hue, so spreading hues makes some faces look ill."
+     ]
+    ],
+    "why": "Skin of every tone has a similar hue. What changes is brightness and saturation, so respect those differences.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You export a corporate film. On the client's laptop it looks lighter and washed out compared to your timeline. What do you do first?",
+    "options": [
+     [
+      "Check the file's colour and gamma tags, then test on the client's kind of screen.",
+      ""
+     ],
+     [
+      "Add contrast to the grade so the export looks richer on their laptop.",
+      "This fixes one screen and breaks every other screen the film plays on."
+     ],
+     [
+      "Tell the client their laptop is not calibrated and send the same file.",
+      "Most viewers use normal screens, so the delivery must look right on them."
+     ]
+    ],
+    "why": "A shift like this is usually a settings mismatch, not a grading problem. Gamma tags tell players how to show brightness, so find the wrong setting, then test on real screens.",
+    "video": ""
+   },
+   {
+    "q": "Your film will play on a hall projector at the reception and later on Instagram. The deadline is tomorrow. What do you do?",
+    "options": [
+     [
+      "Export a short test clip and watch it on that projector and on a phone.",
+      ""
+     ],
+     [
+      "Trust your edit monitor, since the grade looked right while you worked.",
+      "Projectors and phones show colour differently, so problems appear only on them."
+     ],
+     [
+      "Export one final file at the highest bitrate and send it to both.",
+      "A high bitrate does not fix colour or brightness differences between screens."
+     ]
+    ],
+    "why": "Only the real screen tells you how the film will look. A short test saves you from surprises on the day.",
+    "video": ""
+   }
+  ]
+ ],
+ "A12": [
+  [
+   {
+    "q": "You shot a jewellery ad in 4K at 50fps. The broadcaster's sheet asks for 1920x1080, 25fps, ProRes and -24 LUFS loudness (a standard measure of overall volume). What do you send?",
+    "options": [
+     [
+      "A 1080p, 25fps ProRes file at -24 LUFS, matching the sheet item by item.",
+      ""
+     ],
+     [
+      "The 4K 50fps file, since higher quality gives them more room to work.",
+      "Broadcasters reject files that don't match the sheet, even if the quality is higher."
+     ],
+     [
+      "A 1080p 25fps file mixed louder than asked, so the ad stands out.",
+      "Missing the loudness target can get the file rejected or turned down automatically."
+     ]
+    ],
+    "why": "Clients and broadcasters build their systems around the numbers they give you. Match each one exactly, and ask in writing about anything unclear.",
+    "video": ""
+   },
+   {
+    "q": "A client has agreed to three versions: a TV master, a YouTube file and a small preview. How does the Adobe video suggest you handle this at export?",
+    "options": [
+     [
+      "Set up each version as its own export, with the settings agreed for it.",
+      ""
+     ],
+     [
+      "Export one high quality master and let the client convert the rest.",
+      "The client paid for three ready files, and their conversions may break the agreed settings."
+     ],
+     [
+      "Use one preset for all three and give each file a different name.",
+      "The same settings can't meet three different sets of requirements."
+     ]
+    ],
+    "why": "The export workflow lets you build each agreed version on purpose. That way every file matches its own requirements.",
+    "video": "Exporting & delivering projects"
+   }
+  ],
+  [
+   {
+    "q": "A restaurant wants a YouTube film and some vertical Reels, all cut from one day of shooting on a wide camera. How do you frame on the day?",
+    "options": [
+     [
+      "Keep key action near the centre with space around it, so a tall crop still works.",
+      ""
+     ],
+     [
+      "Frame tightly for the wide film and sort out the vertical cuts later.",
+      "Tight wide framing often leaves nothing usable when you crop to vertical."
+     ],
+     [
+      "Turn the main camera sideways for the whole shoot to suit the Reels.",
+      "This ruins the YouTube film to serve the smaller deliverable."
+     ]
+    ],
+    "why": "Planning for the narrow frame while shooting wide lets one shoot serve both. The crop has room to move without losing faces or products.",
+    "video": ""
+   },
+   {
+    "q": "After an automatic reframe to vertical, a speaker's face slides half out of frame when she leans to one side. What does the video show you should do?",
+    "options": [
+     [
+      "Fix that shot by hand with keyframes, markers that set position and size over time.",
+      ""
+     ],
+     [
+      "Leave it, since the automatic tool already tracked the shot for you.",
+      "Auto tools make mistakes, and a half-cut face looks careless to viewers."
+     ],
+     [
+      "Put the wide shot in the vertical frame with black bars above and below.",
+      "Black bars waste most of the vertical screen and look out of place on Reels."
+     ]
+    ],
+    "why": "The automatic pass is only a starting point. Position and scale keyframes let you correct the shots it gets wrong.",
+    "video": "Reframe your video for multiple social platforms"
+   }
+  ],
+  [
+   {
+    "q": "An NGO's YouTube documentary has Hindi interviews. Viewers should be able to read it in English, Tamil or Hindi. You'll use .srt files (plain text subtitle files). What do you deliver?",
+    "options": [
+     [
+      "One video with no text in the picture, plus one .srt file for each language.",
+      ""
+     ],
+     [
+      "One video with English burned in, plus Tamil and Hindi .srt files.",
+      "Tamil and Hindi viewers would see English text under their own, and no one can hide it."
+     ],
+     [
+      "One clean video plus a single .srt file with all three languages stacked.",
+      "Viewers would see three lines at once and can't choose just their language."
+     ]
+    ],
+    "why": "Separate files per language let each viewer pick one or hide them all. The clean master also stays ready for any future use.",
+    "video": ""
+   },
+   {
+    "q": "A sweet shop wants an Instagram Reel. Most people will scroll past it with the sound off. How do you handle captions?",
+    "options": [
+     [
+      "Put the captions into the picture itself, placed clear of the app's buttons.",
+      ""
+     ],
+     [
+      "Upload the Reel with a separate .srt file attached for viewers.",
+      "Social feeds often ignore or hide subtitle files, so muted viewers may see nothing."
+     ],
+     [
+      "Skip captions, because the food shots tell the story without words.",
+      "Offers and shop details spoken aloud are lost on muted viewers."
+     ]
+    ],
+    "why": "On muted social feeds, captions fixed in the picture are the only ones everyone will see. Keep them away from the like and comment buttons.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You've exported a corporate film and the deadline is in 40 minutes. The timeline looked fine all day. What do you do before sending?",
+    "options": [
+     [
+      "Play the exported file in full in a separate player, with headphones on.",
+      ""
+     ],
+     [
+      "Scrub through the timeline once more to confirm the edit is right.",
+      "The timeline is not the export, and some errors appear only in the rendered file."
+     ],
+     [
+      "Open the file, check the first and last minute, then send it.",
+      "Audio drops or a missing graphic can hide anywhere in the middle."
+     ]
+    ],
+    "why": "Export can add problems the timeline never showed. Watching the actual file in full, against the spec, is the only way to know what the client will get.",
+    "video": ""
+   },
+   {
+    "q": "While checking the final file, you notice the interview voice plays only in your left headphone. What do you do?",
+    "options": [
+     [
+      "Set the dialogue to play in both channels, export again and recheck the file.",
+      ""
+     ],
+     [
+      "Send it anyway, since most people watch on phone speakers.",
+      "Many viewers use earphones, and one-sided voice sounds broken to them."
+     ],
+     [
+      "Raise the overall volume so the voice is clear enough on one side.",
+      "Louder audio doesn't fix the channel problem and may break the loudness target."
+     ]
+    ],
+    "why": "A mono voice placed on one side is a common export fault. Fix the routing, then check the new file again, because every fix can add a new error.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You're sending a hotel client the third cut of their vertical promo. Which file name do you use?",
+    "options": [
+     [
+      "Hotel_Promo_9x16_v03_2026-03-04.mp4",
+      ""
+     ],
+     [
+      "Hotel_Promo_v03_04-03-2026.mp4",
+      "It leaves out the shape, and a day-first date won't sort in order."
+     ],
+     [
+      "Hotel_Promo_9x16_v03_FINAL.mp4",
+      "There is no date, and FINAL becomes false if the client asks for another round."
+     ]
+    ],
+    "why": "Shape, version number and a year-month-day date tell anyone what the file is, and the files sort in the right order.",
+    "video": ""
+   },
+   {
+    "q": "A client left timecoded notes on your first cut in Frame.io. You've made the fixes. How does the video show you should upload the new cut?",
+    "options": [
+     [
+      "Add it as a new version on the same item, so notes and cuts stay together.",
+      ""
+     ],
+     [
+      "Upload it as a separate file and email the client the new link.",
+      "The notes stay on the old file, so no one can easily check what was fixed."
+     ],
+     [
+      "Delete the first cut and upload the new one fresh to avoid confusion.",
+      "Deleting it throws away the record of what the client asked for."
+     ]
+    ],
+    "why": "Stacking versions keeps each comment linked to the cut it was about. You and the client can compare and confirm each fix.",
+    "video": "Enhance your review process with Frame.io"
+   }
+  ],
+  [
+   {
+    "q": "A wedding film is delivered and your drive is nearly full. You must free space, but you may need to re-edit next year. What do you remove?",
+    "options": [
+     [
+      "The render and preview cache files.",
+      ""
+     ],
+     [
+      "The original camera footage files.",
+      "Without the originals you can never re-edit or make a new version."
+     ],
+     [
+      "The edit project file.",
+      "The project file holds every edit decision and takes very little space."
+     ]
+    ],
+    "why": "Cache files are rebuilt automatically from the footage and project. The originals, project and masters can't be replaced if lost.",
+    "video": ""
+   },
+   {
+    "q": "The WITNESS video talks about planning to keep footage safe for years. What is the key step it points to?",
+    "options": [
+     [
+      "Decide who is responsible for the footage and keep copies in separate places.",
+      ""
+     ],
+     [
+      "Keep it on your own laptop, since you shot it and know the files best.",
+      "One copy on one device can be lost to theft, damage or failure."
+     ],
+     [
+      "Leave it on the cloud service you used to share it with the team.",
+      "Sharing services can delete files, close accounts or change rules without warning."
+     ]
+    ],
+    "why": "Long-term safety needs a named person in charge and copies stored in different places. Without both, footage quietly disappears.",
+    "video": "Planning to Preserve Video for Human Rights"
+   }
+  ]
+ ],
+ "A13": [
+  [
+   {
+    "q": "Before a big wedding project, you pick a highly praised wedding film to learn from. How do you study it?",
+    "options": [
+     [
+      "Rewatch it scene by scene and write down why each part moves you.",
+      ""
+     ],
+     [
+      "Copy its shot list and song choices closely for your next couple.",
+      "Copying gives you their film for a different couple, not a skill you can reuse."
+     ],
+     [
+      "Find out which camera and lenses they used and rent the same kit.",
+      "Their kit is the smallest part of why the film works, so it teaches you very little."
+     ]
+    ],
+    "why": "Breaking a film into scenes and asking why each one lands teaches you the craft behind it. You can then use those reasons in your own way.",
+    "video": ""
+   },
+   {
+    "q": "When you study how a skilled editor builds a film in your style, what is the most useful thing to look at first?",
+    "options": [
+     [
+      "How the story and the music decide the order of the moments.",
+      ""
+     ],
+     [
+      "Which transitions and effects they use between the clips.",
+      "Transitions are surface polish and cannot hold up a film with a weak structure."
+     ],
+     [
+      "Which colour grade preset gives their footage its look.",
+      "A grade changes the look, but it does not make the film coherent or moving."
+     ]
+    ],
+    "why": "A strong film is built on story and music before anything else. Once you see that foundation, the other choices make sense.",
+    "video": "Wedding Film Framework — Premiere Pro"
+   },
+   {
+    "q": "You watch an experienced filmmaker cover a one-time live event like a ceremony. What is the best way to critique their setup?",
+    "options": [
+     [
+      "Note where each camera and mic sits, and what is lost if one fails.",
+      ""
+     ],
+     [
+      "Note how many cameras they own and plan to buy the same number.",
+      "The number of cameras matters less than how each one is placed and used."
+     ],
+     [
+      "Note only the look of the main camera, since that is what clients see.",
+      "A live event depends on the full plan, including backup angles and clean sound."
+     ]
+    ],
+    "why": "A ceremony happens once, so a good plan covers every angle and sound source. Asking what fails if one piece drops shows how strong the plan really is.",
+    "video": "How to Film a Wedding Ceremony"
+   }
+  ],
+  [
+   {
+    "q": "At a pre-wedding shoot in Udaipur, the couple look stiff and awkward on camera. What do you do?",
+    "options": [
+     [
+      "Ask them to walk toward you while she tells him a funny story.",
+      ""
+     ],
+     [
+      "Tell them to relax, be natural and just look happy together.",
+      "Vague instructions make people more self-aware, so they usually get stiffer."
+     ],
+     [
+      "Show them poses on your phone and ask them to hold each one.",
+      "Held poses often look forced and leave you with stills, not moving moments."
+     ]
+    ],
+    "why": "People look natural when they are busy doing something real. A simple task gives them something to focus on other than the camera.",
+    "video": ""
+   },
+   {
+    "q": "A textile shop owner in Jaipur wants a brand film and asks you to start shooting tomorrow with no prep. What do you do?",
+    "options": [
+     [
+      "Take a day to outline the story, list the shots and walk him through it.",
+      ""
+     ],
+     [
+      "Start filming everything in the shop and find the story in the edit.",
+      "Shooting without a story wastes time and often misses the shots the film needs."
+     ],
+     [
+      "Write a full script with lines for the owner to learn by heart.",
+      "Non-actors reading memorised lines usually sound wooden on camera."
+     ]
+    ],
+    "why": "A short outline (often called a treatment) and a shot list keep the shoot focused. A quick walk-through means everyone knows what to do on the day.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "At a sangeet, the bride's family will perform one big dance. You are alone with two cameras. How do you set up?",
+    "options": [
+     [
+      "Lock one camera on a wide of the stage and handhold the other for faces.",
+      ""
+     ],
+     [
+      "Use both cameras for close-ups so you capture every small detail.",
+      "With no wide shot, you have nothing to cut back to when a close-up misses."
+     ],
+     [
+      "Set one camera to slow motion and shoot the dance with the other.",
+      "Slow motion is a nice extra, but it leaves the main dance with only one usable angle."
+     ]
+    ],
+    "why": "The locked wide makes sure the whole dance is recorded, and the handheld camera adds emotion. Together they give the edit what it needs.",
+    "video": ""
+   },
+   {
+    "q": "You are filming a company founder's interview and only 20 minutes are left. What do you shoot?",
+    "options": [
+     [
+      "Re-ask her main questions from a second angle, then record room sound.",
+      ""
+     ],
+     [
+      "A time-lapse of the busy office lobby to open the film.",
+      "A time-lapse is a nice extra, while the interview is what the film depends on."
+     ],
+     [
+      "Slow-motion shots of the company logo on the reception wall.",
+      "Logo shots can be grabbed any time, but her answers cannot be redone easily."
+     ]
+    ],
+    "why": "A second angle lets the editor cut smoothly, and a minute of quiet room sound helps fill gaps in the audio. Both protect the most important part of the film.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "After the first cut of a wedding film, three family members send you different voice notes asking for changes. What do you do?",
+    "options": [
+     [
+      "Ask the couple for one combined list, then confirm the changes in writing.",
+      ""
+     ],
+     [
+      "Start making each change as soon as each voice note arrives.",
+      "Changes may clash or get undone, and you can end up doing endless rounds."
+     ],
+     [
+      "Make the changes you agree with and quietly skip the rest.",
+      "Ignoring notes without discussing them damages trust and leads to disputes later."
+     ]
+    ],
+    "why": "One decision maker and a written list stop mixed messages. Everyone knows exactly what the next version will include.",
+    "video": ""
+   },
+   {
+    "q": "A Pune bakery has approved its film. They need a 3-minute version, a vertical 30-second reel and a 15-second ad. What next?",
+    "options": [
+     [
+      "Export each in its own size, watch each fully and name files clearly.",
+      ""
+     ],
+     [
+      "Send the main film only and let them cut the short ones themselves.",
+      "The client is paying for every version, and their own cuts may look poor."
+     ],
+     [
+      "Send all three quickly and delete the project to free up space.",
+      "You may need the project later for small fixes or new versions."
+     ]
+    ],
+    "why": "Each platform needs its own size and length, and a full check catches errors before the client does. Clear names help them post the right file.",
+    "video": ""
+   }
+  ]
+ ],
+ "A14": [
+  [
+   {
+    "q": "A jewellery shop owner in Jaipur wants a Diwali video. When you ask about money, he says, \"Budget is flexible, just make it good.\" What do you do next?",
+    "options": [
+     [
+      "Offer two or three priced options with different scope, and ask him to pick one.",
+      ""
+     ],
+     [
+      "Plan the best version you can imagine and send him the full quote for it.",
+      "A big quote with no warning can scare him off, and you still do not know his real limit."
+     ],
+     [
+      "Assume a typical amount for a shop film and plan the shoot around that figure.",
+      "Your guess may be far from his limit, so the plan can collapse once he sees the price."
+     ]
+    ],
+    "why": "Priced options turn a vague answer into a real number. You learn his limit without making him name it first.",
+    "video": ""
+   },
+   {
+    "q": "A Pune startup's marketing manager gives you a clear brief. After the shoot, the founder sees the edit and asks for big changes. What would have prevented this?",
+    "options": [
+     [
+      "Confirming in writing, before the shoot, which person has the final word on the film.",
+      ""
+     ],
+     [
+      "Shooting lots of extra coverage so any later change could be made in the edit.",
+      "Extra footage helps a little, but it cannot fix a creative direction nobody senior agreed to."
+     ],
+     [
+      "Sending the marketing manager daily updates and stills throughout the shoot.",
+      "Updates to the wrong person still leave the real decision maker out of the loop."
+     ]
+    ],
+    "why": "If the person who truly signs off is not named early, their late opinion can undo weeks of work.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "A wedding client in Kochi asks for the highlight film one week earlier than agreed. You cannot add editors. What do you do?",
+    "options": [
+     [
+      "Offer a shorter highlight or drop the extra reels, and confirm the new list in writing.",
+      ""
+     ],
+     [
+      "Keep the full list but skip colour grading and sound cleanup to save days.",
+      "The client gets everything they asked for, but every piece now looks and sounds worse."
+     ],
+     [
+      "Agree quietly and work through the nights to deliver the full original list.",
+      "Tired editing leads to mistakes, and the client learns that rushed timelines cost nothing."
+     ]
+    ],
+    "why": "Trimming what you deliver protects the standard of what you do deliver, and the written list stops later arguments.",
+    "video": ""
+   },
+   {
+    "q": "Using the budget approach in the tutorial, how do you answer a client who cuts the budget by 30 percent?",
+    "options": [
+     [
+      "Show each cost and the reason behind it, then agree which days, crew or outputs to remove.",
+      ""
+     ],
+     [
+      "Lower your own fee to cover the gap and keep the crew and days the same.",
+      "This hides the real cost of the job and sets a price you cannot repeat."
+     ],
+     [
+      "Cut every below-the-line item evenly by 30 percent so the total fits.",
+      "Even cuts weaken every department at once instead of making a clear choice about what to drop."
+     ]
+    ],
+    "why": "A budget with written assumptions shows what each rupee buys, so a cut becomes a clear decision about what to remove.",
+    "video": "How To Make A Film Budget | Tutorial + Free Download"
+   },
+   {
+    "q": "In the budget tutorial, costs are split above and below the line. What usually sits below the line?",
+    "options": [
+     [
+      "Crew, equipment, locations and post-production work.",
+      ""
+     ],
+     [
+      "The director, writer, producer and lead cast.",
+      "These are the key creative roles, which sit above the line."
+     ],
+     [
+      "Only the contingency amount and the insurance.",
+      "These are part of a budget, but below the line covers the whole physical production."
+     ]
+    ],
+    "why": "Below-the-line costs are the working parts of the shoot and edit, which often scale with days and scope.",
+    "video": "How To Make A Film Budget | Tutorial + Free Download"
+   }
+  ],
+  [
+   {
+    "q": "For a Chennai hospital film, the contract names the MD as sign-off with two feedback rounds. At fine cut, a department head sends notes that undo the approved rough cut. What do you do?",
+    "options": [
+     [
+      "Send the notes to the MD, explain they go past the agreed rounds, and quote for the extra work.",
+      ""
+     ],
+     [
+      "Make all the changes right away so the hospital stays happy with your work.",
+      "This rewards notes from outside the agreed process and can break what the MD already approved."
+     ],
+     [
+      "Ignore the notes completely because they came from the wrong person.",
+      "Ignoring them can upset the client; the right person should decide what to do with them."
+     ]
+    ],
+    "why": "Routing notes through the named decision maker keeps the process fair, and extra rounds are paid work.",
+    "video": ""
+   },
+   {
+    "q": "Using the review workflow in the Frame.io video, how do you keep two feedback rounds clean?",
+    "options": [
+     [
+      "Upload each new cut as a new version of the same file, so notes stay linked.",
+      ""
+     ],
+     [
+      "Upload each cut as a separate file and send a fresh link every round.",
+      "Separate files scatter the comments and make it hard to check what changed between rounds."
+     ],
+     [
+      "Ask reviewers to email their notes with the rough times they remember.",
+      "Emailed notes with guessed times cause confusion and lose the link to the exact frame."
+     ]
+    ],
+    "why": "Stacking versions keeps every comment pinned to an exact moment in the video and shows which round each note belongs to.",
+    "video": "Enhance your review process with Frame.io"
+   },
+   {
+    "q": "At rough cut, the client says the middle of the film drags. Using the pacing framework from Inside The Edit, what do you do?",
+    "options": [
+     [
+      "Vary shot length and energy across the film so the middle builds toward the end.",
+      ""
+     ],
+     [
+      "Trim every shot in the film by the same amount so it feels faster.",
+      "Even trimming removes contrast, and pacing depends on change, not just speed."
+     ],
+     [
+      "Put faster music under the middle section and leave the edit as it is.",
+      "Music can hide a slow patch for a moment, but the structure still drags."
+     ]
+    ],
+    "why": "Pacing is an arc across the whole piece. Each section must be judged against what comes before and after it.",
+    "video": "Pacing in Film Editing — The Framework Pro Editors Use"
+   }
+  ],
+  [
+   {
+    "q": "Midway through a temple wedding shoot, the ceremony suddenly moves outdoors. Your three crew members are spread around the venue. What do you do?",
+    "options": [
+     [
+      "Gather everyone for two minutes to share the new plan, positions and hazards.",
+      ""
+     ],
+     [
+      "Post the change on the crew WhatsApp group and keep filming yourself.",
+      "People busy filming may not read it, and nobody can ask questions or confirm their job."
+     ],
+     [
+      "Move your own camera outside and let the others follow when they notice.",
+      "Crew left guessing will miss key moments and may set up cables or lights unsafely."
+     ]
+    ],
+    "why": "A quick face-to-face reset makes sure everyone knows the new plan, their role and the risks before going on.",
+    "video": ""
+   },
+   {
+    "q": "Two editors will cut a 40-minute NGO documentary at the same time. Based on the Productions video, how do you set it up?",
+    "options": [
+     [
+      "Split the film into separate projects in one Production, one part per editor.",
+      ""
+     ],
+     [
+      "Copy the full project to both editors and merge their timelines at the end.",
+      "Merging copies leads to clashing versions, duplicate media and lost work."
+     ],
+     [
+      "Have both editors open the same single project file from a shared drive.",
+      "Two people saving one project file can overwrite each other's changes or corrupt it."
+     ]
+    ],
+    "why": "Productions lets a team share media and projects while locking each project to one editor at a time, so work stays safe.",
+    "video": "Productions — collaborative long-form editing"
+   },
+   {
+    "q": "You are cutting a solo 60-second Instagram reel for a café. Should you set it up as a Production?",
+    "options": [
+     [
+      "No. A single standard project is simpler when only one person edits.",
+      ""
+     ],
+     [
+      "Yes. Every client job should be a Production to look professional.",
+      "The extra setup adds work with no benefit when nobody else needs to share the project."
+     ],
+     [
+      "Yes. Productions export short videos faster than normal projects.",
+      "Productions are about sharing projects between people, not about export speed."
+     ]
+    ],
+    "why": "The shared-project workflow earns its setup time only when collaboration is part of the job.",
+    "video": "Productions — collaborative long-form editing"
+   }
+  ],
+  [
+   {
+    "q": "You are delivering a brand film to a Bengaluru D2C company for YouTube, Instagram vertical and a trade-show screen. What do you hand over?",
+    "options": [
+     [
+      "Each version named by platform and ratio, plus captions, music licences and a readme.",
+      ""
+     ],
+     [
+      "One high-quality master file so their team can make the other versions.",
+      "The client paid for each version, and their team may crop or compress it badly."
+     ],
+     [
+      "The full project file and every clip so they have absolutely everything.",
+      "Raw footage and project files confuse the client and are not what they need to publish."
+     ]
+    ],
+    "why": "Clearly named versions with the right paperwork let the client publish without guessing or coming back to you.",
+    "video": ""
+   },
+   {
+    "q": "Following the export video, what do you do before sending the files?",
+    "options": [
+     [
+      "Play each exported file and check its size, frame rate, sound and captions against the contract.",
+      ""
+     ],
+     [
+      "Trust the export preset, since the same one worked fine on your last job.",
+      "Each job has its own specs, and a preset can carry the wrong settings from before."
+     ],
+     [
+      "Check only the main master closely and assume the shorter versions match it.",
+      "Cutdowns are exported separately and can have their own errors in size, sound or captions."
+     ]
+    ],
+    "why": "Every contracted version must be inspected on its own, because one wrong setting can get a file rejected by a platform or client.",
+    "video": "Exporting & delivering projects"
+   }
+  ]
+ ]
+}
