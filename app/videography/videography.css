@@ -376,3 +376,13 @@
 .vg-unlock-list li{display:flex;gap:10px;align-items:center}
 .vg-unlock-list li span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--border);font-size:.8rem}
 .vg-unlock-list li.ok{color:var(--primary)}
+/* Lesson layout: faded inactive stages, sketch | about, player | titles. */
+.vg-stage-steps li:not(.current){opacity:.42}
+.vg-lesson-intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:center}
+.vg-lesson-about{display:grid;gap:10px;align-content:center}
+.vg-lesson-about h2{margin:0}
+.vg-video.two-col{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:16px;align-items:start}
+.vg-video-main{display:grid;gap:10px;min-width:0}
+.vg-video-side{display:grid;gap:8px;align-content:start;min-width:0}
+ol.vg-video-list{list-style:none;margin:0;padding:0}
+@media (max-width:760px){.vg-lesson-intro,.vg-video.two-col{grid-template-columns:1fr}}

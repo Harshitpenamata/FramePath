@@ -62,16 +62,18 @@ export function VideoPanel({videos,watched=[],onWatched}:{videos:ModuleVideo[];w
  useWatchTracker(frame,v,playing&&!!onWatched,()=>v&&onWatched?.(videoId(v)));
  if(!videos.length)return null;
  const seen=(x:ModuleVideo)=>watched.includes(videoId(x));
- return <div className="vg-video">
-  {v&&<><div className="vg-video-frame">{playing
+ const list=playable.length>0&&<ol className="vg-video-list" aria-label="Videos in this lesson">{playable.map((x,i)=><li key={x.title+i}><button type="button" className={i===active?'active':''} aria-current={i===active?'true':undefined} onClick={()=>{setActive(i);setPlaying(false)}}>{onWatched&&seen(x)?<Check size={14}/>:<Play size={14}/>}<span>{x.title}<small>{x.creator}{x.start?' · from '+clock(x.start):''}</small></span></button></li>)}</ol>;
+ const cards=links.length>0&&<div className="vg-video-links">{links.map(x=><a key={x.title+x.url} className="vg-link-card" href={x.url} target="_blank" rel="noopener noreferrer" onClick={()=>onWatched?.(videoId(x))}>
+   <span><strong>{x.title}</strong><small>{x.creator}{x.section?' · '+x.section:''}</small><small>{x.focus}</small></span>
+   <span className="vg-link-side">{onWatched&&seen(x)?<Badge tone="green"><Check size={12}/> Opened</Badge>:x.paid?<Badge>Optional · paid</Badge>:<Badge tone="green">Free</Badge>}<ExternalLink size={16}/></span></a>)}</div>;
+ // Player on the left, the list of titles (and lessons on other sites) on the right.
+ return <div className={'vg-video'+(v?' two-col':'')}>
+  {v&&<div className="vg-video-main"><div className="vg-video-frame">{playing
    ?<iframe ref={frame} src={embedUrl(v)} title={v.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen loading="lazy"/>
    :<button type="button" className="vg-video-cover" onClick={()=>setPlaying(true)} style={v.youtubeId?{backgroundImage:`url(https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg)`}:undefined} aria-label={'Play '+v.title}><span className="vg-play"><Play size={30}/></span><span className="vg-video-title">{v.title}<small>{v.creator}{v.start?' · starts at '+clock(v.start):''}</small></span></button>}</div>
   <p className="vg-video-focus"><Target size={15}/> Watch for: {v.focus}</p>
-  {onWatched&&<p className={'small vg-watch-state'+(seen(v)?' ok':'')}>{seen(v)?<><Check size={14}/> Watched</>:'Watch most of this video to tick it off.'}</p>}
-  {playable.length>1&&<div className="vg-video-list">{playable.map((x,i)=><button type="button" key={x.title+i} className={i===active?'active':''} onClick={()=>{setActive(i);setPlaying(false)}}>{onWatched&&seen(x)?<Check size={14}/>:<Play size={14}/>}<span>{x.title}<small>{x.creator}{x.start?' · from '+clock(x.start):''}</small></span></button>)}</div>}</>}
-  {links.length>0&&<div className="vg-video-links">{links.map(x=><a key={x.title+x.url} className="vg-link-card" href={x.url} target="_blank" rel="noopener noreferrer" onClick={()=>onWatched?.(videoId(x))}>
-   <span><strong>{x.title}</strong><small>{x.creator}{x.section?' · '+x.section:''}</small><small>{x.focus}</small></span>
-   <span className="vg-link-side">{onWatched&&seen(x)?<Badge tone="green"><Check size={12}/> Opened</Badge>:x.paid?<Badge>Optional · paid</Badge>:<Badge tone="green">Free</Badge>}<ExternalLink size={16}/></span></a>)}</div>}
+  {onWatched&&<p className={'small vg-watch-state'+(seen(v)?' ok':'')}>{seen(v)?<><Check size={14}/> Watched</>:'Watch most of this video to tick it off.'}</p>}</div>}
+  {(list||cards)&&<div className="vg-video-side">{list}{cards}</div>}
  </div>;
 }
 
@@ -124,10 +126,15 @@ export function LessonsTab({moduleKey,onTask}:{moduleKey:string;onTask:()=>void}
   {item?<section className="vg-lessons" id="vg-lesson-top">
    <ol className="vg-lesson-steps" aria-label="Lessons">{lessons.map((x,i)=><li key={x.title}><button type="button" className={(i===index?'current ':'')+(done(i)?'done':'')} aria-current={i===index?'step':undefined} onClick={()=>go(i)}><span>{done(i)?<Check size={14}/>:i+1}</span>{x.title}</button></li>)}</ol>
    <article className="vg-lesson-card">
-    <span className="eyebrow">LESSON {index+1} OF {lessons.length}</span><h2>{item.title}</h2>
-    {user&&open&&<p className={'small vg-lesson-status'+(done(at)?' ok':'')}>{done(at)?<><Check size={14}/> Lesson finished</>:<>To finish this lesson: watch {videos.length===1?'the video':`all ${videos.length} videos`} ({videos.filter(v=>mark?.v.includes(videoId(v))).length} of {videos.length} done){videos.length?' and ':''}solve the practice tool ({mark?.t?'done':'not yet'}).</>}</p>}
-    <LessonSketch key={m.id+index} src={`/sketches/${m.id}-${index+1}`} title={item.title}/>
-    <div className="vg-lesson-part"><h3><BookOpen size={18}/> Watch</h3><p className="vg-idea">{item.idea}</p><VideoPanel videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined}/></div>
+    <div className="vg-lesson-intro">
+     <LessonSketch key={m.id+index} src={`/sketches/${m.id}-${index+1}`} title={item.title}/>
+     <div className="vg-lesson-about">
+      <span className="eyebrow">LESSON {index+1} OF {lessons.length}</span><h2>{item.title}</h2>
+      <p className="vg-idea">{item.idea}</p>
+      {user&&open&&<p className={'small vg-lesson-status'+(done(at)?' ok':'')}>{done(at)?<><Check size={14}/> Lesson finished</>:<>To finish this lesson: watch {videos.length===1?'the video':`all ${videos.length} videos`} ({videos.filter(v=>mark?.v.includes(videoId(v))).length} of {videos.length} done){videos.length?' and ':''}solve the practice tool ({mark?.t?'done':'not yet'}).</>}</p>}
+     </div>
+    </div>
+    <div className="vg-lesson-part"><h3><BookOpen size={18}/> Watch</h3><VideoPanel videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined}/></div>
     <div className="vg-lesson-part"><h3><Puzzle size={18}/> Reflect: try it</h3>{open?<LessonTool key={moduleKey+index} tool={item.tool} onSolved={()=>{if(!mark?.t)save({tool:true})}}/>:<SelfPacedLock moduleKey={moduleKey} what="Practice tools"/>}</div>
     <div className="button-row between">{index>0?<Button variant="outline" onClick={()=>go(index-1)}><ArrowLeft size={16}/>Previous lesson</Button>:<span/>}{index<lessons.length-1?<Button onClick={()=>go(index+1)}>Next lesson<ArrowRight size={16}/></Button>:<Button onClick={onTask}>Go to the task<ArrowRight size={16}/></Button>}</div>
    </article>
@@ -136,10 +143,10 @@ export function LessonsTab({moduleKey,onTask}:{moduleKey:string;onTask:()=>void}
    <section><h3>Watch</h3><VideoPanel videos={videosFor(m.id,pathway)}/></section>
   </>}
 
-  <section className={'vg-assignment-preview'+(open?'':' locked')}>
+  {(!item||at===lessons.length-1)&&<section className={'vg-assignment-preview'+(open?'':' locked')}>
    <span className="eyebrow">{taskLabel(m.id)}</span><h3><ListChecks size={18}/> {m.taskName}</h3>
    <p>{lesson.do}</p>
    {!open?<SelfPacedLock moduleKey={moduleKey} what="This task"/>:requireLessonsForTask&&status.done<status.total?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Finish all {status.total} lessons to unlock this task.</strong><p className="small">{status.done} of {status.total} done. Watch each video and try each practice tool.</p></div></div>:<Button onClick={onTask}>Start the task</Button>}
-  </section>
+  </section>}
  </div>;
 }
