@@ -1,0 +1,1210 @@
+{
+ "I01": [
+  [
+   {
+    "q": "A jeweller in Jaipur asks you for a 60-second reel. Before you plan any shots, what should you ask him first?",
+    "options": [
+     [
+      "Who should watch it, and what should they do after?",
+      ""
+     ],
+     [
+      "Which camera and lens would he like me to use?",
+      "Gear choices come later and depend on what the reel needs to achieve."
+     ],
+     [
+      "Which trending song would he like in the reel?",
+      "Music is a style choice, and you cannot pick it well until you know the goal."
+     ]
+    ],
+    "why": "Knowing the viewer and the result you want lets you judge every later choice, from shots to music to length.",
+    "video": ""
+   },
+   {
+    "q": "You are making a promo for a wedding planner. The aim is to get engaged couples to book a call. You have time for one more setup. Which do you film?",
+    "options": [
+     [
+      "A past couple saying how calm the planner kept their big day",
+      ""
+     ],
+     [
+      "A slow drone shot of the venue, since it looks very grand",
+      "It looks impressive, but it shows the venue, not why a couple should call this planner."
+     ],
+     [
+      "A close detail shot of the flowers and the table decor",
+      "Pretty decor does not tell a couple what working with this planner feels like."
+     ]
+    ],
+    "why": "A real couple speaking about the experience talks straight to the viewers you want and gives them a reason to call.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are making a short film about a potter in Khurja. Which plan gives you a story, not just a subject?",
+    "options": [
+     [
+      "Follow one big order she fears she cannot finish in time",
+      ""
+     ],
+     [
+      "Film her wheel, her kiln and her shelves in good light",
+      "These are lovely shots of her world, but nothing in them changes."
+     ],
+     [
+      "Interview her about the long history of pottery in town",
+      "History gives background, but it does not put anything at stake for her now."
+     ]
+    ],
+    "why": "A deadline she might miss creates tension and change, which is what turns a person into a story.",
+    "video": ""
+   },
+   {
+    "q": "In \"Visual Storytelling in Filmmaking\", what is the main approach the video encourages?",
+    "options": [
+     [
+      "Let the pictures carry meaning, so viewers work it out themselves",
+      ""
+     ],
+     [
+      "Add more voiceover so the audience never misses the point",
+      "Explaining everything in words is the opposite of telling the story with images."
+     ],
+     [
+      "Use the most beautiful shots, even if they add no meaning",
+      "The video is about images that tell the story, not images that only look good."
+     ]
+    ],
+    "why": "The video shows how a planned, image-led approach lets shots do the telling, which keeps viewers engaged.",
+    "video": "Visual Storytelling in Filmmaking"
+   }
+  ],
+  [
+   {
+    "q": "Your film shows a school annual day through the eyes of a nervous child waiting to perform. The principal starts a speech. How do you film it?",
+    "options": [
+     [
+      "From the side of the stage, near the child waiting to go on",
+      ""
+     ],
+     [
+      "From the front row, as a clean, steady shot of the principal",
+      "A clean front view is nice, but it leaves the child and shows the event like any guest would."
+     ],
+     [
+      "Cut evenly between the child, the parents and the teachers",
+      "Sharing time equally spreads the view across many people and weakens the child's experience."
+     ]
+    ],
+    "why": "Filming from where the child is keeps us inside their nerves, even during a moment about someone else.",
+    "video": ""
+   },
+   {
+    "q": "In the DSLRguide video on composition and framing, what is the key idea about where you place a person in the frame?",
+    "options": [
+     [
+      "Where they sit in the frame changes how we feel about them",
+      ""
+     ],
+     [
+      "It is mostly about keeping the frame balanced and tidy",
+      "Balance can matter, but the video stresses that framing carries ideas and emotion."
+     ],
+     [
+      "It should follow the same fixed rules in every scene",
+      "The video shows framing changing with what the scene needs to say, not fixed rules."
+     ]
+    ],
+    "why": "Composition, meaning how the frame is arranged, tells the viewer how to read a person. For example, someone small in a big empty frame can feel alone.",
+    "video": "Composition + Framing — Storytelling with Cinematography"
+   }
+  ],
+  [
+   {
+    "q": "Your 45-second promo for a tailor's shop is 5 seconds too long. One clip is a slow-motion shot of cloth blowing in a fan. What do you do?",
+    "options": [
+     [
+      "Remove the cloth shot and keep the tailor measuring a customer",
+      ""
+     ],
+     [
+      "Keep the cloth shot and speed up the other clips a little",
+      "Speeding up useful clips to save a pretty but empty shot makes the whole video weaker."
+     ],
+     [
+      "Move the cloth shot to the opening, since starts should look nice",
+      "An opening shot should pull viewers in with meaning, not just look attractive."
+     ]
+    ],
+    "why": "The measuring shot tells viewers what the tailor does and how he works, while the cloth shot adds nothing they did not know.",
+    "video": ""
+   },
+   {
+    "q": "You are filming a paratha seller in Old Delhi. You already have a wide shot of his stall. What is the best next shot?",
+    "options": [
+     [
+      "A close-up of his hands flipping parathas at speed",
+      ""
+     ],
+     [
+      "A second wide shot of the stall from across the lane",
+      "Another wide repeats what the viewer has already seen."
+     ],
+     [
+      "A sunset timelapse over the rooftops nearby",
+      "It looks lovely, but it tells us nothing about him or his work."
+     ]
+    ],
+    "why": "The close-up shows his skill and speed, which the wide shot could not, so the viewer learns something.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are editing a documentary about a girl training for a state kabaddi trial. You have scenes of money worries at home and a knee injury two weeks before the trial. Where does the injury go?",
+    "options": [
+     [
+      "Late, after the money worries, close to trial day",
+      ""
+     ],
+     [
+      "Right at the start, to hook viewers in the first seconds",
+      "Using your biggest problem first leaves nothing bigger to come, so the middle feels flat."
+     ],
+     [
+      "Leave it out, since it makes the film feel too sad",
+      "The injury is the hardest test she faces, and cutting it removes the strongest pressure."
+     ]
+    ],
+    "why": "Putting the worst setback near the end, after smaller problems, makes the pressure grow and the trial matter more.",
+    "video": ""
+   },
+   {
+    "q": "An NGO's video has three family stories. The toughest story comes first and the mildest comes last. Test viewers lose interest halfway. What is the best fix?",
+    "options": [
+     [
+      "Open with the mildest story and end with the toughest one",
+      ""
+     ],
+     [
+      "Add livelier music under the middle part of the video",
+      "Music can lift energy for a moment, but it cannot fix a structure that runs downhill."
+     ],
+     [
+      "Trim all three stories so they are exactly the same length",
+      "Equal length does not change the order, so the video still gets weaker as it goes."
+     ]
+    ],
+    "why": "When each part feels more serious than the one before, viewers sense rising pressure and keep watching.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "The family wants a tender, emotional video for a grandmother's 80th birthday. Your rough cut uses a fast party song and quick dance clips. What do you change?",
+    "options": [
+     [
+      "Use slower clips with room to breathe and a gentle track",
+      ""
+     ],
+     [
+      "Keep the fast song and add a warm colour filter on top",
+      "A warm filter helps a little, but fast music and cuts still push the mood toward party energy."
+     ],
+     [
+      "Add even more quick cuts so the day feels full of life",
+      "More quick cuts make it more energetic, which moves further away from tender."
+     ]
+    ],
+    "why": "Holding moments longer and using softer music gives viewers time to feel, which creates a tender mood.",
+    "video": ""
+   },
+   {
+    "q": "In \"How Editors Cut the Same Scene in 2 Completely Different Ways\", what makes the two documentary cuts feel so different?",
+    "options": [
+     [
+      "The order of moments, the music and the pauses between them",
+      ""
+     ],
+     [
+      "Each version was made from different footage of the scene",
+      "The point of the video is that the same footage can be read two ways."
+     ],
+     [
+      "Only the colour grading was changed between the two cuts",
+      "The video shows structure, music and spacing doing the work, not colour alone."
+     ]
+    ],
+    "why": "The editors show that arranging the same material differently, with different music and spacing, changes how viewers understand it.",
+    "video": "How Editors Cut the Same Scene in 2 Completely Different Ways"
+   }
+  ]
+ ],
+ "I02": [
+  [
+   {
+    "q": "A dance academy owner in Pune says, \"Make a nice video for our Instagram.\" Which line would you write as the goal in your brief?",
+    "options": [
+     [
+      "Get parents of kids aged 6 to 12 in Pune to book a free trial class.",
+      ""
+     ],
+     [
+      "Show the studio looking modern and bright with slow-motion dance shots.",
+      "This describes how the video looks, not who it is for or what they should do."
+     ],
+     [
+      "Make a reel so good that everyone in the city shares it.",
+      "\"Everyone\" is not a real viewer, and shares alone do not tell you if the video worked."
+     ]
+    ],
+    "why": "It names a specific group of people and one action you can count later. That makes it easy to plan shots and check results.",
+    "video": ""
+   },
+   {
+    "q": "In the Ziflow video, which set of things does a creative brief pin down at the start?",
+    "options": [
+     [
+      "The aim, the target audience, what gets handed over, and the limits of the work.",
+      ""
+     ],
+     [
+      "The camera, lenses, lighting kit and crew list for the shoot day.",
+      "These are production details that come later, once the brief is agreed."
+     ],
+     [
+      "The final script, the music track and the full edit timeline.",
+      "These are made after the brief, not written into it."
+     ]
+    ],
+    "why": "The video covers objectives, audience, deliverables and scope. Agreeing on these early keeps the whole team working toward the same result.",
+    "video": "What Is a Creative Brief? How to Write One That Aligns Your Team"
+   }
+  ],
+  [
+   {
+    "q": "A jeweller in Jaipur wants a launch video. You have a 20-minute first meeting. Which question is most likely to save you a reshoot later?",
+    "options": [
+     [
+      "Who besides you has to approve the final cut?",
+      ""
+     ],
+     [
+      "Would you like some drone shots of the shop?",
+      "This is about technique and can be decided later, once the goal is clear."
+     ],
+     [
+      "What song would you like playing in the background?",
+      "Music can be picked later and rarely forces a reshoot."
+     ]
+    ],
+    "why": "If a partner or family elder sees the video only at the end, they may ask for big changes. Knowing who signs off lets you include them early.",
+    "video": ""
+   },
+   {
+    "q": "A boutique owner says, \"We need the video soon.\" What is the best thing to do next?",
+    "options": [
+     [
+      "Ask for an exact date and what event or post it is meant for.",
+      ""
+     ],
+     [
+      "Promise about a week and adjust later if needed.",
+      "A guess can clash with their real date and cause stress for both of you."
+     ],
+     [
+      "Say yes and fit it in when your schedule frees up.",
+      "Without a fixed date you may deliver after the moment they needed it."
+     ]
+    ],
+    "why": "\"Soon\" means different things to different people. A real date, tied to a reason, lets you plan the shoot and edit properly.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "A Kolkata sweet shop wants a 60-second video to sell Diwali gift boxes to offices. They also want their history since 1952, all 40 sweets, catering and a new branch. What do you do?",
+    "options": [
+     [
+      "Build it around the Diwali boxes and save the other topics for later videos.",
+      ""
+     ],
+     [
+      "Show all 40 sweets quickly so no product is missed.",
+      "A fast list of sweets buries the gift box message the client actually needs."
+     ],
+     [
+      "Give each topic about ten seconds so everything fits.",
+      "Splitting time five ways means no topic is strong enough to make people act."
+     ]
+    ],
+    "why": "Office buyers need one clear reason to order. The other topics can become their own short videos.",
+    "video": ""
+   },
+   {
+    "q": "You are editing a 30-second reel for a home tutor app. You have a lovely drone shot of the city that has nothing to do with the app. What do you do?",
+    "options": [
+     [
+      "Cut it, because it does not help viewers understand the app.",
+      ""
+     ],
+     [
+      "Keep it as the opening because it looks expensive.",
+      "A pretty shot that is off topic wastes the first seconds, when viewers decide to stay."
+     ],
+     [
+      "Trim the other shots to make room for it.",
+      "This weakens the useful shots to fit in one that adds nothing to the message."
+     ]
+    ],
+    "why": "In a short video every second must earn its place. A shot you love is still wrong if it does not serve the message.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You send a Bengaluru café owner five sample clips for her video. She replies, \"I like all of them!\" What do you do next?",
+    "options": [
+     [
+      "Ask what she likes in each one, like the light, pace or colour, and note it.",
+      ""
+     ],
+     [
+      "Take that as approval and mix ideas from all five clips.",
+      "Five different styles mixed together can look messy and may not be what she pictured."
+     ],
+     [
+      "Pick your own favourite of the five and start planning.",
+      "You are still guessing what she wants, so you may disagree after the shoot."
+     ]
+    ],
+    "why": "Liking a clip is not the same as agreeing on a look. Pinning down the exact things she likes gives you a clear target before filming.",
+    "video": ""
+   },
+   {
+    "q": "In Robin Piree's video, what is the main job of a director's treatment?",
+    "options": [
+     [
+      "To explain your creative approach in words and pictures so the client can imagine the film.",
+      ""
+     ],
+     [
+      "To list the budget, crew rates and payment schedule for the project.",
+      "Money details go in a quote or contract, not in the treatment."
+     ],
+     [
+      "To give a shot-by-shot technical plan for the camera team.",
+      "That is a shot list, which comes after the creative idea is agreed."
+     ]
+    ],
+    "why": "The treatment sells and explains the idea. It helps the client feel the mood and story before anything is filmed.",
+    "video": "How To Write A Director's Treatment (FAST)?"
+   }
+  ],
+  [
+   {
+    "q": "A coaching centre agreed to \"a promo video.\" After the edit, they ask for vertical reels, Hindi subtitles and five rounds of changes, all free. What should you have done at the start?",
+    "options": [
+     [
+      "Listed each version, its length and shape, and how many change rounds are included.",
+      ""
+     ],
+     [
+      "Charged a higher price up front to cover any extra requests.",
+      "A higher price without a clear list still leaves both sides arguing about what is included."
+     ],
+     [
+      "Shared all the raw footage so they could make their own reels.",
+      "This hands over your work without fixing the real problem of an unclear agreement."
+     ]
+    ],
+    "why": "A clear list of versions, sizes and revisions shows both sides what is included. Extra requests can then be quoted as extra work.",
+    "video": ""
+   },
+   {
+    "q": "In Caleb Pike's corporate video guide, why does he gather a brief before shooting for a business client?",
+    "options": [
+     [
+      "So you and the client agree on aims and outputs before time and money are spent.",
+      ""
+     ],
+     [
+      "So the client cannot ask for any changes once filming starts.",
+      "A brief sets direction, but changes still happen and need to be planned for."
+     ],
+     [
+      "So you can choose the gear and crew size before anything else.",
+      "Gear choices follow from the brief's aims; they are not the reason for it."
+     ]
+    ],
+    "why": "Business clients often have several people with opinions. A shared brief keeps everyone on the same plan and protects you from surprises later.",
+    "video": "Corporate Video Guide"
+   }
+  ]
+ ],
+ "I03": [
+  [
+   {
+    "q": "You will film an interview in a small tailoring shop. On your visit you find only one socket, behind the counter, and the sewing machine uses it. What do you do?",
+    "options": [
+     [
+      "Ask the owner which socket you may use, and pack extension cords and spare charged batteries.",
+      ""
+     ],
+     [
+      "Note it down and plan to sort out charging when you arrive on the shoot day.",
+      "Leaving it for the day means you may run out of battery in the middle of the shoot."
+     ],
+     [
+      "Plan to unplug the sewing machine whenever you need to charge a battery.",
+      "This disturbs the owner's work, and nobody has agreed to it."
+     ]
+    ],
+    "why": "Asking first and packing cords and batteries means power can't stop your shoot. You solve the problem days before it can hurt you.",
+    "video": ""
+   },
+   {
+    "q": "A client wants a 6 pm interview at a street-side café. You visited the café at 11 am and it was calm. What is the biggest risk you have missed?",
+    "options": [
+     [
+      "Evening traffic noise, and a low sun that may hit the camera or the speaker's face.",
+      ""
+     ],
+     [
+      "The café staff may be busier and slower to serve tea to your crew.",
+      "Slow tea is a small comfort issue; it does not spoil your picture or sound."
+     ],
+     [
+      "Your camera may behave differently in the evening than in the morning.",
+      "The camera works the same way; the place around it is what changes."
+     ]
+    ],
+    "why": "Light and noise change a lot over a day. A morning visit tells you little about 6 pm traffic or where the sun will sit.",
+    "video": ""
+   },
+   {
+    "q": "In the StudioBinder video, how is a technical scout different from simply finding a place that looks good?",
+    "options": [
+     [
+      "It checks whether the crew and gear can actually work there on the shoot day.",
+      ""
+     ],
+     [
+      "It is mainly about choosing the best angles for the poster and thumbnail.",
+      "Picking good-looking angles is part of the first scout, not the technical one."
+     ],
+     [
+      "It is mainly a chance to bargain a lower rent with the location owner.",
+      "Money talks may happen, but the tech scout is about practical working conditions."
+     ]
+    ],
+    "why": "A place can look perfect and still fail on noise, power or getting gear in. The tech scout tests those practical needs before production.",
+    "video": "Location Scouting Explained — with Tech Scout Checklist"
+   }
+  ],
+  [
+   {
+    "q": "You have 90 minutes to film a bakery owner for her promo video. She warns you she may have to leave early to meet a supplier. What do you film first?",
+    "options": [
+     [
+      "Her main interview answers, then the shots of the bakery if time allows.",
+      ""
+     ],
+     [
+      "Slow slider shots of the cakes to set the mood before she sits down.",
+      "These look nice, but the video still works without them; her answers can't be replaced."
+     ],
+     [
+      "A wide shot outside the shop so the video can open on the street.",
+      "You can get the outside shot any time, even after she leaves."
+     ]
+    ],
+    "why": "Her words are the heart of the video and only she can give them. Film what you can't replace first, and add the extras later.",
+    "video": ""
+   },
+   {
+    "q": "According to \"A Director's Guide to Shot Listing\", what is the main job of a shot list?",
+    "options": [
+     [
+      "To turn the director's coverage plan into a document the crew can follow on set.",
+      ""
+     ],
+     [
+      "To list every possible angle so you never have to make choices on set.",
+      "A shot list is a set of choices, not every angle anyone could think of."
+     ],
+     [
+      "To replace the script once filming starts so the crew needs only one page.",
+      "The shot list works alongside the script; it does not replace it."
+     ]
+    ],
+    "why": "The director decides how each scene will be covered. The shot list writes that plan down so camera and crew work from the same page.",
+    "video": "A Director's Guide to Shot Listing"
+   }
+  ],
+  [
+   {
+    "q": "Late at night, the temple you planned to film at in Pune says you must move to a hall next door. Your crew of four meets at 7 am. What do you do?",
+    "options": [
+     [
+      "Send an updated sheet with the new address to all four and confirm each one has seen it.",
+      ""
+     ],
+     [
+      "Tell the director tonight and let the news spread to the others.",
+      "Passing it along by word of mouth often misses someone or gets the details wrong."
+     ],
+     [
+      "Keep the old plan and explain the change to everyone when they arrive.",
+      "People will go to the wrong place first and lose time in the morning."
+     ]
+    ],
+    "why": "One clear written update reaches everyone with the same details. Checking that each person read it stops anyone going to the old address.",
+    "video": ""
+   },
+   {
+    "q": "In \"A Producer's Guide to Call Sheets\", which set of details belongs on a call sheet?",
+    "options": [
+     [
+      "Contacts, address, weather and the nearest hospital, along with call times.",
+      ""
+     ],
+     [
+      "The full script and the lens chosen for every shot in the scene.",
+      "Those belong in the script and shot list, not the call sheet."
+     ],
+     [
+      "Each person's fee for the day and the overall project budget.",
+      "Money details are private and do not help people get to set."
+     ]
+    ],
+    "why": "A call sheet gives practical day information: who to call, where to go, what to expect and how to stay safe. Creative and money details live elsewhere.",
+    "video": "A Producer's Guide to Call Sheets"
+   }
+  ],
+  [
+   {
+    "q": "At a family wedding shoot, the bride's uncle keeps telling your camera operator where to stand. The operator is getting confused. What do you do?",
+    "options": [
+     [
+      "Politely ask the uncle to share his ideas with the director, who talks to the family.",
+      ""
+     ],
+     [
+      "Tell the operator to follow the uncle, since he is part of the family.",
+      "Now the camera person has two bosses, and the director's plan falls apart."
+     ],
+     [
+      "Ignore the uncle completely and hope he gets tired and walks away.",
+      "This can upset the family; someone still needs to listen to him."
+     ]
+    ],
+    "why": "One person should speak with the family and give camera its directions. That keeps the operator focused and the family feeling heard.",
+    "video": ""
+   },
+   {
+    "q": "Your crew of three is filming an interview. A loud bike horn spoils one answer, but the speaker keeps talking. What should happen?",
+    "options": [
+     [
+      "The sound person tells the director, who asks for that answer once more.",
+      ""
+     ],
+     [
+      "The camera person stops recording at once without telling anyone.",
+      "Camera should not decide on takes alone; it confuses the speaker and the director."
+     ],
+     [
+      "Nobody says anything, and you try to clean the horn out in the edit.",
+      "A horn over speech is very hard to remove later; it is easier to record again."
+     ]
+    ],
+    "why": "Sound hears the problem, and the director decides on the take. Each person doing their own part fixes it quickly and calmly.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You have ₹20,000 left for a series of interviews with shop owners in busy markets. What do you buy first?",
+    "options": [
+     [
+      "A lavalier kit, a small clip-on mic worn on the shirt, plus a recorder.",
+      ""
+     ],
+     [
+      "A gimbal, a handheld stabiliser, for smooth walking shots in the market.",
+      "Smooth shots are nice, but shaky footage is easier to live with than unclear voices."
+     ],
+     [
+      "A second fast lens for a softer background behind each shop owner.",
+      "A soft background is a bonus; the interviews fail if people can't be heard."
+     ]
+    ],
+    "why": "In a noisy market, clear voices are the hardest thing to rescue later. A clip-on mic close to the mouth solves that at the source.",
+    "video": ""
+   },
+   {
+    "q": "In Curren Sheldon's budget tutorial, what does he set out before filling in any costs?",
+    "options": [
+     [
+      "Written assumptions, like the number of shoot days, crew size and locations.",
+      ""
+     ],
+     [
+      "The price of the most expensive camera he hopes to use on the film.",
+      "Starting with gear prices skips the basic facts that drive every other cost."
+     ],
+     [
+      "The client's total amount, split evenly across every category.",
+      "Splitting money evenly ignores what the film actually needs."
+     ]
+    ],
+    "why": "Costs come from facts like days, people and places. Writing those down first makes every number easy to check and change.",
+    "video": "How To Make A Film Budget | Tutorial + Free Download"
+   },
+   {
+    "q": "In the same tutorial, what does \"below the line\" mean in a film budget?",
+    "options": [
+     [
+      "Crew, equipment, locations and other day-to-day production costs.",
+      ""
+     ],
+     [
+      "The writer, director and lead actors who shape the film creatively.",
+      "Those key creative people are above the line, not below it."
+     ],
+     [
+      "Extra costs you can cut first if the money starts running low.",
+      "Below the line is a category of costs, not a list of optional extras."
+     ]
+    ],
+    "why": "Budgets split key creative people (above the line) from the crew and practical costs of making the film (below the line).",
+    "video": "How To Make A Film Budget | Tutorial + Free Download"
+   }
+  ],
+  [
+   {
+    "q": "You are filming a company's annual event with one camera. A week before, what is the smartest step to protect the shoot?",
+    "options": [
+     [
+      "Arrange a second body or phone, test it, and agree when it will take over.",
+      ""
+     ],
+     [
+      "Get your main camera serviced and trust that it will not fail.",
+      "Servicing helps, but any camera can still fail and you would have nothing."
+     ],
+     [
+      "Tell the client that if the camera fails, the event can't be filmed.",
+      "This passes the risk to the client instead of solving it."
+     ]
+    ],
+    "why": "A tested spare that everyone knows about means a failure costs you minutes, not the whole event. Deciding it early keeps you calm on the day.",
+    "video": ""
+   },
+   {
+    "q": "Your documentary depends on one weaver in Varanasi, and he says he might be travelling that week. What do you do?",
+    "options": [
+     [
+      "Line up a second weaver now and tell the client which one you will film if needed.",
+      ""
+     ],
+     [
+      "Wait until the shoot day and find someone at the market if he is away.",
+      "Searching on the day wastes crew time and you may find nobody suitable."
+     ],
+     [
+      "Move the whole shoot to a later month without checking his dates.",
+      "This delays everything for a problem that may never happen."
+     ]
+    ],
+    "why": "Having another person ready keeps the shoot on track either way. Telling the client early means nobody is surprised.",
+    "video": ""
+   }
+  ]
+ ],
+ "I04": [
+  [
+   {
+    "q": "At a sangeet, you set your camera to 50 frames per second so you can slow down the dancing later. Which shutter speed should you pick?",
+    "options": [
+     [
+      "1/100 of a second",
+      ""
+     ],
+     [
+      "1/50 of a second",
+      "That suits 25 frames a second. At 50 frames it gives more blur than looks natural."
+     ],
+     [
+      "1/1000 of a second",
+      "Such a fast shutter freezes each frame, so the movement looks jerky."
+     ]
+    ],
+    "why": "At 50 frames a second, a shutter of 1/100 gives each frame the right amount of motion blur, so the dancing looks smooth.",
+    "video": ""
+   },
+   {
+    "q": "You want smooth slow motion of a kite flying. Based on the video, what should you do?",
+    "options": [
+     [
+      "Record at a high frame rate, then play it at the normal rate",
+      ""
+     ],
+     [
+      "Record at 24 or 25 frames, then slow it down in the edit",
+      "There are too few frames to stretch, so the slowed clip looks jerky."
+     ],
+     [
+      "Keep the normal frame rate and use a faster shutter",
+      "A faster shutter changes blur, not speed, so it cannot create slow motion."
+     ]
+    ],
+    "why": "Recording more frames each second and playing them at the normal rate spreads the action over more time, which gives smooth slow motion.",
+    "video": "What is Frame Rate? Frames Per Second Explained"
+   }
+  ],
+  [
+   {
+    "q": "You film a puja in a home lit by warm yellow bulbs. On auto, the colour shifts every time someone in a bright saree walks past. What do you do?",
+    "options": [
+     [
+      "Choose a fixed setting of about 3200K and keep it for every shot",
+      ""
+     ],
+     [
+      "Leave it on auto and fix each clip in the edit later",
+      "Clips that change colour in the middle of a shot are slow to fix and rarely match well."
+     ],
+     [
+      "Switch to the daylight preset for cleaner, brighter colours",
+      "A daylight setting under yellow bulbs makes everything look very orange."
+     ]
+    ],
+    "why": "K stands for Kelvin, a number for the colour of light. A fixed value that suits the bulbs stops the camera from guessing again on every shot.",
+    "video": ""
+   },
+   {
+    "q": "Your camera is set to about 5600K, but you are filming under ordinary tungsten bulbs. Based on the video, how will the footage look?",
+    "options": [
+     [
+      "Too orange or yellow",
+      ""
+     ],
+     [
+      "Too blue or cold",
+      "Blue comes from a low Kelvin setting in daylight, which is the opposite case."
+     ],
+     [
+      "Natural and correct",
+      "5600K matches daylight, not tungsten bulbs, so the colour will be off."
+     ]
+    ],
+    "why": "Tungsten light is much warmer, around 3200K, so a daylight setting leaves its warm colour uncorrected and the image looks orange.",
+    "video": "Color Temperature Explained: White Balance Fundamentals"
+   }
+  ],
+  [
+   {
+    "q": "You are interviewing a shop owner standing in front of a bright street doorway at noon. The face looks dark on your screen. What is the best move?",
+    "options": [
+     [
+      "Turn them so the doorway is not behind, or add light to the face",
+      ""
+     ],
+     [
+      "Expose for the bright street so it keeps all its detail",
+      "The face will stay dark, and the face is what the viewer needs to see."
+     ],
+     [
+      "Raise exposure until the face is bright and ignore the doorway",
+      "The street will turn pure white with no detail, which looks careless."
+     ]
+    ],
+    "why": "Reducing the gap in brightness between the face and the background lets you show the face well without losing the bright area behind.",
+    "video": ""
+   },
+   {
+    "q": "The video stresses watching the highlights, the brightest parts of the image. Why do cinematographers take such care with them?",
+    "options": [
+     [
+      "Once they turn pure white, the detail cannot be brought back",
+      ""
+     ],
+     [
+      "Bright areas always add a lot of grain to the picture",
+      "Grain mostly shows up in dark areas and at high ISO, not in highlights."
+     ],
+     [
+      "Highlights decide the white balance of the whole shot",
+      "White balance is set separately and does not depend on how bright the highlights are."
+     ]
+    ],
+    "why": "Clipped highlights hold no information, so no edit can recover them. That is why tools like zebras (striped warning lines on the screen) are used to check them while shooting.",
+    "video": "How Cinematographers Set Their Exposure"
+   }
+  ],
+  [
+   {
+    "q": "A client runs a home bakery from a small kitchen. They want one shot that shows the whole workspace, but you cannot step back. What do you use?",
+    "options": [
+     [
+      "A lens around 16mm to 24mm from the doorway",
+      ""
+     ],
+     [
+      "A lens around 85mm pushed into a corner",
+      "An 85mm lens shows only a narrow slice, so you would see one counter at best."
+     ],
+     [
+      "A 50mm lens and several pans across the room",
+      "Panning shows the room in parts, not in one clear shot as the client wants."
+     ]
+    ],
+    "why": "A short focal length takes in a broad view, so you can show a whole small room even with your back to the wall.",
+    "video": ""
+   },
+   {
+    "q": "At a wedding, you want a temple behind the couple to look big and close to them in the frame. What do you do?",
+    "options": [
+     [
+      "Move far back and use a 100mm or longer lens",
+      ""
+     ],
+     [
+      "Stand close to the couple with a 24mm lens",
+      "A wide lens up close makes the background look smaller and further away."
+     ],
+     [
+      "Stay where you are and crop in during the edit",
+      "Cropping loses quality and does not change how near the background feels."
+     ]
+    ],
+    "why": "A long lens used from a distance squeezes the space, so the background looks larger and closer to the subject.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You film a jewellery piece on a table with the camera on a tripod. A hand reaches in to pick it up, and the focus jumps to the hand. What should you do?",
+    "options": [
+     [
+      "Switch to manual, focus on the jewellery, and shoot again",
+      ""
+     ],
+     [
+      "Turn on tracking autofocus and select the jewellery",
+      "Tracking can still jump to the hand when it comes closer or covers the piece."
+     ],
+     [
+      "Open the aperture wider so the hand goes soft",
+      "A wider aperture makes the sharp area thinner, so any jump becomes more obvious."
+     ]
+    ],
+    "why": "Manual focus stays on the product no matter what enters the frame, which a fixed product shot needs.",
+    "video": ""
+   },
+   {
+    "q": "A man talks at a table and his phone starts ringing behind him. You want viewers to look from him to the phone. What technique does the video show for this?",
+    "options": [
+     [
+      "Shift the sharp area from the man to the phone during the shot",
+      ""
+     ],
+     [
+      "Close the aperture so the man and the phone both stay sharp",
+      "With both sharp, nothing guides the viewer's eye towards the phone."
+     ],
+     [
+      "Zoom in quickly towards the phone as it starts to ring",
+      "A fast zoom feels rough and leaves the phone soft if focus is still on the man."
+     ]
+    ],
+    "why": "This is a rack focus. Moving focus from one subject to another tells the viewer exactly where to look.",
+    "video": "Depth of Field Explained: Guide to Camera Focus"
+   }
+  ],
+  [
+   {
+    "q": "You film a café on your phone, walking from a dark corner to a sunny window. The picture gets brighter and changes colour as you move. How do you fix it for the next take?",
+    "options": [
+     [
+      "Tap and hold to fix exposure, and set white balance in pro mode",
+      ""
+     ],
+     [
+      "Turn up the phone's screen brightness before you start",
+      "Screen brightness only changes your view, not the recorded video."
+     ],
+     [
+      "Walk more slowly so the phone adjusts more gently",
+      "The phone will still change brightness and colour, just more slowly."
+     ]
+    ],
+    "why": "When exposure and white balance stay fixed, the phone stops adjusting as the scene changes, so the shot looks even.",
+    "video": ""
+   },
+   {
+    "q": "You and a friend film a family function on two cameras. In the edit, the shots must cut together smoothly. What do you agree on before starting?",
+    "options": [
+     [
+      "The same frame rate, shutter and white balance on both",
+      ""
+     ],
+     [
+      "Both cameras on auto so each one adjusts to the light",
+      "Each camera will make different choices, so colour and brightness will not match."
+     ],
+     [
+      "The same resolution, with the other settings left free",
+      "Matching resolution alone leaves motion and colour different between the cameras."
+     ]
+    ],
+    "why": "Matching motion and colour settings by hand on both cameras makes the shots look like one sequence when you cut between them.",
+    "video": ""
+   }
+  ]
+ ],
+ "I05": [
+  [
+   {
+    "q": "At a birthday party, you have one camera and the cake is about to be cut. What do you plan to film?",
+    "options": [
+     [
+      "The cut in a wide shot, then the grandmother's face and the child's smile",
+      ""
+     ],
+     [
+      "The cut in one long close-up so you never miss the knife moving",
+      "You only get the cake, so the edit has nothing to show how people felt about it."
+     ],
+     [
+      "The cut from three angles: wide, medium and close-up on the knife",
+      "These all show the same event, and none of them shows how the family responded."
+     ]
+    ],
+    "why": "The cake cut tells us what happened. The faces of the people watching tell us why the moment meant something, and give you shots to cut between.",
+    "video": ""
+   },
+   {
+    "q": "You have one hour to film a short scene. What does the shot listing video suggest you do first?",
+    "options": [
+     [
+      "Write a short list of shots and rank them from most to least important",
+      ""
+     ],
+     [
+      "Shoot every angle you can think of so the editor has lots of choice",
+      "Shooting without a plan wastes time, and you may run out before the key shots."
+     ],
+     [
+      "Write a long, detailed list and try to get through every single shot",
+      "A long list with no order means you may miss the shots the scene truly needs."
+     ]
+    ],
+    "why": "A limited, ranked list makes sure the shots the story depends on get filmed first, even if time runs out.",
+    "video": "A Director's Guide to Shot Listing"
+   }
+  ],
+  [
+   {
+    "q": "You are editing an interview with a sweet shop owner. You remove a long pause from the middle of her answer and her face jumps. What do you do?",
+    "options": [
+     [
+      "Lay a shot of her hands packing laddoos over the join while she keeps talking",
+      ""
+     ],
+     [
+      "Add a quick white flash between the two clips so the jump feels planned",
+      "A flash draws attention to the edit instead of hiding it."
+     ],
+     [
+      "Leave the jump in, since viewers know interviews are always edited",
+      "A visible jump in the face looks careless in this kind of interview."
+     ]
+    ],
+    "why": "Covering the join with a related detail shot hides the cut, and her voice carries on so the answer still flows.",
+    "video": ""
+   },
+   {
+    "q": "You finish an interview with a tailor and have 20 minutes left in his shop. What should you film?",
+    "options": [
+     [
+      "Close shots of his hands, scissors, sewing machine and the cloth he talked about",
+      ""
+     ],
+     [
+      "More angles of his face while he chats, to give you extra choices later",
+      "More talking shots will not help you hide cuts in his talking."
+     ],
+     [
+      "Wide shots of the busy street outside to show where the shop is",
+      "One wide street shot is useful, but it does not show the details of his work."
+     ]
+    ],
+    "why": "Details of his work and the things he mentions give you shots to cover edits and to show what he is describing.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You film a baraat (wedding procession) moving left to right across your frame. For the next shot, you want a new angle. What do you do?",
+    "options": [
+     [
+      "Stay on the same side of the road and shoot from further along the route",
+      ""
+     ],
+     [
+      "Cross to the other side of the road to get the shops in the background",
+      "From the other side the procession will move right to left and seem to turn back."
+     ],
+     [
+      "Move to any side you like, since the music will keep the edit connected",
+      "Sound does not fix confusing direction, and viewers will still feel lost."
+     ]
+    ],
+    "why": "Staying on one side keeps the procession moving the same way on screen, so viewers feel it is still heading to the same place.",
+    "video": ""
+   },
+   {
+    "q": "The 180 degree rule video talks about crossing the line. When does crossing it work?",
+    "options": [
+     [
+      "When you do it on purpose and let the audience see the camera move across",
+      ""
+     ],
+     [
+      "When the shots are short enough that viewers will not notice the flip",
+      "Short shots do not hide a flip, and viewers still feel the change in direction."
+     ],
+     [
+      "When the scene is fast, since quick action hides the change of side",
+      "Fast action does not stop the flip from confusing people about where things are."
+     ]
+    ],
+    "why": "A deliberate crossing, like a camera move across the line that viewers can see, keeps them oriented while changing the feel of the scene.",
+    "video": "The 180 Degree Rule in Film (and How to Break the Line)"
+   }
+  ],
+  [
+   {
+    "q": "You film two shopkeepers talking, one at a time with one camera. In the first shot, the man looks towards the right side of the frame. How do you film the woman?",
+    "options": [
+     [
+      "Have her look towards the left side of the frame, just beside the lens",
+      ""
+     ],
+     [
+      "Have her look towards the right side too, so the two shots match",
+      "If both look right, they will seem to be looking away from each other."
+     ],
+     [
+      "Have her look straight into the lens for a strong, direct feeling",
+      "Looking into the lens makes her talk to the viewer, not to the man."
+     ]
+    ],
+    "why": "Opposite sides of the frame make the two people seem to face each other when you cut between them.",
+    "video": ""
+   },
+   {
+    "q": "A father stands and talks to his young son, who sits on the floor. You film each in a separate close-up. Where should each one look?",
+    "options": [
+     [
+      "The son looks up past the lens and the father looks down past it",
+      ""
+     ],
+     [
+      "Both look straight ahead at lens height so the close-ups look even",
+      "Level looks lose the height difference, so they won't seem to see each other."
+     ],
+     [
+      "The son looks down and the father looks up, to make them feel equal",
+      "This flips their real positions and confuses the viewer."
+     ]
+    ],
+    "why": "The angle of the look should match where the other person really is, including height, so the two shots connect.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You cut from a wide to a close-up of a dhaba cook flipping a roti, during the flip. The cut still feels jumpy. What do you check first?",
+    "options": [
+     [
+      "That the roti is at the same height and spot in both clips at the cut",
+      ""
+     ],
+     [
+      "That both clips are about the same length on the timeline",
+      "Clip length does not affect whether the movement lines up at the join."
+     ],
+     [
+      "That the close-up is a little brighter so it stands out from the wide",
+      "A brightness change makes the join more visible, not smoother."
+     ]
+    ],
+    "why": "The cut feels smooth only if the action carries on from the exact same point. If the roti jumps position, the eye catches the join.",
+    "video": ""
+   },
+   {
+    "q": "You film a woman opening a shop shutter, first wide, then close. What do you ask her to do so the edit works?",
+    "options": [
+     [
+      "Do the whole action the same way in both shots, from start to end",
+      ""
+     ],
+     [
+      "In the close shot, just do the last part where the shutter goes up",
+      "Without the full action you have no overlap to pick a cut point."
+     ],
+     [
+      "Try it a little differently each time so you have more variety",
+      "If the action changes, the movement will not match across the cut."
+     ]
+    ],
+    "why": "Repeating the same full action gives you overlap in both shots, so you can cut at the exact same moment of movement.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You interview a weaver. She comes to the part about nearly losing her business. How do you use the camera?",
+    "options": [
+     [
+      "Slowly push in on her face while she tells that part",
+      ""
+     ],
+     [
+      "Keep a gentle slider move going through the whole interview",
+      "Constant movement has no link to the story, so it adds nothing at the key moment."
+     ],
+     [
+      "Pan around the room to show the looms while she talks about it",
+      "Moving away from her face loses the feeling at the most emotional point."
+     ]
+    ],
+    "why": "A slow move closer at that moment draws the viewer into her feeling. The move has a reason, so it lands.",
+    "video": ""
+   },
+   {
+    "q": "In the camera movement guide, what does a tracking shot do for the viewer?",
+    "options": [
+     [
+      "It keeps us beside a character as they move, so we share their path",
+      ""
+     ],
+     [
+      "It adds energy, so it suits most scenes that feel a little slow",
+      "The guide links movement to story and feeling, not to fixing slow scenes."
+     ],
+     [
+      "It replaces cutaways, so you need fewer shots later in the edit",
+      "The guide ties tracking to following a character, not to saving shots."
+     ]
+    ],
+    "why": "Following a character keeps us with them through space, which gives both information and emotion. A still shot is often better when a move adds nothing.",
+    "video": "Ultimate Guide to Camera Movement"
+   }
+  ]
+ ]
+}

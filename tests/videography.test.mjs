@@ -206,3 +206,28 @@ test('a lesson is finished only when every video is watched and the tool is solv
  delete marks[2];assert.equal(Les.lessonsStatus('B02','Wedding',marks).done,4);
  assert.ok(Les.lessonNeeds('B13',0,'Wedding').join()!==Les.lessonNeeds('B13',0,'Travel').join(),'style lessons follow the learner’s pathway');
 });
+
+test('Reflect: every lesson has 2 or 3 sound questions about the lesson or its videos',()=>{
+ const Les=load(path.join(root,'app/videography/lessons.ts'));
+ const bank=Object.assign({},...['beginner','intermediate','advanced'].map(l=>JSON.parse(fs.readFileSync(path.join(root,'app/videography/reflect/'+l+'.json'),'utf8'))));
+ // Beginner is complete; other modules are checked once drafted (until then they keep their earlier tool).
+ for(const [id,lessons] of Object.entries(Les.moduleLessons)){
+  if(!bank[id]){assert.ok(!id.startsWith('B'),id+': Beginner needs questions');continue}
+  assert.equal(bank[id].length,lessons.length,id+': one question set per lesson');
+  bank[id].forEach((qs,i)=>{
+   assert.ok(qs.length>=2&&qs.length<=3,id+' lesson '+(i+1)+': 2 or 3 questions');
+   for(const q of qs){
+    assert.ok(q.q.length>15&&q.why.length>10,id+': question and explanation are written');
+    assert.equal(q.options.length,3,id+': three answers');
+    assert.equal(new Set(q.options.map(o=>o[0])).size,3,id+': answers differ');
+    for(const [text,feedback] of q.options.slice(1))assert.ok(text&&feedback,id+': wrong answers have feedback');
+    assert.ok(!q.options.some(o=>/(all|none) of the above/i.test(o[0])),id+': no all/none of the above');
+    // The right answer must not stand out by length.
+    const lens=q.options.map(o=>o[0].length),others=Math.max(...lens.slice(1));
+    assert.ok(lens[0]<=others*1.6+10,id+': right answer is not much longer than the others: '+q.q);
+    // It must not repeat the lesson's idea (which the sketch draws).
+    assert.ok(!lessons[i].idea.toLowerCase().includes(q.options[0][0].toLowerCase().replace(/\.$/,'')),id+': answer is not the idea sentence');
+   }
+  });
+ }
+});

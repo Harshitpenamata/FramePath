@@ -386,3 +386,8 @@
 .vg-video-side{display:grid;gap:8px;align-content:start;min-width:0}
 ol.vg-video-list{list-style:none;margin:0;padding:0}
 @media (max-width:760px){.vg-lesson-intro,.vg-video.two-col{grid-template-columns:1fr}}
+/* Reflect: lesson questions, then the simulator. */
+.vg-reflect{display:grid;gap:12px}
+.vg-q-count{display:flex;flex-wrap:wrap;gap:4px;align-items:center;color:var(--muted-foreground)}
+.vg-reflect-sim{margin:6px 0 0}
+.vg-pick button:disabled{cursor:default}

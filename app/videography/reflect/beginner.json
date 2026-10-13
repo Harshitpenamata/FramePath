@@ -1,0 +1,3115 @@
+{
+ "B01": [
+  [
+   {
+    "q": "Your aunt asks you to make a 2-minute phone video about her home bakery. You arrive at her house. What do you do first?",
+    "options": [
+     [
+      "Ask what the video is for, then list the shots you need",
+      ""
+     ],
+     [
+      "Start recording everything in the kitchen straight away",
+      "You will end up with hours of clips and still miss the shots that matter."
+     ],
+     [
+      "Choose the music and the editing style before anything else",
+      "Music and editing come later, after you know the story and have the footage."
+     ]
+    ],
+    "why": "Knowing the purpose and your shot list first saves time while filming and makes editing much easier.",
+    "video": ""
+   },
+   {
+    "q": "In Philipp Humm's video, what makes a story moment feel alive?",
+    "options": [
+     [
+      "Slowing down on one moment and showing its small details",
+      ""
+     ],
+     [
+      "Covering many events quickly so that nothing is left out",
+      "Rushing through many events leaves no room for the viewer to feel anything."
+     ],
+     [
+      "Using big words and a dramatic voice to tell the story",
+      "Fancy words do not help if the moment itself is not shown in detail."
+     ]
+    ],
+    "why": "Zooming into a single moment, with its place, action, thoughts, feelings and words, pulls the viewer into it.",
+    "video": "Give me 9min, and I’ll improve your storytelling skills by 176%"
+   },
+   {
+    "q": "In StudioBinder's production process video, what is principal photography?",
+    "options": [
+     [
+      "The stage when the crew records the main footage of the film",
+      ""
+     ],
+     [
+      "The stage when the editor picks the best still photos",
+      "Picking and cutting footage happens later, in editing."
+     ],
+     [
+      "The stage when the team writes the script and budget",
+      "Writing and budgeting are part of the planning stage, before filming."
+     ]
+    ],
+    "why": "Principal photography is the main filming period, when the planned scenes are actually recorded.",
+    "video": "Film Production Explained — The Production Process"
+   }
+  ],
+  [
+   {
+    "q": "You film a chai stall owner making tea, but you only have one long clip from across the road. It looks dull. Next time, what should you film?",
+    "options": [
+     [
+      "One view of the whole stall, then closer clips of his hands and the glass",
+      ""
+     ],
+     [
+      "The same long clip again, but standing a little closer to him",
+      "One clip from one spot still gives the editor nothing to cut between."
+     ],
+     [
+      "Many close clips of the tea only, with no view of the stall",
+      "Without a wider view, the viewer cannot tell where they are or who is working."
+     ]
+    ],
+    "why": "Several clips of different sizes can be cut together to show the whole action clearly and keep it interesting.",
+    "video": ""
+   },
+   {
+    "q": "According to StudioBinder's guide to shot sizes, what does a close shot mainly give the viewer?",
+    "options": [
+     [
+      "Detail and emotion, like a face, an expression or busy hands",
+      ""
+     ],
+     [
+      "A clear idea of where everyone is standing in the place",
+      "Showing the whole place and positions is the job of a wide shot."
+     ],
+     [
+      "How many people are present and what the room looks like",
+      "A close shot hides the room, while a wide shot shows it."
+     ]
+    ],
+    "why": "Close shots cut out the surroundings so the viewer focuses on small details and feelings.",
+    "video": "Ultimate Guide to Camera Shots: Every Shot Size Explained"
+   },
+   {
+    "q": "In Simon Cade's video on visual storytelling, how is the story mostly told?",
+    "options": [
+     [
+      "Through what the characters do and what the camera shows",
+      ""
+     ],
+     [
+      "Through characters explaining their feelings out loud",
+      "The video shows that explaining in words is weaker than showing with images."
+     ],
+     [
+      "Through on-screen text that describes each event",
+      "Text labels tell the viewer, but the video teaches showing through pictures."
+     ]
+    ],
+    "why": "Good visual storytelling lets actions and images carry the meaning, so the viewer understands without being told.",
+    "video": "Visual Storytelling in Filmmaking"
+   }
+  ],
+  [
+   {
+    "q": "A small sari shop wants an Instagram reel. Their buyers are young women scrolling fast on their phones. How should the reel start?",
+    "options": [
+     [
+      "Show the most striking sari up close in the first two seconds",
+      ""
+     ],
+     [
+      "Begin with a slow shot of the shop sign and the street",
+      "Busy scrollers will move on before they see anything they care about."
+     ],
+     [
+      "Open with the owner talking about the shop's history",
+      "History may matter later, but it will not stop someone from scrolling past."
+     ]
+    ],
+    "why": "These buyers want to see beautiful saris quickly, so the strongest image must come first to hold their attention.",
+    "video": ""
+   },
+   {
+    "q": "In DSLRguide's video, what is the main point about camera choices like framing and light?",
+    "options": [
+     [
+      "They guide what the audience notices and understands",
+      ""
+     ],
+     [
+      "They only matter for making each shot look pretty",
+      "The video shows these choices carry meaning, not just beauty."
+     ],
+     [
+      "They matter less than the dialogue in the scene",
+      "The video shows the camera can tell the story even without words."
+     ]
+    ],
+    "why": "Every framing and lighting choice tells the audience where to look and how to read the scene.",
+    "video": "Storytelling with Cinematography"
+   }
+  ],
+  [
+   {
+    "q": "You edit a video of a busy street market with only a music track on it. Something feels missing. What is the best fix?",
+    "options": [
+     [
+      "Mix vendors calling and crowd noise in softly under the music",
+      ""
+     ],
+     [
+      "Make the music louder so the video feels more exciting",
+      "Louder music still hides the life of the market and keeps it feeling empty."
+     ],
+     [
+      "Remove all sound so the pictures can speak for themselves",
+      "Total silence makes a busy place feel strange and broken."
+     ]
+    ],
+    "why": "Sounds recorded in the place make the viewer believe they are standing in that market.",
+    "video": ""
+   },
+   {
+    "q": "In StudioBinder's short film The Pen, how does the simple story keep moving forward?",
+    "options": [
+     [
+      "Each shot adds a new piece of information that leads to the next",
+      ""
+     ],
+     [
+      "Long speeches explain what each character wants",
+      "The film moves its story mainly through images, not long talking."
+     ],
+     [
+      "Many pretty shots repeat the same idea for mood",
+      "Repeating the same idea stops the story, so each shot needs to add something new."
+     ]
+    ],
+    "why": "When every image gives the viewer something new, the story moves forward clearly, even with very few words.",
+    "video": "The Pen · A Short Film"
+   }
+  ]
+ ],
+ "B02": [
+  [
+   {
+    "q": "Your cousin asks you to make a short video for her small tailoring shop in Pune. What should you decide before you start filming?",
+    "options": [
+     [
+      "What customers should remember most, like her quick alterations.",
+      ""
+     ],
+     [
+      "Nothing yet. Film everything in the shop and decide later.",
+      "Without a clear point first, you get lots of footage that does not add up to anything."
+     ],
+     [
+      "A list of every service she offers, so all are covered.",
+      "Too many points at once leaves viewers remembering none of them."
+     ]
+    ],
+    "why": "A single clear takeaway guides every shot you choose. Viewers can remember and repeat it.",
+    "video": ""
+   },
+   {
+    "q": "In the creative brief video, what does the brief make clear early on?",
+    "options": [
+     [
+      "Who the video is for and what it has to get across.",
+      ""
+     ],
+     [
+      "Which camera and lenses the team will use.",
+      "Gear choices come later. The brief starts with the audience and the goal."
+     ],
+     [
+      "The music style and colour look for the final edit.",
+      "These are style details, not the core of what the brief must settle first."
+     ]
+    ],
+    "why": "The brief names the audience and the objective first, so everyone on the team works toward the same goal.",
+    "video": "What Is a Creative Brief? How to Write One That Aligns Your Team"
+   }
+  ],
+  [
+   {
+    "q": "You are making a video for a sweet shop's Instagram. Most followers scroll quickly on their phones. How do you plan it?",
+    "options": [
+     [
+      "Upright frame, sweets shown in the first two seconds, text on screen.",
+      ""
+     ],
+     [
+      "Start with a slow, long shot of the shop sign and the street.",
+      "People scrolling fast will move on before anything interesting appears."
+     ],
+     [
+      "Wide sideways frame with small text along the bottom.",
+      "A sideways frame looks small on an upright phone, and small text is hard to read."
+     ]
+    ],
+    "why": "Phone viewers hold the phone upright and decide in seconds. Show the best part fast and add text for people watching on mute.",
+    "video": ""
+   },
+   {
+    "q": "Your uncle wants a video of the family puja to send on WhatsApp to grandparents in the village. They have old phones and slow internet. What do you send?",
+    "options": [
+     [
+      "A short edit of a few minutes, saved as a smaller file.",
+      ""
+     ],
+     [
+      "The full two-hour recording in the highest quality.",
+      "A huge file may never download on a slow connection or an old phone."
+     ],
+     [
+      "A fast edit with quick cuts and tiny moving text.",
+      "Quick cuts and tiny text are hard to follow on a small, older screen."
+     ]
+    ],
+    "why": "Think about the device and connection your viewers really have. A short, light file actually reaches them.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "Your video of a potter at a village fair opens on his hands already shaping clay. Friends say they feel lost. What helps most?",
+    "options": [
+     [
+      "Add a shot of his stall and him setting up before the clay.",
+      ""
+     ],
+     [
+      "Add more close-ups of the clay during the shaping part.",
+      "More detail in the action does not tell viewers where they are."
+     ],
+     [
+      "Move the shot of the finished pot being sold to the start.",
+      "Showing the result first skips the setting and can confuse a simple story."
+     ]
+    ],
+    "why": "Viewers need to know the place and the person first. Then the action makes sense to them.",
+    "video": ""
+   },
+   {
+    "q": "According to the storyboard video, what is a storyboard mainly used for?",
+    "options": [
+     [
+      "Planning each shot as a simple picture with a short note.",
+      ""
+     ],
+     [
+      "Writing out the full dialogue for every person.",
+      "That is a script. A storyboard shows how each shot will look."
+     ],
+     [
+      "Choosing the final music before the shoot begins.",
+      "Music is not the point. A storyboard plans the pictures and their order."
+     ]
+    ],
+    "why": "A storyboard pairs a rough drawing with a description for each shot, so you can see the video before you film it.",
+    "video": "What is a Storyboard and How to Make One"
+   },
+   {
+    "q": "In the three act structure video, what usually moves a story from its first act into its second?",
+    "options": [
+     [
+      "An event that changes things and starts the main action.",
+      ""
+     ],
+     [
+      "A new place shown with a wide establishing shot.",
+      "A new place alone does not push the story forward. Something has to happen."
+     ],
+     [
+      "A long pause with music to give viewers a break.",
+      "A pause slows things down. The move into act two comes from a change or event."
+     ]
+    ],
+    "why": "Act one ends when something happens that sets the main story going. That turning point pulls viewers into the development.",
+    "video": "Three Act Structure Explained"
+   }
+  ],
+  [
+   {
+    "q": "At a friend's bakery opening, guests will leave in ten minutes. You have many cake close-ups but no shot of the ribbon cutting. What do you film now?",
+    "options": [
+     [
+      "A wide shot of the owner cutting the ribbon with guests.",
+      ""
+     ],
+     [
+      "More close-ups of the cakes and the decorations.",
+      "You already have detail shots. Without the key moment, there is no story."
+     ],
+     [
+      "The street outside, to use as an opening shot later.",
+      "The street will still be there later. The ribbon cutting will not."
+     ]
+    ],
+    "why": "Get the shots the story cannot work without first. Detail shots can wait or be picked up later.",
+    "video": ""
+   },
+   {
+    "q": "You are editing an interview with a jeweller and want to remove a cough in the middle of her answer. The cut makes her face jump. What do you do?",
+    "options": [
+     [
+      "Cover the cut with a shot of her hands setting a stone.",
+      ""
+     ],
+     [
+      "Leave the jump in. Viewers will not notice it.",
+      "A jump in the face is easy to spot and looks like a mistake."
+     ],
+     [
+      "Delete the whole answer, even though it was good.",
+      "You lose good content when a covering shot could fix the cut."
+     ]
+    ],
+    "why": "A related detail shot hides the cut while her voice keeps going. This is why you film details on every shoot.",
+    "video": ""
+   },
+   {
+    "q": "In the shot list video, what does a shot list do with your story outline?",
+    "options": [
+     [
+      "Breaks it into specific shots you can film, with size and angle.",
+      ""
+     ],
+     [
+      "Shrinks it into one short paragraph about the story.",
+      "That is a summary. A shot list breaks the story into filmable shots."
+     ],
+     [
+      "Turns it into a timetable of meals and breaks for the crew.",
+      "That is a schedule, not a shot list."
+     ]
+    ],
+    "why": "A shot list names each shot clearly, so on the day you know exactly what to film and nothing important is missed.",
+    "video": "What is a Shot List? (and How to Make One)"
+   }
+  ],
+  [
+   {
+    "q": "You are filming your grandmother at her 80th birthday for a family video. Which question will give you the best moment on camera?",
+    "options": [
+     [
+      "What was this house like when you first came here?",
+      ""
+     ],
+     [
+      "Are you happy to have everyone here today?",
+      "She can answer with a single word, and the moment ends there."
+     ],
+     [
+      "You must be very proud of your family, right?",
+      "This puts your words in her mouth instead of letting her speak."
+     ]
+    ],
+    "why": "A question that asks her to describe or remember invites a real story in her own words.",
+    "video": ""
+   },
+   {
+    "q": "What does the scripting method in the Think Media video help you do for a short explainer?",
+    "options": [
+     [
+      "Grab attention early, cover points in order, end with a next step.",
+      ""
+     ],
+     [
+      "Open with a long introduction about yourself, then the topic.",
+      "A long self-introduction loses viewers before the useful part starts."
+     ],
+     [
+      "Write every word, then read it out fast in one take.",
+      "Speed is not the method. The point is a clear structure viewers can follow."
+     ]
+    ],
+    "why": "A simple structure keeps viewers watching at the start, guides them through the points, and tells them what to do at the end.",
+    "video": "How to Write a Script for a YouTube Video (Made Easy!)"
+   }
+  ]
+ ],
+ "B03": [
+  [
+   {
+    "q": "Your cousin will help film the haldi at a family wedding. You give her a written plan. Which line will help her most?",
+    "options": [
+     [
+      "Close-up: turmeric being put on the bride's cheek",
+      ""
+     ],
+     [
+      "Lots of happy moments with the whole family",
+      "She cannot tell how close to be or what exactly to film."
+     ],
+     [
+      "Haldi ceremony, just film everything you can",
+      "This gives no clear shot, so she will have to guess."
+     ]
+    ],
+    "why": "It tells her how close to frame and exactly what to point the camera at. She could film it without asking you.",
+    "video": ""
+   },
+   {
+    "q": "In the video, what does each single line of a shot list describe?",
+    "options": [
+     [
+      "One planned shot, with details like framing and action",
+      ""
+     ],
+     [
+      "A whole scene, written out like a short story",
+      "A shot list breaks a scene into separate shots, one per line."
+     ],
+     [
+      "The final order of the clips in the edit",
+      "The list is for planning the filming, not for fixing the edit order."
+     ]
+    ],
+    "why": "The video shows that each line is one shot, filled in with fields like size, angle and what happens.",
+    "video": "Intro to Shot Listing"
+   }
+  ],
+  [
+   {
+    "q": "You make a rough drawing for a shot of a sweet shop owner behind his counter. What must the drawing show clearly?",
+    "options": [
+     [
+      "Where the frame edge cuts him, like at the waist",
+      ""
+     ],
+     [
+      "His face and clothes, drawn with care",
+      "Details of the person do not tell anyone how to frame the shot."
+     ],
+     [
+      "The colours of the sweets on the counter",
+      "Colours do not help; the drawing is there to show the framing."
+     ]
+    ],
+    "why": "The drawing's job is to show how much of him is in the frame and where he sits. That is what your helper needs to copy.",
+    "video": ""
+   },
+   {
+    "q": "According to the video, what is the main job of a storyboard (a set of drawn frames)?",
+    "options": [
+     [
+      "To help the whole team picture the same plan",
+      ""
+     ],
+     [
+      "To show the client how well you can draw",
+      "The video says drawing skill does not matter; clarity does."
+     ],
+     [
+      "To show the exact colours of the final film",
+      "A storyboard is about the plan and framing, not the final look."
+     ]
+    ],
+    "why": "The video stresses that rough frames are enough, because the goal is that everyone shares one plan.",
+    "video": "What is a Storyboard and How to Make One"
+   }
+  ],
+  [
+   {
+    "q": "Next Tuesday at 11 am you will interview a tailor in his shop. You visit this Tuesday at 11 am. What should you check?",
+    "options": [
+     [
+      "The traffic sound and where the sun comes in then",
+      ""
+     ],
+     [
+      "Only how nice the shop looks for the camera",
+      "A shop can look good but still have a loud road or harsh sun."
+     ],
+     [
+      "Not much, since you can fix it all in the edit",
+      "Loud background sound and bad sun are very hard to fix later."
+     ]
+    ],
+    "why": "Visiting at the same time shows you the real sound and sun you will get. Then you can plan around them.",
+    "video": ""
+   },
+   {
+    "q": "Apart from sound and daylight, what else does the scout checklist in the video ask you to check?",
+    "options": [
+     [
+      "Power points, room for gear, and permission to film",
+      ""
+     ],
+     [
+      "The actors' lines, costumes and props",
+      "These are planned separately, not while checking a place."
+     ],
+     [
+      "The order the shots will go in the edit",
+      "Edit order is decided later, not on a visit to the place."
+     ]
+    ],
+    "why": "The checklist covers practical things like power, usable space, weather and permissions, so nothing stops you on the day.",
+    "video": "8 Keys to Location Scouting Like a Pro"
+   }
+  ],
+  [
+   {
+    "q": "For a college project you want to film a vegetable seller at a market. She looks unsure and says, 'Not today.' What do you do?",
+    "options": [
+     [
+      "Thank her and go film a different stall instead",
+      ""
+     ],
+     [
+      "Film her from far away so she will not notice",
+      "Filming her secretly ignores what she clearly told you."
+     ],
+     [
+      "Keep asking her until she finally agrees to it",
+      "Pushing someone is pressure, not real agreement."
+     ]
+    ],
+    "why": "She has said no, so you accept it politely and move on. People trust filmmakers who respect their answer.",
+    "video": ""
+   },
+   {
+    "q": "In the video's consent conversation, what makes the person's agreement 'informed'?",
+    "options": [
+     [
+      "They know how the video will be used and shared",
+      ""
+     ],
+     [
+      "They nodded once when they saw the camera",
+      "A quick nod does not mean they understand where the video will go."
+     ],
+     [
+      "They were standing in a public place",
+      "Being in public does not mean they know or agree to how it is used."
+     ]
+    ],
+    "why": "The video shows the filmmaker explaining the purpose and use of the footage, so the person can truly decide.",
+    "video": "Interviewing Techniques — Obtaining Informed Consent"
+   }
+  ],
+  [
+   {
+    "q": "Tomorrow morning you film a friend's shop opening on your phone. Tonight the battery is at 40% and storage is almost full. What do you do?",
+    "options": [
+     [
+      "Charge it fully and move old videos off the phone",
+      ""
+     ],
+     [
+      "Charge it in the morning while you travel there",
+      "There may not be enough time, and you start the shoot already low."
+     ],
+     [
+      "Delete some apps at the venue if space runs out",
+      "You may miss key moments while you clear space in a hurry."
+     ]
+    ],
+    "why": "Doing it the evening before means you arrive with full power and room to record. Nothing stops you mid-shoot.",
+    "video": ""
+   },
+   {
+    "q": "At a family function, your first clips look hazy and soft, even in good light. What is the most likely cause?",
+    "options": [
+     [
+      "A smudge of fingerprint oil on the lens",
+      ""
+     ],
+     [
+      "The phone's battery is getting low",
+      "Low battery does not make the picture hazy."
+     ],
+     [
+      "The storage is too full to record well",
+      "Full storage stops recording but does not blur the image."
+     ]
+    ],
+    "why": "Phone lenses pick up finger marks easily, which makes video look foggy. A quick wipe with a soft cloth fixes it.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "After filming your nephew's birthday, your phone is full. You have copied the clips to your laptop. What should you do next?",
+    "options": [
+     [
+      "Play a few clips, then copy them to a drive as well",
+      ""
+     ],
+     [
+      "Delete them from the phone right away for space",
+      "If the laptop copy is broken or the laptop fails, the clips are gone."
+     ],
+     [
+      "Clear the phone and keep them on the laptop only",
+      "One copy can be lost to one crash, theft or spill."
+     ]
+    ],
+    "why": "Checking makes sure the copy works, and a second copy protects you if one device fails. Only then is it safe to delete.",
+    "video": ""
+   },
+   {
+    "q": "The WITNESS video talks about keeping video safe. When does it say you should plan for this?",
+    "options": [
+     [
+      "Before you film, as part of your planning",
+      ""
+     ],
+     [
+      "After the edit, once the video is done",
+      "By then files may already be lost or messy."
+     ],
+     [
+      "Once your phone shows storage is full",
+      "Waiting for a warning is too late to plan how to store footage."
+     ]
+    ],
+    "why": "The video explains that keeping footage safe starts before you record, so you know where files will go and how they will be stored.",
+    "video": "Planning to Preserve Video for Human Rights"
+   }
+  ]
+ ],
+ "B04": [
+  [
+   {
+    "q": "You are filming a speech at a family function from the back of the hall. You hold the phone in both hands, but the picture still wobbles a lot. What is the most likely cause?",
+    "options": [
+     [
+      "You zoomed in a lot, which makes every small movement look bigger.",
+      ""
+     ],
+     [
+      "The hall lights are too dim, so the camera shakes the picture.",
+      "Dim light can add blur or grain, but it does not make the frame wobble."
+     ],
+     [
+      "You are too far away, so the phone can't hold the picture still.",
+      "Distance alone does not cause shake; the zoom you use to reach far is what does it."
+     ]
+    ],
+    "why": "Zoom makes small hand movements look much bigger. Walk closer and zoom out to get a calmer shot.",
+    "video": ""
+   },
+   {
+    "q": "At a street market, you want to follow your friend as she walks between the stalls. How do you film while moving?",
+    "options": [
+     [
+      "Walk slowly with bent knees, both hands holding the phone near your chest.",
+      ""
+     ],
+     [
+      "Walk at normal speed with both hands stretched out in front of you.",
+      "Arms held out tire quickly, and normal steps bounce the picture."
+     ],
+     [
+      "Hold the phone high in both hands and take long, quick steps.",
+      "Raised arms and long steps both add a lot of shake."
+     ]
+    ],
+    "why": "Soft knees soak up your steps, and keeping the phone close to your body makes it steadier.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You left a little extra time at the start and end of each clip of your niece cutting her birthday cake. When you edit, what does that extra time help with?",
+    "options": [
+     [
+      "It gives you room to start and end each cut cleanly, or add a fade.",
+      ""
+     ],
+     [
+      "It makes the final video longer, so it feels more complete.",
+      "The extra time is usually trimmed away, not kept to add length."
+     ],
+     [
+      "It gives the phone time to save the file without any errors.",
+      "The phone saves the file on its own; the spare time is for editing."
+     ]
+    ],
+    "why": "Spare seconds at each end let you choose the exact cut point and join clips smoothly without losing the action.",
+    "video": ""
+   },
+   {
+    "q": "You just filmed a short interview with a sweet shop owner. Before you leave, you play the clip back. What matters most to check?",
+    "options": [
+     [
+      "Listen with the sound on, and check that his face is sharp.",
+      ""
+     ],
+     [
+      "Check that the clip is long enough and the file has saved.",
+      "A saved, long clip can still have bad sound or a blurry face."
+     ],
+     [
+      "Check that the colours look bright and nice on your screen.",
+      "Colour can be fixed in the edit, but bad sound or focus usually can't."
+     ]
+    ],
+    "why": "Sound and focus problems can't be fixed later. Catching them now lets you film again while he is still there.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "At an evening sangeet indoors, the dancers look dark and you want their movement to stay sharp. Your shutter speed is 1/250. What do you change?",
+    "options": [
+     [
+      "Open the lens to a lower f-number, and raise ISO a little.",
+      ""
+     ],
+     [
+      "Slow the shutter down to 1/30 so more light comes in.",
+      "A slow shutter makes moving dancers look blurry."
+     ],
+     [
+      "Push ISO all the way up to the highest number it allows.",
+      "Very high ISO makes the picture look grainy and dotty."
+     ]
+    ],
+    "why": "Opening the lens lets in more light without blurring motion, and a small ISO boost adds the rest with little grain.",
+    "video": ""
+   },
+   {
+    "q": "In the aperture guide, what happens when you change from f/8 to f/1.8? (The f-number shows how wide the lens opening is.)",
+    "options": [
+     [
+      "The lens opens wider, more light comes in, and the background gets softer.",
+      ""
+     ],
+     [
+      "The lens closes down, less light comes in, and more of the scene is sharp.",
+      "That is what a bigger f-number does, not a smaller one."
+     ],
+     [
+      "Only the zoom changes, while the brightness of the picture stays the same.",
+      "Aperture is the size of the lens opening, so it changes the light, not the zoom."
+     ]
+    ],
+    "why": "A smaller f-number means a bigger opening. It brightens the picture and blurs the background more.",
+    "video": "Ultimate Guide to Camera Aperture and the Exposure Triangle"
+   },
+   {
+    "q": "You film inside a home lit by warm yellow bulbs, and everyone looks orange. Based on the white balance video, what do you do? (White balance tells the camera what colour white is.)",
+    "options": [
+     [
+      "Set white balance to the indoor bulb setting, around 3200K.",
+      ""
+     ],
+     [
+      "Set white balance to daylight, around 5600K, for natural colour.",
+      "The daylight setting under warm bulbs makes the picture even more orange."
+     ],
+     [
+      "Raise the ISO so the colours become brighter and cleaner.",
+      "ISO changes brightness, not the colour of the light."
+     ]
+    ],
+    "why": "Matching white balance to the light source makes whites look white, so skin looks natural.",
+    "video": "Color Temperature Explained: White Balance Fundamentals"
+   }
+  ],
+  [
+   {
+    "q": "You are filming earrings for a friend's small jewellery business on your phone. The phone keeps making the cloth behind them sharp, not the earrings. What do you do?",
+    "options": [
+     [
+      "Tap and hold on the earrings until it locks, then keep the same distance.",
+      ""
+     ],
+     [
+      "Keep moving the phone closer until the earrings finally look sharp.",
+      "Phones can't focus when too close, so this often gets blurrier."
+     ],
+     [
+      "Use the widest lens and crop in on the earrings during editing.",
+      "The phone may still pick the cloth, and cropping lowers the quality."
+     ]
+    ],
+    "why": "Locking focus on the product stops the phone from choosing for you. Staying at the same distance keeps it sharp.",
+    "video": ""
+   },
+   {
+    "q": "You want a family group sharp and the temple behind them sharp too. Based on the depth of field video, what do you aim for?",
+    "options": [
+     [
+      "Deep focus, using a bigger f-number like f/8 or f/11.",
+      ""
+     ],
+     [
+      "Shallow focus, using a small f-number like f/1.8.",
+      "Shallow focus keeps only one distance sharp and blurs the temple."
+     ],
+     [
+      "Stand very close to the group so all of it fits in focus.",
+      "Getting closer makes the sharp area smaller, not bigger."
+     ]
+    ],
+    "why": "Deep focus keeps near and far things sharp. A smaller lens opening, which means a bigger f-number, gives you that.",
+    "video": "Depth of Field Explained: Guide to Camera Focus"
+   }
+  ],
+  [
+   {
+    "q": "You filmed water splashing from a handpump at 60 frames per second. In your editing app it plays at normal speed and does not look slow. What do you do?",
+    "options": [
+     [
+      "Slow the clip down to about half speed in the editing app.",
+      ""
+     ],
+     [
+      "Film it again at 24 frames per second for a cinema look.",
+      "Fewer frames each second makes slow motion jumpy, not smoother."
+     ],
+     [
+      "Film it again with a faster shutter speed to slow it.",
+      "Shutter speed changes blur and brightness, not playback speed."
+     ]
+    ],
+    "why": "Filming at 60 only gives you extra frames. You still have to slow the clip in the edit to see the slow motion.",
+    "video": ""
+   },
+   {
+    "q": "The camera settings video goes through resolution and frame rate early on. Why set these before you start filming?",
+    "options": [
+     [
+      "They can't be fixed later, so a wrong choice stays in the footage.",
+      ""
+     ],
+     [
+      "They only matter for the editor, so you can change them later.",
+      "Once you record, the size and frame rate are already fixed in the file."
+     ],
+     [
+      "Auto mode always picks the best ones, so a quick check is enough.",
+      "Auto may pick a different frame rate from your other clips or the wrong size."
+     ]
+    ],
+    "why": "Some settings are baked into the clip when you record. Checking them first saves you from footage you can't use.",
+    "video": "Basic CAMERA SETTINGS for beginners filmmaking"
+   }
+  ]
+ ],
+ "B05": [
+  [
+   {
+    "q": "You are filming a bride's mehendi ceremony on your phone. You already have a shot of the whole courtyard and one of the bride sitting with her aunts. What shot should you add next?",
+    "options": [
+     [
+      "Move in close on her palm as the design is drawn.",
+      ""
+     ],
+     [
+      "Step back further to show the house from the gate.",
+      "You already showed the setting, so another far shot adds nothing new."
+     ],
+     [
+      "Film the bride and aunts again from the same spot.",
+      "This repeats a shot you have and still hides the design itself."
+     ]
+    ],
+    "why": "The pattern on her hand is the heart of the moment. A tight shot lets viewers actually see it after the place and the people are shown.",
+    "video": ""
+   },
+   {
+    "q": "The StudioBinder guide explains each shot size. If you film a friend making dosa, which set of shots covers the activity well?",
+    "options": [
+     [
+      "The kitchen, then the cook at the stove, then the batter spreading.",
+      ""
+     ],
+     [
+      "The kitchen, then the kitchen from another corner, then again.",
+      "You only show the place, so viewers never clearly see the cook or the dosa."
+     ],
+     [
+      "Only the cook at the stove for the whole cooking time.",
+      "One size for everything gets boring and hides both the setting and the small moments."
+     ]
+    ],
+    "why": "Mixing sizes tells the viewer the setting, then the person, then the key moment. Together they tell a complete, clear story.",
+    "video": "Ultimate Guide to Camera Shots: Every Shot Size Explained"
+   }
+  ],
+  [
+   {
+    "q": "You are filming the sunset at Marine Drive. The sky is full of orange clouds and the sea is calm and plain. Where do you put the horizon?",
+    "options": [
+     [
+      "Low in the frame, so the sky takes up about two thirds.",
+      ""
+     ],
+     [
+      "Straight across the middle, splitting sky and sea equally.",
+      "A centred horizon often feels flat and gives the best part, the sky, no extra room."
+     ],
+     [
+      "Right at the bottom edge, with almost no sea showing.",
+      "Pushing the horizon to the edge feels cramped and loses the sense of the sea."
+     ]
+    ],
+    "why": "Placing the horizon about a third up from the bottom gives more room to the interesting sky. It also looks more balanced than cutting the frame in half.",
+    "video": ""
+   },
+   {
+    "q": "The StudioBinder composition guide talks about lines in a scene, like roads, railings or rows of lamps. How do they help a shot?",
+    "options": [
+     [
+      "They lead the viewer's eye towards the subject.",
+      ""
+     ],
+     [
+      "They should be hidden so the frame looks simple.",
+      "Lines are a useful tool, and hiding them throws away an easy way to direct attention."
+     ],
+     [
+      "They only matter when the camera is moving.",
+      "Lines work in still frames too, pulling the eye even when nothing moves."
+     ]
+    ],
+    "why": "The eye naturally follows lines in a picture. If they point to your subject, the viewer looks right where you want.",
+    "video": "Ultimate Guide to Film Composition & Framing"
+   }
+  ],
+  [
+   {
+    "q": "At a wedding, you film an uncle giving his blessings. He talks to the interviewer, who stands to the left of your camera, so he looks towards the left of the frame. Where do you place him?",
+    "options": [
+     [
+      "On the right side, with open area on the left of the frame.",
+      ""
+     ],
+     [
+      "On the left side, close to the edge he is facing.",
+      "His face nearly hits the edge, so he looks squeezed and boxed in."
+     ],
+     [
+      "In the exact centre, with his head touching the top.",
+      "Centring ignores where he looks, and touching the top makes the frame feel cramped."
+     ]
+    ],
+    "why": "Room in the direction a person looks feels natural and comfortable. It gives their gaze somewhere to go.",
+    "video": ""
+   },
+   {
+    "q": "You are filming your grandmother telling a story in a medium shot, from the waist up. On your phone screen, there is a big area of empty wall above her head. What do you do?",
+    "options": [
+     [
+      "Tilt down or move closer so her head sits just under the top edge.",
+      ""
+     ],
+     [
+      "Leave it, because more wall makes the frame feel calm.",
+      "Too much empty wall makes her look small and pulls the eye away from her face."
+     ],
+     [
+      "Move in so far that the top of her head is cut off.",
+      "Cutting off the head in a medium shot looks like a mistake to most viewers."
+     ]
+    ],
+    "why": "A thin gap above the head keeps the face as the main thing. It avoids both wasted wall and an awkward chop.",
+    "video": ""
+   },
+   {
+    "q": "The StudioBinder guide explains using empty space in a frame. What can a lot of empty space around a small figure make viewers feel?",
+    "options": [
+     [
+      "That the person is alone or small in their world.",
+      ""
+     ],
+     [
+      "That the camera operator made a framing mistake.",
+      "The video shows empty space used on purpose to create a mood, not as an error."
+     ],
+     [
+      "That the person is powerful and in control.",
+      "A tiny figure in a big empty frame usually feels weak or lonely, not powerful."
+     ]
+    ],
+    "why": "Empty space carries feeling. A small person in a large empty frame often feels isolated or lost.",
+    "video": "Ultimate Guide to Film Composition & Framing"
+   }
+  ],
+  [
+   {
+    "q": "You are filming a vegetable seller at a street market. On screen, an electric pole stands right behind his head, as if it grows out of it. What do you do?",
+    "options": [
+     [
+      "Step a little to one side so the pole is no longer behind him.",
+      ""
+     ],
+     [
+      "Keep filming, since viewers will look at his face anyway.",
+      "A pole coming out of a head is very distracting and often looks funny."
+     ],
+     [
+      "Plan to blur or remove the pole later in the edit.",
+      "Fixing it in editing is slow and hard, while one step sideways fixes it now."
+     ]
+    ],
+    "why": "A small change in your position changes what lines up behind the subject. It is the fastest fix for a distracting background.",
+    "video": ""
+   },
+   {
+    "q": "The depth part of the StudioBinder guide shows ways to make a subject stand out. Which of these helps?",
+    "options": [
+     [
+      "Put more distance between the subject and what is behind.",
+      ""
+     ],
+     [
+      "Stand the subject pressed right against the back wall.",
+      "This flattens the shot and gives the subject no separation from the background."
+     ],
+     [
+      "Make the background brighter than the subject's face.",
+      "A brighter background pulls the eye away from the person you are filming."
+     ]
+    ],
+    "why": "Space behind the subject adds depth and lets the background soften. The person then stands out clearly.",
+    "video": "Ultimate Guide to Film Composition & Framing"
+   }
+  ],
+  [
+   {
+    "q": "You are editing your cousin's birthday speech. You cut out a long pause, and now his face jumps suddenly. What can hide the jump?",
+    "options": [
+     [
+      "Place a shot of the cake candles or listening guests over the cut.",
+      ""
+     ],
+     [
+      "Add a fade to black in the middle of the speech.",
+      "A fade suggests the speech has ended or time has passed, which confuses viewers."
+     ],
+     [
+      "Leave the jump, because people expect it in family videos.",
+      "A visible jump looks careless when a quick extra shot could cover it."
+     ]
+    ],
+    "why": "A short shot of something else in the room covers the join smoothly. That is why filming extra small shots on the day saves your edit.",
+    "video": ""
+   },
+   {
+    "q": "The StudioBinder video on the 180 degree rule talks about an imaginary line between two people talking. How should you film them so the edit makes sense?",
+    "options": [
+     [
+      "Keep the camera on one side of the line for all shots.",
+      ""
+     ],
+     [
+      "Walk around to the other side for some shots for variety.",
+      "Crossing the line flips who is on the left and right, which confuses the viewer."
+     ],
+     [
+      "Stand between them, with the camera right on the line.",
+      "On the line, both people look straight at the lens and their places on screen become unclear."
+     ]
+    ],
+    "why": "Staying on one side keeps each person on the same side of the screen. Your shots then cut together without confusion.",
+    "video": "The 180 Degree Rule in Film (and How to Break the Line)"
+   },
+   {
+    "q": "The StudioBinder guide on camera movement explains pans and tilts. You want to show a tall temple tower from its base to its top in one shot. Which move fits?",
+    "options": [
+     [
+      "A slow tilt, moving the camera upward from the base.",
+      ""
+     ],
+     [
+      "A slow pan, turning the camera from left to right.",
+      "A pan moves sideways, so it cannot travel up the height of the tower."
+     ],
+     [
+      "A quick zoom in and out to cover the whole tower.",
+      "Zooming changes size, not direction, and fast zooms look shaky and amateur."
+     ]
+    ],
+    "why": "A tilt moves the camera up or down from one spot. It is the right choice for showing something tall.",
+    "video": "Ultimate Guide to Camera Movement"
+   }
+  ]
+ ],
+ "B06": [
+  [
+   {
+    "q": "You are filming a short interview with a shopkeeper in his small kirana shop. The only strong light comes in through the open front shutter. Where do you seat him?",
+    "options": [
+     [
+      "Facing the open shutter, with you standing between him and the street.",
+      ""
+     ],
+     [
+      "With his back to the open shutter, so the street shows behind him.",
+      "The bright street will be behind him, and his face will fall into shadow."
+     ],
+     [
+      "Deep inside the shop, right under the tube light on the ceiling.",
+      "A tube light from straight above gives flat, greenish light and dark shadows under the eyes."
+     ]
+    ],
+    "why": "The shutter is the strongest light in the shop. When his face points at it, he gets free, even light and the camera sees it.",
+    "video": ""
+   },
+   {
+    "q": "In \"The Basics of Lighting for Film\", what should you study in a scene before you add any more lights?",
+    "options": [
+     [
+      "Which way the light already there is falling, and how soft it is.",
+      ""
+     ],
+     [
+      "How many lamps you have, so you can find a use for all of them.",
+      "More lamps do not help if you have not first read the light that is already there."
+     ],
+     [
+      "Which lens you will use, so the shot looks wide enough.",
+      "The lens matters for framing, but the video starts with the direction and softness of the light."
+     ]
+    ],
+    "why": "The video shows that you read the existing light first. Then you only add what the scene really needs.",
+    "video": "The Basics of Lighting for Film"
+   }
+  ],
+  [
+   {
+    "q": "At noon you want to film your grandmother talking in the open courtyard. The sun is overhead and her eyes are in deep black shadows. What do you do?",
+    "options": [
+     [
+      "Move her into the shade of the veranda, close to the open courtyard.",
+      ""
+     ],
+     [
+      "Keep her in the sun and shine your phone torch on her face.",
+      "A small torch is also harsh, and it is far too weak to beat the noon sun."
+     ],
+     [
+      "Keep her in the sun and ask her to tilt her face up to the sky.",
+      "She will squint, and the sharp shadows from the sun are still there."
+     ]
+    ],
+    "why": "In the shade, the whole bright sky lights her. That is a big source, so the shadows become gentle and her face looks kinder.",
+    "video": ""
+   },
+   {
+    "q": "In \"Cinematic Lighting: Types of Light\", a table lamp that you can see inside the frame is called what kind of light?",
+    "options": [
+     [
+      "A practical light.",
+      ""
+     ],
+     [
+      "A back light.",
+      "A back light sits behind the subject to make an outline, and it is usually hidden."
+     ],
+     [
+      "A fill light.",
+      "A fill light softens shadows from the main light and is usually kept out of the shot."
+     ]
+    ],
+    "why": "A practical is a real lamp that is part of the scene. It adds mood and can also add a little light.",
+    "video": "Cinematic Lighting: Types of Light"
+   },
+   {
+    "q": "In \"Cinematic Lighting: Types of Light\", what job does the fill light do?",
+    "options": [
+     [
+      "It lifts the dark side of the face so shadows are less deep.",
+      ""
+     ],
+     [
+      "It is the brightest light and sets the main look of the face.",
+      "That is the key light, the main light in the scene."
+     ],
+     [
+      "It shines from behind to separate the person from the background.",
+      "That is the back light, not the fill."
+     ]
+    ],
+    "why": "The key light makes shadows. The fill light is weaker and controls how dark those shadows are.",
+    "video": "Cinematic Lighting: Types of Light"
+   }
+  ],
+  [
+   {
+    "q": "You are filming a tailor at his machine next to a window on a cloudy day. Your camera picture looks too dark. What is the best first change?",
+    "options": [
+     [
+      "Set a smaller f-number (the size of the lens opening), like f/2.8, and keep ISO low.",
+      ""
+     ],
+     [
+      "Raise the ISO (the camera's brightness boost) to 3200 and change nothing else.",
+      "High ISO makes the picture bright but adds a lot of grain, also called noise."
+     ],
+     [
+      "Use a faster shutter speed so his moving hands look sharper.",
+      "A faster shutter lets in less light, so the picture gets even darker."
+     ]
+    ],
+    "why": "A smaller f-number means a bigger lens opening, so more light comes in without adding grain. Indoors, this is often the cleanest way to get a bright picture.",
+    "video": ""
+   },
+   {
+    "q": "In \"3 Cinematic Looks With Natural Light\", how does the filmmaker get three different looks?",
+    "options": [
+     [
+      "By changing where the person sits, the exposure, and how daylight bounces.",
+      ""
+     ],
+     [
+      "By setting up big studio lamps outside the window to copy sunlight.",
+      "The point of the video is using only the light that is already there."
+     ],
+     [
+      "By shooting all three the same way and changing colours in the edit.",
+      "The looks are made on set with position and light, not added later."
+     ]
+    ],
+    "why": "The video shows that where you place the person and how you control reflected daylight can change the whole mood, with no extra lights.",
+    "video": "3 Cinematic Looks With Natural Light"
+   }
+  ],
+  [
+   {
+    "q": "At a haldi function, the couple stands in front of a bright garden in afternoon sun. On your phone, their faces look almost black. What do you do?",
+    "options": [
+     [
+      "Move around them so the sun falls on them from the side.",
+      ""
+     ],
+     [
+      "Zoom in closer so their faces fill more of the frame.",
+      "The bright garden is still behind them, so their faces stay dark."
+     ],
+     [
+      "Keep shooting and plan to brighten the faces in the edit.",
+      "Lifting very dark faces later brings out grain and dull colours."
+     ]
+    ],
+    "why": "When the sun is no longer behind them, it lights their faces. The phone can then set brightness for them, not for the sky.",
+    "video": ""
+   },
+   {
+    "q": "At Marine Drive, you want a dancer to appear as a dark outline against the orange sunset sky. How do you set it up?",
+    "options": [
+     [
+      "Keep the sunset behind her and tap the bright sky to set exposure.",
+      ""
+     ],
+     [
+      "Keep the sunset behind her and tap on her face to set exposure.",
+      "This brightens her and washes out the sky, so the outline is lost."
+     ],
+     [
+      "Turn her around so the setting sun shines right on her face.",
+      "Her face will be lit, so you get a normal shot, not a dark outline."
+     ]
+    ],
+    "why": "Setting brightness for the sky makes the person go dark. Light from behind is a mistake for interviews but a useful tool when you want this look.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You film a boutique owner with a big window on her left. The right side of her face is too dark. You have a white thermocol sheet. Where does it go?",
+    "options": [
+     [
+      "On her right side, just out of frame, tilted to catch the window light.",
+      ""
+     ],
+     [
+      "Behind her head, just out of frame, facing towards the camera.",
+      "It will not send any light onto the dark side of her face."
+     ],
+     [
+      "On her left side, just out of frame, right next to the window.",
+      "That side is already bright, so the dark side stays dark."
+     ]
+    ],
+    "why": "The sheet must sit on the shadow side and face the light. Then it sends window light back into the dark side of her face.",
+    "video": ""
+   },
+   {
+    "q": "In \"The One Dramatic Lighting Technique You Need to Know\", what is negative fill?",
+    "options": [
+     [
+      "A black surface near the subject that makes the shadow side darker.",
+      ""
+     ],
+     [
+      "A white card near the subject that makes the shadow side lighter.",
+      "That is bounce, which does the opposite and makes shadows lighter."
+     ],
+     [
+      "A dark filter on the lens that makes the whole frame darker.",
+      "Negative fill works on one side of the subject, not on the whole picture."
+     ]
+    ],
+    "why": "A black surface soaks up light and stops it bouncing back onto the face. This makes the shadows deeper and the look more dramatic.",
+    "video": "The One Dramatic Lighting Technique You Need to Know"
+   }
+  ]
+ ],
+ "B07": [
+  [
+   {
+    "q": "You are filming a vegetable seller at a market, and your phone stays 3 metres away for a wide shot. A friend lends you his costly camera-top mic. You also have cheap wired earphones with a mic. Which gives the clearer voice?",
+    "options": [
+     [
+      "The cheap earphone mic, clipped to her collar.",
+      ""
+     ],
+     [
+      "The costly mic, fixed on top of your phone.",
+      "A good mic 3 metres away still hears more market noise than voice."
+     ],
+     [
+      "Both together, so the edit has two choices.",
+      "Two far-away recordings are still both full of market noise."
+     ]
+    ],
+    "why": "A cheap mic near the mouth hears the voice strongly over the noise. A costly mic far away hears the whole market.",
+    "video": ""
+   },
+   {
+    "q": "The WITNESS video is about getting good sound on a phone. What is a good habit before you film someone speaking?",
+    "options": [
+     [
+      "Make a short test recording and play it back.",
+      ""
+     ],
+     [
+      "Start filming at once so you don't miss anything.",
+      "Without a test, you may only find bad sound when it is too late."
+     ],
+     [
+      "Trust the screen, since it shows it is recording.",
+      "The screen shows the picture, not whether the voice is clear."
+     ]
+    ],
+    "why": "A quick test and playback lets you hear noise or a weak voice while you can still change things.",
+    "video": "An Activist's Guide to Mobile Video — Sound Recording"
+   }
+  ],
+  [
+   {
+    "q": "You test the mic on your uncle before his birthday speech. When he laughs, the meter jumps into the red at 0. What do you do?",
+    "options": [
+     [
+      "Lower the input level a little, then test his laugh again.",
+      ""
+     ],
+     [
+      "Leave it, since a loud recording is a good recording.",
+      "Sound that hits 0 gets cut off and crackles, and it cannot be repaired."
+     ],
+     [
+      "Leave it and turn the laugh down later in the edit.",
+      "Turning it down later only makes the crackle quieter, not clean."
+     ]
+    ],
+    "why": "The loudest moments must stay below 0, so you leave some space for laughs and shouts.",
+    "video": ""
+   },
+   {
+    "q": "You record a shop owner talking softly. The meter barely moves and sits around −40. What is the best fix?",
+    "options": [
+     [
+      "Raise the level or bring the mic nearer, then test again.",
+      ""
+     ],
+     [
+      "Keep recording and make it louder later on the laptop.",
+      "Boosting a very quiet recording later also boosts hiss and noise."
+     ],
+     [
+      "Turn the level up until normal talking touches 0.",
+      "Touching 0 on normal speech means louder words will crackle."
+     ]
+    ],
+    "why": "Speech should sit in the healthy middle of the meter, roughly −15 to −9, so it is clear but safe.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are recording an interview in a small cafe. Through your headphones you hear a faint buzz that was not there before. What do you do?",
+    "options": [
+     [
+      "Pause, find the cause, fix it, then carry on recording.",
+      ""
+     ],
+     [
+      "Keep going and plan to remove the buzz later.",
+      "A buzz under speech is very hard to remove cleanly later."
+     ],
+     [
+      "Take off the headphones since the meter still looks fine.",
+      "The meter shows how loud the sound is, not whether it is clean."
+     ]
+    ],
+    "why": "Hearing a problem during the shoot means you can still fix it, often by moving a cable or switching off a fan.",
+    "video": ""
+   },
+   {
+    "q": "While listening, you hear a rubbing sound each time the speaker moves her hands. What is the best next step?",
+    "options": [
+     [
+      "Stop, adjust the clip mic, and ask her that question again.",
+      ""
+     ],
+     [
+      "Ask her to keep her hands still for the rest of it.",
+      "Stiff hands make people look and sound awkward."
+     ],
+     [
+      "Ignore it, since viewers will be watching her face.",
+      "Viewers notice bad sound even more than a bad picture."
+     ]
+    ],
+    "why": "The rubbing usually comes from clothing touching the mic, so fix the mic and redo the spoiled answer.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "At an outdoor wedding, you set up for a speech near a running generator. You hardly noticed it while setting up. What do you do?",
+    "options": [
+     [
+      "Move the speaker away or ask for it to be off briefly.",
+      ""
+     ],
+     [
+      "Record as planned, since software can remove hum.",
+      "Removing a loud hum later also damages the voice."
+     ],
+     [
+      "Turn the mic level down so the generator sounds quieter.",
+      "Lowering the level makes the voice quieter too, so nothing improves."
+     ]
+    ],
+    "why": "Dealing with noise before you press record is far easier than trying to clean it afterwards.",
+    "video": ""
+   },
+   {
+    "q": "In the Deity video on hiding a clip mic, what is the main thing to avoid when putting it under clothing?",
+    "options": [
+     [
+      "Fabric rubbing or moving against the top of the mic.",
+      ""
+     ],
+     [
+      "The mic touching the shirt at all, so leave it loose.",
+      "A loose mic swings and rubs more, which makes more noise."
+     ],
+     [
+      "Any cable showing, even if it means burying the mic deep.",
+      "Burying the mic deep in clothing muffles the voice."
+     ]
+    ],
+    "why": "Hidden mics pick up rustle from cloth, so the mic must be held steady so fabric cannot rub it.",
+    "video": "How To Hide A Lav Microphone"
+   },
+   {
+    "q": "Based on the RØDE video, what should you do before recording speech outside on a windy day?",
+    "options": [
+     [
+      "Put a foam or furry cover on the mic.",
+      ""
+     ],
+     [
+      "Turn the mic level up so the voice beats the wind.",
+      "A higher level makes the wind rumble louder as well."
+     ],
+     [
+      "Record normally and cut the wind sound in the edit.",
+      "Wind rumble mixes with the voice and rarely cleans up well."
+     ]
+    ],
+    "why": "A cover, plus shelter from a wall or your body, stops wind hitting the mic before it is recorded.",
+    "video": "Reduce Wind Noise When Recording Outside"
+   }
+  ],
+  [
+   {
+    "q": "You finish an interview in a living room with a ceiling fan running. You want to record the quiet sound of the room. What do you do?",
+    "options": [
+     [
+      "Keep the fan on as it was and ask everyone to stay silent.",
+      ""
+     ],
+     [
+      "Switch the fan off first so you get a cleaner silence.",
+      "The quiet recording must match the interview, and the fan was on then."
+     ],
+     [
+      "Ask people to chat softly so it sounds natural.",
+      "Any talking makes it useless for filling gaps under speech."
+     ]
+    ],
+    "why": "This recording is used under cuts, so it must sound exactly like the background during the interview.",
+    "video": ""
+   },
+   {
+    "q": "In the edit, you cut out a long pause. Now the background sound suddenly drops to dead silence for a moment. How do you fix it?",
+    "options": [
+     [
+      "Place the quiet recording from that same room under the gap.",
+      ""
+     ],
+     [
+      "Lay soft music over that part to cover the silence.",
+      "Music appearing for one moment draws attention to the cut."
+     ],
+     [
+      "Leave it, since a short silence is too quick to notice.",
+      "Listeners clearly hear the background vanish and come back."
+     ]
+    ],
+    "why": "Filling the gap with matching background sound makes the cut smooth and invisible to the ear.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are filming a sweet shop owner for her shop's video. She keeps stumbling and looks worried. What do you say?",
+    "options": [
+     [
+      "\"No hurry. Just tell me how you started the shop.\"",
+      ""
+     ],
+     [
+      "\"Try to stop saying umm, it spoils the video.\"",
+      "Pointing out mistakes makes nervous people tense up more."
+     ],
+     [
+      "\"Let me write it out and you read it from paper.\"",
+      "Reading from paper usually sounds stiff and unnatural."
+     ]
+    ],
+    "why": "A relaxed, easy question lets her talk as she normally would, and you can always take it again.",
+    "video": ""
+   },
+   {
+    "q": "In the WITNESS formal interview setup, where does the interviewer sit?",
+    "options": [
+     [
+      "Right next to the camera, at about lens height.",
+      ""
+     ],
+     [
+      "Behind the speaker, so the speaker faces the lens.",
+      "The speaker cannot talk naturally to someone they cannot see."
+     ],
+     [
+      "Far off to one side, so they stay out of the way.",
+      "A far side position turns the speaker's face away from the camera."
+     ]
+    ],
+    "why": "Sitting next to the lens gives the speaker a steady, natural eyeline and lets the interviewer keep watching and listening.",
+    "video": "Interviewing Techniques — The Formal Interview Setup"
+   }
+  ]
+ ],
+ "B08": [
+  [
+   {
+    "q": "You filmed your cousin's sangeet on a memory card and copied it to your laptop. You need the card again tomorrow. What do you do before you erase the card?",
+    "options": [
+     [
+      "Compare the number of files on both, then play a few clips on the laptop.",
+      ""
+     ],
+     [
+      "Erase the card right away, since the copy bar reached the end.",
+      "A finished copy bar does not prove every file arrived or plays properly."
+     ],
+     [
+      "Move only your favourite clips over, then erase the card.",
+      "You may need the clips you skipped, and once the card is erased they are gone."
+     ]
+    ],
+    "why": "Matching file counts shows nothing was left behind, and playing clips shows the files are not damaged. Only then is it safe to erase the card.",
+    "video": ""
+   },
+   {
+    "q": "The WITNESS video explains video metadata. What is it?",
+    "options": [
+     [
+      "Information saved inside a clip, like the date, time, place and device used.",
+      ""
+     ],
+     [
+      "The text captions you type over a video while editing it.",
+      "Captions are something you add on screen, not information the camera records with the file."
+     ],
+     [
+      "The quality setting you choose on your phone before recording.",
+      "A setting is a choice you make, while metadata is the record stored with each file."
+     ]
+    ],
+    "why": "Metadata is the hidden record of when, where and how a clip was made. It can prove a clip is real, but it can also reveal private details like location.",
+    "video": "What Is Video Metadata?"
+   }
+  ],
+  [
+   {
+    "q": "You recorded a shopkeeper's interview with a separate mic. The file is called shopkeeper_voice.wav. Your folders are Video, Sound, Music and Exports. Where does it go?",
+    "options": [
+     [
+      "Sound, because it is a recording of a voice.",
+      ""
+     ],
+     [
+      "Video, because it was recorded at the same time as the video.",
+      "Files are sorted by what they are, and this file has no picture, only audio."
+     ],
+     [
+      "Music, because Music and Sound are both audio.",
+      "Music is for songs and background tracks, not for voices you recorded on the shoot."
+     ]
+    ],
+    "why": "Voice recordings and room sound belong in Sound, while songs go in Music. Sorting by type means you know exactly where to look.",
+    "video": ""
+   },
+   {
+    "q": "You export a first draft of a reel for a local bakery to show the owner. Your folders are Video, Sound, Music and Exports. Where do you save the draft?",
+    "options": [
+     [
+      "In Exports, with the other finished files you make from the edit.",
+      ""
+     ],
+     [
+      "In Video, because the draft is a video file like the clips.",
+      "Mixing drafts with camera clips makes it hard to tell what you filmed from what you made."
+     ],
+     [
+      "On the desktop, so it is quick to find and send on WhatsApp.",
+      "Files left on the desktop get lost or mixed up with other jobs."
+     ]
+    ],
+    "why": "Exports holds everything that comes out of the editor, and Video holds only what came from the camera. Keeping them apart means you never confuse a draft with a raw clip.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You finished editing a friend's birthday video. Your laptop is almost full, and many clips were not used. What do you do?",
+    "options": [
+     [
+      "Keep every clip, and move the project to an external drive if space is short.",
+      ""
+     ],
+     [
+      "Delete the unused clips, since the edit is already finished.",
+      "Your friend may ask for changes later, and those unused clips might be exactly what you need."
+     ],
+     [
+      "Delete all the clips and keep only the exported video.",
+      "An exported video cannot be re-edited properly, so any future change becomes very hard."
+     ]
+    ],
+    "why": "The original clips are the raw material you cannot film again. Move them to save space, but never throw them away.",
+    "video": ""
+   },
+   {
+    "q": "You want to brighten a clip in a phone app that saves over the file. You have only this one copy of the clip. What do you do?",
+    "options": [
+     [
+      "Make a duplicate of the clip first and make changes on the duplicate.",
+      ""
+     ],
+     [
+      "Edit the clip directly, because you can undo it if needed.",
+      "Once the app saves over the file, undo may not bring the original back."
+     ],
+     [
+      "Edit it, but first send the old one to yourself on WhatsApp.",
+      "WhatsApp shrinks video quality, so that copy is not a true original."
+     ]
+    ],
+    "why": "Working on a duplicate means the original stays exactly as it was filmed. If the change goes wrong, you still have the real clip.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You just imported all the clips from a small shop shoot into your editor. Before you start cutting, what do you do?",
+    "options": [
+     [
+      "Play a few clips from each bin to see they open with picture and sound.",
+      ""
+     ],
+     [
+      "Delete the clips from your laptop folder, since they are now in the project.",
+      "Most editors only link to your files, so deleting them breaks the project."
+     ],
+     [
+      "Start cutting straight away, as any problem will show up later.",
+      "Finding a broken file halfway through an edit wastes far more time than a quick test now."
+     ]
+    ],
+    "why": "A quick test now catches missing or broken files early. Editors point to your files on the drive, so they must stay where they are.",
+    "video": ""
+   },
+   {
+    "q": "In \"Get to know Premiere\", you learn the main panels. Which panel do you use to watch a clip and choose a part of it before it goes into your edit?",
+    "options": [
+     [
+      "The Source panel.",
+      ""
+     ],
+     [
+      "The Program panel.",
+      "The Program panel plays your edit from the timeline, not a single clip on its own."
+     ],
+     [
+      "The Timeline panel.",
+      "The Timeline is where you arrange clips once you have chosen them."
+     ]
+    ],
+    "why": "The Source panel lets you preview a single clip and mark the part you want. The Program panel then shows how your edit looks.",
+    "video": "Get to know Premiere"
+   },
+   {
+    "q": "The Adobe video \"Create a project and import a clip\" shows the basic steps. What must you do before you can bring a clip in?",
+    "options": [
+     [
+      "Create a new project, giving it a name and a place to save it.",
+      ""
+     ],
+     [
+      "Drag the clip onto the timeline before any project exists.",
+      "There is no timeline to drag onto until a project has been created."
+     ],
+     [
+      "Open the clip in the Program panel to load it first.",
+      "The Program panel plays your edit, and it does not bring files into a project."
+     ]
+    ],
+    "why": "The project is the container that holds all your clips and edits. Once it exists and is saved somewhere sensible, you can import into it.",
+    "video": "Create a project and import a clip"
+   }
+  ],
+  [
+   {
+    "q": "On 14 March you sent a client a file called shop_reel_v02_2025-03-14. On 16 March you finish their changes. What do you call the new file?",
+    "options": [
+     [
+      "shop_reel_v03_2025-03-16",
+      ""
+     ],
+     [
+      "shop_reel_v02_2025-03-16",
+      "Two files called v02 makes it unclear which one the client already saw."
+     ],
+     [
+      "shop_reel_v03_2025-03-14",
+      "The old date makes the new file look like it was made before the changes were asked for."
+     ]
+    ],
+    "why": "Both the version number and the date need to move forward. Then anyone can tell which file is newest at a glance.",
+    "video": ""
+   },
+   {
+    "q": "Your edit is working well, but you want to try a big change to the music. How do you save your project before you start?",
+    "options": [
+     [
+      "Use Save As and give the project the next version number.",
+      ""
+     ],
+     [
+      "Keep saving over the same file and use Undo if needed.",
+      "Undo history is often lost when you close the editor, so the good version could disappear."
+     ],
+     [
+      "Save a copy called backup in the same folder.",
+      "A file named 'backup' does not say which version it is, and you may end up with many of them."
+     ]
+    ],
+    "why": "A new numbered version keeps the working edit safe. If the change does not work, you simply open the earlier number.",
+    "video": ""
+   }
+  ]
+ ],
+ "B09": [
+  [
+   {
+    "q": "You have just imported 40 clips from your cousin's engagement into a free editor. You want to watch one clip closely before using it. What do you do?",
+    "options": [
+     [
+      "Click it in the clip area so it plays in the viewer",
+      ""
+     ],
+     [
+      "Drag all 40 clips onto the timeline, then watch them",
+      "This fills your edit with clips you may not want, so check each one before placing it."
+     ],
+     [
+      "Right-click it and choose Export so you can play it",
+      "Export makes a new finished file. It is not how you watch a clip while editing."
+     ]
+    ],
+    "why": "You can check any clip in the viewer before you decide to put it on the timeline.",
+    "video": ""
+   },
+   {
+    "q": "In the DaVinci Resolve introduction, what is the basic path a clip takes during a first edit?",
+    "options": [
+     [
+      "Imported into the media pool, then placed on the timeline and watched",
+      ""
+     ],
+     [
+      "Placed on the timeline first, then imported into the media pool",
+      "A clip has to be imported before it can go onto the timeline."
+     ],
+     [
+      "Watched in the viewer, then exported, then imported once again",
+      "You don't export and re-import, because clips go from the pool straight onto the timeline."
+     ]
+    ],
+    "why": "The video follows clips from import into the media pool, onto the timeline, and into the viewer to check the edit.",
+    "video": "Introduction to Editing · DaVinci Resolve 17"
+   }
+  ],
+  [
+   {
+    "q": "You filmed a friend's chai stall and have three wide shots of the counter. One is sharp and still, one is shaky and one has a scooter passing in front. What do you do?",
+    "options": [
+     [
+      "Use the sharp, still one and leave the other two out",
+      ""
+     ],
+     [
+      "Use all three so the stall gets more screen time",
+      "Repeating the same shot, with weaker versions, makes the video feel long and messy."
+     ],
+     [
+      "Use the shaky one because it feels more real",
+      "Shake that wasn't chosen on purpose just looks like a mistake to viewers."
+     ]
+    ],
+    "why": "When shots repeat, keep the best one. Fewer good clips make a stronger video.",
+    "video": ""
+   },
+   {
+    "q": "In the Adobe video on adding clips, why do you mark In and Out points before adding a clip to the sequence?",
+    "options": [
+     [
+      "So only the part you chose goes into the sequence",
+      ""
+     ],
+     [
+      "So the clip plays faster once it is on the timeline",
+      "In and Out points choose a section of the clip and do not change its speed."
+     ],
+     [
+      "So the clip's colour stays the same after export",
+      "In and Out points have nothing to do with colour."
+     ]
+    ],
+    "why": "In and Out points mark where the useful part starts and ends, so only that part goes into the rough cut.",
+    "video": "Add clips to your sequence"
+   }
+  ],
+  [
+   {
+    "q": "Your clip of a mehndi design starts with three seconds of you adjusting the phone. Then the artist begins drawing. What do you do?",
+    "options": [
+     [
+      "Drag the clip's start in until the drawing begins",
+      ""
+     ],
+     [
+      "Keep it so viewers can see how you set up",
+      "Setup moments are not useful to the viewer and slow down the start."
+     ],
+     [
+      "Delete the whole clip and use a different one",
+      "The clip is fine after the setup, so a small trim saves it."
+     ]
+    ],
+    "why": "Pulling in the start removes the dull setup and keeps the good part of the clip.",
+    "video": ""
+   },
+   {
+    "q": "In Adobe's \"Trim a clip\" video, how is a clip on the timeline made shorter?",
+    "options": [
+     [
+      "By dragging its start or end edge inward",
+      ""
+     ],
+     [
+      "By changing its speed so it plays faster",
+      "Changing the speed alters the motion, but trimming removes unwanted parts."
+     ],
+     [
+      "By cropping the picture to a smaller frame",
+      "Cropping changes what is in the frame, not how long the clip lasts."
+     ]
+    ],
+    "why": "Trimming means pulling in the head (start) or tail (end) of a clip so less of it plays.",
+    "video": "Trim a clip"
+   }
+  ],
+  [
+   {
+    "q": "You are editing a short video for a small sweet shop. You have a wide shot of the shop, a close-up of jalebis frying and a medium shot of the owner serving. Which shot do you show first?",
+    "options": [
+     [
+      "The wide shot of the shop, so viewers know where they are",
+      ""
+     ],
+     [
+      "The jalebi close-up, with the wide shot at the very end",
+      "Without first seeing the place, viewers may not understand the close-up."
+     ],
+     [
+      "Any order works, as long as all three shots are used",
+      "Order changes how easy the video is to follow, so it does matter."
+     ]
+    ],
+    "why": "A wide shot sets the scene. Closer shots then show detail that viewers can now place.",
+    "video": ""
+   },
+   {
+    "q": "In StudioBinder's \"Six Essential Film Editing Techniques\", what should you ask yourself about each cut?",
+    "options": [
+     [
+      "Does it move the story on or guide where the viewer looks?",
+      ""
+     ],
+     [
+      "Does it add a new and eye-catching transition effect?",
+      "Fancy transitions are not what makes a cut work."
+     ],
+     [
+      "Is it about the same length as the shot just before it?",
+      "Equal lengths are not the goal, because each cut should serve the story."
+     ]
+    ],
+    "why": "The video shows that good cuts have a purpose. They push the story forward or direct attention.",
+    "video": "Six Essential Film Editing Techniques"
+   }
+  ],
+  [
+   {
+    "q": "You are editing an interview with a tailor. In the middle of one answer, he coughs and pauses for five seconds, then continues. What do you do?",
+    "options": [
+     [
+      "Cut out the cough and pause and join the two parts",
+      ""
+     ],
+     [
+      "Keep it all in so the interview feels honest",
+      "A cough and a long pause distract viewers and add nothing to his answer."
+     ],
+     [
+      "Turn the music up loud to cover the cough",
+      "Loud music hides the tailor's words too, and the pause is still there."
+     ]
+    ],
+    "why": "Removing the cough and pause keeps his words clear and the video tight.",
+    "video": ""
+   },
+   {
+    "q": "In a family video, your aunt starts a sentence, laughs, says \"wait, let me say that again\", then says it well. What do you keep?",
+    "options": [
+     [
+      "Only the second, clean version of the sentence",
+      ""
+     ],
+     [
+      "Both versions, so nothing she said is lost",
+      "Hearing the line twice confuses viewers and feels like a mistake."
+     ],
+     [
+      "Only the first try, because it felt more natural",
+      "The first try was broken off, so the clean second take works better."
+     ]
+    ],
+    "why": "When someone restarts, keep the take they finished cleanly and cut the false start.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "Your 45-second reel for a flower market feels slow. Each shot opens with a second of nothing happening, and two shots show the same marigold stall. What is the best fix?",
+    "options": [
+     [
+      "Trim the empty second off each shot and keep one marigold shot",
+      ""
+     ],
+     [
+      "Speed every clip up to double speed and keep them all",
+      "Speeding up makes people move strangely and does not remove the dull parts."
+     ],
+     [
+      "Add a fast song and leave the clips just as they are",
+      "Music can lift the mood, but the slow cuts will still feel slow."
+     ]
+    ],
+    "why": "Removing dead time and repeated shots makes the video feel quicker without looking rushed.",
+    "video": ""
+   },
+   {
+    "q": "In Every Frame a Painting's \"How Does an Editor Think and Feel?\", how does an editor decide when to cut?",
+    "options": [
+     [
+      "By feeling when the moment has done its job",
+      ""
+     ],
+     [
+      "By using a fixed number of seconds for every shot",
+      "The video shows timing comes from feel, not a set rule."
+     ],
+     [
+      "By cutting only when the music hits a beat",
+      "Music can help, but the video is about judging the performance and moment."
+     ]
+    ],
+    "why": "The video explains that editors trust their feeling of the moment and the performance to choose the cut point.",
+    "video": "How Does an Editor Think and Feel?"
+   }
+  ]
+ ],
+ "B10": [
+  [
+   {
+    "q": "You are editing a video for a small tailoring shop. You have the owner's interview, a voice-over you recorded later, the hum of sewing machines and a soft song. Where does your voice-over go?",
+    "options": [
+     [
+      "On the voice track, together with the owner's interview.",
+      ""
+     ],
+     [
+      "On the music track, since it was added later in the edit.",
+      "A voice-over is speech, so it belongs with the other speech, not the music."
+     ],
+     [
+      "On the machine hum track, since it was not filmed on the day.",
+      "When it was recorded does not matter. What kind of sound it is decides the track."
+     ]
+    ],
+    "why": "Tracks are grouped by the kind of sound, not by when it was recorded. All speech sits together, so you can set every voice level in one place.",
+    "video": ""
+   },
+   {
+    "q": "In the DaVinci Resolve audio introduction, what part of the sound is worked on first?",
+    "options": [
+     [
+      "Getting the spoken dialogue clean and clear.",
+      ""
+     ],
+     [
+      "Picking and placing the background music.",
+      "Music is added later, after the speech is sorted out."
+     ],
+     [
+      "Adding sound effects to build the mood.",
+      "Effects come after the dialogue, not before it."
+     ]
+    ],
+    "why": "Speech carries the story, so it is cleaned up first. Music and effects are then added around it.",
+    "video": "Introduction to audio · DaVinci Resolve"
+   }
+  ],
+  [
+   {
+    "q": "You interview a bakery owner. Before one answer, she is quiet for about four seconds while she thinks. What do you do in the edit?",
+    "options": [
+     [
+      "Shorten the gap so her answer comes soon after the question.",
+      ""
+     ],
+     [
+      "Leave the full gap because it shows she is a real person.",
+      "A long gap makes the video feel slow and unsure."
+     ],
+     [
+      "Lay music over the gap so it does not feel empty.",
+      "Music hides the gap but the video still drags."
+     ]
+    ],
+    "why": "Taking out dead air keeps the pace up. The speaker sounds confident and the viewer stays interested.",
+    "video": ""
+   },
+   {
+    "q": "A speaker coughs in the middle of a sentence and you cut the cough out. What should you do next?",
+    "options": [
+     [
+      "Play it back and listen that the words around the cut sound natural.",
+      ""
+     ],
+     [
+      "Cut out every tiny pause in the sentence so it plays faster.",
+      "Removing every small pause makes speech sound rushed and robotic."
+     ],
+     [
+      "Raise the volume of the whole clip to cover up the edit.",
+      "Louder sound does not fix a cut that clips a word."
+     ]
+    ],
+    "why": "A careless cut can chop the start or end of a word. Listening back makes sure the speech still flows.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "Your clip of a busy Diwali street ends, and the next clip is a quiet living room. The street noise stops dead at the cut. What do you do?",
+    "options": [
+     [
+      "Bring the street sound down smoothly over about a second as it ends.",
+      ""
+     ],
+     [
+      "Make the whole street clip quieter from start to finish.",
+      "The sound still stops suddenly, just at a lower level."
+     ],
+     [
+      "Move the cut one frame earlier on the street clip.",
+      "The sound still ends with a sharp jump at the new cut."
+     ]
+    ],
+    "why": "A gentle drop in volume at the end hides the sudden stop. The change to the quiet room then feels smooth.",
+    "video": ""
+   },
+   {
+    "q": "In the Adobe transitions video, what problem does the audio transition fix?",
+    "options": [
+     [
+      "A sudden jump in the sound where two clips meet.",
+      ""
+     ],
+     [
+      "A voice that is too quiet next to the music.",
+      "That is a level problem, fixed by changing volumes, not a transition."
+     ],
+     [
+      "A low hiss that runs under the whole clip.",
+      "Hiss needs noise reduction, not a transition between clips."
+     ]
+    ],
+    "why": "An audio crossfade blends the end of one clip into the start of the next. This removes the harsh jump at the edit.",
+    "video": "Elevate your project with cinematic video transitions"
+   }
+  ],
+  [
+   {
+    "q": "You made a phone video for a sari shop with the owner talking over a lively instrumental. Friends say they cannot make out what she says. What do you change?",
+    "options": [
+     [
+      "Lower the music a lot while she talks, then check on a phone speaker.",
+      ""
+     ],
+     [
+      "Push her voice up until the level meter goes into the red.",
+      "Going into the red makes the voice crackle and distort."
+     ],
+     [
+      "Lower the music just a little so it still feels lively.",
+      "A small drop is usually not enough for the words to come through."
+     ]
+    ],
+    "why": "The words matter most here, so the music must sit clearly below the voice. Checking on a phone speaker shows how most viewers will hear it.",
+    "video": ""
+   },
+   {
+    "q": "In \"Mix audio like a pro\", what does the ducking section show?",
+    "options": [
+     [
+      "The music drops in volume on its own whenever someone speaks.",
+      ""
+     ],
+     [
+      "The voice is pushed up to the loudest level it can go.",
+      "Ducking lowers the music. It does not max out the voice."
+     ],
+     [
+      "Background noise is removed from the voice recording.",
+      "That is noise reduction, a different tool."
+     ]
+    ],
+    "why": "Ducking (automatic lowering of one sound when another plays) keeps music from competing with speech. The music returns when the talking stops.",
+    "video": "Mix audio like a pro"
+   },
+   {
+    "q": "In \"Perfect your audio mix\", your music is longer than your video. What does the video show you can do?",
+    "options": [
+     [
+      "Change the music's length so it fits and ends with the video.",
+      ""
+     ],
+     [
+      "Speed up the video so it lasts as long as the music.",
+      "This changes your pictures to suit the song, which looks wrong."
+     ],
+     [
+      "Let the music cut off wherever the video happens to end.",
+      "A song stopping mid-phrase sounds sudden and unfinished."
+     ]
+    ],
+    "why": "The video shows the music being adjusted to the right length. It then finishes neatly with the picture.",
+    "video": "Perfect your audio mix"
+   }
+  ],
+  [
+   {
+    "q": "You film a chai seller at a railway station pouring tea from high up into a glass. What do you do with the sound?",
+    "options": [
+     [
+      "Keep the recorded pour along with the station noise around it.",
+      ""
+     ],
+     [
+      "Mute the clip and play only a cheerful song over it.",
+      "Without the pour sound, the moment feels flat and distant."
+     ],
+     [
+      "Swap in a clean pouring sound from a free library.",
+      "A stock sound will not match the timing or the busy station."
+     ]
+    ],
+    "why": "The splash of tea and the station bustle put the viewer right there. Sound that matches the picture makes the scene believable.",
+    "video": ""
+   },
+   {
+    "q": "You add a voice-over to a video of a vegetable market. What do you do with the market sounds?",
+    "options": [
+     [
+      "Keep them low under the voice and let them rise in the gaps.",
+      ""
+     ],
+     [
+      "Remove them fully so the voice-over is very clear.",
+      "The market then feels empty and lifeless."
+     ],
+     [
+      "Keep them as loud as the voice so it feels busy.",
+      "The voice gets lost and viewers miss the words."
+     ]
+    ],
+    "why": "Soft market sound keeps the scene alive without hiding the words. In the pauses it can come up and fill the space.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "A café owner wants a popular film song in their Instagram ad. They say it is fine because they bought it on a music app. What do you do?",
+    "options": [
+     [
+      "Explain buying only allows listening, and suggest licensed music.",
+      ""
+     ],
+     [
+      "Use the song, since the owner has already paid for it.",
+      "Paying to listen does not give the right to publish it."
+     ],
+     [
+      "Use only thirty seconds, since short clips are allowed.",
+      "There is no safe short length. Any part can get blocked."
+     ]
+    ],
+    "why": "Publishing music needs permission for that use. Licensed library music keeps the ad from being muted or taken down.",
+    "video": ""
+   },
+   {
+    "q": "You find a track on a free music website for a client's video. What should you check before using it?",
+    "options": [
+     [
+      "Read its licence to see if it allows your kind of use.",
+      ""
+     ],
+     [
+      "See that lots of other people have downloaded it.",
+      "Popularity tells you nothing about what you are allowed to do."
+     ],
+     [
+      "Make sure the site's home page uses the word free.",
+      "Free to download can still ban business use or require credit."
+     ]
+    ],
+    "why": "Each track's licence says how you may use it, like whether business use is allowed or credit is needed. Checking it protects you and your client.",
+    "video": ""
+   }
+  ]
+ ],
+ "B11": [
+  [
+   {
+    "q": "You filmed a bride at a family wedding. Her white saree looks like a flat white patch, and you cannot see its pattern. What do you do?",
+    "options": [
+     [
+      "Lower the highlights until the saree pattern shows again.",
+      ""
+     ],
+     [
+      "Raise the saturation so the saree looks richer.",
+      "Saturation changes colour strength, but it cannot bring back pattern in areas that are too bright."
+     ],
+     [
+      "Lift the shadows so the whole frame looks even.",
+      "Lifting shadows makes dark areas lighter, which does nothing for the white saree."
+     ]
+    ],
+    "why": "Highlights are the brightest parts of the picture. Bringing them down can bring back detail in white areas that look blank.",
+    "video": ""
+   },
+   {
+    "q": "In the Adobe video, how is the Auto correction button best used?",
+    "options": [
+     [
+      "As a quick first step that you then adjust by hand.",
+      ""
+     ],
+     [
+      "As a complete fix you can trust without checking.",
+      "Auto can get things close, but you still need to check and tweak the result yourself."
+     ],
+     [
+      "As a way to add a creative style to the clip.",
+      "Auto is for correcting problems. Creative looks are a separate, optional step."
+     ]
+    ],
+    "why": "The video shows Auto first, then the manual controls. Auto gives you a starting point, and your eyes decide the final result.",
+    "video": "Make basic color adjustments"
+   }
+  ],
+  [
+   {
+    "q": "You film an evening puja at home under yellow bulbs. On your phone, the white wall behind the family looks orange. What do you do?",
+    "options": [
+     [
+      "Move the temperature cooler until the wall looks neutral.",
+      ""
+     ],
+     [
+      "Lower the brightness until the orange looks softer.",
+      "Making the shot darker does not remove the orange tint. It only hides detail."
+     ],
+     [
+      "Raise the saturation so the colours look more lively.",
+      "More saturation would make the orange tint even stronger."
+     ]
+    ],
+    "why": "Yellow bulbs give warm light. Cooling the temperature cancels the orange so the wall looks the way it does to your eyes.",
+    "video": ""
+   },
+   {
+    "q": "Why does the StudioBinder video stress keeping white balance the same between shots?",
+    "options": [
+     [
+      "So the colour does not jump when you cut between shots.",
+      ""
+     ],
+     [
+      "So every shot gets a warm, cinematic feel.",
+      "White balance consistency is about matching, not about choosing a warm style."
+     ],
+     [
+      "So you never need to adjust colour in the edit.",
+      "Consistent settings help a lot, but you may still need small fixes in the edit."
+     ]
+    ],
+    "why": "If white balance changes between shots, the same scene looks bluer in one and more orange in the next, which feels wrong to viewers.",
+    "video": "Colour Temperature and White Balance"
+   },
+   {
+    "q": "Based on the StudioBinder video, which light gives a warmer, more orange colour?",
+    "options": [
+     [
+      "A regular household tungsten bulb.",
+      ""
+     ],
+     [
+      "Bright sunlight at midday.",
+      "Midday daylight has a higher colour temperature and looks cooler than a tungsten bulb."
+     ],
+     [
+      "Light from a cloudy, overcast sky.",
+      "Cloudy daylight is even cooler and tends to look bluish, not orange."
+     ]
+    ],
+    "why": "Tungsten bulbs have a low colour temperature, around 3200 Kelvin, so they look warm and orange next to daylight.",
+    "video": "Colour Temperature and White Balance"
+   }
+  ],
+  [
+   {
+    "q": "You filmed a vegetable stall at a street market. The brightness is fine and whites look white, but the red tomatoes look faded. What do you change?",
+    "options": [
+     [
+      "Raise the saturation a little.",
+      ""
+     ],
+     [
+      "Raise the brightness a little.",
+      "Brightness is already right, so raising it would wash the picture out."
+     ],
+     [
+      "Move the temperature warmer.",
+      "Warming would tint the whole shot orange, including the whites that are already correct."
+     ]
+    ],
+    "why": "Saturation controls how strong colours are. A small boost brings back the reds without changing brightness or the white balance.",
+    "video": ""
+   },
+   {
+    "q": "A phone clip of your shop is too dark and also a little orange. Which do you fix first?",
+    "options": [
+     [
+      "Get the light level right, then sort out the colour.",
+      ""
+     ],
+     [
+      "Sort out the colour, then get the light level right.",
+      "Changing brightness later can shift how colours look, so you would end up redoing the colour."
+     ],
+     [
+      "Fix both at once with a strong preset filter.",
+      "A preset guesses for you and often adds a style instead of fixing the real problems."
+     ]
+    ],
+    "why": "Colours are hard to judge in a picture that is too dark. Fixing brightness first gives you a true base for colour work.",
+    "video": ""
+   },
+   {
+    "q": "Like in the Adobe video, you press Auto and the clip looks close, but the colours now feel too loud. Which manual slider do you lower?",
+    "options": [
+     [
+      "Saturation, to calm the colours down.",
+      ""
+     ],
+     [
+      "Contrast, to soften the darks and brights.",
+      "Contrast changes the gap between dark and bright areas, not how strong the colours are."
+     ],
+     [
+      "Temperature, to make the clip look cooler.",
+      "Temperature shifts the whole clip toward blue or orange instead of making colours less strong."
+     ]
+    ],
+    "why": "The video shows manual controls for fine-tuning after Auto. Saturation is the one that sets how strong the colours look.",
+    "video": "Make basic color adjustments"
+   }
+  ],
+  [
+   {
+    "q": "You film a tailor's interview on two phones. In the edit, one phone's shots make his face look bluer than the other's. What do you do?",
+    "options": [
+     [
+      "Warm the bluer clips until his skin matches the other phone.",
+      ""
+     ],
+     [
+      "Leave it, because viewers will not notice the change.",
+      "Viewers do notice when skin colour jumps between cuts, even if they cannot say why."
+     ],
+     [
+      "Put a strong filter on both to hide the difference.",
+      "A filter on top keeps the difference underneath, so the clips still will not match."
+     ]
+    ],
+    "why": "Shots from the same scene should look like one moment. Adjusting the odd clip toward the other keeps the cuts smooth.",
+    "video": ""
+   },
+   {
+    "q": "In the Adobe video, what does the Color Match tool do?",
+    "options": [
+     [
+      "Copies the colour of a reference shot onto another clip.",
+      ""
+     ],
+     [
+      "Sets the camera's white balance while you are filming.",
+      "Color Match works in the edit on clips you have already shot, not on the camera."
+     ],
+     [
+      "Picks the best-looking clip from your whole timeline.",
+      "It does not choose clips. It changes one clip to look like the one you pick as reference."
+     ]
+    ],
+    "why": "You choose a reference shot you like, and Color Match adjusts another clip so the two look consistent.",
+    "video": "Create a professional look using Color Match and Curves"
+   }
+  ],
+  [
+   {
+    "q": "A client wants a golden, warm look for their wedding film. Some of your clips are brighter than others. What do you do first?",
+    "options": [
+     [
+      "Even out the brightness across clips, then add the golden look.",
+      ""
+     ],
+     [
+      "Add the golden look, then fix clips that still stand out.",
+      "A look on top of uneven clips makes the problems harder to see and harder to fix."
+     ],
+     [
+      "Add the golden look only to the darker clips.",
+      "This changes some clips and not others, so they will look even more different."
+     ]
+    ],
+    "why": "Evening out the clips gives you a clean base. A style added on top then looks the same across the whole film.",
+    "video": ""
+   },
+   {
+    "q": "You are editing a promo for a small restaurant. Which change is correcting a problem rather than adding a creative look?",
+    "options": [
+     [
+      "Making the plates white again in one shot that looks blue.",
+      ""
+     ],
+     [
+      "Turning the whole video into black and white.",
+      "This is a creative choice about mood, not a correction of something wrong."
+     ],
+     [
+      "Giving all the food shots a soft, dreamy glow.",
+      "A glow is a style you choose to add, not a fix for a mistake."
+     ]
+    ],
+    "why": "A blue tint on white plates is an error that makes one shot stand out. Removing it is a correction, while black and white or a glow are style choices.",
+    "video": ""
+   }
+  ]
+ ],
+ "B12": [
+  [
+   {
+    "q": "You are making a 1-minute phone video for your cousin's new sweet shop. Which opening title should you use?",
+    "options": [
+     [
+      "\"Mehta Sweets\" in big, plain letters, on screen for about 3 seconds",
+      ""
+     ],
+     [
+      "The full shop address and phone number in curly script for 1 second",
+      "Too many words in a fancy font, and 1 second is not enough time to read them."
+     ],
+     [
+      "\"Mehta Sweets\" with letters flying in one by one for 8 seconds",
+      "The animation slows the video down and pulls attention away from the words."
+     ]
+    ],
+    "why": "A few words in a plain font are easy to read, and about 3 seconds gives people time to read them without getting bored.",
+    "video": ""
+   },
+   {
+    "q": "The video shows how to make a lower third. What is a lower third usually used for?",
+    "options": [
+     [
+      "Showing a speaker's name and role near the bottom while they talk",
+      ""
+     ],
+     [
+      "Placing a big title across the middle of the screen at the start",
+      "That is a main title, not a lower third, which sits low in the frame."
+     ],
+     [
+      "Listing everyone who worked on the video at the very end",
+      "That is the end credits, not a lower third."
+     ]
+    ],
+    "why": "A lower third is a small text label in the bottom part of the frame. It tells viewers who is speaking without covering their face.",
+    "video": "Text and Graphics"
+   }
+  ],
+  [
+   {
+    "q": "You are adding a title to a wedding video. You are not sure if the groom's name is spelled \"Aarav\" or \"Arav\". What do you do?",
+    "options": [
+     [
+      "Check the spelling the family sent you, or message them to confirm",
+      ""
+     ],
+     [
+      "Use the spelling you see most often for that name online",
+      "Many names have more than one spelling, and the family will notice if theirs is wrong."
+     ],
+     [
+      "Type it the way it sounds when the guests say it aloud",
+      "Names often sound the same but are spelled differently, so sound is not a safe guide."
+     ]
+    ],
+    "why": "Only the family knows the right spelling of their own names. A quick message saves an embarrassing mistake in a video they will keep for years.",
+    "video": ""
+   },
+   {
+    "q": "You have finished all the titles for a small bakery's video. What is the best way to check them?",
+    "options": [
+     [
+      "Read each one slowly, word by word, and ask a friend to read them too",
+      ""
+     ],
+     [
+      "Trust the spell check in your editing app to catch any errors",
+      "Spell check often misses names and real words used wrongly, like \"Monday\" for \"Sunday\"."
+     ],
+     [
+      "Skim them quickly, since you typed them yourself just now",
+      "When you know what you meant to type, your eyes skip over your own mistakes."
+     ]
+    ],
+    "why": "Slow reading catches small errors, and a fresh pair of eyes spots what you have stopped seeing.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "Your phone app made automatic captions for an interview with a shopkeeper. He says \"fifteen years\" but the caption shows \"fifty years\". What do you do?",
+    "options": [
+     [
+      "Play the whole clip and correct every line that differs from the audio",
+      ""
+     ],
+     [
+      "Leave it, because most viewers will still get the general idea",
+      "A wrong number changes the meaning, and viewers who read captions will believe it."
+     ],
+     [
+      "Fix that one line and trust the app for the rest of the clip",
+      "If the app got one line wrong, it has likely made other mistakes too."
+     ]
+    ],
+    "why": "Automatic captions often mishear words, especially numbers, names and mixed languages. You need to check every line while listening.",
+    "video": ""
+   },
+   {
+    "q": "In the video, what happens before the captions are created?",
+    "options": [
+     [
+      "The speech is turned into written text through transcription",
+      ""
+     ],
+     [
+      "The caption font, colour and size are chosen first",
+      "In the video, styling comes after the captions are made, not before."
+     ],
+     [
+      "The editor types every caption by hand from memory",
+      "The video shows the tool making a transcript from the audio, not typing from memory."
+     ]
+    ],
+    "why": "Transcription means changing spoken words into written text. The captions are built from that text, so it comes first.",
+    "video": "Improve video accessibility using captioning tools"
+   }
+  ],
+  [
+   {
+    "q": "A boutique owner asks you for an Instagram Reel from your 3-minute edit. How should you export it?",
+    "options": [
+     [
+      "Make it tall (9:16) and trim it to under 90 seconds",
+      ""
+     ],
+     [
+      "Make it tall (9:16) and export the full 3 minutes",
+      "The shape is right, but 3 minutes is too long for Reels, where people scroll fast."
+     ],
+     [
+      "Keep it wide (16:9) and trim it to under 90 seconds",
+      "The length is right, but a wide video looks small with empty space on an upright phone."
+     ]
+    ],
+    "why": "Reels are watched on phones held upright, and people scroll fast. A tall, short video fits the screen and holds attention.",
+    "video": ""
+   },
+   {
+    "q": "The video shows Quick Export. What should you set before you press export?",
+    "options": [
+     [
+      "The file name, the folder it saves to, and a preset for the platform",
+      ""
+     ],
+     [
+      "Nothing, just press export and keep the name and folder it picks",
+      "You may lose the file or not know which version it is later."
+     ],
+     [
+      "Only the highest quality preset, whatever the platform is",
+      "The best preset depends on where the video will be shown, not just on quality."
+     ]
+    ],
+    "why": "A preset is a ready-made group of export settings. A clear name, a known folder and the right preset mean you can find the file and it suits where it will play.",
+    "video": "Share your videos fast using Quick Export"
+   }
+  ],
+  [
+   {
+    "q": "You exported a video of a family function. The preview in the editor looked fine. You are about to send it to your aunt on WhatsApp. What should you do first?",
+    "options": [
+     [
+      "Play the saved file from start to end, with sound on, before sending",
+      ""
+     ],
+     [
+      "Send it now, since the editor preview already looked fine",
+      "Problems like missing sound or broken titles can show up only in the saved file."
+     ],
+     [
+      "Watch the first 10 seconds of the saved file, then send it",
+      "Errors can appear anywhere, including near the end, so a short check is not enough."
+     ]
+    ],
+    "why": "The file you send is what your aunt will see. Checking all of it, with sound, is the only way to be sure it is right.",
+    "video": ""
+   },
+   {
+    "q": "While watching your exported file, you notice the captions disappear in the last minute. What do you do?",
+    "options": [
+     [
+      "Fix it in the editor, export again, and watch the new file too",
+      ""
+     ],
+     [
+      "Send it anyway and tell them the end has no captions",
+      "Sending a known mistake makes the work look unfinished."
+     ],
+     [
+      "Fix it in the editor, export again, and send without watching",
+      "A new export can bring new problems, so the new file needs checking too."
+     ]
+    ],
+    "why": "Each export makes a new file. Only by watching the new one can you be sure the fix worked and nothing else broke.",
+    "video": ""
+   }
+  ]
+ ],
+ "B13": [
+  [
+   {
+    "q": "You copied a creator's wedding film shot by shot. Your version still feels flat next to theirs. What should you check next?",
+    "options": [
+     [
+      "The sounds they used, like vows, laughter and music, and where each one comes in",
+      ""
+     ],
+     [
+      "Whether they used a more expensive camera and lens than yours",
+      "Better gear rarely explains why a film feels alive; the choices made in the edit matter more."
+     ],
+     [
+      "Whether they added stronger colour filters than you did in the edit",
+      "Colour can help the look, but it seldom fixes a film that feels flat."
+     ]
+    ],
+    "why": "Sound often carries the feeling of a video, so studying what you hear and when it appears shows you a big part of the craft.",
+    "video": ""
+   },
+   {
+    "q": "In the bride and groom prep video, what does the filmmaker pay close attention to while the couple gets ready?",
+    "options": [
+     [
+      "The people, the small details around them and the light already in the room",
+      ""
+     ],
+     [
+      "Setting up big extra lights so every corner of the room is bright",
+      "The walkthrough works with the light that is already there, not heavy lighting setups."
+     ],
+     [
+      "Getting the couple to repeat actions until each shot looks perfect",
+      "Prep filming is about capturing real moments and details, not directing retakes."
+     ]
+    ],
+    "why": "Good prep footage mixes people and details, and it works with the natural light so the room still feels real.",
+    "video": "How to Film Bride and Groom Prep — Wedding BTS Part 2"
+   }
+  ],
+  [
+   {
+    "q": "A sweet shop owner asks you for a one-minute video. He wants to show his history, every sweet, his staff, his prices and his new branch. What do you suggest?",
+    "options": [
+     [
+      "Pick one thing viewers should remember, like \"fresh sweets made by hand daily\", and build around it",
+      ""
+     ],
+     [
+      "Fit everything in by using many quick shots so nothing is left out",
+      "Too many ideas in one minute leaves the viewer remembering none of them."
+     ],
+     [
+      "Skip planning a point and just film the prettiest sweets in nice light",
+      "Nice shots without a reason feel empty and do not sell the shop."
+     ]
+    ],
+    "why": "A short video works best when a viewer can sum it up in one sentence, and every shot supports that sentence.",
+    "video": ""
+   },
+   {
+    "q": "You filmed your cousin's mehendi. Before editing, a friend asks what the video is about. Which answer shows you are ready to edit?",
+    "options": [
+     [
+      "\"It shows how the whole family came together and laughed with the bride\"",
+      ""
+     ],
+     [
+      "\"It has the mehendi, the dancing, the food, the gifts and the guests\"",
+      "That is a list of things filmed, not one idea the edit can follow."
+     ],
+     [
+      "\"I'm not sure yet, I'll see what comes out when I edit it\"",
+      "Without a clear point, it is hard to choose which clips to keep or cut."
+     ]
+    ],
+    "why": "One clear feeling in a sentence tells you which clips belong and which can go.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "You are filming a friend's small shop opening on your phone. You have only twenty minutes. What do you film first?",
+    "options": [
+     [
+      "A wide view of the shop, the ribbon cutting up close and the owner's speech heard clearly",
+      ""
+     ],
+     [
+      "Slow-motion shots of guests walking in, the flowers and the sweets table",
+      "Those are nice extras, but they cannot tell the story without the key moments."
+     ],
+     [
+      "Rooftop angles, shots through the window and a timelapse of the street",
+      "Interesting angles can wait until the shots the video depends on are safe."
+     ]
+    ],
+    "why": "The shots you cannot do without come first, and extras only if time is left.",
+    "video": ""
+   },
+   {
+    "q": "In the video on filming a ceremony alone, when should cameras and audio be set in place?",
+    "options": [
+     [
+      "Before the ceremony begins, so the key moments are covered without rushing",
+      ""
+     ],
+     [
+      "Once the couple arrives, so you can see where they will stand",
+      "By then the ceremony is starting and you may miss the first moments."
+     ],
+     [
+      "During quiet parts of the ceremony, moving gear when no one is looking",
+      "Moving gear mid-ceremony risks missing moments and distracting guests."
+     ]
+    ],
+    "why": "Working solo, you cannot be everywhere, so placing cameras and recorders early makes sure the must-have moments are captured.",
+    "video": "How to Film a Wedding Ceremony Solo"
+   }
+  ]
+ ],
+ "B14": [
+  [
+   {
+    "q": "A bakery in your area asks for a 60-second video for Instagram. You have the brief. What should you do before you pick up the phone to shoot?",
+    "options": [
+     [
+      "Decide the one thing viewers must remember, then sketch a start, middle and end.",
+      ""
+     ],
+     [
+      "Go to the bakery and film everything, then find the story while editing.",
+      "Filming without a clear aim wastes time and often misses the shots you need most."
+     ],
+     [
+      "Choose the music and the colour style first, then think about the shots.",
+      "Music and colour help later, but they cannot tell you what to film."
+     ]
+    ],
+    "why": "A clear main message and a simple shape tell you which shots you need. Everything else gets easier after that.",
+    "video": ""
+   },
+   {
+    "q": "You make a 1-minute video about a local tailor. Using three-act structure, which moment belongs in the middle part?",
+    "options": [
+     [
+      "The tailor working through a tricky order, showing skill and effort.",
+      ""
+     ],
+     [
+      "The shop sign and the tailor saying hello to the camera.",
+      "This sets the scene, so it belongs at the beginning."
+     ],
+     [
+      "A happy customer trying on the finished outfit in the mirror.",
+      "This is the payoff, so it belongs at the ending."
+     ]
+    ],
+    "why": "The middle part develops the story. It shows the work, the problem or the change that leads to the ending.",
+    "video": "Three Act Structure Explained"
+   }
+  ],
+  [
+   {
+    "q": "You are filming a small shop. The owner says they must close in 20 minutes, and you still have six shots on your list. What do you do?",
+    "options": [
+     [
+      "Film the shots you marked as essential first, then add extras if time is left.",
+      ""
+     ],
+     [
+      "Film the shots in the order they appear on your list until time runs out.",
+      "List order may leave your most important shots unfilmed."
+     ],
+     [
+      "Film quick, shaky versions of all six so nothing is skipped.",
+      "Rushed shots of everything can leave you with no usable footage at all."
+     ]
+    ],
+    "why": "Knowing which shots carry the video lets you protect them when time is short. Extras are a bonus.",
+    "video": ""
+   },
+   {
+    "q": "You are writing a shot list for your new project. What should each line on the list tell you?",
+    "options": [
+     [
+      "What the shot shows, how wide or close it is, and the camera angle.",
+      ""
+     ],
+     [
+      "Only the name of the place where you will be filming that day.",
+      "A location alone does not tell you which shots to get there."
+     ],
+     [
+      "The music track and the transition you will use in the edit.",
+      "These are edit choices, not a guide for what to film."
+     ]
+    ],
+    "why": "A good shot list describes each shot clearly, so on the day you know exactly what to capture and can tick it off.",
+    "video": "Intro to Shot Listing"
+   },
+   {
+    "q": "You record a vendor speaking at a busy vegetable market on your phone. How do you get clear sound?",
+    "options": [
+     [
+      "Move the phone close to the speaker, away from the noise, and listen back.",
+      ""
+     ],
+     [
+      "Stand back for a wide shot and raise the voice volume later in the edit.",
+      "Raising volume later also raises the market noise, so the voice stays unclear."
+     ],
+     [
+      "Ask the vendor to speak louder and trust the phone's mic from where you are.",
+      "A far-away mic still picks up mostly crowd noise, even if the person speaks up."
+     ]
+    ],
+    "why": "Distance is the biggest cause of bad phone sound. Getting the mic close and checking a test clip saves the recording.",
+    "video": "An Activist's Guide to Mobile Video — Sound Recording"
+   }
+  ],
+  [
+   {
+    "q": "You watch your edit and note three problems: the voice cuts out for 5 seconds, one title is a bit small, and one shot is half a second long. What do you fix first?",
+    "options": [
+     [
+      "The voice gap, because missing speech hurts every viewer.",
+      ""
+     ],
+     [
+      "The small title, because viewers see titles first.",
+      "A small title is a minor issue next to missing speech."
+     ],
+     [
+      "The short shot, because it is the quickest fix.",
+      "Doing the easy fix first can leave the serious problem until you run out of time."
+     ]
+    ],
+    "why": "Missing sound breaks the video for everyone who watches. Fix the problem that hurts the most, then move to smaller ones.",
+    "video": ""
+   },
+   {
+    "q": "Your friend watches your video about a weaver and asks, \"Who is this man?\" What is the best response?",
+    "options": [
+     [
+      "Add a name title or a short line in the video that says who he is.",
+      ""
+     ],
+     [
+      "Explain it to your friend and leave the video just as it is.",
+      "Other viewers will not have you there to explain it."
+     ],
+     [
+      "Ask a second friend, and only change it if they are confused too.",
+      "One honest confused viewer is already a clear sign something is missing."
+     ]
+    ],
+    "why": "Someone seeing the video fresh shows you gaps you cannot notice. If they are confused, others will be too.",
+    "video": ""
+   },
+   {
+    "q": "In your rough cut you want to put a new clip between two clips without losing any of either. Which kind of edit do you use?",
+    "options": [
+     [
+      "An insert edit, which pushes the later clips along to make room.",
+      ""
+     ],
+     [
+      "An overwrite edit, which places the new clip at that exact point.",
+      "Overwrite replaces whatever is already there, so you would lose part of a clip."
+     ],
+     [
+      "A trim edit, which shortens both clips to make a gap for it.",
+      "Trimming cuts off parts of both clips, which is what you wanted to avoid."
+     ]
+    ],
+    "why": "Insert adds the clip and moves everything after it, so nothing is covered up. Overwrite puts the clip on top of what is there.",
+    "video": "Add clips to your sequence"
+   }
+  ],
+  [
+   {
+    "q": "You have finished a birthday video for a family friend and exported it. What do you do before you send it on WhatsApp?",
+    "options": [
+     [
+      "Play the exported file from start to end with the sound turned on.",
+      ""
+     ],
+     [
+      "Play it once more inside the editing app, since that looked fine.",
+      "The exported file can have problems that the editing timeline does not show."
+     ],
+     [
+      "Send it and ask them to tell you if anything looks wrong.",
+      "Letting the person you made it for find mistakes makes your work look careless."
+     ]
+    ],
+    "why": "The exported file is what people will actually see. Watching it fully catches missing sound, cut-off endings and spelling errors.",
+    "video": ""
+   },
+   {
+    "q": "When you use Quick Export, why should you set the file name and where the file is saved?",
+    "options": [
+     [
+      "So you can find the right file later and not mix it up with old versions.",
+      ""
+     ],
+     [
+      "Because a clear file name makes the picture quality higher.",
+      "The name does not change quality; the preset controls that."
+     ],
+     [
+      "Because choosing a folder makes the export finish much faster.",
+      "The save location does not really change how fast it exports."
+     ]
+    ],
+    "why": "A clear name and a known folder stop you from sending the wrong or older version by mistake.",
+    "video": "Share your videos fast using Quick Export"
+   }
+  ]
+ ]
+}
