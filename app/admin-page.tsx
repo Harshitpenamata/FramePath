@@ -1,6 +1,7 @@
 'use client';
 import React,{useEffect,useState} from 'react';
 import {Panel,PageHead,Badge} from './ui';
+import {Button} from '@/components/ui/button';
 import './videography/studio.css';
 
 // /admin: AI spend and queue, and lesson videos that need replacing. The server only answers admins (ADMIN_EMAILS).
@@ -17,6 +18,7 @@ export function AdminHealth(){
    {d.job.stale?<p><strong>{d.job.lastRun?'The hourly job hasn’t run since '+when(d.job.lastRun.at)+'.':'The hourly job has never run.'}</strong> Lesson videos aren’t being checked, and reviews and comments waiting in the queue won’t run until it does. If it has never run, the schedule isn’t registered: open Workers &amp; Pages in the Cloudflare dashboard once, then redeploy.</p>
     :<p><Badge tone="green">Running</Badge> Last run {when(d.job.lastRun.at)}: {d.job.lastRun.videos.checked} videos checked, {d.job.lastRun.reviews} queued reviews run, {d.job.lastRun.comments} comments checked{d.job.lastRun.aiPaused?' (AI was paused)':''}.</p>}
   </Panel>
+  <FlaggedReviews/>
   <Panel><h2>AI</h2>
    <p>{d.ai.ok?<Badge tone="green">Running</Badge>:<Badge>{d.ai.reason==='credits'?'Paused: provider has no credit':'Paused: daily cap reached'}</Badge>} Today ${d.ai.spent.toFixed(2)} of ${d.ai.budget} cap ({pct}%){pct>=80&&' · close to the cap'}</p>
    <p>{d.queuedReviews} reviews and {d.pendingComments} comments waiting in the queue.</p>
@@ -29,3 +31,36 @@ export function AdminHealth(){
   </Panel>
  </>;
 }
+
+// Reviews learners flagged as wrong: read the review next to the work, then let it stand or give it back.
+function FlaggedReviews(){
+ const [flags,setFlags]=useState<any[]|null>(null),[notes,setNotes]=useState<Record<string,string>>({}),[busy,setBusy]=useState('');
+ const load=()=>fetch('/api/admin/flags').then(r=>r.json()).then((d:any)=>setFlags(d.flags||[])).catch(()=>setFlags([]));
+ useEffect(()=>{load()},[]);
+ async function decide(id:string,decision:string){setBusy(id);try{await fetch('/api/admin/flags',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,decision,note:notes[id]||''})});await load()}finally{setBusy('')}}
+ if(!flags)return null;
+ const open=flags.filter(f=>f.status==='open'),done=flags.filter(f=>f.status!=='open');
+ return <Panel className={open.length?'admin-alert':''}><h2>Flagged reviews ({open.length} open)</h2>
+  {!open.length&&<p className="small">No reviews waiting to be checked.</p>}
+  {open.map(f=><article key={f.id} className="admin-flag">
+   <p><strong>{f.email}</strong> · {f.lessonKey} · {new Date(f.createdAt).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'})}</p>
+   <p><Badge>{f.reason}</Badge> {f.details}</p>
+   <details open><summary>The AI review{f.review?.total!=null?' · '+Math.round(f.review.total)+'/100':''}</summary>
+    <p>{f.review?.summary}</p>
+    <ul>{(f.review?.criteria||[]).map((c:any,i:number)=><li key={i}><strong>{c.label}:</strong> {c.rating??'not rated'}/4 · {c.feedback}</li>)}</ul>
+    <p className="small">What it couldn’t check: {f.review?.evidenceLimit}</p>
+    {f.watched.length>0&&<p className="small">Video watched: {f.watched.map((w:any)=>w.video+(w.ok?' ('+w.duration+')':' (could not be watched)')).join('; ')}</p>}
+   </details>
+   <details open><summary>The learner’s work</summary>
+    {f.work?<>{f.work.answer&&<p className="prewrap"><strong>Answer:</strong> {f.work.answer}</p>}{f.work.notes&&<p className="prewrap"><strong>Notes:</strong> {f.work.notes}</p>}
+     {f.work.url&&<p><a className="text-link" href={f.work.url} target="_blank" rel="noreferrer">{f.work.url}</a></p>}
+     {f.work.files.map((x:any)=><p key={x.id}><a className="text-link" href={'/api/file/'+x.id} target="_blank" rel="noreferrer">{x.name}</a> <span className="small">({x.type})</span></p>)}</>
+     :<p className="small">The hand-in was removed.</p>}
+   </details>
+   <textarea rows={2} maxLength={600} placeholder="Note to the learner (optional)" value={notes[f.id]||''} onChange={e=>setNotes({...notes,[f.id]:e.target.value})}/>
+   <div className="button-row"><Button size="sm" variant="outline" disabled={busy===f.id} onClick={()=>decide(f.id,'fine')}>Review stands</Button><Button size="sm" disabled={busy===f.id} onClick={()=>decide(f.id,'refunded')}>Give review back</Button></div>
+  </article>)}
+  {done.length>0&&<details><summary>Resolved ({done.length})</summary><ul className="admin-list">{done.map(f=><li key={f.id}>{f.email} · {f.lessonKey} · {f.reason} · <strong>{f.status==='refunded'?'given back':'stands'}</strong>{f.note?' · '+f.note:''}</li>)}</ul></details>}
+ </Panel>;
+}
+

@@ -27,6 +27,8 @@ import {scoreAttempt,moduleInfo,sequenceFor,assignmentRubric} from '../../learni
 import {identity,readState,saveState,usage,checkOrigin,safeText,safeUrl,mentorFor,requireLesson,activeExplore,craftEnrolled,db,errorResponse} from '../../service';
 export const dynamic='force-dynamic';
 export async function GET(req:Request){try{const user=await identity();await adoptReadyOnboarding(req);let data=await readState(user.userId);
+ // The sign-in email is kept on the learner's row so admins can find them (only written when it changes).
+ await db().prepare('UPDATE learners SET email=? WHERE user_id=? AND (email IS NULL OR email<>?)').bind(user.email||null,user.userId,user.email||'').run().catch(()=>{});
  // Accounts from before plans: give the plan an id and a plan list, once.
  if(!Array.isArray(data.state.plans)){setupPlans(data.state);data={state:data.state,revision:await saveState(user.userId,data.state,data.revision)}}
  return Response.json({...data,user:{name:user.fullName||'Learner',email:user.email},usage:await usage(user.userId,data.state)},{headers:{'Cache-Control':'no-store'}})}catch(e){return errorResponse(e)}}
