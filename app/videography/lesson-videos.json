@@ -21,6 +21,17 @@
    "replaces": ""
   }
  ],
+ "A01-5": [
+  {
+   "youtubeId": "LSoNlG9JpRg",
+   "title": "The One Storytelling Shift That Will Make Your Documentary Unforgettable",
+   "creator": "Early Light Media and Darren Durlach",
+   "start": 0,
+   "focus": "Notice how one clear \"story within a story\" decides which scenes stay and which you can leave out.",
+   "style": "",
+   "replaces": ""
+  }
+ ],
  "A01-6": [
   {
    "youtubeId": "Jw_ysaoVlt4",
@@ -50,6 +61,17 @@
    "creator": "DecodingYT",
    "start": 0,
    "focus": "Watch the section on finding answers and verifying sources, and note how you can record each claim with its source.",
+   "style": "",
+   "replaces": ""
+  }
+ ],
+ "A02-3": [
+  {
+   "youtubeId": "RmNIC-dvc_k",
+   "title": "How to Get Anyone to Trust You with Their Story",
+   "creator": "Amine Hamouda",
+   "start": 0,
+   "focus": "Notice how he earns access by being open about what he will film and how it will be used.",
    "style": "",
    "replaces": ""
   }
@@ -472,6 +494,17 @@
    "replaces": ""
   }
  ],
+ "A12-4": [
+  {
+   "youtubeId": "oSrbchLYuVQ",
+   "title": "An Overview of the Quality Control Process for Films & TV Shows",
+   "creator": "Phil Svitek",
+   "start": 0,
+   "focus": "Notice what a quality-control check looks for in the final file, picture, sound, captions and specs, before you deliver.",
+   "style": "",
+   "replaces": ""
+  }
+ ],
  "A13-1": [
   {
    "youtubeId": "4oA-NIaz2GM",
@@ -514,6 +547,17 @@
    "replaces": ""
   }
  ],
+ "A13-4": [
+  {
+   "youtubeId": "VpIh6I4jWPk",
+   "title": "How To Handle Video Revisions For Clients",
+   "creator": "Nick Metzger",
+   "start": 0,
+   "focus": "Notice how he agrees the number of revision rounds up front and turns client notes into clear, numbered changes.",
+   "style": "",
+   "replaces": ""
+  }
+ ],
  "A14-1": [
   {
    "youtubeId": "5kgT0CP26Os",
@@ -527,9 +571,9 @@
  ],
  "B02-2": [
   {
-   "youtubeId": "hcwVm09nBZ4",
-   "title": "How to Find Your Target Audience on YouTube [3 TIPS]",
-   "creator": "Jenn Jager",
+   "url": "https://academy.shootsta.com/discover-your-target-audience",
+   "title": "Discover Your Target Audience",
+   "creator": "Shootsta Academy",
    "start": 0,
    "focus": "Notice how knowing who your viewers are and where they watch shapes what you make, so you plan for their screen and their time.",
    "style": "",
@@ -822,6 +866,17 @@
    "replaces": ""
   }
  ],
+ "I02-3": [
+  {
+   "youtubeId": "FC_9R4xyug4",
+   "title": "How to Write a Creative Brief",
+   "creator": "Jotform",
+   "start": 0,
+   "focus": "Notice how settling the goal and the audience first tells you what to include in the brief and what to leave out.",
+   "style": "",
+   "replaces": ""
+  }
+ ],
  "I02-5": [
   {
    "youtubeId": "oacSSamqP6s",
@@ -862,6 +917,17 @@
    "creator": "CrashCourse",
    "start": 0,
    "focus": "Notice how each crew role reports to someone and has a clear job, which keeps a busy set calm.",
+   "style": "",
+   "replaces": ""
+  }
+ ],
+ "I03-6": [
+  {
+   "youtubeId": "E5iSkxcygQw",
+   "title": "So You Wanna Make a Movie: Backup Plan",
+   "creator": "TheMelHurry",
+   "start": 0,
+   "focus": "Notice the backups she lines up for actors, locations and crew, and how they keep a low-budget shoot going.",
    "style": "",
    "replaces": ""
   }
@@ -1038,6 +1104,17 @@
    "creator": "Pixel & Bracket",
    "start": 0,
    "focus": "Notice how a consistent order of details in each name makes files easy to sort and find later.",
+   "style": "",
+   "replaces": ""
+  }
+ ],
+ "I08-6": [
+  {
+   "youtubeId": "KXqDHC7X430",
+   "title": "Saving Sequence versions in Adobe Premiere Pro",
+   "creator": "VideoRevealed",
+   "start": 0,
+   "focus": "Notice how he saves a new copy of the sequence and the project before big changes, instead of trusting auto-save.",
    "style": "",
    "replaces": ""
   }

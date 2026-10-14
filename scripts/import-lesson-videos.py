@@ -38,13 +38,34 @@ def embeddable(video_id):
     except Exception as e:
         return False, str(e)
 
+def frameable(url):
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=20) as r:
+            xfo = (r.headers.get('X-Frame-Options') or '').lower()
+            fa = re.search(r'frame-ancestors[^;]*', r.headers.get('Content-Security-Policy') or '')
+            if 'deny' in xfo or 'sameorigin' in xfo or (fa and '*' not in fa.group(0)):
+                return False, 'refuses to be shown inside another site'
+            return True, {}
+    except urllib.error.HTTPError as e:
+        return False, 'HTTP %d' % e.code
+    except Exception as e:
+        return False, str(e)
+
 out, problems = {}, []
 for row in read_rows(src):
     lesson, url = pick(row, 'Lesson ID'), pick(row, 'YouTube URL')
     if not url: continue
     m = re.search(r'(?:v=|youtu\.be/|embed/|shorts/)([\w-]{11})', url)
-    if not re.fullmatch(r'[BIA]\d{2}-\d{1,2}', lesson) or not m:
-        problems.append(f'{lesson}: not a lesson ID or YouTube link ({url})'); continue
+    if not re.fullmatch(r'[BIA]\d{2}-\d{1,2}', lesson):
+        problems.append(f'{lesson}: not a lesson ID ({url})'); continue
+    if not m:
+        # A page on another site: it must load and allow FramePath to show it in its window.
+        ok, info = frameable(url)
+        if not ok:
+            problems.append(f'{lesson}: {url} {info}'); continue
+        out.setdefault(lesson, []).append({'url': url, 'title': pick(row, 'Video title'), 'creator': pick(row, 'Creator'), 'start': 0,
+            'focus': pick(row, 'Watch for'), 'style': pick(row, 'Style'), 'replaces': pick(row, 'Replaces')})
+        continue
     ok, info = embeddable(m.group(1))
     if not ok:
         problems.append(f'{lesson}: {url} {info}'); continue

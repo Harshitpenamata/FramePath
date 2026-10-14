@@ -48,7 +48,8 @@ export const V={
  cameraLimits:v('kVxh-R6XE04','How To Test Your Camera’s Limitations','KINETEK','Test highlights, shadows and noise before the shoot depends on them.'),
  preShoot:v('qnz7oR0C2CI','The Cinematographer’s Pre-Shoot Blueprint: Gear & Workflow','Marcus Ferguson','Prepare and check every piece of the capture chain the night before.'),
  docStepByStep:v('KfirJkk7dnI','How to Make a Documentary Film: A Step-By-Step Guide','Camp Films','Research, access and a test change the story before principal filming.'),
- resolveAudio:vm('659185216','Introduction to audio · DaVinci Resolve','Clean dialogue first, then add music and effects.'),
+ // The Blackmagic Vimeo lesson was taken down (checked 14 Oct 2026); this free YouTube lesson covers the same ground.
+ resolveAudio:v('9zeObEITN8Q','DaVinci Resolve Fairlight Tutorial: Audio for Beginners','Alli and Will','Clean the dialogue first, then add music and effects on the Fairlight page.'),
  resolveSoundDesign:vm('659185384','Introduction to sound design · DaVinci Resolve','Build ambience and effects that support the picture.'),
  resolveMixing:vm('659185402','Introduction to mixing · DaVinci Resolve','Balance levels for the destination, then measure.'),
  resolveColour:vm('662444535','Introduction to colour · DaVinci Resolve','Correct exposure and balance before any creative look.'),

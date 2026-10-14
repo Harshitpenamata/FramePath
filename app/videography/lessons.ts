@@ -297,12 +297,12 @@ export const lessonVideoRefs:Record<string,string[][]>={
 };
 // Videos added from the filled-in lesson video sheet (scripts/import-lesson-videos.py), keyed '<module>-<lesson>'.
 // Each is added to its lesson, or replaces the video in "replaces"; "style" limits it to one style.
-type ExtraVideo={youtubeId:string;title:string;creator:string;start:number;focus:string;style:string;replaces:string};
+type ExtraVideo={youtubeId?:string;url?:string;title:string;creator:string;start:number;focus:string;style:string;replaces:string};
 const extraVideos=lessonExtras as Record<string,ExtraVideo[]>;
 export function lessonVideos(moduleId:string,index:number,pathway:Pathway):ModuleVideo[]{
  const extra=(extraVideos[moduleId+'-'+(index+1)]||[]).filter(x=>!x.style||x.style===pathway);
  const replaced=new Set(extra.map(x=>x.replaces).filter(Boolean));
- const added=extra.map((x):ModuleVideo=>({youtubeId:x.youtubeId,title:x.title,creator:x.creator,start:x.start||undefined,focus:x.focus||'What this lesson’s idea looks like in practice.'}));
+ const added=extra.map((x):ModuleVideo=>({...(x.youtubeId?{youtubeId:x.youtubeId}:{url:x.url}),title:x.title,creator:x.creator,start:x.start||undefined,focus:x.focus||'What this lesson’s idea looks like in practice.'}));
  // Paid courses are left out: every lesson video is free to watch.
  return [...baseVideos(moduleId,index,pathway).filter(v=>!v.paid&&(!v.url||!replaced.has(v.url))),...added];
 }
