@@ -60,7 +60,11 @@ case 'visual_session_complete':{
  }
  break;
 }
-case 'programme_save':{if(s.plans.length>=maxPlans)throw new Error('You have '+maxPlans+' plans already. Delete one to make another.');
+// Age: 'adult' (18 or older) or 'guardian' (13 to 17, with a parent or guardian's agreement). Asked once, before
+// the first plan. Under 13s can't use FramePath. Learners under 18 can share portfolios by link, not publicly.
+case 'consent_save':{if(!['adult','guardian'].includes(b.age))throw new Error('Choose your age group.');s.consent={age:b.age,at:now};break;}
+case 'programme_save':{if(['adult','guardian'].includes(b.programme?.age))s.consent={age:b.programme.age,at:now};if(!s.consent)throw new Error('Tell us your age group first.');
+ if(s.plans.length>=maxPlans)throw new Error('You have '+maxPlans+' plans already. Delete one to make another.');
  const plan={...buildProgramme(b.programme,null),id:id()};s.plans.push(plan);openPlan(s,plan);break;}
 case 'plan_open':{const plan=s.plans.find((x:any)=>x.id===b.id);if(!plan)throw new Error('That plan no longer exists.');openPlan(s,plan);break;}
 case 'programme_update':{if(!s.programme)throw new Error('Make your plan first.');const u=b.update||{};
@@ -146,7 +150,7 @@ case 'cancel_call':s.bookings=s.bookings.filter((x:any)=>x.id!==b.id);break;
 case 'switch_request':{if(s.craft?.status!=='active')throw new Error('Activate Craft before requesting a mentor change.');const m=mentorFor(b.mentorId);if(m.id===s.craft.mentorId)throw new Error('Choose a different mentor.');if(!m.slots.includes(b.slot))throw new Error('Choose a call preference.');s.craft.switchRequest={mentorId:m.id,slot:b.slot,at:now};break;}
 case 'switch_accept':{if(!s.craft?.switchRequest)throw new Error('No mentor change is pending.');s.craft.mentorId=s.craft.switchRequest.mentorId;s.craft.slot=s.craft.switchRequest.slot;s.craft.switchRequest=null;break;}
 case 'portfolio_save':{s.portfolio.title=safeText(b.title,100,1);s.portfolio.bio=safeText(b.bio,1500);const ids=Array.isArray(b.ids)?b.ids:[];if(ids.length>9||new Set(ids).size!==ids.length||ids.some((x:string)=>!s.submissions.find((v:any)=>v.id===x)))throw new Error('Select up to nine of your submissions.');s.portfolio.ids=ids;portfolioChange=republish(s);break;}
-case 'portfolio_publish':{if(b.consent!==true)throw new Error('Confirm that the selected work may be shared publicly.');if(!s.portfolio.ids.length)throw new Error('Select at least one portfolio piece first.');s.portfolio.visibility=b.visibility==='public'?'public':'unlisted';s.portfolio.token=s.portfolio.token||id();portfolioChange={token:s.portfolio.token,data:publicPortfolio(s),visibility:s.portfolio.visibility};break;}
+case 'portfolio_publish':{if(b.consent!==true)throw new Error('Confirm that the selected work may be shared publicly.');if(b.visibility==='public'&&s.consent?.age!=='adult')throw new Error(s.consent?'Public portfolios are for learners 18 and over. You can still share it by link (Unlisted).':'Tell us your age group first.');if(!s.portfolio.ids.length)throw new Error('Select at least one portfolio piece first.');s.portfolio.visibility=b.visibility==='public'?'public':'unlisted';s.portfolio.token=s.portfolio.token||id();portfolioChange={token:s.portfolio.token,data:publicPortfolio(s),visibility:s.portfolio.visibility};break;}
 // Deletes the learner's plan. keepWork: only the plan goes (level, dates, styles); hand-ins and progress stay, and a
 // new plan at the same level picks them up. Otherwise everything from the plan goes too: Videography progress,
 // lesson progress and hand-ins (and their portfolio pieces), and the older "previous learning" plan.
