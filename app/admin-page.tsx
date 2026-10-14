@@ -19,11 +19,14 @@ export function AdminHealth(){
     :<p><Badge tone="green">Running</Badge> Last run {when(d.job.lastRun.at)}: {d.job.lastRun.videos.checked} videos checked, {d.job.lastRun.reviews} queued reviews run, {d.job.lastRun.comments} comments checked{d.job.lastRun.aiPaused?' (AI was paused)':''}.</p>}
   </Panel>
   <FlaggedReviews/>
+  <ReportedComments/>
+  <FindLearner/>
   <Panel><h2>AI</h2>
    <p>{d.ai.ok?<Badge tone="green">Running</Badge>:<Badge>{d.ai.reason==='credits'?'Paused: provider has no credit':'Paused: daily cap reached'}</Badge>} Today ${d.ai.spent.toFixed(2)} of ${d.ai.budget} cap ({pct}%){pct>=80&&' · close to the cap'}</p>
    <p>{d.queuedReviews} reviews and {d.pendingComments} comments waiting in the queue.</p>
    <table className="admin-table"><thead><tr><th>Day</th><th>Provider</th><th>Calls</th><th>US$</th></tr></thead><tbody>{d.spend.map((r:any)=><tr key={r.day+r.provider}><td>{r.day}</td><td>{r.provider}</td><td>{r.calls}</td><td>{r.usd}</td></tr>)}</tbody></table>
   </Panel>
+  <Storage/>
   <Panel><h2>Lesson videos</h2><p className="small">{d.videos.checked} of {d.videos.total} checked · last check {when(d.videos.lastCheck)}</p>
    <h3>Dead: hidden from lessons, replace these ({d.videos.dead.length})</h3>{list(d.videos.dead)}
    <h3>Failed one check, being watched ({d.videos.failingOnce.length})</h3>{list(d.videos.failingOnce)}
@@ -61,6 +64,55 @@ function FlaggedReviews(){
    <div className="button-row"><Button size="sm" variant="outline" disabled={busy===f.id} onClick={()=>decide(f.id,'fine')}>Review stands</Button><Button size="sm" disabled={busy===f.id} onClick={()=>decide(f.id,'refunded')}>Give review back</Button></div>
   </article>)}
   {done.length>0&&<details><summary>Resolved ({done.length})</summary><ul className="admin-list">{done.map(f=><li key={f.id}>{f.email} · {f.lessonKey} · {f.reason} · <strong>{f.status==='refunded'?'given back':'stands'}</strong>{f.note?' · '+f.note:''}</li>)}</ul></details>}
+ </Panel>;
+}
+
+const mb=(b:number)=>b>=1073741824?(b/1073741824).toFixed(2)+' GB':(b/1048576).toFixed(1)+' MB';
+const at=(t:any)=>t?new Date(t).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}):'';
+const get=(q:string)=>fetch('/api/admin/console?'+q).then(async r=>{const d:any=await r.json();if(!r.ok)throw Error(d.error);return d});
+
+// Comments people reported: hidden until an admin restores or removes them.
+function ReportedComments(){
+ const [rows,setRows]=useState<any[]|null>(null),[busy,setBusy]=useState('');
+ const load=()=>get('section=comments').then(d=>setRows(d.comments)).catch(()=>setRows([]));
+ useEffect(()=>{load()},[]);
+ async function act(id:string,action:string){setBusy(id);try{await fetch('/api/admin/console',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,action})});await load()}finally{setBusy('')}}
+ if(!rows)return null;
+ return <Panel className={rows.length?'admin-alert':''}><h2>Reported comments ({rows.length})</h2>
+  {!rows.length&&<p className="small">No reported comments.</p>}
+  {rows.map(c=><article key={c.id} className="admin-flag">
+   <p className="prewrap">“{c.body}”</p>
+   <p className="small">By {c.author} ({c.author_email||'unknown'}) on <a className="text-link" href={'/p/'+c.token} target="_blank" rel="noreferrer">{c.owner_email||'a portfolio'}</a> · {at(c.created_at)} · {c.reports} report{c.reports>1?'s':''}: {c.reasons}</p>
+   <div className="button-row"><Button size="sm" variant="outline" disabled={busy===c.id} onClick={()=>act(c.id,'restore')}>Restore</Button><Button size="sm" disabled={busy===c.id} onClick={()=>act(c.id,'remove')}>Remove</Button></div>
+  </article>)}
+ </Panel>;
+}
+
+// Find a learner by email: their plans, hand-ins, reviews, storage and portfolio.
+function FindLearner(){
+ const [q,setQ]=useState(''),[users,setUsers]=useState<any[]|null>(null),[error,setError]=useState('');
+ async function find(e:React.FormEvent){e.preventDefault();setError('');try{setUsers((await get('section=users&email='+encodeURIComponent(q))).users)}catch(e:any){setError(e.message)}}
+ return <Panel><h2>Find a learner</h2>
+  <form className="admin-search" onSubmit={find}><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Email, or part of it" aria-label="Email"/><Button size="sm" type="submit">Find</Button></form>
+  {error&&<p className="field-error">{error}</p>}
+  {users&&!users.length&&<p className="small">No learner with that email has signed in since emails started being saved.</p>}
+  {users?.map(u=><article key={u.userId} className="admin-flag">
+   <p><strong>{u.email}</strong>{u.name&&' · '+u.name} · last active {at(u.lastActive)}{u.paid.selfPaced&&' · Self-paced'}{u.paid.mentor&&' · Mentor'}</p>
+   <p className="small">Plans: {u.plans.length?u.plans.map((p:any)=>p.title+' ('+p.level+(p.open?', open':'')+')').join('; '):'none'}</p>
+   <p className="small">{u.handIns.length} hand-ins · {u.reviews} AI reviews · {u.comments} comments · {u.files} files, {mb(u.bytes)}{u.portfolio&&<> · portfolio <a className="text-link" href={'/p/'+u.portfolio.token} target="_blank" rel="noreferrer">{u.portfolio.visibility}</a></>}</p>
+   {u.handIns.length>0&&<details><summary>Hand-ins</summary><ul className="admin-list">{u.handIns.map((h:any)=><li key={h.id}>{h.key} · {at(h.createdAt)}{h.files.map((f:any)=><span key={f.id}> · <a className="text-link" href={'/api/file/'+f.id} target="_blank" rel="noreferrer">{f.name}</a></span>)}{h.url&&<span> · <a className="text-link" href={h.url} target="_blank" rel="noreferrer">link</a></span>}</li>)}</ul></details>}
+  </article>)}
+ </Panel>;
+}
+
+// Uploads in storage: the total and the biggest users.
+function Storage(){
+ const [d,setD]=useState<any>(null);
+ useEffect(()=>{get('section=storage').then(setD).catch(()=>{})},[]);
+ if(!d)return null;
+ return <Panel><h2>Storage</h2>
+  <p>{mb(d.total.bytes)} in {d.total.files} files from {d.total.users} learners. <span className="small">Cloudflare R2 includes 10 GB free; after that about $0.015 per GB a month.</span></p>
+  {d.top.length>0&&<table className="admin-table"><thead><tr><th>Learner</th><th>Files</th><th>Used</th></tr></thead><tbody>{d.top.map((r:any)=><tr key={r.user_id}><td>{r.email||r.user_id}</td><td>{r.files}</td><td>{mb(r.bytes)}</td></tr>)}</tbody></table>}
  </Panel>;
 }
 
