@@ -58,7 +58,8 @@ export function ProgrammeStart(){
  // Each answer is final for this step; the next question depends on it.
  function answer(i:number){if(current)update({answers:[...draft.answers,{q:current.id,a:i}],level:undefined})}
  function back(){if(!draft.answers.length){setStep(0);return}update({answers:draft.answers.slice(0,-1),level:undefined})}
- const level:Level=draft.level||result?.level||'beginner';
+ // The level comes from the check; learners move up later by finishing a level.
+ const level:Level=result?.level||'beginner';
  const plan=schedule(level,draft.hoursPerWeek,draft.startDate,draft.daysPerWeek);
 
  async function create(){
@@ -97,9 +98,8 @@ export function ProgrammeStart(){
   {step===2&&result&&<Panel className="vg-panel">
    <span className="eyebrow">STEP 3 · YOUR TIME</span>
    <h1>Your level: <span className="vg-level">{levelNames[level]}</span></h1>
-   <p className="lede">{levelSummary[level]}. You can pick a different level if you like.</p>
+   <p className="lede">{levelSummary[level]}. This is where your answers put you. Finish this level to move up.</p>
    <p className="small">Skill checks: {result.checks.right} of {result.checks.total} right.</p>
-   <div className="vg-level-switch" role="radiogroup" aria-label="Starting level">{(['beginner','intermediate','advanced'] as Level[]).map(l=><button type="button" role="radio" aria-checked={level===l} key={l} className={level===l?'selected':''} onClick={()=>update({level:l===result.level?undefined:l,hoursPerWeek:undefined})}>{levelNames[l]}{l===result.level&&<small>Recommended</small>}</button>)}</div>
    <div className="vg-time-grid">
     <div className="vg-stat"><Clock size={20}/><strong>{plan.recommendedHoursPerWeek} h / week</strong><span>Suggested for {rhythm[level].hours} hours of learning</span></div>
     <div className="vg-stat"><strong>{plan.weeks} weeks</strong><span>{formatDate(plan.startDate)} → {formatDate(plan.endDate)}</span></div>

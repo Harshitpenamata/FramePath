@@ -229,3 +229,22 @@ test('Reflect: every lesson has 2 or 3 sound questions about the lesson or its v
   });
  }
 });
+
+test('a new plan always starts at the level its check recommends',()=>{
+ const base={course:'videography',interests:['wedding'],answers:answers(0)};
+ const assessed=P.buildProgramme(base).level;
+ for(const asked of ['beginner','intermediate','advanced'])assert.equal(P.buildProgramme({...base,level:asked}).level,assessed);
+ // Later updates (moving up) keep or change the level they are given.
+ const p=P.buildProgramme(base);assert.equal(P.buildProgramme({...p,level:'intermediate'},p).level,'intermediate');
+});
+
+test('courses: up to three styles from the interests, the first one active',()=>{
+ const ids=P.interests.map(i=>i.id),byStyle=new Map();for(const i of P.interests)if(!byStyle.has(i.pathway))byStyle.set(i.pathway,i.id);
+ const four=[...byStyle.values()].slice(0,4);
+ const p=P.buildProgramme({course:'videography',interests:four,answers:answers(0)});
+ assert.equal(p.styles.length,3);assert.equal(p.primaryPathway,P.interestFor(four[0]).pathway);
+ assert.throws(()=>P.buildProgramme({...p,styles:[...P.pathways].slice(0,4)},p));
+ const switched=P.buildProgramme({...p,primaryPathway:p.styles[2]},p);assert.equal(switched.primaryPathway,p.styles[2]);
+ assert.deepEqual(P.stylesOf({...p,styles:undefined}),[p.primaryPathway]);
+ assert.equal(P.styleModuleKeys.length,3);assert.ok(ids.length>0);
+});

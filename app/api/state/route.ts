@@ -7,10 +7,12 @@ import {normalizeProfile} from '../../profile-validation';
 import {buildPersonalPlan,isPersonalized} from '../../personalization';
 import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../selfpaced-curriculum';
 import {validateReview} from '../../assignment-review';
-import {buildProgramme,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,type Level} from '../../videography/programme';
+import {buildProgramme,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,stylesOf,maxStyles,styleModuleKeys,pathways,type Level} from '../../videography/programme';
 // Public portfolio data: only the pieces the learner picked to share.
 // What a shared portfolio shows. File names stay private; only each file's id and type are shared, so images and videos can be shown.
 function publicPortfolio(s:any){const items=s.portfolio.ids.map((x:string)=>s.submissions.find((v:any)=>v.id===x)).filter(Boolean).map((v:any)=>({id:v.id,key:v.key,moduleId:v.moduleId||'',createdAt:v.createdAt,notes:v.notes,answer:v.answer||'',url:v.url,uploadId:v.uploadId,uploadIds:v.uploadIds||[],uploads:(v.uploads||[]).map((f:any)=>({id:f.id,type:f.type})),status:v.status,total:v.total}));return JSON.stringify({title:s.portfolio.title,bio:s.portfolio.bio,name:s.profile?.name||'Framepath learner',items,simulatedReviews:true})}
+// Each course (style) keeps its own style-project hand-in: switching swaps that module's progress in and out.
+function switchStyle(s:any,from:string,to:string){s.styleProgress=s.styleProgress||{};const saved:any={};for(const k of styleModuleKeys){if(s.progress[k])saved[k]=s.progress[k];delete s.progress[k]}s.styleProgress[from]=saved;Object.assign(s.progress,s.styleProgress[to]||{});delete s.styleProgress[to]}
 // Keeps a published portfolio in step when a piece or file is removed.
 function republish(s:any){if(!s.portfolio.token)return null;if(!s.portfolio.ids.length){const removeToken=s.portfolio.token;s.portfolio.token=null;return {removeToken}}return {token:s.portfolio.token,data:publicPortfolio(s),visibility:s.portfolio.visibility||'unlisted'}}
 import {lessonsFor,lessonNeeds,lessonsStatus,requireLessonsForTask,type LessonMark} from '../../videography/lessons';
@@ -51,7 +53,14 @@ case 'programme_update':{if(!s.programme)throw new Error('Make your plan first.'
  // Moving up a level: only to the next one, once every module of the current level is handed in. The new plan starts today.
  let level=s.programme.level,startDate=u.startDate??s.programme.schedule.startDate;
  if(u.level!==undefined&&u.level!==level){const cur=level as Level;if(u.level!==videoLevels[videoLevels.indexOf(cur)+1]||modulesFor(cur).some((_,i)=>!s.progress[moduleKey(cur,i)]))throw new Error('Finish every module in this level first.');level=u.level;startDate=today()}
- s.programme=buildProgramme({...s.programme,level,hoursPerWeek:u.level&&u.level!==s.programme.level?undefined:u.hoursPerWeek??s.programme.schedule.hoursPerWeek,startDate,daysPerWeek:u.daysPerWeek??s.programme.schedule.daysPerWeek,mode:u.mode??s.programme.mode},s.programme);break;}
+ // Courses: add or remove a style (max three), or switch which one is active.
+ let styles=stylesOf(s.programme),active=s.programme.primaryPathway;
+ if(u.addStyle!==undefined){if(!pathways.includes(u.addStyle))throw new Error('Pick one of the styles.');if(!styles.includes(u.addStyle)){if(styles.length>=maxStyles)throw new Error('You can follow up to '+maxStyles+' styles at a time. Remove one first.');styles=[...styles,u.addStyle]}}
+ if(u.removeStyle!==undefined){if(styles.length<=1)throw new Error('Keep at least one style.');styles=styles.filter(x=>x!==u.removeStyle)}
+ const to=u.style!==undefined?u.style:styles.includes(active)?active:styles[0];
+ if(!styles.includes(to))throw new Error('Add that style first.');
+ if(to!==active)switchStyle(s,active,to);
+ s.programme=buildProgramme({...s.programme,styles,primaryPathway:to,level,hoursPerWeek:u.level&&u.level!==s.programme.level?undefined:u.hoursPerWeek??s.programme.schedule.hoursPerWeek,startDate,daysPerWeek:u.daysPerWeek??s.programme.schedule.daysPerWeek,mode:u.mode??s.programme.mode},s.programme);break;}
 case 'lesson_progress':{
  // Marks one lesson's video as watched, or its practice tool as solved. The task unlocks when every lesson is finished.
  const key=safeText(b.key,80,1),video=parseVideoKey(key);if(!video)throw new Error('Choose a Videography module.');
@@ -74,7 +83,7 @@ case 'video_submit':{
  const uploads:any[]=[];for(const uploadId of ids){const own:any=await db().prepare('SELECT id,name,type FROM uploads WHERE id=? AND user_id=?').bind(uploadId,user.userId).first();if(!own)throw new Error('That upload is not available in your account.');uploads.push({id:own.id,name:own.name,type:own.type})}
  if(s.submissions.length>=100)throw new Error('My Work is full (100 pieces). Remove a piece you no longer need, then hand in again.');
  const self=selfCheck?scoreAttempt(key,handIn.ratings,s.profile):null,attempt=s.submissions.filter((x:any)=>x.key===key).length+1;
- s.submissions.unshift({id:id(),key,moduleId:video.module.id,handIn:true,attempt,answer:handIn.answer,notes:handIn.notes,url:handIn.url,uploads,uploadId:uploads[0]?.id||'',uploadIds:ids,selfRatings:self?handIn.ratings:null,selfScore:self?self.total:null,reflections:selfCheck?handIn.reflections:null,status:'saved',feedback:'',scores:null,createdAt:now,updatedAt:now});
+ s.submissions.unshift({id:id(),key,moduleId:video.module.id,...(styleModuleKeys.includes(key)&&s.programme?{pathway:s.programme.primaryPathway}:{}),handIn:true,attempt,answer:handIn.answer,notes:handIn.notes,url:handIn.url,uploads,uploadId:uploads[0]?.id||'',uploadIds:ids,selfRatings:self?handIn.ratings:null,selfScore:self?self.total:null,reflections:selfCheck?handIn.reflections:null,status:'saved',feedback:'',scores:null,createdAt:now,updatedAt:now});
  // Handing in unlocks the next module; the AI score in Reflect is feedback, not a gate.
  s.progress[key]={...(s.progress[key]||{}),done:true,at:s.progress[key]?.at||now,source:'hand-in',score:self?.total??null};
  delete s.drafts[key];

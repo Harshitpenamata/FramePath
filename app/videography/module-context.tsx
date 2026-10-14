@@ -1,10 +1,10 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,Check,ExternalLink,Play,Target,ListChecks,Gift,LockKeyhole,BookOpen,Puzzle} from 'lucide-react';
+import {ArrowLeft,ArrowRight,BookOpen,Check,ExternalLink,Gift,ListChecks,LockKeyhole,Maximize2,Play,Puzzle,Target,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
-import {parseVideoKey,moduleLesson,projectLabel,freeModuleCount,isFreeModule,type Pathway} from './programme';
+import {parseVideoKey,moduleLesson,projectLabel,freeModuleCount,isFreeModule,modulesFor,moduleKey as keyOf,type Pathway} from './programme';
 import {videosFor,moduleImages,imageSrcSet,type ModuleVideo} from './media';
 import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
 import {ReflectStep} from './reflect';
@@ -16,8 +16,8 @@ export const canPractise=(s:any,key:string)=>isFreeModule(key)||isExplore(s)||['
 export const taskLabel=(moduleId:string)=>'Task '+moduleId;
 
 // The six steps of the course, with this module's step highlighted.
-function StageDiagram({current}:{current:string}){
- return <ol className="vg-stage-steps">{stages.map((s,i)=><li key={s} className={s===current?'current':''} aria-current={s===current?'step':undefined}><span>{i+1}</span>{s}</li>)}</ol>;
+function StageDiagram({current,done=[]}:{current:string;done?:string[]}){
+ return <ol className="vg-stage-steps">{stages.map((s,i)=><li key={s} className={[s===current&&'current',done.includes(s)&&'done'].filter(Boolean).join(' ')} aria-current={s===current?'step':undefined}><span>{done.includes(s)?<Check size={13}/>:i+1}</span>{s}</li>)}</ol>;
 }
 
 function embedUrl(v:ModuleVideo){return v.youtubeId?`https://www.youtube-nocookie.com/embed/${v.youtubeId}?autoplay=1&rel=0&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}${v.start?'&start='+v.start:''}`:`https://player.vimeo.com/video/${v.vimeoId}?autoplay=1${v.start?'#t='+v.start+'s':''}`}
@@ -53,19 +53,40 @@ function useWatchTracker(iframe:React.RefObject<HTMLIFrameElement|null>,v:Module
 
 // Videos that play here (YouTube, Vimeo) go in a click-to-load player; lessons on other sites are link cards.
 // watched: ids of videos already watched; onWatched: called with a video's id when it has been watched (or a link opened).
+// Sites that refuse to be shown inside another site (checked 14 Oct 2026). Their lessons open in a new tab.
+const noFrameHosts=['studiobinder.com','helpx.adobe.com','deitymic.com','collab.sundance.org','unscripted.com','school.learnlightandsound.com','academy.dslrvideoshooter.com','learnlightandsound.com'];
+const canFrame=(url?:string)=>{try{const h=new URL(url||'').hostname.replace(/^www\./,'');return !noFrameHosts.some(x=>h===x||h.endsWith('.'+x))}catch{return false}};
+const sketchSpeed=0.5;
+
+// A lesson from another site, shown in a window on our page with its creator and site credited.
+function SiteWindow({v,onClose}:{v:ModuleVideo;onClose:()=>void}){
+ const close=useRef<HTMLButtonElement>(null);
+ useEffect(()=>{close.current?.focus();document.body.style.overflow='hidden';const key=(e:KeyboardEvent)=>{if(e.key==='Escape')onClose()};window.addEventListener('keydown',key);return ()=>{window.removeEventListener('keydown',key);document.body.style.overflow=''}},[]);
+ const site=new URL(v.url!).hostname.replace(/^www\./,'');
+ return <div className="vg-site-window" role="dialog" aria-modal="true" aria-label={v.title} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
+  <div className="vg-site-box">
+   <div className="vg-site-bar"><div><strong>{v.title}</strong><span className="small">By {v.creator} · on {site}</span></div>
+    <a className="text-link small" href={v.url} target="_blank" rel="noopener noreferrer">Open on {site} <ExternalLink size={13}/></a>
+    <button ref={close} type="button" className="vg-site-close" onClick={onClose} aria-label="Close"><X size={20}/></button></div>
+   <iframe src={v.url} title={v.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/>
+   <p className="small vg-site-note">Content and credit: {v.creator}, {site}. {v.focus}</p>
+  </div>
+ </div>;
+}
+
 export function VideoPanel({videos,watched=[],onWatched}:{videos:ModuleVideo[];watched?:string[];onWatched?:(id:string)=>void}){
  const playable=videos.filter(v=>v.youtubeId||v.vimeoId),links=videos.filter(v=>v.url);
- const [active,setActive]=useState(0),[playing,setPlaying]=useState(false);
+ const [active,setActive]=useState(0),[playing,setPlaying]=useState(false),[reader,setReader]=useState<ModuleVideo|null>(null);
  const frame=useRef<HTMLIFrameElement>(null);
  useEffect(()=>{setActive(0);setPlaying(false)},[videos[0]?.title]);
  const v=playable[active]||playable[0];
  useWatchTracker(frame,v,playing&&!!onWatched,()=>v&&onWatched?.(videoId(v)));
  if(!videos.length)return null;
  const seen=(x:ModuleVideo)=>watched.includes(videoId(x));
- const list=playable.length>0&&<ol className="vg-video-list" aria-label="Videos in this lesson">{playable.map((x,i)=><li key={x.title+i}><button type="button" className={i===active?'active':''} aria-current={i===active?'true':undefined} onClick={()=>{setActive(i);setPlaying(false)}}>{onWatched&&seen(x)?<Check size={14}/>:<Play size={14}/>}<span>{x.title}<small>{x.creator}{x.start?' · from '+clock(x.start):''}</small></span></button></li>)}</ol>;
- const cards=links.length>0&&<div className="vg-video-links">{links.map(x=><a key={x.title+x.url} className="vg-link-card" href={x.url} target="_blank" rel="noopener noreferrer" onClick={()=>onWatched?.(videoId(x))}>
+ const list=playable.length>0&&<ol className="vg-video-list" aria-label="Videos in this lesson">{playable.map((x,i)=><li key={x.title+i}><button type="button" className={[i===active&&'active',onWatched&&seen(x)&&'watched'].filter(Boolean).join(' ')} aria-current={i===active?'true':undefined} onClick={()=>{setActive(i);setPlaying(false)}}>{onWatched&&seen(x)?<Check size={14}/>:<Play size={14}/>}<span>{x.title}<small>{x.creator}{x.start?' · from '+clock(x.start):''}</small></span></button></li>)}</ol>;
+ const cards=links.length>0&&<div className="vg-video-links">{links.map(x=><a key={x.title+x.url} className={'vg-link-card'+(onWatched&&seen(x)?' watched':'')} href={x.url} target="_blank" rel="noopener noreferrer" onClick={e=>{onWatched?.(videoId(x));if(canFrame(x.url)){e.preventDefault();setReader(x)}}}>
    <span><strong>{x.title}</strong><small>{x.creator}{x.section?' · '+x.section:''}</small><small>{x.focus}</small></span>
-   <span className="vg-link-side">{onWatched&&seen(x)?<Badge tone="green"><Check size={12}/> Opened</Badge>:x.paid?<Badge>Optional · paid</Badge>:<Badge tone="green">Free</Badge>}<ExternalLink size={16}/></span></a>)}</div>;
+   <span className="vg-link-side">{onWatched&&seen(x)?<Badge tone="green"><Check size={12}/> Opened</Badge>:x.paid?<Badge>Optional · paid</Badge>:<Badge tone="green">Free</Badge>}{canFrame(x.url)?<Maximize2 size={16}/>:<ExternalLink size={16}/>}</span></a>)}</div>;
  // Player on the left, the list of titles (and lessons on other sites) on the right.
  return <div className={'vg-video'+(v?' two-col':'')}>
   {v&&<div className="vg-video-main"><div className="vg-video-frame">{playing
@@ -74,6 +95,7 @@ export function VideoPanel({videos,watched=[],onWatched}:{videos:ModuleVideo[];w
   <p className="vg-video-focus"><Target size={15}/> Watch for: {v.focus}</p>
   {onWatched&&<p className={'small vg-watch-state'+(seen(v)?' ok':'')}>{seen(v)?<><Check size={14}/> Watched</>:'Watch most of this video to tick it off.'}</p>}</div>}
   {(list||cards)&&<div className="vg-video-side">{list}{cards}</div>}
+  {reader&&<SiteWindow v={reader} onClose={()=>setReader(null)}/>}
  </div>;
 }
 
@@ -85,7 +107,7 @@ function LessonSketch({src,title}:{src:string;title:string}){
   const v=ref.current;if(!v)return;
   v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.loop=true;v.playsInline=true;
   v.src=src+'.mp4';v.load();
-  const play=()=>{v.play().catch(()=>{})};
+  const play=()=>{v.defaultPlaybackRate=v.playbackRate=sketchSpeed;v.play().catch(()=>{})};
   v.addEventListener('canplay',play);play();
   const io=new IntersectionObserver(([e])=>{if(e.isIntersecting)play()});io.observe(v);
   return ()=>{v.removeEventListener('canplay',play);io.disconnect()};
@@ -98,11 +120,13 @@ function SelfPacedLock({moduleKey,what}:{moduleKey:string;what:string}){
 }
 
 // Lessons tab: module intro, then each lesson's Watch and Reflect, then a pointer to the task.
-export function LessonsTab({moduleKey,onTask}:{moduleKey:string;onTask:()=>void}){
+export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:()=>void;onLesson?:(index:number,count:number)=>void}){
  const {s,user,mutate}=useLearning();
  const parsed=parseVideoKey(moduleKey);
  const [index,setIndex]=useState(0);
  useEffect(()=>{const n=Number(new URLSearchParams(window.location.search).get('lesson'));if(n>0)setIndex(n-1)},[]);
+ // Tells the module page which lesson is open, so Next module only shows on the last one.
+ useEffect(()=>{if(parsed)onLesson?.(index,lessonsFor(parsed.module.id).length)},[index,moduleKey]);
  if(!parsed)return null;
  const m=parsed.module,p=s.programme;
  const pathway:Pathway=p?.primaryPathway||'Documentary';
@@ -120,8 +144,8 @@ export function LessonsTab({moduleKey,onTask}:{moduleKey:string;onTask:()=>void}
    {image&&<img src={`${image.base}-960.webp`} srcSet={imageSrcSet(image)} sizes="(max-width: 760px) 100vw, 640px" alt={image.alt} loading="lazy"/>}
    <div><Badge>{m.id} · {m.stageLabel}</Badge>{parsed.index<freeModuleCount&&<Badge tone="green"><Gift size={12}/> Free</Badge>}<p className="vg-outcome">{m.outcome}</p><span className="small">About {m.hours} hours{lessons.length>0&&` · ${lessons.length} lessons`}</span></div>
   </div>
-  <section><h3>Where this fits in making a video</h3><StageDiagram current={m.stageLabel}/></section>
-  {m.stage==='selected-pathway'&&<p className="notice">Your style: <strong>{pathway}</strong>. It comes from the first interest you picked.</p>}
+  <section><h3>Where this fits in making a video</h3><StageDiagram current={m.stageLabel} done={[...new Set(modulesFor(parsed.level).map(x=>x.stageLabel))].filter(st=>modulesFor(parsed.level).every((x,i)=>x.stageLabel!==st||!!s.progress?.[keyOf(parsed.level,i)]))}/></section>
+  {m.stage==='selected-pathway'&&<p className="notice">Your course: <strong>{pathway}</strong>. Switch between your styles under My courses on your Journey page.</p>}
 
   {item?<section className="vg-lessons" id="vg-lesson-top">
    <ol className="vg-lesson-steps" aria-label="Lessons">{lessons.map((x,i)=><li key={x.title}><button type="button" className={(i===index?'current ':'')+(done(i)?'done':'')} aria-current={i===index?'step':undefined} onClick={()=>go(i)}><span>{done(i)?<Check size={14}/>:i+1}</span>{x.title}</button></li>)}</ol>

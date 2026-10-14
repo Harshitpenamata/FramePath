@@ -1,9 +1,9 @@
 'use client';
 import React,{useState} from 'react';
-import {ArrowRight,BookOpen,CalendarClock,Check,Gift,Lock,PlayCircle,Sparkles,Target,UserRound} from 'lucide-react';
+import {ArrowRight,BookOpen,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Badge,isExplore} from '../ui';
-import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,type Programme,type Level,type Mode} from './programme';
+import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,pathways,stylesOf,maxStyles,styleModuleKeys,type Programme,type Level,type Mode,type Pathway} from './programme';
 import {formatDate} from './start';
 
 const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
@@ -88,10 +88,12 @@ export function ProgrammeDashboard(){
  return <div className="vg-dashboard">
   <section className="vg-report-head">
    <div><span className="eyebrow">YOUR LEVEL REPORT · VIDEOGRAPHY</span><h1>Your {levelNames[p.level]} plan</h1><p className="lede">{levelSummary[p.level]}</p>
-    <div className="vg-tags">{p.interests.map((id,i)=><Badge key={id} tone={i===0?'green':''}>{i===0&&'★ '}{interestFor(id)?.label}</Badge>)}</div></div>
+    </div>
    <div className="vg-head-side"><div className="vg-score"><strong>{done}/{mods.length}</strong><span>modules done</span></div>
     {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>{current==='free'?'Upgrade':'Get a mentor'}</Button>}</div>
   </section>
+
+  <MyCourses p={p}/>
 
   <div className="vg-report-grid">
    <PathwayOutcome p={p}/>
@@ -123,16 +125,45 @@ export function ProgrammeDashboard(){
  </div>;
 }
 
+// Modules grouped by stage (Ideas, Planning, Filming…), each group opening like a drop-down.
+// The group with the learner's next module starts open.
 export function ModuleList({p,level}:{p?:Programme;level?:Level}){
  const {s}=useLearning();
  const lv:Level=level||p?.level||'beginner';
  const entitled=isExplore(s)||['paid','active'].includes(s.craft?.status);
- const mods=modulesFor(lv);
+ const mods=modulesFor(lv),nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(lv,i)]);
+ const groups=stageOrder.map(stage=>({stage,items:mods.map((m,i)=>({m,i})).filter(x=>x.m.stageLabel===stage)})).filter(g=>g.items.length);
  return <section className="vg-modules"><span className="eyebrow">YOUR MODULES · {levelNames[lv].toUpperCase()}</span><h2>Start here and work down</h2>
-  <ol>{mods.map((m,i)=>{const key=moduleKey(lv,i),done=!!s.progress?.[key],free=i<freeModuleCount;return <li key={m.id} className={done?'done':''}>
-   <a href={`/explore/video-${lv}/${i}`}><span className="vg-mod-id" style={{background:stageColor[m.stageLabel]}}>{done?<Check size={16}/>:m.id}</span>
-    <span className="vg-mod-body"><strong>{moduleLesson(m,projectLabel(p)).title}</strong><span className="small">{m.stageLabel} · {m.hours} h · Task: {m.taskName}</span></span>
-    <span className="vg-mod-access">{free?<Badge tone="green"><Gift size={12}/> Free task</Badge>:entitled?<Badge>Task</Badge>:<span className="small"><Lock size={12}/> Task in Self-paced</span>}</span></a></li>})}</ol></section>;
+  {groups.map(g=>{const done=g.items.filter(x=>s.progress?.[moduleKey(lv,x.i)]).length,all=done===g.items.length;return <details key={g.stage} className={'vg-stage-group'+(all?' done':'')} open={g.items.some(x=>x.i===nextIndex)||(nextIndex<0&&g===groups[0])}>
+   <summary><span className="vg-stage-dot" style={{background:stageColor[g.stage]}}>{all?<Check size={14}/>:null}</span><strong>{g.stage}</strong><span className="small">{g.items.length} module{g.items.length>1?'s':''} · {done} done</span><ChevronDown size={18} className="vg-stage-chev"/></summary>
+   <ol>{g.items.map(({m,i})=>{const key=moduleKey(lv,i),done=!!s.progress?.[key],free=i<freeModuleCount;return <li key={m.id} className={done?'done':''}>
+    <a href={`/explore/video-${lv}/${i}`}><span className="vg-mod-id" style={{background:stageColor[m.stageLabel]}}>{done?<Check size={16}/>:m.id}</span>
+     <span className="vg-mod-body"><strong>{moduleLesson(m,projectLabel(p)).title}</strong><span className="small">{m.stageLabel} · {m.hours} h · Task: {m.taskName}</span></span>
+     <span className="vg-mod-access">{free?<Badge tone="green"><Gift size={12}/> Free task</Badge>:entitled?<Badge>Task</Badge>:<span className="small"><Lock size={12}/> Task in Self-paced</span>}</span></a></li>})}</ol>
+  </details>})}</section>;
+}
+
+// My courses: up to three styles, each a tile with its own progress. Core modules are shared; each style
+// has its own style project (B13 / I13 / A13). Switching changes the style project and its videos.
+function MyCourses({p}:{p:Programme}){
+ const {s,mutate,busy}=useLearning();
+ const [adding,setAdding]=useState(false);
+ const styles=stylesOf(p),mods=modulesFor(p.level);
+ const doneFor=(style:Pathway)=>mods.filter((_,i)=>{const k=moduleKey(p.level,i);return styleModuleKeys.includes(k)&&style!==p.primaryPathway?!!s.styleProgress?.[style]?.[k]:!!s.progress?.[k]}).length;
+ const update=(u:any)=>mutate('programme_update',{update:u});
+ return <section className="vg-courses"><div className="row between"><div><span className="eyebrow">MY COURSES · {styles.length} OF {maxStyles}</span><h2>Your styles</h2></div><span className="small">Core modules count for every style. Each style has its own project.</span></div>
+  <div className="vg-course-grid">
+   {styles.map(style=>{const done=doneFor(style),active=style===p.primaryPathway;return <article key={style} className={'vg-course'+(active?' active':'')}>
+    <div className="row between"><span className="eyebrow">{levelNames[p.level]}</span>{styles.length>1&&<button type="button" className="vg-course-remove" disabled={busy} aria-label={'Remove '+style} onClick={()=>{if(window.confirm('Remove '+style+'? Its project stays in My Work, and comes back if you add this style again.'))update({removeStyle:style})}}><X size={14}/></button>}</div>
+    <h3>{style}</h3>
+    <div className="vg-course-bar" aria-hidden="true"><span style={{width:Math.round(done/mods.length*100)+'%'}}/></div>
+    <span className="small">{done} / {mods.length} modules</span>
+    {active?<Badge tone="green">Current course</Badge>:<Button size="sm" variant="outline" disabled={busy} onClick={()=>update({style})}>Switch to this course</Button>}
+   </article>})}
+   {styles.length<maxStyles&&<article className="vg-course add">{adding?<><h3>Add a style</h3><div className="vg-course-picks">{pathways.filter(x=>!styles.includes(x)).map(x=><button type="button" key={x} disabled={busy} onClick={async()=>{if(await update({addStyle:x}))setAdding(false)}}>{x}</button>)}</div><Button size="sm" variant="ghost" onClick={()=>setAdding(false)}>Cancel</Button></>
+    :<button type="button" className="vg-course-addbtn" onClick={()=>setAdding(true)}><Plus size={22}/><strong>Add a style</strong><span className="small">Up to {maxStyles} at a time</span></button>}</article>}
+  </div>
+ </section>;
 }
 
 // Explore: every Videography module at each level. Videos and notes are free to watch.

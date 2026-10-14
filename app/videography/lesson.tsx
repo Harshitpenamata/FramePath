@@ -25,6 +25,9 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
  const {s,loaded}=useLearning();
  const parsed=parseVideoKey(key)!;
  const [tab,setTab]=useState('lessons');
+ const [lessonAt,setLessonAt]=useState<{index:number;count:number}|null>(null);
+ // Next module appears once the learner reaches the last lesson of this module (or has handed in its task).
+ const atLastLesson=!!lessonAt&&lessonAt.index>=lessonAt.count-1;
  const [reviewNow,setReviewNow]=useState('');
  const mods=modulesFor(parsed.level),lesson=moduleLesson(parsed.module,projectLabel(s.programme));
  const last=parsed.index===mods.length-1;
@@ -36,12 +39,12 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
   <h1>{lesson.title}</h1>
   <Tabs value={tab} onValueChange={setTab}>
    <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons"><BookOpen/>Lessons</TabsTrigger><TabsTrigger value="task"><Clapperboard/>Task</TabsTrigger><TabsTrigger value="feedback"><MessageCircle/>Feedback</TabsTrigger>{last&&<TabsTrigger value="finish"><Flag/>Finish</TabsTrigger>}</TabsList>
-   <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}}/></TabsContent>
+   <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}} onLesson={(index,count)=>setLessonAt({index,count})}/></TabsContent>
    <TabsContent value="task">{loaded&&<TaskTab moduleKey={key} onHandedIn={id=>{setReviewNow(id);setTab('feedback')}}/>}</TabsContent>
    <TabsContent value="feedback">{loaded&&<FeedbackTab moduleKey={key} requestFor={reviewNow} onFinish={last?()=>setTab('finish'):undefined}/>}</TabsContent>
    {last&&<TabsContent value="finish">{loaded&&<LevelClosure level={parsed.level}/>}</TabsContent>}
   </Tabs>
-  <div className="button-row between">{prev?<Go outline href={moduleHref(prev)}><ArrowLeft size={16}/>Previous module</Go>:<span/>}{next&&<Go outline href={moduleHref(next)}>Next module<ArrowRight size={16}/></Go>}</div>
+  <div className="button-row between">{prev?<Go outline href={moduleHref(prev)}><ArrowLeft size={16}/>Previous module</Go>:<span/>}{next&&(atLastLesson||s.progress?.[key])?<Go outline href={moduleHref(next)}>Next module<ArrowRight size={16}/></Go>:<span/>}</div>
  </div>;
 }
 

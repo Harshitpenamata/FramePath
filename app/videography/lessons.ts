@@ -1,5 +1,6 @@
 import {V,pathwayVideos,videoLibrary,fromLibrary,pathwayLibrary,type ModuleVideo} from './media';
 import type {Pathway} from './programme';
+import lessonExtras from './lesson-videos.json';
 
 // Lessons inside a module: one per curriculum topic. Each lesson has Watch (an idea and videos)
 // and Reflect (a small interactive tool). Every module has lessons; Intermediate and Advanced are added below.
@@ -294,7 +295,17 @@ export const lessonVideoRefs:Record<string,string[][]>={
  B13:[['path'],[],['pathway1']],
  B14:[['threeActs'],['lib:B14-1','lib:B14-2'],['lib:B14-3'],['lib:B14-4']],
 };
+// Videos added from the filled-in lesson video sheet (scripts/import-lesson-videos.py), keyed '<module>-<lesson>'.
+// Each is added to its lesson, or replaces the video in "replaces"; "style" limits it to one style.
+type ExtraVideo={youtubeId:string;title:string;creator:string;start:number;focus:string;style:string;replaces:string};
+const extraVideos=lessonExtras as Record<string,ExtraVideo[]>;
 export function lessonVideos(moduleId:string,index:number,pathway:Pathway):ModuleVideo[]{
+ const extra=(extraVideos[moduleId+'-'+(index+1)]||[]).filter(x=>!x.style||x.style===pathway);
+ const replaced=new Set(extra.map(x=>x.replaces).filter(Boolean));
+ const added=extra.map((x):ModuleVideo=>({youtubeId:x.youtubeId,title:x.title,creator:x.creator,start:x.start||undefined,focus:x.focus||'What this lesson’s idea looks like in practice.'}));
+ return [...baseVideos(moduleId,index,pathway).filter(v=>!v.url||!replaced.has(v.url)),...added];
+}
+function baseVideos(moduleId:string,index:number,pathway:Pathway):ModuleVideo[]{
  const refs=lessonVideoRefs[moduleId]?.[index]??moduleLessons[moduleId]?.[index]?.videos??[];
  return refs.flatMap((ref):ModuleVideo[]=>{
   if(ref==='path')return pathwayLibrary(moduleId,pathway).map(v=>fromLibrary(v));
