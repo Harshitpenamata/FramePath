@@ -1,4 +1,4 @@
-/* Videography programme: home carousel, onboarding flow, diagnostic dashboard, module context. */
+/* Videography programme: home carousel,onboarding flow,diagnostic dashboard,module context. */
 :root{--vg-s1:#d3ee96;--vg-s2:#8fd3c8;--vg-s3:#f2c879;--vg-s4:#f3a3a0;--vg-s5:#b8a6f2;--vg-s6:#7fb7f0;--vg-heat:#d3ee96}
 
 .vg-home{display:grid;gap:clamp(28px,5vw,56px);width:100%;max-width:1240px;margin:0 auto;padding:clamp(24px,5vw,56px) clamp(16px,4vw,40px);box-sizing:border-box;min-width:0}
@@ -51,10 +51,6 @@
 .vg-option.selected{border-color:var(--primary);background:var(--surface-raised)}
 .vg-option.selected span{background:var(--primary);color:var(--primary-foreground)}
 .vg-level{color:var(--primary)}
-.vg-level-switch{display:flex;flex-wrap:wrap;gap:8px}
-.vg-level-switch button{display:grid;padding:10px 16px;border-radius:12px;border:1px solid var(--border);background:transparent;color:inherit;font:inherit;cursor:pointer;text-align:left}
-.vg-level-switch button small{font-size:.72rem;color:var(--primary)}
-.vg-level-switch button.selected{border-color:var(--primary);background:var(--surface-raised);font-weight:700}
 .vg-time-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
 .vg-stat{display:grid;gap:4px;padding:16px;border-radius:var(--radius);background:var(--surface-raised)}
 .vg-stat strong{font-size:1.3rem}
@@ -71,7 +67,6 @@
 .vg-dashboard{display:grid;gap:28px;padding-bottom:84px}
 .vg-report-head{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:end}
 .vg-report-head h1{margin:.2em 0}
-.vg-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .vg-score{display:grid;justify-items:center;gap:4px;padding:18px 26px;border-radius:var(--radius);background:var(--surface-raised)}
 .vg-score strong{font-size:2.6rem;line-height:1;color:var(--primary)}
 .vg-report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
@@ -198,7 +193,7 @@
 .vg-piece li button{margin-left:auto}
 @media (max-width:760px){.vg-rate div{grid-template-columns:repeat(5,minmax(0,1fr))}.vg-rate button{font-size:.68rem;padding:6px 2px}}
 
-/* Lessons inside a module: lesson steps, Watch + Reflect, interactive tools. */
+/* Lessons inside a module: lesson steps,Watch + Reflect,interactive tools. */
 .vg-lessons{display:grid;gap:16px;scroll-margin-top:90px}
 .vg-lesson-steps{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
 .vg-lesson-steps button{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted-foreground);font:inherit;font-size:.88rem;cursor:pointer;text-align:left}
@@ -289,7 +284,7 @@
 .vg-closure-stages li.ok svg{color:var(--primary)}
 .vg-best{display:grid;gap:8px;padding-left:20px}
 
-/* My Work: header, overview and feedback per piece. */
+/* My Work: header,overview and feedback per piece. */
 .vg-back{display:inline-flex;gap:8px;align-items:center;margin-bottom:16px;font-weight:600}
 .vg-work-overview{margin-bottom:20px}
 .vg-work-overview h2{margin:0}
@@ -376,7 +371,7 @@
 .vg-unlock-list li{display:flex;gap:10px;align-items:center}
 .vg-unlock-list li span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--border);font-size:.8rem}
 .vg-unlock-list li.ok{color:var(--primary)}
-/* Lesson layout: faded inactive stages, sketch | about, player | titles. */
+/* Lesson layout: faded inactive stages,sketch | about,player | titles. */
 .vg-stage-steps li:not(.current){opacity:.42}
 .vg-lesson-intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:center}
 .vg-lesson-about{display:grid;gap:10px;align-content:center}
@@ -386,12 +381,12 @@
 .vg-video-side{display:grid;gap:8px;align-content:start;min-width:0}
 ol.vg-video-list{list-style:none;margin:0;padding:0}
 @media (max-width:760px){.vg-lesson-intro,.vg-video.two-col{grid-template-columns:1fr}}
-/* Reflect: lesson questions, then the simulator. */
+/* Reflect: lesson questions,then the simulator. */
 .vg-reflect{display:grid;gap:12px}
 .vg-q-count{display:flex;flex-wrap:wrap;gap:4px;align-items:center;color:var(--muted-foreground)}
 .vg-reflect-sim{margin:6px 0 0}
 .vg-pick button:disabled{cursor:default}
-/* Plan: modules grouped by stage, as drop-downs. */
+/* Plan: modules grouped by stage,as drop-downs. */
 .vg-stage-group{margin-top:10px;border:1px solid var(--border);border-radius:var(--radius);background:color-mix(in srgb,var(--card) 60%,transparent)}
 .vg-stage-group summary{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;list-style:none}
 .vg-stage-group summary::-webkit-details-marker{display:none}
@@ -401,28 +396,22 @@ ol.vg-video-list{list-style:none;margin:0;padding:0}
 .vg-stage-dot{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;color:#111}
 .vg-stage-group ol{margin:0;padding:0 10px 10px}
 .vg-stage-group.done>summary{background:color-mix(in srgb,var(--primary) 14%,transparent)}
-/* My courses: style tiles. */
-.vg-courses{display:grid;gap:12px}
-.vg-courses h2{margin:.15em 0 0}
 .vg-course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
 .vg-course{display:grid;gap:8px;align-content:start;padding:16px;border-radius:var(--radius);border:1px solid var(--border);background:var(--card)}
 .vg-course h3{margin:0;font-size:1.3rem}
 .vg-course.active{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary) inset}
 .vg-course-bar{height:6px;border-radius:3px;background:var(--surface-raised);overflow:hidden}
 .vg-course-bar span{display:block;height:100%;background:var(--primary)}
-.vg-course-remove{border:0;background:none;color:var(--muted-foreground);cursor:pointer;padding:4px}
 .vg-course.add{border-style:dashed;background:transparent}
 .vg-course-addbtn{display:grid;gap:4px;justify-items:center;padding:18px 8px;border:0;background:none;color:inherit;font:inherit;cursor:pointer}
-.vg-course-picks{display:flex;flex-wrap:wrap;gap:6px}
-.vg-course-picks button{padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface-raised);color:inherit;font:inherit;cursor:pointer}
-/* Done states fill green: finished lessons, watched videos, finished stages. */
+/* Done states fill green: finished lessons,watched videos,finished stages. */
 .vg-lesson-steps button.done{background:var(--primary);border-color:var(--primary);color:var(--primary-foreground);font-weight:700}
 .vg-lesson-steps button.done span{background:var(--primary-foreground);color:var(--primary);border-color:var(--primary-foreground)}
 .vg-video-list button.watched,.vg-link-card.watched{background:var(--primary);border-color:var(--primary);color:var(--primary-foreground)}
 .vg-video-list button.watched small,.vg-link-card.watched small{color:color-mix(in srgb,var(--primary-foreground) 75%,transparent)}
 .vg-stage-steps li.done{background:var(--primary);border-color:var(--primary);color:var(--primary-foreground);opacity:1}
 .vg-stage-steps li.done span{background:var(--primary-foreground);color:var(--primary)}
-/* A lesson from another site, in a window on our page. */
+/* A lesson from another site,in a window on our page. */
 .vg-site-window{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(0,0,0,.8)}
 .vg-site-box{display:grid;grid-template-rows:auto 1fr auto;width:min(1200px,100%);height:min(860px,100%);border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid var(--border)}
 .vg-site-bar{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--border)}
@@ -449,3 +438,4 @@ a.vg-course:hover{border-color:var(--primary)}
 .vg-flag-form textarea{font:inherit;padding:10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--card);color:var(--foreground)}
 .vg-flag-state{padding:10px 12px;border-radius:var(--radius);background:var(--surface-raised);margin:0}
 .vg-flag-state.refunded{background:color-mix(in srgb,var(--primary) 16%,transparent)}
+.vg-age{display:grid;gap:8px;border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin:0}.vg-age legend{font-weight:700;padding:0 4px}.vg-age label{display:flex;gap:8px;align-items:flex-start}
