@@ -199,7 +199,7 @@ test('a lesson is finished only when every video is watched and the tool is solv
  assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs,t:false}),false,'tool not solved');
  assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs.slice(1),t:true}),false,'a video not watched');
  assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs,t:true}),true);
- const noVideo=P.modulesFor('beginner').flatMap(m=>Les.lessonsFor(m.id).map((_,i)=>[m.id,i])).find(([id,i])=>Les.lessonNeeds(id,i,'Wedding').length===0);
+ const noVideo=P.curriculumModules.flatMap(m=>Les.lessonsFor(m.id).map((_,i)=>[m.id,i])).find(([id,i])=>Les.lessonNeeds(id,i,'Wedding').length===0);
  assert.ok(noVideo,'some lessons have no video');assert.equal(Les.lessonFinished(noVideo[0],noVideo[1],'Wedding',{v:[],t:true}),true,'tool alone finishes a lesson with no video');
  const marks=Object.fromEntries(Les.lessonsFor('B02').map((_,i)=>[i,{v:Les.lessonNeeds('B02',i,'Wedding'),t:true}]));
  assert.deepEqual(Les.lessonsStatus('B02','Wedding',marks),{total:5,done:5,finished:[true,true,true,true,true]});
@@ -248,4 +248,13 @@ test('plans: each plan follows its first interest’s style; up to three plans',
  assert.deepEqual(P.plansOf({programme:p}),[p]);assert.deepEqual(P.plansOf({plans:[p,p]}),[p,p]);assert.deepEqual(P.plansOf({}),[]);
  assert.equal(P.planTitle(p),'Videography · Documentary');
  assert.equal(P.styleModuleKeys.length,3);
+});
+
+test('lesson videos are free and can all be shown inside FramePath',()=>{
+ const Les=load(path.join(root,'app/videography/lessons.ts'));
+ const blocked=['studiobinder.com','helpx.adobe.com','deitymic.com','collab.sundance.org','unscripted.com','learnlightandsound.com','dslrvideoshooter.com'];
+ for(const id of Object.keys(Les.moduleLessons))Les.lessonsFor(id).forEach((_,i)=>{for(const pw of P.pathways)for(const v of Les.lessonVideos(id,i,pw)){
+  assert.ok(!v.paid,id+'-'+(i+1)+': no paid videos');
+  assert.ok(!v.url||!blocked.some(b=>v.url.includes(b)),id+'-'+(i+1)+': no links that refuse to show inside FramePath ('+v.url+')');
+ }});
 });

@@ -303,7 +303,8 @@ export function lessonVideos(moduleId:string,index:number,pathway:Pathway):Modul
  const extra=(extraVideos[moduleId+'-'+(index+1)]||[]).filter(x=>!x.style||x.style===pathway);
  const replaced=new Set(extra.map(x=>x.replaces).filter(Boolean));
  const added=extra.map((x):ModuleVideo=>({youtubeId:x.youtubeId,title:x.title,creator:x.creator,start:x.start||undefined,focus:x.focus||'What this lesson’s idea looks like in practice.'}));
- return [...baseVideos(moduleId,index,pathway).filter(v=>!v.url||!replaced.has(v.url)),...added];
+ // Paid courses are left out: every lesson video is free to watch.
+ return [...baseVideos(moduleId,index,pathway).filter(v=>!v.paid&&(!v.url||!replaced.has(v.url))),...added];
 }
 function baseVideos(moduleId:string,index:number,pathway:Pathway):ModuleVideo[]{
  const refs=lessonVideoRefs[moduleId]?.[index]??moduleLessons[moduleId]?.[index]?.videos??[];
