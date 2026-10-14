@@ -3,11 +3,12 @@ import React,{useEffect,useMemo,useRef,useState} from 'react';
 import {ArrowLeft,ArrowRight,Check,ChevronLeft,ChevronRight,Clock,Lock,Plus,Star,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go} from '../ui';
-import {courses,interests,interestFor,questionCount,nextQuestion,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,type Level,type Answer} from './programme';
+import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,maxPlans,plansOf,type Level,type Answer,type Visual} from './programme';
 
-const draftKey='fp-programme-draft-v2';
-type Draft={interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
-const emptyDraft=():Draft=>({interests:[],answers:[],daysPerWeek:5,startDate:today()});
+const draftKey='fp-programme-draft-v3';
+// seed: shuffles each question's answer order for this learner, so the position of an answer gives nothing away.
+type Draft={seed:string;age?:'adult'|'guardian';interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
+const emptyDraft=():Draft=>({seed:Math.random().toString(36).slice(2),interests:[],answers:[],daysPerWeek:5,startDate:today()});
 function readDraft():Draft{try{const d=JSON.parse(localStorage.getItem(draftKey)||'null');if(d&&Array.isArray(d.answers))return {...emptyDraft(),...d}}catch{}return emptyDraft()}
 function writeDraft(d:Draft){try{localStorage.setItem(draftKey,JSON.stringify(d))}catch{}}
 export function clearDraft(){try{localStorage.removeItem(draftKey)}catch{}}
@@ -37,10 +38,14 @@ export function VideographyHome(){
  </div>;
 }
 
+// A picture answer: a lesson image with a brightness filter, a colour tint, a crop and an optional thirds grid.
+function OptionPicture({v}:{v:Visual}){
+ return <span className="vg-q-visual" style={{backgroundImage:`url(${v.src})`,backgroundSize:(v.zoom??1)*100+'%',backgroundPosition:`${v.x??50}% ${v.y??50}%`,filter:v.filter}} aria-hidden="true">{v.tint&&<i style={{background:v.tint}}/>}{v.grid&&<b/>}</span>;
+}
 const steps=['Interests','12 questions','Your time','Review'] as const;
 
 export function ProgrammeStart(){
- const {user,loaded,mutate,busy}=useLearning();
+ const {s,user,loaded,mutate,busy}=useLearning();
  const [draft,setDraft]=useState<Draft>(emptyDraft);
  const [step,setStep]=useState(0);
  const [error,setError]=useState('');
@@ -53,18 +58,21 @@ export function ProgrammeStart(){
  // Each answer is final for this step; the next question depends on it.
  function answer(i:number){if(current)update({answers:[...draft.answers,{q:current.id,a:i}],level:undefined})}
  function back(){if(!draft.answers.length){setStep(0);return}update({answers:draft.answers.slice(0,-1),level:undefined})}
- const level:Level=draft.level||result?.level||'beginner';
+ // The level comes from the check; learners move up later by finishing a level.
+ const level:Level=result?.level||'beginner';
  const plan=schedule(level,draft.hoursPerWeek,draft.startDate,draft.daysPerWeek);
 
  async function create(){
   setError('');
   if(!user){writeDraft(draft);window.location.assign('/auth/google?return_to='+encodeURIComponent('/start?finish=1'));return}
-  const saved=await mutate('programme_save',{programme:{course:'videography',interests:draft.interests,answers:draft.answers,level,hoursPerWeek:plan.hoursPerWeek,daysPerWeek:plan.daysPerWeek,startDate:plan.startDate}});
-  if(saved){clearDraft();window.location.assign('/workspace')}else setError('Your plan could not be saved. Your answers are still here.');
+  const saved=await mutate('programme_save',{programme:{course:'videography',age:draft.age,interests:draft.interests,answers:draft.answers,level,hoursPerWeek:plan.hoursPerWeek,daysPerWeek:plan.daysPerWeek,startDate:plan.startDate}});
+  if(saved){clearDraft();const made=(saved as any).programme?.id;window.location.assign(made?'/workspace/'+made:'/workspace')}else setError('Your plan could not be saved. Your answers are still here.');
  }
  // Returning from Google sign-in: finish automatically with the saved draft.
  useEffect(()=>{if(!loaded||!user||autoFinished.current)return;if(new URLSearchParams(window.location.search).get('finish')==='1'){const d=readDraft();if(d.interests.length&&d.answers.length===questionCount){autoFinished.current=true;setDraft(d);setStep(3)}}},[loaded,user]);
 
+ // Up to three plans at a time: a fourth needs one deleted first.
+ if(loaded&&user&&plansOf(s).length>=maxPlans)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>You have {maxPlans} plans</h1><p className="lede">You can follow up to {maxPlans} plans at a time. Delete one from its page to make another.</p><Go href="/workspace">My courses</Go></Panel>;
  return <div className="vg-flow">
   <ol className="vg-stepper" aria-label="Plan setup steps">{steps.map((label,i)=><li key={label} className={i===step?'current':i<step?'done':''}><span>{i<step?<Check size={14}/>:i+1}</span>{label}</li>)}</ol>
 
@@ -74,16 +82,20 @@ export function ProgrammeStart(){
    {draft.interests.length>0&&<ol className="vg-chosen">{draft.interests.map((id,i)=><li key={id}>{i===0?<Star size={14} aria-label="Primary"/>:<span className="vg-rank">{i+1}</span>}{interestFor(id)?.label}{i>0&&<button type="button" className="vg-link" onClick={()=>update({interests:[id,...draft.interests.filter(x=>x!==id)]})}>Make main</button>}<button type="button" aria-label={'Remove '+interestFor(id)?.label} onClick={()=>update({interests:draft.interests.filter(x=>x!==id)})}><X size={14}/></button></li>)}</ol>}
    <div className="vg-chips">{interests.filter(i=>!draft.interests.includes(i.id)).map(i=><button type="button" key={i.id} className="vg-chip" onClick={()=>update({interests:[...draft.interests,i.id]})}><Plus size={14}/>{i.label}</button>)}</div>
    {draft.interests[0]&&<p className="small">Main project: <strong>{interestFor(draft.interests[0])!.label}</strong></p>}
-   <div className="button-row"><Button disabled={!draft.interests.length} onClick={()=>setStep(draft.answers.length===questionCount?2:1)}>Next: 12 quick questions <ArrowRight size={16}/></Button></div>
+   {!s.consent&&<fieldset className="vg-age"><legend>How old are you?</legend>
+    {([['adult','I’m 18 or older'],['guardian','I’m 13 to 17, and a parent or guardian agrees I can use FramePath']] as const).map(([id,label])=><label key={id}><input type="radio" name="age" checked={draft.age===id} onChange={()=>update({age:id})}/> {label}</label>)}
+    <p className="small">FramePath isn’t for children under 13. Learners under 18 can share their portfolio by link, but not publicly in Community.</p></fieldset>}
+   <div className="button-row"><Button disabled={!draft.interests.length||(!s.consent&&!draft.age)} onClick={()=>setStep(draft.answers.length===questionCount?2:1)}>Next: 12 quick questions <ArrowRight size={16}/></Button></div>
   </Panel>}
 
   {step===1&&<Panel className="vg-panel">
    <div className="row between"><span className="eyebrow">LEVEL CHECK · QUESTION {Math.min(draft.answers.length+1,questionCount)} OF {questionCount}</span></div>
    <div className="vg-progress" role="progressbar" aria-label="Level check progress" aria-valuemin={0} aria-valuemax={questionCount} aria-valuenow={draft.answers.length}><span style={{width:`${draft.answers.length/questionCount*100}%`}}/></div>
    {current?<>
+    {current.kind==='check'&&<span className="vg-check-tag">Quick skill check</span>}
     <h2 className="vg-question">{current.prompt}</h2>
-    <div className="vg-options" role="group" aria-label={current.prompt}>{current.options.map((o,i)=><button type="button" key={current.id+i} className="vg-option" onClick={()=>answer(i)}><span>{String.fromCharCode(65+i)}</span>{o}</button>)}</div>
-    <p className="small">Pick the answer most like you. There are no wrong answers. Questions get easier or harder as you go.</p>
+    <div className={'vg-options'+(current.options.some(o=>o.visual)?' visual':'')} role="group" aria-label={current.prompt}>{optionOrder(current,draft.seed).map((i,k)=>{const o=current.options[i];return <button type="button" key={current.id+i} className="vg-option" onClick={()=>answer(i)}>{o.visual?<><OptionPicture v={o.visual}/>{'Picture '+String.fromCharCode(65+k)}</>:<><span>{String.fromCharCode(65+k)}</span>{o.text}</>}</button>})}</div>
+    <p className="small">{current.kind==='check'?'One answer is right. If you don’t know, pick “Not sure”. Guessing only gives you a plan that’s too hard.':'Pick what you really did, not what sounds best. Honest answers give you a plan that isn’t too easy or too hard.'}</p>
    </>:<><h2 className="vg-question">All done. Let’s see your level.</h2></>}
    <div className="button-row"><Button variant="outline" onClick={back}><ArrowLeft size={16}/>Back</Button>{done&&<Button onClick={()=>setStep(2)}>See my level <ArrowRight size={16}/></Button>}</div>
   </Panel>}
@@ -91,8 +103,8 @@ export function ProgrammeStart(){
   {step===2&&result&&<Panel className="vg-panel">
    <span className="eyebrow">STEP 3 · YOUR TIME</span>
    <h1>Your level: <span className="vg-level">{levelNames[level]}</span></h1>
-   <p className="lede">{levelSummary[level]}. You can pick a different level if you like.</p>
-   <div className="vg-level-switch" role="radiogroup" aria-label="Starting level">{(['beginner','intermediate','advanced'] as Level[]).map(l=><button type="button" role="radio" aria-checked={level===l} key={l} className={level===l?'selected':''} onClick={()=>update({level:l===result.level?undefined:l,hoursPerWeek:undefined})}>{levelNames[l]}{l===result.level&&<small>Recommended</small>}</button>)}</div>
+   <p className="lede">{levelSummary[level]}. This is where your answers put you. Finish this level to move up.</p>
+   <p className="small">Skill checks: {result.checks.right} of {result.checks.total} right.</p>
    <div className="vg-time-grid">
     <div className="vg-stat"><Clock size={20}/><strong>{plan.recommendedHoursPerWeek} h / week</strong><span>Suggested for {rhythm[level].hours} hours of learning</span></div>
     <div className="vg-stat"><strong>{plan.weeks} weeks</strong><span>{formatDate(plan.startDate)} → {formatDate(plan.endDate)}</span></div>

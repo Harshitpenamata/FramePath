@@ -1,5 +1,6 @@
 import {V,pathwayVideos,videoLibrary,fromLibrary,pathwayLibrary,type ModuleVideo} from './media';
 import type {Pathway} from './programme';
+import lessonExtras from './lesson-videos.json';
 
 // Lessons inside a module: one per curriculum topic. Each lesson has Watch (an idea and videos)
 // and Reflect (a small interactive tool). Every module has lessons; Intermediate and Advanced are added below.
@@ -294,7 +295,18 @@ export const lessonVideoRefs:Record<string,string[][]>={
  B13:[['path'],[],['pathway1']],
  B14:[['threeActs'],['lib:B14-1','lib:B14-2'],['lib:B14-3'],['lib:B14-4']],
 };
+// Videos added from the filled-in lesson video sheet (scripts/import-lesson-videos.py), keyed '<module>-<lesson>'.
+// Each is added to its lesson, or replaces the video in "replaces"; "style" limits it to one style.
+type ExtraVideo={youtubeId?:string;url?:string;title:string;creator:string;start:number;focus:string;style:string;replaces:string};
+const extraVideos=lessonExtras as Record<string,ExtraVideo[]>;
 export function lessonVideos(moduleId:string,index:number,pathway:Pathway):ModuleVideo[]{
+ const extra=(extraVideos[moduleId+'-'+(index+1)]||[]).filter(x=>!x.style||x.style===pathway);
+ const replaced=new Set(extra.map(x=>x.replaces).filter(Boolean));
+ const added=extra.map((x):ModuleVideo=>({...(x.youtubeId?{youtubeId:x.youtubeId}:{url:x.url}),title:x.title,creator:x.creator,start:x.start||undefined,focus:x.focus||'What this lesson’s idea looks like in practice.'}));
+ // Paid courses are left out: every lesson video is free to watch.
+ return [...baseVideos(moduleId,index,pathway).filter(v=>!v.paid&&(!v.url||!replaced.has(v.url))),...added];
+}
+function baseVideos(moduleId:string,index:number,pathway:Pathway):ModuleVideo[]{
  const refs=lessonVideoRefs[moduleId]?.[index]??moduleLessons[moduleId]?.[index]?.videos??[];
  return refs.flatMap((ref):ModuleVideo[]=>{
   if(ref==='path')return pathwayLibrary(moduleId,pathway).map(v=>fromLibrary(v));
@@ -962,3 +974,23 @@ Object.assign(lessonVideoRefs,{
  A13:[['path'],[],[],[]],
  A14:[[],['lib:A14-1'],['lib:A14-3','lib:A14-4'],['lib:A14-2'],['lib:A14-5']],
 });
+
+// ---- Lesson completion: the task unlocks once every lesson in the module is finished.
+// A lesson is finished when each of its videos has been watched (YouTube/Vimeo: played for at least 70%;
+// videos on other sites: opened) and its practice tool has been solved.
+export const watchShare=0.7;
+// Switch for locking each module's task until its lessons are finished. Off during testing; progress is still
+// tracked, so turning it on later counts lessons already finished.
+export const requireLessonsForTask=false;
+export const videoId=(v:ModuleVideo)=>v.youtubeId?'yt:'+v.youtubeId+'@'+(v.start||0):v.vimeoId?'vm:'+v.vimeoId:'url:'+v.url;
+export type LessonMark={v:string[];t:boolean};
+// dead: video ids the health check found removed or not embeddable (app/video-health.ts). They don't count.
+export function lessonNeeds(moduleId:string,index:number,pathway:Pathway,dead:string[]=[]){return lessonVideos(moduleId,index,pathway).map(videoId).filter(id=>!dead.includes(id))}
+export function lessonFinished(moduleId:string,index:number,pathway:Pathway,mark?:LessonMark,dead:string[]=[]){
+ return !!mark?.t&&lessonNeeds(moduleId,index,pathway,dead).every(id=>mark.v.includes(id));
+}
+// How far a learner is through a module's lessons (marks come from state.lessonProgress[moduleKey]).
+export function lessonsStatus(moduleId:string,pathway:Pathway,marks:Record<string,LessonMark>|undefined,dead:string[]=[]){
+ const total=lessonsFor(moduleId).length,finished=lessonsFor(moduleId).map((_,i)=>lessonFinished(moduleId,i,pathway,marks?.[i],dead));
+ return {total,done:finished.filter(Boolean).length,finished};
+}

@@ -1,0 +1,46 @@
+/* Portfolio page, sharing controls, community gallery, likes and comments. Loaded only with these pages. */
+.cm-resume{display:grid;gap:22px}
+.cm-resume h2{margin:0}
+.cm-resume-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start}
+.cm-resume-head h1{margin:.15em 0 0}
+.cm-resume-head p{margin:.4em 0 0;max-width:62ch}
+.cm-resume-title{font-size:1.15rem;color:var(--muted-foreground)}
+.cm-avatar{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:color-mix(in srgb,var(--primary) 22%,var(--card));color:var(--primary);font-size:2.2rem;font-weight:800}
+.cm-resume-facts{display:flex;flex-wrap:wrap;gap:12px;margin:0}
+.cm-resume-facts>div{padding:12px 18px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);min-width:120px}
+.cm-resume-facts dt{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-foreground)}
+.cm-resume-facts dd{margin:4px 0 0;font-size:1.3rem;font-weight:800}
+.cm-skills ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.cm-skills li{padding:6px 12px;border:1px solid var(--border);border-radius:999px;font-size:.88rem}
+.cm-skills li strong{color:var(--primary);margin-right:4px}
+
+.cm-share{display:grid;gap:14px;margin-bottom:28px}
+.cm-share h2{margin:.2em 0 0}
+.cm-vis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cm-vis button{display:grid;gap:4px;justify-items:start;text-align:left;padding:14px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface-raised);color:var(--foreground);cursor:pointer;font:inherit}
+.cm-vis button.selected{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary)}
+.cm-vis button svg{color:var(--primary)}
+.cm-share-actions{display:flex;flex-wrap:wrap;gap:10px}
+
+.cm-social{display:grid;gap:10px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12)}
+.cm-social h3{margin:4px 0 0;font-size:1rem;color:#fff}
+.cm-like{display:inline-flex;gap:6px;align-items:center;width:max-content;padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:none;color:#eee;font:inherit;font-weight:700}
+button.cm-like{cursor:pointer}
+.cm-like.on{border-color:var(--primary);color:var(--primary)}
+.cm-like.on svg{fill:currentColor}
+.cm-comments{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.cm-comments li{padding:10px 12px;border-radius:var(--radius);background:rgba(255,255,255,.06)}
+.cm-comments p{margin:4px 0 0;font-size:.92rem}
+.cm-comment-head{display:flex;gap:8px;align-items:baseline}
+.cm-comment-tools{margin-left:auto;display:flex;gap:2px}
+.cm-comment-tools button{border:0;background:none;color:#aaa;cursor:pointer;padding:4px}
+.cm-comment-tools button:hover{color:#fff}
+.cm-form{display:grid;gap:8px;justify-items:start}
+.cm-form textarea{width:100%;font:inherit;padding:10px;border-radius:var(--radius);border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:#fff}
+.cm-tile-likes{display:inline-flex;gap:4px;align-items:center;font-size:.8rem;color:var(--muted-foreground)}
+
+@media (max-width:760px){
+ .cm-vis{grid-template-columns:1fr}
+ .cm-resume-head{grid-template-columns:1fr}
+ .cm-avatar{width:64px;height:64px;font-size:1.7rem}
+}

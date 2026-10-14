@@ -5,3 +5,17 @@ export async function readBoundedBody(req:Request,size:number){if(!req.body)thro
 export function verifyMediaHeader(bytes:Uint8Array,type:string){const starts=(v:number[])=>v.every((b,i)=>bytes[i]===b),ascii=(start:number,end:number)=>String.fromCharCode(...bytes.subarray(start,end));const ok=type==='image/jpeg'?starts([255,216,255]):type==='image/png'?starts([137,80,78,71,13,10,26,10]):type==='image/webp'?ascii(0,4)==='RIFF'&&ascii(8,12)==='WEBP':type==='video/webm'?starts([26,69,223,163]):['video/mp4','video/quicktime'].includes(type)&&['ftyp','moov','mdat','wide'].includes(ascii(4,8));if(!ok)throw new Error('The file does not match its declared image or video format. Export a supported file and try again.');}
 export function imageDataUrl(bytes:Uint8Array,type:string){let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));return 'data:'+type+';base64,'+btoa(binary);}
 export async function screenPracticeImage(bytes:Uint8Array,type:string){if(!claudeKey())throw Object.assign(new Error('Image safety screening is unavailable. No file was stored. Keep working with text or a labelled storyboard and try the image later.'),{status:503});let result:{safe:boolean;reason:string};try{result=await screenImageWithClaude({mediaType:type as any,base64:imageDataUrl(bytes,type).split(',')[1]})}catch(e){if(e instanceof AIRefused)throw Object.assign(new Error('This image cannot be used as pilot practice. Choose a harmless, non-sensitive example or continue with written notes. No file was stored.'),{status:422});throw Object.assign(new Error('Image safety screening is temporarily unavailable. No file was stored and no learning allowance was used.'),{status:503})}if(!result.safe)throw Object.assign(new Error('This image cannot be used as pilot practice. Choose a harmless, non-sensitive example or continue with written notes. No file was stored.'),{status:422});return {status:'image-screened',model:claudeModel};}
+// Streams a video upload of exactly `size` bytes to storage without holding it in memory. The first bytes are
+// checked against the declared type before anything is stored.
+export async function streamVideoBody(req:Request,size:number,type:string):Promise<ReadableStream>{
+ if(!req.body)throw new Error('The upload was empty.');
+ const reader=req.body.getReader(),head:Uint8Array[]=[];let got=0;
+ while(got<64){const {value,done}=await reader.read();if(done)break;head.push(value);got+=value.byteLength}
+ const first=new Uint8Array(got);let o=0;for(const c of head){first.set(c,o);o+=c.byteLength}
+ verifyMediaHeader(first,type);
+ let sent=0;const {readable,writable}=new FixedLengthStream(size);
+ const out=new ReadableStream({start(c){sent+=first.byteLength;c.enqueue(first)},async pull(c){const {value,done}=await reader.read();if(done){c.close();return}sent+=value.byteLength;if(sent>size){c.error(new Error('The upload is larger than declared.'));return}c.enqueue(value)}});
+ out.pipeTo(writable).catch(()=>{});
+ return readable;
+}
+

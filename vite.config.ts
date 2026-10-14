@@ -49,6 +49,8 @@ const deployConfig = {
   routes: [{ pattern: target.domain, custom_domain: true }],
   d1_databases: [{ binding: d1, database_name: target.d1.name, database_id: target.d1.id }],
   r2_buckets: [{ binding: r2, bucket_name: target.r2 }],
+  // Hourly: lesson video health checks and queued AI work (build/sites-worker.ts → app/jobs.ts).
+  triggers: { crons: ["17 * * * *"] },
 };
 
 export default defineConfig(async ({ command }) => {

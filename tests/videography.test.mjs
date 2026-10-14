@@ -19,50 +19,63 @@ test('every module has three assessment checks and becomes a scoreable lesson',(
  assert.equal(P.videoPaths.length,3);assert.ok(P.videoPaths.every(p=>p.lessons.length===14));
 });
 
-test('question bank: start question plus easy, medium and hard questions for every skill area',()=>{
+const best=q=>q.options.reduce((b,o,i,a)=>o.score>a[b].score?i:b,0),worst=q=>q.options.reduce((b,o,i,a)=>o.score<a[b].score?i:b,0);
+const notSure=q=>q.options.findIndex(o=>o.text==='Not sure');
+const mid=q=>q.kind==='check'?0:q.tier==='start'?2:Math.min(2,q.options.length-1);
+test('question bank: habit and skill-check questions at every tier for every skill area',()=>{
  assert.equal(P.questionCount,12);
- for(const a of P.skillAreas)for(const tier of ['easy','medium','hard'])assert.ok(P.questions.some(q=>q.area===a.id&&q.tier===tier),a.id+' '+tier);
- assert.ok(P.questions.every(q=>q.options.length===4&&q.scores.length===4));
+ for(const a of P.skillAreas)for(const kind of ['habit','check'])for(const tier of ['easy','medium','hard'])assert.ok(P.questions.some(q=>q.area===a.id&&q.kind===kind&&q.tier===tier),a.id+' '+kind+' '+tier);
  assert.equal(new Set(P.questions.map(q=>q.id)).size,P.questions.length,'ids are unique');
+ for(const q of P.questions.filter(q=>q.kind==='check')){assert.equal(q.options[0].score,Math.max(...q.options.map(o=>o.score)),q.id+' right answer is first in data');assert.ok(notSure(q)>0,q.id+' has Not sure')}
+ for(const q of P.questions)for(const o of q.options)for(const sentence of [q.prompt,o.text])assert.ok(sentence.split(/\s+/).length<=20,q.id);
 });
 
-test('adaptive: a brand-new learner only gets easy questions and starts at Beginner',()=>{
- const path=answers(0);assert.equal(path.length,12);
- const tiers=path.slice(1).map(x=>P.questions.find(q=>q.id===x.q).tier);
- assert.ok(tiers.every(t=>t==='easy'),tiers.join(','));
- const r=P.assess(path);assert.equal(r.level,'beginner');assert.equal(r.score,0);
+test('answer order is shuffled per learner, with "Not sure" kept last',()=>{
+ const q=P.questions.find(q=>q.id==='cam-cm');
+ const orders=['a','b','c','d','e','f'].map(seed=>P.optionOrder(q,seed));
+ for(const o of orders){assert.deepEqual([...o].sort(),[0,1,2,3]);assert.equal(o[o.length-1],notSure(q))}
+ assert.ok(new Set(orders.map(o=>o.join())).size>1,'different learners see different orders');
+ assert.ok(orders.some(o=>o[0]!==0),'the right answer is not always first');
 });
 
-test('adaptive: a professional gets hard questions and starts at Advanced',()=>{
- const path=answers(3);
- const tiers=path.slice(1).map(x=>P.questions.find(q=>q.id===x.q).tier);
- assert.ok(tiers.every(t=>t==='hard'),tiers.join(','));
- const r=P.assess(path);assert.equal(r.level,'advanced');assert.ok(Object.values(r.areas).every(v=>v>=95),JSON.stringify(r.areas));
+test('adaptive: a brand-new learner gets easy questions and starts at Beginner',()=>{
+ const path=answers(worst);assert.equal(path.length,12);
+ assert.ok(path.slice(1).every(x=>P.questions.find(q=>q.id===x.q).tier==='easy'));
+ const r=P.assess(path);assert.equal(r.level,'beginner');assert.equal(r.checks.right,0);
 });
 
-test('adaptive: middle answers get medium questions and start at Intermediate',()=>{
- const path=answers(2);
- const tiers=path.slice(1).map(x=>P.questions.find(q=>q.id===x.q).tier);
- assert.ok(tiers.includes('medium'),tiers.join(','));
- assert.equal(P.assess(path).level,'intermediate');
+test('adaptive: a real professional gets hard questions and starts at Advanced',()=>{
+ const path=answers(best);
+ assert.ok(path.slice(1).every(x=>P.questions.find(q=>q.id===x.q).tier==='hard'));
+ const r=P.assess(path);assert.equal(r.level,'advanced');assert.equal(r.checks.right,6);
 });
 
-test('adaptive: questions get harder after strong answers and easier after weak ones',()=>{
- // Strong start, then weak answers: the check should step down to easy questions.
- const path=answers(q=>q.id==='start'?3:0);
+test('claiming pro habits but missing the skill checks does not give Advanced',()=>{
+ const bluff=answers(q=>q.kind==='check'?notSure(q):best(q));
+ const r=P.assess(bluff);assert.notEqual(r.level,'advanced');
+ assert.ok(Object.values(r.areas).every(v=>v<70),JSON.stringify(r.areas));
+ const guess=answers(q=>q.kind==='check'?1:best(q));assert.notEqual(P.assess(guess).level,'advanced');
+});
+
+test('adaptive: some experience and correct checks start at Intermediate',()=>{
+ const path=answers(mid);
+ assert.equal(P.assess(path).level,'intermediate',JSON.stringify(P.assess(path)));
+});
+
+test('adaptive: questions get easier after weak answers',()=>{
+ const path=answers(q=>q.id==='start'?best(q):worst(q));
  const tiers=path.map(x=>P.questions.find(q=>q.id===x.q).tier);
  assert.equal(tiers[1],'hard');assert.ok(tiers.slice(-3).every(t=>t==='easy'),tiers.join(','));
  assert.equal(P.assess(path).level,'beginner');
 });
 
 test('assessment rejects tampered or incomplete answer lists',()=>{
- const good=answers(1);
+ const good=answers(best);
  assert.throws(()=>P.assess(good.slice(0,11)));
- const swapped=good.map((x,i)=>i===3?{...x,q:'plan-h2'}:x);assert.throws(()=>P.assess(swapped),/Something went wrong/);
+ const swapped=good.map((x,i)=>i===3?{...x,q:'plan-hm'}:x);assert.throws(()=>P.assess(swapped),/Something went wrong/);
  assert.throws(()=>P.assess(good.map((x,i)=>i===5?{...x,a:7}:x)));
  assert.throws(()=>P.assess([1,2,3]));
- // A high level can't be faked by answering the start question low and the rest high.
- const noFilm=answers(q=>q.id==='start'?0:3);assert.equal(P.assess(noFilm).level,'beginner');
+ const noFilm=answers(q=>q.id==='start'?worst(q):best(q));assert.equal(P.assess(noFilm).level,'beginner');
 });
 
 test('schedule follows the recommended rhythm and only lets learners add hours',()=>{
@@ -75,12 +88,12 @@ test('schedule follows the recommended rhythm and only lets learners add hours',
 
 test('server-side programme build validates input and recomputes derived values',()=>{
  const today=P.today();
- const p=P.buildProgramme({course:'videography',interests:['wildlife','wedding'],answers:answers(2),hoursPerWeek:12,startDate:P.addDays(today,7),daysPerWeek:6});
+ const p=P.buildProgramme({course:'videography',interests:['wildlife','wedding'],answers:answers(mid),hoursPerWeek:12,startDate:P.addDays(today,7),daysPerWeek:6});
  assert.equal(p.level,'intermediate');assert.equal(p.primaryPathway,'Documentary');assert.equal(p.schedule.hoursPerWeek,12);assert.equal(p.schedule.weeks,12);assert.equal(p.mode,null);
- assert.throws(()=>P.buildProgramme({course:'photography',interests:['wedding'],answers:answers(1)}));
- assert.throws(()=>P.buildProgramme({course:'videography',interests:[],answers:answers(1)}));
- assert.throws(()=>P.buildProgramme({course:'videography',interests:['not-real'],answers:answers(1)}));
- const far=P.buildProgramme({course:'videography',interests:['travel'],answers:answers(1),startDate:'2099-01-01'});assert.equal(far.schedule.startDate,today,'out-of-range start falls back to today');
+ assert.throws(()=>P.buildProgramme({course:'photography',interests:['wedding'],answers:answers(best)}));
+ assert.throws(()=>P.buildProgramme({course:'videography',interests:[],answers:answers(best)}));
+ assert.throws(()=>P.buildProgramme({course:'videography',interests:['not-real'],answers:answers(best)}));
+ const far=P.buildProgramme({course:'videography',interests:['travel'],answers:answers(best),startDate:'2099-01-01'});assert.equal(far.schedule.startDate,today,'out-of-range start falls back to today');
  const updated=P.buildProgramme({...p,mode:'self'},p);assert.deepEqual(updated.assessment,p.assessment,'updates keep the saved assessment');
  // Regression: changing hours after the start date has passed must not reset the start date to today.
  const started={...p,schedule:{...p.schedule,startDate:P.addDays(today,-21)}};const moreHours=P.buildProgramme({...started,hoursPerWeek:14,startDate:started.schedule.startDate},started);assert.equal(moreHours.schedule.startDate,P.addDays(today,-21));assert.equal(moreHours.schedule.hoursPerWeek,14);
@@ -178,4 +191,80 @@ test('video library: every row is used on a lesson, and every module has library
  for(const p of P.pathways)for(const lv of ['B13','I13','A13'])assert.ok(M.pathwayLibrary(lv,p).length>0,lv+' '+p);
  for(const v of M.videoLibrary){assert.ok(v.youtubeId||/^https:\/\//.test(v.url),v.id);assert.ok(v.title&&v.creator,v.id)}
  const timed=Les.lessonVideos('B05',2,'Wedding')[0];assert.equal(timed.start,417);
+});
+
+test('a lesson is finished only when every video is watched and the tool is solved',()=>{
+ const needs=Les.lessonNeeds('B01',0,'Wedding');assert.ok(needs.length>=2,'B01 lesson 1 has several videos');
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',undefined),false);
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs,t:false}),false,'tool not solved');
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs.slice(1),t:true}),false,'a video not watched');
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs,t:true}),true);
+ const noVideo=P.curriculumModules.flatMap(m=>Les.lessonsFor(m.id).map((_,i)=>[m.id,i])).find(([id,i])=>Les.lessonNeeds(id,i,'Wedding').length===0);
+ // Every lesson has a video today; if one ever has none, the tool alone finishes it.
+ if(noVideo)assert.equal(Les.lessonFinished(noVideo[0],noVideo[1],'Wedding',{v:[],t:true}),true,'tool alone finishes a lesson with no video');
+ const marks=Object.fromEntries(Les.lessonsFor('B02').map((_,i)=>[i,{v:Les.lessonNeeds('B02',i,'Wedding'),t:true}]));
+ assert.deepEqual(Les.lessonsStatus('B02','Wedding',marks),{total:5,done:5,finished:[true,true,true,true,true]});
+ delete marks[2];assert.equal(Les.lessonsStatus('B02','Wedding',marks).done,4);
+ assert.ok(Les.lessonNeeds('B13',0,'Wedding').join()!==Les.lessonNeeds('B13',0,'Travel').join(),'style lessons follow the learner’s pathway');
+});
+
+test('Reflect: every lesson has 2 or 3 sound questions about the lesson or its videos',()=>{
+ const Les=load(path.join(root,'app/videography/lessons.ts'));
+ const bank=Object.assign({},...['beginner','intermediate','advanced'].map(l=>JSON.parse(fs.readFileSync(path.join(root,'app/videography/reflect/'+l+'.json'),'utf8'))));
+ for(const [id,lessons] of Object.entries(Les.moduleLessons)){
+  assert.equal(bank[id]?.length,lessons.length,id+': one question set per lesson');
+  bank[id].forEach((qs,i)=>{
+   assert.ok(qs.length>=2&&qs.length<=3,id+' lesson '+(i+1)+': 2 or 3 questions');
+   for(const q of qs){
+    assert.ok(q.q.length>15&&q.why.length>10,id+': question and explanation are written');
+    assert.equal(q.options.length,3,id+': three answers');
+    assert.equal(new Set(q.options.map(o=>o[0])).size,3,id+': answers differ');
+    for(const [text,feedback] of q.options.slice(1))assert.ok(text&&feedback,id+': wrong answers have feedback');
+    assert.ok(!q.options.some(o=>/(all|none) of the above/i.test(o[0])),id+': no all/none of the above');
+    // The right answer must not stand out by length.
+    const lens=q.options.map(o=>o[0].length),others=Math.max(...lens.slice(1));
+    assert.ok(lens[0]<=others*1.6+10,id+': right answer is not much longer than the others: '+q.q);
+    // It must not repeat the lesson's idea (which the sketch draws).
+    assert.ok(!lessons[i].idea.toLowerCase().includes(q.options[0][0].toLowerCase().replace(/\.$/,'')),id+': answer is not the idea sentence');
+   }
+  });
+ }
+});
+
+test('a new plan always starts at the level its check recommends',()=>{
+ const base={course:'videography',interests:['wedding'],answers:answers(0)};
+ const assessed=P.buildProgramme(base).level;
+ for(const asked of ['beginner','intermediate','advanced'])assert.equal(P.buildProgramme({...base,level:asked}).level,assessed);
+ // Later updates (moving up) keep or change the level they are given.
+ const p=P.buildProgramme(base);assert.equal(P.buildProgramme({...p,level:'intermediate'},p).level,'intermediate');
+});
+
+test('plans: each plan follows its first interest’s style; up to three plans',()=>{
+ const doc=P.interests.find(i=>i.pathway==='Documentary').id,wed=P.interests.find(i=>i.pathway==='Wedding').id;
+ const p=P.buildProgramme({course:'videography',interests:[doc,wed],answers:answers(0)});
+ assert.equal(p.primaryPathway,'Documentary');
+ // An update keeps the plan's style.
+ assert.equal(P.buildProgramme({...p,interests:[wed]},p).primaryPathway,'Documentary');
+ assert.equal(P.maxPlans,3);
+ assert.deepEqual(P.plansOf({programme:p}),[p]);assert.deepEqual(P.plansOf({plans:[p,p]}),[p,p]);assert.deepEqual(P.plansOf({}),[]);
+ assert.equal(P.planTitle(p),'Videography · Documentary');
+ assert.equal(P.styleModuleKeys.length,3);
+});
+
+test('every lesson has a video, and lesson videos are free and can all be shown inside FramePath',()=>{
+ const Les=load(path.join(root,'app/videography/lessons.ts'));
+ const blocked=['studiobinder.com','helpx.adobe.com','deitymic.com','collab.sundance.org','unscripted.com','learnlightandsound.com','dslrvideoshooter.com'];
+ for(const id of Object.keys(Les.moduleLessons))Les.lessonsFor(id).forEach((_,i)=>{assert.ok(P.pathways.some(pw=>Les.lessonVideos(id,i,pw).length),id+'-'+(i+1)+' has a video');for(const pw of P.pathways)for(const v of Les.lessonVideos(id,i,pw)){
+  assert.ok(!v.paid,id+'-'+(i+1)+': no paid videos');
+  assert.ok(!v.url||!blocked.some(b=>v.url.includes(b)),id+'-'+(i+1)+': no links that refuse to show inside FramePath ('+v.url+')');
+ }});
+});
+
+test('dead lesson videos do not count toward finishing a lesson',()=>{
+ const Les=load(path.join(root,'app/videography/lessons.ts'));
+ const needs=Les.lessonNeeds('B01',0,'Wedding');assert.ok(needs.length>=2);
+ const dead=[needs[0]];
+ assert.deepEqual(Les.lessonNeeds('B01',0,'Wedding',dead),needs.slice(1));
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs.slice(1),t:true}),false,'without the dead list the missing video counts');
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs.slice(1),t:true},dead),true,'a dead video is not needed');
 });

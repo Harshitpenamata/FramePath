@@ -1,9 +1,10 @@
 'use client';
 import React,{useState} from 'react';
-import {ArrowRight,BookOpen,CalendarClock,Check,Gift,Lock,PlayCircle,Sparkles,Target,UserRound} from 'lucide-react';
+import {ArrowRight,BookOpen,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
+import {toast} from 'sonner';
 import {useLearning,Panel,Go,Badge,isExplore} from '../ui';
-import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,type Programme,type Level,type Mode} from './programme';
+import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
 
 const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
@@ -65,32 +66,70 @@ function StartDate({p,busy,update}:{p:Programme;busy:boolean;update:(u:any)=>Pro
 const modes:{id:Mode;title:string;price:string;Icon:any;points:string[]}[]=[
  {id:'free',title:'Free',price:'₹0',Icon:BookOpen,points:['A learning path made for you','Videos, notes and pictures for every module',`Tasks in the first ${freeModuleCount} modules`]},
  {id:'self',title:'Self-paced',price:'₹999 / year',Icon:Sparkles,points:['Every task, with your work saved','AI checks and feedback on your work','Build a portfolio and track progress']},
- {id:'mentor',title:'Mentor-led',price:'₹30,000',Icon:UserRound,points:['A mentor from the beginning','Your mentor checks your plan and work each week','Everything in Self-paced']},
 ];
 
-export function ProgrammeDashboard(){
+// My courses (/workspace): the learner's plans as tiles, up to three across all courses. Opening one shows its page.
+export function MyCourses(){
+ const {s,user,loaded,mutate,busy}=useLearning();
+ if(!loaded)return <Panel><p role="status">Opening your courses…</p></Panel>;
+ const plans=plansOf(s);
+ return <div className="vg-dashboard">
+  <section><span className="eyebrow">MY COURSES · {plans.length} OF {maxPlans}</span><h1>My courses</h1><p className="lede">The plans you’ve made for yourself. You can follow up to {maxPlans} at a time, across any course.</p></section>
+  <div className="vg-course-grid">
+   {plans.map(p=>{const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]||s.planProgress?.[p.id!]?.[moduleKey(p.level,i)]).length;
+    return <a key={p.id} className={'vg-course'+(p.id===s.programme?.id?' active':'')} href={'/workspace/'+p.id}>
+     <span className="eyebrow">{(courseNames[p.course]||p.course).toUpperCase()} · {levelNames[p.level].toUpperCase()}</span>
+     <h3>{p.primaryPathway}</h3>
+     <div className="vg-course-bar" aria-hidden="true"><span style={{width:Math.round(done/mods.length*100)+'%'}}/></div>
+     <span className="small">{done} / {mods.length} modules · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</span>
+     <span className="vg-course-open">{done?'Continue':'Open'} <ArrowRight size={15}/></span>
+    </a>})}
+   {plans.length<maxPlans?<a className="vg-course add" href="/start"><span className="vg-course-addbtn"><Plus size={22}/><strong>{plans.length?'Make another plan':'Make your first plan'}</strong><span className="small">Pick a course, answer a short level check and set your time.</span></span></a>
+    :<div className="vg-course add"><span className="vg-course-addbtn"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one from its page to make another.</span></span></div>}
+  </div>
+  {!plans.length&&s.profile&&<div className="button-row"><Go href="/workspace/previous" outline>Open my previous learning</Go><Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button></div>}
+  {!user&&<p className="small">Sign in to keep your plans and work.</p>}
+ </div>;
+}
+
+// One plan's page (/workspace/<id>): its report, dates, how you learn and its modules. Opening it makes it the
+// current plan, so lessons and tasks follow its level and style.
+export function PlanPage({id}:{id:string}){
+ const {s,loaded,mutate}=useLearning();
+ const plan=plansOf(s).find(p=>p.id===id);
+ const needsOpen=loaded&&!!plan&&s.programme?.id!==id;
+ React.useEffect(()=>{if(needsOpen)void mutate('plan_open',{id})},[needsOpen,id]);
+ if(!loaded||needsOpen)return <Panel><p role="status">Opening your plan…</p></Panel>;
+ if(!plan)return <Panel className="vg-empty"><h1>Plan not found</h1><p>It may have been deleted.</p><Go href="/workspace">My courses</Go></Panel>;
+ return <ProgrammeDashboard/>;
+}
+
+function ProgrammeDashboard(){
  const {s,user,loaded,mutate,busy}=useLearning();
  const [hours,setHours]=useState<number|null>(null);
  const [upgrading,setUpgrading]=useState(false);
  if(!loaded)return <Panel><p role="status">Opening your plan…</p></Panel>;
  const p:Programme|undefined=s.programme;
- if(!p)return <Panel className="vg-empty"><span className="eyebrow">YOUR PROGRAMME</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}</div></Panel>;
+ if(!p)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}{s.profile&&<Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button>}</div></Panel>;
  const selfActive=isExplore(s),mentorActive=['paid','active'].includes(s.craft?.status);
  const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]).length;
  const nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(p.level,i)]);
  const update=(u:any)=>mutate('programme_update',{update:u});
- async function chooseMode(m:Mode){const saved=await update({mode:m});if(!saved)return;if(m==='self'&&!selfActive)window.location.assign('/membership?return_to=%2Fworkspace');if(m==='mentor'&&!mentorActive)window.location.assign('/mentors')}
+ async function chooseMode(m:Mode){const saved=await update({mode:m});if(!saved)return;if(m==='self'&&!selfActive)window.location.assign('/membership?return_to=%2Fworkspace')}
  // Once a mode is settled (Free chosen, or a paid mode active), the choice moves behind an Upgrade button.
- const decided=mentorActive||selfActive&&p.mode!=='mentor'||p.mode==='free';
- const rank:Record<Mode,number>={free:0,self:1,mentor:2},current:Mode=mentorActive?'mentor':selfActive?'self':'free';
+ // How you learn: Free or Self-paced. Mentorship will run as its own short and long courses (coming soon).
+ const paid=selfActive||mentorActive;
+ const decided=paid||p.mode==='free';
+ const rank:Record<Mode,number>={free:0,self:1,mentor:2},current:Mode=paid?'self':'free';
  const shown=decided?modes.filter(m=>rank[m.id]>rank[current]):modes;
  const preview=(hours:number)=>schedule(p.level,hours,p.schedule.startDate,p.schedule.daysPerWeek);
  return <div className="vg-dashboard">
   <section className="vg-report-head">
-   <div><span className="eyebrow">YOUR LEVEL REPORT · VIDEOGRAPHY</span><h1>Your {levelNames[p.level]} plan</h1><p className="lede">{levelSummary[p.level]}</p>
-    <div className="vg-tags">{p.interests.map((id,i)=><Badge key={id} tone={i===0?'green':''}>{i===0&&'★ '}{interestFor(id)?.label}</Badge>)}</div></div>
+   <div><div className="breadcrumbs"><a href="/workspace">My courses</a><span>/</span><span>{planTitle(p)}</span></div><span className="eyebrow">{(courseNames[p.course]||p.course).toUpperCase()} · {levelNames[p.level].toUpperCase()} LEVEL</span><h1>{p.primaryPathway}</h1><p className="lede">{levelSummary[p.level]}</p>
+    </div>
    <div className="vg-head-side"><div className="vg-score"><strong>{done}/{mods.length}</strong><span>modules done</span></div>
-    {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>{current==='free'?'Upgrade':'Get a mentor'}</Button>}</div>
+    <div className="vg-head-actions">{decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
+     <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div></div>
   </section>
 
   <div className="vg-report-grid">
@@ -108,37 +147,56 @@ export function ProgrammeDashboard(){
   </div>
 
   {(!decided||upgrading)&&shown.length>0&&<section id="vg-modes"><span className="eyebrow">HOW YOU LEARN</span><h2>{decided?'Upgrade your learning':'How do you want to learn?'}</h2>
-   <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?selfActive:m.id==='mentor'?mentorActive:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}>
+   <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?paid:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}>
     <div className="row between"><m.Icon size={26}/>{chosen&&<Badge tone="green">Your mode</Badge>}</div><h3>{m.title}</h3><strong className="vg-price">{m.price}</strong>
     <ul>{m.points.map(x=><li key={x}><Check size={15}/>{x}</li>)}</ul>
-    {m.id!=='free'&&chosen&&!active&&<p className="small">{m.id==='self'?'Finish the practice checkout to unlock every task.':'Choose your mentor to continue.'}</p>}
-    <Button variant={chosen?'default':'outline'} disabled={busy} onClick={()=>chooseMode(m.id)}>{chosen?(active?'Selected':m.id==='self'?'Complete checkout':'Choose a mentor'):m.id==='free'?'Learn free':m.id==='self'?'Go self-paced':'Choose a mentor'}</Button>
+    {m.id==='self'&&chosen&&!active&&<p className="small">Finish the practice checkout to unlock every task.</p>}
+    <Button variant={chosen?'default':'outline'} disabled={busy} onClick={()=>chooseMode(m.id)}>{chosen?(active?'Selected':'Complete checkout'):m.id==='free'?'Learn free':'Go self-paced'}</Button>
    </Panel>})}</div>
-   <p className="small">This is a test version. Checkout takes no money and mentors are made up.</p>
+   <p className="small">This is a test version. Checkout takes no money.</p>
    {decided&&<Button variant="ghost" onClick={()=>setUpgrading(false)}>Not now</Button>}
   </section>}
 
   <ModuleList p={p}/>
+  <DeletePlan id={p.id!}/>
   {nextIndex>=0&&<div className="vg-sticky-next"><Go href={`/explore/${'video-'+p.level}/${nextIndex}`}><PlayCircle size={18}/>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}</Go></div>}
  </div>;
 }
 
+// Modules grouped by stage (Ideas, Planning, Filming…), each group opening like a drop-down.
+// The group with the learner's next module starts open.
 export function ModuleList({p,level}:{p?:Programme;level?:Level}){
  const {s}=useLearning();
  const lv:Level=level||p?.level||'beginner';
  const entitled=isExplore(s)||['paid','active'].includes(s.craft?.status);
- const mods=modulesFor(lv);
+ const mods=modulesFor(lv),nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(lv,i)]);
+ const groups=stageOrder.map(stage=>({stage,items:mods.map((m,i)=>({m,i})).filter(x=>x.m.stageLabel===stage)})).filter(g=>g.items.length);
  return <section className="vg-modules"><span className="eyebrow">YOUR MODULES · {levelNames[lv].toUpperCase()}</span><h2>Start here and work down</h2>
-  <ol>{mods.map((m,i)=>{const key=moduleKey(lv,i),done=!!s.progress?.[key],free=i<freeModuleCount;return <li key={m.id} className={done?'done':''}>
-   <a href={`/explore/video-${lv}/${i}`}><span className="vg-mod-id" style={{background:stageColor[m.stageLabel]}}>{done?<Check size={16}/>:m.id}</span>
-    <span className="vg-mod-body"><strong>{moduleLesson(m,projectLabel(p)).title}</strong><span className="small">{m.stageLabel} · {m.hours} h · Task: {m.taskName}</span></span>
-    <span className="vg-mod-access">{free?<Badge tone="green"><Gift size={12}/> Free task</Badge>:entitled?<Badge>Task</Badge>:<span className="small"><Lock size={12}/> Task in Self-paced</span>}</span></a></li>})}</ol></section>;
+  {groups.map(g=>{const done=g.items.filter(x=>s.progress?.[moduleKey(lv,x.i)]).length,all=done===g.items.length;return <details key={g.stage} className={'vg-stage-group'+(all?' done':'')} open={g.items.some(x=>x.i===nextIndex)||(nextIndex<0&&g===groups[0])}>
+   <summary><span className="vg-stage-dot" style={{background:stageColor[g.stage]}}>{all?<Check size={14}/>:null}</span><strong>{g.stage}</strong><span className="small">{g.items.length} module{g.items.length>1?'s':''} · {done} done</span><ChevronDown size={18} className="vg-stage-chev"/></summary>
+   <ol>{g.items.map(({m,i})=>{const key=moduleKey(lv,i),done=!!s.progress?.[key],free=i<freeModuleCount;return <li key={m.id} className={done?'done':''}>
+    <a href={`/explore/video-${lv}/${i}`}><span className="vg-mod-id" style={{background:stageColor[m.stageLabel]}}>{done?<Check size={16}/>:m.id}</span>
+     <span className="vg-mod-body"><strong>{moduleLesson(m,projectLabel(p)).title}</strong><span className="small">{m.stageLabel} · {m.hours} h · Task: {m.taskName}</span></span>
+     <span className="vg-mod-access">{free?<Badge tone="green"><Gift size={12}/> Free task</Badge>:entitled?<Badge>Task</Badge>:<span className="small"><Lock size={12}/> Task in Self-paced</span>}</span></a></li>})}</ol>
+  </details>})}</section>;
 }
 
-// Explore: every Videography module at each level. Videos and notes are free to watch.
-export function ExploreModules(){
- const {s}=useLearning();
- return <div className="vg-dashboard"><section><span className="eyebrow">EXPLORE · VIDEOGRAPHY</span><h1>All modules</h1><p className="lede">Watch any module for free. {s.programme?'Your plan is on your Journey page.':'Answer 12 quick questions to get a plan made for you.'}</p>{!s.programme&&<Go href="/start">Make my plan</Go>}</section>
-  {levels.map(l=><ModuleList key={l} level={l} p={s.programme}/>)}
- </div>;
+// Delete this plan: keep the work (hand-ins, feedback and progress stay) or delete the plan's work too.
+function DeletePlan({id}:{id:string}){
+ const {mutate,busy}=useLearning();
+ const [open,setOpen]=useState(false);
+ async function run(keepWork:boolean){
+  const ask=keepWork?'Delete this plan? Your hand-ins, feedback and progress stay.'
+   :'Delete this plan and its work? Hand-ins and lesson progress for this level are removed, unless another of your plans is at the same level. This can’t be undone.';
+  if(!window.confirm(ask))return;
+  if(await mutate('plan_delete',{id,keepWork}))window.location.assign('/workspace');
+ }
+ return <section className="vg-delete-plan">{open?<>
+  <h2>Delete this plan</h2>
+  <div className="vg-delete-options">
+   <div><strong>Delete the plan, keep my work</strong><p className="small">The plan goes. Hand-ins, feedback and progress stay, so a new plan at this level picks up where you are.</p><Button variant="outline" disabled={busy} onClick={()=>run(true)}>Delete plan only</Button></div>
+   <div><strong>Delete the plan and its work</strong><p className="small">Also removes this level’s hand-ins and lesson progress, unless another plan uses the same level. Can’t be undone.</p><Button variant="destructive" disabled={busy} onClick={()=>run(false)}>Delete plan and work</Button></div>
+  </div>
+  <Button variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button>
+ </>:<Button variant="ghost" className="vg-delete-open" onClick={()=>setOpen(true)}><Trash2 size={16}/>Delete this plan</Button>}</section>;
 }

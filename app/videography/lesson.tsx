@@ -1,13 +1,13 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,BookOpen,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
+import {ArrowLeft,ArrowRight,BookOpen,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import {useLearning,Go,Action,Panel,Badge,Gate,UploadField} from '../ui';
 import {blockingModule,moduleHref,moduleInfo} from '../learning-rules';
-import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn} from './programme';
-import {LessonsTab,canPractise,taskLabel} from './module-context';
-import {waitingTips} from './lessons';
+import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
+import {LessonsTab,canPractise,taskLabel,useDeadVideos} from './module-context';
+import {waitingTips,lessonsFor,lessonsStatus,requireLessonsForTask} from './lessons';
 import {LevelClosure} from './closure';
 
 type FileRef={id:string;name:string;type:string};
@@ -22,26 +22,35 @@ const toHandIn=(d:Draft):HandIn=>({answer:d.answer,notes:d.notes,url:d.url,uploa
 // The last module of a level also has Finish, which closes the level.
 const oldTabs:Record<string,string>={watch:'lessons',make:'task',reflect:'feedback'};
 export function VideoLesson({moduleKey:key}:{moduleKey:string}){
- const {s,loaded}=useLearning();
+ const {s,loaded,mutate}=useLearning();
  const parsed=parseVideoKey(key)!;
+ // Learners only see modules from their own plans. Opening a module of another of their plans opens that plan.
+ const plans=plansOf(s),own=plans.find(p=>p.id===s.programme?.id&&p.level===parsed.level)||plans.find(p=>p.level===parsed.level);
+ const switching=loaded&&!!own&&own.id!==s.programme?.id;
+ useEffect(()=>{if(switching)void mutate('plan_open',{id:own!.id})},[switching]);
  const [tab,setTab]=useState('lessons');
+ const [lessonAt,setLessonAt]=useState<{index:number;count:number}|null>(null);
+ // Next module appears once the learner reaches the last lesson of this module (or has handed in its task).
+ const atLastLesson=!!lessonAt&&lessonAt.index>=lessonAt.count-1;
  const [reviewNow,setReviewNow]=useState('');
  const mods=modulesFor(parsed.level),lesson=moduleLesson(parsed.module,projectLabel(s.programme));
  const last=parsed.index===mods.length-1;
  useEffect(()=>{const q=new URLSearchParams(window.location.search).get('tab')||'';const t=oldTabs[q]||q;if(['task','feedback'].includes(t)||t==='finish'&&last)setTab(t)},[]);
  const prev=parsed.index>0?moduleKey(parsed.level,parsed.index-1):null,next=parsed.index<mods.length-1?moduleKey(parsed.level,parsed.index+1):null;
+ if(loaded&&!own)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>This module isn’t in your plans</h1><p className="lede">You can open modules from the plans you’ve made. Make a plan at this level to see it.</p><div className="button-row"><Go href="/workspace">My courses</Go>{plans.length<maxPlans&&<Go href="/start" outline>Make a plan</Go>}</div></Panel>;
+ if(!loaded||switching)return <Panel><p role="status">Opening your plan…</p></Panel>;
  return <div className="vg-lesson">
-  <div className="breadcrumbs"><a href="/workspace">My journey</a><span>/</span><a href={'/explore/video-'+parsed.level}>All {parsed.level} modules</a></div>
+  <div className="breadcrumbs"><a href="/workspace">My courses</a><span>/</span><a href={'/workspace/'+own!.id}>{planTitle(own!)}</a></div>
   <div className="row between"><Badge>MODULE {parsed.index+1} / {mods.length}</Badge><span className="small"><Clock size={15}/> {parsed.module.hours} h</span></div>
   <h1>{lesson.title}</h1>
   <Tabs value={tab} onValueChange={setTab}>
    <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons"><BookOpen/>Lessons</TabsTrigger><TabsTrigger value="task"><Clapperboard/>Task</TabsTrigger><TabsTrigger value="feedback"><MessageCircle/>Feedback</TabsTrigger>{last&&<TabsTrigger value="finish"><Flag/>Finish</TabsTrigger>}</TabsList>
-   <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}}/></TabsContent>
+   <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}} onLesson={(index,count)=>setLessonAt({index,count})}/></TabsContent>
    <TabsContent value="task">{loaded&&<TaskTab moduleKey={key} onHandedIn={id=>{setReviewNow(id);setTab('feedback')}}/>}</TabsContent>
    <TabsContent value="feedback">{loaded&&<FeedbackTab moduleKey={key} requestFor={reviewNow} onFinish={last?()=>setTab('finish'):undefined}/>}</TabsContent>
    {last&&<TabsContent value="finish">{loaded&&<LevelClosure level={parsed.level}/>}</TabsContent>}
   </Tabs>
-  <div className="button-row between">{prev?<Go outline href={moduleHref(prev)}><ArrowLeft size={16}/>Previous module</Go>:<span/>}{next&&<Go outline href={moduleHref(next)}>Next module<ArrowRight size={16}/></Go>}</div>
+  <div className="button-row between">{prev?<Go outline href={moduleHref(prev)}><ArrowLeft size={16}/>Previous module</Go>:<span/>}{next&&(atLastLesson||s.progress?.[key])?<Go outline href={moduleHref(next)}>Next module<ArrowRight size={16}/></Go>:<span/>}</div>
  </div>;
 }
 
@@ -57,6 +66,11 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
  const selfCheck=needsSelfCheck(key),missing=handInMissing(m,toHandIn(draft),selfCheck);
  if(!entitled)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Choose Self-paced to do this task.</h2><p>On the Free plan, only the tasks in the first two modules are open. Choose the Self-paced plan (₹999/year) to unlock this task and every task after it, with AI reviews and your portfolio. You can still watch this module for free.</p><div className="button-row"><Go href={'/membership?return_to='+encodeURIComponent(moduleHref(key)+'?tab=task')}>Choose Self-paced</Go><Go outline href="/mentors">Learn with a mentor</Go></div></Panel>;
  if(blocker)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Hand in the module before this one first.</h2><p>Finish “{moduleInfo(blocker).lesson.title}” to unlock this task. You can still watch this module.</p><Go href={moduleHref(blocker)+'?tab=task'}>Go to that module</Go></Panel>;
+ // The task opens once every lesson in this module is finished (videos watched, practice tools solved).
+ const dead=useDeadVideos();
+ const lessons=lessonsFor(m.id),lessonState=lessonsStatus(m.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[key],dead);
+ if(requireLessonsForTask&&lessonState.done<lessonState.total)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Finish the lessons to unlock this task.</h2><p>{lessonState.done} of {lessonState.total} lessons done. In each lesson, watch the videos and answer the Reflect questions.</p>
+  <ol className="vg-unlock-list">{lessons.map((l,i)=><li key={l.title} className={lessonState.finished[i]?'ok':''}>{lessonState.finished[i]?<Check size={16}/>:<span>{i+1}</span>}<a className="text-link" href={moduleHref(key)+'?lesson='+(i+1)}>{l.title}</a></li>)}</ol></Panel>;
  async function handIn(){
   const state=await mutate('video_submit',{key,answer:draft.answer,notes:draft.notes,url:draft.url,uploadIds:draft.files.map(f=>f.id),ratings:draft.ratings,reflections:draft.reflections});
   if(!state)return;
@@ -67,7 +81,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
  return <Gate><div className="vg-make">
   <section className="vg-task-brief"><span className="eyebrow">{taskLabel(m.id)}</span><h2>{m.taskName}</h2><p className="vg-task-do">{lesson.do}</p>
    <div className="vg-task-meta"><div><strong>Good work looks like this</strong><p>{m.evidence}</p></div><div><strong>How it’s checked</strong><ul>{lesson.checks.map(c=><li key={c}>{c}</li>)}</ul></div></div>
-   {handedIn>0&&<p className="small">You have handed this in {handedIn} time{handedIn>1?'s':''}. Handing in again adds a new piece to My Work.</p>}</section>
+   {handedIn>0&&<p className="small">You have handed this in {handedIn} time{handedIn>1?'s':''}. Handing in again adds a new piece to My Work. Each module includes 2 AI reviews in total.</p>}</section>
 
   <Panel className="vg-form-block vg-handin"><h2><FileText size={18}/> {m.handIn==='text'?'1. Write your answer':'1. Hand in your work'}</h2>
    {m.handIn==='text'&&<label>Your answer <span className="small">({draft.answer.trim().length}/80 characters minimum)</span><textarea rows={9} maxLength={6000} value={draft.answer} onChange={e=>update({answer:e.target.value})} placeholder="Write your answer here. You don’t need to upload a document."/></label>}
@@ -100,7 +114,8 @@ function WaitingTips(){
  return <Panel className="vg-waiting"><p role="status"><span className="vg-spinner" aria-hidden="true"/>AI is reviewing your work. This can take up to a minute…</p><p className="vg-tip"><span className="eyebrow">WHILE YOU WAIT</span>{waitingTips[i]}</p></Panel>;
 }
 
-type Review={id:string;submissionId?:string;createdAt:number;review:{total:number|null;summary:string;strength:string;improvement:string;nextStep:string;evidenceLimit:string;criteria:{label:string;rating:number|null;feedback:string}[]}};
+type Flag={reason:string;status:'open'|'fine'|'refunded';note:string};
+type Review={id:string;flag?:Flag|null;submissionId?:string;createdAt:number;review:{total:number|null;summary:string;strength:string;improvement:string;nextStep:string;evidenceLimit:string;criteria:{label:string;rating:number|null;feedback:string}[]}};
 function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;requestFor:string;onFinish?:()=>void}){
  const {s}=useLearning();
  const piece=s.submissions.find((x:any)=>x.key===key);
@@ -114,24 +129,43 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
  }
  useEffect(()=>{if(piece)load()},[piece?.id]);
  // Straight after a hand-in, ask for the AI review automatically.
- useEffect(()=>{if(requestFor&&piece?.id===requestFor&&reviews&&!reviews.some(r=>r.submissionId===requestFor))requestReview(requestFor)},[requestFor,reviews]);
+ // Only when a review is left; otherwise the learner sees why this piece has no review.
+ useEffect(()=>{if(requestFor&&piece?.id===requestFor&&reviews&&allowance?.eligible&&allowance.used<allowance.limit&&!reviews.some(r=>r.submissionId===requestFor))requestReview(requestFor)},[requestFor,reviews,allowance]);
  if(!piece)return <Panel className="empty"><h2>Nothing to review yet.</h2><p>Hand in your work in Task. Then your AI review shows here.</p></Panel>;
  const review=reviews?.find(r=>r.submissionId===piece.id);
  const canReview=allowance?.eligible&&allowance.used<allowance.limit;
  const rated=Array.isArray(piece.selfRatings);
  return <div className="vg-reflect">
   {status&&<WaitingTips/>}
+  {!review&&allowance?.queued>0&&<p className="notice" role="status">Your AI review is in the queue. AI is paused for a short while, so it will run soon and show up here, usually within a few hours. You don’t need to do anything.</p>}
   {review?<Panel className="vg-ai-review">
    <div className="row between"><h2><Sparkles size={20}/> AI review</h2>{review.review.total!==null?<strong className="vg-ai-score">{Math.round(review.review.total)}<small>/100</small></strong>:<Badge>Not enough to score every check</Badge>}</div>
    <p>{review.review.summary}</p>
    <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>AI</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label} className={gap?'gap':''}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span>{gap&&<span className="small vg-gap">You and the AI see this differently. Read the note above and try again.</span>}</td>{rated&&<td>{mine??'–'}/4</td>}<td>{c.rating??'–'}/4</td></tr>})}</tbody></table>
    <div className="vg-review-notes"><p><strong>What worked:</strong> {review.review.strength}</p><p><strong>What to improve:</strong> {review.review.improvement}</p><p><strong>Try next (under 30 minutes):</strong> {review.review.nextStep}</p><p className="small"><strong>What the AI couldn’t check:</strong> {review.review.evidenceLimit}</p></div>
+   <ReviewFlag review={review}/>
   </Panel>:!status&&<Panel><h2>AI review</h2>
    {error&&<p role="alert" className="notice">{error}</p>}
-   {canReview?<><p>Get feedback on the work you handed in.</p><Button onClick={()=>requestReview(piece.id)}>Get my AI review</Button></>:allowance&&<p>You have used both AI reviews for this module. Your own rating is below.</p>}
+   {canReview?<><p>Get feedback on the work you handed in.</p><Button onClick={()=>requestReview(piece.id)}>Get my AI review</Button></>:allowance&&<p>{allowance.eligible?'You’ve used both AI reviews for this module, so this hand-in won’t get one. It’s saved in My Work.':'AI reviews for this module are part of Self-paced. Your work is saved in My Work.'}{rated?' Your own rating is below.':''}</p>}
   </Panel>}
   {rated&&<Panel><h2>What you said</h2><p className="small">Your rating: {piece.selfScore}/100</p><p><strong>What went well:</strong> {piece.reflections?.well}</p><p><strong>What you would change:</strong> {piece.reflections?.change}</p></Panel>}
-  {allowance&&<p className="small">AI reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} The AI reads your text and photos. It can’t watch videos or open links.</p>}
+  {allowance&&<p className="small">AI reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} The AI reads your text and photos, and watches your videos and YouTube or Google Drive links, picture and sound.</p>}
   <div className="button-row"><Go href={'/portfolio?from='+encodeURIComponent(key)} outline>See it in My Work</Go>{onFinish&&<Button onClick={onFinish}><Flag size={16}/>Finish the level</Button>}</div>
  </div>;
 }
+
+// "This feedback seems wrong": the learner tells us, an admin checks it on /admin and replies here.
+const flagReasons:[string,string][]=[['missed','It says something is missing, but it’s in my work'],['video','It describes the video or sound wrongly'],['score','The score doesn’t match the feedback'],['task','It reviewed it against the wrong task'],['other','Something else']];
+function ReviewFlag({review}:{review:Review}){
+ const [flag,setFlag]=useState<Flag|null>(review.flag||null),[open,setOpen]=useState(false),[reason,setReason]=useState(''),[details,setDetails]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ if(flag)return <p className={'small vg-flag-state '+flag.status} role="status">{flag.status==='open'?'You flagged this review. We’re checking it and will reply here.':flag.status==='refunded'?'We checked: this review was wrong, so it no longer counts. You can ask for another review.':'We checked this review and it stands.'}{flag.note&&<><br/><strong>FramePath:</strong> {flag.note}</>}</p>;
+ if(!open)return <button type="button" className="text-link small vg-flag-open" onClick={()=>setOpen(true)}>This feedback seems wrong</button>;
+ async function send(){setBusy(true);setError('');try{const r=await fetch('/api/review/flag',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewId:review.id,reason,details})});const d:any=await r.json();if(!r.ok)throw Error(d.error);setFlag(d.flag)}catch(e:any){setError(e.message||'That didn’t send. Please try again.')}finally{setBusy(false)}}
+ return <div className="vg-flag-form"><strong>What seems wrong?</strong>
+  <div className="vg-pick" role="radiogroup" aria-label="What seems wrong">{flagReasons.map(([id,label])=><button type="button" role="radio" aria-checked={reason===id} key={id} className={reason===id?'ok':''} onClick={()=>setReason(id)}>{label}</button>)}</div>
+  <textarea rows={3} maxLength={1000} value={details} onChange={e=>setDetails(e.target.value)} placeholder="Tell us what it got wrong (optional). For example: the sound is clear at 0:10." aria-label="Details"/>
+  {error&&<p role="alert" className="field-error">{error}</p>}
+  <div className="button-row"><Button size="sm" disabled={!reason||busy} onClick={send}>{busy?'Sending…':'Send'}</Button><Button size="sm" variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button></div>
+ </div>;
+}
+
