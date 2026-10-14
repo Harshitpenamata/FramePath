@@ -7,7 +7,7 @@ import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,ass
 
 const draftKey='fp-programme-draft-v3';
 // seed: shuffles each question's answer order for this learner, so the position of an answer gives nothing away.
-type Draft={seed:string;interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
+type Draft={seed:string;age?:'adult'|'guardian';interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
 const emptyDraft=():Draft=>({seed:Math.random().toString(36).slice(2),interests:[],answers:[],daysPerWeek:5,startDate:today()});
 function readDraft():Draft{try{const d=JSON.parse(localStorage.getItem(draftKey)||'null');if(d&&Array.isArray(d.answers))return {...emptyDraft(),...d}}catch{}return emptyDraft()}
 function writeDraft(d:Draft){try{localStorage.setItem(draftKey,JSON.stringify(d))}catch{}}
@@ -65,7 +65,7 @@ export function ProgrammeStart(){
  async function create(){
   setError('');
   if(!user){writeDraft(draft);window.location.assign('/auth/google?return_to='+encodeURIComponent('/start?finish=1'));return}
-  const saved=await mutate('programme_save',{programme:{course:'videography',interests:draft.interests,answers:draft.answers,level,hoursPerWeek:plan.hoursPerWeek,daysPerWeek:plan.daysPerWeek,startDate:plan.startDate}});
+  const saved=await mutate('programme_save',{programme:{course:'videography',age:draft.age,interests:draft.interests,answers:draft.answers,level,hoursPerWeek:plan.hoursPerWeek,daysPerWeek:plan.daysPerWeek,startDate:plan.startDate}});
   if(saved){clearDraft();const made=(saved as any).programme?.id;window.location.assign(made?'/workspace/'+made:'/workspace')}else setError('Your plan could not be saved. Your answers are still here.');
  }
  // Returning from Google sign-in: finish automatically with the saved draft.
@@ -82,7 +82,10 @@ export function ProgrammeStart(){
    {draft.interests.length>0&&<ol className="vg-chosen">{draft.interests.map((id,i)=><li key={id}>{i===0?<Star size={14} aria-label="Primary"/>:<span className="vg-rank">{i+1}</span>}{interestFor(id)?.label}{i>0&&<button type="button" className="vg-link" onClick={()=>update({interests:[id,...draft.interests.filter(x=>x!==id)]})}>Make main</button>}<button type="button" aria-label={'Remove '+interestFor(id)?.label} onClick={()=>update({interests:draft.interests.filter(x=>x!==id)})}><X size={14}/></button></li>)}</ol>}
    <div className="vg-chips">{interests.filter(i=>!draft.interests.includes(i.id)).map(i=><button type="button" key={i.id} className="vg-chip" onClick={()=>update({interests:[...draft.interests,i.id]})}><Plus size={14}/>{i.label}</button>)}</div>
    {draft.interests[0]&&<p className="small">Main project: <strong>{interestFor(draft.interests[0])!.label}</strong></p>}
-   <div className="button-row"><Button disabled={!draft.interests.length} onClick={()=>setStep(draft.answers.length===questionCount?2:1)}>Next: 12 quick questions <ArrowRight size={16}/></Button></div>
+   {!s.consent&&<fieldset className="vg-age"><legend>How old are you?</legend>
+    {([['adult','I’m 18 or older'],['guardian','I’m 13 to 17, and a parent or guardian agrees I can use FramePath']] as const).map(([id,label])=><label key={id}><input type="radio" name="age" checked={draft.age===id} onChange={()=>update({age:id})}/> {label}</label>)}
+    <p className="small">FramePath isn’t for children under 13. Learners under 18 can share their portfolio by link, but not publicly in Community.</p></fieldset>}
+   <div className="button-row"><Button disabled={!draft.interests.length||(!s.consent&&!draft.age)} onClick={()=>setStep(draft.answers.length===questionCount?2:1)}>Next: 12 quick questions <ArrowRight size={16}/></Button></div>
   </Panel>}
 
   {step===1&&<Panel className="vg-panel">
