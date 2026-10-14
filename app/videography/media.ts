@@ -87,7 +87,7 @@ export const pathwayVideos:Record<Pathway,ModuleVideo[]>={
  Advertising:[v('n8o4ON2vePA','8 Tips to Make Better Product Videos','Austen Paul','Every shot should show a product benefit.'),v('jt6DVwCwZPk','5 Tips to Make Cinematic Product Commercials','Austen Paul','Use light and movement to reveal the product.')],
 };
 
-// ---- The curated video library (Video_Library_Module_by_Module_Merged.xlsx, imported by scripts/import-video-library.py)
+// ---- The curated video library (docs/sources/Video_Library_Module_by_Module_Merged.xlsx, imported by scripts/import-video-library.py)
 export const videoLibrary=library;
 const firstSentence=(s:string)=>(s.match(/^.*?[.!?](\s|$)/)?.[0]||s).trim();
 const wholeLesson=(s:string)=>!s||/^whole focused lesson/i.test(s);
