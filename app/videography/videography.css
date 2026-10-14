@@ -431,3 +431,10 @@ ol.vg-video-list{list-style:none;margin:0;padding:0}
 .vg-site-close{border:0;background:none;color:var(--foreground);cursor:pointer;padding:4px}
 .vg-site-box iframe{width:100%;height:100%;border:0;background:#fff}
 .vg-site-note{margin:0;padding:8px 14px;border-top:1px solid var(--border)}
+/* Delete this plan. */
+.vg-delete-plan{display:grid;gap:12px;justify-items:start;padding-top:12px;border-top:1px solid var(--border)}
+.vg-delete-plan h2{margin:0}
+.vg-delete-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;width:100%}
+.vg-delete-options>div{display:grid;gap:6px;justify-items:start;padding:14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card)}
+.vg-delete-options p{margin:0}
+.vg-delete-open{color:var(--muted-foreground)}

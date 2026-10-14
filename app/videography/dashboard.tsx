@@ -1,6 +1,6 @@
 'use client';
 import React,{useState} from 'react';
-import {ArrowRight,BookOpen,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,UserRound,X} from 'lucide-react';
+import {ArrowRight,BookOpen,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Badge,isExplore} from '../ui';
 import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,pathways,stylesOf,maxStyles,styleModuleKeys,type Programme,type Level,type Mode,type Pathway} from './programme';
@@ -74,7 +74,7 @@ export function ProgrammeDashboard(){
  const [upgrading,setUpgrading]=useState(false);
  if(!loaded)return <Panel><p role="status">Opening your plan…</p></Panel>;
  const p:Programme|undefined=s.programme;
- if(!p)return <Panel className="vg-empty"><span className="eyebrow">YOUR PROGRAMME</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}</div></Panel>;
+ if(!p)return <Panel className="vg-empty"><span className="eyebrow">YOUR PROGRAMME</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}{s.profile&&<Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button>}</div></Panel>;
  const selfActive=isExplore(s),mentorActive=['paid','active'].includes(s.craft?.status);
  const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]).length;
  const nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(p.level,i)]);
@@ -121,6 +121,7 @@ export function ProgrammeDashboard(){
   </section>}
 
   <ModuleList p={p}/>
+  <DeletePlan/>
   {nextIndex>=0&&<div className="vg-sticky-next"><Go href={`/explore/${'video-'+p.level}/${nextIndex}`}><PlayCircle size={18}/>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}</Go></div>}
  </div>;
 }
@@ -141,6 +142,26 @@ export function ModuleList({p,level}:{p?:Programme;level?:Level}){
      <span className="vg-mod-body"><strong>{moduleLesson(m,projectLabel(p)).title}</strong><span className="small">{m.stageLabel} · {m.hours} h · Task: {m.taskName}</span></span>
      <span className="vg-mod-access">{free?<Badge tone="green"><Gift size={12}/> Free task</Badge>:entitled?<Badge>Task</Badge>:<span className="small"><Lock size={12}/> Task in Self-paced</span>}</span></a></li>})}</ol>
   </details>})}</section>;
+}
+
+// Delete this plan: keep the work (redo the level check, keep hand-ins and progress) or start completely fresh.
+function DeletePlan(){
+ const {mutate,busy}=useLearning();
+ const [open,setOpen]=useState(false);
+ async function run(keepWork:boolean){
+  const ask=keepWork?'Delete this plan? Your hand-ins, feedback and progress stay. You can make a new plan any time.'
+   :'Delete this plan and everything in it? Your Videography hand-ins, lesson progress and your older previous learning plan will be removed. This can’t be undone.';
+  if(!window.confirm(ask))return;
+  if(await mutate('plan_delete',{keepWork}))window.location.assign('/start');
+ }
+ return <section className="vg-delete-plan">{open?<>
+  <h2>Delete this plan</h2>
+  <div className="vg-delete-options">
+   <div><strong>Delete the plan, keep my work</strong><p className="small">Your level, dates and styles go. Hand-ins, feedback and progress stay, so a new plan picks up where you are.</p><Button variant="outline" disabled={busy} onClick={()=>run(true)}>Delete plan only</Button></div>
+   <div><strong>Delete everything and start fresh</strong><p className="small">Also removes your Videography hand-ins, lesson progress and your older previous learning plan. Can’t be undone.</p><Button variant="destructive" disabled={busy} onClick={()=>run(false)}>Delete everything</Button></div>
+  </div>
+  <Button variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button>
+ </>:<Button variant="ghost" className="vg-delete-open" onClick={()=>setOpen(true)}><Trash2 size={16}/>Delete this plan</Button>}</section>;
 }
 
 // My courses: up to three styles, each a tile with its own progress. Core modules are shared; each style

@@ -140,6 +140,23 @@ case 'switch_request':{if(s.craft?.status!=='active')throw new Error('Activate C
 case 'switch_accept':{if(!s.craft?.switchRequest)throw new Error('No mentor change is pending.');s.craft.mentorId=s.craft.switchRequest.mentorId;s.craft.slot=s.craft.switchRequest.slot;s.craft.switchRequest=null;break;}
 case 'portfolio_save':{s.portfolio.title=safeText(b.title,100,1);s.portfolio.bio=safeText(b.bio,1500);const ids=Array.isArray(b.ids)?b.ids:[];if(ids.length>9||new Set(ids).size!==ids.length||ids.some((x:string)=>!s.submissions.find((v:any)=>v.id===x)))throw new Error('Select up to nine of your submissions.');s.portfolio.ids=ids;portfolioChange=republish(s);break;}
 case 'portfolio_publish':{if(b.consent!==true)throw new Error('Confirm that the selected work may be shared publicly.');if(!s.portfolio.ids.length)throw new Error('Select at least one portfolio piece first.');s.portfolio.visibility=b.visibility==='public'?'public':'unlisted';s.portfolio.token=s.portfolio.token||id();portfolioChange={token:s.portfolio.token,data:publicPortfolio(s),visibility:s.portfolio.visibility};break;}
+// Deletes the learner's plan. keepWork: only the plan goes (level, dates, styles); hand-ins and progress stay, and a
+// new plan at the same level picks them up. Otherwise everything from the plan goes too: Videography progress,
+// lesson progress and hand-ins (and their portfolio pieces), and the older "previous learning" plan.
+case 'plan_delete':{
+ // previous: only the older previous learning plan.
+ if(b.previous===true){s.profile=null;break}
+ s.programme=null;delete s.styleProgress;
+ if(b.keepWork!==true){
+  const isVideo=(k:string)=>k.startsWith('video-');
+  for(const k of Object.keys(s.progress||{}))if(isVideo(k))delete s.progress[k];
+  delete s.lessonProgress;
+  const gone=new Set(s.submissions.filter((x:any)=>isVideo(String(x.key))).map((x:any)=>x.id));
+  s.submissions=s.submissions.filter((x:any)=>!gone.has(x.id));
+  s.portfolio.ids=s.portfolio.ids.filter((x:string)=>!gone.has(x));portfolioChange=republish(s);
+  s.profile=null;
+ }
+ break;}
 case 'portfolio_unpublish':{if(s.portfolio.token)portfolioChange={removeToken:s.portfolio.token};s.portfolio.token=null;break;}
 default:throw new Error('That action is not available.')}
 let next:number;if(reflectionChange){const encoded=JSON.stringify(s);const results=await db().batch([db().prepare('UPDATE learners SET data=?,revision=revision+1,updated_at=? WHERE user_id=? AND revision=?').bind(encoded,Date.now(),user.userId,revision),db().prepare('INSERT INTO reflection_attempts(id,user_id,module_key,data,created_at) SELECT ?,?,?,?,? WHERE EXISTS(SELECT 1 FROM learners WHERE user_id=? AND revision=? AND data=?)').bind(reflectionChange.id,user.userId,reflectionChange.key,JSON.stringify(reflectionChange),Date.now(),user.userId,revision+1,encoded)]);if(!results[0].meta.changes)throw Object.assign(new Error('Your learning changed in another tab. Refresh and retry.'),{status:409});next=revision+1}else if(portfolioChange){const encoded=JSON.stringify(s);const update=db().prepare('UPDATE learners SET data=?,revision=revision+1,updated_at=? WHERE user_id=? AND revision=?').bind(encoded,Date.now(),user.userId,revision);const condition='EXISTS (SELECT 1 FROM learners WHERE user_id=? AND revision=? AND data=?)';const change=portfolioChange.removeToken?db().prepare('DELETE FROM portfolios WHERE token=? AND user_id=? AND '+condition).bind(portfolioChange.removeToken,user.userId,user.userId,revision+1,encoded):db().prepare('INSERT INTO portfolios(token,user_id,data,visibility,updated_at) SELECT ?,?,?,?,? WHERE '+condition+' ON CONFLICT(token) DO UPDATE SET data=excluded.data,visibility=excluded.visibility,updated_at=excluded.updated_at').bind(portfolioChange.token,user.userId,portfolioChange.data,portfolioChange.visibility,Date.now(),user.userId,revision+1,encoded);const results=await db().batch([update,change]);if(!results[0].meta.changes)throw Object.assign(new Error('Your learning changed in another tab. Refresh and try again.'),{status:409});next=revision+1}else{next=await saveState(user.userId,s,revision)}return Response.json({state:s,revision:next,usage:await usage(user.userId,s)},{headers:{'Cache-Control':'no-store'}});
