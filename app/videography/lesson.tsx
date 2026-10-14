@@ -5,7 +5,7 @@ import {Button} from '@/components/ui/button';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import {useLearning,Go,Action,Panel,Badge,Gate,UploadField} from '../ui';
 import {blockingModule,moduleHref,moduleInfo} from '../learning-rules';
-import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn} from './programme';
+import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
 import {LessonsTab,canPractise,taskLabel} from './module-context';
 import {waitingTips,lessonsFor,lessonsStatus,requireLessonsForTask} from './lessons';
 import {LevelClosure} from './closure';
@@ -22,8 +22,12 @@ const toHandIn=(d:Draft):HandIn=>({answer:d.answer,notes:d.notes,url:d.url,uploa
 // The last module of a level also has Finish, which closes the level.
 const oldTabs:Record<string,string>={watch:'lessons',make:'task',reflect:'feedback'};
 export function VideoLesson({moduleKey:key}:{moduleKey:string}){
- const {s,loaded}=useLearning();
+ const {s,loaded,mutate}=useLearning();
  const parsed=parseVideoKey(key)!;
+ // Learners only see modules from their own plans. Opening a module of another of their plans opens that plan.
+ const plans=plansOf(s),own=plans.find(p=>p.id===s.programme?.id&&p.level===parsed.level)||plans.find(p=>p.level===parsed.level);
+ const switching=loaded&&!!own&&own.id!==s.programme?.id;
+ useEffect(()=>{if(switching)void mutate('plan_open',{id:own!.id})},[switching]);
  const [tab,setTab]=useState('lessons');
  const [lessonAt,setLessonAt]=useState<{index:number;count:number}|null>(null);
  // Next module appears once the learner reaches the last lesson of this module (or has handed in its task).
@@ -33,8 +37,10 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
  const last=parsed.index===mods.length-1;
  useEffect(()=>{const q=new URLSearchParams(window.location.search).get('tab')||'';const t=oldTabs[q]||q;if(['task','feedback'].includes(t)||t==='finish'&&last)setTab(t)},[]);
  const prev=parsed.index>0?moduleKey(parsed.level,parsed.index-1):null,next=parsed.index<mods.length-1?moduleKey(parsed.level,parsed.index+1):null;
+ if(loaded&&!own)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>This module isn’t in your plans</h1><p className="lede">You can open modules from the plans you’ve made. Make a plan at this level to see it.</p><div className="button-row"><Go href="/workspace">My courses</Go>{plans.length<maxPlans&&<Go href="/start" outline>Make a plan</Go>}</div></Panel>;
+ if(!loaded||switching)return <Panel><p role="status">Opening your plan…</p></Panel>;
  return <div className="vg-lesson">
-  <div className="breadcrumbs"><a href="/workspace">My journey</a><span>/</span><a href={'/explore/video-'+parsed.level}>All {parsed.level} modules</a></div>
+  <div className="breadcrumbs"><a href="/workspace">My courses</a><span>/</span><a href={'/workspace/'+own!.id}>{planTitle(own!)}</a></div>
   <div className="row between"><Badge>MODULE {parsed.index+1} / {mods.length}</Badge><span className="small"><Clock size={15}/> {parsed.module.hours} h</span></div>
   <h1>{lesson.title}</h1>
   <Tabs value={tab} onValueChange={setTab}>

@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 import {ArrowRight,BookOpen,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Badge,isExplore} from '../ui';
-import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,pathways,stylesOf,maxStyles,styleModuleKeys,type Programme,type Level,type Mode,type Pathway} from './programme';
+import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
 
 const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
@@ -68,13 +68,49 @@ const modes:{id:Mode;title:string;price:string;Icon:any;points:string[]}[]=[
  {id:'mentor',title:'Mentor-led',price:'₹30,000',Icon:UserRound,points:['A mentor from the beginning','Your mentor checks your plan and work each week','Everything in Self-paced']},
 ];
 
-export function ProgrammeDashboard(){
+// My courses (/workspace): the learner's plans as tiles, up to three across all courses. Opening one shows its page.
+export function MyCourses(){
+ const {s,user,loaded,mutate,busy}=useLearning();
+ if(!loaded)return <Panel><p role="status">Opening your courses…</p></Panel>;
+ const plans=plansOf(s);
+ return <div className="vg-dashboard">
+  <section><span className="eyebrow">MY COURSES · {plans.length} OF {maxPlans}</span><h1>My courses</h1><p className="lede">The plans you’ve made for yourself. You can follow up to {maxPlans} at a time, across any course.</p></section>
+  <div className="vg-course-grid">
+   {plans.map(p=>{const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]||s.planProgress?.[p.id!]?.[moduleKey(p.level,i)]).length;
+    return <a key={p.id} className={'vg-course'+(p.id===s.programme?.id?' active':'')} href={'/workspace/'+p.id}>
+     <span className="eyebrow">{(courseNames[p.course]||p.course).toUpperCase()} · {levelNames[p.level].toUpperCase()}</span>
+     <h3>{p.primaryPathway}</h3>
+     <div className="vg-course-bar" aria-hidden="true"><span style={{width:Math.round(done/mods.length*100)+'%'}}/></div>
+     <span className="small">{done} / {mods.length} modules · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</span>
+     <span className="vg-course-open">{done?'Continue':'Open'} <ArrowRight size={15}/></span>
+    </a>})}
+   {plans.length<maxPlans?<a className="vg-course add" href="/start"><span className="vg-course-addbtn"><Plus size={22}/><strong>{plans.length?'Make another plan':'Make your first plan'}</strong><span className="small">Pick a course, answer a short level check and set your time.</span></span></a>
+    :<div className="vg-course add"><span className="vg-course-addbtn"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one from its page to make another.</span></span></div>}
+  </div>
+  {!plans.length&&s.profile&&<div className="button-row"><Go href="/workspace/previous" outline>Open my previous learning</Go><Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button></div>}
+  {!user&&<p className="small">Sign in to keep your plans and work.</p>}
+ </div>;
+}
+
+// One plan's page (/workspace/<id>): its report, dates, how you learn and its modules. Opening it makes it the
+// current plan, so lessons and tasks follow its level and style.
+export function PlanPage({id}:{id:string}){
+ const {s,loaded,mutate}=useLearning();
+ const plan=plansOf(s).find(p=>p.id===id);
+ const needsOpen=loaded&&!!plan&&s.programme?.id!==id;
+ React.useEffect(()=>{if(needsOpen)void mutate('plan_open',{id})},[needsOpen,id]);
+ if(!loaded||needsOpen)return <Panel><p role="status">Opening your plan…</p></Panel>;
+ if(!plan)return <Panel className="vg-empty"><h1>Plan not found</h1><p>It may have been deleted.</p><Go href="/workspace">My courses</Go></Panel>;
+ return <ProgrammeDashboard/>;
+}
+
+function ProgrammeDashboard(){
  const {s,user,loaded,mutate,busy}=useLearning();
  const [hours,setHours]=useState<number|null>(null);
  const [upgrading,setUpgrading]=useState(false);
  if(!loaded)return <Panel><p role="status">Opening your plan…</p></Panel>;
  const p:Programme|undefined=s.programme;
- if(!p)return <Panel className="vg-empty"><span className="eyebrow">YOUR PROGRAMME</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}{s.profile&&<Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button>}</div></Panel>;
+ if(!p)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}{s.profile&&<Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button>}</div></Panel>;
  const selfActive=isExplore(s),mentorActive=['paid','active'].includes(s.craft?.status);
  const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]).length;
  const nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(p.level,i)]);
@@ -87,13 +123,11 @@ export function ProgrammeDashboard(){
  const preview=(hours:number)=>schedule(p.level,hours,p.schedule.startDate,p.schedule.daysPerWeek);
  return <div className="vg-dashboard">
   <section className="vg-report-head">
-   <div><span className="eyebrow">YOUR LEVEL REPORT · VIDEOGRAPHY</span><h1>Your {levelNames[p.level]} plan</h1><p className="lede">{levelSummary[p.level]}</p>
+   <div><div className="breadcrumbs"><a href="/workspace">My courses</a><span>/</span><span>{planTitle(p)}</span></div><span className="eyebrow">{(courseNames[p.course]||p.course).toUpperCase()} · {levelNames[p.level].toUpperCase()} LEVEL</span><h1>{p.primaryPathway}</h1><p className="lede">{levelSummary[p.level]}</p>
     </div>
    <div className="vg-head-side"><div className="vg-score"><strong>{done}/{mods.length}</strong><span>modules done</span></div>
     {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>{current==='free'?'Upgrade':'Get a mentor'}</Button>}</div>
   </section>
-
-  <MyCourses p={p}/>
 
   <div className="vg-report-grid">
    <PathwayOutcome p={p}/>
@@ -121,7 +155,7 @@ export function ProgrammeDashboard(){
   </section>}
 
   <ModuleList p={p}/>
-  <DeletePlan/>
+  <DeletePlan id={p.id!}/>
   {nextIndex>=0&&<div className="vg-sticky-next"><Go href={`/explore/${'video-'+p.level}/${nextIndex}`}><PlayCircle size={18}/>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}</Go></div>}
  </div>;
 }
@@ -144,53 +178,22 @@ export function ModuleList({p,level}:{p?:Programme;level?:Level}){
   </details>})}</section>;
 }
 
-// Delete this plan: keep the work (redo the level check, keep hand-ins and progress) or start completely fresh.
-function DeletePlan(){
+// Delete this plan: keep the work (hand-ins, feedback and progress stay) or delete the plan's work too.
+function DeletePlan({id}:{id:string}){
  const {mutate,busy}=useLearning();
  const [open,setOpen]=useState(false);
  async function run(keepWork:boolean){
-  const ask=keepWork?'Delete this plan? Your hand-ins, feedback and progress stay. You can make a new plan any time.'
-   :'Delete this plan and everything in it? Your Videography hand-ins, lesson progress and your older previous learning plan will be removed. This can’t be undone.';
+  const ask=keepWork?'Delete this plan? Your hand-ins, feedback and progress stay.'
+   :'Delete this plan and its work? Hand-ins and lesson progress for this level are removed, unless another of your plans is at the same level. This can’t be undone.';
   if(!window.confirm(ask))return;
-  if(await mutate('plan_delete',{keepWork}))window.location.assign('/start');
+  if(await mutate('plan_delete',{id,keepWork}))window.location.assign('/workspace');
  }
  return <section className="vg-delete-plan">{open?<>
   <h2>Delete this plan</h2>
   <div className="vg-delete-options">
-   <div><strong>Delete the plan, keep my work</strong><p className="small">Your level, dates and styles go. Hand-ins, feedback and progress stay, so a new plan picks up where you are.</p><Button variant="outline" disabled={busy} onClick={()=>run(true)}>Delete plan only</Button></div>
-   <div><strong>Delete everything and start fresh</strong><p className="small">Also removes your Videography hand-ins, lesson progress and your older previous learning plan. Can’t be undone.</p><Button variant="destructive" disabled={busy} onClick={()=>run(false)}>Delete everything</Button></div>
+   <div><strong>Delete the plan, keep my work</strong><p className="small">The plan goes. Hand-ins, feedback and progress stay, so a new plan at this level picks up where you are.</p><Button variant="outline" disabled={busy} onClick={()=>run(true)}>Delete plan only</Button></div>
+   <div><strong>Delete the plan and its work</strong><p className="small">Also removes this level’s hand-ins and lesson progress, unless another plan uses the same level. Can’t be undone.</p><Button variant="destructive" disabled={busy} onClick={()=>run(false)}>Delete plan and work</Button></div>
   </div>
   <Button variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button>
  </>:<Button variant="ghost" className="vg-delete-open" onClick={()=>setOpen(true)}><Trash2 size={16}/>Delete this plan</Button>}</section>;
-}
-
-// My courses: up to three styles, each a tile with its own progress. Core modules are shared; each style
-// has its own style project (B13 / I13 / A13). Switching changes the style project and its videos.
-function MyCourses({p}:{p:Programme}){
- const {s,mutate,busy}=useLearning();
- const [adding,setAdding]=useState(false);
- const styles=stylesOf(p),mods=modulesFor(p.level);
- const doneFor=(style:Pathway)=>mods.filter((_,i)=>{const k=moduleKey(p.level,i);return styleModuleKeys.includes(k)&&style!==p.primaryPathway?!!s.styleProgress?.[style]?.[k]:!!s.progress?.[k]}).length;
- const update=(u:any)=>mutate('programme_update',{update:u});
- return <section className="vg-courses"><div className="row between"><div><span className="eyebrow">MY COURSES · {styles.length} OF {maxStyles}</span><h2>Your styles</h2></div><span className="small">Core modules count for every style. Each style has its own project.</span></div>
-  <div className="vg-course-grid">
-   {styles.map(style=>{const done=doneFor(style),active=style===p.primaryPathway;return <article key={style} className={'vg-course'+(active?' active':'')}>
-    <div className="row between"><span className="eyebrow">{levelNames[p.level]}</span>{styles.length>1&&<button type="button" className="vg-course-remove" disabled={busy} aria-label={'Remove '+style} onClick={()=>{if(window.confirm('Remove '+style+'? Its project stays in My Work, and comes back if you add this style again.'))update({removeStyle:style})}}><X size={14}/></button>}</div>
-    <h3>{style}</h3>
-    <div className="vg-course-bar" aria-hidden="true"><span style={{width:Math.round(done/mods.length*100)+'%'}}/></div>
-    <span className="small">{done} / {mods.length} modules</span>
-    {active?<Badge tone="green">Current course</Badge>:<Button size="sm" variant="outline" disabled={busy} onClick={()=>update({style})}>Switch to this course</Button>}
-   </article>})}
-   {styles.length<maxStyles&&<article className="vg-course add">{adding?<><h3>Add a style</h3><div className="vg-course-picks">{pathways.filter(x=>!styles.includes(x)).map(x=><button type="button" key={x} disabled={busy} onClick={async()=>{if(await update({addStyle:x}))setAdding(false)}}>{x}</button>)}</div><Button size="sm" variant="ghost" onClick={()=>setAdding(false)}>Cancel</Button></>
-    :<button type="button" className="vg-course-addbtn" onClick={()=>setAdding(true)}><Plus size={22}/><strong>Add a style</strong><span className="small">Up to {maxStyles} at a time</span></button>}</article>}
-  </div>
- </section>;
-}
-
-// Explore: every Videography module at each level. Videos and notes are free to watch.
-export function ExploreModules(){
- const {s}=useLearning();
- return <div className="vg-dashboard"><section><span className="eyebrow">EXPLORE · VIDEOGRAPHY</span><h1>All modules</h1><p className="lede">Watch any module for free. {s.programme?'Your plan is on your Journey page.':'Answer 12 quick questions to get a plan made for you.'}</p>{!s.programme&&<Go href="/start">Make my plan</Go>}</section>
-  {levels.map(l=><ModuleList key={l} level={l} p={s.programme}/>)}
- </div>;
 }

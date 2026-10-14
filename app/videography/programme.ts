@@ -207,7 +207,7 @@ export function schedule(level:Level,hoursPerWeek?:number,startDate?:string,days
  return {level,totalHours:r.hours,hoursPerWeek:hours,recommendedHoursPerWeek:r.hoursPerWeek,weeks,startDate:start,endDate:addDays(start,weeks*7-1),minutesPerDay:Math.round(hours*60/days/5)*5,daysPerWeek:days};
 }
 
-export type Programme={version:1;course:'videography';interests:string[];primaryPathway:Pathway;styles?:Pathway[];assessment:Assessment;level:Level;schedule:Schedule;mode:Mode|null;createdAt:string;updatedAt:string};
+export type Programme={version:1;course:'videography';id?:string;interests:string[];primaryPathway:Pathway;assessment:Assessment;level:Level;schedule:Schedule;mode:Mode|null;createdAt:string;updatedAt:string};
 // Validates client input and recomputes every derived value server-side.
 export function buildProgramme(input:any,previous?:Programme|null):Programme{
  if(input?.course!=='videography')throw new Error('Only Videography is open right now.');
@@ -217,17 +217,13 @@ export function buildProgramme(input:any,previous?:Programme|null):Programme{
  const assessment=input.answers===undefined&&previous?previous.assessment:assess(input.answers);
  // A new plan always starts at the level its check recommends; only later updates (moving up) change it.
  const level:Level=input.answers!==undefined||!previous?assessment.level:levels.includes(input.level)?input.level:previous.level;
- // Courses: up to three styles. The active one (primaryPathway) decides the style project and its videos.
- const fromInterests=[...new Set(ids.map(id=>interestFor(id as string)!.pathway))].slice(0,maxStyles);
- const asked=Array.isArray(input.styles)?[...new Set(input.styles as Pathway[])]:null;
- if(asked&&(!asked.length||asked.length>maxStyles||asked.some(x=>!pathways.includes(x))))throw new Error('Pick one to three styles.');
- const styles:Pathway[]=asked||(previous&&input.answers===undefined?stylesOf(previous):fromInterests);
- const active:Pathway=styles.includes(input.primaryPathway)?input.primaryPathway:previous&&styles.includes(previous.primaryPathway)&&input.answers===undefined?previous.primaryPathway:styles[0];
+ // Each plan follows one style: the first interest's. An update keeps the plan's style.
+ const active:Pathway=previous&&input.answers===undefined?previous.primaryPathway:interestFor(ids[0] as string)!.pathway;
  // An unchanged start date is kept even once it is in the past; a new one must be from today to 180 days ahead.
  const keptStart=previous&&input.startDate===previous.schedule.startDate;
  const start=keptStart||typeof input.startDate==='string'&&input.startDate>=addDays(today(),-1)&&input.startDate<=addDays(today(),180)?input.startDate:today();
  const now=new Date().toISOString();
- return {version:1,course:'videography',interests:ids as string[],primaryPathway:active,styles,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self','mentor'].includes(input.mode)?input.mode:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
+ return {version:1,course:'videography',interests:ids as string[],primaryPathway:active,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self','mentor'].includes(input.mode)?input.mode:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
 }
 
 // ---- Modules as lesson paths ----
@@ -245,9 +241,12 @@ export const stagePhase=(stage:string)=>stage==='concepts'||stage==='preproducti
 
 // The learner's main project name, from their first interest (e.g. "Wildlife & nature").
 export const projectLabel=(p?:Programme|null)=>p?(interestFor(p.interests.find(id=>interestFor(id)?.pathway===p.primaryPathway)||'')?.label||p.primaryPathway):undefined;
-// Courses (styles). Plans made before courses have just their first interest's style.
-export const maxStyles=3;
-export function stylesOf(p:Programme):Pathway[]{return p.styles?.length?p.styles:[p.primaryPathway]}
+// My courses: a learner's plans, up to three across all courses. state.programme is the plan that's open;
+// state.plans holds them all. Accounts from before plans have just their one plan.
+export const maxPlans=3;
+export function plansOf(s:any):Programme[]{return Array.isArray(s?.plans)?s.plans:s?.programme?[s.programme]:[]}
+export const courseNames:Record<string,string>={videography:'Videography'};
+export const planTitle=(p:Programme)=>(courseNames[p.course]||p.course)+' · '+p.primaryPathway;
 // The style project module of each level (B13, I13, A13): its hand-in is kept separately for each course.
 export const styleModuleKeys=levels.flatMap(l=>modulesFor(l).flatMap((m,i)=>m.stage==='selected-pathway'?[moduleKey(l,i)]:[]));
 // Converts a curriculum module into the shared Lesson shape used by assignments and scoring.

@@ -7,12 +7,17 @@ import {normalizeProfile} from '../../profile-validation';
 import {buildPersonalPlan,isPersonalized} from '../../personalization';
 import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../selfpaced-curriculum';
 import {validateReview} from '../../assignment-review';
-import {buildProgramme,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,stylesOf,maxStyles,styleModuleKeys,pathways,type Level} from '../../videography/programme';
+import {buildProgramme,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,maxPlans,styleModuleKeys,type Level} from '../../videography/programme';
 // Public portfolio data: only the pieces the learner picked to share.
 // What a shared portfolio shows. File names stay private; only each file's id and type are shared, so images and videos can be shown.
 function publicPortfolio(s:any){const items=s.portfolio.ids.map((x:string)=>s.submissions.find((v:any)=>v.id===x)).filter(Boolean).map((v:any)=>({id:v.id,key:v.key,moduleId:v.moduleId||'',createdAt:v.createdAt,notes:v.notes,answer:v.answer||'',url:v.url,uploadId:v.uploadId,uploadIds:v.uploadIds||[],uploads:(v.uploads||[]).map((f:any)=>({id:f.id,type:f.type})),status:v.status,total:v.total}));return JSON.stringify({title:s.portfolio.title,bio:s.portfolio.bio,name:s.profile?.name||'Framepath learner',items,simulatedReviews:true})}
-// Each course (style) keeps its own style-project hand-in: switching swaps that module's progress in and out.
-function switchStyle(s:any,from:string,to:string){s.styleProgress=s.styleProgress||{};const saved:any={};for(const k of styleModuleKeys){if(s.progress[k])saved[k]=s.progress[k];delete s.progress[k]}s.styleProgress[from]=saved;Object.assign(s.progress,s.styleProgress[to]||{});delete s.styleProgress[to]}
+// My courses: up to three plans. state.programme is the open plan and state.plans holds them all. Each plan keeps
+// its own style-project hand-in (B13 / I13 / A13): opening another plan swaps that progress in and out.
+function setupPlans(s:any){if(!Array.isArray(s.plans)){s.plans=s.programme?[s.programme]:[]}for(const p of s.plans)if(!p.id)p.id=crypto.randomUUID();if(s.programme&&!s.programme.id)s.programme.id=s.plans[0]?.id;delete s.styleProgress}
+function openPlan(s:any,to:any){const from=s.programme;if(from?.id===to?.id)return;s.planProgress=s.planProgress||{};
+ if(from){const saved:any={};for(const k of styleModuleKeys){if(s.progress[k])saved[k]=s.progress[k];delete s.progress[k]}s.planProgress[from.id]=saved}
+ if(to){Object.assign(s.progress,s.planProgress[to.id]||{});delete s.planProgress[to.id]}
+ s.programme=to||null}
 // Keeps a published portfolio in step when a piece or file is removed.
 function republish(s:any){if(!s.portfolio.token)return null;if(!s.portfolio.ids.length){const removeToken=s.portfolio.token;s.portfolio.token=null;return {removeToken}}return {token:s.portfolio.token,data:publicPortfolio(s),visibility:s.portfolio.visibility||'unlisted'}}
 import {lessonsFor,lessonNeeds,lessonsStatus,requireLessonsForTask,type LessonMark} from '../../videography/lessons';
@@ -20,10 +25,14 @@ import {basicPaths,basicKeys,basicContext,curriculumVersion,journalTypes} from '
 import {scoreAttempt,moduleInfo,sequenceFor,assignmentRubric} from '../../learning-rules';
 import {identity,readState,saveState,usage,checkOrigin,safeText,safeUrl,mentorFor,requireLesson,activeExplore,craftEnrolled,db,errorResponse} from '../../service';
 export const dynamic='force-dynamic';
-export async function GET(req:Request){try{const user=await identity();await adoptReadyOnboarding(req);const data=await readState(user.userId);return Response.json({...data,user:{name:user.fullName||'Learner',email:user.email},usage:await usage(user.userId,data.state)},{headers:{'Cache-Control':'no-store'}})}catch(e){return errorResponse(e)}}
+export async function GET(req:Request){try{const user=await identity();await adoptReadyOnboarding(req);let data=await readState(user.userId);
+ // Accounts from before plans: give the plan an id and a plan list, once.
+ if(!Array.isArray(data.state.plans)){setupPlans(data.state);data={state:data.state,revision:await saveState(user.userId,data.state,data.revision)}}
+ return Response.json({...data,user:{name:user.fullName||'Learner',email:user.email},usage:await usage(user.userId,data.state)},{headers:{'Cache-Control':'no-store'}})}catch(e){return errorResponse(e)}}
 export async function POST(req:Request){try{
 checkOrigin(req);const user=await identity();const raw=await req.text();if(raw.length>24000)throw new Error('This submission is too long.');const b=JSON.parse(raw);const {state:s,revision}=await readState(user.userId);if(b.revision!==revision)throw Object.assign(new Error('Your learning changed in another tab. Refresh and try again.'),{status:409});
 const now=new Date().toISOString(),a=b.action,id=()=>crypto.randomUUID();let portfolioChange:any=null;let reflectionChange:any=null;
+setupPlans(s);
 switch(a){
 case 'learning_level':{if(!s.profile)throw new Error('Complete your starting-point diagnostic first.');if(!levels.includes(b.level))throw new Error('Choose a published level.');s.profile.level=b.level;if(isPersonalized(s.profile)){s.profile.levelOverride=b.level;s.personalPlan=buildPersonalPlan(s.profile);}break;}
 case 'profile':{s.profile=normalizeProfile(b.profile);s.basicPlan={...basicContext(s.profile),createdAt:now,basis:'curriculum template'};if(isPersonalized(s.profile)||isScenarioProfile(s.profile)){s.personalPlan=buildPersonalPlan(s.profile);if(s.personalPlan.notices?.some((n:any)=>n.blocking))throw new Error('Adjust the blocked format or time choice in your diagnostic before saving this route.');const first=s.personalPlan.paths.slice(0,2).map((p:any)=>p.id);if(isScenarioProfile(s.profile)&&first.length===1)first.push('need-'+s.profile.request.scenario.use_case.toLowerCase()+'-prepare');s.trialPathIds=s.trialPathIds||first;}break;}
@@ -48,19 +57,14 @@ case 'visual_session_complete':{
  }
  break;
 }
-case 'programme_save':{s.programme=buildProgramme(b.programme,s.programme);break;}
+case 'programme_save':{if(s.plans.length>=maxPlans)throw new Error('You have '+maxPlans+' plans already. Delete one to make another.');
+ const plan={...buildProgramme(b.programme,null),id:id()};s.plans.push(plan);openPlan(s,plan);break;}
+case 'plan_open':{const plan=s.plans.find((x:any)=>x.id===b.id);if(!plan)throw new Error('That plan no longer exists.');openPlan(s,plan);break;}
 case 'programme_update':{if(!s.programme)throw new Error('Make your plan first.');const u=b.update||{};
  // Moving up a level: only to the next one, once every module of the current level is handed in. The new plan starts today.
  let level=s.programme.level,startDate=u.startDate??s.programme.schedule.startDate;
  if(u.level!==undefined&&u.level!==level){const cur=level as Level;if(u.level!==videoLevels[videoLevels.indexOf(cur)+1]||modulesFor(cur).some((_,i)=>!s.progress[moduleKey(cur,i)]))throw new Error('Finish every module in this level first.');level=u.level;startDate=today()}
- // Courses: add or remove a style (max three), or switch which one is active.
- let styles=stylesOf(s.programme),active=s.programme.primaryPathway;
- if(u.addStyle!==undefined){if(!pathways.includes(u.addStyle))throw new Error('Pick one of the styles.');if(!styles.includes(u.addStyle)){if(styles.length>=maxStyles)throw new Error('You can follow up to '+maxStyles+' styles at a time. Remove one first.');styles=[...styles,u.addStyle]}}
- if(u.removeStyle!==undefined){if(styles.length<=1)throw new Error('Keep at least one style.');styles=styles.filter(x=>x!==u.removeStyle)}
- const to=u.style!==undefined?u.style:styles.includes(active)?active:styles[0];
- if(!styles.includes(to))throw new Error('Add that style first.');
- if(to!==active)switchStyle(s,active,to);
- s.programme=buildProgramme({...s.programme,styles,primaryPathway:to,level,hoursPerWeek:u.level&&u.level!==s.programme.level?undefined:u.hoursPerWeek??s.programme.schedule.hoursPerWeek,startDate,daysPerWeek:u.daysPerWeek??s.programme.schedule.daysPerWeek,mode:u.mode??s.programme.mode},s.programme);break;}
+ s.programme={...buildProgramme({...s.programme,level,hoursPerWeek:u.level&&u.level!==s.programme.level?undefined:u.hoursPerWeek??s.programme.schedule.hoursPerWeek,startDate,daysPerWeek:u.daysPerWeek??s.programme.schedule.daysPerWeek,mode:u.mode??s.programme.mode},s.programme),id:s.programme.id};break;}
 case 'lesson_progress':{
  // Marks one lesson's video as watched, or its practice tool as solved. The task unlocks when every lesson is finished.
  const key=safeText(b.key,80,1),video=parseVideoKey(key);if(!video)throw new Error('Choose a Videography module.');
@@ -143,22 +147,28 @@ case 'portfolio_publish':{if(b.consent!==true)throw new Error('Confirm that the 
 // Deletes the learner's plan. keepWork: only the plan goes (level, dates, styles); hand-ins and progress stay, and a
 // new plan at the same level picks them up. Otherwise everything from the plan goes too: Videography progress,
 // lesson progress and hand-ins (and their portfolio pieces), and the older "previous learning" plan.
+// Deletes one plan (b.id, or the open one). keepWork: hand-ins and progress stay. Otherwise the work for that plan's
+// level goes too, unless another plan is at the same level. previous: only the older previous learning plan.
 case 'plan_delete':{
- // previous: only the older previous learning plan.
  if(b.previous===true){s.profile=null;break}
- s.programme=null;delete s.styleProgress;
- if(b.keepWork!==true){
-  const isVideo=(k:string)=>k.startsWith('video-');
-  for(const k of Object.keys(s.progress||{}))if(isVideo(k))delete s.progress[k];
-  delete s.lessonProgress;
-  const gone=new Set(s.submissions.filter((x:any)=>isVideo(String(x.key))).map((x:any)=>x.id));
+ const plan=s.plans.find((x:any)=>x.id===(b.id||s.programme?.id));if(!plan)throw new Error('That plan no longer exists.');
+ if(s.programme?.id===plan.id)openPlan(s,null);
+ s.plans=s.plans.filter((x:any)=>x.id!==plan.id);
+ if(s.planProgress)delete s.planProgress[plan.id];
+ if(b.keepWork!==true&&!s.plans.some((x:any)=>x.level===plan.level)){
+  const mine=(k:string)=>k.startsWith('video-'+plan.level+'-');
+  for(const k of Object.keys(s.progress||{}))if(mine(k))delete s.progress[k];
+  for(const k of Object.keys(s.lessonProgress||{}))if(mine(k))delete s.lessonProgress[k];
+  const gone=new Set(s.submissions.filter((x:any)=>mine(String(x.key))).map((x:any)=>x.id));
   s.submissions=s.submissions.filter((x:any)=>!gone.has(x.id));
   s.portfolio.ids=s.portfolio.ids.filter((x:string)=>!gone.has(x));portfolioChange=republish(s);
-  s.profile=null;
  }
+ // The most recent remaining plan opens, if there is one.
+ if(!s.programme&&s.plans.length)openPlan(s,s.plans[s.plans.length-1]);
  break;}
 case 'portfolio_unpublish':{if(s.portfolio.token)portfolioChange={removeToken:s.portfolio.token};s.portfolio.token=null;break;}
 default:throw new Error('That action is not available.')}
+if(s.programme)s.plans=s.plans.map((x:any)=>x.id===s.programme.id?s.programme:x);
 let next:number;if(reflectionChange){const encoded=JSON.stringify(s);const results=await db().batch([db().prepare('UPDATE learners SET data=?,revision=revision+1,updated_at=? WHERE user_id=? AND revision=?').bind(encoded,Date.now(),user.userId,revision),db().prepare('INSERT INTO reflection_attempts(id,user_id,module_key,data,created_at) SELECT ?,?,?,?,? WHERE EXISTS(SELECT 1 FROM learners WHERE user_id=? AND revision=? AND data=?)').bind(reflectionChange.id,user.userId,reflectionChange.key,JSON.stringify(reflectionChange),Date.now(),user.userId,revision+1,encoded)]);if(!results[0].meta.changes)throw Object.assign(new Error('Your learning changed in another tab. Refresh and retry.'),{status:409});next=revision+1}else if(portfolioChange){const encoded=JSON.stringify(s);const update=db().prepare('UPDATE learners SET data=?,revision=revision+1,updated_at=? WHERE user_id=? AND revision=?').bind(encoded,Date.now(),user.userId,revision);const condition='EXISTS (SELECT 1 FROM learners WHERE user_id=? AND revision=? AND data=?)';const change=portfolioChange.removeToken?db().prepare('DELETE FROM portfolios WHERE token=? AND user_id=? AND '+condition).bind(portfolioChange.removeToken,user.userId,user.userId,revision+1,encoded):db().prepare('INSERT INTO portfolios(token,user_id,data,visibility,updated_at) SELECT ?,?,?,?,? WHERE '+condition+' ON CONFLICT(token) DO UPDATE SET data=excluded.data,visibility=excluded.visibility,updated_at=excluded.updated_at').bind(portfolioChange.token,user.userId,portfolioChange.data,portfolioChange.visibility,Date.now(),user.userId,revision+1,encoded);const results=await db().batch([update,change]);if(!results[0].meta.changes)throw Object.assign(new Error('Your learning changed in another tab. Refresh and try again.'),{status:409});next=revision+1}else{next=await saveState(user.userId,s,revision)}return Response.json({state:s,revision:next,usage:await usage(user.userId,s)},{headers:{'Cache-Control':'no-store'}});
 }catch(e){return errorResponse(e)}}
 

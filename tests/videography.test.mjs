@@ -238,13 +238,14 @@ test('a new plan always starts at the level its check recommends',()=>{
  const p=P.buildProgramme(base);assert.equal(P.buildProgramme({...p,level:'intermediate'},p).level,'intermediate');
 });
 
-test('courses: up to three styles from the interests, the first one active',()=>{
- const ids=P.interests.map(i=>i.id),byStyle=new Map();for(const i of P.interests)if(!byStyle.has(i.pathway))byStyle.set(i.pathway,i.id);
- const four=[...byStyle.values()].slice(0,4);
- const p=P.buildProgramme({course:'videography',interests:four,answers:answers(0)});
- assert.equal(p.styles.length,3);assert.equal(p.primaryPathway,P.interestFor(four[0]).pathway);
- assert.throws(()=>P.buildProgramme({...p,styles:[...P.pathways].slice(0,4)},p));
- const switched=P.buildProgramme({...p,primaryPathway:p.styles[2]},p);assert.equal(switched.primaryPathway,p.styles[2]);
- assert.deepEqual(P.stylesOf({...p,styles:undefined}),[p.primaryPathway]);
- assert.equal(P.styleModuleKeys.length,3);assert.ok(ids.length>0);
+test('plans: each plan follows its first interest’s style; up to three plans',()=>{
+ const doc=P.interests.find(i=>i.pathway==='Documentary').id,wed=P.interests.find(i=>i.pathway==='Wedding').id;
+ const p=P.buildProgramme({course:'videography',interests:[doc,wed],answers:answers(0)});
+ assert.equal(p.primaryPathway,'Documentary');
+ // An update keeps the plan's style.
+ assert.equal(P.buildProgramme({...p,interests:[wed]},p).primaryPathway,'Documentary');
+ assert.equal(P.maxPlans,3);
+ assert.deepEqual(P.plansOf({programme:p}),[p]);assert.deepEqual(P.plansOf({plans:[p,p]}),[p,p]);assert.deepEqual(P.plansOf({}),[]);
+ assert.equal(P.planTitle(p),'Videography · Documentary');
+ assert.equal(P.styleModuleKeys.length,3);
 });

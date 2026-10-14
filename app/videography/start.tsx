@@ -3,7 +3,7 @@ import React,{useEffect,useMemo,useRef,useState} from 'react';
 import {ArrowLeft,ArrowRight,Check,ChevronLeft,ChevronRight,Clock,Lock,Plus,Star,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go} from '../ui';
-import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,type Level,type Answer,type Visual} from './programme';
+import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,maxPlans,plansOf,type Level,type Answer,type Visual} from './programme';
 
 const draftKey='fp-programme-draft-v3';
 // seed: shuffles each question's answer order for this learner, so the position of an answer gives nothing away.
@@ -45,7 +45,7 @@ function OptionPicture({v}:{v:Visual}){
 const steps=['Interests','12 questions','Your time','Review'] as const;
 
 export function ProgrammeStart(){
- const {user,loaded,mutate,busy}=useLearning();
+ const {s,user,loaded,mutate,busy}=useLearning();
  const [draft,setDraft]=useState<Draft>(emptyDraft);
  const [step,setStep]=useState(0);
  const [error,setError]=useState('');
@@ -66,11 +66,13 @@ export function ProgrammeStart(){
   setError('');
   if(!user){writeDraft(draft);window.location.assign('/auth/google?return_to='+encodeURIComponent('/start?finish=1'));return}
   const saved=await mutate('programme_save',{programme:{course:'videography',interests:draft.interests,answers:draft.answers,level,hoursPerWeek:plan.hoursPerWeek,daysPerWeek:plan.daysPerWeek,startDate:plan.startDate}});
-  if(saved){clearDraft();window.location.assign('/workspace')}else setError('Your plan could not be saved. Your answers are still here.');
+  if(saved){clearDraft();const made=(saved as any).programme?.id;window.location.assign(made?'/workspace/'+made:'/workspace')}else setError('Your plan could not be saved. Your answers are still here.');
  }
  // Returning from Google sign-in: finish automatically with the saved draft.
  useEffect(()=>{if(!loaded||!user||autoFinished.current)return;if(new URLSearchParams(window.location.search).get('finish')==='1'){const d=readDraft();if(d.interests.length&&d.answers.length===questionCount){autoFinished.current=true;setDraft(d);setStep(3)}}},[loaded,user]);
 
+ // Up to three plans at a time: a fourth needs one deleted first.
+ if(loaded&&user&&plansOf(s).length>=maxPlans)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>You have {maxPlans} plans</h1><p className="lede">You can follow up to {maxPlans} plans at a time. Delete one from its page to make another.</p><Go href="/workspace">My courses</Go></Panel>;
  return <div className="vg-flow">
   <ol className="vg-stepper" aria-label="Plan setup steps">{steps.map((label,i)=><li key={label} className={i===step?'current':i<step?'done':''}><span>{i<step?<Check size={14}/>:i+1}</span>{label}</li>)}</ol>
 
