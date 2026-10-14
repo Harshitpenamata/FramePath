@@ -6,7 +6,7 @@ import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import {useLearning,Go,Action,Panel,Badge,Gate,UploadField} from '../ui';
 import {blockingModule,moduleHref,moduleInfo} from '../learning-rules';
 import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
-import {LessonsTab,canPractise,taskLabel} from './module-context';
+import {LessonsTab,canPractise,taskLabel,useDeadVideos} from './module-context';
 import {waitingTips,lessonsFor,lessonsStatus,requireLessonsForTask} from './lessons';
 import {LevelClosure} from './closure';
 
@@ -67,7 +67,8 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
  if(!entitled)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Choose Self-paced to do this task.</h2><p>On the Free plan, only the tasks in the first two modules are open. Choose the Self-paced plan (₹999/year) to unlock this task and every task after it, with AI reviews and your portfolio. You can still watch this module for free.</p><div className="button-row"><Go href={'/membership?return_to='+encodeURIComponent(moduleHref(key)+'?tab=task')}>Choose Self-paced</Go><Go outline href="/mentors">Learn with a mentor</Go></div></Panel>;
  if(blocker)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Hand in the module before this one first.</h2><p>Finish “{moduleInfo(blocker).lesson.title}” to unlock this task. You can still watch this module.</p><Go href={moduleHref(blocker)+'?tab=task'}>Go to that module</Go></Panel>;
  // The task opens once every lesson in this module is finished (videos watched, practice tools solved).
- const lessons=lessonsFor(m.id),lessonState=lessonsStatus(m.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[key]);
+ const dead=useDeadVideos();
+ const lessons=lessonsFor(m.id),lessonState=lessonsStatus(m.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[key],dead);
  if(requireLessonsForTask&&lessonState.done<lessonState.total)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Finish the lessons to unlock this task.</h2><p>{lessonState.done} of {lessonState.total} lessons done. In each lesson, watch the videos and answer the Reflect questions.</p>
   <ol className="vg-unlock-list">{lessons.map((l,i)=><li key={l.title} className={lessonState.finished[i]?'ok':''}>{lessonState.finished[i]?<Check size={16}/>:<span>{i+1}</span>}<a className="text-link" href={moduleHref(key)+'?lesson='+(i+1)}>{l.title}</a></li>)}</ol></Panel>;
  async function handIn(){
@@ -135,6 +136,7 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
  const rated=Array.isArray(piece.selfRatings);
  return <div className="vg-reflect">
   {status&&<WaitingTips/>}
+  {!review&&allowance?.queued>0&&<p className="notice" role="status">Your AI review is in the queue. AI is paused for a short while, so it will run soon and show up here, usually within a few hours. You don’t need to do anything.</p>}
   {review?<Panel className="vg-ai-review">
    <div className="row between"><h2><Sparkles size={20}/> AI review</h2>{review.review.total!==null?<strong className="vg-ai-score">{Math.round(review.review.total)}<small>/100</small></strong>:<Badge>Not enough to score every check</Badge>}</div>
    <p>{review.review.summary}</p>

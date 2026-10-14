@@ -984,12 +984,13 @@ export const watchShare=0.7;
 export const requireLessonsForTask=false;
 export const videoId=(v:ModuleVideo)=>v.youtubeId?'yt:'+v.youtubeId+'@'+(v.start||0):v.vimeoId?'vm:'+v.vimeoId:'url:'+v.url;
 export type LessonMark={v:string[];t:boolean};
-export function lessonNeeds(moduleId:string,index:number,pathway:Pathway){return lessonVideos(moduleId,index,pathway).map(videoId)}
-export function lessonFinished(moduleId:string,index:number,pathway:Pathway,mark?:LessonMark){
- return !!mark?.t&&lessonNeeds(moduleId,index,pathway).every(id=>mark.v.includes(id));
+// dead: video ids the health check found removed or not embeddable (app/video-health.ts). They don't count.
+export function lessonNeeds(moduleId:string,index:number,pathway:Pathway,dead:string[]=[]){return lessonVideos(moduleId,index,pathway).map(videoId).filter(id=>!dead.includes(id))}
+export function lessonFinished(moduleId:string,index:number,pathway:Pathway,mark?:LessonMark,dead:string[]=[]){
+ return !!mark?.t&&lessonNeeds(moduleId,index,pathway,dead).every(id=>mark.v.includes(id));
 }
 // How far a learner is through a module's lessons (marks come from state.lessonProgress[moduleKey]).
-export function lessonsStatus(moduleId:string,pathway:Pathway,marks:Record<string,LessonMark>|undefined){
- const total=lessonsFor(moduleId).length,finished=lessonsFor(moduleId).map((_,i)=>lessonFinished(moduleId,i,pathway,marks?.[i]));
+export function lessonsStatus(moduleId:string,pathway:Pathway,marks:Record<string,LessonMark>|undefined,dead:string[]=[]){
+ const total=lessonsFor(moduleId).length,finished=lessonsFor(moduleId).map((_,i)=>lessonFinished(moduleId,i,pathway,marks?.[i],dead));
  return {total,done:finished.filter(Boolean).length,finished};
 }

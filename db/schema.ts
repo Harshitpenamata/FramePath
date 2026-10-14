@@ -1,4 +1,4 @@
-import {sqliteTable,text,integer,index,uniqueIndex,primaryKey} from 'drizzle-orm/sqlite-core';
+import {sqliteTable,text,integer,real,index,uniqueIndex,primaryKey} from 'drizzle-orm/sqlite-core';
 export const learners=sqliteTable('learners',{userId:text('user_id').primaryKey(),data:text('data').notNull(),revision:integer('revision').notNull().default(0),updatedAt:integer('updated_at').notNull()});
 export const uploads=sqliteTable('uploads',{id:text('id').primaryKey(),userId:text('user_id').notNull(),name:text('name').notNull(),type:text('type').notNull(),size:integer('size').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_uploads_owner').on(t.userId)]);
 export const aiJobs=sqliteTable('ai_jobs',{id:text('id').primaryKey(),userId:text('user_id').notNull(),scope:text('scope').notNull(),kind:text('kind').notNull(),status:text('status').notNull(),answer:text('answer'),createdAt:integer('created_at').notNull()},t=>[index('idx_ai_user_scope_date').on(t.userId,t.scope,t.createdAt),index('idx_ai_date').on(t.createdAt)]);
@@ -15,3 +15,11 @@ export const reflectionAttempts=sqliteTable('reflection_attempts',{id:text('id')
 
 export const onboardingAttempts=sqliteTable('onboarding_attempts',{id:text('id').primaryKey(),userId:text('user_id'),guestHash:text('guest_hash').notNull(),revision:integer('revision').notNull().default(0),data:text('data').notNull(),status:text('status').notNull(),createdAt:integer('created_at').notNull(),updatedAt:integer('updated_at').notNull()},t=>[index('idx_onboarding_owner').on(t.userId,t.updatedAt),index('idx_onboarding_guest').on(t.guestHash,t.updatedAt)]);
 export const goalLogs=sqliteTable('goal_logs',{id:text('id').primaryKey(),attemptId:text('attempt_id').notNull(),userId:text('user_id'),words:text('words').notNull(),caseId:text('case_id').notNull(),confidence:integer('confidence').notNull(),clarification:text('clarification').notNull(),status:text('status').notNull().default('new'),createdAt:integer('created_at').notNull()},t=>[index('idx_goal_log_date').on(t.createdAt)]);
+// Lesson video health, checked by the scheduled job. status: 'ok', 'dead' (removed, private or not embeddable;
+// hidden from lessons after two failed checks in a row) or 'noframe' (a page that refuses to show inside FramePath).
+export const videoStatus=sqliteTable('video_status',{id:text('id').primaryKey(),status:text('status').notNull(),detail:text('detail').notNull(),fails:integer('fails').notNull(),checkedAt:integer('checked_at').notNull()});
+// Every AI call's tokens and estimated cost, for the daily spend cap.
+export const aiUsage=sqliteTable('ai_usage',{id:text('id').primaryKey(),day:text('day').notNull(),provider:text('provider').notNull(),model:text('model').notNull(),kind:text('kind').notNull(),inputTokens:integer('input_tokens').notNull(),outputTokens:integer('output_tokens').notNull(),usd:real('usd').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_ai_usage_day').on(t.day)]);
+// Small switches the app sets for itself, e.g. 'ai_paused_until' after the AI provider reports no credit.
+export const appFlags=sqliteTable('app_flags',{key:text('key').primaryKey(),value:text('value').notNull(),updatedAt:integer('updated_at').notNull()});
+

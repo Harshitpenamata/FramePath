@@ -1,6 +1,7 @@
 import {db,fail,checkOrigin,identity,readState,safeText,errorResponse} from '../../service';
 import {getUser} from '../../user';
-import {askClaude,AIRefused} from '../../claude';
+import {askClaude,AIRefused,AIUnavailable} from '../../claude';
+import {aiStatus} from '../../ai-budget';
 export const dynamic='force-dynamic';
 const noStore={headers:{'Cache-Control':'no-store'}};
 const commentsPerDay=30;
@@ -11,14 +12,14 @@ function hasPiece(p:any,pieceId:unknown){return typeof pieceId==='string'&&p.dat
 const placeholders=(n:number)=>Array(n).fill('?').join(',');
 
 // Claude checks every comment before anyone else sees it.
-async function screenComment(body:string){
+export async function screenComment(body:string){
  let text:string;
  try{text=await askClaude({effort:'low',maxTokens:2000,timeoutMs:20000,
   system:'You screen comments on practice videography work posted by adult learners on a learning site. Allow comments that are kind, neutral, or give honest, specific critique, even blunt critique of the work. Block: insults or mockery aimed at the person, harassment, hate, sexual content, threats, spam or ads, links to other sites, personal contact details, and anything unrelated to the work. Reply with a short reason the commenter can read.',
   content:[{type:'text',text:'Comment:\n'+body}],
   schema:{type:'object',additionalProperties:false,properties:{allowed:{type:'boolean'},reason:{type:'string'}},required:['allowed','reason']}})}
- catch(e){if(e instanceof AIRefused)return {allowed:false,reason:'This comment can’t be posted.'};throw Object.assign(new Error('Comments can’t be checked right now, so they can’t be posted. Please try again later.'),{status:503})}
- const r=JSON.parse(text) as {allowed:boolean;reason:string};return {allowed:r.allowed===true,reason:String(r.reason||'').slice(0,300)};
+ catch(e){if(e instanceof AIRefused)return {allowed:false,reason:'This comment can’t be posted.'};if(e instanceof AIUnavailable&&e.noCredit)return {allowed:false,reason:'',wait:true};throw Object.assign(new Error('Comments can’t be checked right now, so they can’t be posted. Please try again later.'),{status:503})}
+ const r=JSON.parse(text) as {allowed:boolean;reason:string};return {allowed:r.allowed===true,reason:String(r.reason||'').slice(0,300),wait:false};
 }
 
 export async function GET(req:Request){try{
@@ -55,11 +56,13 @@ export async function POST(req:Request){try{
   const body=safeText(b.body,600,2);
   const today:any=await db().prepare('SELECT COUNT(*) AS n FROM portfolio_comments WHERE user_id=? AND created_at>?').bind(user.userId,Date.now()-86400000).first();
   if(today.n>=commentsPerDay)return fail('You’ve posted '+commentsPerDay+' comments today. You can post more tomorrow.',429);
-  const check=await screenComment(body);if(!check.allowed)return fail('This comment wasn’t posted: '+(check.reason||'it doesn’t follow the community rules.'),422);
+  // While AI is paused, the comment waits (status 'pending') and the scheduled job checks it later.
+  const ai=await aiStatus();const check=ai.ok?await screenComment(body):{allowed:false,reason:'',wait:true};
+  if(!check.allowed&&!check.wait)return fail('This comment wasn’t posted: '+(check.reason||'it doesn’t follow the community rules.'),422);
   const {state}=await readState(user.userId);const author=String(state.profile?.name||user.displayName.split(' ')[0]||'Learner').slice(0,60);
-  const id=crypto.randomUUID(),now=Date.now();
-  await db().prepare("INSERT INTO portfolio_comments(id,token,piece_id,user_id,author,body,status,created_at) VALUES(?,?,?,?,?,?,'visible',?)").bind(id,p.token,b.pieceId,user.userId,author,body,now).run();
-  return Response.json({comment:{id,author,body,createdAt:now,mine:true,canDelete:true}},noStore);
+  const id=crypto.randomUUID(),now=Date.now(),status=check.wait?'pending':'visible';
+  await db().prepare("INSERT INTO portfolio_comments(id,token,piece_id,user_id,author,body,status,created_at) VALUES(?,?,?,?,?,?,?,?)").bind(id,p.token,b.pieceId,user.userId,author,body,status,now).run();
+  return Response.json({comment:{id,author,body,createdAt:now,mine:true,canDelete:true,pending:check.wait}},noStore);
  }
  if(b.action==='report'||b.action==='delete'){
   if(typeof b.commentId!=='string')return fail('This comment is unavailable.');

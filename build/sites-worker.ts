@@ -31,4 +31,12 @@ export default {
     }
     return runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx));
   },
+  // Hourly cron (vite.config.ts): video health checks and queued AI work. It calls the app's own job route
+  // internally with a one-time token kept in memory, so the route can't be triggered from outside.
+  async scheduled(_controller: ScheduledController, env: Cloudflare.Env, ctx: ExecutionContext) {
+    const token = crypto.randomUUID();
+    (globalThis as any).__framepathCronToken = token;
+    const request = new Request("https://framepath.internal/api/jobs/run", { method: "POST", headers: { "x-framepath-cron": token } });
+    ctx.waitUntil(Promise.resolve(handler.fetch(request, env, ctx as any)).then(async (r: Response) => console.log("Scheduled job", r.status, (await r.text()).slice(0, 500))));
+  },
 };

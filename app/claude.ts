@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import {env} from 'cloudflare:workers';
+import {recordUsage,pauseAI} from './ai-budget';
 
 // Single entry point for Claude calls (questions, assignment reviews, image screening).
 export const claudeModel='claude-opus-5-5';
@@ -7,14 +8,14 @@ type Effort='low'|'medium'|'high';
 type Content=Anthropic.Beta.BetaContentBlockParam[];
 export type ClaudeImage={mediaType:'image/jpeg'|'image/png'|'image/webp';base64:string};
 
-export class AIUnavailable extends Error{status=503}
+export class AIUnavailable extends Error{status=503;noCredit=false}
 export class AIRefused extends Error{status=422}
 
 export function claudeKey(){return env.ANTHROPIC_API_KEY||process.env.ANTHROPIC_API_KEY||''}
 export const imageBlock=(img:ClaudeImage):Anthropic.Beta.BetaImageBlockParam=>({type:'image',source:{type:'base64',media_type:img.mediaType,data:img.base64}});
 
 // Sends one request with Anthropic's default refusal fallback and returns the text output.
-export async function askClaude({system,content,maxTokens=8000,effort='low',schema,timeoutMs=45000}:{system:string;content:Content;maxTokens?:number;effort?:Effort;schema?:Record<string,unknown>;timeoutMs?:number}):Promise<string>{
+export async function askClaude({system,content,maxTokens=8000,effort='low',schema,timeoutMs=45000,kind='other'}:{system:string;content:Content;maxTokens?:number;effort?:Effort;schema?:Record<string,unknown>;timeoutMs?:number;kind?:string}):Promise<string>{
  const apiKey=claudeKey();if(!apiKey)throw new AIUnavailable('AI is not configured on this site yet.');
  const client=new Anthropic({apiKey,maxRetries:1,timeout:timeoutMs});
  let response:Anthropic.Beta.BetaMessage;
@@ -23,9 +24,12 @@ export async function askClaude({system,content,maxTokens=8000,effort='low',sche
  }catch(error){
   if(error instanceof Anthropic.AuthenticationError||error instanceof Anthropic.PermissionDeniedError)throw new AIUnavailable('AI is not set up correctly on this site.');
   if(error instanceof Anthropic.RateLimitError)throw new AIUnavailable('AI is busy right now.');
+  // Out of credit: pause AI so new work waits in the queue instead of failing.
+  if(error instanceof Anthropic.BadRequestError&&/credit balance/i.test(error.message)){await pauseAI('Anthropic account has no credit');throw Object.assign(new AIUnavailable('AI is paused for a while.'),{noCredit:true})}
   if(error instanceof Anthropic.APIError)throw new AIUnavailable('AI is not available right now.');
   throw new AIUnavailable('AI could not connect.');
  }
+ const u:any=response.usage||{};await recordUsage('anthropic',claudeModel,kind,(u.input_tokens||0)+(u.cache_creation_input_tokens||0)+(u.cache_read_input_tokens||0),u.output_tokens||0);
  if(response.stop_reason==='refusal')throw new AIRefused('AI declined this request.');
  if(response.stop_reason==='max_tokens')throw new AIUnavailable('AI’s answer was cut short. Please try again.');
  return response.content.flatMap(b=>b.type==='text'?[b.text]:[]).join('').trim();

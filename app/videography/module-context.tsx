@@ -74,13 +74,35 @@ function SiteWindow({v,onClose}:{v:ModuleVideo;onClose:()=>void}){
  </div>;
 }
 
-export function VideoPanel({videos,watched=[],onWatched}:{videos:ModuleVideo[];watched?:string[];onWatched?:(id:string)=>void}){
+// Lesson videos the health check found removed or not embeddable; fetched once per page.
+let deadOnce:Promise<string[]>|null=null;
+export function useDeadVideos(){const [dead,setDead]=useState<string[]>([]);useEffect(()=>{(deadOnce||=fetch('/api/videos/status').then(r=>r.json()).then((d:any)=>d.dead||[]).catch(()=>[])).then(setDead)},[]);return dead}
+
+// Some browsers and ad blockers stop the player from reporting progress. If a playing video sends nothing for 12
+// seconds, the learner can tick it off by hand once enough time has passed for most of it to play (70% of its
+// length when the player told us, otherwise 2 minutes).
+function useTrackingFallback(frame:React.RefObject<HTMLIFrameElement|null>,v:ModuleVideo|undefined,on:boolean){
+ const [blocked,setBlocked]=useState(false),[left,setLeft]=useState(0);
+ useEffect(()=>{
+  setBlocked(false);if(!on||!v)return;
+  let heard=false,started=Date.now(),need=120;
+  const msg=(e:MessageEvent)=>{if(e.source&&e.source===frame.current?.contentWindow){heard=true;try{const d=typeof e.data==='string'?JSON.parse(e.data):e.data;const dur=d?.info?.duration||d?.data?.duration;if(dur>0)need=Math.max(30,Math.round((dur-(v.start||0))*watchShare))}catch{}}};
+  window.addEventListener('message',msg);
+  const t=setInterval(()=>{const gone=(Date.now()-started)/1000;if(!heard&&gone>12)setBlocked(true);setLeft(Math.max(0,Math.ceil(need-gone)))},1000);
+  return ()=>{window.removeEventListener('message',msg);clearInterval(t)};
+ },[on,v&&videoId(v)]);
+ return {blocked,ready:blocked&&left===0,wait:Math.floor(left/60)+':'+String(left%60).padStart(2,'0')};
+}
+
+export function VideoPanel({videos:all,watched=[],onWatched}:{videos:ModuleVideo[];watched?:string[];onWatched?:(id:string)=>void}){
+ const dead=useDeadVideos(),videos=all.filter(v=>!dead.includes(videoId(v)));
  const playable=videos.filter(v=>v.youtubeId||v.vimeoId),links=videos.filter(v=>v.url);
  const [active,setActive]=useState(0),[playing,setPlaying]=useState(false),[reader,setReader]=useState<ModuleVideo|null>(null);
  const frame=useRef<HTMLIFrameElement>(null);
  useEffect(()=>{setActive(0);setPlaying(false)},[videos[0]?.title]);
  const v=playable[active]||playable[0];
  useWatchTracker(frame,v,playing&&!!onWatched,()=>v&&onWatched?.(videoId(v)));
+ const fallback=useTrackingFallback(frame,v,playing&&!!onWatched);
  if(!videos.length)return null;
  const seen=(x:ModuleVideo)=>watched.includes(videoId(x));
  const list=playable.length>0&&<ol className="vg-video-list" aria-label="Videos in this lesson">{playable.map((x,i)=><li key={x.title+i}><button type="button" className={[i===active&&'active',onWatched&&seen(x)&&'watched'].filter(Boolean).join(' ')} aria-current={i===active?'true':undefined} onClick={()=>{setActive(i);setPlaying(false)}}>{onWatched&&seen(x)?<Check size={14}/>:<Play size={14}/>}<span>{x.title}<small>{x.creator}{x.start?' · from '+clock(x.start):''}</small></span></button></li>)}</ol>;
@@ -93,7 +115,8 @@ export function VideoPanel({videos,watched=[],onWatched}:{videos:ModuleVideo[];w
    ?<iframe ref={frame} src={embedUrl(v)} title={v.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen loading="lazy"/>
    :<button type="button" className="vg-video-cover" onClick={()=>setPlaying(true)} style={v.youtubeId?{backgroundImage:`url(https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg)`}:undefined} aria-label={'Play '+v.title}><span className="vg-play"><Play size={30}/></span><span className="vg-video-title">{v.title}<small>{v.creator}{v.start?' · starts at '+clock(v.start):''}</small></span></button>}</div>
   <p className="vg-video-focus"><Target size={15}/> Watch for: {v.focus}</p>
-  {onWatched&&<p className={'small vg-watch-state'+(seen(v)?' ok':'')}>{seen(v)?<><Check size={14}/> Watched</>:'Watch most of this video to tick it off.'}</p>}</div>}
+  {onWatched&&<p className={'small vg-watch-state'+(seen(v)?' ok':'')}>{seen(v)?<><Check size={14}/> Watched</>:fallback.blocked?'Your browser is blocking the player’s progress, so we can’t tick this off by itself.':'Watch most of this video to tick it off.'}</p>}
+  {onWatched&&!seen(v)&&fallback.blocked&&<Button size="sm" variant="outline" disabled={!fallback.ready} onClick={()=>onWatched(videoId(v))}>{fallback.ready?'I’ve watched it':'I’ve watched it (available in '+fallback.wait+')'}</Button>}</div>}
   {(list||cards)&&<div className="vg-video-side">{list}{cards}</div>}
   {reader&&<SiteWindow v={reader} onClose={()=>setReader(null)}/>}
  </div>;
@@ -135,7 +158,8 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  const item=lessons[Math.min(index,lessons.length-1)],at=Math.min(index,lessons.length-1);
  // Progress is saved to the account (signed-in learners on a plan that covers this module).
  const marks:Record<string,LessonMark>=s.lessonProgress?.[moduleKey]||{};
- const status=lessonsStatus(m.id,pathway,marks),done=(i:number)=>status.finished[i];
+ const dead=useDeadVideos();
+ const status=lessonsStatus(m.id,pathway,marks,dead),done=(i:number)=>status.finished[i];
  const save=(body:any)=>{if(user&&open)void mutate('lesson_progress',{key:moduleKey,index:at,...body})};
  const mark=marks[at],videos=lessonVideos(m.id,at,pathway);
  const go=(i:number)=>{setIndex(i);document.getElementById('vg-lesson-top')?.scrollIntoView({behavior:'smooth',block:'start'})};

@@ -62,3 +62,6 @@
  .st-portfolio-grid{grid-template-columns:1fr}
  .st-module-grid{grid-template-columns:1fr}
 }
+.admin-list{display:grid;gap:8px;padding-left:18px}
+.admin-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.admin-table th,.admin-table td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--border)}

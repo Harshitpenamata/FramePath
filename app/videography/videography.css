@@ -443,3 +443,4 @@ a.vg-course:hover{border-color:var(--primary)}
 .vg-course-open{display:inline-flex;gap:6px;align-items:center;font-weight:700;color:var(--primary)}
 .vg-head-actions{display:grid;gap:8px;justify-items:stretch}
 .vg-soon span{margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--surface-raised);font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-foreground)}
+.shrink-offer{display:grid;gap:8px;justify-items:start;margin-top:10px;padding:12px;border:1px dashed var(--border);border-radius:var(--radius)}.shrink-offer p{margin:0}.shrink-offer progress{width:100%}

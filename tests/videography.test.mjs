@@ -259,3 +259,12 @@ test('every lesson has a video, and lesson videos are free and can all be shown 
   assert.ok(!v.url||!blocked.some(b=>v.url.includes(b)),id+'-'+(i+1)+': no links that refuse to show inside FramePath ('+v.url+')');
  }});
 });
+
+test('dead lesson videos do not count toward finishing a lesson',()=>{
+ const Les=load(path.join(root,'app/videography/lessons.ts'));
+ const needs=Les.lessonNeeds('B01',0,'Wedding');assert.ok(needs.length>=2);
+ const dead=[needs[0]];
+ assert.deepEqual(Les.lessonNeeds('B01',0,'Wedding',dead),needs.slice(1));
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs.slice(1),t:true}),false,'without the dead list the missing video counts');
+ assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs.slice(1),t:true},dead),true,'a dead video is not needed');
+});
