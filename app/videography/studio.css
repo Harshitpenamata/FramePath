@@ -65,3 +65,4 @@
 .admin-list{display:grid;gap:8px;padding-left:18px}
 .admin-table{width:100%;border-collapse:collapse;font-size:.9rem}
 .admin-table th,.admin-table td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--border)}
+.admin-alert{border-color:#f3a3a0;background:color-mix(in srgb,#f3a3a0 12%,var(--card))}

@@ -1,5 +1,5 @@
 import {db} from './service';
-import {aiStatus} from './ai-budget';
+import {aiStatus,setFlag} from './ai-budget';
 import {runVideoChecks} from './video-health';
 import {runReview} from './api/review/route';
 import {screenComment} from './api/community/route';
@@ -8,6 +8,12 @@ import {screenComment} from './api/community/route';
 // available again, runs reviews and checks comments that waited in the queue. Small batches keep each run short.
 export async function runScheduled(){
  const out:any={videos:await runVideoChecks(30),reviews:0,comments:0,ai:await aiStatus()};
+ try{return await aiWork(out)}finally{
+  // The admin page shows the last run and warns when the job has stopped running.
+  await setFlag('job_last_run',JSON.stringify({at:Date.now(),videos:out.videos,reviews:out.reviews,comments:out.comments,aiPaused:!out.ai.ok})).catch(()=>{});
+ }
+}
+async function aiWork(out:any){
  if(!out.ai.ok)return out;
  const jobs:any[]=(await db().prepare("SELECT id,user_id,answer FROM ai_jobs WHERE status='queued' ORDER BY created_at LIMIT 2").all()).results||[];
  for(const j of jobs){

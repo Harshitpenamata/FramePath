@@ -13,6 +13,10 @@ export function AdminHealth(){
  const list=(rows:any[])=>rows.length?<ul className="admin-list">{rows.map(v=><li key={v.id}><strong>{v.title||v.id}</strong> · {v.creator}<br/><span className="small">{v.detail} · lessons {v.lessons.join(', ')} · checked {when(v.checkedAt)}</span></li>)}</ul>:<p className="small">None.</p>;
  return <>
   <PageHead eyebrow="ADMIN" title="Health"/>
+  <Panel className={d.job.stale?'admin-alert':''}><h2>Hourly job</h2>
+   {d.job.stale?<p><strong>{d.job.lastRun?'The hourly job hasn’t run since '+when(d.job.lastRun.at)+'.':'The hourly job has never run.'}</strong> Lesson videos aren’t being checked, and reviews and comments waiting in the queue won’t run until it does. If it has never run, the schedule isn’t registered: open Workers &amp; Pages in the Cloudflare dashboard once, then redeploy.</p>
+    :<p><Badge tone="green">Running</Badge> Last run {when(d.job.lastRun.at)}: {d.job.lastRun.videos.checked} videos checked, {d.job.lastRun.reviews} queued reviews run, {d.job.lastRun.comments} comments checked{d.job.lastRun.aiPaused?' (AI was paused)':''}.</p>}
+  </Panel>
   <Panel><h2>AI</h2>
    <p>{d.ai.ok?<Badge tone="green">Running</Badge>:<Badge>{d.ai.reason==='credits'?'Paused: provider has no credit':'Paused: daily cap reached'}</Badge>} Today ${d.ai.spent.toFixed(2)} of ${d.ai.budget} cap ({pct}%){pct>=80&&' · close to the cap'}</p>
    <p>{d.queuedReviews} reviews and {d.pendingComments} comments waiting in the queue.</p>
