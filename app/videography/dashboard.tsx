@@ -2,6 +2,7 @@
 import React,{useState} from 'react';
 import {ArrowRight,BookOpen,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
+import {toast} from 'sonner';
 import {useLearning,Panel,Go,Badge,isExplore} from '../ui';
 import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
@@ -65,7 +66,6 @@ function StartDate({p,busy,update}:{p:Programme;busy:boolean;update:(u:any)=>Pro
 const modes:{id:Mode;title:string;price:string;Icon:any;points:string[]}[]=[
  {id:'free',title:'Free',price:'₹0',Icon:BookOpen,points:['A learning path made for you','Videos, notes and pictures for every module',`Tasks in the first ${freeModuleCount} modules`]},
  {id:'self',title:'Self-paced',price:'₹999 / year',Icon:Sparkles,points:['Every task, with your work saved','AI checks and feedback on your work','Build a portfolio and track progress']},
- {id:'mentor',title:'Mentor-led',price:'₹30,000',Icon:UserRound,points:['A mentor from the beginning','Your mentor checks your plan and work each week','Everything in Self-paced']},
 ];
 
 // My courses (/workspace): the learner's plans as tiles, up to three across all courses. Opening one shows its page.
@@ -115,10 +115,12 @@ function ProgrammeDashboard(){
  const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]).length;
  const nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(p.level,i)]);
  const update=(u:any)=>mutate('programme_update',{update:u});
- async function chooseMode(m:Mode){const saved=await update({mode:m});if(!saved)return;if(m==='self'&&!selfActive)window.location.assign('/membership?return_to=%2Fworkspace');if(m==='mentor'&&!mentorActive)window.location.assign('/mentors')}
+ async function chooseMode(m:Mode){const saved=await update({mode:m});if(!saved)return;if(m==='self'&&!selfActive)window.location.assign('/membership?return_to=%2Fworkspace')}
  // Once a mode is settled (Free chosen, or a paid mode active), the choice moves behind an Upgrade button.
- const decided=mentorActive||selfActive&&p.mode!=='mentor'||p.mode==='free';
- const rank:Record<Mode,number>={free:0,self:1,mentor:2},current:Mode=mentorActive?'mentor':selfActive?'self':'free';
+ // How you learn: Free or Self-paced. Mentorship will run as its own short and long courses (coming soon).
+ const paid=selfActive||mentorActive;
+ const decided=paid||p.mode==='free';
+ const rank:Record<Mode,number>={free:0,self:1,mentor:2},current:Mode=paid?'self':'free';
  const shown=decided?modes.filter(m=>rank[m.id]>rank[current]):modes;
  const preview=(hours:number)=>schedule(p.level,hours,p.schedule.startDate,p.schedule.daysPerWeek);
  return <div className="vg-dashboard">
@@ -126,7 +128,8 @@ function ProgrammeDashboard(){
    <div><div className="breadcrumbs"><a href="/workspace">My courses</a><span>/</span><span>{planTitle(p)}</span></div><span className="eyebrow">{(courseNames[p.course]||p.course).toUpperCase()} · {levelNames[p.level].toUpperCase()} LEVEL</span><h1>{p.primaryPathway}</h1><p className="lede">{levelSummary[p.level]}</p>
     </div>
    <div className="vg-head-side"><div className="vg-score"><strong>{done}/{mods.length}</strong><span>modules done</span></div>
-    {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>{current==='free'?'Upgrade':'Get a mentor'}</Button>}</div>
+    <div className="vg-head-actions">{decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
+     <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div></div>
   </section>
 
   <div className="vg-report-grid">
@@ -144,13 +147,13 @@ function ProgrammeDashboard(){
   </div>
 
   {(!decided||upgrading)&&shown.length>0&&<section id="vg-modes"><span className="eyebrow">HOW YOU LEARN</span><h2>{decided?'Upgrade your learning':'How do you want to learn?'}</h2>
-   <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?selfActive:m.id==='mentor'?mentorActive:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}>
+   <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?paid:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}>
     <div className="row between"><m.Icon size={26}/>{chosen&&<Badge tone="green">Your mode</Badge>}</div><h3>{m.title}</h3><strong className="vg-price">{m.price}</strong>
     <ul>{m.points.map(x=><li key={x}><Check size={15}/>{x}</li>)}</ul>
-    {m.id!=='free'&&chosen&&!active&&<p className="small">{m.id==='self'?'Finish the practice checkout to unlock every task.':'Choose your mentor to continue.'}</p>}
-    <Button variant={chosen?'default':'outline'} disabled={busy} onClick={()=>chooseMode(m.id)}>{chosen?(active?'Selected':m.id==='self'?'Complete checkout':'Choose a mentor'):m.id==='free'?'Learn free':m.id==='self'?'Go self-paced':'Choose a mentor'}</Button>
+    {m.id==='self'&&chosen&&!active&&<p className="small">Finish the practice checkout to unlock every task.</p>}
+    <Button variant={chosen?'default':'outline'} disabled={busy} onClick={()=>chooseMode(m.id)}>{chosen?(active?'Selected':'Complete checkout'):m.id==='free'?'Learn free':'Go self-paced'}</Button>
    </Panel>})}</div>
-   <p className="small">This is a test version. Checkout takes no money and mentors are made up.</p>
+   <p className="small">This is a test version. Checkout takes no money.</p>
    {decided&&<Button variant="ghost" onClick={()=>setUpgrading(false)}>Not now</Button>}
   </section>}
 

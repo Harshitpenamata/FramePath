@@ -441,3 +441,5 @@ ol.vg-video-list{list-style:none;margin:0;padding:0}
 a.vg-course{color:inherit;text-decoration:none}
 a.vg-course:hover{border-color:var(--primary)}
 .vg-course-open{display:inline-flex;gap:6px;align-items:center;font-weight:700;color:var(--primary)}
+.vg-head-actions{display:grid;gap:8px;justify-items:stretch}
+.vg-soon span{margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--surface-raised);font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-foreground)}

@@ -223,7 +223,7 @@ export function buildProgramme(input:any,previous?:Programme|null):Programme{
  const keptStart=previous&&input.startDate===previous.schedule.startDate;
  const start=keptStart||typeof input.startDate==='string'&&input.startDate>=addDays(today(),-1)&&input.startDate<=addDays(today(),180)?input.startDate:today();
  const now=new Date().toISOString();
- return {version:1,course:'videography',interests:ids as string[],primaryPathway:active,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self','mentor'].includes(input.mode)?input.mode:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
+ return {version:1,course:'videography',interests:ids as string[],primaryPathway:active,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self'].includes(input.mode)?input.mode:previous?.mode==='mentor'?null:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
 }
 
 // ---- Modules as lesson paths ----
