@@ -1,5 +1,6 @@
 import {sqliteTable,text,integer,real,index,uniqueIndex,primaryKey} from 'drizzle-orm/sqlite-core';
-export const learners=sqliteTable('learners',{userId:text('user_id').primaryKey(),data:text('data').notNull(),revision:integer('revision').notNull().default(0),updatedAt:integer('updated_at').notNull()});
+// email: the sign-in email, saved when the learner loads the app, so admins can find them.
+export const learners=sqliteTable('learners',{userId:text('user_id').primaryKey(),data:text('data').notNull(),revision:integer('revision').notNull().default(0),updatedAt:integer('updated_at').notNull(),email:text('email')},t=>[index('idx_learners_email').on(t.email)]);
 export const uploads=sqliteTable('uploads',{id:text('id').primaryKey(),userId:text('user_id').notNull(),name:text('name').notNull(),type:text('type').notNull(),size:integer('size').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_uploads_owner').on(t.userId)]);
 export const aiJobs=sqliteTable('ai_jobs',{id:text('id').primaryKey(),userId:text('user_id').notNull(),scope:text('scope').notNull(),kind:text('kind').notNull(),status:text('status').notNull(),answer:text('answer'),createdAt:integer('created_at').notNull()},t=>[index('idx_ai_user_scope_date').on(t.userId,t.scope,t.createdAt),index('idx_ai_date').on(t.createdAt)]);
 // visibility: 'unlisted' (anyone with the link) or 'public' (also listed in the community gallery).
@@ -22,4 +23,6 @@ export const videoStatus=sqliteTable('video_status',{id:text('id').primaryKey(),
 export const aiUsage=sqliteTable('ai_usage',{id:text('id').primaryKey(),day:text('day').notNull(),provider:text('provider').notNull(),model:text('model').notNull(),kind:text('kind').notNull(),inputTokens:integer('input_tokens').notNull(),outputTokens:integer('output_tokens').notNull(),usd:real('usd').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_ai_usage_day').on(t.day)]);
 // Small switches the app sets for itself, e.g. 'ai_paused_until' after the AI provider reports no credit.
 export const appFlags=sqliteTable('app_flags',{key:text('key').primaryKey(),value:text('value').notNull(),updatedAt:integer('updated_at').notNull()});
-
+// A learner says an AI review seems wrong. status: 'open', 'fine' (the review stands) or 'refunded' (the review was
+// wrong; it no longer counts toward the learner's review allowance). note: what the admin tells the learner.
+export const reviewFlags=sqliteTable('review_flags',{id:text('id').primaryKey(),jobId:text('job_id').notNull(),userId:text('user_id').notNull(),lessonKey:text('lesson_key').notNull(),reason:text('reason').notNull(),details:text('details').notNull(),status:text('status').notNull(),note:text('note').notNull(),createdAt:integer('created_at').notNull(),resolvedAt:integer('resolved_at')},t=>[uniqueIndex('idx_flags_job').on(t.jobId),index('idx_flags_status').on(t.status,t.createdAt)]);

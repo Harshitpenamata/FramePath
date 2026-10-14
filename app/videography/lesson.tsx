@@ -114,7 +114,8 @@ function WaitingTips(){
  return <Panel className="vg-waiting"><p role="status"><span className="vg-spinner" aria-hidden="true"/>AI is reviewing your work. This can take up to a minute…</p><p className="vg-tip"><span className="eyebrow">WHILE YOU WAIT</span>{waitingTips[i]}</p></Panel>;
 }
 
-type Review={id:string;submissionId?:string;createdAt:number;review:{total:number|null;summary:string;strength:string;improvement:string;nextStep:string;evidenceLimit:string;criteria:{label:string;rating:number|null;feedback:string}[]}};
+type Flag={reason:string;status:'open'|'fine'|'refunded';note:string};
+type Review={id:string;flag?:Flag|null;submissionId?:string;createdAt:number;review:{total:number|null;summary:string;strength:string;improvement:string;nextStep:string;evidenceLimit:string;criteria:{label:string;rating:number|null;feedback:string}[]}};
 function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;requestFor:string;onFinish?:()=>void}){
  const {s}=useLearning();
  const piece=s.submissions.find((x:any)=>x.key===key);
@@ -142,12 +143,29 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
    <p>{review.review.summary}</p>
    <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>AI</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label} className={gap?'gap':''}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span>{gap&&<span className="small vg-gap">You and the AI see this differently. Read the note above and try again.</span>}</td>{rated&&<td>{mine??'–'}/4</td>}<td>{c.rating??'–'}/4</td></tr>})}</tbody></table>
    <div className="vg-review-notes"><p><strong>What worked:</strong> {review.review.strength}</p><p><strong>What to improve:</strong> {review.review.improvement}</p><p><strong>Try next (under 30 minutes):</strong> {review.review.nextStep}</p><p className="small"><strong>What the AI couldn’t check:</strong> {review.review.evidenceLimit}</p></div>
+   <ReviewFlag review={review}/>
   </Panel>:!status&&<Panel><h2>AI review</h2>
    {error&&<p role="alert" className="notice">{error}</p>}
    {canReview?<><p>Get feedback on the work you handed in.</p><Button onClick={()=>requestReview(piece.id)}>Get my AI review</Button></>:allowance&&<p>{allowance.eligible?'You’ve used both AI reviews for this module, so this hand-in won’t get one. It’s saved in My Work.':'AI reviews for this module are part of Self-paced. Your work is saved in My Work.'}{rated?' Your own rating is below.':''}</p>}
   </Panel>}
   {rated&&<Panel><h2>What you said</h2><p className="small">Your rating: {piece.selfScore}/100</p><p><strong>What went well:</strong> {piece.reflections?.well}</p><p><strong>What you would change:</strong> {piece.reflections?.change}</p></Panel>}
-  {allowance&&<p className="small">AI reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} The AI reads your text and photos. It can’t watch videos or open links.</p>}
+  {allowance&&<p className="small">AI reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} The AI reads your text and photos, and watches your videos and YouTube or Google Drive links, picture and sound.</p>}
   <div className="button-row"><Go href={'/portfolio?from='+encodeURIComponent(key)} outline>See it in My Work</Go>{onFinish&&<Button onClick={onFinish}><Flag size={16}/>Finish the level</Button>}</div>
  </div>;
 }
+
+// "This feedback seems wrong": the learner tells us, an admin checks it on /admin and replies here.
+const flagReasons:[string,string][]=[['missed','It says something is missing, but it’s in my work'],['video','It describes the video or sound wrongly'],['score','The score doesn’t match the feedback'],['task','It reviewed it against the wrong task'],['other','Something else']];
+function ReviewFlag({review}:{review:Review}){
+ const [flag,setFlag]=useState<Flag|null>(review.flag||null),[open,setOpen]=useState(false),[reason,setReason]=useState(''),[details,setDetails]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ if(flag)return <p className={'small vg-flag-state '+flag.status} role="status">{flag.status==='open'?'You flagged this review. We’re checking it and will reply here.':flag.status==='refunded'?'We checked: this review was wrong, so it no longer counts. You can ask for another review.':'We checked this review and it stands.'}{flag.note&&<><br/><strong>FramePath:</strong> {flag.note}</>}</p>;
+ if(!open)return <button type="button" className="text-link small vg-flag-open" onClick={()=>setOpen(true)}>This feedback seems wrong</button>;
+ async function send(){setBusy(true);setError('');try{const r=await fetch('/api/review/flag',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewId:review.id,reason,details})});const d:any=await r.json();if(!r.ok)throw Error(d.error);setFlag(d.flag)}catch(e:any){setError(e.message||'That didn’t send. Please try again.')}finally{setBusy(false)}}
+ return <div className="vg-flag-form"><strong>What seems wrong?</strong>
+  <div className="vg-pick" role="radiogroup" aria-label="What seems wrong">{flagReasons.map(([id,label])=><button type="button" role="radio" aria-checked={reason===id} key={id} className={reason===id?'ok':''} onClick={()=>setReason(id)}>{label}</button>)}</div>
+  <textarea rows={3} maxLength={1000} value={details} onChange={e=>setDetails(e.target.value)} placeholder="Tell us what it got wrong (optional). For example: the sound is clear at 0:10." aria-label="Details"/>
+  {error&&<p role="alert" className="field-error">{error}</p>}
+  <div className="button-row"><Button size="sm" disabled={!reason||busy} onClick={send}>{busy?'Sending…':'Send'}</Button><Button size="sm" variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button></div>
+ </div>;
+}
+
