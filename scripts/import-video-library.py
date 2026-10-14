@@ -1,6 +1,6 @@
 """Import the curated video library spreadsheet into app/videography/video-library.json.
 
-    python scripts/import-video-library.py [Video_Library_Module_by_Module_Merged.xlsx]
+    python scripts/import-video-library.py [docs/sources/Video_Library_Module_by_Module_Merged.xlsx]
 
 One entry per row, ids are <module>-<n> in sheet order (B01-1, B01-2, ...). YouTube links get a youtubeId;
 the first timestamp in "Watch this section" becomes the start time. Needs openpyxl.
@@ -10,7 +10,7 @@ from pathlib import Path
 import openpyxl
 
 ROOT = Path(__file__).resolve().parent.parent
-src = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'Video_Library_Module_by_Module_Merged.xlsx'
+src = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'docs' / 'sources' / 'Video_Library_Module_by_Module_Merged.xlsx'
 rows = [list(r) for r in openpyxl.load_workbook(src, read_only=True, data_only=True).worksheets[0].iter_rows(values_only=True)]
 head_i = next(i for i, r in enumerate(rows) if r and 'Level' in [str(c) for c in r])
 cols = {str(h).strip(): i for i, h in enumerate(rows[head_i]) if h}
