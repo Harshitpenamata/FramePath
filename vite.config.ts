@@ -51,6 +51,8 @@ const deployConfig = {
   r2_buckets: [{ binding: r2, bucket_name: target.r2 }],
   // Hourly: lesson video health checks and queued AI work (build/sites-worker.ts → app/jobs.ts).
   triggers: { crons: ["17 * * * *"] },
+  // Links in WhatsApp messages point here.
+  vars: { SITE_URL: `https://${target.domain}` },
 };
 
 export default defineConfig(async ({ command }) => {
