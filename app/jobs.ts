@@ -3,14 +3,16 @@ import {aiStatus,setFlag} from './ai-budget';
 import {runVideoChecks} from './video-health';
 import {runReview} from './api/review/route';
 import {screenComment} from './api/community/route';
+import {runWhatsAppJobs} from './whatsapp-jobs';
 
 // The hourly job (Cloudflare cron, see build/sites-worker.ts): checks a batch of lesson videos, then, if AI is
 // available again, runs reviews and checks comments that waited in the queue. Small batches keep each run short.
 export async function runScheduled(){
  const out:any={videos:await runVideoChecks(30),reviews:0,comments:0,ai:await aiStatus()};
+ out.whatsapp=await runWhatsAppJobs().catch((e:any)=>({error:String(e?.message||e).slice(0,200)}));
  try{return await aiWork(out)}finally{
   // The admin page shows the last run and warns when the job has stopped running.
-  await setFlag('job_last_run',JSON.stringify({at:Date.now(),videos:out.videos,reviews:out.reviews,comments:out.comments,aiPaused:!out.ai.ok})).catch(()=>{});
+  await setFlag('job_last_run',JSON.stringify({at:Date.now(),videos:out.videos,reviews:out.reviews,comments:out.comments,aiPaused:!out.ai.ok,whatsapp:out.whatsapp})).catch(()=>{});
  }
 }
 async function aiWork(out:any){

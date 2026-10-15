@@ -1,6 +1,7 @@
 import {db,identity,checkOrigin,fail,errorResponse} from '../../../service';
 import {isAdmin} from '../health/route';
 import {plansOf,planTitle} from '../../../videography/programme';
+import {waLive} from '../../../whatsapp';
 export const dynamic='force-dynamic';
 const noStore={headers:{'Cache-Control':'no-store'}};
 
@@ -32,6 +33,14 @@ export async function GET(req:Request){try{
   const [total,top]=await Promise.all([db().prepare('SELECT COUNT(*) AS files,COALESCE(SUM(size),0) AS bytes,COUNT(DISTINCT user_id) AS users FROM uploads').first(),
    db().prepare('SELECT u.user_id,l.email,COUNT(*) AS files,SUM(u.size) AS bytes FROM uploads u LEFT JOIN learners l ON l.user_id=u.user_id GROUP BY u.user_id ORDER BY bytes DESC LIMIT 10').all()]);
   return Response.json({total,top:top.results||[]},noStore);
+ }
+ if(section==='whatsapp'){
+  const [opted,byStatus,recent,cost]=await Promise.all([
+   db().prepare("SELECT COUNT(*) AS n FROM learners WHERE json_extract(data,'$.whatsapp.optIn')=1").first(),
+   db().prepare("SELECT template,status,COUNT(*) AS n FROM wa_messages WHERE created_at>? GROUP BY template,status ORDER BY template").bind(Date.now()-7*86400000).all(),
+   db().prepare("SELECT w.template,w.status,w.body,w.error,w.created_at,w.phone,l.email FROM wa_messages w LEFT JOIN learners l ON l.user_id=w.user_id ORDER BY w.created_at DESC LIMIT 25").all(),
+   db().prepare("SELECT COALESCE(SUM(cost_paise),0) AS paise FROM wa_messages WHERE created_at>?").bind(Date.now()-30*86400000).first()]);
+  return Response.json({live:waLive(),optedIn:(opted as any)?.n||0,week:byStatus.results||[],recent:recent.results||[],costInr30d:((cost as any)?.paise||0)/100},noStore);
  }
  return fail('Unknown section.');
 }catch(e){return errorResponse(e)}}
