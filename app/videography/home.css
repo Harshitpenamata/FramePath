@@ -1,7 +1,7 @@
 /* Home (Studio Grid screen 01). Loaded only with the home and plan setup pages. */
 .hm{display:grid;gap:22px}
 .hm-hero{display:grid;gap:22px;padding:14px 0 18px}
-.hm-hero h1{font-size:clamp(3.4rem,8.6vw,8.8rem);max-width:15ch}
+.hm-hero h1{max-width:15ch}
 .hm-hero h1 em{font-style:normal;color:var(--primary)}
 .hm-hero .lede{max-width:720px}
 .hm-hero .button-row{margin-top:4px}
@@ -10,15 +10,15 @@
 
 .hm-grid{display:grid;grid-template-columns:minmax(0,1.15fr) repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(170px,auto));gap:12px;scroll-margin-top:24px}
 .hm-intro{grid-row:1/4;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:40px;border:var(--line);border-radius:var(--radius);position:relative}
-.hm-intro h2{font-size:clamp(2.8rem,5.4vw,5.6rem);line-height:.9}
+.hm-intro h2{font-size:var(--t-h2);line-height:var(--lh-h2)}
 .hm-intro p{max-width:34ch}
-.hm-intro .sg-arrow{position:absolute;right:28px;bottom:28px;width:50px;height:50px}
+.hm-intro .sg-arrow{position:absolute;right:28px;bottom:28px;width:var(--icon-lg);height:var(--icon-lg)}
 .hm-craft{position:relative;display:flex;flex-direction:column;gap:6px;min-height:170px;padding:22px 24px;border:var(--line);border-radius:var(--radius);overflow:hidden;color:var(--foreground);isolation:isolate}
 .hm-craft.live{grid-column:2/4;background:var(--primary);border-color:var(--primary);color:#0b0b0b}
 .hm-craft-photo{position:absolute;right:0;top:0;bottom:0;width:58%;z-index:-1;-webkit-mask-image:linear-gradient(90deg,transparent,#000 45%);mask-image:linear-gradient(90deg,transparent,#000 45%)}
 .hm-craft.live .hm-craft-photo{width:52%;mix-blend-mode:multiply}
 .hm-craft-n{font-size:.8rem;letter-spacing:.12em;opacity:.7}
-.hm-craft strong{font-size:clamp(1.7rem,2.3vw,2.4rem);line-height:.95;text-transform:uppercase}
+.hm-craft strong{font-size:var(--t-card);line-height:var(--lh-card);text-transform:uppercase}
 .hm-craft-blurb{max-width:24ch;font-size:.95rem;color:var(--muted-foreground)}
 .hm-craft.live .hm-craft-blurb{color:#1e2410}
 .hm-craft-foot{margin-top:auto;display:flex;align-items:center;gap:12px;font-weight:600}
@@ -30,7 +30,7 @@
 .hm-live{position:absolute;top:18px;right:18px;background:#0b0b0b;color:var(--primary);border-radius:999px;padding:4px 12px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 
 .hm-ways,.hm-how{display:grid;gap:14px;margin-top:40px}
-.hm-ways h2,.hm-how h2{font-size:clamp(2.4rem,4.6vw,4.4rem)}
+.hm-ways h2,.hm-how h2{font-size:var(--t-h2)}
 .hm-way-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .hm-way{display:grid;gap:14px;align-content:start;padding:30px;border:var(--line);border-radius:var(--radius)}
 .hm-way h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:2rem;line-height:1}
@@ -44,7 +44,7 @@
 .hm-how li:first-child{border-left:0}
 .hm-how li strong{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.6rem;line-height:1}
 .hm-cta{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:40px;padding:34px 38px;border-radius:var(--radius);background:var(--primary);color:#0b0b0b}
-.hm-cta h2{font-size:clamp(2.2rem,4vw,3.6rem);color:#0b0b0b}
+.hm-cta h2{font-size:var(--t-h2);color:#0b0b0b}
 .hm-cta p{color:#1e2410}
 .hm-cta [data-slot=button][data-variant=default]{background:#0b0b0b;color:var(--foreground)}
 
@@ -63,13 +63,13 @@
  .hm-how li:first-child{border-top:0}
  .hm-cta{flex-direction:column;align-items:flex-start;padding:26px}
 }
-.hm-hero h1{font-size:clamp(3rem,6.6vw,6.8rem);max-width:none}
+.hm-hero h1{font-size:var(--t-display);max-width:none}
 .hm-craft.live strong{color:#0b0b0b}
 
 /* Plan setup (Studio Grid screen 02): headline and photo left, the step card right */
 .sp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:34px;align-items:start;padding-top:20px}
 .sp-side{display:grid;gap:22px;position:sticky;top:20px}
-.sp-side h1{font-size:clamp(3rem,6.4vw,6.6rem)}
+.sp-side h1{font-size:var(--t-h1)}
 .sp-photo{width:100%;aspect-ratio:16/9;border:var(--line);border-radius:var(--radius)}
 .sp-card{border:var(--line);border-radius:28px;padding:28px}
 .sp-card .panel{border:0;padding:0;margin:0;background:transparent}
@@ -88,3 +88,10 @@
 .sp-tile span{min-width:0}
 .sp-card .vg-age{display:grid;gap:10px}
 .sp-card .vg-age label{margin:0}
+/* Spacing (system): sections 96px apart, label 12px above its heading, heading 32px above its content */
+.hm-ways,.hm-how{gap:var(--s3);margin-top:var(--s9)}
+.hm-ways>h2,.hm-how>h2{margin:0 0 var(--s5)}
+.hm-cta{margin-top:var(--s9)}
+.hm-cta>div{display:grid;gap:var(--s3)}
+.hm-cta h2,.hm-cta p{margin:0}
+@media(max-width:760px){.hm-craft-photo,.hm-craft.live .hm-craft-photo{width:44%}.hm-craft-blurb{max-width:54%}}

@@ -1,7 +1,7 @@
 /* Help (Studio Grid screen 12) */
 .hp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;align-items:start;padding-top:20px}
 .hp-side{display:grid;gap:24px;justify-items:start;position:sticky;top:20px}
-.hp-side .page-head h1{font-size:clamp(3.4rem,7.2vw,7.4rem)}
+.hp-side .page-head h1{font-size:var(--t-h1)}
 .help-stack{display:grid;gap:12px}
 .hp-q{margin:0!important}
 .hp-q>summary{font-size:1.1rem;padding:20px 24px!important}

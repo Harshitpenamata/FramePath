@@ -1,12 +1,12 @@
 /* Resources (Studio Grid screen 11). Loaded only with the resources page. */
 .rs-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px;align-items:center;padding:40px 44px;border:var(--line);border-radius:28px;margin-top:10px}
-.rs-hero h1{font-size:clamp(3.2rem,6.6vw,6.8rem)}
+.rs-hero h1{font-size:var(--t-h1)}
 .rs-hero .lede{margin-top:16px}
 .rs-search{display:grid;gap:14px}
 .rs-field{display:flex;align-items:center;gap:12px;margin:0;padding:6px 22px;border:var(--line);border-radius:999px}
 .rs-field input{border:0!important;background:transparent!important;margin:0!important;padding:12px 0!important;font-size:1.05rem}
 .rs-chips{display:flex;gap:10px;flex-wrap:wrap}
-.rs-chips button{min-width:120px;padding:12px 26px;border:var(--line);border-radius:999px;background:transparent;color:var(--foreground);font:inherit;font-weight:600}
+.rs-chips button{min-width:120px;min-height:var(--btn);padding:0 var(--s5);font-size:.9375rem;border:var(--line);border-radius:999px;background:transparent;color:var(--foreground);font-family:inherit;font-weight:600}
 .rs-chips button.on{background:var(--primary);border-color:var(--primary);color:#0b0b0b}
 .rs-filters{margin:16px 0;border:var(--line);border-radius:22px;padding:0 22px}
 .rs-filters>summary{display:flex;align-items:center;gap:10px;padding:16px 0;cursor:pointer;font-weight:600;list-style:none}
@@ -17,7 +17,7 @@
 .library-resource>details{grid-column:1/-1}
 .resource-topic-art{height:120px;border-radius:16px;background:#1a1a18;display:grid;place-content:center;text-align:center;font-family:var(--display);text-transform:uppercase;font-size:1.6rem;color:var(--foreground)}
 .resource-topic-art small{font-family:var(--body);font-size:.72rem;letter-spacing:.2em;color:var(--primary)}
-.library-resource-copy h2{font-size:clamp(1.5rem,2.2vw,2rem);margin:6px 0}
+.library-resource-copy h2{font-size:var(--t-card);line-height:var(--lh-card);margin:var(--s2) 0}
 .library-resource-copy [data-slot=button]{margin-top:10px}
 @media(max-width:900px){.rs-hero{grid-template-columns:1fr;padding:28px}.library-resource{grid-template-columns:1fr}}
 .library-resource{grid-template-columns:200px minmax(0,1fr);row-gap:4px;padding:12px 18px 12px 12px}

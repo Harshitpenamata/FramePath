@@ -2,7 +2,7 @@
 .vg-lesson{display:grid;gap:22px}
 .vg-lesson .breadcrumbs{margin:10px 0 0}
 .ls-head{display:grid;gap:10px;margin:22px 0 26px}
-.ls-head h1{font-size:clamp(3rem,6.6vw,6.8rem)}
+.ls-head h1{font-size:var(--t-h1)}
 .ls-meta{color:var(--foreground);font-size:1.02rem}
 .ls-meta span{margin:0 8px;color:var(--muted-foreground)}
 
@@ -10,7 +10,7 @@
 .vg-lesson-card{border:var(--line);border-radius:var(--radius);padding:26px;background:transparent}
 .vg-lesson-steps button{border:var(--line);border-radius:999px;color:var(--foreground)}
 .vg-lesson-steps button.current{background:var(--primary);color:#0b0b0b;border-color:var(--primary)}
-.vg-lesson-about h2{font-size:clamp(2rem,3.4vw,3rem)}
+.vg-lesson-about h2{font-size:var(--t-card)}
 .vg-sketch{border:var(--line);border-radius:18px}
 .vg-video.two-col{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px}
 .vg-video-frame{border:var(--line);border-radius:var(--radius);overflow:hidden}
@@ -27,7 +27,7 @@
 .vg-make{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:18px;align-items:start}
 .vg-make>*{grid-column:2}
 .vg-make>.vg-task-brief{grid-column:1;grid-row:1/span 6;position:sticky;top:20px;border:var(--line);border-radius:var(--radius);padding:30px;display:grid;gap:16px}
-.vg-task-brief h2{font-size:clamp(2.2rem,3.6vw,3.4rem)}
+.vg-task-brief h2{font-size:var(--t-card)}
 .vg-task-do{color:var(--foreground);font-size:1.1rem}
 .vg-task-meta{display:grid;gap:16px;border-top:var(--soft-line);padding-top:18px}
 .vg-task-meta ul{padding-left:0;list-style:none;display:grid;gap:10px;counter-reset:chk}
@@ -45,3 +45,13 @@
 .vg-make .upload-box input[type=file]{opacity:0!important;position:absolute!important;inset:0!important;border:0!important}
 .vg-lesson img:not(.sg-photo),.vg-module-hero img{filter:var(--photo-filter)}
 .vg-sketch{filter:none!important}
+/* Spacing and sizes (system) */
+.vg-lesson [data-slot=tabs-list]{margin-bottom:var(--s6)}
+.ls-head{gap:var(--s3);margin:0 0 var(--s7)}
+.vg-stage-steps{gap:var(--s2)}
+.vg-stage-steps li,.vg-lesson-steps button{min-height:40px;padding:0 var(--s4);display:inline-flex;align-items:center;gap:var(--s2);font-size:.875rem}
+.vg-lesson-steps{gap:var(--s2)}
+.vg-make .upload-box{padding:var(--s5)}
+.vg-make .vg-form-block{display:grid;gap:var(--s4)}
+.vg-make .vg-form-block>*{margin:0}
+.vg-make .upload-box>:first-child{margin-top:0}

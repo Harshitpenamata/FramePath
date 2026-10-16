@@ -8,17 +8,25 @@
  --line:1.5px solid var(--border);--soft-line:1px solid #3a3935;--display:Anton,'Arial Narrow',Impact,sans-serif;--body:Inter,system-ui,'Segoe UI',Arial,sans-serif;
  --photo-filter:grayscale(1) contrast(1.05)}
 :root[data-photos=colour]{--photo-filter:none}
+/* One system for the whole site: spacing steps, type scale, button and icon sizes, and the page grid.
+   Every page uses these, so the same thing looks the same everywhere. */
+:root{--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;
+ --gutter:26px;--frame:min(1460px,calc(100% - 40px));
+ --t-display:clamp(3.25rem,6.6vw,6.75rem);--t-h1:clamp(3rem,6vw,6rem);--t-h2:clamp(2.25rem,4.2vw,4rem);--t-card:clamp(1.5rem,2.2vw,2.125rem);--t-lede:clamp(1.0625rem,1.5vw,1.3125rem);
+ --lh-h1:.92;--lh-h2:.95;--lh-card:1.02;
+ --btn:48px;--btn-lg:56px;--icon:40px;--icon-lg:48px}
+@media(max-width:760px){:root{--gutter:16px;--frame:calc(100% - 24px)}}
 body{font-family:var(--body);background:#0b0b0b;letter-spacing:-.005em}
 p{color:var(--muted-foreground)}
 
 /* Headlines: Anton, uppercase, tight */
 h1,.display{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.005em;line-height:.9;color:var(--foreground)}
-h1{font-size:clamp(3.2rem,8.4vw,8.6rem)}
-.page-head h1{font-size:clamp(3rem,7vw,7rem);max-width:none}
-h2{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.98;font-size:clamp(1.6rem,2.6vw,2.4rem)}
+h1{font-size:var(--t-h1)}
+.page-head h1{font-size:var(--t-h1);line-height:var(--lh-h1);max-width:none}
+h2{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:var(--lh-card);font-size:var(--t-card)}
 h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 .kicker,.eyebrow{font-family:var(--body);font-size:.76rem;letter-spacing:.24em;font-weight:600;text-transform:uppercase;color:var(--foreground)}
-.lede{font-size:clamp(1.05rem,1.6vw,1.35rem);color:var(--foreground);max-width:760px}
+.lede{font-size:var(--t-lede);line-height:1.5;color:var(--foreground);max-width:760px}
 
 /* Header: a cream pill bar floating over the black page */
 .topbar{max-width:1460px;height:auto;margin:18px auto 0;padding:10px 12px 10px 26px;background:#f2eee4;color:#0b0b0b;border:0;border-radius:999px;width:calc(100% - 40px)}
@@ -48,7 +56,7 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 .breadcrumbs a:hover{color:var(--foreground)}
 
 /* Buttons: lime pill, cream outline pill */
-[data-slot=button]{border-radius:999px!important;font-family:var(--body);font-weight:600;min-height:48px;padding-inline:26px!important;gap:10px}
+[data-slot=button]{border-radius:999px!important;font-family:var(--body);font-weight:600;min-height:48px;padding-inline:var(--s5)!important;gap:10px}
 [data-slot=button][data-variant=default]{background:var(--primary);color:#0b0b0b;border:0}
 [data-slot=button][data-variant=default]:hover{background:#e3f28a}
 [data-slot=button][data-variant=outline]{background:transparent;color:var(--foreground);border:var(--line)}
@@ -100,3 +108,34 @@ input[type=radio]:checked::after{content:'';width:14px;height:14px;border-radius
  .topbar .main-nav a{padding:6px 0}
  .topbar .more-disclosure .header-popover{right:0;left:auto}
 }
+
+/* System rules (kept last so page styles can't drift) */
+h1,.page-head h1{line-height:var(--lh-h1)}
+main.page{width:var(--frame);max-width:none;margin-inline:auto;padding:var(--s7) var(--gutter) var(--s8)}
+.topbar{width:var(--frame);max-width:none;padding-left:var(--gutter)}
+.footer{width:var(--frame);max-width:none;padding-inline:var(--gutter)}
+main.page :is(.hm-intro,.hm-ways,.hm-how,.hm-cta,.db-empty,.vg-modules,#vg-modes) h2,main.page .sf-h{line-height:var(--lh-h2)}
+main.page .page-head{gap:var(--s4)}
+main.page .page-head p{margin:0}
+[data-slot=button]{min-height:var(--btn);padding-block:0;padding-inline:var(--s5);line-height:1.2;font-size:.9375rem;font-weight:600;gap:var(--s2)}
+[data-slot=button][data-size=sm]{min-height:40px;padding-inline:var(--s4)!important}
+[data-slot=button][data-size=icon]{width:var(--icon);min-height:var(--icon);padding:0}
+.sg-arrow{width:var(--icon);height:var(--icon)}
+.button-row{gap:var(--s3)}
+@media(max-width:760px){main.page{padding-top:var(--s6);padding-bottom:var(--s7)}}
+[data-slot=button]:disabled{opacity:1;background:#262521!important;color:#8d897f!important;border-color:transparent!important}
+[data-slot=button][data-size=sm]{min-height:var(--btn)}
+.badge{font-family:var(--body)!important;font-size:.75rem;font-weight:600;letter-spacing:.02em;line-height:1;padding:6px 10px;border-radius:999px;gap:var(--s1)}
+main.page h1{letter-spacing:.005em}
+main.page .page-head{display:grid;gap:var(--s4);align-content:start}
+.notice{border-radius:18px;padding:var(--s5);display:grid;gap:var(--s3);justify-items:start}
+.notice.success{background:transparent;border:1.5px solid var(--primary);color:var(--foreground)}
+.notice>*{margin:0}
+main.page .page-head>div{display:grid;gap:var(--s3);align-content:start}
+main.page .page-head h1+p,main.page .page-head h1+.lede{margin-top:var(--s2)}
+/* Stacked cards: one 24px rhythm */
+main.page>.panel,main.page>.two-col{margin:0 0 var(--s5)}
+main.page .two-col{gap:var(--s5);align-items:start}
+main.page .two-col>.panel{margin:0}
+.panel:has(>details.sg-acc:only-child){border:0;padding:0;background:none}
+.panel:has(>details.sg-acc:only-child)>details.sg-acc{margin:0}

@@ -37,6 +37,39 @@ The site has been restyled to follow the 15 Studio Grid mockups (`Assets/01_Stud
 
 **Phones:** the header becomes two rows: the brand and account button on top, the nav links underneath. No page scrolls sideways at 390px.
 
+## Spacing and sizes
+
+After review, the pages were measured with a script (button sizes, heading sizes, line spacing, left edges) and brought onto one shared set of sizes. This follows the consistency, alignment, proximity and hierarchy principles from Figma's and UXPin's UI design guides. The sizes are tokens at the top of `app/studio-grid.css`.
+
+- **Grid:**
+  - The header, page content and footer share one frame (max 1460px).
+  - Content starts exactly under the logo on every page. Before, it started at 58px on some pages and 78px on others, with the logo at 64px.
+- **Type scale:**
+
+  | Level | Size at 1536px | Line spacing |
+  |---|---|---|
+  | Page headline | 92px (was 92–129px, varying by page) | 0.92 |
+  | Section heading | 64px | 0.95 |
+  | Card title | 34px | 1.02 |
+  | Lede | 21px | 1.5 |
+  | Body | 16px | 1.6 |
+
+  The home hero is the only larger headline, as in the mockup.
+- **Spacing steps:** 4, 8, 12, 16, 24, 32, 48, 64 and 96px.
+  - A label sits 12px above its heading, and a heading sits 24px above its content.
+  - Stacked cards are 12px apart; blocks are 24px apart; home sections are 96px apart.
+- **Buttons:**
+  - 48px everywhere. 56px only for the main action in a hero card.
+  - Disabled buttons are a quiet grey instead of a faded lime.
+  - Icon circles are 40px (small) or 48px (large).
+- **Small fixes:**
+  - **Letter spacing:** headlines no longer have squeezed letters from an older stylesheet.
+  - **Tags:** use Inter instead of a typewriter font.
+  - **My work:** the hand-in rows no longer overlap, and module cards in a row are the same height.
+  - **Account:** the privacy panel no longer has a double border.
+  - **Membership:** the notice uses the lime outline instead of an old dark green.
+  - **Home on phones:** the craft card text no longer runs into the photo.
+
 ## Wording changes
 
 - **Help:** some answers were out of date and have been corrected:
