@@ -1,0 +1,13 @@
+/* Help (Studio Grid screen 12) */
+.hp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;align-items:start;padding-top:20px}
+.hp-side{display:grid;gap:24px;justify-items:start;position:sticky;top:20px}
+.hp-side .page-head h1{font-size:clamp(3.4rem,7.2vw,7.4rem)}
+.help-stack{display:grid;gap:12px}
+.hp-q{margin:0!important}
+.hp-q>summary{font-size:1.1rem;padding:20px 24px!important}
+.hp-q>summary::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d6e86b' stroke-width='2.4'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E")!important}
+.hp-q[open]>summary::after{transform:rotate(45deg)!important}
+.hp-q p{color:var(--foreground)}
+.hp-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.hp-photos .sg-photo{width:100%;aspect-ratio:16/9;border:var(--line);border-radius:var(--radius)}
+@media(max-width:900px){.hp{grid-template-columns:1fr}.hp-side{position:static}.hp-photos{grid-template-columns:1fr}}

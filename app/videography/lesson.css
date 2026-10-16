@@ -1,0 +1,47 @@
+/* A module's page: Watch / Make / Reflect (Studio Grid screens 06 and 07). Loaded only with module pages. */
+.vg-lesson{display:grid;gap:22px}
+.vg-lesson .breadcrumbs{margin:10px 0 0}
+.ls-head{display:grid;gap:10px;margin:22px 0 26px}
+.ls-head h1{font-size:clamp(3rem,6.6vw,6.8rem)}
+.ls-meta{color:var(--foreground);font-size:1.02rem}
+.ls-meta span{margin:0 8px;color:var(--muted-foreground)}
+
+/* Watch */
+.vg-lesson-card{border:var(--line);border-radius:var(--radius);padding:26px;background:transparent}
+.vg-lesson-steps button{border:var(--line);border-radius:999px;color:var(--foreground)}
+.vg-lesson-steps button.current{background:var(--primary);color:#0b0b0b;border-color:var(--primary)}
+.vg-lesson-about h2{font-size:clamp(2rem,3.4vw,3rem)}
+.vg-sketch{border:var(--line);border-radius:18px}
+.vg-video.two-col{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px}
+.vg-video-frame{border:var(--line);border-radius:var(--radius);overflow:hidden}
+.vg-video-cover{border-radius:0}
+.vg-play{background:var(--primary)!important;color:#0b0b0b!important;width:84px!important;height:84px!important}
+.vg-video-side{display:grid;gap:12px;align-content:start}
+.vg-video-list button{border:var(--line);border-radius:18px;padding:16px 18px;background:transparent;color:var(--foreground)}
+.vg-video-list button.active{border-color:var(--primary)}
+.vg-video-focus{color:var(--foreground)}
+.vg-link-card{border:var(--line);border-radius:18px;background:transparent}
+.vg-lesson-part h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.8rem;letter-spacing:.01em}
+
+/* Make: the task brief on the left, the hand-in form on the right */
+.vg-make{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:18px;align-items:start}
+.vg-make>*{grid-column:2}
+.vg-make>.vg-task-brief{grid-column:1;grid-row:1/span 6;position:sticky;top:20px;border:var(--line);border-radius:var(--radius);padding:30px;display:grid;gap:16px}
+.vg-task-brief h2{font-size:clamp(2.2rem,3.6vw,3.4rem)}
+.vg-task-do{color:var(--foreground);font-size:1.1rem}
+.vg-task-meta{display:grid;gap:16px;border-top:var(--soft-line);padding-top:18px}
+.vg-task-meta ul{padding-left:0;list-style:none;display:grid;gap:10px;counter-reset:chk}
+.vg-task-meta li{display:flex;gap:12px;align-items:flex-start;counter-increment:chk;color:var(--foreground)}
+.vg-task-meta li::before{content:counter(chk);flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--primary);color:#0b0b0b;font-weight:700;font-size:.9rem}
+.vg-make .vg-form-block{border:var(--line);border-radius:var(--radius);margin:0;padding:28px}
+.vg-make .vg-form-block h2{font-size:1.9rem;margin-bottom:8px}
+.vg-make .upload-box{border:1px dashed var(--foreground);border-radius:16px;background:transparent}
+.vg-make .button-row{margin:4px 0 0}
+.ls-make-photo{width:100%;aspect-ratio:16/10;border-radius:16px}
+@media(max-width:900px){.vg-make{grid-template-columns:1fr}.vg-make>*,.vg-make>.vg-task-brief{grid-column:1;grid-row:auto;position:static}.vg-video.two-col{grid-template-columns:1fr}}
+.vg-lesson{max-width:none;margin:0}
+.vg-lesson [data-slot=tabs-list]{justify-content:flex-start!important;width:auto!important}
+.vg-make>.vg-task-brief{background:transparent;border:var(--line)}
+.vg-make .upload-box input[type=file]{opacity:0!important;position:absolute!important;inset:0!important;border:0!important}
+.vg-lesson img:not(.sg-photo),.vg-module-hero img{filter:var(--photo-filter)}
+.vg-sketch{filter:none!important}

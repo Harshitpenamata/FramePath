@@ -91,3 +91,12 @@ details.sg-acc>:not(summary){padding:0 22px 20px}
 input[type=radio]{appearance:none;width:26px;height:26px;border:1.5px solid var(--foreground);border-radius:50%;display:inline-grid;place-items:center;margin:0;vertical-align:middle}
 input[type=radio]:checked{border-color:var(--primary)}
 input[type=radio]:checked::after{content:'';width:14px;height:14px;border-radius:50%;background:var(--primary)}
+/* Phone header: brand and account on the first row, the nav on its own row inside the same card */
+@media(max-width:760px){
+ .topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;border-radius:26px;padding:10px 10px 6px 16px;gap:6px 10px;min-height:0}
+ .topbar .brand-group{order:1}
+ .topbar .account-link{order:2;padding:10px 18px;font-size:.9rem}
+ .topbar .main-nav{order:3;position:static;display:flex;flex:1 0 100%;justify-content:space-between;gap:12px;margin:0;padding:6px 4px 2px;border:0;border-top:1px solid #0b0b0b22;border-radius:0;box-shadow:none;background:transparent;font-size:.95rem}
+ .topbar .main-nav a{padding:6px 0}
+ .topbar .more-disclosure .header-popover{right:0;left:auto}
+}

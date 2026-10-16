@@ -4,8 +4,9 @@ import React,{useState} from 'react';
 import {LessonImage} from './lessons/media';
 import {pathLessons} from './lessons/content';
 import {Button} from '@/components/ui/button';
-import {Check,Clock,SlidersHorizontal,BookOpen} from 'lucide-react';
-import {useLearning,Panel,Go,Gate,AIBox} from './ui';
+import {Check,Clock,SlidersHorizontal,BookOpen,Users,Baby,MapPin,FileText,Music,Plane,Lock,ArrowRight,ArrowLeft} from 'lucide-react';
+import {useLearning,Panel,Go,Gate,AIBox,Photo} from './ui';
+import './safety.css';
 import {BeginnerJourney,BeginnerLibrary} from './beginner-pages';
 import {archetypes,scenarios,clusterNames,buildScenarioPlan,isScenarioProfile,scenarioPath,scenarioLesson,initialScenarioRequest,scenarioVersion} from './scenario-engine';
 import {isFreePath,moduleHref,moduleInfo} from './learning-rules';
@@ -20,7 +21,10 @@ export function ScenarioPathPage({id}:{id:string}){const {s}=useLearning(),path=
 
 export function ScenarioFinish(){const {s}=useLearning();if(!isScenarioProfile(s.profile))return <Panel><h1>Choose your next task</h1><Go href="/">Find my route</Go></Panel>;const plan=buildScenarioPlan(s.profile),remaining=plan.keys.find(k=>!s.progress[k]);return <><div className="page-head"><div><span className="kicker">YOUR OUTCOME</span><h1>{remaining?'Keep working on your task':plan.starterOnly?'Your first try is recorded':'Your practice route is complete'}</h1></div></div><Gate>{remaining?<Panel><p>{scenarioLesson(remaining,s.profile).title} is your next assignment.</p><Go href={moduleHref(remaining)+'?tab=assignment'}>Continue my assignment</Go></Panel>:<><ScenarioSnapshot profile={s.profile} compact/><Panel><h2>What this completion means</h2><p>Your saved record contains self-checks and any accepted AI first-pass feedback. It does not verify footage, sound, consent or professional readiness. {plan.starterOnly?'The full intended deliverable is still unfinished.':plan.rehearsal?'The output is a labelled rehearsal; real capture remains untested.':'Keep the evidence and check the actual deliverable with its intended recipient.'}</p><div className="button-row"><Go href="/portfolio">Review my saved work</Go><Go href="/" outline>Choose another task</Go></div></Panel></>}</Gate></>}
 
-export function SafetyPage(){return <><div className="page-head"><div><span className="kicker">BEFORE YOU RECORD</span><h1>Keep people and their information safe.</h1><p>Use harmless stand-ins and fictional information for sensitive practice.</p></div></div><div className="safety-grid">{[
+// Privacy & safety (Studio Grid screens 14 and 15): recording safely, then uploads and privacy. Text is unchanged;
+// the checklist lines are taken word for word from the sections below.
+const safetyItems:[string,string][]=[
+
  ['Ask separately about recording and sharing','Agree the purpose, audience and boundaries before filming. Explain how someone can decline or ask you to stop. Permission for a private learning clip does not automatically include public posting.'],
  ['Children and vulnerable people','Use objects or consenting adult stand-ins in this pilot. In real work, follow the responsible organisation’s safeguarding procedures, guardian permissions and the participant’s willing involvement. Never upload identifying footage of children here.'],
  ['Events and public places','Check venue permission and the rights and expectations of people being recorded. Avoid intrusive close-ups or private conversations without agreement. A public location is not a blanket permission to publish.'],
@@ -32,4 +36,16 @@ export function SafetyPage(){return <><div className="page-head"><div><span clas
  ['Age','FramePath is for learners 13 and over. Learners under 18 need a parent or guardian’s agreement, and can share their portfolio by link but not publicly in Community.'],
  ['Your data','Your work is stored privately on Cloudflare. AI providers only receive what is needed for each review or check. You can delete any unused upload, and delete your whole account and everything in it, from My account.'],
  ['Your portfolio','Work starts private. Publish only selected, safe material with permission from everyone affected; sharing a snapshot with a demo mentor is a separate consent decision. You can unpublish your portfolio.']
- ].map(([title,text])=><Panel key={title}><h2>{title}</h2><p>{text}</p></Panel>)}</div><p className="small">Further reading: <a className="text-link" href="https://library.witness.org/product/video-as-evidence-ethical-guidelines/" target="_blank" rel="noreferrer">WITNESS ethical guidance</a>, <a className="text-link" href="https://www.w3.org/WAI/media/av/" target="_blank" rel="noreferrer">W3C accessible media</a>, <a className="text-link" href="https://digitalsky.aai.aero/" target="_blank" rel="noreferrer">official DigitalSky airspace portal</a>. Check current Indian rules for your actual activity and location.</p></>}
+ ];
+const safetyIcons:Record<string,React.ReactNode>={'Ask separately about recording and sharing':<Users size={20}/>,'Children and vulnerable people':<Baby size={20}/>,'Events and public places':<MapPin size={20}/>,'Evidence and health':<FileText size={20}/>,'Music and third-party material':<Music size={20}/>,'Drone and specialist work':<Plane size={20}/>};
+const privacyTitles=['Uploads and AI','People in your work','Age','Your data','Your portfolio'];
+const SafetyAcc=({title,text,icon}:{title:string;text:string;icon?:React.ReactNode})=><details className="sg-acc sf-acc"><summary>{icon&&<span className="sf-ico">{icon}</span>}{title}</summary><p>{text}</p></details>;
+export function SafetyPage(){const rec=safetyItems.filter(([t])=>!privacyTitles.includes(t)),priv=safetyItems.filter(([t])=>privacyTitles.includes(t));return <>
+ <div className="breadcrumbs"><a href="/">Home</a><span>/</span><span>Privacy &amp; safety</span></div>
+ <section className="sf" id="recording"><div className="sf-side"><span className="kicker">BEFORE YOU RECORD</span><h1>Keep people and their information safe.</h1><p className="lede">Use harmless stand-ins and fictional information for sensitive practice.</p><Photo slot="safety" className="sf-photo"/></div>
+  <div className="sf-main"><ul className="sf-checks"><li><Check size={20}/>Ask separately about recording and sharing.</li><li><Check size={20}/>Never upload identifying footage of children here.</li><li><Check size={20}/>Use material you own or are licensed to use.</li></ul>
+   {rec.map(([t,x])=><SafetyAcc key={t} title={t} text={x} icon={safetyIcons[t]}/>)}<a className="text-link sf-next" href="#privacy">Uploads and privacy<ArrowRight size={16}/></a></div></section>
+ <section className="sf" id="privacy"><div className="sf-side"><h2 className="sf-h">Uploads and privacy.</h2><Photo slot="privacy" className="sf-photo"/></div>
+  <div className="sf-main sf-card"><span className="sf-lock"><Lock size={34}/></span><div className="sf-cols"><strong>Work starts private.</strong><strong>Only upload non-sensitive practice you own or may share.</strong><strong>Publish only selected, safe material.</strong></div>
+   {priv.map(([t,x])=><SafetyAcc key={t} title={t} text={x}/>)}<div className="sf-foot"><a href="#recording"><ArrowLeft size={18}/>Recording safely</a><a href="/settings">My account<ArrowRight size={18}/></a></div></div></section>
+ <p className="small">Further reading: <a className="text-link" href="https://library.witness.org/product/video-as-evidence-ethical-guidelines/" target="_blank" rel="noreferrer">WITNESS ethical guidance</a>, <a className="text-link" href="https://www.w3.org/WAI/media/av/" target="_blank" rel="noreferrer">W3C accessible media</a>, <a className="text-link" href="https://digitalsky.aai.aero/" target="_blank" rel="noreferrer">official DigitalSky airspace portal</a>. Check current Indian rules for your actual activity and location.</p></>}
