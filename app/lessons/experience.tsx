@@ -1,4 +1,5 @@
 'use client';
+import '../lessons.css';import '../simplified-pilot.css';import '../refined-pilot.css';
 import React,{lazy,Suspense,useEffect,useRef,useState} from 'react';
 import {Button} from '@/components/ui/button';
 import {Go,Panel,UploadField,useLearning,isExplore} from '../ui';

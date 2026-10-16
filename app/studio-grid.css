@@ -1,0 +1,93 @@
+/* Studio Grid: FramePath's look (docs/sources reference screens 01–15). Black studio, cream type and lines,
+   one lime accent. Headlines Anton (condensed caps), everything else Inter. Loaded last, so it sets the look. */
+@font-face{font-family:Anton;src:url(/fonts/anton-latin.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url(/fonts/inter-latin.woff2) format('woff2');font-weight:400 700;font-display:swap}
+:root{--background:#0b0b0b;--foreground:#f2eee4;--card:#0b0b0b;--card-foreground:#f2eee4;--popover:#141414;--popover-foreground:#f2eee4;
+ --primary:#d6e86b;--primary-foreground:#0b0b0b;--secondary:#1b1b1b;--secondary-foreground:#f2eee4;--muted:#1b1b1b;--muted-foreground:#a7a399;
+ --accent:#1b1b1b;--accent-foreground:#f2eee4;--border:#d9d5cb;--input:#d9d5cb;--ring:#d6e86b;--surface-raised:#151515;--radius:22px;
+ --line:1.5px solid var(--border);--soft-line:1px solid #3a3935;--display:Anton,'Arial Narrow',Impact,sans-serif;--body:Inter,system-ui,'Segoe UI',Arial,sans-serif;
+ --photo-filter:grayscale(1) contrast(1.05)}
+:root[data-photos=colour]{--photo-filter:none}
+body{font-family:var(--body);background:#0b0b0b;letter-spacing:-.005em}
+p{color:var(--muted-foreground)}
+
+/* Headlines: Anton, uppercase, tight */
+h1,.display{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.005em;line-height:.9;color:var(--foreground)}
+h1{font-size:clamp(3.2rem,8.4vw,8.6rem)}
+.page-head h1{font-size:clamp(3rem,7vw,7rem);max-width:none}
+h2{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.98;font-size:clamp(1.6rem,2.6vw,2.4rem)}
+h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
+.kicker,.eyebrow{font-family:var(--body);font-size:.76rem;letter-spacing:.24em;font-weight:600;text-transform:uppercase;color:var(--foreground)}
+.lede{font-size:clamp(1.05rem,1.6vw,1.35rem);color:var(--foreground);max-width:760px}
+
+/* Header: a cream pill bar floating over the black page */
+.topbar{max-width:1460px;height:auto;margin:18px auto 0;padding:10px 12px 10px 26px;background:#f2eee4;color:#0b0b0b;border:0;border-radius:999px;width:calc(100% - 40px)}
+.topbar .brand{color:#0b0b0b;font-family:var(--body);font-weight:700;font-size:1.6rem;letter-spacing:-.04em;gap:14px}
+.brand-dot{color:inherit}
+.topbar .main-nav{gap:36px;font-size:1rem;font-weight:500}
+.topbar .main-nav a,.topbar .main-nav summary{color:#0b0b0b}
+.topbar .main-nav a[aria-current=page]{border-bottom:2px solid #0b0b0b}
+.topbar .account-link{background:#0b0b0b;color:#f2eee4;border:0;border-radius:999px;padding:12px 26px;font-weight:600;white-space:nowrap}
+.topbar .demo-disclosure summary{color:#0b0b0b;border-color:#0b0b0b55}
+.topbar .header-popover{background:#141414;color:#f2eee4;border:var(--line);border-radius:18px}
+.topbar .mobile-menu{color:#0b0b0b}
+@media(max-width:760px){.topbar{width:calc(100% - 24px);margin-top:12px;padding:8px 8px 8px 18px}.topbar .brand{font-size:1.3rem}.main-nav{top:84px;background:#f2eee4;border-radius:22px;margin:0 12px}.topbar .main-nav a{color:#0b0b0b}}
+
+/* Footer */
+.footer{max-width:1460px;width:calc(100% - 40px);margin:64px auto 0;padding:26px 6px 30px;border-top:var(--soft-line);align-items:center;color:var(--foreground);font-size:.85rem}
+.footer-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.25rem;letter-spacing:-.04em}
+.footer>div a+a{border-left:1px solid #5a5953;padding-left:22px}
+
+/* Page frame */
+.page{max-width:1460px;padding:44px 20px 40px}
+.home{max-width:1460px;padding:44px 20px 40px}
+.page-head{margin-bottom:34px;align-items:flex-end}
+.page-head .kicker{margin-bottom:18px}
+.breadcrumbs{color:var(--muted-foreground);font-size:.92rem}
+.breadcrumbs a{text-decoration:none;color:var(--muted-foreground)}
+.breadcrumbs a:hover{color:var(--foreground)}
+
+/* Buttons: lime pill, cream outline pill */
+[data-slot=button]{border-radius:999px!important;font-family:var(--body);font-weight:600;min-height:48px;padding-inline:26px!important;gap:10px}
+[data-slot=button][data-variant=default]{background:var(--primary);color:#0b0b0b;border:0}
+[data-slot=button][data-variant=default]:hover{background:#e3f28a}
+[data-slot=button][data-variant=outline]{background:transparent;color:var(--foreground);border:var(--line)}
+[data-slot=button][data-variant=outline]:hover{background:#f2eee412}
+[data-slot=button][data-variant=ghost]{color:var(--foreground)}
+.text-link{color:var(--primary);text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:2px;font-weight:500}
+
+/* Cards: black with a cream line */
+.panel,.vg-card,.st-card{background:transparent;border:var(--line);border-radius:var(--radius)}
+.panel{padding:30px}
+.notice{background:transparent;border:var(--soft-line);border-radius:16px}
+.badge{border-radius:999px;background:transparent;border:1px solid #5a5953;color:var(--foreground);padding:3px 11px}
+.badge.green{background:var(--primary);color:#0b0b0b;border-color:var(--primary)}
+
+/* Forms */
+input:not([type=radio]):not([type=checkbox]):not([type=file]),textarea,select{background:#141414;border:1px solid #5a5953;border-radius:14px;color:var(--foreground)}
+input:focus,textarea:focus,select:focus{border-color:var(--foreground)}
+label{font-family:var(--body);font-weight:500}
+
+/* Accordions (details): a lined row with a round chevron */
+details.sg-acc{border:var(--line);border-radius:18px;margin:12px 0}
+details.sg-acc>summary{list-style:none;display:flex;align-items:center;gap:18px;padding:18px 22px;cursor:pointer;font-weight:500;color:var(--foreground)}
+details.sg-acc>summary::-webkit-details-marker{display:none}
+details.sg-acc>summary::after{content:'';margin-left:auto;width:36px;height:36px;flex:none;border:var(--line);border-radius:50%;background:no-repeat center/14px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f2eee4' stroke-width='2.4'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");transition:transform .2s}
+details.sg-acc[open]>summary::after{transform:rotate(180deg)}
+details.sg-acc>:not(summary){padding:0 22px 20px}
+
+/* Round arrow button */
+.sg-arrow{display:grid;place-items:center;width:42px;height:42px;border:var(--line);border-radius:50%;color:var(--foreground);flex:none}
+
+/* Photos: black and white by default; admins can switch the whole site to colour */
+.sg-photo{filter:var(--photo-filter);object-fit:cover}
+
+/* Pill tabs (Watch / Make / Reflect, and section tabs) */
+.learning-tabs,[data-slot=tabs-list]{background:transparent!important;border:0!important;gap:10px;padding:0!important;height:auto!important}
+[data-slot=tabs-trigger]{border:var(--line)!important;border-radius:999px!important;padding:10px 26px!important;color:var(--foreground)!important;background:transparent!important;font-weight:500;flex:0 0 auto!important}
+[data-slot=tabs-trigger][data-state=active]{background:var(--primary)!important;color:#0b0b0b!important;border-color:var(--primary)!important}
+.sg-photo-empty{display:block;background:linear-gradient(135deg,#1c1c1a,#0f0f0e)}
+.topbar .brand-mark{color:#0b0b0b}.footer .brand-mark{color:var(--foreground)}
+input[type=radio]{appearance:none;width:26px;height:26px;border:1.5px solid var(--foreground);border-radius:50%;display:inline-grid;place-items:center;margin:0;vertical-align:middle}
+input[type=radio]:checked{border-color:var(--primary)}
+input[type=radio]:checked::after{content:'';width:14px;height:14px;border-radius:50%;background:var(--primary)}

@@ -1,4 +1,5 @@
 'use client';
+import './legacy-styles';
 import {PersonalJourney,PersonalPathPage} from './personal-journey';
 import {currentPlan} from './personalization';
 import {lessonTitle} from './visual-lab';

@@ -1,4 +1,5 @@
 'use client';
+import './legacy-styles';
 import React,{useState} from 'react';
 import {LessonImage} from './lessons/media';
 import {pathLessons} from './lessons/content';

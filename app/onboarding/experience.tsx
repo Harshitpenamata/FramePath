@@ -1,4 +1,5 @@
 'use client';
+import '../legacy-styles';
 import React,{lazy,Suspense,useEffect,useRef,useState} from 'react';
 import {Button} from '@/components/ui/button';
 import {Combobox,ComboboxInput,ComboboxContent,ComboboxList,ComboboxItem} from '@/components/ui/combobox';

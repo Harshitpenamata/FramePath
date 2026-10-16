@@ -1,4 +1,5 @@
 'use client';
+import './legacy-styles';
 import React,{useState} from 'react';
 import {Button} from '@/components/ui/button';
 import {learningResources} from './learning-resources';
