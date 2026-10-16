@@ -3,7 +3,8 @@ import React,{useEffect,useRef,useState} from 'react';
 import {ArrowLeft,ArrowRight,BookOpen,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
-import {useLearning,Go,Action,Panel,Badge,Gate,UploadField} from '../ui';
+import './lesson.css';
+import {useLearning,Go,Action,Panel,Badge,Gate,UploadField,Photo} from '../ui';
 import {blockingModule,moduleHref,moduleInfo} from '../learning-rules';
 import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
 import {LessonsTab,canPractise,taskLabel,useDeadVideos} from './module-context';
@@ -36,15 +37,16 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
  const mods=modulesFor(parsed.level),lesson=moduleLesson(parsed.module,projectLabel(s.programme));
  const last=parsed.index===mods.length-1;
  useEffect(()=>{const q=new URLSearchParams(window.location.search).get('tab')||'';const t=oldTabs[q]||q;if(['task','feedback'].includes(t)||t==='finish'&&last)setTab(t)},[]);
+ // Watch, Make and Reflect each have their own address (?tab=watch|make|reflect) so they can be linked and shared.
+ useEffect(()=>{const name={lessons:'watch',task:'make',feedback:'reflect',finish:'finish'}[tab];const u=new URL(window.location.href);if(u.searchParams.get('tab')!==name){u.searchParams.set('tab',name!);window.history.replaceState(null,'',u)}},[tab]);
  const prev=parsed.index>0?moduleKey(parsed.level,parsed.index-1):null,next=parsed.index<mods.length-1?moduleKey(parsed.level,parsed.index+1):null;
  if(loaded&&!own)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>This module isn’t in your plans</h1><p className="lede">You can open modules from the plans you’ve made. Make a plan at this level to see it.</p><div className="button-row"><Go href="/workspace">My courses</Go>{plans.length<maxPlans&&<Go href="/start" outline>Make a plan</Go>}</div></Panel>;
  if(!loaded||switching)return <Panel><p role="status">Opening your plan…</p></Panel>;
  return <div className="vg-lesson">
   <div className="breadcrumbs"><a href="/workspace">My courses</a><span>/</span><a href={'/workspace/'+own!.id}>{planTitle(own!)}</a></div>
-  <div className="row between"><Badge>MODULE {parsed.index+1} / {mods.length}</Badge><span className="small"><Clock size={15}/> {parsed.module.hours} h</span></div>
-  <h1>{lesson.title}</h1>
   <Tabs value={tab} onValueChange={setTab}>
-   <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons"><BookOpen/>Lessons</TabsTrigger><TabsTrigger value="task"><Clapperboard/>Task</TabsTrigger><TabsTrigger value="feedback"><MessageCircle/>Feedback</TabsTrigger>{last&&<TabsTrigger value="finish"><Flag/>Finish</TabsTrigger>}</TabsList>
+   <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons">Watch</TabsTrigger><TabsTrigger value="task">Make</TabsTrigger><TabsTrigger value="feedback">Reflect</TabsTrigger>{last&&<TabsTrigger value="finish">Finish</TabsTrigger>}</TabsList>
+   <div className="ls-head"><h1>{lesson.title}</h1><p className="ls-meta">Module {parsed.index+1} of {mods.length} <span>·</span> {parsed.module.hours} h <span>·</span> {parsed.module.stageLabel}</p></div>
    <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}} onLesson={(index,count)=>setLessonAt({index,count})}/></TabsContent>
    <TabsContent value="task">{loaded&&<TaskTab moduleKey={key} onHandedIn={id=>{setReviewNow(id);setTab('feedback')}}/>}</TabsContent>
    <TabsContent value="feedback">{loaded&&<FeedbackTab moduleKey={key} requestFor={reviewNow} onFinish={last?()=>setTab('finish'):undefined}/>}</TabsContent>
@@ -79,7 +81,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
   setDraft(emptyDraft());onHandedIn(piece?.id||'');
  }
  return <Gate><div className="vg-make">
-  <section className="vg-task-brief"><span className="eyebrow">{taskLabel(m.id)}</span><h2>{m.taskName}</h2><p className="vg-task-do">{lesson.do}</p>
+  <section className="vg-task-brief"><Photo slot="make" className="ls-make-photo"/><span className="eyebrow">{taskLabel(m.id)}</span><h2>{m.taskName}</h2><p className="vg-task-do">{lesson.do}</p>
    <div className="vg-task-meta"><div><strong>Good work looks like this</strong><p>{m.evidence}</p></div><div><strong>How it’s checked</strong><ul>{lesson.checks.map(c=><li key={c}>{c}</li>)}</ul></div></div>
    {handedIn>0&&<p className="small">You have handed this in {handedIn} time{handedIn>1?'s':''}. Handing in again adds a new piece to My Work. Each module includes 2 AI reviews in total.</p>}</section>
 

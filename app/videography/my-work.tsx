@@ -9,6 +9,9 @@ import {levelNames,modulesFor,moduleKey,type Level} from './programme';
 import {useVideoReviews,WorkFolders} from './work-folders';
 import './studio.css';
 
+// My work and Portfolio switch (reference screens 08 and 09).
+export function WorkSwitch({current}:{current:'work'|'portfolio'}){return <nav className="sg-switch" aria-label="My work sections"><a href="/portfolio" aria-current={current==='work'?'page':undefined}>My work</a><a href="/my-portfolio" aria-current={current==='portfolio'?'page':undefined}>Portfolio</a></nav>}
+
 // My Work: where a learner sees progress, every module's hand-ins with AI feedback, and builds a portfolio.
 const pad=(n:number)=>String(n).padStart(2,'0');
 function pieceKind(p:any){
@@ -109,7 +112,7 @@ function PortfolioPanel({ids}:{ids:string[]}){
 }
 
 export function MyWorkStudio(){
- const {s}=useLearning();
+ const {s,user,loaded}=useLearning();
  const reviews=useVideoReviews();
  const [ids,setIds]=useState<string[]>(s.portfolio.ids||[]);
  useEffect(()=>{setIds(s.portfolio.ids||[])},[(s.portfolio.ids||[]).join()]);
@@ -119,14 +122,16 @@ export function MyWorkStudio(){
  // Opening from a module ("See it in My Work") scrolls to that module's card.
  useEffect(()=>{const from=new URLSearchParams(window.location.search).get('from');if(from)document.getElementById('mod-'+from)?.scrollIntoView({block:'start'})},[]);
  return <div className="st-page">
-  <PageHead eyebrow="YOUR LEARNING SPACE" title="Everything you’ve handed in.">A clear view of your progress, your feedback, and the work you’re ready to share.</PageHead>
-  <Gate>
+  <WorkSwitch current="work"/>
+  <div className={'st-hero'+(loaded&&!user?' split':'')}><PageHead eyebrow="YOUR LEARNING SPACE" title="Everything you’ve handed in.">A clear view of your progress, your feedback, and the work you’re ready to share.</PageHead>
+  {loaded&&!user&&<Gate>{null}</Gate>}</div>
+  {(!loaded||user)&&<Gate>
    <StatusCard level={level} reviews={reviews}/>
    <section className="st-modules"><div className="st-row"><div><span className="st-kicker">Manage / details</span><h2>Your modules</h2></div><span className="small">Every hand-in, all in one place.</span></div>
     <div className="st-module-grid">{mods.map((_,i)=><div id={'mod-'+moduleKey(level,i)} key={i}><ModuleCard level={level} index={i} reviews={reviews} ids={ids} setIds={setIds} isNext={i===nextIndex}/></div>)}</div>
    </section>
    {other.length>0&&<section className="st-other"><h2>Other work</h2><p className="small">Hand-ins from other levels and earlier practice.</p><WorkFolders ids={ids} setIds={setIds} keys={[...new Set<string>(other.map((p:any)=>p.key))]}/></section>}
    <PortfolioPanel ids={ids}/>
-  </Gate>
+  </Gate>}
  </div>;
 }

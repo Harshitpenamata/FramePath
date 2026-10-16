@@ -1,8 +1,10 @@
 'use client';
 import React,{useEffect,useMemo,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,Check,ChevronLeft,ChevronRight,Clock,Lock,Plus,Star,X} from 'lucide-react';
+import {ArrowLeft,ArrowRight,Check,ChevronLeft,ChevronRight,Clock,Lock,Plus,Star,X,Gem,CalendarDays,Briefcase,FileText,PawPrint,Smartphone,TvMinimalPlay,Plane,Package,Music,UtensilsCrossed,Shirt,Home,PersonStanding,Presentation,Clapperboard,Film} from 'lucide-react';
 import {Button} from '@/components/ui/button';
-import {useLearning,Panel,Go} from '../ui';
+import {useLearning,Panel,Go,Photo} from '../ui';
+import type {PhotoSlot} from '../photos';
+import './home.css';
 import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,maxPlans,plansOf,type Level,type Answer,type Visual} from './programme';
 
 const draftKey='fp-programme-draft-v3';
@@ -28,13 +30,46 @@ export function CourseCarousel(){
  </section>;
 }
 
+// Home (Studio Grid, reference screen 01). Content as on the live site: the pitch, the five crafts, the two ways
+// to learn, the four steps and the closing call to action.
+const crafts:{id:string;n:string;title:string;blurb:string;photo:PhotoSlot;live?:boolean}[]=[
+ {id:'videography',n:'01',title:'Videography',blurb:'Plan, shoot, edit and share videos people watch to the end.',photo:'home-videography',live:true},
+ {id:'photography',n:'02',title:'Photography',blurb:'Build a portfolio you’re proud to put your name on.',photo:'home-photography'},
+ {id:'filmmaking',n:'03',title:'Filmmaking',blurb:'Take a story from idea to finished film.',photo:'home-filmmaking'},
+ {id:'animation',n:'04',title:'Animation · 2D | 3D',blurb:'Bring characters and worlds to life.',photo:'home-animation'},
+ {id:'motion-graphics',n:'05',title:'Motion Graphics',blurb:'Make text and shapes move with purpose.',photo:'home-motion'},
+];
 export function VideographyHome(){
  const {s,loaded}=useLearning();
- return <div className="vg-home">
-  <section className="vg-hero"><span className="eyebrow">FRAMEPATH · CREATIVE LEARNING</span><h1>Learn the craft you want to create.</h1><p className="lede">Pick a course and tell us what you like to film. Answer 12 quick questions. Get a learning plan with clear dates.</p>
-   <div className="button-row">{loaded&&s.programme?<Go href="/workspace">Continue my plan</Go>:<Go href="/start">Start with Videography</Go>}<Go href="#courses" outline>See all courses</Go></div></section>
-  <div id="courses"><CourseCarousel/></div>
-  <section className="vg-steps"><div><strong>1</strong><span>Choose interests</span></div><div><strong>2</strong><span>12-question level check</span></div><div><strong>3</strong><span>Set your time</span></div><div><strong>4</strong><span>Get your pathway report</span></div></section>
+ const startHref=loaded&&s.programme?'/workspace':'/start',startLabel=loaded&&s.programme?'Continue my pathway':'Build my free pathway';
+ return <div className="hm">
+  <section className="hm-hero">
+   <span className="kicker">India’s first full-stack creative education platform</span>
+   <h1>Your creative career, mapped by industry leaders. <em>Powered by AI.</em></h1>
+   <p className="lede">From your first frame to your first film, Framepath builds a personal learning path from beginner to advanced, shaped by working professionals and guided by AI that gives feedback on your real work.</p>
+   <div className="button-row"><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go><Go href="#crafts" outline>Explore courses</Go></div>
+   <p className="hm-facts">Curated by industry leaders <span>·</span> Beginner to advanced <span>·</span> Self-paced or mentor-led</p>
+  </section>
+
+  <section className="hm-grid" id="crafts" aria-label="Choose your craft">
+   <div className="hm-intro"><span className="kicker">Choose your craft</span><h2 className="display">Pick your craft. We’ll build the path.</h2><p>Each course runs from beginner to advanced, designed by industry practitioners.</p><a className="sg-arrow" href={startHref} aria-label={startLabel}><ArrowRight size={18}/></a></div>
+   {crafts.map(c=>{const body=<><Photo slot={c.photo} className="hm-craft-photo"/><span className="hm-craft-n">{c.n}</span><strong className="display">{c.title}</strong><span className="hm-craft-blurb">{c.blurb}</span><span className="hm-craft-foot">{c.live?<>Start · Phase 1</>:<>Coming soon</>}<span className="sg-arrow"><ArrowRight size={16}/></span></span>{c.live&&<span className="hm-live">Live now</span>}</>;
+    return c.live?<a key={c.id} href={startHref} className="hm-craft live">{body}</a>:<div key={c.id} className="hm-craft" aria-disabled="true">{body}</div>})}
+  </section>
+
+  <section className="hm-ways"><span className="kicker">Two ways to learn</span><h2 className="display">Learn your way.</h2>
+   <div className="hm-way-grid">
+    <article className="hm-way"><span className="hm-num">1</span><h3>Self-paced with AI</h3><p>Learn on your schedule. Get AI-driven assignments and instant, specific feedback on your work.</p><ul>{['AI-driven assignments','Instant feedback on your work','Start any time, go at your pace'].map(x=><li key={x}><Check size={16}/>{x}</li>)}</ul></article>
+    <article className="hm-way"><span className="hm-num">2</span><h3>Mentor-led program</h3><p>Learn alongside working professionals with live guidance, reviews and accountability.</p><ul>{['Live sessions with industry mentors','Personal reviews of your work','Cohort accountability'].map(x=><li key={x}><Check size={16}/>{x}</li>)}</ul></article>
+   </div>
+   <p className="small">Not sure which fits? Your pathway report will recommend one.</p>
+  </section>
+
+  <section className="hm-how"><span className="kicker">How it works</span><h2 className="display">Your personal pathway in four steps.</h2>
+   <ol>{[['Tell us your craft','Choose the interests you want to build.'],['Check your level','12 quick questions so you start in the right place.'],['Set your time','Tell us your hours per week and we’ll plan around your life.'],['Get your pathway','A personal roadmap with milestones and clear dates.']].map(([t,d],i)=><li key={t}><span className="hm-num">{i+1}</span><strong>{t}</strong><p>{d}</p></li>)}</ol>
+  </section>
+
+  <section className="hm-cta"><div><h2 className="display">Ready to find your path?</h2><p>Answer 12 quick questions. Get a pathway built for you, with clear dates.</p></div><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go></section>
  </div>;
 }
 
@@ -42,6 +77,7 @@ export function VideographyHome(){
 function OptionPicture({v}:{v:Visual}){
  return <span className="vg-q-visual" style={{backgroundImage:`url(${v.src})`,backgroundSize:(v.zoom??1)*100+'%',backgroundPosition:`${v.x??50}% ${v.y??50}%`,filter:v.filter}} aria-hidden="true">{v.tint&&<i style={{background:v.tint}}/>}{v.grid&&<b/>}</span>;
 }
+const interestIcons:Record<string,any>={wedding:Gem,events:CalendarDays,corporate:Briefcase,documentary:FileText,wildlife:PawPrint,social:Smartphone,youtube:TvMinimalPlay,travel:Plane,advertising:Package,music:Music,food:UtensilsCrossed,fashion:Shirt,'real-estate':Home,sports:PersonStanding,education:Presentation,'short-film':Clapperboard};
 const steps=['Interests','12 questions','Your time','Review'] as const;
 
 export function ProgrammeStart(){
@@ -73,14 +109,19 @@ export function ProgrammeStart(){
 
  // Up to three plans at a time: a fourth needs one deleted first.
  if(loaded&&user&&plansOf(s).length>=maxPlans)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>You have {maxPlans} plans</h1><p className="lede">You can follow up to {maxPlans} plans at a time. Delete one from its page to make another.</p><Go href="/workspace">My courses</Go></Panel>;
- return <div className="vg-flow">
-  <ol className="vg-stepper" aria-label="Plan setup steps">{steps.map((label,i)=><li key={label} className={i===step?'current':i<step?'done':''}><span>{i<step?<Check size={14}/>:i+1}</span>{label}</li>)}</ol>
+ const side=[{title:'What do you want to film?',text:<>Pick as many as you like. Your <strong>first</strong> pick becomes your main project.</>},
+  {title:'Level check.',text:<>Pick what you really did, not what sounds best. Honest answers give you a plan that isn’t too easy or too hard.</>},
+  {title:result?'Your level: '+levelNames[level]:'Your time.',text:result?<>{levelSummary[level]}. This is where your answers put you. Finish this level to move up.</>:null},
+  {title:'Your Videography plan.',text:<>Check it, then create it. You can change your hours and start date later.</>}][step];
+ return <div className="sp">
+  <section className="sp-side"><h1>{side.title}</h1>{side.text&&<p className="lede">{side.text}</p>}{step===0&&<Photo slot="interests" className="sp-photo"/>}</section>
+  <div className="sp-card">
+  <ol className="vg-stepper sp-stepper" aria-label="Plan setup steps">{steps.map((label,i)=><li key={label} className={i===step?'current':i<step?'done':''}><span>{i<step?<Check size={14}/>:i+1}</span>{label}</li>)}</ol>
 
   {step===0&&<Panel className="vg-panel">
-   <span className="eyebrow">VIDEOGRAPHY · STEP 1</span><h1>What do you want to film?</h1>
-   <p className="lede">Pick as many as you like. Your <strong>first</strong> pick becomes your main project.</p>
+   <span className="eyebrow">VIDEOGRAPHY · STEP 1</span>
+   <div className="sp-tiles" role="group" aria-label="What do you want to film?">{interests.map(i=>{const at=draft.interests.indexOf(i.id),Icon=interestIcons[i.id]||Film;return <button type="button" key={i.id} aria-pressed={at>=0} className={'sp-tile'+(at>=0?' on':'')} onClick={()=>update({interests:at>=0?draft.interests.filter(x=>x!==i.id):[...draft.interests,i.id]})}><Icon size={20}/><span>{i.label}</span>{at>=0&&<b aria-label={at===0?'Main project':'Pick '+(at+1)}>{at+1}</b>}</button>})}</div>
    {draft.interests.length>0&&<ol className="vg-chosen">{draft.interests.map((id,i)=><li key={id}>{i===0?<Star size={14} aria-label="Primary"/>:<span className="vg-rank">{i+1}</span>}{interestFor(id)?.label}{i>0&&<button type="button" className="vg-link" onClick={()=>update({interests:[id,...draft.interests.filter(x=>x!==id)]})}>Make main</button>}<button type="button" aria-label={'Remove '+interestFor(id)?.label} onClick={()=>update({interests:draft.interests.filter(x=>x!==id)})}><X size={14}/></button></li>)}</ol>}
-   <div className="vg-chips">{interests.filter(i=>!draft.interests.includes(i.id)).map(i=><button type="button" key={i.id} className="vg-chip" onClick={()=>update({interests:[...draft.interests,i.id]})}><Plus size={14}/>{i.label}</button>)}</div>
    {draft.interests[0]&&<p className="small">Main project: <strong>{interestFor(draft.interests[0])!.label}</strong></p>}
    {!s.consent&&<fieldset className="vg-age"><legend>How old are you?</legend>
     {([['adult','I’m 18 or older'],['guardian','I’m 13 to 17, and a parent or guardian agrees I can use FramePath']] as const).map(([id,label])=><label key={id}><input type="radio" name="age" checked={draft.age===id} onChange={()=>update({age:id})}/> {label}</label>)}
@@ -102,8 +143,6 @@ export function ProgrammeStart(){
 
   {step===2&&result&&<Panel className="vg-panel">
    <span className="eyebrow">STEP 3 · YOUR TIME</span>
-   <h1>Your level: <span className="vg-level">{levelNames[level]}</span></h1>
-   <p className="lede">{levelSummary[level]}. This is where your answers put you. Finish this level to move up.</p>
    <p className="small">Skill checks: {result.checks.right} of {result.checks.total} right.</p>
    <div className="vg-time-grid">
     <div className="vg-stat"><Clock size={20}/><strong>{plan.recommendedHoursPerWeek} h / week</strong><span>Suggested for {rhythm[level].hours} hours of learning</span></div>
@@ -119,7 +158,7 @@ export function ProgrammeStart(){
   </Panel>}
 
   {step===3&&result&&<Panel className="vg-panel">
-   <span className="eyebrow">STEP 4 · REVIEW</span><h1>Your Videography plan</h1>
+   <span className="eyebrow">STEP 4 · REVIEW</span>
    <dl className="vg-review">
     <div><dt>Course</dt><dd>Videography</dd></div>
     <div><dt>Interests</dt><dd>{draft.interests.map(id=>interestFor(id)?.label).join(', ')}</dd></div>
@@ -132,5 +171,6 @@ export function ProgrammeStart(){
    <div className="button-row"><Button variant="outline" onClick={()=>setStep(2)}><ArrowLeft size={16}/>Back</Button><Button disabled={busy||!loaded} onClick={create}>{user?'Create my plan':'Sign in with Google and create'}<ArrowRight size={16}/></Button></div>
   </Panel>}
   {step===3&&!result&&<Panel><p>Finish the level check first.</p><Button onClick={()=>setStep(1)}>Open level check</Button></Panel>}
+  </div>
  </div>;
 }

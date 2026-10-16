@@ -1,0 +1,26 @@
+/* Privacy & safety (Studio Grid screens 14 and 15). Loaded only with the safety page. */
+.sf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;align-items:start;margin:14px 0 56px;scroll-margin-top:24px}
+.sf-side{display:grid;gap:18px;align-content:start;position:sticky;top:20px}
+.sf-side h1,.sf-h{font-size:var(--t-h1);line-height:var(--lh-h1);margin:0}
+.sf-side .lede{font-size:1.4rem;font-weight:600;color:var(--foreground);margin:0}
+.sf-photo{width:100%;aspect-ratio:16/10;border-radius:24px;margin-top:12px}
+.sf-main{display:grid;gap:14px}
+.sf-checks{list-style:none;margin:0;padding:10px 34px;border:var(--line);border-radius:28px}
+.sf-checks li{display:flex;align-items:center;gap:22px;padding:24px 0;font-size:1.3rem;font-weight:600;color:var(--foreground)}
+.sf-checks li+li{border-top:var(--soft-line)}
+.sf-checks svg{flex:none;width:var(--icon-lg);height:var(--icon-lg);padding:13px;border-radius:50%;background:var(--primary);color:#0b0b0b;stroke-width:3}
+.sf-acc summary{display:flex;align-items:center;gap:16px}
+.sf-ico{display:grid;place-items:center;flex:none;width:var(--icon-lg);height:var(--icon-lg);border-radius:50%;background:#262521;color:var(--foreground)}
+.sf-next{display:inline-flex;align-items:center;gap:8px;justify-self:start;margin-top:8px;font-weight:600}
+.sf-card{border:var(--line);border-radius:28px;padding:36px}
+.sf-lock{display:grid;place-items:center;width:96px;height:96px;border-radius:50%;background:var(--primary);color:#0b0b0b}
+.sf-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:12px 0 24px;border-bottom:var(--soft-line);margin-bottom:10px}
+.sf-cols strong{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.5rem;line-height:1.05;padding:0 18px}
+.sf-cols strong:first-child{padding-left:0}
+.sf-cols strong+strong{border-left:var(--line)}
+.sf-foot{display:flex;justify-content:space-between;gap:12px;border-top:var(--soft-line);padding-top:20px;margin-top:10px}
+.sf-foot a{display:inline-flex;align-items:center;gap:10px;color:var(--foreground);text-decoration:none;font-weight:600}
+@media(max-width:900px){.sf{grid-template-columns:1fr}.sf-side{position:static}.sf-cols{grid-template-columns:1fr;gap:12px}.sf-cols strong{padding:0!important;border:0!important}.sf-checks{padding:4px 20px}.sf-card{padding:24px}}
+.sf-main .sf-acc{margin:0}
+.sf-acc summary{font-size:1.125rem;font-weight:600}
+.sf-cols strong{font-size:1.3rem}

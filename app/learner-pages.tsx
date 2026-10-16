@@ -1,4 +1,5 @@
 'use client';
+import './legacy-styles';
 import React,{useEffect,useState} from 'react';
 import {Button} from '@/components/ui/button';import {Progress} from '@/components/ui/progress';
 import {Aperture,Clapperboard,ScanLine,Film,Check,Clock,BookOpen,Users,Calendar,Sparkles} from 'lucide-react';

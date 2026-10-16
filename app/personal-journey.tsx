@@ -1,4 +1,5 @@
 'use client';
+import './legacy-styles';
 import React from 'react';
 import {Aperture,Check,LockKeyhole,Camera,Sun,Mic,Scissors,Film,ScanLine,Clapperboard} from 'lucide-react';
 import {currentPlan,curatedLesson,pathTitle,buildPersonalPlan,isPersonalized,goalKinds,goalKind,subjectFor} from './personalization';

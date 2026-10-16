@@ -1,0 +1,74 @@
+/* My courses and a plan's page (Studio Grid screens 04 and 05). Loaded only with those pages. */
+.db{display:grid;gap:26px}
+.db-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:24px}
+.db-head h1{font-size:var(--t-h1)}
+.db-head .lede{margin-top:14px}
+.db-count{display:flex;align-items:center;gap:18px;white-space:nowrap;color:var(--foreground)}
+.db-count::after{content:'';width:60px;height:1px;background:var(--foreground)}
+.db-empty{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:60px 64px;border:var(--line);border-radius:var(--radius)}
+.db-empty>div{display:grid;gap:18px;justify-items:start}
+.db-empty h2{font-size:var(--t-h2)}
+.db-signin{color:var(--foreground);text-decoration:underline;text-underline-offset:4px}
+.db-path{width:100%;color:var(--foreground)}
+.db-plans{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.db-plan{display:grid;gap:12px;align-content:start;padding:28px;border:var(--line);border-radius:var(--radius);color:var(--foreground);text-decoration:none;min-height:240px}
+.db-plan strong.display{font-size:var(--t-card);text-transform:uppercase}
+.db-plan.active{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary) inset}
+.db-plan:hover{background:#f2eee40a}
+.db-plan-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;font-weight:600}
+.db-plan.add{border-style:dashed;justify-items:center;align-content:center;text-align:center}
+.db-plan .vg-course-bar{height:6px;border-radius:3px;background:#2a2a27;overflow:hidden}
+.db-plan .vg-course-bar span{display:block;height:100%;background:var(--primary)}
+
+/* Plan page */
+.db-crumbs{margin:10px 0 0}
+.db-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:stretch}
+.db-hero-text{display:flex;flex-direction:column;justify-content:center;gap:20px}
+.db-hero h1{font-size:var(--t-h1)}
+.db-meta{display:flex;align-items:center;gap:10px;color:var(--foreground)}
+.db-hero-photo{width:100%;height:100%;min-height:380px;border-radius:var(--radius)}
+.db-stages{list-style:none;margin:6px 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:var(--line);border-radius:var(--radius);overflow:hidden}
+.db-stages li+li{border-left:var(--line)}
+.db-stages a{display:flex;align-items:center;gap:14px;padding:22px 20px;color:var(--foreground);text-decoration:none;height:100%}
+.db-stages a:hover{background:#f2eee40a}
+.db-stages .display{font-size:2.4rem;line-height:1}
+.db-stages strong{font-weight:600}
+.db-stages .sg-arrow{margin-left:auto}
+.db-stages li.done .sg-arrow{background:var(--primary);border-color:var(--primary);color:#0b0b0b}
+.vg-dashboard .sg-acc .panel,.vg-dashboard .sg-acc .vg-card{border:0;padding:0;margin:0}
+.vg-dashboard>.sg-acc{margin:0}
+@media(max-width:900px){.db-hero,.db-empty{grid-template-columns:1fr}.db-empty{padding:34px 26px}.db-head{flex-direction:column;align-items:flex-start}.db-stages li+li{border-left:0;border-top:var(--line)}}
+.db-stages .display{white-space:nowrap}
+.vg-dashboard .sg-acc>.panel,.vg-dashboard .sg-acc>.vg-card{padding:0 22px 22px}
+.vg-dashboard .sg-acc .lede{font-size:1.1rem}
+.vg-modules h2{font-size:var(--t-h2);margin:var(--s2) 0 var(--s4)}
+.vg-stage-group{border:var(--line);border-radius:18px;background:transparent}
+.vg-stage-group summary{padding:16px 20px}
+.vg-stage-group.done>summary{background:transparent}
+.vg-stage-group.done .vg-stage-dot{background:var(--primary)!important}
+.vg-modules a{border:1px solid #3a3935;border-radius:14px;background:transparent}
+.vg-modules a:hover{border-color:var(--foreground)}
+/* How you learn (Studio Grid screen 03): photo cards */
+#vg-modes{display:grid;gap:14px;justify-items:center;text-align:center;margin:40px 0}
+#vg-modes h2{font-size:var(--t-h2);line-height:var(--lh-h2)}
+#vg-modes .vg-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:18px;width:100%;text-align:left}
+.vg-mode{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:0!important;overflow:hidden;border:var(--line)!important;border-radius:26px!important;background:transparent!important}
+.vg-mode.chosen{border-color:var(--primary)!important}
+.vg-mode-body{display:grid;gap:14px;align-content:start;padding:28px}
+.vg-mode-tag{display:inline-block;padding:9px 20px;border:var(--line);border-radius:999px;font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.vg-mode-tag.on{background:var(--primary);border-color:var(--primary);color:#0b0b0b}
+.vg-mode .vg-price{font-size:1.9rem;font-weight:700}
+.vg-mode ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.vg-mode li{display:flex;gap:10px;align-items:center}
+.vg-mode li svg{flex:none;width:22px;height:22px;padding:4px;border-radius:50%;background:var(--primary);color:#0b0b0b;stroke-width:3}
+.vg-mode [data-slot=button]{min-height:var(--btn-lg);font-size:1rem}
+.vg-mode-photo{width:100%;height:100%;min-height:360px;contain:size}
+@media(max-width:700px){.vg-mode{grid-template-columns:1fr}.vg-mode-photo{min-height:220px}}
+#vg-modes .vg-modes>*{margin:0!important}
+.vg-mode:has(.vg-mode-tag.on) [data-slot=button]:not(:disabled){background:var(--primary);border-color:var(--primary);color:#0b0b0b}
+/* Spacing (system): blocks 24px apart, stacked cards 12px, label 12px above its heading, heading 24px above its content */
+.vg-dashboard{gap:var(--s5)}
+.vg-dashboard>.sg-acc+.sg-acc{margin-top:calc(var(--s3) - var(--s5))!important}
+.vg-modules{display:grid;gap:var(--s3);margin-top:var(--s7)}
+.vg-modules>h2{margin:0 0 var(--s3)!important}
+.vg-modules>.vg-stage-group{margin:0}

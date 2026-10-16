@@ -1,0 +1,141 @@
+/* Studio Grid: FramePath's look (docs/sources reference screens 01–15). Black studio, cream type and lines,
+   one lime accent. Headlines Anton (condensed caps), everything else Inter. Loaded last, so it sets the look. */
+@font-face{font-family:Anton;src:url(/fonts/anton-latin.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url(/fonts/inter-latin.woff2) format('woff2');font-weight:400 700;font-display:swap}
+:root{--background:#0b0b0b;--foreground:#f2eee4;--card:#0b0b0b;--card-foreground:#f2eee4;--popover:#141414;--popover-foreground:#f2eee4;
+ --primary:#d6e86b;--primary-foreground:#0b0b0b;--secondary:#1b1b1b;--secondary-foreground:#f2eee4;--muted:#1b1b1b;--muted-foreground:#a7a399;
+ --accent:#1b1b1b;--accent-foreground:#f2eee4;--border:#d9d5cb;--input:#d9d5cb;--ring:#d6e86b;--surface-raised:#151515;--radius:22px;
+ --line:1.5px solid var(--border);--soft-line:1px solid #3a3935;--display:Anton,'Arial Narrow',Impact,sans-serif;--body:Inter,system-ui,'Segoe UI',Arial,sans-serif;
+ --photo-filter:grayscale(1) contrast(1.05)}
+:root[data-photos=colour]{--photo-filter:none}
+/* One system for the whole site: spacing steps, type scale, button and icon sizes, and the page grid.
+   Every page uses these, so the same thing looks the same everywhere. */
+:root{--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;
+ --gutter:26px;--frame:min(1460px,calc(100% - 40px));
+ --t-display:clamp(3.25rem,6.6vw,6.75rem);--t-h1:clamp(3rem,6vw,6rem);--t-h2:clamp(2.25rem,4.2vw,4rem);--t-card:clamp(1.5rem,2.2vw,2.125rem);--t-lede:clamp(1.0625rem,1.5vw,1.3125rem);
+ --lh-h1:.92;--lh-h2:.95;--lh-card:1.02;
+ --btn:48px;--btn-lg:56px;--icon:40px;--icon-lg:48px}
+@media(max-width:760px){:root{--gutter:16px;--frame:calc(100% - 24px)}}
+body{font-family:var(--body);background:#0b0b0b;letter-spacing:-.005em}
+p{color:var(--muted-foreground)}
+
+/* Headlines: Anton, uppercase, tight */
+h1,.display{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.005em;line-height:.9;color:var(--foreground)}
+h1{font-size:var(--t-h1)}
+.page-head h1{font-size:var(--t-h1);line-height:var(--lh-h1);max-width:none}
+h2{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:var(--lh-card);font-size:var(--t-card)}
+h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
+.kicker,.eyebrow{font-family:var(--body);font-size:.76rem;letter-spacing:.24em;font-weight:600;text-transform:uppercase;color:var(--foreground)}
+.lede{font-size:var(--t-lede);line-height:1.5;color:var(--foreground);max-width:760px}
+
+/* Header: a cream pill bar floating over the black page */
+.topbar{max-width:1460px;height:auto;margin:18px auto 0;padding:10px 12px 10px 26px;background:#f2eee4;color:#0b0b0b;border:0;border-radius:999px;width:calc(100% - 40px)}
+.topbar .brand{color:#0b0b0b;font-family:var(--body);font-weight:700;font-size:1.6rem;letter-spacing:-.04em;gap:14px}
+.brand-dot{color:inherit}
+.topbar .main-nav{gap:36px;font-size:1rem;font-weight:500}
+.topbar .main-nav a,.topbar .main-nav summary{color:#0b0b0b}
+.topbar .main-nav a[aria-current=page]{border-bottom:2px solid #0b0b0b}
+.topbar .account-link{background:#0b0b0b;color:#f2eee4;border:0;border-radius:999px;padding:12px 26px;font-weight:600;white-space:nowrap}
+.topbar .demo-disclosure summary{color:#0b0b0b;border-color:#0b0b0b55}
+.topbar .header-popover{background:#141414;color:#f2eee4;border:var(--line);border-radius:18px}
+.topbar .mobile-menu{color:#0b0b0b}
+@media(max-width:760px){.topbar{width:calc(100% - 24px);margin-top:12px;padding:8px 8px 8px 18px}.topbar .brand{font-size:1.3rem}.main-nav{top:84px;background:#f2eee4;border-radius:22px;margin:0 12px}.topbar .main-nav a{color:#0b0b0b}}
+
+/* Footer */
+.footer{max-width:1460px;width:calc(100% - 40px);margin:64px auto 0;padding:26px 6px 30px;border-top:var(--soft-line);align-items:center;color:var(--foreground);font-size:.85rem}
+.footer-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.25rem;letter-spacing:-.04em}
+.footer>div a+a{border-left:1px solid #5a5953;padding-left:22px}
+
+/* Page frame */
+.page{max-width:1460px;padding:44px 20px 40px}
+.home{max-width:1460px;padding:44px 20px 40px}
+.page-head{margin-bottom:34px;align-items:flex-end}
+.page-head .kicker{margin-bottom:18px}
+.breadcrumbs{color:var(--muted-foreground);font-size:.92rem}
+.breadcrumbs a{text-decoration:none;color:var(--muted-foreground)}
+.breadcrumbs a:hover{color:var(--foreground)}
+
+/* Buttons: lime pill, cream outline pill */
+[data-slot=button]{border-radius:999px!important;font-family:var(--body);font-weight:600;min-height:48px;padding-inline:var(--s5)!important;gap:10px}
+[data-slot=button][data-variant=default]{background:var(--primary);color:#0b0b0b;border:0}
+[data-slot=button][data-variant=default]:hover{background:#e3f28a}
+[data-slot=button][data-variant=outline]{background:transparent;color:var(--foreground);border:var(--line)}
+[data-slot=button][data-variant=outline]:hover{background:#f2eee412}
+[data-slot=button][data-variant=ghost]{color:var(--foreground)}
+.text-link{color:var(--primary);text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:2px;font-weight:500}
+
+/* Cards: black with a cream line */
+.panel,.vg-card,.st-card{background:transparent;border:var(--line);border-radius:var(--radius)}
+.panel{padding:30px}
+.notice{background:transparent;border:var(--soft-line);border-radius:16px}
+.badge{border-radius:999px;background:transparent;border:1px solid #5a5953;color:var(--foreground);padding:3px 11px}
+.badge.green{background:var(--primary);color:#0b0b0b;border-color:var(--primary)}
+
+/* Forms */
+input:not([type=radio]):not([type=checkbox]):not([type=file]),textarea,select{background:#141414;border:1px solid #5a5953;border-radius:14px;color:var(--foreground)}
+input:focus,textarea:focus,select:focus{border-color:var(--foreground)}
+label{font-family:var(--body);font-weight:500}
+
+/* Accordions (details): a lined row with a round chevron */
+details.sg-acc{border:var(--line);border-radius:18px;margin:12px 0}
+details.sg-acc>summary{list-style:none;display:flex;align-items:center;gap:18px;padding:18px 22px;cursor:pointer;font-weight:500;color:var(--foreground)}
+details.sg-acc>summary::-webkit-details-marker{display:none}
+details.sg-acc>summary::after{content:'';margin-left:auto;width:36px;height:36px;flex:none;border:var(--line);border-radius:50%;background:no-repeat center/14px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f2eee4' stroke-width='2.4'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");transition:transform .2s}
+details.sg-acc[open]>summary::after{transform:rotate(180deg)}
+details.sg-acc>:not(summary){padding:0 22px 20px}
+
+/* Round arrow button */
+.sg-arrow{display:grid;place-items:center;width:42px;height:42px;border:var(--line);border-radius:50%;color:var(--foreground);flex:none}
+
+/* Photos: black and white by default; admins can switch the whole site to colour */
+.sg-photo{filter:var(--photo-filter);object-fit:cover}
+
+/* Pill tabs (Watch / Make / Reflect, and section tabs) */
+.learning-tabs,[data-slot=tabs-list]{background:transparent!important;border:0!important;gap:10px;padding:0!important;height:auto!important}
+[data-slot=tabs-trigger]{border:var(--line)!important;border-radius:999px!important;padding:10px 26px!important;color:var(--foreground)!important;background:transparent!important;font-weight:500;flex:0 0 auto!important}
+[data-slot=tabs-trigger][data-state=active]{background:var(--primary)!important;color:#0b0b0b!important;border-color:var(--primary)!important}
+.sg-photo-empty{display:block;background:linear-gradient(135deg,#1c1c1a,#0f0f0e)}
+.topbar .brand-mark{color:#0b0b0b}.footer .brand-mark{color:var(--foreground)}
+input[type=radio]{appearance:none;width:26px;height:26px;border:1.5px solid var(--foreground);border-radius:50%;display:inline-grid;place-items:center;margin:0;vertical-align:middle}
+input[type=radio]:checked{border-color:var(--primary)}
+input[type=radio]:checked::after{content:'';width:14px;height:14px;border-radius:50%;background:var(--primary)}
+/* Phone header: brand and account on the first row, the nav on its own row inside the same card */
+@media(max-width:760px){
+ .topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;border-radius:26px;padding:10px 10px 6px 16px;gap:6px 10px;min-height:0}
+ .topbar .brand-group{order:1}
+ .topbar .account-link{order:2;padding:10px 18px;font-size:.9rem}
+ .topbar .main-nav{order:3;position:static;display:flex;flex:1 0 100%;justify-content:space-between;gap:12px;margin:0;padding:6px 4px 2px;border:0;border-top:1px solid #0b0b0b22;border-radius:0;box-shadow:none;background:transparent;font-size:.95rem}
+ .topbar .main-nav a{padding:6px 0}
+ .topbar .more-disclosure .header-popover{right:0;left:auto}
+}
+
+/* System rules (kept last so page styles can't drift) */
+h1,.page-head h1{line-height:var(--lh-h1)}
+main.page{width:var(--frame);max-width:none;margin-inline:auto;padding:var(--s7) var(--gutter) var(--s8)}
+.topbar{width:var(--frame);max-width:none;padding-left:var(--gutter)}
+.footer{width:var(--frame);max-width:none;padding-inline:var(--gutter)}
+main.page :is(.hm-intro,.hm-ways,.hm-how,.hm-cta,.db-empty,.vg-modules,#vg-modes) h2,main.page .sf-h{line-height:var(--lh-h2)}
+main.page .page-head{gap:var(--s4)}
+main.page .page-head p{margin:0}
+[data-slot=button]{min-height:var(--btn);padding-block:0;padding-inline:var(--s5);line-height:1.2;font-size:.9375rem;font-weight:600;gap:var(--s2)}
+[data-slot=button][data-size=sm]{min-height:40px;padding-inline:var(--s4)!important}
+[data-slot=button][data-size=icon]{width:var(--icon);min-height:var(--icon);padding:0}
+.sg-arrow{width:var(--icon);height:var(--icon)}
+.button-row{gap:var(--s3)}
+@media(max-width:760px){main.page{padding-top:var(--s6);padding-bottom:var(--s7)}}
+[data-slot=button]:disabled{opacity:1;background:#262521!important;color:#8d897f!important;border-color:transparent!important}
+[data-slot=button][data-size=sm]{min-height:var(--btn)}
+.badge{font-family:var(--body)!important;font-size:.75rem;font-weight:600;letter-spacing:.02em;line-height:1;padding:6px 10px;border-radius:999px;gap:var(--s1)}
+main.page h1{letter-spacing:.005em}
+main.page .page-head{display:grid;gap:var(--s4);align-content:start}
+.notice{border-radius:18px;padding:var(--s5);display:grid;gap:var(--s3);justify-items:start}
+.notice.success{background:transparent;border:1.5px solid var(--primary);color:var(--foreground)}
+.notice>*{margin:0}
+main.page .page-head>div{display:grid;gap:var(--s3);align-content:start}
+main.page .page-head h1+p,main.page .page-head h1+.lede{margin-top:var(--s2)}
+/* Stacked cards: one 24px rhythm */
+main.page>.panel,main.page>.two-col{margin:0 0 var(--s5)}
+main.page .two-col{gap:var(--s5);align-items:start}
+main.page .two-col>.panel{margin:0}
+.panel:has(>details.sg-acc:only-child){border:0;padding:0;background:none}
+.panel:has(>details.sg-acc:only-child)>details.sg-acc{margin:0}

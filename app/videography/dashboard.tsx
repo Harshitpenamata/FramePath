@@ -3,7 +3,8 @@ import React,{useState} from 'react';
 import {ArrowRight,BookOpen,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {toast} from 'sonner';
-import {useLearning,Panel,Go,Badge,isExplore} from '../ui';
+import {useLearning,Panel,Go,Badge,isExplore,Photo} from '../ui';
+import './dashboard.css';
 import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
 
@@ -43,7 +44,7 @@ function PathwayInfographic({p}:{p:Programme}){
 function PathwayOutcome({p}:{p:Programme}){
  const mods=modulesFor(p.level);
  const skills=['Ideas','Planning','Filming','Editing'].map(stage=>mods.filter(m=>m.stageLabel===stage).sort((a,b)=>b.hours-a.hours)[0]).filter(Boolean);
- return <Panel className="vg-card wide vg-outcome-card"><h2><Target size={20}/> What you’ll be able to do</h2>
+ return <Panel className="vg-card wide vg-outcome-card">
   <p className="lede">By the end, you will make {pathwayOutcomes[p.primaryPathway]}, and {finalProject[p.level]}.</p>
   <ul className="vg-outcomes">{skills.map(m=><li key={m.id}><Check size={16}/><span><strong>{m.stageLabel}:</strong> {m.outcome}</span></li>)}</ul>
  </Panel>;
@@ -73,22 +74,26 @@ export function MyCourses(){
  const {s,user,loaded,mutate,busy}=useLearning();
  if(!loaded)return <Panel><p role="status">Opening your courses…</p></Panel>;
  const plans=plansOf(s);
- return <div className="vg-dashboard">
-  <section><span className="eyebrow">MY COURSES · {plans.length} OF {maxPlans}</span><h1>My courses</h1><p className="lede">The plans you’ve made for yourself. You can follow up to {maxPlans} at a time, across any course.</p></section>
-  <div className="vg-course-grid">
+ return <div className="db">
+  <section className="db-head"><div><h1>My courses</h1><p className="lede">The plans you’ve made for yourself. You can follow up to {maxPlans} at a time, across any course.</p></div><span className="db-count">{plans.length} of {maxPlans} plans</span></section>
+  {!plans.length?<section className="db-empty">
+    <div><h2 className="display">Make your first plan.</h2><p className="lede">Pick a course, answer a short level check and set your time.</p><Go href="/start">Make your first plan<ArrowRight size={18}/></Go>{!user&&<a className="db-signin" href="/auth/google?return_to=%2Fworkspace">Sign in to keep your plans and work.</a>}</div>
+    <svg className="db-path" viewBox="0 0 560 140" fill="none" aria-hidden="true"><path d="M12 116H170c18 0 26-10 26-26V52c0-18 12-28 30-28h86c18 0 30 10 30 28v14c0 18 12 28 30 28h136" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="116" r="10" fill="#0b0b0b" stroke="currentColor" strokeWidth="2"/><circle cx="270" cy="24" r="10" fill="#0b0b0b" stroke="currentColor" strokeWidth="2"/><circle cx="530" cy="94" r="20" fill="var(--primary)"/><path d="M522 94h16m-6-6 6 6-6 6" stroke="#0b0b0b" strokeWidth="2.4"/></svg>
+   </section>
+  :<div className="db-plans">
    {plans.map(p=>{const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]||s.planProgress?.[p.id!]?.[moduleKey(p.level,i)]).length;
-    return <a key={p.id} className={'vg-course'+(p.id===s.programme?.id?' active':'')} href={'/workspace/'+p.id}>
-     <span className="eyebrow">{(courseNames[p.course]||p.course).toUpperCase()} · {levelNames[p.level].toUpperCase()}</span>
-     <h3>{p.primaryPathway}</h3>
+    return <a key={p.id} className={'db-plan'+(p.id===s.programme?.id?' active':'')} href={'/workspace/'+p.id}>
+     <span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]}</span>
+     <strong className="display">{p.primaryPathway}</strong>
      <div className="vg-course-bar" aria-hidden="true"><span style={{width:Math.round(done/mods.length*100)+'%'}}/></div>
      <span className="small">{done} / {mods.length} modules · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</span>
-     <span className="vg-course-open">{done?'Continue':'Open'} <ArrowRight size={15}/></span>
+     <span className="db-plan-foot">{done?'Continue':'Open'}<span className="sg-arrow"><ArrowRight size={16}/></span></span>
     </a>})}
-   {plans.length<maxPlans?<a className="vg-course add" href="/start"><span className="vg-course-addbtn"><Plus size={22}/><strong>{plans.length?'Make another plan':'Make your first plan'}</strong><span className="small">Pick a course, answer a short level check and set your time.</span></span></a>
-    :<div className="vg-course add"><span className="vg-course-addbtn"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one from its page to make another.</span></span></div>}
-  </div>
+   {plans.length<maxPlans?<a className="db-plan add" href="/start"><Plus size={26}/><strong>Make another plan</strong><span className="small">Pick a course, answer a short level check and set your time.</span></a>
+    :<div className="db-plan add"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one from its page to make another.</span></div>}
+  </div>}
   {!plans.length&&s.profile&&<div className="button-row"><Go href="/workspace/previous" outline>Open my previous learning</Go><Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button></div>}
-  {!user&&<p className="small">Sign in to keep your plans and work.</p>}
+  {!user&&plans.length>0&&<p className="small">Sign in to keep your plans and work.</p>}
  </div>;
 }
 
@@ -124,42 +129,43 @@ function ProgrammeDashboard(){
  const shown=decided?modes.filter(m=>rank[m.id]>rank[current]):modes;
  const preview=(hours:number)=>schedule(p.level,hours,p.schedule.startDate,p.schedule.daysPerWeek);
  return <div className="vg-dashboard">
-  <section className="vg-report-head">
-   <div><div className="breadcrumbs"><a href="/workspace">My courses</a><span>/</span><span>{planTitle(p)}</span></div><span className="eyebrow">{(courseNames[p.course]||p.course).toUpperCase()} · {levelNames[p.level].toUpperCase()} LEVEL</span><h1>{p.primaryPathway}</h1><p className="lede">{levelSummary[p.level]}</p>
-    </div>
-   <div className="vg-head-side"><div className="vg-score"><strong>{done}/{mods.length}</strong><span>modules done</span></div>
-    <div className="vg-head-actions">{decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
-     <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div></div>
+  <div className="breadcrumbs db-crumbs"><a href="/workspace">My courses</a><span>/</span><span>{planTitle(p)}</span></div>
+  <section className="db-hero">
+   <div className="db-hero-text"><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><h1>{p.primaryPathway}</h1><p className="lede">{levelSummary[p.level]}</p>
+    <p className="db-meta"><PlayCircle size={18}/>{done}/{mods.length} modules done · {p.schedule.totalHours} hours · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</p>
+    <div className="button-row">{nextIndex>=0&&<Go href={`/explore/${'video-'+p.level}/${nextIndex}`}>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}<ArrowRight size={18}/></Go>}
+     {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
+     <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div>
+   </div>
+   <Photo slot="project" className="db-hero-photo"/>
   </section>
+  <ol className="db-stages" aria-label="Stages">{stageOrder.map((st,i)=>{const ms=mods.map((m,k)=>({m,k})).filter(x=>x.m.stageLabel===st);if(!ms.length)return null;const all=ms.every(x=>s.progress?.[moduleKey(p.level,x.k)]);return <li key={st} className={all?'done':''}><a href={`/explore/video-${p.level}/${ms.find(x=>!s.progress?.[moduleKey(p.level,x.k)])?.k??ms[0].k}`}><span className="display">{String(i+1).padStart(2,'0')}</span><strong>{st}</strong><span className="sg-arrow">{all?<Check size={16}/>:<ArrowRight size={16}/>}</span></a></li>})}</ol>
 
-  <div className="vg-report-grid">
-   <PathwayOutcome p={p}/>
-   <Panel className="vg-card wide"><h2>Your learning plan</h2><p>{overview(p)}</p><PathwayInfographic p={p}/></Panel>
-   <Panel className="vg-card"><h2>Your level in each skill</h2><HeatMap p={p}/><p className="small">Based on your 12 answers. Your tasks will show more.</p></Panel>
-   <Panel className="vg-card"><h2><CalendarClock size={20}/> Your dates</h2>
+  <details className="sg-acc" open><summary><Target size={20}/>What you’ll be able to do</summary><PathwayOutcome p={p}/></details>
+  <details className="sg-acc"><summary><BookOpen size={20}/>Your learning plan</summary><p>{overview(p)}</p><PathwayInfographic p={p}/></details>
+  <details className="sg-acc"><summary><Sparkles size={20}/>Your level in each skill</summary><HeatMap p={p}/><p className="small">Based on your 12 answers. Your tasks will show more.</p></details>
+  <details className="sg-acc"><summary><CalendarClock size={20}/>Your dates</summary>
     <div className="vg-dates"><div><span className="small">Start</span><strong>{formatDate(p.schedule.startDate)}</strong></div><ArrowRight/><div><span className="small">End</span><strong>{formatDate(p.schedule.endDate)}</strong></div></div>
     <p className="small">{p.schedule.totalHours} hours · {p.schedule.hoursPerWeek} h/week (recommended {p.schedule.recommendedHoursPerWeek}) · {p.schedule.weeks} weeks · ≈ {p.schedule.minutesPerDay} min/day over {p.schedule.daysPerWeek} days</p>
     <label className="vg-field">Hours per week: <strong>{hours??p.schedule.hoursPerWeek} h</strong> → ends {formatDate(preview(hours??p.schedule.hoursPerWeek).endDate)}
      <input type="range" min={p.schedule.recommendedHoursPerWeek} max={maxHoursPerWeek} value={hours??p.schedule.hoursPerWeek} disabled={busy} onChange={e=>setHours(Number(e.target.value))}/></label>
     {hours!==null&&hours!==p.schedule.hoursPerWeek&&<div className="button-row"><Button size="sm" disabled={busy} onClick={async()=>{if(await update({hoursPerWeek:hours}))setHours(null)}}>Save {hours} h/week</Button><Button size="sm" variant="outline" onClick={()=>setHours(null)}>Cancel</Button></div>}
     <StartDate p={p} busy={busy} update={update}/>
-   </Panel>
-  </div>
+  </details>
 
   {(!decided||upgrading)&&shown.length>0&&<section id="vg-modes"><span className="eyebrow">HOW YOU LEARN</span><h2>{decided?'Upgrade your learning':'How do you want to learn?'}</h2>
-   <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?paid:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}>
-    <div className="row between"><m.Icon size={26}/>{chosen&&<Badge tone="green">Your mode</Badge>}</div><h3>{m.title}</h3><strong className="vg-price">{m.price}</strong>
+   <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?paid:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}><div className="vg-mode-body">
+    <div className="row between"><span className={'vg-mode-tag'+(m.id==='self'?' on':'')}>{m.title}</span>{chosen&&<Badge tone="green">Your mode</Badge>}</div><strong className="vg-price">{m.price}</strong>
     <ul>{m.points.map(x=><li key={x}><Check size={15}/>{x}</li>)}</ul>
     {m.id==='self'&&chosen&&!active&&<p className="small">Finish the practice checkout to unlock every task.</p>}
     <Button variant={chosen?'default':'outline'} disabled={busy} onClick={()=>chooseMode(m.id)}>{chosen?(active?'Selected':'Complete checkout'):m.id==='free'?'Learn free':'Go self-paced'}</Button>
-   </Panel>})}</div>
+   </div><Photo slot={m.id==='self'?'self-paced':'interests'} className="vg-mode-photo"/></Panel>})}</div>
    <p className="small">This is a test version. Checkout takes no money.</p>
    {decided&&<Button variant="ghost" onClick={()=>setUpgrading(false)}>Not now</Button>}
   </section>}
 
   <ModuleList p={p}/>
   <DeletePlan id={p.id!}/>
-  {nextIndex>=0&&<div className="vg-sticky-next"><Go href={`/explore/${'video-'+p.level}/${nextIndex}`}><PlayCircle size={18}/>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}</Go></div>}
  </div>;
 }
 
