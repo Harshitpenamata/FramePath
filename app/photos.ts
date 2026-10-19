@@ -18,6 +18,7 @@ export const photoSources:Record<string,string>={
 export const photoSlots={
  'home-videography':'01','home-photography':'02','home-filmmaking':'03','home-animation':'04','home-motion':'06',
  'interests':'10','self-paced':'06','mentor-led':'05','project':'11','make':'01','community':'05',
+ 'hero-1':'12','hero-2':'05','hero-3':'08','hero-4':'10','hero-5':'06',
  'help-1':'07','help-2':'09','help-3':'04','account':'08','safety':'12','privacy':'06',
 } as const;
 export type PhotoSlot=keyof typeof photoSlots;

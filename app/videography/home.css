@@ -93,3 +93,29 @@
 .hm-cta>div{display:grid;gap:var(--s3)}
 .hm-cta h2,.hm-cta p{margin:0}
 @media(max-width:760px){.hm-craft-photo,.hm-craft.live .hm-craft-photo{width:44%}.hm-craft-blurb{max-width:54%}}
+/* Home banner slides */
+.hm-slides{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:var(--s7);align-items:stretch}
+.hm-slide-text{display:grid;gap:var(--s5);align-content:center}
+.hm-slide-stack{display:grid}
+.hm-slide{grid-area:1/1;display:grid;gap:var(--s4);align-content:start;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility 0s .5s}
+.hm-slide.on{opacity:1;visibility:visible;transition:opacity .5s ease}
+.hm-slide :is(h1,h2){font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:var(--t-display);line-height:var(--lh-h1);margin:0;max-width:16ch}
+.hm-slide em{font-style:normal;color:var(--primary)}
+.hm-slide .lede{margin:0;max-width:52ch}
+.hm-slide-nav{display:flex;align-items:center;gap:var(--s3)}
+.hm-slide-dots{display:flex;gap:2px}
+.hm-slide-dots button{width:44px;height:44px;display:grid;place-items:center;background:none;border:0;cursor:pointer;padding:0}
+.hm-slide-dots button::before{content:'';width:10px;height:10px;border-radius:50%;border:1.5px solid var(--foreground);transition:width .3s,background .3s}
+.hm-slide-dots button[aria-current]::before{width:28px;border-radius:999px;background:var(--primary);border-color:var(--primary)}
+.hm-slide-nav .sg-arrow{width:var(--icon);height:var(--icon);display:grid;place-items:center;border:var(--line);border-radius:50%;background:none;color:var(--foreground);cursor:pointer}
+.hm-slide-pause{margin-left:auto;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:var(--soft-line);background:none;color:var(--foreground);cursor:pointer}
+.hm-slide-photos{display:grid;min-height:460px;border-radius:var(--radius);overflow:hidden;border:var(--line)}
+.hm-slide-photo{grid-area:1/1;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+.hm-slide-photo.on{opacity:1}
+@media(prefers-reduced-motion:reduce){.hm-slide,.hm-slide.on,.hm-slide-photo{transition:none}}
+@media(max-width:900px){.hm-slides{grid-template-columns:1fr;gap:var(--s5)}.hm-slide-photos{min-height:240px;order:-1}}
+.hm-slide :is(h1,h2){font-size:clamp(2.75rem,5.2vw,5.5rem);max-width:18ch}
+.hm-slides{min-height:0;padding-top:var(--s5)}
+.hm-slide-photos{min-height:0;max-height:620px}
+.hm-slides>*{min-width:0}
+@media(max-width:900px){.hm-slide-photos{aspect-ratio:16/10;max-height:none}.hm-slide-nav{gap:var(--s1)}.hm-slide-dots button{width:32px}}

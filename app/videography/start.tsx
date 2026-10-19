@@ -1,6 +1,6 @@
 'use client';
 import React,{useEffect,useMemo,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,Check,ChevronLeft,ChevronRight,Clock,Lock,Plus,Star,X,Gem,CalendarDays,Briefcase,FileText,PawPrint,Smartphone,TvMinimalPlay,Plane,Package,Music,UtensilsCrossed,Shirt,Home,PersonStanding,Presentation,Clapperboard,Film} from 'lucide-react';
+import {ArrowLeft,ArrowRight,Check,ChevronLeft,ChevronRight,Clock,Lock,Plus,Star,X,Gem,CalendarDays,Briefcase,FileText,PawPrint,Smartphone,TvMinimalPlay,Plane,Package,Music,UtensilsCrossed,Shirt,Home,PersonStanding,Presentation,Clapperboard,Film,Pause,Play} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Photo} from '../ui';
 import type {PhotoSlot} from '../photos';
@@ -39,16 +39,42 @@ const crafts:{id:string;n:string;title:string;blurb:string;photo:PhotoSlot;live?
  {id:'animation',n:'04',title:'Animation · 2D | 3D',blurb:'Bring characters and worlds to life.',photo:'home-animation'},
  {id:'motion-graphics',n:'05',title:'Motion Graphics',blurb:'Make text and shapes move with purpose.',photo:'home-motion'},
 ];
+// Home banner (site edits, page 1): five slides that change every 5 seconds. Pauses on hover and keyboard focus,
+// has a pause button, dots and arrows, and stays still for people who ask their device for reduced motion.
+// The second sentence of a headline is highlighted.
+const heroSlides:{eyebrow:string;head:[string,string?];line:string;photo:PhotoSlot}[]=[
+ {eyebrow:'Your creative career,',head:['Curated by industry leaders.','Powered by AI.'],line:'From your first frame to your first film, beginner to advanced, all in one place.',photo:'hero-1'},
+ {eyebrow:'Curated by people who’ve done it',head:['Most of our industry leaders never went to film school.'],line:'They learned from the internet and from great mentors. Now they’ve mapped the path for you.',photo:'hero-2'},
+ {eyebrow:'Beginner to advanced',head:['700+ curated pathways.','In every course.'],line:'From first steps to advanced craft, the whole climb is mapped.',photo:'hero-3'},
+ {eyebrow:'Your pathway is free',head:['Know a little? Know a lot?','Start right there.'],line:'Share what you know and how far you’ve come. We map what comes next.',photo:'hero-4'},
+ {eyebrow:'Learn your way',head:['Learn with AI.','Or learn with a mentor.'],line:'Self-paced with AI-driven assignments and feedback, or a mentor-led program.',photo:'hero-5'},
+];
+function HeroSlides({actions}:{actions:React.ReactNode}){
+ const [at,setAt]=useState(0),[paused,setPaused]=useState(false),[held,setHeld]=useState(false),[still,setStill]=useState(false);
+ useEffect(()=>{const m=window.matchMedia('(prefers-reduced-motion: reduce)');setStill(m.matches||document.documentElement.classList.contains('ui-reduced-motion'))},[]);
+ const n=heroSlides.length,go=(i:number)=>setAt((i+n)%n);
+ useEffect(()=>{if(paused||held||still)return;const t=setTimeout(()=>go(at+1),5000);return ()=>clearTimeout(t)},[at,paused,held,still]);
+ return <section className="hm-hero hm-slides" aria-roledescription="carousel" aria-label="About Framepath" onMouseEnter={()=>setHeld(true)} onMouseLeave={()=>setHeld(false)} onFocus={()=>setHeld(true)} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setHeld(false)}}>
+  <div className="hm-slide-text">
+   <div className="hm-slide-stack">{heroSlides.map((x,i)=>{const H=i===0?'h1':'h2';return <div key={i} className={'hm-slide'+(i===at?' on':'')} role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`} aria-hidden={i!==at}>
+    <span className="kicker">{x.eyebrow}</span><H>{x.head[0]}{x.head[1]&&<> <em>{x.head[1]}</em></>}</H><p className="lede">{x.line}</p></div>})}</div>
+   {actions}
+   <div className="hm-slide-nav">
+    <button type="button" className="sg-arrow" aria-label="Previous slide" onClick={()=>go(at-1)}><ChevronLeft size={18}/></button>
+    <span className="hm-slide-dots">{heroSlides.map((_,i)=><button key={i} type="button" aria-label={`Slide ${i+1}`} aria-current={i===at?'true':undefined} onClick={()=>go(i)}/>)}</span>
+    <button type="button" className="sg-arrow" aria-label="Next slide" onClick={()=>go(at+1)}><ChevronRight size={18}/></button>
+    {!still&&<button type="button" className="hm-slide-pause" onClick={()=>setPaused(p=>!p)} aria-label={paused?'Play slides':'Pause slides'}>{paused?<Play size={16}/>:<Pause size={16}/>}</button>}
+   </div>
+  </div>
+  <div className="hm-slide-photos" aria-hidden="true">{heroSlides.map((x,i)=><Photo key={i} slot={x.photo} priority={i===0} className={'hm-slide-photo'+(i===at?' on':'')}/>)}</div>
+ </section>;
+}
+
 export function VideographyHome(){
  const {s,loaded}=useLearning();
  const startHref=loaded&&s.programme?'/workspace':'/start',startLabel=loaded&&s.programme?'Continue my pathway':'Build my free pathway';
  return <div className="hm">
-  <section className="hm-hero">
-   <span className="kicker">India’s first full-stack creative education platform</span>
-   <h1>Your creative career, mapped by industry leaders. <em>Powered by AI.</em></h1>
-   <p className="lede">From your first frame to your first film, Framepath builds a personal learning path from beginner to advanced, shaped by working professionals and guided by AI that gives feedback on your real work.</p>
-   <div className="button-row"><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go><Go href="#crafts" outline>Explore courses</Go></div>
-  </section>
+  <HeroSlides actions={<div className="button-row"><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go><Go href="#crafts" outline>Explore courses</Go></div>}/>
 
   <section className="hm-grid" id="crafts" aria-label="Choose your craft">
    <div className="hm-intro"><span className="kicker">Choose your craft</span><h2 className="display">Pick your craft. We’ll build the path.</h2><p>Each course runs from beginner to advanced, designed by industry practitioners.</p><a className="sg-arrow" href={startHref} aria-label={startLabel}><ArrowRight size={18}/></a></div>
