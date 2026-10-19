@@ -39,25 +39,25 @@ const crafts:{id:string;n:string;title:string;blurb:string;photo:PhotoSlot;live?
  {id:'animation',n:'04',title:'Animation · 2D | 3D',blurb:'Bring characters and worlds to life.',photo:'home-animation'},
  {id:'motion-graphics',n:'05',title:'Motion Graphics',blurb:'Make text and shapes move with purpose.',photo:'home-motion'},
 ];
-// Home banner (site edits, page 1): five slides that change every 5 seconds. Pauses while a keyboard user is in it,
-// has a pause button, dots and arrows, and stays still for people who ask their device for reduced motion.
-// The second sentence of a headline is highlighted.
-const heroSlides:{eyebrow:string;head:[string,string?];line:string;photo:PhotoSlot}[]=[
- {eyebrow:'Your creative career,',head:['Curated by industry leaders.','Powered by AI.'],line:'From your first frame to your first film, beginner to advanced, all in one place.',photo:'hero-1'},
- {eyebrow:'Curated by people who’ve done it',head:['Most of our industry leaders never went to film school.'],line:'They learned from the internet and from great mentors. Now they’ve mapped the path for you.',photo:'hero-2'},
- {eyebrow:'Beginner to advanced',head:['700+ curated pathways.','In every course.'],line:'From first steps to advanced craft, the whole climb is mapped.',photo:'hero-3'},
- {eyebrow:'Your pathway is free',head:['Know a little? Know a lot?','Start right there.'],line:'Share what you know and how far you’ve come. We map what comes next.',photo:'hero-4'},
- {eyebrow:'Learn your way',head:['Learn with AI.','Or learn with a mentor.'],line:'Self-paced with AI-driven assignments and feedback, or a mentor-led program.',photo:'hero-5'},
+// Home banner: five designed banner images (Assets/fontpage) that change every 5 seconds. Each image's words are
+// its alt text, so screen readers hear them. Pauses while a keyboard user is in it and with the pause button, and
+// stays still for people who ask their device for reduced motion. Served from public/banners at 1000 and 2070 wide.
+const heroSlides:{n:number;alt:string}[]=[
+ {n:1,alt:'India’s first full-stack creative education platform. Your creative career, mapped by industry leaders. Powered by AI. From your first frame to your first film, beginner to advanced, all in one place.'},
+ {n:2,alt:'Curated by people who’ve done it. Most of our industry leaders never went to film school. They learned from the internet and from great mentors. Now they’ve mapped the path for you.'},
+ {n:3,alt:'Beginner to advanced. 700+ curated pathways. In every course. From first steps to advanced craft, the whole climb is mapped.'},
+ {n:4,alt:'Your pathway is free. Know a little? Know a lot? Start right there. Share what you know and how far you’ve come. We map what comes next.'},
+ {n:5,alt:'Learn your way. Learn with AI. Or learn with a mentor. Self-paced with AI-driven assignments and feedback, or a mentor-led program.'},
 ];
 function HeroSlides({actions}:{actions:React.ReactNode}){
  const [at,setAt]=useState(0),[paused,setPaused]=useState(false),[held,setHeld]=useState(false),[still,setStill]=useState(false);
  useEffect(()=>{const m=window.matchMedia('(prefers-reduced-motion: reduce)');setStill(m.matches||document.documentElement.classList.contains('ui-reduced-motion'))},[]);
  const n=heroSlides.length,go=(i:number)=>setAt((i+n)%n);
  useEffect(()=>{if(paused||held||still)return;const t=setTimeout(()=>go(at+1),5000);return ()=>clearTimeout(t)},[at,paused,held,still]);
- return <section className="hm-hero hm-slides" aria-roledescription="carousel" aria-label="About Framepath" onFocus={e=>{if(e.target.matches(':focus-visible'))setHeld(true)}} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setHeld(false)}}>
-  <div className="hm-slide-text">
-   <div className="hm-slide-stack">{heroSlides.map((x,i)=>{const H=i===0?'h1':'h2';return <div key={i} className={'hm-slide'+(i===at?' on':'')} role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`} aria-hidden={i!==at}>
-    <span className="kicker">{x.eyebrow}</span><H>{x.head[0]}{x.head[1]&&<> <em>{x.head[1]}</em></>}</H><p className="lede">{x.line}</p></div>})}</div>
+ return <section className="hm-hero hm-banner" aria-roledescription="carousel" aria-label="About Framepath" onFocus={e=>{if(e.target.matches(':focus-visible'))setHeld(true)}} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setHeld(false)}}>
+  <h1 className="sr-only">Framepath: your creative career, mapped by industry leaders. Powered by AI.</h1>
+  <div className="hm-banner-frame">{heroSlides.map((x,i)=><img key={x.n} className={'hm-banner-img'+(i===at?' on':'')} src={`/banners/hero-${x.n}-2070.webp`} srcSet={`/banners/hero-${x.n}-1000.webp 1000w, /banners/hero-${x.n}-2070.webp 2070w`} sizes="(max-width: 1460px) 100vw, 1460px" width={2070} height={760} alt={x.alt} aria-hidden={i!==at} loading={i===0?'eager':'lazy'} decoding="async" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`}/>)}</div>
+  <div className="hm-banner-bar">
    {actions}
    <div className="hm-slide-nav">
     <button type="button" className="sg-arrow" aria-label="Previous slide" onClick={()=>go(at-1)}><ChevronLeft size={18}/></button>
@@ -66,7 +66,6 @@ function HeroSlides({actions}:{actions:React.ReactNode}){
     {!still&&<button type="button" className="hm-slide-pause" onClick={()=>setPaused(p=>!p)} aria-label={paused?'Play slides':'Pause slides'}>{paused?<Play size={16}/>:<Pause size={16}/>}</button>}
    </div>
   </div>
-  <div className="hm-slide-photos" aria-hidden="true">{heroSlides.map((x,i)=><Photo key={i} slot={x.photo} priority={i===0} className={'hm-slide-photo'+(i===at?' on':'')}/>)}</div>
  </section>;
 }
 
