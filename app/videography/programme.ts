@@ -196,7 +196,8 @@ export const maxHoursPerWeek=30;
 export type Schedule={level:Level;totalHours:number;hoursPerWeek:number;recommendedHoursPerWeek:number;weeks:number;startDate:string;endDate:string;minutesPerDay:number;daysPerWeek:number};
 const isoDate=(d:Date)=>d.toISOString().slice(0,10);
 export function addDays(date:string,days:number){const d=new Date(date+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+days);return isoDate(d)}
-export function today(){return isoDate(new Date())}
+// Learners are in India, so "today" is the India date. The browser and the server share this, so they always agree.
+export function today(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata'}).format(new Date())}
 // Recommended rhythm comes from the level; learners may only increase their weekly hours.
 export function schedule(level:Level,hoursPerWeek?:number,startDate?:string,daysPerWeek=5):Schedule{
  const r=rhythm[level];
@@ -221,7 +222,7 @@ export function buildProgramme(input:any,previous?:Programme|null):Programme{
  const active:Pathway=previous&&input.answers===undefined?previous.primaryPathway:interestFor(ids[0] as string)!.pathway;
  // An unchanged start date is kept even once it is in the past; a new one must be from today to 180 days ahead.
  const keptStart=previous&&input.startDate===previous.schedule.startDate;
- const start=keptStart||typeof input.startDate==='string'&&input.startDate>=addDays(today(),-1)&&input.startDate<=addDays(today(),180)?input.startDate:today();
+ const start=keptStart||typeof input.startDate==='string'&&input.startDate>=today()&&input.startDate<=addDays(today(),180)?input.startDate:today();
  const now=new Date().toISOString();
  return {version:1,course:'videography',interests:ids as string[],primaryPathway:active,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self'].includes(input.mode)?input.mode:previous?.mode==='mentor'?null:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
 }
@@ -240,7 +241,8 @@ export const isFreeModule=(key:string)=>{const v=parseVideoKey(key);return !!v&&
 export const stagePhase=(stage:string)=>stage==='concepts'||stage==='preproduction'?'pre' as const:stage==='postproduction'?'post' as const:'production' as const;
 
 // The learner's main project name, from their first interest (e.g. "Wildlife & nature").
-export const projectLabel=(p?:Programme|null)=>p?(interestFor(p.interests.find(id=>interestFor(id)?.pathway===p.primaryPathway)||'')?.label||p.primaryPathway):undefined;
+// The style project (B13, I13, A13) is named after the plan's pathway, the same name the plan and its breadcrumb use (audit F04).
+export const projectLabel=(p?:Programme|null)=>p?p.primaryPathway:undefined;
 // When each module of a plan is due: modules in order, at the plan's weekly hours, from its start date.
 export function moduleDueDates(p:Programme){let hours=0;return modulesFor(p.level).map((m,i)=>{hours+=m.hours;return {key:moduleKey(p.level,i),module:m,due:addDays(p.schedule.startDate,Math.max(0,Math.ceil(hours/p.schedule.hoursPerWeek*7)-1))}})}
 // My courses: a learner's plans, up to three across all courses. state.programme is the plan that's open;

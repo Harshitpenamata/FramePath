@@ -179,11 +179,11 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
      <div className="vg-lesson-about">
       <span className="eyebrow">LESSON {index+1} OF {lessons.length}</span><h2>{item.title}</h2>
       <p className="vg-idea">{item.idea}</p>
-      {user&&open&&<p className={'small vg-lesson-status'+(done(at)?' ok':'')}>{done(at)?<><Check size={14}/> Lesson finished</>:<>To finish this lesson: watch {videos.length===1?'the video':`all ${videos.length} videos`} ({videos.filter(v=>mark?.v.includes(videoId(v))).length} of {videos.length} done){videos.length?' and ':''}answer the Reflect questions ({mark?.t?'done':'not yet'}).</>}</p>}
+      {user&&open&&<p className={'small vg-lesson-status'+(done(at)?' ok':'')}>{done(at)?<><Check size={14}/> Lesson finished</>:<>To finish this lesson: watch {videos.length===1?'the video':`all ${videos.length} videos`} ({videos.filter(v=>mark?.v.includes(videoId(v))).length} of {videos.length} done){videos.length?' and ':''}answer the Think it through questions ({mark?.t?'done':'not yet'}).</>}</p>}
      </div>
     </div>
     <div className="vg-lesson-part"><h3><BookOpen size={18}/> Watch</h3><VideoPanel videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined}/></div>
-    <div className="vg-lesson-part"><h3><Puzzle size={18}/> Reflect</h3>{open?<ReflectStep moduleId={m.id} index={index} tool={item.tool} onSolved={()=>{if(!mark?.t)save({tool:true})}}/>:<SelfPacedLock moduleKey={moduleKey} what="Reflect questions"/>}</div>
+    <div className="vg-lesson-part"><h3><Puzzle size={18}/> Think it through</h3>{open?<ReflectStep moduleId={m.id} index={index} tool={item.tool} videos={videos} onSolved={()=>{if(!mark?.t)save({tool:true})}}/>:<SelfPacedLock moduleKey={moduleKey} what="Think it through questions"/>}</div>
     <div className="button-row between">{index>0?<Button variant="outline" onClick={()=>go(index-1)}><ArrowLeft size={16}/>Previous lesson</Button>:<span/>}{index<lessons.length-1?<Button onClick={()=>go(index+1)}>Next lesson<ArrowRight size={16}/></Button>:<Button onClick={onTask}>Go to the task<ArrowRight size={16}/></Button>}</div>
    </article>
   </section>:<>
@@ -194,7 +194,7 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
   {(!item||at===lessons.length-1)&&<section className={'vg-assignment-preview'+(open?'':' locked')}>
    <span className="eyebrow">{taskLabel(m.id)}</span><h3><ListChecks size={18}/> {m.taskName}</h3>
    <p>{lesson.do}</p>
-   {!open?<SelfPacedLock moduleKey={moduleKey} what="This task"/>:requireLessonsForTask&&status.done<status.total?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Finish all {status.total} lessons to unlock this task.</strong><p className="small">{status.done} of {status.total} done. Watch each video and answer each lesson’s Reflect questions.</p></div></div>:<Button onClick={onTask}>Start the task</Button>}
+   {!open?<SelfPacedLock moduleKey={moduleKey} what="This task"/>:requireLessonsForTask&&status.done<status.total?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Finish all {status.total} lessons to unlock this task.</strong><p className="small">{status.done} of {status.total} done. Watch each video and answer each lesson’s Think it through questions.</p></div></div>:<Button onClick={onTask}>Start the task</Button>}
   </section>}
  </div>;
 }

@@ -48,7 +48,6 @@ export function VideographyHome(){
    <h1>Your creative career, mapped by industry leaders. <em>Powered by AI.</em></h1>
    <p className="lede">From your first frame to your first film, Framepath builds a personal learning path from beginner to advanced, shaped by working professionals and guided by AI that gives feedback on your real work.</p>
    <div className="button-row"><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go><Go href="#crafts" outline>Explore courses</Go></div>
-   <p className="hm-facts">Curated by industry leaders <span>·</span> Beginner to advanced <span>·</span> Self-paced or mentor-led</p>
   </section>
 
   <section className="hm-grid" id="crafts" aria-label="Choose your craft">
@@ -152,7 +151,7 @@ export function ProgrammeStart(){
    <label className="vg-field">Hours per week: <strong>{plan.hoursPerWeek} h</strong><input type="range" min={plan.recommendedHoursPerWeek} max={maxHoursPerWeek} step={1} value={plan.hoursPerWeek} onChange={e=>update({hoursPerWeek:Number(e.target.value)})}/><span className="small">Add more hours to finish sooner. You can’t go below the suggested time.</span></label>
    <div className="vg-field-row">
     <label className="vg-field">Days per week<select value={plan.daysPerWeek} onChange={e=>update({daysPerWeek:Number(e.target.value)})}>{[3,4,5,6,7].map(d=><option key={d} value={d}>{d} days</option>)}</select></label>
-    <label className="vg-field">Start date<input type="date" min={today()} max={addDays(today(),180)} value={plan.startDate} onChange={e=>update({startDate:e.target.value||today()})}/></label>
+    <label className="vg-field">Start date<input type="date" min={today()} max={addDays(today(),180)} value={plan.startDate} onChange={e=>{const v=e.target.value;update({startDate:v&&v>=today()&&v<=addDays(today(),180)?v:today()})}}/></label>
    </div>
    <div className="button-row"><Button variant="outline" onClick={()=>setStep(1)}><ArrowLeft size={16}/>Back</Button><Button onClick={()=>setStep(3)}>Check my plan <ArrowRight size={16}/></Button></div>
   </Panel>}

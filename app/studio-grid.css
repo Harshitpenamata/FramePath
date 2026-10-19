@@ -139,3 +139,4 @@ main.page .two-col{gap:var(--s5);align-items:start}
 main.page .two-col>.panel{margin:0}
 .panel:has(>details.sg-acc:only-child){border:0;padding:0;background:none}
 .panel:has(>details.sg-acc:only-child)>details.sg-acc{margin:0}
+main:focus{outline:none}

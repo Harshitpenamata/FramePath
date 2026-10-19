@@ -60,7 +60,7 @@ function StartDate({p,busy,update}:{p:Programme;busy:boolean;update:(u:any)=>Pro
  return <div className="vg-delay"><span className="vg-label">Start date</span>
   <p className="small">{n>0?`Your plan starts in ${n} day${n>1?'s':''}, on ${formatDate(start)}.`:n===0?'Your plan starts today.':`You started on ${formatDate(start)}.`} Change it if you need more time.</p>
   <div className="vg-chips" role="group" aria-label="Pick a start date">{choices.map(([label,date])=><button type="button" key={label} disabled={busy} aria-pressed={start===date} className={start===date?'selected':''} onClick={()=>update({startDate:date})}>{label}<small>{formatDate(date)}</small></button>)}</div>
-  <label className="vg-field">Or pick a date <input type="date" min={today()} max={addDays(today(),180)} value={start>=today()?start:''} disabled={busy} onChange={e=>{if(e.target.value)update({startDate:e.target.value})}}/></label>
+  <label className="vg-field">Or pick a date <input type="date" min={today()} max={addDays(today(),180)} value={start>=today()?start:''} disabled={busy} onChange={e=>{const v=e.target.value;if(v&&v>=today()&&v<=addDays(today(),180))update({startDate:v})}}/></label>
  </div>;
 }
 
@@ -89,7 +89,7 @@ export function MyCourses(){
      <span className="small">{done} / {mods.length} modules · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</span>
      <span className="db-plan-foot">{done?'Continue':'Open'}<span className="sg-arrow"><ArrowRight size={16}/></span></span>
     </a>})}
-   {plans.length<maxPlans?<a className="db-plan add" href="/start"><Plus size={26}/><strong>Make another plan</strong><span className="small">Pick a course, answer a short level check and set your time.</span></a>
+   {plans.length<maxPlans?<a className="db-plan add" href="/#crafts"><Plus size={26}/><strong>Make another plan</strong><span className="small">Pick a course, answer a short level check and set your time.</span></a>
     :<div className="db-plan add"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one from its page to make another.</span></div>}
   </div>}
   {!plans.length&&s.profile&&<div className="button-row"><Go href="/workspace/previous" outline>Open my previous learning</Go><Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button></div>}

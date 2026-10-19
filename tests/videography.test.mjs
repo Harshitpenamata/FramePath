@@ -97,7 +97,10 @@ test('server-side programme build validates input and recomputes derived values'
  const updated=P.buildProgramme({...p,mode:'self'},p);assert.deepEqual(updated.assessment,p.assessment,'updates keep the saved assessment');
  // Regression: changing hours after the start date has passed must not reset the start date to today.
  const started={...p,schedule:{...p.schedule,startDate:P.addDays(today,-21)}};const moreHours=P.buildProgramme({...started,hoursPerWeek:14,startDate:started.schedule.startDate},started);assert.equal(moreHours.schedule.startDate,P.addDays(today,-21));assert.equal(moreHours.schedule.hoursPerWeek,14);
- assert.equal(P.buildProgramme({...started,startDate:P.addDays(today,-30)},started).schedule.startDate,today,'a new date in the past is not allowed');assert.equal(updated.mode,'self');assert.equal(updated.createdAt,p.createdAt);
+ assert.equal(P.buildProgramme({...started,startDate:P.addDays(today,-30)},started).schedule.startDate,today,'a new date in the past is not allowed');
+ // Audit F01: yesterday was accepted (a one-day grace). A new plan starting yesterday now starts today.
+ assert.equal(P.buildProgramme({course:'videography',interests:['travel'],answers:answers(best),startDate:P.addDays(today,-1)}).schedule.startDate,today,'yesterday is in the past');
+ assert.equal(today,new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata'}).format(new Date()),'today is the India date');assert.equal(updated.mode,'self');assert.equal(updated.createdAt,p.createdAt);
 });
 
 test('free tier: assignments only on the first two modules of each level',()=>{
@@ -267,4 +270,25 @@ test('dead lesson videos do not count toward finishing a lesson',()=>{
  assert.deepEqual(Les.lessonNeeds('B01',0,'Wedding',dead),needs.slice(1));
  assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs.slice(1),t:true}),false,'without the dead list the missing video counts');
  assert.equal(Les.lessonFinished('B01',0,'Wedding',{v:needs.slice(1),t:true},dead),true,'a dead video is not needed');
+});
+
+test('audit F04: the style project is named after the plan pathway, like the breadcrumb',()=>{
+ const p=P.buildProgramme({course:'videography',interests:['wildlife','wedding'],answers:answers(mid)});
+ assert.equal(p.primaryPathway,'Documentary');
+ const m=P.modulesFor(p.level).find(x=>x.stage==='selected-pathway');
+ assert.equal(P.moduleLesson(m,P.projectLabel(p)).title,'Your Documentary project');
+});
+
+test('audit F05: no Reflect question names a video the lesson does not show, in any style',()=>{
+ const L=load(path.join(root,'app/videography/lessons.ts'));
+ const banks=['beginner','intermediate','advanced'].map(l=>JSON.parse(fs.readFileSync(path.join(root,'app/videography/reflect/'+l+'.json'),'utf8')));
+ const styles=[...new Set(P.interests.map(i=>i.pathway))];
+ const key=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+ for(const bank of banks)for(const [id,lessons] of Object.entries(bank))lessons.forEach((qs,i)=>{
+  for(const style of /13$/.test(id)?styles:['Documentary']){
+   const videos=L.lessonVideos(id,i,style),shown=L.questionsForVideos(qs||[],videos);
+   if((qs||[]).length)assert.ok(shown.length>0,`${id} lesson ${i+1} (${style}) keeps at least one question`);
+   for(const q of shown)if(q.video)assert.ok(videos.some(v=>key(v.title).includes(key(q.video))||key(q.video).includes(key(v.title))),`${id} lesson ${i+1} (${style}): "${q.video}"`);
+  }
+ });
 });

@@ -2,7 +2,7 @@
 import React,{useEffect,useMemo,useState} from 'react';
 import {Check,PlayCircle,X} from 'lucide-react';
 import {LessonTool} from './tools';
-import type {Tool} from './lessons';
+import {questionsForVideos,type Tool} from './lessons';
 
 // Reflect: two or three questions about the lesson and its videos, then the hands-on simulator where the
 // lesson has one. The lesson's Reflect counts as done once every question is answered right and the
@@ -29,10 +29,10 @@ function Question({item,n,total,onRight}:{item:ReflectQuestion;n:number;total:nu
  </div>;
 }
 
-export function ReflectStep({moduleId,index,tool,onSolved}:{moduleId:string;index:number;tool:Tool;onSolved:()=>void}){
+export function ReflectStep({moduleId,index,tool,videos,onSolved}:{moduleId:string;index:number;tool:Tool;videos:{title:string}[];onSolved:()=>void}){
  const [questions,setQuestions]=useState<ReflectQuestion[]|null|undefined>(undefined);
  const [right,setRight]=useState<Set<number>>(new Set()),[simDone,setSimDone]=useState(false);
- useEffect(()=>{let live=true;setQuestions(undefined);setRight(new Set());setSimDone(false);bankFor(moduleId).then(b=>{if(live)setQuestions(b[moduleId]?.[index]||null)}).catch(()=>{if(live)setQuestions(null)});return ()=>{live=false}},[moduleId,index]);
+ useEffect(()=>{let live=true;setQuestions(undefined);setRight(new Set());setSimDone(false);bankFor(moduleId).then(b=>{if(live){const qs=questionsForVideos(b[moduleId]?.[index]||[],videos);setQuestions(qs.length?qs:null)}}).catch(()=>{if(live)setQuestions(null)});return ()=>{live=false}},[moduleId,index,videos.map(v=>v.title).join('|')]);
  const sim=simulatorKinds.includes(tool.kind);
  useEffect(()=>{if(questions&&right.size===questions.length&&(!sim||simDone))onSolved()},[right,simDone,questions]);
  if(questions===undefined)return <p className="small" role="status">Loading questions…</p>;
