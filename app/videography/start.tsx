@@ -39,7 +39,7 @@ const crafts:{id:string;n:string;title:string;blurb:string;photo:PhotoSlot;live?
  {id:'animation',n:'04',title:'Animation · 2D | 3D',blurb:'Bring characters and worlds to life.',photo:'home-animation'},
  {id:'motion-graphics',n:'05',title:'Motion Graphics',blurb:'Make text and shapes move with purpose.',photo:'home-motion'},
 ];
-// Home banner (site edits, page 1): five slides that change every 5 seconds. Pauses on hover and keyboard focus,
+// Home banner (site edits, page 1): five slides that change every 5 seconds. Pauses while a keyboard user is in it,
 // has a pause button, dots and arrows, and stays still for people who ask their device for reduced motion.
 // The second sentence of a headline is highlighted.
 const heroSlides:{eyebrow:string;head:[string,string?];line:string;photo:PhotoSlot}[]=[
@@ -54,7 +54,7 @@ function HeroSlides({actions}:{actions:React.ReactNode}){
  useEffect(()=>{const m=window.matchMedia('(prefers-reduced-motion: reduce)');setStill(m.matches||document.documentElement.classList.contains('ui-reduced-motion'))},[]);
  const n=heroSlides.length,go=(i:number)=>setAt((i+n)%n);
  useEffect(()=>{if(paused||held||still)return;const t=setTimeout(()=>go(at+1),5000);return ()=>clearTimeout(t)},[at,paused,held,still]);
- return <section className="hm-hero hm-slides" aria-roledescription="carousel" aria-label="About Framepath" onMouseEnter={()=>setHeld(true)} onMouseLeave={()=>setHeld(false)} onFocus={()=>setHeld(true)} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setHeld(false)}}>
+ return <section className="hm-hero hm-slides" aria-roledescription="carousel" aria-label="About Framepath" onFocus={e=>{if(e.target.matches(':focus-visible'))setHeld(true)}} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setHeld(false)}}>
   <div className="hm-slide-text">
    <div className="hm-slide-stack">{heroSlides.map((x,i)=>{const H=i===0?'h1':'h2';return <div key={i} className={'hm-slide'+(i===at?' on':'')} role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`} aria-hidden={i!==at}>
     <span className="kicker">{x.eyebrow}</span><H>{x.head[0]}{x.head[1]&&<> <em>{x.head[1]}</em></>}</H><p className="lede">{x.line}</p></div>})}</div>
