@@ -164,3 +164,13 @@ label:has(>input[type=radio]),label:has(>input[type=checkbox]){min-height:44px;d
 [data-slot=button].sg-danger:hover:not(:disabled){background:color-mix(in srgb,var(--destructive) 12%,transparent)!important}
 [data-slot=button][data-variant=destructive]{background:var(--destructive);color:#0b0b0b;border:0}
 [data-slot=button][data-variant=destructive]:hover:not(:disabled){background:#f48b81}
+/* Focus stands out on every surface (Make it Clear guide): a ring 3px away from the control, so it never
+   blends into a lime button; black on the cream header and on lime panels, where lime would be too faint. */
+:focus-visible{outline:3px solid var(--primary)!important;outline-offset:3px!important}
+.topbar :focus-visible,.hm-cta :focus-visible,.hm-craft.live :focus-visible{outline-color:#0b0b0b!important}
+/* Hover for every button style */
+[data-slot=button][data-variant=ghost]:hover:not(:disabled){background:#f2eee414}
+/* Button labels stay on one line */
+[data-slot=button]{white-space:nowrap}
+/* Red with a margin over AAA (7.6:1 on the page) */
+:root{--destructive:#f5887e}

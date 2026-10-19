@@ -134,6 +134,12 @@ From `FramePath Site Final Edits.pdf` and the functional audit of staging (18 Oc
 - **Destructive actions:** red, never the main button.
 - **Busy labels:** slow actions say what they are doing.
 
+**Buttons (Make it Clear's button guide)**
+- **Focus:** the ring sits 3px away from the control, so it shows on lime buttons. It turns black on the cream header and lime panels, where lime was only 1.16:1.
+- **Hover:** ghost buttons now have a hover state.
+- **Contrast:** every button and text label measured at WCAG AAA (7:1) on 9 pages. The red for delete actions is lightened for margin (7.6:1).
+- **One-line labels:** "Open resource" no longer wraps on phones. The plan page button says "Continue", with "Next up: module name" above it.
+
 **Not changed:** five older flows (the beginner session, the legacy onboarding and lesson pages) still say AI can't watch video. The current site doesn't link to them, so they were left alone.
 
 ## Not included

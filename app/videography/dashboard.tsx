@@ -145,7 +145,9 @@ function ProgrammeDashboard(){
   <section className="db-hero">
    <div className="db-hero-text"><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><PlanName p={p}/><p className="lede">{levelSummary[p.level]}</p>
     <p className="db-meta"><PlayCircle size={18}/>{done}/{mods.length} modules done · {p.schedule.totalHours} hours · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</p>
-    <div className="button-row">{nextIndex>=0&&<Go href={`/explore/${'video-'+p.level}/${nextIndex}`}>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}<ArrowRight size={18}/></Go>}
+    {/* One-line button labels: the module's name sits above the button. */}
+    {nextIndex>=0&&<p className="db-next">Next up: <strong>{moduleLesson(mods[nextIndex],projectLabel(p)).title}</strong></p>}
+    <div className="button-row">{nextIndex>=0&&<Go href={`/explore/${'video-'+p.level}/${nextIndex}`}>{done?'Continue':'Start'}<ArrowRight size={18}/></Go>}
      {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
      <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div>
    </div>
