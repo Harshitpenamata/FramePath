@@ -17,3 +17,10 @@ test('device filter: Android hides iPhone-only and Mac-only guides',()=>{
  assert.deepEqual(R.find(r=>r.id==='imovie-mac').devices,['desktop']);
  assert.ok(android.includes('android-screen'));
 });
+
+test('support: ID letters and ticket categories',()=>{
+ const S=load(path.resolve('app/support-shared.ts'));
+ assert.ok(S.ticketCategories.length>=6);assert.equal(new Set(S.ticketCategories.map(c=>c[0])).size,S.ticketCategories.length,'category ids are unique');
+ assert.equal(S.categoryLabel('nope'),'Something else');assert.equal(S.statusLabel('in_progress'),'In progress');
+ assert.ok(S.messageMin>=10&&S.messageMax<=4000&&S.ticketsPerDay>0);
+});

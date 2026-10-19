@@ -7,6 +7,7 @@ import {useLearning,Panel,Go,Badge,isExplore,Photo} from '../ui';
 import './dashboard.css';
 import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,defaultPlanTitle,courseId,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
+import {ReportProblem} from '../support';
 
 const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
 const stageColor:Record<string,string>={Ideas:'var(--vg-s1)',Planning:'var(--vg-s2)',Filming:'var(--vg-s3)',Editing:'var(--vg-s4)','Your pathway':'var(--vg-s5)','Final project':'var(--vg-s6)'};
@@ -78,7 +79,7 @@ function PlanName({p}:{p:Programme}){
  return <div className="db-name">
   {editing?<form className="db-rename" onSubmit={save}><label className="vg-field">Pathway name<input autoFocus value={value} maxLength={60} placeholder={defaultPlanTitle(p)} onChange={e=>setValue(e.target.value)}/></label>
     <div className="button-row"><Button type="submit" disabled={busy}>{busy?'Saving…':'Save name'}</Button><Button type="button" variant="outline" onClick={()=>setEditing(false)}>Cancel</Button></div><p className="small">Leave it empty to use “{defaultPlanTitle(p)}”.</p></form>
-   :<><h1>{p.name||p.primaryPathway}</h1><div className="db-id"><span>Course ID <strong>{courseId(p)}</strong></span><button type="button" className="text-link" onClick={()=>{setValue(p.name||'');setEditing(true)}}><Pencil size={14}/>Rename</button></div></>}
+   :<><h1>{p.name||p.primaryPathway}</h1><div className="db-id">{courseId(p)&&<span>Course ID <strong>{courseId(p)}</strong></span>}<button type="button" className="text-link" onClick={()=>{setValue(p.name||'');setEditing(true)}}><Pencil size={14}/>Rename</button></div></>}
  </div>;
 }
 
@@ -98,7 +99,7 @@ export function MyCourses(){
     return <div key={p.id} className={'db-plan'+(p.id===s.programme?.id?' active':'')}>
      <span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]}</span>
      <a className="db-plan-link" href={'/workspace/'+p.id}><strong className="display">{p.name||p.primaryPathway}</strong></a>
-     <span className="small db-plan-id">Course ID {courseId(p)}</span>
+     {courseId(p)&&<span className="small db-plan-id">Course ID {courseId(p)}</span>}
      <button type="button" className="db-plan-delete" aria-label={'Delete '+planTitle(p)} title="Delete this plan" onClick={()=>setDeleting(p)}><Trash2 size={16}/>Delete</button>
      <div className="vg-course-bar" aria-hidden="true"><span style={{width:Math.round(done/mods.length*100)+'%'}}/></div>
      <span className="small">{done} / {mods.length} modules · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</span>
@@ -188,7 +189,7 @@ function ProgrammeDashboard(){
   </section>}
 
   <ModuleList p={p}/>
-  <DeletePlan p={p}/>
+  <div className="db-foot-actions"><ReportProblem planId={p.id} variant="ghost" label="Report a problem with this plan"/><DeletePlan p={p}/></div>
  </div>;
 }
 

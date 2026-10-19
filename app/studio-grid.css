@@ -190,3 +190,34 @@ label:has(>input[type=radio]),label:has(>input[type=checkbox]){min-height:44px;d
 .sg-dialog .button-row{justify-content:flex-end;margin-top:var(--s2)}
 .sg-dialog{margin:auto;position:fixed;inset:0;height:fit-content;max-height:calc(100dvh - 32px);overflow:auto}
 .sg-choices label{margin:0}
+/* Support: Report a problem dialog, Help requests on My account, the admin queue */
+.sg-report{display:grid;gap:var(--s4)}
+.sg-report h2,.sg-dialog h2{display:flex;align-items:center;gap:var(--s2)}
+.sg-choices-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sg-choices-grid label{align-items:center;min-height:52px;padding:var(--s2) var(--s3);font-size:.9375rem}
+.sg-report textarea{width:100%;min-height:120px;padding:var(--s3);border:var(--soft-line);border-radius:14px;background:#0b0b0b;color:var(--foreground);font:inherit;resize:vertical}
+.sg-attached{margin:0;padding:var(--s3) var(--s4);border-radius:12px;background:#f2eee40d;color:var(--muted-foreground)}
+.sg-attached strong{color:var(--foreground)}
+.sg-link-button{display:inline-flex;align-items:center;min-height:48px;padding:0 var(--s5);border-radius:999px;background:var(--primary);color:#0b0b0b;font-weight:600;text-decoration:none}
+.sg-id{letter-spacing:.04em;color:var(--foreground)}
+.sg-help-requests{display:grid;gap:var(--s3)}
+.sg-help-requests .row{gap:var(--s3);flex-wrap:wrap;align-items:center}
+.sg-help-requests h2{margin:0}
+.sg-tickets{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.sg-tickets li{display:grid;gap:var(--s2);padding:var(--s4);border:var(--soft-line);border-radius:16px}
+.sg-tickets p{margin:0}
+.sg-status.open{background:#d6e86b26;color:var(--primary)}
+.sg-status.in_progress{background:#f2eee41f;color:var(--foreground)}
+.sg-status.resolved{background:#2a2a27;color:var(--muted-foreground)}
+.sg-reply{margin:0;padding:var(--s3);border-left:3px solid var(--primary);background:#d6e86b0f;color:var(--foreground)}
+.ls-support,.db-foot-actions{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--s3);margin-top:var(--s5)}
+.hp-report{display:grid;gap:var(--s3);justify-items:start;margin-top:var(--s4)}
+.hp-report p{margin:0}
+.admin-ticket{border-top:var(--soft-line);padding:var(--s3) 0}
+.admin-ticket[open]{display:grid;gap:var(--s3)}
+.admin-ticket label{display:grid;gap:var(--s1)}
+.admin-ticket textarea,.admin-ticket select{font:inherit;padding:var(--s2);border-radius:10px;border:var(--soft-line);background:#0b0b0b;color:var(--foreground)}
+.admin-ticket-context{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s2) var(--s4);margin:0}
+.admin-ticket-context dt{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-foreground)}
+.admin-ticket-context dd{margin:0}
+@media(max-width:600px){.sg-choices-grid{grid-template-columns:1fr}}

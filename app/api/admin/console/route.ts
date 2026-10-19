@@ -14,15 +14,18 @@ export async function GET(req:Request){try{
   return Response.json({comments:rows},noStore);
  }
  if(section==='users'){
-  const email=String(q.get('email')||'').trim().toLowerCase();if(email.length<3)return fail('Type at least 3 letters of an email.');
-  const rows:any[]=(await db().prepare('SELECT user_id,email,data,updated_at FROM learners WHERE email LIKE ? ORDER BY updated_at DESC LIMIT 10').bind('%'+email+'%').all()).results||[];
+  // Find by email, User ID (FP-10001) or Course ID (VID-B-1001), including Course IDs of deleted plans.
+  const email=String(q.get('email')||'').trim().toLowerCase(),key=email.toUpperCase();if(email.length<3)return fail('Type at least 3 letters of an email, or a User or Course ID.');
+  const rows:any[]=(/^FP-\d+$/.test(key)?await db().prepare('SELECT user_id,email,data,updated_at,public_id FROM learners WHERE public_id=?').bind(key).all()
+   :/^[A-Z]+-[A-Z]-\d+$/.test(key)?await db().prepare('SELECT l.user_id,l.email,l.data,l.updated_at,l.public_id FROM course_ids c JOIN learners l ON l.user_id=c.user_id WHERE c.course_id=?').bind(key).all()
+   :await db().prepare('SELECT user_id,email,data,updated_at,public_id FROM learners WHERE email LIKE ? ORDER BY updated_at DESC LIMIT 10').bind('%'+email+'%').all()).results||[];
   const users=await Promise.all(rows.map(async r=>{const s=JSON.parse(r.data||'{}');
    const [files,reviews,comments]=await Promise.all([
     db().prepare('SELECT COUNT(*) AS n,COALESCE(SUM(size),0) AS bytes FROM uploads WHERE user_id=?').bind(r.user_id).first(),
     db().prepare("SELECT COUNT(*) AS n FROM ai_jobs WHERE user_id=? AND kind='feedback' AND status='complete'").bind(r.user_id).first(),
     db().prepare("SELECT COUNT(*) AS n FROM portfolio_comments WHERE user_id=? AND status='visible'").bind(r.user_id).first()]);
-   return {email:r.email,userId:r.user_id,lastActive:r.updated_at,name:s.profile?.name||'',
-    plans:plansOf(s).map((p:any)=>({title:planTitle(p),level:p.level,mode:p.mode,start:p.schedule?.startDate,open:p.id===s.programme?.id})),
+   return {email:r.email,userId:r.user_id,publicId:r.public_id||'',lastActive:r.updated_at,name:s.profile?.name||'',
+    plans:plansOf(s).map((p:any)=>({courseId:p.courseId||'',title:planTitle(p),level:p.level,mode:p.mode,start:p.schedule?.startDate,open:p.id===s.programme?.id})),
     paid:{selfPaced:!!s.membership&&new Date(s.membership.expiresAt).getTime()>Date.now(),mentor:['paid','active'].includes(s.craft?.status)},
     handIns:(s.submissions||[]).filter((x:any)=>x.handIn).map((x:any)=>({id:x.id,key:x.key,createdAt:x.createdAt,files:(x.uploads||[]).map((f:any)=>({id:f.id,name:f.name,type:f.type})),url:x.url||''})),
     reviews:(reviews as any)?.n||0,comments:(comments as any)?.n||0,files:(files as any)?.n||0,bytes:(files as any)?.bytes||0,

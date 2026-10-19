@@ -301,8 +301,10 @@ test('plans: an optional own name and a VID-<level>-XXXX course ID',()=>{
  assert.equal(plain.name,undefined);assert.equal(P.planTitle(plain),'Videography · Travel');
  assert.equal(P.buildProgramme({...p,hoursPerWeek:20},p).name,'My travel films','updates keep the name');
  assert.equal(P.planName('x'.repeat(80)).length,60);
- assert.match(P.courseId(p),/^VID-[BIA]-\d{4}$/);
- assert.equal(P.courseId(p),P.courseId({...p}),'the ID is stable');
- assert.equal(P.courseId({...p,level:'intermediate'}).slice(0,6),'VID-I-','the letter follows the level');
- assert.equal(P.courseId({...p,level:'intermediate'}).slice(-4),P.courseId(p).slice(-4),'the digits stay');
+ // Course IDs come from the server (app/ids.ts) and survive every update: renames, new hours, moving up a level.
+ const withId={...p,courseId:'VID-B-1001'};
+ assert.equal(P.courseId(withId),'VID-B-1001');assert.equal(P.courseId(p),'','no ID until the server gives one');
+ assert.equal(P.buildProgramme({...withId,hoursPerWeek:20,name:'Renamed'},withId).courseId,'VID-B-1001','rename keeps the ID');
+ assert.equal(P.buildProgramme({...withId,level:'intermediate'},withId).courseId,'VID-B-1001','moving up keeps the ID');
+ assert.equal(P.buildProgramme({course:'videography',interests:['travel'],answers:answers(best),courseId:'VID-B-9'}).courseId,undefined,'a new plan cannot choose its own ID');
 });

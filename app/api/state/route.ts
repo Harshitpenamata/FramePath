@@ -25,6 +25,7 @@ function republish(s:any){if(!s.portfolio.token)return null;if(!s.portfolio.ids.
 import {lessonsFor,lessonNeeds,lessonsStatus,requireLessonsForTask,type LessonMark} from '../../videography/lessons';
 import {basicPaths,basicKeys,basicContext,curriculumVersion,journalTypes} from '../../beginner-curriculum';
 import {scoreAttempt,moduleInfo,sequenceFor,assignmentRubric} from '../../learning-rules';
+import {ensureUserId,ensureCourseId,retireCourseId} from '../../ids';
 import {identity,readState,saveState,usage,checkOrigin,safeText,safeUrl,mentorFor,requireLesson,activeExplore,craftEnrolled,db,errorResponse} from '../../service';
 export const dynamic='force-dynamic';
 export async function GET(req:Request){try{const user=await identity();await adoptReadyOnboarding(req);let data=await readState(user.userId);
@@ -32,7 +33,13 @@ export async function GET(req:Request){try{const user=await identity();await ado
  await db().prepare('UPDATE learners SET email=? WHERE user_id=? AND (email IS NULL OR email<>?)').bind(user.email||null,user.userId,user.email||'').run().catch(()=>{});
  // Accounts from before plans: give the plan an id and a plan list, once.
  if(!Array.isArray(data.state.plans)){setupPlans(data.state);data={state:data.state,revision:await saveState(user.userId,data.state,data.revision)}}
- return Response.json({...data,user:{name:user.fullName||'Learner',email:user.email},usage:await usage(user.userId,data.state)},{headers:{'Cache-Control':'no-store'}})}catch(e){return errorResponse(e)}}
+ // Support IDs: the learner's User ID, and a Course ID for any plan made before Course IDs existed.
+ const publicId=await ensureUserId(user.userId);let ided=false;
+ for(const p of data.state.plans||[])if(await ensureCourseId(user.userId,p))ided=true;
+ const open=data.state.programme&&(data.state.plans||[]).find((p:any)=>p.id===data.state.programme.id);
+ if(open&&data.state.programme.courseId!==open.courseId){data.state.programme.courseId=open.courseId;ided=true}
+ if(ided)data={state:data.state,revision:await saveState(user.userId,data.state,data.revision)};
+ return Response.json({...data,user:{name:user.fullName||'Learner',email:user.email,publicId},usage:await usage(user.userId,data.state)},{headers:{'Cache-Control':'no-store'}})}catch(e){return errorResponse(e)}}
 export async function POST(req:Request){try{
 checkOrigin(req);const user=await identity();const raw=await req.text();if(raw.length>24000)throw new Error('This submission is too long.');const b=JSON.parse(raw);const {state:s,revision}=await readState(user.userId);if(b.revision!==revision)throw Object.assign(new Error('Your learning changed in another tab. Refresh and try again.'),{status:409});
 const now=new Date().toISOString(),a=b.action,id=()=>crypto.randomUUID();let portfolioChange:any=null;let reflectionChange:any=null;
@@ -70,7 +77,7 @@ case 'whatsapp_save':{const phone=normalisePhone(b.phone);if(b.optIn===true&&!ph
 case 'consent_save':{if(!['adult','guardian'].includes(b.age))throw new Error('Choose your age group.');s.consent={age:b.age,at:now};break;}
 case 'programme_save':{if(['adult','guardian'].includes(b.programme?.age))s.consent={age:b.programme.age,at:now};if(!s.consent)throw new Error('Tell us your age group first.');
  if(s.plans.length>=maxPlans)throw new Error('You have '+maxPlans+' plans already. Delete one to make another.');
- const plan={...buildProgramme(b.programme,null),id:id()};s.plans.push(plan);openPlan(s,plan);break;}
+ const plan={...buildProgramme(b.programme,null),id:id()};await ensureCourseId(user.userId,plan);s.plans.push(plan);openPlan(s,plan);break;}
 case 'plan_rename':{const plan=s.plans.find((x:any)=>x.id===b.id);if(!plan)throw new Error('That plan no longer exists.');const name=planName(b.name);
  for(const x of [plan,s.programme])if(x?.id===plan.id){if(name)x.name=name;else delete x.name}break;}
 case 'plan_open':{const plan=s.plans.find((x:any)=>x.id===b.id);if(!plan)throw new Error('That plan no longer exists.');openPlan(s,plan);break;}
@@ -167,6 +174,7 @@ case 'plan_delete':{
  if(b.previous===true){s.profile=null;break}
  const plan=s.plans.find((x:any)=>x.id===(b.id||s.programme?.id));if(!plan)throw new Error('That plan no longer exists.');
  if(s.programme?.id===plan.id)openPlan(s,null);
+ await retireCourseId(user.userId,plan.id);
  s.plans=s.plans.filter((x:any)=>x.id!==plan.id);
  if(s.planProgress)delete s.planProgress[plan.id];
  if(b.keepWork!==true&&!s.plans.some((x:any)=>x.level===plan.level)){

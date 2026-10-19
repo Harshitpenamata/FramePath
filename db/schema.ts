@@ -1,6 +1,7 @@
 import {sqliteTable,text,integer,real,index,uniqueIndex,primaryKey} from 'drizzle-orm/sqlite-core';
 // email: the sign-in email, saved when the learner loads the app, so admins can find them.
-export const learners=sqliteTable('learners',{userId:text('user_id').primaryKey(),data:text('data').notNull(),revision:integer('revision').notNull().default(0),updatedAt:integer('updated_at').notNull(),email:text('email')},t=>[index('idx_learners_email').on(t.email)]);
+// public_id: the learner's User ID for support and tracking (FP-10001), given once and never changed.
+export const learners=sqliteTable('learners',{userId:text('user_id').primaryKey(),data:text('data').notNull(),revision:integer('revision').notNull().default(0),updatedAt:integer('updated_at').notNull(),email:text('email'),publicId:text('public_id')},t=>[index('idx_learners_email').on(t.email),uniqueIndex('idx_learners_public_id').on(t.publicId)]);
 export const uploads=sqliteTable('uploads',{id:text('id').primaryKey(),userId:text('user_id').notNull(),name:text('name').notNull(),type:text('type').notNull(),size:integer('size').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_uploads_owner').on(t.userId)]);
 export const aiJobs=sqliteTable('ai_jobs',{id:text('id').primaryKey(),userId:text('user_id').notNull(),scope:text('scope').notNull(),kind:text('kind').notNull(),status:text('status').notNull(),answer:text('answer'),createdAt:integer('created_at').notNull()},t=>[index('idx_ai_user_scope_date').on(t.userId,t.scope,t.createdAt),index('idx_ai_date').on(t.createdAt)]);
 // visibility: 'unlisted' (anyone with the link) or 'public' (also listed in the community gallery).
@@ -31,3 +32,14 @@ export const reviewFlags=sqliteTable('review_flags',{id:text('id').primaryKey(),
 // 'delivered', 'read', 'failed' or 'skipped'. cost_paise is Meta's estimated charge including GST.
 export const waMessages=sqliteTable('wa_messages',{id:text('id').primaryKey(),userId:text('user_id').notNull(),phone:text('phone').notNull(),template:text('template').notNull(),params:text('params').notNull(),body:text('body').notNull(),category:text('category').notNull(),status:text('status').notNull(),waId:text('wa_id'),error:text('error'),dedupeKey:text('dedupe_key'),costPaise:integer('cost_paise').notNull().default(0),createdAt:integer('created_at').notNull(),updatedAt:integer('updated_at').notNull()},t=>[uniqueIndex('idx_wa_dedupe').on(t.dedupeKey),index('idx_wa_user_date').on(t.userId,t.createdAt),index('idx_wa_status').on(t.status,t.createdAt),index('idx_wa_waid').on(t.waId)]);
 
+
+// IDs for support and tracking. Counters hand out the next number for each kind of ID (user, course, ticket),
+// so IDs are unique and never reused.
+export const idCounters=sqliteTable('id_counters',{name:text('name').primaryKey(),value:integer('value').notNull()});
+// Course IDs (VID-B-1001): one per plan, given when the plan is made and kept for good, even after a rename,
+// a move up a level or deletion (deleted_at), so an old ticket still points at the right plan.
+export const courseIds=sqliteTable('course_ids',{courseId:text('course_id').primaryKey(),userId:text('user_id').notNull(),planId:text('plan_id').notNull(),createdAt:integer('created_at').notNull(),deletedAt:integer('deleted_at')},t=>[index('idx_course_ids_user').on(t.userId),uniqueIndex('idx_course_ids_plan').on(t.userId,t.planId)]);
+// Support tickets (T-1001). Each one records who raised it and where they were: User ID, course ID, course,
+// pathway, plan name, level, module, lesson and page, so support knows the context without asking.
+// status: 'open', 'in_progress' or 'resolved'. reply is shown to the learner; note is for staff only.
+export const supportTickets=sqliteTable('support_tickets',{id:text('id').primaryKey(),userId:text('user_id').notNull(),publicUserId:text('public_user_id').notNull(),courseId:text('course_id'),planId:text('plan_id'),course:text('course'),pathway:text('pathway'),planName:text('plan_name'),level:text('level'),moduleKey:text('module_key'),moduleTitle:text('module_title'),lesson:integer('lesson'),page:text('page').notNull(),category:text('category').notNull(),message:text('message').notNull(),status:text('status').notNull(),reply:text('reply').notNull().default(''),note:text('note').notNull().default(''),context:text('context').notNull().default('{}'),createdAt:integer('created_at').notNull(),updatedAt:integer('updated_at').notNull()},t=>[index('idx_tickets_status').on(t.status,t.createdAt),index('idx_tickets_user').on(t.userId,t.createdAt),index('idx_tickets_course').on(t.courseId)]);
