@@ -1,6 +1,6 @@
 'use client';
 import React,{useEffect,useMemo,useState} from 'react';
-import {Check,PlayCircle,X} from 'lucide-react';
+import {ArrowRight,Check,PlayCircle,X} from 'lucide-react';
 import {LessonTool} from './tools';
 import {questionsForVideos,type Tool} from './lessons';
 
@@ -22,24 +22,28 @@ function Question({item,n,total,onRight}:{item:ReflectQuestion;n:number;total:nu
  const shown=useMemo(()=>order(item.options.length,item.q),[item]);
  const right=picked===0;
  return <div className="vg-tool">
-  <span className="small vg-q-count">Question {n} of {total}{item.video&&<> · <PlayCircle size={13}/> from “{item.video}”</>}</span>
   <p className="vg-tool-prompt">{item.q}</p>
-  <div className="vg-pick" role="group" aria-label={'Answers to question '+n}>{shown.map(i=><button type="button" key={i} aria-pressed={picked===i} disabled={right} className={picked===i?(i===0?'ok':'no'):''} onClick={()=>{setPicked(i);if(i===0)onRight()}}>{item.options[i][0]}</button>)}</div>
+  {item.video&&<span className="small vg-q-source"><PlayCircle size={13}/> From “{item.video}”</span>}
+  <div className="vg-pick" role="group" aria-label={'Answers to question '+n}>{shown.map((i,k)=><button type="button" key={i} aria-pressed={picked===i} disabled={right} className={picked===i?(i===0?'ok':'no'):''} onClick={()=>{setPicked(i);if(i===0)onRight()}}><span className="vg-letter" aria-hidden="true">{'ABCDE'[k]}</span><span>{item.options[i][0]}</span>{picked===i&&i===0&&<Check size={18} className="vg-pick-tick"/>}</button>)}</div>
   {picked!==null&&<p role="status" className={'vg-tool-result '+(right?'ok':'no')}>{right?<Check size={16}/>:<X size={16}/>}{right?item.why:(item.options[picked][1]||'Not quite.')+' Try another answer.'}</p>}
  </div>;
 }
 
 export function ReflectStep({moduleId,index,tool,videos,onSolved}:{moduleId:string;index:number;tool:Tool;videos:{title:string}[];onSolved:()=>void}){
  const [questions,setQuestions]=useState<ReflectQuestion[]|null|undefined>(undefined);
- const [right,setRight]=useState<Set<number>>(new Set()),[simDone,setSimDone]=useState(false);
- useEffect(()=>{let live=true;setQuestions(undefined);setRight(new Set());setSimDone(false);bankFor(moduleId).then(b=>{if(live){const qs=questionsForVideos(b[moduleId]?.[index]||[],videos);setQuestions(qs.length?qs:null)}}).catch(()=>{if(live)setQuestions(null)});return ()=>{live=false}},[moduleId,index,videos.map(v=>v.title).join('|')]);
+ const [right,setRight]=useState<Set<number>>(new Set()),[simDone,setSimDone]=useState(false),[at,setAt]=useState(0);
+ useEffect(()=>{let live=true;setQuestions(undefined);setRight(new Set());setSimDone(false);setAt(0);bankFor(moduleId).then(b=>{if(live){const qs=questionsForVideos(b[moduleId]?.[index]||[],videos);setQuestions(qs.length?qs:null)}}).catch(()=>{if(live)setQuestions(null)});return ()=>{live=false}},[moduleId,index,videos.map(v=>v.title).join('|')]);
  const sim=simulatorKinds.includes(tool.kind);
  useEffect(()=>{if(questions&&right.size===questions.length&&(!sim||simDone))onSolved()},[right,simDone,questions]);
  if(questions===undefined)return <p className="small" role="status">Loading questions…</p>;
  // Lessons without written questions keep their earlier practice tool.
  if(!questions)return <LessonTool tool={tool} onSolved={onSolved}/>;
  return <div className="vg-reflect">
-  {questions.map((q,i)=><Question key={moduleId+index+i} item={q} n={i+1} total={questions.length} onRight={()=>setRight(s=>new Set(s).add(i))}/>)}
-  {sim&&<><h4 className="vg-reflect-sim">Now try it</h4><LessonTool tool={tool} onSolved={()=>setSimDone(true)}/></>}
+  <div className="vg-quiz">
+   <div className="vg-quiz-top"><span className="eyebrow">QUESTION {at+1} OF {questions.length}</span><span className="vg-dots" aria-hidden="true">{questions.map((_,i)=><i key={i} className={right.has(i)?'done':i===at?'now':''}/>)}</span></div>
+   <Question key={moduleId+index+at} item={questions[at]} n={at+1} total={questions.length} onRight={()=>setRight(s=>new Set(s).add(at))}/>
+   {right.has(at)&&at<questions.length-1&&<button type="button" className="vg-next-q" onClick={()=>setAt(at+1)}>Next question<ArrowRight size={16}/></button>}
+  </div>
+  {sim&&right.size===questions.length&&<><h4 className="vg-reflect-sim">Now try it</h4><LessonTool tool={tool} onSolved={()=>setSimDone(true)}/></>}
  </div>;
 }

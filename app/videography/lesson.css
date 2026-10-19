@@ -65,3 +65,75 @@
 .ls-tags{display:flex;gap:var(--s2);flex-wrap:wrap}
 .ls-outcome{margin:0;color:var(--foreground);font-size:1.0625rem}
 @media(max-width:900px){.ls-head{grid-template-columns:1fr;gap:var(--s5)}}
+/* Lesson layout (site edits, item 6) */
+.vg-lesson-card{display:grid;gap:var(--s6);padding:var(--s6)}
+.vg-lesson-intro{display:grid;grid-template-columns:160px minmax(0,1fr) auto;gap:var(--s5);align-items:center;padding-bottom:var(--s5);border-bottom:var(--soft-line)}
+.vg-lesson-intro .vg-sketch{width:160px;aspect-ratio:4/3;object-fit:cover}
+.vg-lesson-about{display:grid;gap:var(--s2);padding-left:var(--s5);border-left:var(--soft-line)}
+.vg-lesson-about h2{font-size:var(--t-card);margin:0}
+.vg-lesson-about .vg-idea{margin:0}
+.vg-lesson-progress{display:grid;gap:var(--s2);justify-items:end;text-align:right}
+.vg-dots{display:flex;align-items:center;gap:0}
+.vg-dots i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--foreground)}
+.vg-dots i+i{margin-left:22px;position:relative}
+.vg-dots i+i::before{content:'';position:absolute;right:100%;top:50%;width:22px;height:1.5px;background:var(--muted-foreground)}
+.vg-dots i.done{background:var(--primary);border-color:var(--primary)}
+.vg-dots i.now{border-color:var(--primary)}
+.vg-lesson-part{display:grid;gap:var(--s4);border:0;padding:0}
+.vg-part-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4)}
+.vg-part-head h3{margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:var(--t-card);color:var(--primary)}
+.vg-part-head h3 span{color:var(--foreground);margin-right:var(--s1)}
+.vg-part-lede{margin:calc(var(--s2) * -1) 0 0}
+/* Watch: player, strip of videos, then the open video */
+.vg-video,.vg-video.two-col{display:grid;grid-template-columns:1fr;gap:0}
+.vg-video-frame{aspect-ratio:16/9}
+.vg-video-cover{width:100%;height:100%;background-size:cover;background-position:center}
+.vg-video-strip{list-style:none;margin:var(--s3) 0 0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);border:var(--soft-line);border-radius:16px;overflow:hidden}
+.vg-video-strip li+li{border-left:var(--soft-line)}
+.vg-video-strip button{width:100%;min-height:64px;display:flex;gap:var(--s3);align-items:flex-start;text-align:left;padding:var(--s3) var(--s4);background:transparent;border:0;border-bottom:2px solid transparent;color:var(--foreground);font:inherit;cursor:pointer}
+.vg-video-strip button:hover{background:#f2eee40d}
+.vg-video-strip button.active{border-bottom-color:var(--primary)}
+.vg-strip-n{color:var(--primary);font-weight:600;font-size:.875rem;min-width:20px}
+.vg-strip-t{display:grid;font-size:.9375rem;font-weight:600;line-height:1.3}
+.vg-strip-t small{font-weight:400;color:var(--muted-foreground);font-size:.8125rem}
+.vg-video-about{display:grid;gap:var(--s2);margin-top:var(--s4);justify-items:start}
+.vg-video-about h4{margin:0;font-size:1.25rem;font-weight:600;line-height:1.3}
+.vg-video-about .vg-video-focus{display:flex;gap:var(--s2);align-items:flex-start;margin:var(--s2) 0 0;color:var(--muted-foreground);padding-bottom:var(--s4);border-bottom:var(--soft-line);width:100%}
+.vg-video-about .vg-video-focus svg{flex:none;color:var(--primary);margin-top:3px}
+.vg-video .vg-video-links{margin-top:var(--s4)}
+/* Think it through: one question at a time */
+.vg-quiz{display:grid;gap:var(--s4);border:var(--line);border-radius:var(--radius);padding:var(--s5)}
+.vg-quiz-top{display:flex;justify-content:space-between;align-items:center;gap:var(--s4)}
+.vg-quiz .vg-tool{background:none;border:0;padding:0;gap:var(--s4)}
+.vg-quiz .vg-tool-prompt{font-size:1.25rem;line-height:1.35;color:var(--foreground)}
+.vg-q-source{display:flex;gap:6px;align-items:center;margin-top:calc(var(--s2) * -1)}
+.vg-quiz .vg-pick button{display:flex;gap:var(--s3);align-items:center;min-height:56px;padding:var(--s3) var(--s4);border:var(--soft-line);border-radius:14px;background:transparent;color:var(--foreground)}
+.vg-quiz .vg-pick button:hover:not(:disabled){border-color:var(--foreground)}
+.vg-quiz .vg-pick button.ok{border:1.5px solid var(--primary);background:#d6e86b14;box-shadow:none}
+.vg-quiz .vg-pick button.no{border-color:#f3a3a0}
+.vg-quiz .vg-pick button:disabled{opacity:1;cursor:default}
+.vg-letter{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--muted-foreground);font-size:.8125rem;font-weight:700}
+.vg-pick button.ok .vg-letter{background:var(--primary);border-color:var(--primary);color:#0b0b0b}
+.vg-pick-tick{margin-left:auto;color:var(--primary);flex:none}
+.vg-quiz .vg-tool-result{background:none;padding:0;color:var(--foreground)}
+.vg-quiz .vg-tool-result.ok svg{color:var(--primary)}
+.vg-next-q{justify-self:end;display:inline-flex;align-items:center;gap:var(--s2);min-height:44px;padding:0 var(--s2);background:none;border:0;color:var(--foreground);font:inherit;font-weight:600;cursor:pointer}
+.vg-next-q:hover{color:var(--primary)}
+/* The way on */
+.vg-lesson-foot{display:flex;justify-content:space-between;align-items:center;gap:var(--s4);flex-wrap:wrap;padding-top:var(--s5);border-top:var(--soft-line)}
+.vg-lesson-foot p{margin:0;display:flex;gap:6px;align-items:center}
+.vg-lesson-foot p.ok{color:var(--primary)}
+@media(max-width:760px){
+ .vg-lesson-card{padding:var(--s4);gap:var(--s5)}
+ .vg-lesson-intro{grid-template-columns:96px minmax(0,1fr)}
+ .vg-lesson-intro .vg-sketch{width:96px}
+ .vg-lesson-about{padding-left:0;border-left:0}
+ .vg-lesson-progress{grid-column:1/-1;justify-items:start;text-align:left}
+ .vg-video-strip{grid-auto-flow:row}
+ .vg-video-strip li+li{border-left:0;border-top:var(--soft-line)}
+ .vg-quiz{padding:var(--s4)}
+}
+.vg-video-about .vg-video-focus{border-bottom:0;padding-bottom:0}
+.vg-video-about{padding-bottom:var(--s4);border-bottom:var(--soft-line)}
+.vg-video-about .vg-watch-state{margin:0}
+@media(max-width:760px){.vg-play{width:56px!important;height:56px!important}}
