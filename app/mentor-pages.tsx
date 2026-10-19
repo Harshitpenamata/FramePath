@@ -1,4 +1,5 @@
 'use client';
+import './legacy-styles';
 import React,{useEffect,useState} from 'react';
 import {Button} from '@/components/ui/button';import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';import {Dialog,DialogContent,DialogTitle,DialogDescription,DialogTrigger} from '@/components/ui/dialog';import {Progress} from '@/components/ui/progress';
 import {Check,Calendar,MessageCircle,Users,Clock,BookOpen,FileCheck} from 'lucide-react';

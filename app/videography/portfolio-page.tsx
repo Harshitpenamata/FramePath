@@ -3,11 +3,12 @@ import React,{useEffect,useMemo,useState} from 'react';
 import {Copy,Flag,Globe2,Heart,Link2,Lock,Trash2} from 'lucide-react';
 import {toast} from 'sonner';
 import {Button} from '@/components/ui/button';
-import {useLearning,Panel,Go,Action,CheckField,PageHead,Gate} from '../ui';
+import {useLearning,Panel,Go,Action,CheckField,PageHead,Gate,Photo} from '../ui';
 import {levelNames,type Level} from './programme';
 import {Showcase,itemsFromPublic,itemsFromSubmissions,type ShowItem} from './showcase';
 import {useVideoReviews} from './work-folders';
 import './studio.css';
+import {WorkSwitch} from './my-work';
 import './community.css';
 
 // The portfolio page (resume-like), the community gallery, and likes and comments on shared pieces.
@@ -79,7 +80,7 @@ const visibilities=[
 
 // /my-portfolio: the learner's own portfolio page, with who can see it.
 export function MyPortfolio(){
- const {s,mutate}=useLearning();const reviews=useVideoReviews();
+ const {s,mutate,user,loaded}=useLearning();const reviews=useVideoReviews();
  const current=s.portfolio.token?(s.portfolio.visibility||'unlisted'):'private';
  const [choice,setChoice]=useState<string>(current),[consent,setConsent]=useState(false);
  useEffect(()=>{setChoice(current)},[current]);
@@ -87,7 +88,10 @@ export function MyPortfolio(){
  const link=s.portfolio.token?window.location.origin+'/p/'+s.portfolio.token:'';
  const needsConsent=current==='private'&&choice!=='private';
  async function apply(){if(choice==='private')await mutate('portfolio_unpublish');else await mutate('portfolio_publish',{consent:true,visibility:choice});setConsent(false)}
- return <Gate>
+ return <div className="st-page">
+ <WorkSwitch current="portfolio"/>
+ <div className={'st-hero'+(loaded&&!user?' split':'')}><PageHead eyebrow="PORTFOLIO" title="Your portfolio">Pick your best pieces in My work, then choose who can see them.</PageHead>{loaded&&!user&&<Gate>{null}</Gate>}</div>
+ {(!loaded||user)&&<Gate>
   <section className="cm-share st-card">
    <div><span className="kicker">WHO CAN SEE YOUR PORTFOLIO</span><h2>Sharing</h2></div>
    <div className="cm-vis" role="radiogroup" aria-label="Who can see your portfolio">{visibilities.map(v=><button type="button" role="radio" aria-checked={choice===v.id} key={v.id} className={choice===v.id?'selected':''} onClick={()=>setChoice(v.id)}><v.Icon size={18}/><strong>{v.label}</strong><span className="small">{v.text}</span></button>)}</div>
@@ -103,7 +107,8 @@ export function MyPortfolio(){
   </section>
   {items.length?<PortfolioResume name={s.profile?.name||'Your name'} title={s.portfolio.title||'My videography journey'} bio={s.portfolio.bio||''} items={items} social={!!s.portfolio.token}/>
    :<Panel className="empty"><h2>Your portfolio is empty</h2><p>Tick <strong>Portfolio</strong> on the hand-ins you want to show, then save in My Work.</p><Go href="/portfolio">Go to My Work</Go></Panel>}
- </Gate>;
+ </Gate>}
+ </div>;
 }
 
 // /community: pieces from public portfolios, newest first, with likes.
@@ -112,7 +117,7 @@ export function CommunityGallery(){
  useEffect(()=>{fetch('/api/community').then(async r=>{const d:any=await r.json();if(!r.ok)throw Error(d.error);setData(d)}).catch(e=>setError(e.message||'The community is unavailable right now.'))},[]);
  const items=useMemo(()=>data?data.portfolios.flatMap((p:any)=>itemsFromPublic(p.items,p.token).map(i=>({...i,owner:p.name}))):[],[data]);
  return <>
-  <PageHead eyebrow="COMMUNITY" title="What other learners are making.">Practice work from learners who chose to share their portfolio publicly. Open a piece to like it or leave a comment.</PageHead>
+  <section className="cm-hero"><PageHead eyebrow="COMMUNITY" title="What other learners are making.">Practice work from learners who chose to share their portfolio publicly. Open a piece to like it or leave a comment.</PageHead><Photo slot="community" className="cm-hero-photo"/></section>
   {error?<Panel><p>{error}</p></Panel>:!data?<Panel><p role="status">Loading the community…</p></Panel>
    :<Showcase items={items} social={socialFor}
      tileExtra={i=>{const n=data.likes[i.token+':'+i.id]||0;return n?<span className="cm-tile-likes"><Heart size={13}/>{n}</span>:null}}

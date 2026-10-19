@@ -28,6 +28,7 @@ export function AdminHealth(){
   </Panel>
   <WhatsAppAdmin/>
   <Storage/>
+  <Look/>
   <Panel><h2>Lesson videos</h2><p className="small">{d.videos.checked} of {d.videos.total} checked · last check {when(d.videos.lastCheck)}</p>
    <h3>Dead: hidden from lessons, replace these ({d.videos.dead.length})</h3>{list(d.videos.dead)}
    <h3>Failed one check, being watched ({d.videos.failingOnce.length})</h3>{list(d.videos.failingOnce)}
@@ -103,6 +104,17 @@ function FindLearner(){
    <p className="small">{u.handIns.length} hand-ins · {u.reviews} AI reviews · {u.comments} comments · {u.files} files, {mb(u.bytes)}{u.portfolio&&<> · portfolio <a className="text-link" href={'/p/'+u.portfolio.token} target="_blank" rel="noreferrer">{u.portfolio.visibility}</a></>}</p>
    {u.handIns.length>0&&<details><summary>Hand-ins</summary><ul className="admin-list">{u.handIns.map((h:any)=><li key={h.id}>{h.key} · {at(h.createdAt)}{h.files.map((f:any)=><span key={f.id}> · <a className="text-link" href={'/api/file/'+f.id} target="_blank" rel="noreferrer">{f.name}</a></span>)}{h.url&&<span> · <a className="text-link" href={h.url} target="_blank" rel="noreferrer">link</a></span>}</li>)}</ul></details>}
   </article>)}
+ </Panel>;
+}
+
+// Look: photos across the site in colour or black and white.
+function Look(){
+ const [v,setV]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ useEffect(()=>{fetch('/api/look').then(r=>r.json()).then((d:any)=>setV(d.photos)).catch(()=>{})},[]);
+ const choose=async(photos:string)=>{setBusy(true);setError('');try{const r=await fetch('/api/look',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({photos})});const d:any=await r.json();if(!r.ok)throw Error(d.error);setV(d.photos);document.documentElement.dataset.photos=d.photos;try{localStorage.setItem('fp-photos',d.photos)}catch{}}catch(e:any){setError(e.message)}finally{setBusy(false)}};
+ return <Panel><h2>Look</h2><p className="small">Photos across the site. Learners see a change within a minute.</p>
+  <div className="button-row">{([['bw','Black and white'],['colour','Colour']] as const).map(([k,l])=><Button key={k} variant={v===k?'default':'outline'} disabled={busy} aria-pressed={v===k} onClick={()=>choose(k)}>{l}</Button>)}</div>
+  {error&&<p className="small" role="alert">{error}</p>}
  </Panel>;
 }
 

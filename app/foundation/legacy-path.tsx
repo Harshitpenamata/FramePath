@@ -1,4 +1,5 @@
 'use client';
+import '../legacy-styles';
 import React from 'react';
 import {legacyPaths} from '../catalog';
 import {Go,PageHead,Panel,useLearning} from '../ui';
