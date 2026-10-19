@@ -1,13 +1,14 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,BookOpen,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
+import {ArrowLeft,ArrowRight,BookOpen,Gift,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import './lesson.css';
 import {useLearning,Go,Action,Panel,Badge,Gate,UploadField,Photo} from '../ui';
 import {blockingModule,moduleHref,moduleInfo} from '../learning-rules';
-import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
+import {parseVideoKey,moduleLesson,projectLabel,modulesFor,freeModuleCount,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
 import {LessonsTab,canPractise,taskLabel,useDeadVideos} from './module-context';
+import {moduleImages,imageSrcSet} from './media';
 import {waitingTips,lessonsFor,lessonsStatus,requireLessonsForTask} from './lessons';
 import {LevelClosure} from './closure';
 
@@ -35,6 +36,7 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
  const atLastLesson=!!lessonAt&&lessonAt.index>=lessonAt.count-1;
  const [reviewNow,setReviewNow]=useState('');
  const mods=modulesFor(parsed.level),lesson=moduleLesson(parsed.module,projectLabel(s.programme));
+ const image=moduleImages[parsed.module.id],lessonCount=lessonsFor(parsed.module.id).length;
  const last=parsed.index===mods.length-1;
  useEffect(()=>{const q=new URLSearchParams(window.location.search).get('tab')||'';const t=oldTabs[q]||q;if(['task','feedback'].includes(t)||t==='finish'&&last)setTab(t)},[]);
  // Watch, Make and Reflect each have their own address (?tab=watch|make|reflect) so they can be linked and shared.
@@ -46,7 +48,10 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
   <div className="breadcrumbs"><a href="/workspace">My courses</a><span>/</span><a href={'/workspace/'+own!.id}>{planTitle(own!)}</a></div>
   <Tabs value={tab} onValueChange={setTab}>
    <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons">Watch</TabsTrigger><TabsTrigger value="task">Make</TabsTrigger><TabsTrigger value="feedback">Reflect</TabsTrigger>{last&&<TabsTrigger value="finish">Finish</TabsTrigger>}</TabsList>
-   <div className="ls-head"><h1>{lesson.title}</h1><p className="ls-meta">Module {parsed.index+1} of {mods.length} <span>·</span> {parsed.module.hours} h <span>·</span> {parsed.module.stageLabel}</p></div>
+   {/* Module header (site edits, item 4): title on the left; the picture, tag and summary on the right. */}
+   <header className="ls-head"><div className="ls-title"><h1>{lesson.title}</h1><p className="ls-meta">Module {parsed.index+1} of {mods.length} <span>·</span> {parsed.module.hours} h <span>·</span> {parsed.module.stageLabel}</p></div>
+    <figure className="ls-hero">{image&&<img src={`${image.base}-960.webp`} srcSet={imageSrcSet(image)} sizes="(max-width: 900px) 100vw, 640px" alt={image.alt}/>}
+     <figcaption><span className="ls-tags"><Badge>{parsed.module.id} · {parsed.module.stageLabel}</Badge>{parsed.index<freeModuleCount&&<Badge tone="green"><Gift size={12}/> Free</Badge>}</span><p className="ls-outcome">{parsed.module.outcome}</p><span className="small">About {parsed.module.hours} hours{lessonCount>0&&` · ${lessonCount} lessons`}</span></figcaption></figure></header>
    <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}} onLesson={(index,count)=>setLessonAt({index,count})}/></TabsContent>
    <TabsContent value="task">{loaded&&<TaskTab moduleKey={key} onHandedIn={id=>{setReviewNow(id);setTab('feedback')}}/>}</TabsContent>
    <TabsContent value="feedback">{loaded&&<FeedbackTab moduleKey={key} requestFor={reviewNow} onFinish={last?()=>setTab('finish'):undefined}/>}</TabsContent>

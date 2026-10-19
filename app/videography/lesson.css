@@ -55,3 +55,13 @@
 .vg-make .vg-form-block{display:grid;gap:var(--s4)}
 .vg-make .vg-form-block>*{margin:0}
 .vg-make .upload-box>:first-child{margin-top:0}
+/* Module header (site edits, item 4): title left, picture and summary right */
+.ls-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:var(--s7);align-items:center;margin:0 0 var(--s7)}
+.ls-title{display:grid;gap:var(--s3)}
+.ls-title h1{margin:0}
+.ls-hero{margin:0;display:grid;gap:var(--s4)}
+.ls-hero img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:var(--radius);filter:var(--photo-filter)}
+.ls-hero figcaption{display:grid;gap:var(--s2);justify-items:start}
+.ls-tags{display:flex;gap:var(--s2);flex-wrap:wrap}
+.ls-outcome{margin:0;color:var(--foreground);font-size:1.0625rem}
+@media(max-width:900px){.ls-head{grid-template-columns:1fr;gap:var(--s5)}}

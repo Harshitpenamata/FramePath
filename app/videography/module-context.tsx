@@ -1,11 +1,11 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,BookOpen,Check,ExternalLink,Gift,ListChecks,LockKeyhole,Maximize2,Play,Puzzle,Target,X} from 'lucide-react';
+import {ArrowLeft,ArrowRight,BookOpen,Check,ExternalLink,ListChecks,LockKeyhole,Maximize2,Play,Puzzle,Target,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
-import {parseVideoKey,moduleLesson,projectLabel,freeModuleCount,isFreeModule,modulesFor,moduleKey as keyOf,type Pathway} from './programme';
-import {videosFor,moduleImages,imageSrcSet,type ModuleVideo} from './media';
+import {parseVideoKey,moduleLesson,projectLabel,isFreeModule,modulesFor,moduleKey as keyOf,type Pathway} from './programme';
+import {videosFor,type ModuleVideo} from './media';
 import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
 import {ReflectStep} from './reflect';
 
@@ -153,7 +153,7 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  if(!parsed)return null;
  const m=parsed.module,p=s.programme;
  const pathway:Pathway=p?.primaryPathway||'Documentary';
- const lesson=moduleLesson(m,projectLabel(p)),image=moduleImages[m.id];
+ const lesson=moduleLesson(m,projectLabel(p));
  const lessons=lessonsFor(m.id),open=canPractise(s,moduleKey);
  const item=lessons[Math.min(index,lessons.length-1)],at=Math.min(index,lessons.length-1);
  // Progress is saved to the account (signed-in learners on a plan that covers this module).
@@ -164,10 +164,6 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  const mark=marks[at],videos=lessonVideos(m.id,at,pathway);
  const go=(i:number)=>{setIndex(i);document.getElementById('vg-lesson-top')?.scrollIntoView({behavior:'smooth',block:'start'})};
  return <div className="vg-context">
-  <div className="vg-context-hero">
-   {image&&<img src={`${image.base}-960.webp`} srcSet={imageSrcSet(image)} sizes="(max-width: 760px) 100vw, 640px" alt={image.alt} loading="lazy"/>}
-   <div><Badge>{m.id} · {m.stageLabel}</Badge>{parsed.index<freeModuleCount&&<Badge tone="green"><Gift size={12}/> Free</Badge>}<p className="vg-outcome">{m.outcome}</p><span className="small">About {m.hours} hours{lessons.length>0&&` · ${lessons.length} lessons`}</span></div>
-  </div>
   <section><h3>Where this fits in making a video</h3><StageDiagram current={m.stageLabel} done={[...new Set(modulesFor(parsed.level).map(x=>x.stageLabel))].filter(st=>modulesFor(parsed.level).every((x,i)=>x.stageLabel!==st||!!s.progress?.[keyOf(parsed.level,i)]))}/></section>
   {m.stage==='selected-pathway'&&<p className="notice">Your course: <strong>{pathway}</strong>. Switch between your styles under My courses on your Journey page.</p>}
 
