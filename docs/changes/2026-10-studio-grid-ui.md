@@ -142,6 +142,17 @@ From `FramePath Site Final Edits.pdf` and the functional audit of staging (18 Oc
 
 **Not changed:** five older flows (the beginner session, the legacy onboarding and lesson pages) still say AI can't watch video. The current site doesn't link to them, so they were left alone.
 
+## User IDs, Course IDs and support tickets
+
+Full design: `docs/plans/2026-10-ids-and-support.md`.
+
+- **IDs:** every account gets a User ID (`FP-10001`) and every plan a Course ID (`VID-B-1001`). Both come from database counters, so they are unique and never reused. A Course ID never changes, even when a plan is renamed, moves up a level or is deleted.
+- **Report a problem:** the module, plan, Help and Account pages each have a "Report a problem" button. A ticket (`T-1001`) records the User ID, Course ID, pathway, plan name, level, module, lesson and page, so support doesn't have to ask.
+- **Learners:** they see their User ID, tickets and replies in My account → Help requests.
+- **Admins:** a support queue that finds tickets by `T-`, `FP-`, `VID-` or email, with status, a reply to the learner and a staff-only note. "Find a learner" also accepts User and Course IDs.
+- **Database migration `0007`** (adds tables and one column; changes nothing existing). **Run `npm run db:migrate:production` before deploying this to production.** Staging is already migrated.
+- **No alerts yet:** neither staff nor learners get an email or WhatsApp message when a ticket is raised or answered. Replies appear in My account.
+
 ## Not included
 
 - The "Get notified" buttons on the coming-soon crafts in the home mockup. There is nothing behind them yet.
