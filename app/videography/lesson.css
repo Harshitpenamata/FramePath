@@ -49,7 +49,7 @@
 .vg-lesson [data-slot=tabs-list]{margin-bottom:var(--s6)}
 .ls-head{gap:var(--s3);margin:0 0 var(--s7)}
 .vg-stage-steps{gap:var(--s2)}
-.vg-stage-steps li,.vg-lesson-steps button{min-height:40px;padding:0 var(--s4);display:inline-flex;align-items:center;gap:var(--s2);font-size:.875rem}
+.vg-stage-steps li{min-height:40px;}.vg-lesson-steps button{min-height:44px}.vg-stage-steps li,.vg-lesson-steps button{padding:0 var(--s4);display:inline-flex;align-items:center;gap:var(--s2);font-size:.875rem}
 .vg-lesson-steps{gap:var(--s2)}
 .vg-make .upload-box{padding:var(--s5)}
 .vg-make .vg-form-block{display:grid;gap:var(--s4)}

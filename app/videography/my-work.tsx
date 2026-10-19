@@ -80,7 +80,7 @@ function ModuleCard({level,index,reviews,ids,setIds,isNext}:{level:Level;index:n
     </div>
     <div className="st-handin-actions">
      <CheckField checked={ids.includes(p.id)} onChange={(on:boolean)=>toggle(p.id,on)}>Portfolio</CheckField>
-     <Button variant="ghost" size="sm" disabled={busy} aria-label="Remove from My Work" onClick={()=>removePiece(p.id)}><Trash2 size={14}/></Button>
+     <Button variant="ghost" size="sm" className="sg-danger" disabled={busy} aria-label="Remove from My Work" title="Remove from My Work" onClick={()=>removePiece(p.id)}><Trash2 size={14}/></Button>
     </div>
    </li>};
     return <><ul className="st-handins">{pieces.slice(0,2).map(row)}</ul>{pieces.length>2&&<details className="st-more"><summary>Earlier hand-ins ({pieces.length-2})</summary><ul className="st-handins">{pieces.slice(2).map(row)}</ul></details>}</>})()}

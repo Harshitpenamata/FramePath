@@ -140,3 +140,27 @@ main.page .two-col>.panel{margin:0}
 .panel:has(>details.sg-acc:only-child){border:0;padding:0;background:none}
 .panel:has(>details.sg-acc:only-child)>details.sg-acc{margin:0}
 main:focus{outline:none}
+/* Buttons (Apple HIG rules, in the Studio Grid look)
+   1. Every control has at least a 44 by 44 px target.  2. Every button visibly reacts when pressed.
+   3. Lime is for the main action only; a selected item uses a cream fill.  4. Destructive actions are red and never the main button. */
+:root{--destructive:#f0766b;--destructive-foreground:#0b0b0b}
+[data-slot=button],.sg-arrow,.rs-chips button,[data-slot=tabs-trigger],.vg-lesson-steps button,.vg-pick button,.vg-video-strip button,.hm-slide-dots button,.hm-slide-pause{transition:transform .08s ease,background-color .15s ease,border-color .15s ease,color .15s ease}
+:is([data-slot=button],.sg-arrow,.rs-chips button,[data-slot=tabs-trigger],.vg-lesson-steps button,.vg-pick button,.hm-slide-pause,.vg-next-q):active:not(:disabled){transform:scale(.97)}
+[data-slot=button][data-variant=default]:active:not(:disabled){background:#c4d65a}
+[data-slot=button][data-variant=outline]:active:not(:disabled),[data-slot=button][data-variant=ghost]:active:not(:disabled){background:#f2eee41f}
+/* Targets */
+[data-slot=checkbox]{position:relative}
+[data-slot=checkbox]::after{content:'';position:absolute;inset:-14px}
+.check-row{min-height:44px;align-items:center}
+.check-row label{cursor:pointer;padding-block:var(--s2)}
+details>summary{min-height:44px;display:flex;align-items:center}
+select,input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]){min-height:44px}
+label:has(>input[type=radio]),label:has(>input[type=checkbox]){min-height:44px;display:flex;align-items:center;gap:var(--s3)}
+.vg-lesson-steps button{min-height:44px}
+/* Selected is cream; lime stays for actions */
+.vg-lesson-steps button.current{background:var(--foreground)!important;border-color:var(--foreground)!important;color:#0b0b0b!important}
+/* Destructive */
+[data-slot=button].sg-danger{color:var(--destructive)!important;border-color:color-mix(in srgb,var(--destructive) 60%,transparent)!important}
+[data-slot=button].sg-danger:hover:not(:disabled){background:color-mix(in srgb,var(--destructive) 12%,transparent)!important}
+[data-slot=button][data-variant=destructive]{background:var(--destructive);color:#0b0b0b;border:0}
+[data-slot=button][data-variant=destructive]:hover:not(:disabled){background:#f48b81}

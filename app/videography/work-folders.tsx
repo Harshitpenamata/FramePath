@@ -73,7 +73,7 @@ export function WorkFolders({ids,setIds,keys:only}:{ids:string[];setIds:(fn:(pre
     {(p.uploads?.length>0||p.url)&&<ul>{p.uploads?.map((f:any)=><li key={f.id}><a className="text-link" href={'/api/file/'+f.id} target="_blank" rel="noreferrer">{f.name}</a><Button variant="ghost" size="sm" disabled={busy} aria-label={'Remove '+f.name} onClick={()=>removeFile(p.id,f.id)}><X size={14}/></Button></li>)}{p.url&&<li><a className="text-link" href={p.url} target="_blank" rel="noreferrer">Watch video link</a></li>}</ul>}
     {reviews?.[p.id]?<PieceReview review={reviews[p.id]} open={from===key&&p===pieces[0]}/>:reviews&&<p className="small">No AI feedback yet. <a className="text-link" href={moduleHref(key)+'?tab=feedback'}>Get it in Reflect</a></p>}
    </>:<SubmissionCard sub={p}/>}
-   <div><Button variant="outline" size="sm" disabled={busy} onClick={()=>removePiece(p.id)}><Trash2 size={14}/>Remove from My Work</Button></div>
+   <div><Button variant="outline" size="sm" className="sg-danger" disabled={busy} onClick={()=>removePiece(p.id)}><Trash2 size={14}/>Remove from My Work</Button></div>
   </div>)}</div>
  </details></Panel>})}</div>;
 }

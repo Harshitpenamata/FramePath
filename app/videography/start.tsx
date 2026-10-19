@@ -195,7 +195,7 @@ export function ProgrammeStart(){
    </dl>
    {!user&&loaded&&<p className="notice">Sign in with Google to save your plan. Until then, your answers stay on this device.</p>}
    {error&&<p role="alert" className="notice">{error}</p>}
-   <div className="button-row"><Button variant="outline" onClick={()=>setStep(2)}><ArrowLeft size={16}/>Back</Button><Button disabled={busy||!loaded} onClick={create}>{user?'Create my plan':'Sign in with Google and create'}<ArrowRight size={16}/></Button></div>
+   <div className="button-row"><Button variant="outline" onClick={()=>setStep(2)}><ArrowLeft size={16}/>Back</Button><Button disabled={busy||!loaded} onClick={create}>{busy?'Creating your plan…':user?'Create my plan':'Sign in with Google and create'}<ArrowRight size={16}/></Button></div>
   </Panel>}
   {step===3&&!result&&<Panel><p>Finish the level check first.</p><Button onClick={()=>setStep(1)}>Open level check</Button></Panel>}
   </div>

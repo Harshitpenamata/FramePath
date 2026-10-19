@@ -77,7 +77,7 @@ function PlanName({p}:{p:Programme}){
  const save=async(e:React.FormEvent)=>{e.preventDefault();if(await mutate('plan_rename',{id:p.id,name:value}))setEditing(false)};
  return <div className="db-name">
   {editing?<form className="db-rename" onSubmit={save}><label className="vg-field">Pathway name<input autoFocus value={value} maxLength={60} placeholder={defaultPlanTitle(p)} onChange={e=>setValue(e.target.value)}/></label>
-    <div className="button-row"><Button type="submit" disabled={busy}>Save name</Button><Button type="button" variant="outline" onClick={()=>setEditing(false)}>Cancel</Button></div><p className="small">Leave it empty to use “{defaultPlanTitle(p)}”.</p></form>
+    <div className="button-row"><Button type="submit" disabled={busy}>{busy?'Saving…':'Save name'}</Button><Button type="button" variant="outline" onClick={()=>setEditing(false)}>Cancel</Button></div><p className="small">Leave it empty to use “{defaultPlanTitle(p)}”.</p></form>
    :<><h1>{p.name||p.primaryPathway}</h1><div className="db-id"><span>Course ID <strong>{courseId(p)}</strong></span><button type="button" className="text-link" onClick={()=>{setValue(p.name||'');setEditing(true)}}><Pencil size={14}/>Rename</button></div></>}
  </div>;
 }
@@ -216,5 +216,5 @@ function DeletePlan({id}:{id:string}){
    <div><strong>Delete the plan and its work</strong><p className="small">Also removes this level’s hand-ins and lesson progress, unless another plan uses the same level. Can’t be undone.</p><Button variant="destructive" disabled={busy} onClick={()=>run(false)}>Delete plan and work</Button></div>
   </div>
   <Button variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button>
- </>:<Button variant="ghost" className="vg-delete-open" onClick={()=>setOpen(true)}><Trash2 size={16}/>Delete this plan</Button>}</section>;
+ </>:<Button variant="ghost" className="vg-delete-open sg-danger" onClick={()=>setOpen(true)}><Trash2 size={16}/>Delete this plan</Button>}</section>;
 }
