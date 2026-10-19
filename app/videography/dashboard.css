@@ -91,3 +91,12 @@
 .db-plan-delete:hover,.db-plan-delete:focus-visible{color:var(--destructive);border-color:color-mix(in srgb,var(--destructive) 60%,transparent)}
 .db-plan .kicker{padding-right:104px}
 .db-plan-id{margin-top:calc(var(--s2) * -1);letter-spacing:.02em}
+/* Stage strip: progress only (finished = lime fill, current = lime outline, upcoming = quiet) */
+.db-stages li{display:flex;align-items:center;gap:14px;padding:22px 20px;min-height:84px;color:var(--muted-foreground)}
+.db-stages li strong{color:var(--foreground)}
+.db-stages li.done{background:var(--primary);color:#0b0b0b}
+.db-stages li.done strong,.db-stages li.done .display{color:#0b0b0b}
+.db-stages li.now{box-shadow:inset 0 0 0 2px var(--primary);color:var(--foreground)}
+.db-stages li:not(.done):not(.now) .display{color:var(--muted-foreground)}
+.db-stage-mark{margin-left:auto;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#0b0b0b;color:var(--primary)}
+.db-stage-now{margin-left:auto;padding:4px 10px;border-radius:999px;background:var(--primary);color:#0b0b0b;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}

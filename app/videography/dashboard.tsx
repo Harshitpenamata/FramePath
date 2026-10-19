@@ -157,7 +157,12 @@ function ProgrammeDashboard(){
    </div>
    <Photo slot="project" className="db-hero-photo"/>
   </section>
-  <ol className="db-stages" aria-label="Stages">{stageOrder.map((st,i)=>{const ms=mods.map((m,k)=>({m,k})).filter(x=>x.m.stageLabel===st);if(!ms.length)return null;const all=ms.every(x=>s.progress?.[moduleKey(p.level,x.k)]);return <li key={st} className={all?'done':''}><a href={`/explore/video-${p.level}/${ms.find(x=>!s.progress?.[moduleKey(p.level,x.k)])?.k??ms[0].k}`}><span className="display">{String(i+1).padStart(2,'0')}</span><strong>{st}</strong><span className="sg-arrow">{all?<Check size={16}/>:<ArrowRight size={16}/>}</span></a></li>})}</ol>
+  {/* Progress, not navigation: finished stages are filled, the current one is outlined, the rest wait. */}
+  {(()=>{const rows=stageOrder.map(st=>{const ms=mods.map((m,k)=>({m,k})).filter(x=>x.m.stageLabel===st);return {st,ms,all:ms.length>0&&ms.every(x=>s.progress?.[moduleKey(p.level,x.k)])}}).filter(r=>r.ms.length);
+   const now=rows.findIndex(r=>!r.all);
+   return <ol className="db-stages" aria-label="Your progress through the stages">{rows.map((r,i)=><li key={r.st} className={r.all?'done':i===now?'now':''} aria-current={i===now?'step':undefined}>
+    <span className="display">{String(i+1).padStart(2,'0')}</span><strong>{r.st}</strong>
+    {r.all?<span className="db-stage-mark"><Check size={16}/><span className="sr-only">Finished</span></span>:i===now?<span className="db-stage-now">Now</span>:null}</li>)}</ol>})()}
 
   <details className="sg-acc" open><summary><Target size={20}/>What you’ll be able to do</summary><PathwayOutcome p={p}/></details>
   <details className="sg-acc"><summary><BookOpen size={20}/>Your learning plan</summary><p>{overview(p)}</p><PathwayInfographic p={p}/></details>
