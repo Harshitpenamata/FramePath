@@ -82,3 +82,12 @@
 .db-rename .vg-field input{font-size:1.125rem}
 .db-next{margin:0;color:var(--muted-foreground)}
 .db-next strong{color:var(--foreground);font-weight:600}
+/* Plan cards: the whole card opens the plan; Delete sits above the link */
+.db-plan{position:relative}
+.db-plan-link{color:inherit;text-decoration:none}
+.db-plan-link::after{content:'';position:absolute;inset:0;border-radius:inherit}
+.db-plan:has(.db-plan-link:hover){border-color:var(--foreground)}
+.db-plan-delete{position:absolute;z-index:1;top:var(--s4);right:var(--s4);display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 var(--s3);border:1px solid transparent;border-radius:999px;background:none;color:var(--muted-foreground);font:inherit;font-size:.875rem;font-weight:600;cursor:pointer}
+.db-plan-delete:hover,.db-plan-delete:focus-visible{color:var(--destructive);border-color:color-mix(in srgb,var(--destructive) 60%,transparent)}
+.db-plan .kicker{padding-right:104px}
+.db-plan-id{margin-top:calc(var(--s2) * -1);letter-spacing:.02em}

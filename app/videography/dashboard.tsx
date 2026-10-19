@@ -1,6 +1,6 @@
 'use client';
 import React,{useState} from 'react';
-import {ArrowRight,BookOpen,Pencil,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
+import {ArrowRight,BookOpen,Pencil,TriangleAlert,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {toast} from 'sonner';
 import {useLearning,Panel,Go,Badge,isExplore,Photo} from '../ui';
@@ -84,6 +84,7 @@ function PlanName({p}:{p:Programme}){
 
 export function MyCourses(){
  const {s,user,loaded,mutate,busy}=useLearning();
+ const [deleting,setDeleting]=useState<Programme|null>(null);
  if(!loaded)return <Panel><p role="status">Opening your courses…</p></Panel>;
  const plans=plansOf(s);
  return <div className="db">
@@ -94,18 +95,21 @@ export function MyCourses(){
    </section>
   :<div className="db-plans">
    {plans.map(p=>{const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]||s.planProgress?.[p.id!]?.[moduleKey(p.level,i)]).length;
-    return <a key={p.id} className={'db-plan'+(p.id===s.programme?.id?' active':'')} href={'/workspace/'+p.id}>
-     <span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} · {courseId(p)}</span>
-     <strong className="display">{p.name||p.primaryPathway}</strong>
+    return <div key={p.id} className={'db-plan'+(p.id===s.programme?.id?' active':'')}>
+     <span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]}</span>
+     <a className="db-plan-link" href={'/workspace/'+p.id}><strong className="display">{p.name||p.primaryPathway}</strong></a>
+     <span className="small db-plan-id">Course ID {courseId(p)}</span>
+     <button type="button" className="db-plan-delete" aria-label={'Delete '+planTitle(p)} title="Delete this plan" onClick={()=>setDeleting(p)}><Trash2 size={16}/>Delete</button>
      <div className="vg-course-bar" aria-hidden="true"><span style={{width:Math.round(done/mods.length*100)+'%'}}/></div>
      <span className="small">{done} / {mods.length} modules · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</span>
-     <span className="db-plan-foot">{done?'Continue':'Open'}<span className="sg-arrow"><ArrowRight size={16}/></span></span>
-    </a>})}
+     <span className="db-plan-foot" aria-hidden="true">{done?'Continue':'Open'}<span className="sg-arrow"><ArrowRight size={16}/></span></span>
+    </div>})}
    {plans.length<maxPlans?<a className="db-plan add" href="/#crafts"><Plus size={26}/><strong>Make another plan</strong><span className="small">Pick a course, answer a short level check and set your time.</span></a>
-    :<div className="db-plan add"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one from its page to make another.</span></div>}
+    :<div className="db-plan add"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one to make another.</span></div>}
   </div>}
   {!plans.length&&s.profile&&<div className="button-row"><Go href="/workspace/previous" outline>Open my previous learning</Go><Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button></div>}
   {!user&&plans.length>0&&<p className="small">Sign in to keep your plans and work.</p>}
+  {deleting&&<DeletePlanDialog p={deleting} open onClose={()=>setDeleting(null)}/>}
  </div>;
 }
 
@@ -179,7 +183,7 @@ function ProgrammeDashboard(){
   </section>}
 
   <ModuleList p={p}/>
-  <DeletePlan id={p.id!}/>
+  <DeletePlan p={p}/>
  </div>;
 }
 
@@ -202,21 +206,26 @@ export function ModuleList({p,level}:{p?:Programme;level?:Level}){
 }
 
 // Delete this plan: keep the work (hand-ins, feedback and progress stay) or delete the plan's work too.
-function DeletePlan({id}:{id:string}){
+// Deleting a plan (from My courses or the plan's page): a warning dialog with two choices. Keeping the work
+// leaves hand-ins, feedback and progress for a new plan at the same level; deleting the work can't be undone.
+function DeletePlanDialog({p,open,onClose,onDeleted}:{p:Programme;open:boolean;onClose:()=>void;onDeleted?:()=>void}){
  const {mutate,busy}=useLearning();
+ const ref=React.useRef<HTMLDialogElement>(null);
+ const [keepWork,setKeepWork]=useState(true);
+ React.useEffect(()=>{const d=ref.current;if(!d)return;if(open&&!d.open){setKeepWork(true);d.showModal()}else if(!open&&d.open)d.close()},[open]);
+ const run=async()=>{if(await mutate('plan_delete',{id:p.id,keepWork})){onClose();onDeleted?.()}};
+ return <dialog ref={ref} className="sg-dialog" aria-labelledby={'del-'+p.id} onClose={onClose} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
+  <h2 id={'del-'+p.id}>Delete “{planTitle(p)}”?</h2>
+  <p className="sg-warning" role="alert"><TriangleAlert size={20}/><span><strong>This can’t be undone.</strong> Deleting a plan is permanent, and you could lose your progress.</span></p>
+  <fieldset className="sg-choices" aria-label="What to delete">
+   <label><input type="radio" name={'del-mode-'+p.id} checked={keepWork} onChange={()=>setKeepWork(true)}/><span><strong>Delete the plan, keep my work</strong><span className="small">Your hand-ins, feedback and progress stay, so a new plan at this level picks up where you are.</span></span></label>
+   <label><input type="radio" name={'del-mode-'+p.id} checked={!keepWork} onChange={()=>setKeepWork(false)}/><span><strong>Delete the plan and its work</strong><span className="small">Also removes this level’s hand-ins, feedback and lesson progress, unless another of your plans is at the same level.</span></span></label>
+  </fieldset>
+  <div className="button-row"><Button variant="outline" onClick={onClose} disabled={busy}>Cancel</Button><Button variant="destructive" onClick={run} disabled={busy}>{busy?'Deleting…':keepWork?'Delete plan':'Delete plan and work'}</Button></div>
+ </dialog>;
+}
+function DeletePlan({p}:{p:Programme}){
  const [open,setOpen]=useState(false);
- async function run(keepWork:boolean){
-  const ask=keepWork?'Delete this plan? Your hand-ins, feedback and progress stay.'
-   :'Delete this plan and its work? Hand-ins and lesson progress for this level are removed, unless another of your plans is at the same level. This can’t be undone.';
-  if(!window.confirm(ask))return;
-  if(await mutate('plan_delete',{id,keepWork}))window.location.assign('/workspace');
- }
- return <section className="vg-delete-plan">{open?<>
-  <h2>Delete this plan</h2>
-  <div className="vg-delete-options">
-   <div><strong>Delete the plan, keep my work</strong><p className="small">The plan goes. Hand-ins, feedback and progress stay, so a new plan at this level picks up where you are.</p><Button variant="outline" disabled={busy} onClick={()=>run(true)}>Delete plan only</Button></div>
-   <div><strong>Delete the plan and its work</strong><p className="small">Also removes this level’s hand-ins and lesson progress, unless another plan uses the same level. Can’t be undone.</p><Button variant="destructive" disabled={busy} onClick={()=>run(false)}>Delete plan and work</Button></div>
-  </div>
-  <Button variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button>
- </>:<Button variant="ghost" className="vg-delete-open sg-danger" onClick={()=>setOpen(true)}><Trash2 size={16}/>Delete this plan</Button>}</section>;
+ return <section className="vg-delete-plan"><Button variant="ghost" className="vg-delete-open sg-danger" onClick={()=>setOpen(true)}><Trash2 size={16}/>Delete this plan</Button>
+  <DeletePlanDialog p={p} open={open} onClose={()=>setOpen(false)} onDeleted={()=>window.location.assign('/workspace')}/></section>;
 }
