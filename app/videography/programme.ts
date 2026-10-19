@@ -208,7 +208,7 @@ export function schedule(level:Level,hoursPerWeek?:number,startDate?:string,days
  return {level,totalHours:r.hours,hoursPerWeek:hours,recommendedHoursPerWeek:r.hoursPerWeek,weeks,startDate:start,endDate:addDays(start,weeks*7-1),minutesPerDay:Math.round(hours*60/days/5)*5,daysPerWeek:days};
 }
 
-export type Programme={version:1;course:'videography';id?:string;interests:string[];primaryPathway:Pathway;assessment:Assessment;level:Level;schedule:Schedule;mode:Mode|null;createdAt:string;updatedAt:string};
+export type Programme={version:1;course:'videography';id?:string;name?:string;interests:string[];primaryPathway:Pathway;assessment:Assessment;level:Level;schedule:Schedule;mode:Mode|null;createdAt:string;updatedAt:string};
 // Validates client input and recomputes every derived value server-side.
 export function buildProgramme(input:any,previous?:Programme|null):Programme{
  if(input?.course!=='videography')throw new Error('Only Videography is open right now.');
@@ -224,7 +224,9 @@ export function buildProgramme(input:any,previous?:Programme|null):Programme{
  const keptStart=previous&&input.startDate===previous.schedule.startDate;
  const start=keptStart||typeof input.startDate==='string'&&input.startDate>=today()&&input.startDate<=addDays(today(),180)?input.startDate:today();
  const now=new Date().toISOString();
- return {version:1,course:'videography',interests:ids as string[],primaryPathway:active,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self'].includes(input.mode)?input.mode:previous?.mode==='mentor'?null:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
+ // The learner's own name for the plan (optional); updates keep it unless a new one is sent.
+ const name=input.name!==undefined?planName(input.name):previous?.name;
+ return {version:1,course:'videography',...(name?{name}:{}),interests:ids as string[],primaryPathway:active,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self'].includes(input.mode)?input.mode:previous?.mode==='mentor'?null:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
 }
 
 // ---- Modules as lesson paths ----
@@ -250,7 +252,13 @@ export function moduleDueDates(p:Programme){let hours=0;return modulesFor(p.leve
 export const maxPlans=3;
 export function plansOf(s:any):Programme[]{return Array.isArray(s?.plans)?s.plans:s?.programme?[s.programme]:[]}
 export const courseNames:Record<string,string>={videography:'Videography'};
-export const planTitle=(p:Programme)=>(courseNames[p.course]||p.course)+' · '+p.primaryPathway;
+// A plan's name: the learner's own, or the course and pathway. Names are one line, up to 60 characters.
+export const planName=(v:any)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,60);
+export const defaultPlanTitle=(p:Programme)=>(courseNames[p.course]||p.course)+' · '+p.primaryPathway;
+export const planTitle=(p:Programme)=>p.name||defaultPlanTitle(p);
+// Course ID, shown on the plan: course, level letter and four digits from the plan's id, e.g. VID-B-4821.
+// The digits stay the same for the life of the plan; the letter follows the level when a learner moves up.
+export function courseId(p:Programme){let h=2166136261;for(const c of p.id||p.createdAt)h=Math.imul(h^c.charCodeAt(0),16777619);return `VID-${p.level[0].toUpperCase()}-${1000+(h>>>0)%9000}`}
 // The style project module of each level (B13, I13, A13): its hand-in is kept separately for each course.
 export const styleModuleKeys=levels.flatMap(l=>modulesFor(l).flatMap((m,i)=>m.stage==='selected-pathway'?[moduleKey(l,i)]:[]));
 // Converts a curriculum module into the shared Lesson shape used by assignments and scoring.

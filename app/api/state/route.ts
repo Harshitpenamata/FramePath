@@ -9,7 +9,7 @@ import {normalizeProfile} from '../../profile-validation';
 import {buildPersonalPlan,isPersonalized} from '../../personalization';
 import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../selfpaced-curriculum';
 import {validateReview} from '../../assignment-review';
-import {buildProgramme,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,maxPlans,styleModuleKeys,type Level} from '../../videography/programme';
+import {buildProgramme,planName,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,maxPlans,styleModuleKeys,type Level} from '../../videography/programme';
 // Public portfolio data: only the pieces the learner picked to share.
 // What a shared portfolio shows. File names stay private; only each file's id and type are shared, so images and videos can be shown.
 function publicPortfolio(s:any){const items=s.portfolio.ids.map((x:string)=>s.submissions.find((v:any)=>v.id===x)).filter(Boolean).map((v:any)=>({id:v.id,key:v.key,moduleId:v.moduleId||'',createdAt:v.createdAt,notes:v.notes,answer:v.answer||'',url:v.url,uploadId:v.uploadId,uploadIds:v.uploadIds||[],uploads:(v.uploads||[]).map((f:any)=>({id:f.id,type:f.type})),status:v.status,total:v.total}));return JSON.stringify({title:s.portfolio.title,bio:s.portfolio.bio,name:s.profile?.name||'Framepath learner',items,simulatedReviews:true})}
@@ -71,6 +71,8 @@ case 'consent_save':{if(!['adult','guardian'].includes(b.age))throw new Error('C
 case 'programme_save':{if(['adult','guardian'].includes(b.programme?.age))s.consent={age:b.programme.age,at:now};if(!s.consent)throw new Error('Tell us your age group first.');
  if(s.plans.length>=maxPlans)throw new Error('You have '+maxPlans+' plans already. Delete one to make another.');
  const plan={...buildProgramme(b.programme,null),id:id()};s.plans.push(plan);openPlan(s,plan);break;}
+case 'plan_rename':{const plan=s.plans.find((x:any)=>x.id===b.id);if(!plan)throw new Error('That plan no longer exists.');const name=planName(b.name);
+ for(const x of [plan,s.programme])if(x?.id===plan.id){if(name)x.name=name;else delete x.name}break;}
 case 'plan_open':{const plan=s.plans.find((x:any)=>x.id===b.id);if(!plan)throw new Error('That plan no longer exists.');openPlan(s,plan);break;}
 case 'programme_update':{if(!s.programme)throw new Error('Make your plan first.');const u=b.update||{};
  // Moving up a level: only to the next one, once every module of the current level is handed in. The new plan starts today.

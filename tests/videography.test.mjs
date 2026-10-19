@@ -292,3 +292,17 @@ test('audit F05: no Reflect question names a video the lesson does not show, in 
   }
  });
 });
+
+test('plans: an optional own name and a VID-<level>-XXXX course ID',()=>{
+ const p={...P.buildProgramme({course:'videography',interests:['travel'],answers:answers(best),name:'  My   travel films  '}),id:'abc-123'};
+ assert.equal(p.name,'My travel films','names are tidied to one line');
+ assert.equal(P.planTitle(p),'My travel films');
+ const plain={...P.buildProgramme({course:'videography',interests:['travel'],answers:answers(best)}),id:'abc-123'};
+ assert.equal(plain.name,undefined);assert.equal(P.planTitle(plain),'Videography · Travel');
+ assert.equal(P.buildProgramme({...p,hoursPerWeek:20},p).name,'My travel films','updates keep the name');
+ assert.equal(P.planName('x'.repeat(80)).length,60);
+ assert.match(P.courseId(p),/^VID-[BIA]-\d{4}$/);
+ assert.equal(P.courseId(p),P.courseId({...p}),'the ID is stable');
+ assert.equal(P.courseId({...p,level:'intermediate'}).slice(0,6),'VID-I-','the letter follows the level');
+ assert.equal(P.courseId({...p,level:'intermediate'}).slice(-4),P.courseId(p).slice(-4),'the digits stay');
+});

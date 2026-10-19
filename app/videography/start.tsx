@@ -9,7 +9,7 @@ import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,ass
 
 const draftKey='fp-programme-draft-v3';
 // seed: shuffles each question's answer order for this learner, so the position of an answer gives nothing away.
-type Draft={seed:string;age?:'adult'|'guardian';interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
+type Draft={seed:string;name?:string;age?:'adult'|'guardian';interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
 const emptyDraft=():Draft=>({seed:Math.random().toString(36).slice(2),interests:[],answers:[],daysPerWeek:5,startDate:today()});
 function readDraft():Draft{try{const d=JSON.parse(localStorage.getItem(draftKey)||'null');if(d&&Array.isArray(d.answers))return {...emptyDraft(),...d}}catch{}return emptyDraft()}
 function writeDraft(d:Draft){try{localStorage.setItem(draftKey,JSON.stringify(d))}catch{}}
@@ -126,7 +126,7 @@ export function ProgrammeStart(){
  async function create(){
   setError('');
   if(!user){writeDraft(draft);window.location.assign('/auth/google?return_to='+encodeURIComponent('/start?finish=1'));return}
-  const saved=await mutate('programme_save',{programme:{course:'videography',age:draft.age,interests:draft.interests,answers:draft.answers,level,hoursPerWeek:plan.hoursPerWeek,daysPerWeek:plan.daysPerWeek,startDate:plan.startDate}});
+  const saved=await mutate('programme_save',{programme:{course:'videography',age:draft.age,interests:draft.interests,answers:draft.answers,level,hoursPerWeek:plan.hoursPerWeek,daysPerWeek:plan.daysPerWeek,startDate:plan.startDate,name:draft.name||''}});
   if(saved){clearDraft();const made=(saved as any).programme?.id;window.location.assign(made?'/workspace/'+made:'/workspace')}else setError('Your plan could not be saved. Your answers are still here.');
  }
  // Returning from Google sign-in: finish automatically with the saved draft.
@@ -184,8 +184,10 @@ export function ProgrammeStart(){
 
   {step===3&&result&&<Panel className="vg-panel">
    <span className="eyebrow">STEP 4 · REVIEW</span>
+   <label className="vg-field">Pathway name<input value={draft.name??''} maxLength={60} placeholder={'Videography · '+(interestFor(draft.interests[0])?.pathway||'')} onChange={e=>update({name:e.target.value})}/><span className="small">Optional. You can change it later on your plan.</span></label>
    <dl className="vg-review">
     <div><dt>Course</dt><dd>Videography</dd></div>
+    <div><dt>Pathway</dt><dd>{interestFor(draft.interests[0])?.pathway}</dd></div>
     <div><dt>Interests</dt><dd>{draft.interests.map(id=>interestFor(id)?.label).join(', ')}</dd></div>
     <div><dt>Level</dt><dd>{levelNames[level]} · {rhythm[level].hours} hours</dd></div>
     <div><dt>Time</dt><dd>{plan.hoursPerWeek} h/week for {plan.weeks} weeks</dd></div>

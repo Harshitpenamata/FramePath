@@ -1,11 +1,11 @@
 'use client';
 import React,{useState} from 'react';
-import {ArrowRight,BookOpen,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
+import {ArrowRight,BookOpen,Pencil,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {toast} from 'sonner';
 import {useLearning,Panel,Go,Badge,isExplore,Photo} from '../ui';
 import './dashboard.css';
-import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,courseNames,type Programme,type Level,type Mode} from './programme';
+import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,defaultPlanTitle,courseId,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
 
 const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
@@ -70,6 +70,18 @@ const modes:{id:Mode;title:string;price:string;Icon:any;points:string[]}[]=[
 ];
 
 // My courses (/workspace): the learner's plans as tiles, up to three across all courses. Opening one shows its page.
+// The plan's name, which the learner can change, and its course ID (site edits, item 3).
+function PlanName({p}:{p:Programme}){
+ const {mutate,busy}=useLearning();
+ const [editing,setEditing]=useState(false),[value,setValue]=useState('');
+ const save=async(e:React.FormEvent)=>{e.preventDefault();if(await mutate('plan_rename',{id:p.id,name:value}))setEditing(false)};
+ return <div className="db-name">
+  {editing?<form className="db-rename" onSubmit={save}><label className="vg-field">Pathway name<input autoFocus value={value} maxLength={60} placeholder={defaultPlanTitle(p)} onChange={e=>setValue(e.target.value)}/></label>
+    <div className="button-row"><Button type="submit" disabled={busy}>Save name</Button><Button type="button" variant="outline" onClick={()=>setEditing(false)}>Cancel</Button></div><p className="small">Leave it empty to use “{defaultPlanTitle(p)}”.</p></form>
+   :<><h1>{p.name||p.primaryPathway}</h1><div className="db-id"><span>Course ID <strong>{courseId(p)}</strong></span><button type="button" className="text-link" onClick={()=>{setValue(p.name||'');setEditing(true)}}><Pencil size={14}/>Rename</button></div></>}
+ </div>;
+}
+
 export function MyCourses(){
  const {s,user,loaded,mutate,busy}=useLearning();
  if(!loaded)return <Panel><p role="status">Opening your courses…</p></Panel>;
@@ -83,8 +95,8 @@ export function MyCourses(){
   :<div className="db-plans">
    {plans.map(p=>{const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]||s.planProgress?.[p.id!]?.[moduleKey(p.level,i)]).length;
     return <a key={p.id} className={'db-plan'+(p.id===s.programme?.id?' active':'')} href={'/workspace/'+p.id}>
-     <span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]}</span>
-     <strong className="display">{p.primaryPathway}</strong>
+     <span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} · {courseId(p)}</span>
+     <strong className="display">{p.name||p.primaryPathway}</strong>
      <div className="vg-course-bar" aria-hidden="true"><span style={{width:Math.round(done/mods.length*100)+'%'}}/></div>
      <span className="small">{done} / {mods.length} modules · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</span>
      <span className="db-plan-foot">{done?'Continue':'Open'}<span className="sg-arrow"><ArrowRight size={16}/></span></span>
@@ -131,7 +143,7 @@ function ProgrammeDashboard(){
  return <div className="vg-dashboard">
   <div className="breadcrumbs db-crumbs"><a href="/workspace">My courses</a><span>/</span><span>{planTitle(p)}</span></div>
   <section className="db-hero">
-   <div className="db-hero-text"><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><h1>{p.primaryPathway}</h1><p className="lede">{levelSummary[p.level]}</p>
+   <div className="db-hero-text"><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><PlanName p={p}/><p className="lede">{levelSummary[p.level]}</p>
     <p className="db-meta"><PlayCircle size={18}/>{done}/{mods.length} modules done · {p.schedule.totalHours} hours · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</p>
     <div className="button-row">{nextIndex>=0&&<Go href={`/explore/${'video-'+p.level}/${nextIndex}`}>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}<ArrowRight size={18}/></Go>}
      {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}

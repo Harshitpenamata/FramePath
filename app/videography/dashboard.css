@@ -72,3 +72,11 @@
 .vg-modules{display:grid;gap:var(--s3);margin-top:var(--s7)}
 .vg-modules>h2{margin:0 0 var(--s3)!important}
 .vg-modules>.vg-stage-group{margin:0}
+/* Plan name and course ID (site edits, item 3) */
+.db-name{display:grid;gap:var(--s3)}
+.db-name h1{margin:0}
+.db-id{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s4);font-size:.9375rem;color:var(--muted-foreground)}
+.db-id strong{color:var(--foreground);letter-spacing:.04em}
+.db-id .text-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;background:none;border:0;padding:0;font:inherit;font-weight:600;cursor:pointer}
+.db-rename{display:grid;gap:var(--s3);max-width:520px}
+.db-rename .vg-field input{font-size:1.125rem}
