@@ -241,6 +241,8 @@ export const stagePhase=(stage:string)=>stage==='concepts'||stage==='preproducti
 
 // The learner's main project name, from their first interest (e.g. "Wildlife & nature").
 export const projectLabel=(p?:Programme|null)=>p?(interestFor(p.interests.find(id=>interestFor(id)?.pathway===p.primaryPathway)||'')?.label||p.primaryPathway):undefined;
+// When each module of a plan is due: modules in order, at the plan's weekly hours, from its start date.
+export function moduleDueDates(p:Programme){let hours=0;return modulesFor(p.level).map((m,i)=>{hours+=m.hours;return {key:moduleKey(p.level,i),module:m,due:addDays(p.schedule.startDate,Math.max(0,Math.ceil(hours/p.schedule.hoursPerWeek*7)-1))}})}
 // My courses: a learner's plans, up to three across all courses. state.programme is the plan that's open;
 // state.plans holds them all. Accounts from before plans have just their one plan.
 export const maxPlans=3;

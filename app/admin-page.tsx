@@ -26,6 +26,7 @@ export function AdminHealth(){
    <p>{d.queuedReviews} reviews and {d.pendingComments} comments waiting in the queue.</p>
    <table className="admin-table"><thead><tr><th>Day</th><th>Provider</th><th>Calls</th><th>US$</th></tr></thead><tbody>{d.spend.map((r:any)=><tr key={r.day+r.provider}><td>{r.day}</td><td>{r.provider}</td><td>{r.calls}</td><td>{r.usd}</td></tr>)}</tbody></table>
   </Panel>
+  <WhatsAppAdmin/>
   <Storage/>
   <Look/>
   <Panel><h2>Lesson videos</h2><p className="small">{d.videos.checked} of {d.videos.total} checked · last check {when(d.videos.lastCheck)}</p>
@@ -125,6 +126,18 @@ function Storage(){
  return <Panel><h2>Storage</h2>
   <p>{mb(d.total.bytes)} in {d.total.files} files from {d.total.users} learners. <span className="small">Cloudflare R2 includes 10 GB free; after that about $0.015 per GB a month.</span></p>
   {d.top.length>0&&<table className="admin-table"><thead><tr><th>Learner</th><th>Files</th><th>Used</th></tr></thead><tbody>{d.top.map((r:any)=><tr key={r.user_id}><td>{r.email||r.user_id}</td><td>{r.files}</td><td>{mb(r.bytes)}</td></tr>)}</tbody></table>}
+ </Panel>;
+}
+
+// WhatsApp: test or live, who's opted in, this week's messages, recent messages with their text, and cost.
+function WhatsAppAdmin(){
+ const [d,setD]=useState<any>(null);
+ useEffect(()=>{get('section=whatsapp').then(setD).catch(()=>{})},[]);
+ if(!d)return null;
+ return <Panel><h2>WhatsApp</h2>
+  <p>{d.live?<Badge tone="green">Live</Badge>:<Badge>Test mode</Badge>} {d.live?'Messages are being sent.':'Messages are logged here but not sent. To switch on, set the WhatsApp settings (docs/whatsapp-setup.md).'} {d.optedIn} learners opted in · about ₹{d.costInr30d.toFixed(2)} in the last 30 days.</p>
+  {d.week.length>0&&<table className="admin-table"><thead><tr><th>Message</th><th>Status</th><th>This week</th></tr></thead><tbody>{d.week.map((r:any)=><tr key={r.template+r.status}><td>{r.template}</td><td>{r.status}</td><td>{r.n}</td></tr>)}</tbody></table>}
+  {d.recent.length>0&&<details><summary>Recent messages ({d.recent.length})</summary><ul className="admin-list">{d.recent.map((m:any,i:number)=><li key={i}><strong>{m.template}</strong> · {m.status} · {m.email||m.phone} · {at(m.created_at)}<br/><span className="small">{m.body}{m.error?' · '+m.error:''}</span></li>)}</ul></details>}
  </Panel>;
 }
 

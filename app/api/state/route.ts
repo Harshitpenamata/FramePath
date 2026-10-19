@@ -1,3 +1,4 @@
+import {normalisePhone} from '../../whatsapp';
 import {deadVideoIds} from '../../video-health';
 import {reviewDraft,completeReview} from '../../lessons/review-rules';
 import {isVisualKey,visualLesson} from '../../lessons/content';
@@ -62,6 +63,10 @@ case 'visual_session_complete':{
 }
 // Age: 'adult' (18 or older) or 'guardian' (13 to 17, with a parent or guardian's agreement). Asked once, before
 // the first plan. Under 13s can't use FramePath. Learners under 18 can share portfolios by link, not publicly.
+// WhatsApp updates: the number, explicit opt-in, which updates, and quiet hours (India time).
+case 'whatsapp_save':{const phone=normalisePhone(b.phone);if(b.optIn===true&&!phone)throw new Error('Enter your WhatsApp number with its country code, for example +91 98765 43210.');
+ const pr=b.prefs||{},hour=(v:any,d:number)=>Number.isInteger(v)&&v>=0&&v<24?v:d;
+ s.whatsapp={phone:phone||s.whatsapp?.phone||'',optIn:b.optIn===true,name:safeText(b.name||'',40)||String(user.fullName||'').split(' ')[0]||'',prefs:{reviews:pr.reviews!==false,deadlines:pr.deadlines!==false,weekly:pr.weekly!==false,nudges:pr.nudges!==false},quietFrom:hour(b.quietFrom,21),quietTo:hour(b.quietTo,8),at:now};break;}
 case 'consent_save':{if(!['adult','guardian'].includes(b.age))throw new Error('Choose your age group.');s.consent={age:b.age,at:now};break;}
 case 'programme_save':{if(['adult','guardian'].includes(b.programme?.age))s.consent={age:b.programme.age,at:now};if(!s.consent)throw new Error('Tell us your age group first.');
  if(s.plans.length>=maxPlans)throw new Error('You have '+maxPlans+' plans already. Delete one to make another.');

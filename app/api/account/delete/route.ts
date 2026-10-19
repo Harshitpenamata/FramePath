@@ -16,6 +16,7 @@ export async function POST(req:Request){try{
   db().prepare('DELETE FROM portfolio_likes WHERE user_id=? OR token IN '+mine).bind(id,id),
   db().prepare('DELETE FROM portfolios WHERE user_id=?').bind(id),
   db().prepare('DELETE FROM review_flags WHERE user_id=?').bind(id),
+  db().prepare('DELETE FROM wa_messages WHERE user_id=?').bind(id),
   db().prepare('DELETE FROM ai_jobs WHERE user_id=?').bind(id),
   db().prepare('DELETE FROM reflection_attempts WHERE user_id=?').bind(id),
   db().prepare('DELETE FROM goal_logs WHERE user_id=?').bind(id),
