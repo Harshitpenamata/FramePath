@@ -154,3 +154,18 @@
 .vg-rate-buttons button[aria-pressed=true]{background:var(--foreground);color:#0b0b0b;border-color:var(--foreground)}
 .vg-rate-comment{display:grid;gap:var(--s2);width:100%}
 .vg-rate-comment textarea{width:100%;padding:var(--s3);border-radius:12px;border:var(--soft-line);background:#0b0b0b;color:var(--foreground);font:inherit}
+/* "Already know this?" quick check */
+.vg-testout{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3);padding:var(--s4) var(--s5);margin-bottom:var(--s4);border:var(--soft-line);border-radius:16px}
+.vg-testout.ok{border-color:var(--primary);background:#d6e86b0f}
+.vg-testout.ok>svg{color:var(--primary)}
+.vg-testout .text-link{background:none;border:0;padding:0;min-height:44px;font:inherit;font-weight:600;cursor:pointer}
+.vg-testout.open{display:grid;gap:var(--s4);justify-content:stretch}
+.vg-testout.open h3{margin:0}
+.vg-testout-q{border:0;margin:0;padding:0;display:grid;gap:var(--s2)}
+.vg-testout-q legend{font-weight:600;margin-bottom:var(--s2);color:var(--foreground)}
+.vg-testout-q label{display:flex;gap:var(--s3);align-items:center;min-height:48px;padding:var(--s2) var(--s4);border:var(--soft-line);border-radius:12px;cursor:pointer}
+.vg-testout-q label:has(input:checked){border-color:var(--foreground)}
+.vg-testout-q input{position:absolute;opacity:0;pointer-events:none}
+.vg-testout-q label:has(input:checked) .vg-letter{background:var(--foreground);color:#0b0b0b;border-color:var(--foreground)}
+.vg-testout-q label:has(input:focus-visible){outline:3px solid var(--primary);outline-offset:3px}
+.vg-testout-q label{margin:0}

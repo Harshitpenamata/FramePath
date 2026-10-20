@@ -46,9 +46,12 @@ const MyPortfolio=lazy(()=>import('./other-pages').then(m=>({default:m.MyPortfol
 const Community=lazy(()=>import('./other-pages').then(m=>({default:m.Community})));
 const Settings=lazy(()=>import('./other-pages').then(m=>({default:m.Settings})));
 const AIPage=lazy(()=>import('./other-pages').then(m=>({default:m.AIPage})));
+const legacyStart=['/diagnostic/result','/learn-mode','/first-frame'];
+function ReplaceUrl({to}:{to:string}){React.useEffect(()=>{window.history.replaceState(null,'',to)},[to]);return null}
 function Content({route}:{route:string}){const parts=route.split('/').filter(Boolean);if(parts[0]==='explore'&&(rebuiltPathIds.includes(parts[1] as any)||isSharedPath(parts[1]))){if(parts.length===2)return <VisualPath id={parts[1]}/>;if(parts.length===3&&isVisualKey(parts[1]+'-'+parts[2]))return <VisualSession key={parts[1]+'-'+parts[2]} pathId={parts[1]} index={Number(parts[2])}/>;return <Panel><h1>That session is not in this pathway.</h1><Go href={'/explore/'+parts[1]}>Open pathway</Go></Panel>;}if(route==='/goal-review')return <Suspense fallback={<Panel>Opening goal review…</Panel>}><GoalReview/></Suspense>;const vgFallback=<Panel><p role="status">Opening your plan…</p></Panel>;
 if(route==='/')return <Suspense fallback={vgFallback}><VideographyHome/></Suspense>;
-if(route==='/start'||route==='/diagnostic')return <Suspense fallback={vgFallback}><ProgrammeStart/></Suspense>;
+// Old onboarding pages (the first diagnostic, its result, learn mode, first frame) now go to the current plan builder.
+if(route==='/start'||route==='/diagnostic'||legacyStart.includes(route))return <Suspense fallback={vgFallback}>{route!=='/start'&&<ReplaceUrl to="/start"/>}<ProgrammeStart/></Suspense>;
 if(route==='/admin')return <Suspense fallback={vgFallback}><AdminHealth/></Suspense>;
 if(route==='/workspace')return <Suspense fallback={vgFallback}><MyCourses/></Suspense>;
 if(parts[0]==='workspace'&&parts.length===2&&parts[1]!=='previous')return <Suspense fallback={vgFallback}><PlanPage id={parts[1]}/></Suspense>;

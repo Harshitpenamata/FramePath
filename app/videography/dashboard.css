@@ -100,3 +100,20 @@
 .db-stages li:not(.done):not(.now) .display{color:var(--muted-foreground)}
 .db-stage-mark{margin-left:auto;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#0b0b0b;color:var(--primary)}
 .db-stage-now{margin-left:auto;padding:4px 10px;border-radius:999px;background:var(--primary);color:#0b0b0b;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+/* Today card on My courses */
+.db-today{display:grid;gap:var(--s3);justify-items:start;margin:0 0 var(--s6);padding:var(--s6);border:1.5px solid var(--primary);border-radius:var(--radius);background:#d6e86b0d}
+.db-today h2{margin:0;font-size:var(--t-card);line-height:var(--lh-card)}
+.db-today p{margin:0}
+/* Plan notices: behind, stage finished, suggested for you */
+.db-nudges{display:grid;gap:var(--s3)}
+.db-nudge{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--s4);align-items:center;padding:var(--s4) var(--s5);border:var(--line);border-radius:18px}
+.db-nudge>svg{color:var(--primary)}
+.db-nudge p,.db-nudge ul{margin:var(--s1) 0 0}
+.db-nudge ul{padding-left:var(--s5);display:grid;gap:var(--s1)}
+.db-nudge.late{border-color:var(--primary)}
+.db-nudge.done{background:#d6e86b0f}
+.db-nudge.tips{grid-template-columns:auto minmax(0,1fr)}
+.vg-heat-score small{display:block;font-size:.75rem;font-weight:500}
+.vg-heat-score small.up{color:var(--primary)}
+.vg-heat-score small.down{color:var(--destructive)}
+@media(max-width:760px){.db-nudge{grid-template-columns:auto minmax(0,1fr)}.db-nudge>:last-child:not(div:nth-child(2)){grid-column:1/-1}.db-today{padding:var(--s5)}}

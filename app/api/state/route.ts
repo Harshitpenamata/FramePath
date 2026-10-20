@@ -27,6 +27,10 @@ import {basicPaths,basicKeys,basicContext,curriculumVersion,journalTypes} from '
 import {scoreAttempt,moduleInfo,sequenceFor,assignmentRubric} from '../../learning-rules';
 import {ensureUserId,ensureCourseId,retireCourseId} from '../../ids';
 import {logEvent,today as dayNow} from '../../events';
+import {questionsForVideos,lessonVideos} from '../../videography/lessons';
+import {behindBy,catchUpStart} from '../../videography/programme';
+// Reflect question banks, loaded only when a learner tests out of a module.
+const reflectBanks={beginner:()=>import('../../videography/reflect/beginner.json'),intermediate:()=>import('../../videography/reflect/intermediate.json'),advanced:()=>import('../../videography/reflect/advanced.json')};
 import {isAdmin} from '../admin/health/route';
 import type {StepName} from '../../events-shared';
 import {identity,readState,saveState,usage,checkOrigin,safeText,safeUrl,mentorFor,requireLesson,activeExplore,craftEnrolled,db,errorResponse} from '../../service';
@@ -87,6 +91,27 @@ case 'consent_save':{if(!['adult','guardian'].includes(b.age))throw new Error('C
 case 'programme_save':{if(['adult','guardian'].includes(b.programme?.age))s.consent={age:b.programme.age,at:now};if(!s.consent)throw new Error('Tell us your age group first.');
  if(s.plans.length>=maxPlans)throw new Error('You have '+maxPlans+' plans already. Delete one to make another.');
  const plan={...buildProgramme(b.programme,null),id:id()};await ensureCourseId(user.userId,plan);s.plans.push(plan);openPlan(s,plan);steps.push(['plan_created',{courseId:plan.courseId,level:plan.level,pathway:plan.primaryPathway},'']);break;}
+// Behind on the plan's dates: move the open plan's remaining modules forward from today (hours already done count
+// as time spent). The server works the new start date out, so it may be in the past.
+case 'plan_reschedule':{if(!s.programme||s.programme.id!==b.id)throw new Error('Open this plan first.');const p=s.programme;
+ if(!behindBy(p,s.progress))throw new Error('Your plan is on schedule.');const start=catchUpStart(p,s.progress);
+ s.programme={...buildProgramme({...p,startDate:start},{...p,schedule:{...p.schedule,startDate:start}}),id:p.id};break;}
+// "Already know this?": answer every question of a module's lessons in one go. If every answer is right first time,
+// those lessons count as finished (videos and questions). One try per module per day.
+case 'lesson_testout':{
+ const key=safeText(b.key,80,1),video=parseVideoKey(key);if(!video)throw new Error('Choose a Videography module.');
+ if(!isFreeModule(key)&&!activeExplore(s)&&!craftEnrolled(s))throw new Error('This module’s practice is part of Self-paced.');
+ s.testOuts=s.testOuts||{};if(s.testOuts[key]===dayNow())throw new Error('You’ve already tried this today. Work through the lessons, or try again tomorrow.');
+ s.testOuts[key]=dayNow();
+ const pathway=s.programme?.primaryPathway||'Documentary',bank:any=(await reflectBanks[video.level as 'beginner'|'intermediate'|'advanced']()).default;
+ const picks=b.answers&&typeof b.answers==='object'?b.answers:{};let right=true,checked=0;const passed:number[]=[];
+ lessonsFor(video.module.id).forEach((_:any,i:number)=>{const qs=questionsForVideos(bank[video.module.id]?.[i]||[],lessonVideos(video.module.id,i,pathway));if(!qs.length)return;
+  const mine=Array.isArray(picks[i])?picks[i]:[];qs.forEach((_q:any,n:number)=>{checked++;if(mine[n]!==0)right=false});if(right)passed.push(i)});
+ if(!checked)throw new Error('This module has no questions to answer.');
+ if(right){s.lessonProgress=s.lessonProgress||{};const marks=(s.lessonProgress[key]=s.lessonProgress[key]||{});
+  for(const i of passed){const mark:LessonMark=(marks[i]=marks[i]||{v:[],t:false});for(const id of lessonNeeds(video.module.id,i,pathway))if(!mark.v.includes(id))mark.v.push(id);mark.t=true}
+  steps.push(['test_out',{module:key,lessons:passed.length},''])}
+ s.lastTestOut={key,passed:right,at:now};break;}
 case 'plan_rename':{const plan=s.plans.find((x:any)=>x.id===b.id);if(!plan)throw new Error('That plan no longer exists.');const name=planName(b.name);
  for(const x of [plan,s.programme])if(x?.id===plan.id){if(name)x.name=name;else delete x.name}break;}
 case 'plan_open':{const plan=s.plans.find((x:any)=>x.id===b.id);if(!plan)throw new Error('That plan no longer exists.');openPlan(s,plan);break;}

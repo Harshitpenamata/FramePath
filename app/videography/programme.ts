@@ -289,3 +289,34 @@ export function handInMissing(m:CurriculumModule,h:HandIn,selfCheck=true):string
  }
  return missing;
 }
+
+// ---- Adapting the plan as the learner goes ----
+// Which skill area a module mostly trains, from its stage and title (style project and final project: none).
+export function moduleArea(m:CurriculumModule):SkillArea|null{
+ const t=m.title.toLowerCase();
+ if(m.stageLabel==='Ideas')return 'story';
+ if(m.stageLabel==='Planning')return 'planning';
+ if(m.stageLabel==='Filming')return /light|sound|speaker|interview/.test(t)?'light-sound':'camera';
+ if(m.stageLabel==='Editing')return /colour|color|title|caption|export|sound|music|mix/.test(t)?'finishing':'editing';
+ return null;
+}
+// Skill levels that keep up with the learner: the starting check counts once, and each AI-reviewed module in
+// that area counts once more (its checks' average, 0–4 as 0–100). reviews: the latest review per module key.
+export function liveSkills(p:Programme,reviews:Record<string,{ratings:(number|null)[]}>){
+ const out={} as Record<SkillArea,{start:number;now:number;evidence:number}>;
+ for(const a of skillAreas){const start=p.assessment.areas[a.id];let sum=start,n=0;
+  modulesFor(p.level).forEach((m,i)=>{const r=reviews[moduleKey(p.level,i)];if(moduleArea(m)!==a.id||!r)return;const got=r.ratings.filter((x):x is number=>x!==null);if(!got.length)return;sum+=got.reduce((x,y)=>x+y,0)/got.length/4*100;n++});
+  out[a.id]={start,now:Math.round(sum/(n+1)),evidence:n}}
+ return out;
+}
+// How far behind the plan's dates the learner is: the first unfinished module and how many days past its due date.
+export function behindBy(p:Programme,progress:Record<string,any>,on=today()){
+ const next=moduleDueDates(p).find(d=>!progress?.[d.key]?.done);if(!next)return null;
+ const days=Math.round((Date.parse(on)-Date.parse(next.due))/86400000);return days>0?{days,key:next.key,due:next.due}:null;
+}
+// New start date that puts the next unfinished module due from today, at the plan's weekly hours: the hours already
+// done are counted as time spent, so only what's left is spread forward.
+export function catchUpStart(p:Programme,progress:Record<string,any>,on=today()){
+ const doneHours=modulesFor(p.level).reduce((h,m,i)=>h+(progress?.[moduleKey(p.level,i)]?.done?m.hours:0),0);
+ return addDays(on,-Math.floor(doneHours/p.schedule.hoursPerWeek*7));
+}

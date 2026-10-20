@@ -7,7 +7,7 @@ import {moduleHref} from '../learning-rules';
 import {parseVideoKey,moduleLesson,projectLabel,isFreeModule,modulesFor,moduleKey as keyOf,type Pathway} from './programme';
 import {videosFor,type ModuleVideo} from './media';
 import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
-import {ReflectStep} from './reflect';
+import {ReflectStep,TestOut} from './reflect';
 
 const stages=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
 
@@ -148,7 +148,7 @@ function SelfPacedLock({moduleKey,what}:{moduleKey:string;what:string}){
 
 // Lessons tab: module intro, then each lesson's Watch and Reflect, then a pointer to the task.
 export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:()=>void;onLesson?:(index:number,count:number)=>void}){
- const {s,user,mutate}=useLearning();
+ const {s,user,mutate,busy}=useLearning();
  const parsed=parseVideoKey(moduleKey);
  const [index,setIndex]=useState(0);
  useEffect(()=>{const n=Number(new URLSearchParams(window.location.search).get('lesson'));if(n>0)setIndex(n-1)},[]);
@@ -174,6 +174,7 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
   {m.stage==='selected-pathway'&&<p className="notice">Your course: <strong>{pathway}</strong>. Switch between your styles under My courses on your Journey page.</p>}
 
   {item?<section className="vg-lessons" id="vg-lesson-top">
+   {user&&open&&!lessons.every((_,i)=>done(i))&&<TestOut moduleId={m.id} moduleKey={moduleKey} lessonCount={lessons.length} videosFor={i=>lessonVideos(m.id,i,pathway)} mutate={mutate} busy={busy} result={s.lastTestOut}/>}
    <ol className="vg-lesson-steps" aria-label="Lessons">{lessons.map((x,i)=><li key={x.title}><button type="button" className={(i===index?'current ':'')+(done(i)?'done':'')} aria-current={i===index?'step':undefined} onClick={()=>go(i)}><span>{done(i)?<Check size={14}/>:i+1}</span>{x.title}</button></li>)}</ol>
    {/* Lesson layout (site edits, item 6): header with progress, 01 Watch, 02 Think it through (opens once the
        videos are watched), then the way on. */}

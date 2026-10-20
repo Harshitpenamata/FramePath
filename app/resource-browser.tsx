@@ -8,6 +8,8 @@ import {archetypes,isScenarioProfile} from './scenario-engine';
 import {useLearning,PageHead,Panel} from './ui';
 import {ResourcePlayer} from './resource-player';
 export function ScenarioResources(){const {s,loaded}=useLearning(),[ready,setReady]=useState(false),[search,setSearch]=useState(''),[topic,setTopic]=useState(''),[archetype,setArchetype]=useState(''),[level,setLevel]=useState(''),[device,setDevice]=useState(''),[format,setFormat]=useState(''),[low,setLow]=useState(false),[selected,setSelected]=useState('');
+ // A search can arrive in the address (/resources?q=sound), e.g. from "Suggested for you" on a plan.
+ useEffect(()=>{const q=new URLSearchParams(window.location.search).get('q');if(q)setSearch(q.slice(0,60))},[]);
  useEffect(()=>{if(loaded&&!ready){if(isScenarioProfile(s.profile)){setArchetype(s.profile.request.scenario.archetype);setDevice(s.profile.request.starting.device);setLow(['low','offline'].includes(s.profile.request.starting.bandwidth))}setReady(true)}},[loaded,ready]);
  useEffect(()=>{const id=new URLSearchParams(window.location.search).get('resource');const r=learningResources.find(v=>v.id===id);if(r){setSearch(r.title);setArchetype('');setDevice('');setLow(false);setSelected(r.id);setReady(true)}},[]);
  const list=learningResources.filter(r=>(!topic||r.topic===topic)&&(!archetype||r.archetypes?.includes(archetype))&&(!level||r.levels?.includes(level))&&(!device||r.devices?.includes(device))&&(!format||r.format===format)&&(!low||r.bandwidth==='low')&&[r.title,r.creator,r.focus,r.topic].join(' ').toLowerCase().includes(search.toLowerCase()));

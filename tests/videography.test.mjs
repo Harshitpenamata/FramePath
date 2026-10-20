@@ -308,3 +308,19 @@ test('plans: an optional own name and a VID-<level>-XXXX course ID',()=>{
  assert.equal(P.buildProgramme({...withId,level:'intermediate'},withId).courseId,'VID-B-1001','moving up keeps the ID');
  assert.equal(P.buildProgramme({course:'videography',interests:['travel'],answers:answers(best),courseId:'VID-B-9'}).courseId,undefined,'a new plan cannot choose its own ID');
 });
+
+test('adapting the plan: skill areas, live skill levels, behind and catch-up dates',()=>{
+ const p=P.buildProgramme({course:'videography',interests:['travel'],answers:answers(mid),startDate:P.today()});
+ const mods=P.modulesFor(p.level);
+ assert.equal(P.moduleArea(mods[0]),'story');assert.ok(mods.every(m=>m.stageLabel==='Your pathway'||m.stageLabel==='Final project'?P.moduleArea(m)===null:P.moduleArea(m)!==null));
+ const k0=P.moduleKey(p.level,0),start=p.assessment.areas.story;
+ const live=P.liveSkills(p,{[k0]:{ratings:[4,4,null]}});
+ assert.equal(live.story.evidence,1);assert.equal(live.story.now,Math.round((start+100)/2),'the review counts as much as the starting check');
+ assert.equal(P.liveSkills(p,{}).camera.now,p.assessment.areas.camera,'no reviews: unchanged');
+ const late={...p,schedule:{...p.schedule,startDate:P.addDays(P.today(),-60)}};
+ const b=P.behindBy(late,{});assert.ok(b&&b.days>0&&b.key===k0);
+ assert.equal(P.behindBy(p,{}),null,'a plan starting today is not behind');
+ const done={[k0]:{done:true}},start2=P.catchUpStart(late,done);
+ assert.ok(start2<P.today(),'hours done count as time spent');
+ assert.equal(P.behindBy({...late,schedule:{...late.schedule,startDate:start2}},done),null,'after catching up, not behind');
+});
