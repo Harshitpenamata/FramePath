@@ -121,6 +121,7 @@ function PilotFunnel(){
   {!d?<p className="small" role="status">Loading…</p>:<>
    <table className="admin-table admin-funnel"><thead><tr><th>Step</th><th>People</th><th>Of the step before</th><th>Of all visitors</th></tr></thead><tbody>
     {d.steps.map((st:any,i:number)=><tr key={st.name}><td>{st.label}</td><td>{st.people}</td><td>{i?pct(st.people,d.steps[i-1].people):'–'}</td><td>{pct(st.people,d.steps[0].people)}</td></tr>)}</tbody></table>
+   {d.backfilled>0&&<p className="small">Tracking started on 20 Oct 2026. {d.backfilled} earlier steps were recovered from saved data: plans made, hand-ins, modules finished, AI reviews and each learner’s last active day. Visits, plans started, videos watched and reviews opened from before then weren’t saved, so those steps undercount and the percentages for earlier dates can look uneven.</p>}
    <p className="small">Signed-in learners who came back in a later week: <strong>{d.returning.cameBack} of {d.returning.signedIn}</strong> ({pct(d.returning.cameBack,d.returning.signedIn)}).</p>
    <h3>Were AI reviews useful?</h3>
    <p className="small">{d.reviews.rated?<><strong>{pct(d.reviews.useful,d.reviews.rated)}</strong> said yes ({d.reviews.useful} of {d.reviews.rated} answers).</>:'No answers yet.'}</p>
