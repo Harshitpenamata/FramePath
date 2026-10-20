@@ -5,6 +5,7 @@ import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Photo} from '../ui';
 import type {PhotoSlot} from '../photos';
 import './home.css';
+import {track} from '../track';
 import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,maxPlans,plansOf,type Level,type Answer,type Visual} from './programme';
 
 const draftKey='fp-programme-draft-v3';
@@ -144,7 +145,7 @@ export function ProgrammeStart(){
 
   {step===0&&<Panel className="vg-panel">
    <span className="eyebrow">VIDEOGRAPHY · STEP 1</span>
-   <div className="sp-tiles" role="group" aria-label="What do you want to film?">{interests.map(i=>{const at=draft.interests.indexOf(i.id),Icon=interestIcons[i.id]||Film;return <button type="button" key={i.id} aria-pressed={at>=0} className={'sp-tile'+(at>=0?' on':'')} onClick={()=>update({interests:at>=0?draft.interests.filter(x=>x!==i.id):[...draft.interests,i.id]})}><Icon size={20}/><span>{i.label}</span>{at>=0&&<b aria-label={at===0?'Main project':'Pick '+(at+1)}>{at+1}</b>}</button>})}</div>
+   <div className="sp-tiles" role="group" aria-label="What do you want to film?">{interests.map(i=>{const at=draft.interests.indexOf(i.id),Icon=interestIcons[i.id]||Film;return <button type="button" key={i.id} aria-pressed={at>=0} className={'sp-tile'+(at>=0?' on':'')} onClick={()=>{if(!draft.interests.length&&at<0)track('plan_started',{interest:i.id});update({interests:at>=0?draft.interests.filter(x=>x!==i.id):[...draft.interests,i.id]})}}><Icon size={20}/><span>{i.label}</span>{at>=0&&<b aria-label={at===0?'Main project':'Pick '+(at+1)}>{at+1}</b>}</button>})}</div>
    {draft.interests.length>0&&<ol className="vg-chosen">{draft.interests.map((id,i)=><li key={id}>{i===0?<Star size={14} aria-label="Primary"/>:<span className="vg-rank">{i+1}</span>}{interestFor(id)?.label}{i>0&&<button type="button" className="vg-link" onClick={()=>update({interests:[id,...draft.interests.filter(x=>x!==id)]})}>Make main</button>}<button type="button" aria-label={'Remove '+interestFor(id)?.label} onClick={()=>update({interests:draft.interests.filter(x=>x!==id)})}><X size={14}/></button></li>)}</ol>}
    {draft.interests[0]&&<p className="small">Main project: <strong>{interestFor(draft.interests[0])!.label}</strong></p>}
    {!s.consent&&<fieldset className="vg-age"><legend>How old are you?</legend>

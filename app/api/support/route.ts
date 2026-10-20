@@ -8,8 +8,10 @@ const noStore={headers:{'Cache-Control':'no-store'}};
 // The learner's own tickets, newest first, with support's reply.
 export async function GET(){try{
  const u:any=await identity();
- const rows:any[]=(await db().prepare('SELECT id,category,message,status,reply,course_id,plan_name,pathway,module_title,lesson,created_at,updated_at FROM support_tickets WHERE user_id=? ORDER BY created_at DESC LIMIT 20').bind(u.userId).all()).results||[];
- return Response.json({tickets:rows},noStore);
+ const rows:any[]=(await db().prepare('SELECT id,category,message,status,reply,course_id,plan_name,pathway,module_title,lesson,created_at,updated_at,learner_seen_at FROM support_tickets WHERE user_id=? ORDER BY created_at DESC LIMIT 20').bind(u.userId).all()).results||[];
+ // fresh: a reply the learner hasn't seen yet. The page marks them seen (/api/support/seen) once it has shown them.
+ const fresh=rows.filter(r=>r.reply&&(r.learner_seen_at==null||r.learner_seen_at<r.updated_at)).map(r=>r.id);
+ return Response.json({tickets:rows.map(r=>({...r,fresh:fresh.includes(r.id)}))},noStore);
 }catch(e){return errorResponse(e)}}
 
 // Raise a ticket. The learner writes what's wrong; the server adds who they are and where they were, from their

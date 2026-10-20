@@ -28,6 +28,7 @@ export function AdminHealth(){
    <table className="admin-table"><thead><tr><th>Day</th><th>Provider</th><th>Calls</th><th>US$</th></tr></thead><tbody>{d.spend.map((r:any)=><tr key={r.day+r.provider}><td>{r.day}</td><td>{r.provider}</td><td>{r.calls}</td><td>{r.usd}</td></tr>)}</tbody></table>
   </Panel>
   <WhatsAppAdmin/>
+  <PilotFunnel/>
   <SupportQueue/>
   <Storage/>
   <Look/>
@@ -109,6 +110,25 @@ function FindLearner(){
  </Panel>;
 }
 
+// Pilot funnel: how many people reach each step, who comes back, and whether AI reviews help.
+function PilotFunnel(){
+ const [days,setDays]=useState(30),[d,setD]=useState<any>(null),[error,setError]=useState('');
+ useEffect(()=>{setD(null);fetch('/api/admin/funnel?days='+days).then(async r=>{const j:any=await r.json();if(!r.ok)throw Error(j.error);setD(j)}).catch(e=>setError(e.message))},[days]);
+ const pct=(a:number,b:number)=>b?Math.round(a/b*100)+'%':'–';
+ return <Panel><h2>Pilot funnel</h2>
+  <div className="button-row">{[7,30,90].map(n=><Button key={n} variant={days===n?'default':'outline'} aria-pressed={days===n} onClick={()=>setDays(n)}>Last {n} days</Button>)}</div>
+  {error&&<p className="small" role="alert">{error}</p>}
+  {!d?<p className="small" role="status">Loading…</p>:<>
+   <table className="admin-table admin-funnel"><thead><tr><th>Step</th><th>People</th><th>Of the step before</th><th>Of all visitors</th></tr></thead><tbody>
+    {d.steps.map((st:any,i:number)=><tr key={st.name}><td>{st.label}</td><td>{st.people}</td><td>{i?pct(st.people,d.steps[i-1].people):'–'}</td><td>{pct(st.people,d.steps[0].people)}</td></tr>)}</tbody></table>
+   <p className="small">Signed-in learners who came back in a later week: <strong>{d.returning.cameBack} of {d.returning.signedIn}</strong> ({pct(d.returning.cameBack,d.returning.signedIn)}).</p>
+   <h3>Were AI reviews useful?</h3>
+   <p className="small">{d.reviews.rated?<><strong>{pct(d.reviews.useful,d.reviews.rated)}</strong> said yes ({d.reviews.useful} of {d.reviews.rated} answers).</>:'No answers yet.'}</p>
+   {d.reviews.comments.length>0&&<ul className="admin-list">{d.reviews.comments.map((c:any,i:number)=><li key={i}><strong>{c.helpful?'👍':'👎'} {c.module}</strong> · {c.public_id||'learner'} · {new Date(c.created_at).toLocaleDateString('en-IN')}<br/><span className="small">{c.comment}</span></li>)}</ul>}
+  </>}
+ </Panel>;
+}
+
 // Support tickets: the queue, newest first, resolved last. Find a ticket by T-1001, a learner by FP-10001 or
 // email, or a plan by VID-B-1001. Each ticket shows the context it was raised from.
 function SupportQueue(){
@@ -116,7 +136,7 @@ function SupportQueue(){
  const load=(st=status,query=q)=>fetch('/api/admin/support?'+new URLSearchParams({status:st,q:query})).then(async r=>{const j:any=await r.json();if(!r.ok)throw Error(j.error);setD(j)}).catch(e=>setError(e.message));
  useEffect(()=>{load()},[]);
  const counts=d?.counts||{};
- return <Panel className={(counts.open||0)>0?'admin-alert':''}><h2>Support tickets ({counts.open||0} open)</h2>
+ return <Panel className={(counts.open||0)>0?'admin-alert':''}><h2 id="tickets">Support tickets ({counts.open||0} open)</h2>
   <form className="admin-search" onSubmit={e=>{e.preventDefault();load(status,q)}}><input value={q} onChange={e=>setQ(e.target.value)} placeholder="T-1001, FP-10001, VID-B-1001 or email" aria-label="Find tickets"/><Button type="submit" variant="outline">Find</Button></form>
   <div className="button-row">{[['open','Open'],['in_progress','In progress'],['resolved','Resolved'],['','All']].map(([k,l])=><Button key={k} variant={status===k?'default':'outline'} aria-pressed={status===k} onClick={()=>{setStatus(k);load(k,q)}}>{l}{k&&counts[k]?` (${counts[k]})`:''}</Button>)}</div>
   {error&&<p className="small" role="alert">{error}</p>}

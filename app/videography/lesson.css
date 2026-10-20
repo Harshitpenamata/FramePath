@@ -137,3 +137,20 @@
 .vg-video-about{padding-bottom:var(--s4);border-bottom:var(--soft-line)}
 .vg-video-about .vg-watch-state{margin:0}
 @media(max-width:760px){.vg-play{width:56px!important;height:56px!important}}
+/* AI review: change since last time, lesson to rewatch, "ask us", usefulness */
+.vg-delta{display:block;font-size:.75rem;font-weight:600}
+.vg-delta.up{color:var(--primary)}
+.vg-delta.down{color:var(--destructive)}
+.vg-progress-note{margin:0;padding:var(--s3) var(--s4);border-left:3px solid var(--primary);background:#d6e86b0f;color:var(--foreground)}
+.vg-revisit{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s4);border:var(--line);border-radius:16px;color:var(--foreground);text-decoration:none}
+.vg-revisit:hover{border-color:var(--primary)}
+.vg-revisit>span{display:grid;gap:2px;flex:1}
+.vg-revisit svg:first-child{color:var(--primary);flex:none}
+.vg-unsure{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3);padding:var(--s3) var(--s4);border:var(--soft-line);border-radius:14px}
+.vg-unsure p{margin:0;flex:1 1 280px}
+.vg-rate{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);padding-top:var(--s3);border-top:var(--soft-line)}
+.vg-rate-buttons{display:flex;gap:var(--s2)}
+.vg-rate-buttons button{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 var(--s4);border:var(--soft-line);border-radius:999px;background:none;color:var(--foreground);font:inherit;font-weight:600;cursor:pointer}
+.vg-rate-buttons button[aria-pressed=true]{background:var(--foreground);color:#0b0b0b;border-color:var(--foreground)}
+.vg-rate-comment{display:grid;gap:var(--s2);width:100%}
+.vg-rate-comment textarea{width:100%;padding:var(--s3);border-radius:12px;border:var(--soft-line);background:#0b0b0b;color:var(--foreground);font:inherit}

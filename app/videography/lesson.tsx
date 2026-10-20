@@ -1,6 +1,6 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,BookOpen,Gift,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
+import {ArrowLeft,ArrowRight,BookOpen,Gift,ThumbsUp,ThumbsDown,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import './lesson.css';
@@ -12,6 +12,7 @@ import {moduleImages,imageSrcSet} from './media';
 import {waitingTips,lessonsFor,lessonsStatus,requireLessonsForTask} from './lessons';
 import {LevelClosure} from './closure';
 import {ReportProblem} from '../support';
+import {track} from '../track';
 
 type FileRef={id:string;name:string;type:string};
 type Draft={answer:string;notes:string;url:string;files:FileRef[];ratings:number[];reflections:{well:string;change:string}};
@@ -124,7 +125,7 @@ function WaitingTips(){
 }
 
 type Flag={reason:string;status:'open'|'fine'|'refunded';note:string};
-type Review={id:string;flag?:Flag|null;submissionId?:string;createdAt:number;review:{total:number|null;summary:string;strength:string;improvement:string;nextStep:string;evidenceLimit:string;criteria:{label:string;rating:number|null;feedback:string}[]}};
+type Review={id:string;flag?:Flag|null;rating?:{helpful:number;comment:string}|null;submissionId?:string;createdAt:number;review:{total:number|null;summary:string;strength:string;improvement:string;nextStep:string;evidenceLimit:string;revisit?:number|null;revisitWhy?:string;progress?:string;criteria:{label:string;rating:number|null;feedback:string}[]}};
 function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;requestFor:string;onFinish?:()=>void}){
  const {s}=useLearning();
  const piece=s.submissions.find((x:any)=>x.key===key);
@@ -140,8 +141,14 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
  // Straight after a hand-in, ask for the AI review automatically.
  // Only when a review is left; otherwise the learner sees why this piece has no review.
  useEffect(()=>{if(requestFor&&piece?.id===requestFor&&reviews&&allowance?.eligible&&allowance.used<allowance.limit&&!reviews.some(r=>r.submissionId===requestFor))requestReview(requestFor)},[requestFor,reviews,allowance]);
+ // Pilot tracker: the learner opened their review (once per review).
+ const shownId=piece?reviews?.find(r=>r.submissionId===piece.id)?.id:undefined;
+ useEffect(()=>{if(shownId)track('review_opened',{module:key},shownId)},[shownId]);
  if(!piece)return <Panel className="empty"><h2>Nothing to review yet.</h2><p>Hand in your work in Task. Then your AI review shows here.</p></Panel>;
  const review=reviews?.find(r=>r.submissionId===piece.id);
+ // The review of the hand-in before this one, to show what changed; and the module's lesson titles for 'Rewatch'.
+ const prev=review?reviews!.find(r=>r.submissionId!==piece.id&&r.createdAt<review.createdAt):undefined;
+ const lessonTitles=lessonsFor(parseVideoKey(key)!.module.id).map((l:any)=>l.title);
  const canReview=allowance?.eligible&&allowance.used<allowance.limit;
  const rated=Array.isArray(piece.selfRatings);
  return <div className="vg-reflect">
@@ -150,8 +157,12 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
   {review?<Panel className="vg-ai-review">
    <div className="row between"><h2><Sparkles size={20}/> AI review</h2>{review.review.total!==null?<strong className="vg-ai-score">{Math.round(review.review.total)}<small>/100</small></strong>:<Badge>Not enough to score every check</Badge>}</div>
    <p>{review.review.summary}</p>
-   <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>AI</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label} className={gap?'gap':''}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span>{gap&&<span className="small vg-gap">You and the AI see this differently. Read the note above and try again.</span>}</td>{rated&&<td>{mine??'–'}/4</td>}<td>{c.rating??'–'}/4</td></tr>})}</tbody></table>
+   <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>AI</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label} className={gap?'gap':''}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span>{gap&&<span className="small vg-gap">You and the AI see this differently. Read the note above and try again.</span>}</td>{rated&&<td>{mine??'–'}/4</td>}<td>{c.rating??'–'}/4{(()=>{const was=prev?.review.criteria[i]?.rating;return c.rating!==null&&was!=null&&was!==c.rating?<span className={'vg-delta '+(c.rating>was?'up':'down')} title={'Last time: '+was+'/4'}>{c.rating>was?'↑':'↓'} from {was}</span>:null})()}</td></tr>})}</tbody></table>
    <div className="vg-review-notes"><p><strong>What worked:</strong> {review.review.strength}</p><p><strong>What to improve:</strong> {review.review.improvement}</p><p><strong>Try next (under 30 minutes):</strong> {review.review.nextStep}</p><p className="small"><strong>What the AI couldn’t check:</strong> {review.review.evidenceLimit}</p></div>
+   {review.review.progress&&<p className="vg-progress-note"><strong>Since your last hand-in:</strong> {review.review.progress}</p>}
+   {review.review.revisit&&<a className="vg-revisit" href={moduleHref(key)+'?tab=watch&lesson='+review.review.revisit}><BookOpen size={18}/><span><strong>Rewatch lesson {review.review.revisit}{lessonTitles[review.review.revisit-1]?': '+lessonTitles[review.review.revisit-1]:''}</strong>{review.review.revisitWhy&&<span className="small">{review.review.revisitWhy}</span>}</span><ArrowRight size={18}/></a>}
+   {review.review.criteria.some(c=>c.rating===null)&&<div className="vg-unsure"><p className="small">The AI couldn’t judge every check from what it could see. Not sure this review is right? Ask us and a person will look.</p><ReportProblem moduleKey={key} category="review" variant="outline" label="Ask us about this review"/></div>}
+   <ReviewRating review={review}/>
    <ReviewFlag review={review}/>
   </Panel>:!status&&<Panel><h2>AI review</h2>
    {error&&<p role="alert" className="notice">{error}</p>}
@@ -160,6 +171,21 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
   {rated&&<Panel><h2>What you said</h2><p className="small">Your rating: {piece.selfScore}/100</p><p><strong>What went well:</strong> {piece.reflections?.well}</p><p><strong>What you would change:</strong> {piece.reflections?.change}</p></Panel>}
   {allowance&&<p className="small">AI reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} The AI reads your text and photos, and watches your videos and YouTube or Google Drive links, picture and sound.</p>}
   <div className="button-row"><Go href={'/portfolio?from='+encodeURIComponent(key)} outline>See it in My Work</Go>{onFinish&&<Button onClick={onFinish}><Flag size={16}/>Finish the level</Button>}</div>
+ </div>;
+}
+
+// "Was this review useful?" Thumbs up or down, which the learner can change, with an optional comment.
+function ReviewRating({review}:{review:Review}){
+ const [rating,setRating]=useState(review.rating||null),[comment,setComment]=useState(review.rating?.comment||''),[asking,setAsking]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ async function send(helpful:boolean,note=comment,close=true){setBusy(true);setError('');try{const r=await fetch('/api/review/rate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewId:review.id,helpful,comment:note})});const d:any=await r.json();if(!r.ok)throw Error(d.error);setRating(d.rating);if(close)setAsking(false)}catch(e:any){setError(e.message||'That didn’t save. Please try again.')}finally{setBusy(false)}}
+ return <div className="vg-rate"><span className="small">Was this review useful?</span>
+  <div className="vg-rate-buttons" role="group" aria-label="Was this review useful?">
+   <button type="button" aria-pressed={rating?.helpful===1} disabled={busy} onClick={()=>send(true,'')}><ThumbsUp size={16}/>Yes</button>
+   <button type="button" aria-pressed={rating?.helpful===0} disabled={busy} onClick={()=>{setAsking(true);if(rating?.helpful!==0)send(false,'',false)}}><ThumbsDown size={16}/>No</button>
+  </div>
+  {rating&&!asking&&<span className="small" role="status">Thanks{rating.comment?', we read every comment':''}.</span>}
+  {asking&&<form className="vg-rate-comment" onSubmit={e=>{e.preventDefault();send(false)}}><label className="vg-field">What would have made it more useful? (optional)<textarea rows={2} maxLength={600} value={comment} onChange={e=>setComment(e.target.value)}/></label><Button type="submit" variant="outline" disabled={busy}>{busy?'Sending…':'Send'}</Button></form>}
+  {error&&<p className="small" role="alert">{error}</p>}
  </div>;
 }
 

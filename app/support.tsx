@@ -9,7 +9,7 @@ import {ticketCategories,categoryLabel,statusLabel,messageMin,messageMax} from '
 // "Report a problem": a learner tells us what's wrong, and the ticket carries where they were (User ID, Course ID,
 // pathway, module, lesson, page) so support knows the context without asking. The dialog shows what's attached.
 // The server works the context out again from the learner's own account; this preview is only for them.
-export function ReportProblem({planId,moduleKey,lesson,label='Report a problem',variant='outline'}:{planId?:string;moduleKey?:string;lesson?:number;label?:string;variant?:'outline'|'ghost'}){
+export function ReportProblem({planId,moduleKey,lesson,category:preset='',label='Report a problem',variant='outline'}:{planId?:string;moduleKey?:string;lesson?:number;category?:string;label?:string;variant?:'outline'|'ghost'}){
  const {s,user}=useLearning();
  const ref=useRef<HTMLDialogElement>(null);
  const [open,setOpen]=useState(false),[category,setCategory]=useState(''),[message,setMessage]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[sent,setSent]=useState<any>(null);
@@ -17,7 +17,7 @@ export function ReportProblem({planId,moduleKey,lesson,label='Report a problem',
  const plans=plansOf(s),mod=moduleKey?parseVideoKey(moduleKey):null;
  const plan=plans.find(p=>p.id===planId)||(mod&&(plans.find(p=>p.id===s.programme?.id&&p.level===mod.level)||plans.find(p=>p.level===mod.level)))||(planId||mod?null:s.programme)||null;
  const where=[(user as any)?.publicId&&`User ID ${(user as any).publicId}`,plan?.courseId&&`Course ID ${plan.courseId}`,plan&&planTitle(plan),mod&&`${mod.module.id} · ${moduleLesson(mod.module,projectLabel(plan)).title}`,lesson&&`Lesson ${lesson}`].filter(Boolean) as string[];
- const start=()=>{setCategory('');setMessage('');setError('');setSent(null);setOpen(true)};
+ const start=()=>{setCategory(preset);setMessage('');setError('');setSent(null);setOpen(true)};
  const send=async(e:React.FormEvent)=>{e.preventDefault();setBusy(true);setError('');
   try{const r=await fetch('/api/support',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({category,message,planId:plan?.id,moduleKey,lesson,page:window.location.pathname+window.location.search,viewport:`${window.innerWidth}x${window.innerHeight}`})});
    const d:any=await r.json();if(!r.ok)throw Error(d.error||'That didn’t send. Please try again.');setSent(d.ticket)}
@@ -50,16 +50,18 @@ export function HelpRequests(){
  const {user}=useLearning();
  const [tickets,setTickets]=useState<any[]|null>(null);
  useEffect(()=>{if(user)fetch('/api/support').then(r=>r.json()).then((d:any)=>setTickets(d.tickets||[])).catch(()=>setTickets([]))},[user]);
+ // Once new replies are on screen, mark them seen so the header dot clears; they stay highlighted until the page reloads.
+ useEffect(()=>{if(tickets?.some(t=>t.fresh))fetch('/api/support/seen',{method:'POST'}).catch(()=>{})},[tickets]);
  if(!user)return null;
  return <section className="panel sg-help-requests" id="help-requests">
   <div className="row between"><h2>Help requests</h2><ReportProblem/></div>
   <p className="small">Your User ID is <strong className="sg-id">{(user as any).publicId||'…'}</strong>. Quote it, with a course ID or ticket number, if you contact us.</p>
   {tickets===null?<p className="small" role="status">Loading…</p>:!tickets.length?<p className="small">No requests yet.</p>:
-   <ul className="sg-tickets">{tickets.map(t=><li key={t.id}>
+   <ul className="sg-tickets">{tickets.map(t=><li key={t.id} className={t.fresh?'fresh':''}>
     <div className="row between"><strong>{t.id} · {categoryLabel(t.category)}</strong><span className={'badge sg-status '+t.status}>{statusLabel(t.status)}</span></div>
     <span className="small">{[t.course_id,t.plan_name,t.module_title,t.lesson&&'Lesson '+t.lesson].filter(Boolean).join(' · ')} · {new Date(t.created_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</span>
     <p className="small prewrap">{t.message}</p>
-    {t.reply&&<p className="sg-reply"><strong>Reply from Framepath:</strong> {t.reply}</p>}
+    {t.reply&&<p className="sg-reply"><strong>{t.fresh?'New reply':'Reply'} from Framepath:</strong> {t.reply}</p>}
    </li>)}</ul>}
  </section>;
 }
