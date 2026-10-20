@@ -12,7 +12,7 @@ This round covers everything since #29 was merged:
 - the home banner images
 - permanent User and Course IDs, with a support ticket system
 
-> **Before deploying to production:** run `npm run db:migrate:production`. Migration `0007` adds the ID and ticket tables. The deploy script doesn't run migrations, and the new code needs these tables. Staging is already migrated.
+> **Before deploying to production:** run `npm run db:migrate:production`. Migrations `0007` (IDs and tickets) and `0008` (pilot tracker, review ratings, ticket alerts) add tables and columns. The deploy script doesn't run migrations, and the new code needs them. Staging is already migrated.
 
 Plans behind this work:
 - `docs/plans/2026-10-final-edits.md`: the map of every edit and audit finding
@@ -69,8 +69,55 @@ Also fixed:
 - **Account deletion:** removes the learner's tickets and Course ID rows.
 - **No alerts yet:** neither staff nor learners get an email or WhatsApp message about tickets.
 
+## Pilot: learning from use, smarter reviews, a plan that adapts
+
+**Tracker**
+- Each step is recorded where it happens:
+  - visit
+  - plan started
+  - plan created
+  - lesson video watched
+  - hand-in
+  - AI review ready
+  - AI review opened
+  - module finished
+- Steps before sign-in use an anonymous browser ID and are linked to the account at sign-in.
+- **Admin → Pilot funnel** shows, for the last 7, 30 or 90 days:
+  - people at each step, as a share of the step before
+  - signed-in learners who came back in a later week
+  - the share of AI reviews rated useful, with the latest comments
+
+**AI reviews**
+- **Rewatch:** each review names one lesson to rewatch, chosen from the module's real lessons, with a link to it.
+- **Since your last hand-in:** compares with the module's previous hand-in. Each check also shows "↑ from 2" or "↓ from 3", worked out from the saved scores.
+- **Usefulness:** "Was this review useful?" with 👍/👎 and an optional comment.
+- **Unscored checks:** when a check can't be scored, "Ask us about this review" opens a ticket with the review category already chosen.
+
+**Ticket alerts (inside the site)**
+- **Learners:** a lime dot on My account when support replies. The reply is highlighted once in Help requests.
+- **Admins:** a Tickets link with the open count in the header.
+- Email alerts need an email provider, which isn't chosen yet.
+
+**A plan that adapts**
+- **Skill levels keep up with the learner.** The starting check counts once, and each AI-reviewed module in that skill counts once more. The plan shows where each skill started.
+- **Behind:** "You're N days behind" with **Update my dates**, which moves the remaining modules forward from today and counts the hours already done.
+- **Stage finished:** a one-time note when a stage is finished, suggesting a portfolio piece.
+- **Suggested for you:** for skills the reviews show are weak, the lesson to rewatch plus a Resources search.
+- **Today card on My courses:** the next lesson or task, with a time estimate.
+- **Already know this?** Answer all of a module's questions in one go. If every answer is right first time, those lessons count as finished. The server checks the answers and allows one try per module per day.
+
+**Old pages**
+- `/first-frame`, `/learn-mode` and `/diagnostic/result` now go to the plan builder.
+- The older lesson flows that say "AI can't watch video" were left alone. That is still true of those flows; only the current Videography modules send video to Gemini.
+
+**Not in this round**
+- WhatsApp messages (waiting for your go-ahead).
+- Email alerts (no email provider yet).
+- Hindi (a decision on scope is needed first).
+- Phone versions of the home banners (needs taller images).
+
 ## Checks
-- `node --test tests/*.test.mjs`: 107 pass. New tests cover F01, F02, F04 and F05, the device filter, plan names and Course IDs, and the support categories.
+- `node --test tests/*.test.mjs`: 108 pass. New tests cover F01, F02, F04 and F05, the device filter, plan names and Course IDs, and the support categories.
 - `npx tsc`: clean.
 - `npm run build`: all budgets pass (shared styles 49.2 KB of 60 KB).
 - Every changed page was checked by screenshot at 1536px and 390px, with no sideways scroll.
