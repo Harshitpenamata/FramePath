@@ -139,3 +139,91 @@ main.page .two-col{gap:var(--s5);align-items:start}
 main.page .two-col>.panel{margin:0}
 .panel:has(>details.sg-acc:only-child){border:0;padding:0;background:none}
 .panel:has(>details.sg-acc:only-child)>details.sg-acc{margin:0}
+main:focus{outline:none}
+/* Buttons (Apple HIG rules, in the Studio Grid look)
+   1. Every control has at least a 44 by 44 px target.  2. Every button visibly reacts when pressed.
+   3. Lime is for the main action only; a selected item uses a cream fill.  4. Destructive actions are red and never the main button. */
+:root{--destructive:#f0766b;--destructive-foreground:#0b0b0b}
+[data-slot=button],.sg-arrow,.rs-chips button,[data-slot=tabs-trigger],.vg-lesson-steps button,.vg-pick button,.vg-video-strip button,.hm-slide-dots button,.hm-slide-pause{transition:transform .08s ease,background-color .15s ease,border-color .15s ease,color .15s ease}
+:is([data-slot=button],.sg-arrow,.rs-chips button,[data-slot=tabs-trigger],.vg-lesson-steps button,.vg-pick button,.hm-slide-pause,.vg-next-q):active:not(:disabled){transform:scale(.97)}
+[data-slot=button][data-variant=default]:active:not(:disabled){background:#c4d65a}
+[data-slot=button][data-variant=outline]:active:not(:disabled),[data-slot=button][data-variant=ghost]:active:not(:disabled){background:#f2eee41f}
+/* Targets */
+[data-slot=checkbox]{position:relative}
+[data-slot=checkbox]::after{content:'';position:absolute;inset:-14px}
+.check-row{min-height:44px;align-items:center}
+.check-row label{cursor:pointer;padding-block:var(--s2)}
+details>summary{min-height:44px;display:flex;align-items:center}
+select,input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]){min-height:44px}
+label:has(>input[type=radio]),label:has(>input[type=checkbox]){min-height:44px;display:flex;align-items:center;gap:var(--s3)}
+.vg-lesson-steps button{min-height:44px}
+/* Selected is cream; lime stays for actions */
+.vg-lesson-steps button.current{background:var(--foreground)!important;border-color:var(--foreground)!important;color:#0b0b0b!important}
+/* Destructive */
+[data-slot=button].sg-danger{color:var(--destructive)!important;border-color:color-mix(in srgb,var(--destructive) 60%,transparent)!important}
+[data-slot=button].sg-danger:hover:not(:disabled){background:color-mix(in srgb,var(--destructive) 12%,transparent)!important}
+[data-slot=button][data-variant=destructive]{background:var(--destructive);color:#0b0b0b;border:0}
+[data-slot=button][data-variant=destructive]:hover:not(:disabled){background:#f48b81}
+/* Focus stands out on every surface (Make it Clear guide): a ring 3px away from the control, so it never
+   blends into a lime button; black on the cream header and on lime panels, where lime would be too faint. */
+:focus-visible{outline:3px solid var(--primary)!important;outline-offset:3px!important}
+.topbar :focus-visible,.hm-cta :focus-visible,.hm-craft.live :focus-visible{outline-color:#0b0b0b!important}
+/* Hover for every button style */
+[data-slot=button][data-variant=ghost]:hover:not(:disabled){background:#f2eee414}
+/* Button labels stay on one line */
+[data-slot=button]{white-space:nowrap}
+/* Red with a margin over AAA (7.6:1 on the page) */
+:root{--destructive:#f5887e}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* Warning dialog (used for deleting a plan) */
+.sg-dialog{width:min(560px,calc(100% - 32px));border:var(--line);border-radius:var(--radius);background:#121212;color:var(--foreground);padding:var(--s6);display:grid;gap:var(--s4)}
+.sg-dialog:not([open]){display:none}
+.sg-dialog::backdrop{background:#000000b3}
+.sg-dialog h2{margin:0;font-size:var(--t-card);line-height:var(--lh-card)}
+.sg-warning{display:flex;gap:var(--s3);align-items:flex-start;margin:0;padding:var(--s4);border:1.5px solid var(--destructive);border-radius:14px;background:color-mix(in srgb,var(--destructive) 10%,transparent);color:var(--foreground)}
+.sg-warning svg{flex:none;color:var(--destructive);margin-top:2px}
+.sg-choices{border:0;margin:0;padding:0;display:grid;gap:var(--s2)}
+.sg-choices label{display:flex;gap:var(--s3);align-items:flex-start;padding:var(--s3) var(--s4);border:var(--soft-line);border-radius:14px;cursor:pointer}
+.sg-choices label:has(input:checked){border-color:var(--foreground)}
+.sg-choices input{margin-top:4px;accent-color:var(--primary);width:18px;height:18px;flex:none}
+.sg-choices label>span{display:grid;gap:2px}
+.sg-dialog .button-row{justify-content:flex-end;margin-top:var(--s2)}
+.sg-dialog{margin:auto;position:fixed;inset:0;height:fit-content;max-height:calc(100dvh - 32px);overflow:auto}
+.sg-choices label{margin:0}
+/* Support: Report a problem dialog, Help requests on My account, the admin queue */
+.sg-report{display:grid;gap:var(--s4)}
+.sg-report h2,.sg-dialog h2{display:flex;align-items:center;gap:var(--s2)}
+.sg-choices-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sg-choices-grid label{align-items:center;min-height:52px;padding:var(--s2) var(--s3);font-size:.9375rem}
+.sg-report textarea{width:100%;min-height:120px;padding:var(--s3);border:var(--soft-line);border-radius:14px;background:#0b0b0b;color:var(--foreground);font:inherit;resize:vertical}
+.sg-attached{margin:0;padding:var(--s3) var(--s4);border-radius:12px;background:#f2eee40d;color:var(--muted-foreground)}
+.sg-attached strong{color:var(--foreground)}
+.sg-link-button{display:inline-flex;align-items:center;min-height:48px;padding:0 var(--s5);border-radius:999px;background:var(--primary);color:#0b0b0b;font-weight:600;text-decoration:none}
+.sg-id{letter-spacing:.04em;color:var(--foreground)}
+.sg-help-requests{display:grid;gap:var(--s3)}
+.sg-help-requests .row{gap:var(--s3);flex-wrap:wrap;align-items:center}
+.sg-help-requests h2{margin:0}
+.sg-tickets{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.sg-tickets li{display:grid;gap:var(--s2);padding:var(--s4);border:var(--soft-line);border-radius:16px}
+.sg-tickets p{margin:0}
+.sg-status.open{background:#d6e86b26;color:var(--primary)}
+.sg-status.in_progress{background:#f2eee41f;color:var(--foreground)}
+.sg-status.resolved{background:#2a2a27;color:var(--muted-foreground)}
+.sg-reply{margin:0;padding:var(--s3);border-left:3px solid var(--primary);background:#d6e86b0f;color:var(--foreground)}
+.ls-support,.db-foot-actions{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--s3);margin-top:var(--s5)}
+.hp-report{display:grid;gap:var(--s3);justify-items:start;margin-top:var(--s4)}
+.hp-report p{margin:0}
+.admin-ticket{border-top:var(--soft-line);padding:var(--s3) 0}
+.admin-ticket[open]{display:grid;gap:var(--s3)}
+.admin-ticket label{display:grid;gap:var(--s1)}
+.admin-ticket textarea,.admin-ticket select{font:inherit;padding:var(--s2);border-radius:10px;border:var(--soft-line);background:#0b0b0b;color:var(--foreground)}
+.admin-ticket-context{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s2) var(--s4);margin:0}
+.admin-ticket-context dt{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-foreground)}
+.admin-ticket-context dd{margin:0}
+@media(max-width:600px){.sg-choices-grid{grid-template-columns:1fr}}
+/* Ticket alerts in the header */
+.topbar .account-link{position:relative}
+.sg-dot{position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;background:var(--primary);border:2px solid #0b0b0b}
+.sg-admin-tickets{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 var(--s3);color:#0b0b0b;font-weight:600;text-decoration:none}
+.sg-count{display:grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#0b0b0b;color:var(--primary);font-size:.75rem}
+.sg-tickets li.fresh{border-color:var(--primary)}

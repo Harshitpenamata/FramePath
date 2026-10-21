@@ -1,13 +1,13 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,BookOpen,Check,ExternalLink,Gift,ListChecks,LockKeyhole,Maximize2,Play,Puzzle,Target,X} from 'lucide-react';
+import {ArrowLeft,ArrowRight,Check,ExternalLink,Lightbulb,ListChecks,LockKeyhole,Maximize2,Play,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
-import {parseVideoKey,moduleLesson,projectLabel,freeModuleCount,isFreeModule,modulesFor,moduleKey as keyOf,type Pathway} from './programme';
-import {videosFor,moduleImages,imageSrcSet,type ModuleVideo} from './media';
+import {parseVideoKey,moduleLesson,projectLabel,isFreeModule,modulesFor,moduleKey as keyOf,type Pathway} from './programme';
+import {videosFor,type ModuleVideo} from './media';
 import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
-import {ReflectStep} from './reflect';
+import {ReflectStep,TestOut} from './reflect';
 
 const stages=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
 
@@ -105,19 +105,23 @@ export function VideoPanel({videos:all,watched=[],onWatched}:{videos:ModuleVideo
  const fallback=useTrackingFallback(frame,v,playing&&!!onWatched);
  if(!videos.length)return null;
  const seen=(x:ModuleVideo)=>watched.includes(videoId(x));
- const list=playable.length>0&&<ol className="vg-video-list" aria-label="Videos in this lesson">{playable.map((x,i)=><li key={x.title+i}><button type="button" className={[i===active&&'active',onWatched&&seen(x)&&'watched'].filter(Boolean).join(' ')} aria-current={i===active?'true':undefined} onClick={()=>{setActive(i);setPlaying(false)}}>{onWatched&&seen(x)?<Check size={14}/>:<Play size={14}/>}<span>{x.title}<small>{x.creator}{x.start?' · from '+clock(x.start):''}</small></span></button></li>)}</ol>;
  const cards=links.length>0&&<div className="vg-video-links">{links.map(x=><a key={x.title+x.url} className={'vg-link-card'+(onWatched&&seen(x)?' watched':'')} href={x.url} target="_blank" rel="noopener noreferrer" onClick={e=>{onWatched?.(videoId(x));if(canFrame(x.url)){e.preventDefault();setReader(x)}}}>
    <span><strong>{x.title}</strong><small>{x.creator}{x.section?' · '+x.section:''}</small><small>{x.focus}</small></span>
    <span className="vg-link-side">{onWatched&&seen(x)?<Badge tone="green"><Check size={12}/> Opened</Badge>:x.paid?<Badge>Optional · paid</Badge>:<Badge tone="green">Free</Badge>}{canFrame(x.url)?<Maximize2 size={16}/>:<ExternalLink size={16}/>}</span></a>)}</div>;
- // Player on the left, the list of titles (and lessons on other sites) on the right.
- return <div className={'vg-video'+(v?' two-col':'')}>
-  {v&&<div className="vg-video-main"><div className="vg-video-frame">{playing
+ // The player, a strip of the lesson's videos under it, then the open video's title and what to watch for.
+ // Lessons on other sites follow as cards.
+ return <div className="vg-video">
+  {v&&<div className="vg-video-frame">{playing
    ?<iframe ref={frame} src={embedUrl(v)} title={v.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen loading="lazy"/>
-   :<button type="button" className="vg-video-cover" onClick={()=>setPlaying(true)} style={v.youtubeId?{backgroundImage:`url(https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg)`}:undefined} aria-label={'Play '+v.title}><span className="vg-play"><Play size={30}/></span><span className="vg-video-title">{v.title}<small>{v.creator}{v.start?' · starts at '+clock(v.start):''}</small></span></button>}</div>
-  <p className="vg-video-focus"><Target size={15}/> Watch for: {v.focus}</p>
-  {onWatched&&<p className={'small vg-watch-state'+(seen(v)?' ok':'')}>{seen(v)?<><Check size={14}/> Watched</>:fallback.blocked?'Your browser is blocking the player’s progress, so we can’t tick this off by itself.':'Watch most of this video to tick it off.'}</p>}
-  {onWatched&&!seen(v)&&fallback.blocked&&<Button size="sm" variant="outline" disabled={!fallback.ready} onClick={()=>onWatched(videoId(v))}>{fallback.ready?'I’ve watched it':'I’ve watched it (available in '+fallback.wait+')'}</Button>}</div>}
-  {(list||cards)&&<div className="vg-video-side">{list}{cards}</div>}
+   :<button type="button" className="vg-video-cover" onClick={()=>setPlaying(true)} style={v.youtubeId?{backgroundImage:`url(https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg)`}:undefined} aria-label={'Play '+v.title}><span className="vg-play"><Play size={30}/></span></button>}</div>}
+  {playable.length>1&&<ol className="vg-video-strip" aria-label="Videos in this lesson">{playable.map((x,i)=><li key={x.title+i}><button type="button" className={[i===active&&'active',onWatched&&seen(x)&&'watched'].filter(Boolean).join(' ')} aria-current={i===active?'true':undefined} onClick={()=>{setActive(i);setPlaying(false)}}><span className="vg-strip-n">{onWatched&&seen(x)?<Check size={14}/>:String(i+1).padStart(2,'0')}</span><span className="vg-strip-t">{x.title}<small>{x.creator}</small></span></button></li>)}</ol>}
+  {v&&<div className="vg-video-about">
+   <h4>{v.title}</h4><span className="small">{v.creator}{v.start?' · starts at '+clock(v.start):''}</span>
+   <p className="vg-video-focus"><Lightbulb size={16}/> Watch for: {v.focus}</p>
+   {onWatched&&<p className={'small vg-watch-state'+(seen(v)?' ok':'')}>{seen(v)?<><Check size={14}/> Watched</>:fallback.blocked?'Your browser is blocking the player’s progress, so we can’t tick this off by itself.':'Watch most of this video to tick it off.'}</p>}
+   {onWatched&&!seen(v)&&fallback.blocked&&<Button size="sm" variant="outline" disabled={!fallback.ready} onClick={()=>onWatched(videoId(v))}>{fallback.ready?'I’ve watched it':'I’ve watched it (available in '+fallback.wait+')'}</Button>}
+  </div>}
+  {cards}
   {reader&&<SiteWindow v={reader} onClose={()=>setReader(null)}/>}
  </div>;
 }
@@ -144,7 +148,7 @@ function SelfPacedLock({moduleKey,what}:{moduleKey:string;what:string}){
 
 // Lessons tab: module intro, then each lesson's Watch and Reflect, then a pointer to the task.
 export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:()=>void;onLesson?:(index:number,count:number)=>void}){
- const {s,user,mutate}=useLearning();
+ const {s,user,mutate,busy}=useLearning();
  const parsed=parseVideoKey(moduleKey);
  const [index,setIndex]=useState(0);
  useEffect(()=>{const n=Number(new URLSearchParams(window.location.search).get('lesson'));if(n>0)setIndex(n-1)},[]);
@@ -153,7 +157,7 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  if(!parsed)return null;
  const m=parsed.module,p=s.programme;
  const pathway:Pathway=p?.primaryPathway||'Documentary';
- const lesson=moduleLesson(m,projectLabel(p)),image=moduleImages[m.id];
+ const lesson=moduleLesson(m,projectLabel(p));
  const lessons=lessonsFor(m.id),open=canPractise(s,moduleKey);
  const item=lessons[Math.min(index,lessons.length-1)],at=Math.min(index,lessons.length-1);
  // Progress is saved to the account (signed-in learners on a plan that covers this module).
@@ -162,29 +166,35 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  const status=lessonsStatus(m.id,pathway,marks,dead),done=(i:number)=>status.finished[i];
  const save=(body:any)=>{if(user&&open)void mutate('lesson_progress',{key:moduleKey,index:at,...body})};
  const mark=marks[at],videos=lessonVideos(m.id,at,pathway);
+ // Videos still online; the questions open once they are all watched. Next lesson waits until the lesson is finished.
+ const live=videos.filter(v=>!dead.includes(videoId(v))),watched=(v:ModuleVideo)=>!!mark?.v.includes(videoId(v)),allWatched=live.every(watched),locked=!!user&&open&&!done(at);
  const go=(i:number)=>{setIndex(i);document.getElementById('vg-lesson-top')?.scrollIntoView({behavior:'smooth',block:'start'})};
  return <div className="vg-context">
-  <div className="vg-context-hero">
-   {image&&<img src={`${image.base}-960.webp`} srcSet={imageSrcSet(image)} sizes="(max-width: 760px) 100vw, 640px" alt={image.alt} loading="lazy"/>}
-   <div><Badge>{m.id} · {m.stageLabel}</Badge>{parsed.index<freeModuleCount&&<Badge tone="green"><Gift size={12}/> Free</Badge>}<p className="vg-outcome">{m.outcome}</p><span className="small">About {m.hours} hours{lessons.length>0&&` · ${lessons.length} lessons`}</span></div>
-  </div>
   <section><h3>Where this fits in making a video</h3><StageDiagram current={m.stageLabel} done={[...new Set(modulesFor(parsed.level).map(x=>x.stageLabel))].filter(st=>modulesFor(parsed.level).every((x,i)=>x.stageLabel!==st||!!s.progress?.[keyOf(parsed.level,i)]))}/></section>
   {m.stage==='selected-pathway'&&<p className="notice">Your course: <strong>{pathway}</strong>. Switch between your styles under My courses on your Journey page.</p>}
 
   {item?<section className="vg-lessons" id="vg-lesson-top">
+   {user&&open&&!lessons.every((_,i)=>done(i))&&<TestOut moduleId={m.id} moduleKey={moduleKey} lessonCount={lessons.length} videosFor={i=>lessonVideos(m.id,i,pathway)} mutate={mutate} busy={busy} result={s.lastTestOut}/>}
    <ol className="vg-lesson-steps" aria-label="Lessons">{lessons.map((x,i)=><li key={x.title}><button type="button" className={(i===index?'current ':'')+(done(i)?'done':'')} aria-current={i===index?'step':undefined} onClick={()=>go(i)}><span>{done(i)?<Check size={14}/>:i+1}</span>{x.title}</button></li>)}</ol>
+   {/* Lesson layout (site edits, item 6): header with progress, 01 Watch, 02 Think it through (opens once the
+       videos are watched), then the way on. */}
    <article className="vg-lesson-card">
-    <div className="vg-lesson-intro">
+    <header className="vg-lesson-intro">
      <LessonSketch key={m.id+index} src={`/sketches/${m.id}-${index+1}`} title={item.title}/>
-     <div className="vg-lesson-about">
-      <span className="eyebrow">LESSON {index+1} OF {lessons.length}</span><h2>{item.title}</h2>
-      <p className="vg-idea">{item.idea}</p>
-      {user&&open&&<p className={'small vg-lesson-status'+(done(at)?' ok':'')}>{done(at)?<><Check size={14}/> Lesson finished</>:<>To finish this lesson: watch {videos.length===1?'the video':`all ${videos.length} videos`} ({videos.filter(v=>mark?.v.includes(videoId(v))).length} of {videos.length} done){videos.length?' and ':''}answer the Reflect questions ({mark?.t?'done':'not yet'}).</>}</p>}
-     </div>
-    </div>
-    <div className="vg-lesson-part"><h3><BookOpen size={18}/> Watch</h3><VideoPanel videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined}/></div>
-    <div className="vg-lesson-part"><h3><Puzzle size={18}/> Reflect</h3>{open?<ReflectStep moduleId={m.id} index={index} tool={item.tool} onSolved={()=>{if(!mark?.t)save({tool:true})}}/>:<SelfPacedLock moduleKey={moduleKey} what="Reflect questions"/>}</div>
-    <div className="button-row between">{index>0?<Button variant="outline" onClick={()=>go(index-1)}><ArrowLeft size={16}/>Previous lesson</Button>:<span/>}{index<lessons.length-1?<Button onClick={()=>go(index+1)}>Next lesson<ArrowRight size={16}/></Button>:<Button onClick={onTask}>Go to the task<ArrowRight size={16}/></Button>}</div>
+     <div className="vg-lesson-about"><span className="eyebrow">LESSON {index+1} OF {lessons.length}</span><h2>{item.title}</h2><p className="vg-idea">{item.idea}</p></div>
+     {live.length>0&&<div className="vg-lesson-progress"><span className="vg-dots" aria-hidden="true">{live.map(v=><i key={videoId(v)} className={watched(v)?'done':''}/>)}</span><span className="small">{live.filter(watched).length} of {live.length} {live.length===1?'video':'videos'} watched</span></div>}
+    </header>
+    <section className="vg-lesson-part"><div className="vg-part-head"><h3><span>01 /</span> Watch</h3>{live.length>0&&<span className="eyebrow">{live.length} {live.length===1?'VIDEO':'VIDEOS'}</span>}</div>
+     <VideoPanel videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined}/></section>
+    <section className="vg-lesson-part"><div className="vg-part-head"><h3><span>02 /</span> Think it through</h3></div><p className="small vg-part-lede">Turn what you watched into a practical decision.</p>
+     {!open?<SelfPacedLock moduleKey={moduleKey} what="Think it through questions"/>
+      :user&&!allWatched?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Watch {live.length===1?'the video':`all ${live.length} videos`} to open these questions.</strong><p className="small">{live.filter(watched).length} of {live.length} watched so far.</p></div></div>
+      :<ReflectStep moduleId={m.id} index={index} tool={item.tool} videos={videos} onSolved={()=>{if(!mark?.t)save({tool:true})}}/>}</section>
+    <footer className="vg-lesson-foot">
+     <p className={'small'+(done(at)?' ok':'')}>{!user||!open?'':done(at)?<><Check size={14}/> Lesson finished</>:`Complete ${live.length===1?'the video':live.length?`all ${live.length} videos`:'this lesson'} and the questions to continue.`}</p>
+     <div className="button-row">{index>0&&<Button variant="outline" onClick={()=>go(index-1)}><ArrowLeft size={16}/>Previous lesson</Button>}
+      {index<lessons.length-1?<Button disabled={locked} onClick={()=>go(index+1)}>Next lesson<ArrowRight size={16}/></Button>:<Button disabled={locked} onClick={onTask}>Go to the task<ArrowRight size={16}/></Button>}</div>
+    </footer>
    </article>
   </section>:<>
    <section><h3>What you’ll learn</h3><ul className="vg-topics">{m.topics.map(t=><li key={t}>{t}</li>)}</ul></section>
@@ -194,7 +204,7 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
   {(!item||at===lessons.length-1)&&<section className={'vg-assignment-preview'+(open?'':' locked')}>
    <span className="eyebrow">{taskLabel(m.id)}</span><h3><ListChecks size={18}/> {m.taskName}</h3>
    <p>{lesson.do}</p>
-   {!open?<SelfPacedLock moduleKey={moduleKey} what="This task"/>:requireLessonsForTask&&status.done<status.total?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Finish all {status.total} lessons to unlock this task.</strong><p className="small">{status.done} of {status.total} done. Watch each video and answer each lesson’s Reflect questions.</p></div></div>:<Button onClick={onTask}>Start the task</Button>}
+   {!open?<SelfPacedLock moduleKey={moduleKey} what="This task"/>:requireLessonsForTask&&status.done<status.total?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Finish all {status.total} lessons to unlock this task.</strong><p className="small">{status.done} of {status.total} done. Watch each video and answer each lesson’s Think it through questions.</p></div></div>:<Button onClick={onTask}>Start the task</Button>}
   </section>}
  </div>;
 }

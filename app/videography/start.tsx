@@ -1,15 +1,16 @@
 'use client';
 import React,{useEffect,useMemo,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,Check,ChevronLeft,ChevronRight,Clock,Lock,Plus,Star,X,Gem,CalendarDays,Briefcase,FileText,PawPrint,Smartphone,TvMinimalPlay,Plane,Package,Music,UtensilsCrossed,Shirt,Home,PersonStanding,Presentation,Clapperboard,Film} from 'lucide-react';
+import {ArrowLeft,ArrowRight,Check,ChevronLeft,ChevronRight,Clock,Lock,Plus,Star,X,Gem,CalendarDays,Briefcase,FileText,PawPrint,Smartphone,TvMinimalPlay,Plane,Package,Music,UtensilsCrossed,Shirt,Home,PersonStanding,Presentation,Clapperboard,Film,Pause,Play} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Photo} from '../ui';
 import type {PhotoSlot} from '../photos';
 import './home.css';
+import {track} from '../track';
 import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,maxPlans,plansOf,type Level,type Answer,type Visual} from './programme';
 
 const draftKey='fp-programme-draft-v3';
 // seed: shuffles each question's answer order for this learner, so the position of an answer gives nothing away.
-type Draft={seed:string;age?:'adult'|'guardian';interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
+type Draft={seed:string;name?:string;age?:'adult'|'guardian';interests:string[];answers:Answer[];level?:Level;hoursPerWeek?:number;daysPerWeek:number;startDate:string};
 const emptyDraft=():Draft=>({seed:Math.random().toString(36).slice(2),interests:[],answers:[],daysPerWeek:5,startDate:today()});
 function readDraft():Draft{try{const d=JSON.parse(localStorage.getItem(draftKey)||'null');if(d&&Array.isArray(d.answers))return {...emptyDraft(),...d}}catch{}return emptyDraft()}
 function writeDraft(d:Draft){try{localStorage.setItem(draftKey,JSON.stringify(d))}catch{}}
@@ -39,17 +40,41 @@ const crafts:{id:string;n:string;title:string;blurb:string;photo:PhotoSlot;live?
  {id:'animation',n:'04',title:'Animation · 2D | 3D',blurb:'Bring characters and worlds to life.',photo:'home-animation'},
  {id:'motion-graphics',n:'05',title:'Motion Graphics',blurb:'Make text and shapes move with purpose.',photo:'home-motion'},
 ];
+// Home banner: five designed banner images (Assets/fontpage) that change every 5 seconds. Each image's words are
+// its alt text, so screen readers hear them. Pauses while a keyboard user is in it and with the pause button, and
+// stays still for people who ask their device for reduced motion. Served from public/banners at 1000 and 2070 wide.
+const heroSlides:{n:number;alt:string}[]=[
+ {n:1,alt:'India’s first full-stack creative education platform. Your creative career, mapped by industry leaders. Powered by AI. From your first frame to your first film, beginner to advanced, all in one place.'},
+ {n:2,alt:'Curated by people who’ve done it. Most of our industry leaders never went to film school. They learned from the internet and from great mentors. Now they’ve mapped the path for you.'},
+ {n:3,alt:'Beginner to advanced. 700+ curated pathways. In every course. From first steps to advanced craft, the whole climb is mapped.'},
+ {n:4,alt:'Your pathway is free. Know a little? Know a lot? Start right there. Share what you know and how far you’ve come. We map what comes next.'},
+ {n:5,alt:'Learn your way. Learn with AI. Or learn with a mentor. Self-paced with AI-driven assignments and feedback, or a mentor-led program.'},
+];
+function HeroSlides({actions}:{actions:React.ReactNode}){
+ const [at,setAt]=useState(0),[paused,setPaused]=useState(false),[held,setHeld]=useState(false),[still,setStill]=useState(false);
+ useEffect(()=>{const m=window.matchMedia('(prefers-reduced-motion: reduce)');setStill(m.matches||document.documentElement.classList.contains('ui-reduced-motion'))},[]);
+ const n=heroSlides.length,go=(i:number)=>setAt((i+n)%n);
+ useEffect(()=>{if(paused||held||still)return;const t=setTimeout(()=>go(at+1),5000);return ()=>clearTimeout(t)},[at,paused,held,still]);
+ return <section className="hm-hero hm-banner" aria-roledescription="carousel" aria-label="About Framepath" onFocus={e=>{if(e.target.matches(':focus-visible'))setHeld(true)}} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setHeld(false)}}>
+  <h1 className="sr-only">Framepath: your creative career, mapped by industry leaders. Powered by AI.</h1>
+  <div className="hm-banner-frame">{heroSlides.map((x,i)=><img key={x.n} className={'hm-banner-img'+(i===at?' on':'')} src={`/banners/hero-${x.n}-2070.webp`} srcSet={`/banners/hero-${x.n}-1000.webp 1000w, /banners/hero-${x.n}-2070.webp 2070w`} sizes="(max-width: 1460px) 100vw, 1460px" width={2070} height={760} alt={x.alt} aria-hidden={i!==at} loading={i===0?'eager':'lazy'} decoding="async" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`}/>)}</div>
+  <div className="hm-banner-bar">
+   {actions}
+   <div className="hm-slide-nav">
+    <button type="button" className="sg-arrow" aria-label="Previous slide" onClick={()=>go(at-1)}><ChevronLeft size={18}/></button>
+    <span className="hm-slide-dots">{heroSlides.map((_,i)=><button key={i} type="button" aria-label={`Slide ${i+1}`} aria-current={i===at?'true':undefined} onClick={()=>go(i)}/>)}</span>
+    <button type="button" className="sg-arrow" aria-label="Next slide" onClick={()=>go(at+1)}><ChevronRight size={18}/></button>
+    {!still&&<button type="button" className="hm-slide-pause" onClick={()=>setPaused(p=>!p)} aria-label={paused?'Play slides':'Pause slides'}>{paused?<Play size={16}/>:<Pause size={16}/>}</button>}
+   </div>
+  </div>
+ </section>;
+}
+
 export function VideographyHome(){
  const {s,loaded}=useLearning();
  const startHref=loaded&&s.programme?'/workspace':'/start',startLabel=loaded&&s.programme?'Continue my pathway':'Build my free pathway';
  return <div className="hm">
-  <section className="hm-hero">
-   <span className="kicker">India’s first full-stack creative education platform</span>
-   <h1>Your creative career, mapped by industry leaders. <em>Powered by AI.</em></h1>
-   <p className="lede">From your first frame to your first film, Framepath builds a personal learning path from beginner to advanced, shaped by working professionals and guided by AI that gives feedback on your real work.</p>
-   <div className="button-row"><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go><Go href="#crafts" outline>Explore courses</Go></div>
-   <p className="hm-facts">Curated by industry leaders <span>·</span> Beginner to advanced <span>·</span> Self-paced or mentor-led</p>
-  </section>
+  <HeroSlides actions={<div className="button-row"><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go><Go href="#crafts" outline>Explore courses</Go></div>}/>
 
   <section className="hm-grid" id="crafts" aria-label="Choose your craft">
    <div className="hm-intro"><span className="kicker">Choose your craft</span><h2 className="display">Pick your craft. We’ll build the path.</h2><p>Each course runs from beginner to advanced, designed by industry practitioners.</p><a className="sg-arrow" href={startHref} aria-label={startLabel}><ArrowRight size={18}/></a></div>
@@ -101,7 +126,7 @@ export function ProgrammeStart(){
  async function create(){
   setError('');
   if(!user){writeDraft(draft);window.location.assign('/auth/google?return_to='+encodeURIComponent('/start?finish=1'));return}
-  const saved=await mutate('programme_save',{programme:{course:'videography',age:draft.age,interests:draft.interests,answers:draft.answers,level,hoursPerWeek:plan.hoursPerWeek,daysPerWeek:plan.daysPerWeek,startDate:plan.startDate}});
+  const saved=await mutate('programme_save',{programme:{course:'videography',age:draft.age,interests:draft.interests,answers:draft.answers,level,hoursPerWeek:plan.hoursPerWeek,daysPerWeek:plan.daysPerWeek,startDate:plan.startDate,name:draft.name||''}});
   if(saved){clearDraft();const made=(saved as any).programme?.id;window.location.assign(made?'/workspace/'+made:'/workspace')}else setError('Your plan could not be saved. Your answers are still here.');
  }
  // Returning from Google sign-in: finish automatically with the saved draft.
@@ -120,7 +145,7 @@ export function ProgrammeStart(){
 
   {step===0&&<Panel className="vg-panel">
    <span className="eyebrow">VIDEOGRAPHY · STEP 1</span>
-   <div className="sp-tiles" role="group" aria-label="What do you want to film?">{interests.map(i=>{const at=draft.interests.indexOf(i.id),Icon=interestIcons[i.id]||Film;return <button type="button" key={i.id} aria-pressed={at>=0} className={'sp-tile'+(at>=0?' on':'')} onClick={()=>update({interests:at>=0?draft.interests.filter(x=>x!==i.id):[...draft.interests,i.id]})}><Icon size={20}/><span>{i.label}</span>{at>=0&&<b aria-label={at===0?'Main project':'Pick '+(at+1)}>{at+1}</b>}</button>})}</div>
+   <div className="sp-tiles" role="group" aria-label="What do you want to film?">{interests.map(i=>{const at=draft.interests.indexOf(i.id),Icon=interestIcons[i.id]||Film;return <button type="button" key={i.id} aria-pressed={at>=0} className={'sp-tile'+(at>=0?' on':'')} onClick={()=>{if(!draft.interests.length&&at<0)track('plan_started',{interest:i.id});update({interests:at>=0?draft.interests.filter(x=>x!==i.id):[...draft.interests,i.id]})}}><Icon size={20}/><span>{i.label}</span>{at>=0&&<b aria-label={at===0?'Main project':'Pick '+(at+1)}>{at+1}</b>}</button>})}</div>
    {draft.interests.length>0&&<ol className="vg-chosen">{draft.interests.map((id,i)=><li key={id}>{i===0?<Star size={14} aria-label="Primary"/>:<span className="vg-rank">{i+1}</span>}{interestFor(id)?.label}{i>0&&<button type="button" className="vg-link" onClick={()=>update({interests:[id,...draft.interests.filter(x=>x!==id)]})}>Make main</button>}<button type="button" aria-label={'Remove '+interestFor(id)?.label} onClick={()=>update({interests:draft.interests.filter(x=>x!==id)})}><X size={14}/></button></li>)}</ol>}
    {draft.interests[0]&&<p className="small">Main project: <strong>{interestFor(draft.interests[0])!.label}</strong></p>}
    {!s.consent&&<fieldset className="vg-age"><legend>How old are you?</legend>
@@ -152,15 +177,17 @@ export function ProgrammeStart(){
    <label className="vg-field">Hours per week: <strong>{plan.hoursPerWeek} h</strong><input type="range" min={plan.recommendedHoursPerWeek} max={maxHoursPerWeek} step={1} value={plan.hoursPerWeek} onChange={e=>update({hoursPerWeek:Number(e.target.value)})}/><span className="small">Add more hours to finish sooner. You can’t go below the suggested time.</span></label>
    <div className="vg-field-row">
     <label className="vg-field">Days per week<select value={plan.daysPerWeek} onChange={e=>update({daysPerWeek:Number(e.target.value)})}>{[3,4,5,6,7].map(d=><option key={d} value={d}>{d} days</option>)}</select></label>
-    <label className="vg-field">Start date<input type="date" min={today()} max={addDays(today(),180)} value={plan.startDate} onChange={e=>update({startDate:e.target.value||today()})}/></label>
+    <label className="vg-field">Start date<input type="date" min={today()} max={addDays(today(),180)} value={plan.startDate} onChange={e=>{const v=e.target.value;update({startDate:v&&v>=today()&&v<=addDays(today(),180)?v:today()})}}/></label>
    </div>
    <div className="button-row"><Button variant="outline" onClick={()=>setStep(1)}><ArrowLeft size={16}/>Back</Button><Button onClick={()=>setStep(3)}>Check my plan <ArrowRight size={16}/></Button></div>
   </Panel>}
 
   {step===3&&result&&<Panel className="vg-panel">
    <span className="eyebrow">STEP 4 · REVIEW</span>
+   <label className="vg-field">Pathway name<input value={draft.name??''} maxLength={60} placeholder={'Videography · '+(interestFor(draft.interests[0])?.pathway||'')} onChange={e=>update({name:e.target.value})}/><span className="small">Optional. You can change it later on your plan.</span></label>
    <dl className="vg-review">
     <div><dt>Course</dt><dd>Videography</dd></div>
+    <div><dt>Pathway</dt><dd>{interestFor(draft.interests[0])?.pathway}</dd></div>
     <div><dt>Interests</dt><dd>{draft.interests.map(id=>interestFor(id)?.label).join(', ')}</dd></div>
     <div><dt>Level</dt><dd>{levelNames[level]} · {rhythm[level].hours} hours</dd></div>
     <div><dt>Time</dt><dd>{plan.hoursPerWeek} h/week for {plan.weeks} weeks</dd></div>
@@ -168,7 +195,7 @@ export function ProgrammeStart(){
    </dl>
    {!user&&loaded&&<p className="notice">Sign in with Google to save your plan. Until then, your answers stay on this device.</p>}
    {error&&<p role="alert" className="notice">{error}</p>}
-   <div className="button-row"><Button variant="outline" onClick={()=>setStep(2)}><ArrowLeft size={16}/>Back</Button><Button disabled={busy||!loaded} onClick={create}>{user?'Create my plan':'Sign in with Google and create'}<ArrowRight size={16}/></Button></div>
+   <div className="button-row"><Button variant="outline" onClick={()=>setStep(2)}><ArrowLeft size={16}/>Back</Button><Button disabled={busy||!loaded} onClick={create}>{busy?'Creating your plan…':user?'Create my plan':'Sign in with Google and create'}<ArrowRight size={16}/></Button></div>
   </Panel>}
   {step===3&&!result&&<Panel><p>Finish the level check first.</p><Button onClick={()=>setStep(1)}>Open level check</Button></Panel>}
   </div>

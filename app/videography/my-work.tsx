@@ -68,10 +68,11 @@ function ModuleCard({level,index,reviews,ids,setIds,isNext}:{level:Level;index:n
   <div className="st-ai">
    <div className="st-row"><span><Sparkles size={15}/> AI feedback / score</span>{review?.total!=null&&<strong>{Math.round(review.total)}<small>/100</small></strong>}</div>
    <p className="small">{review?review.summary:'No AI review for this piece yet.'}</p>
-   <a className="text-link" href={moduleHref(key)+'?tab=feedback'}>{review?'See detailed review':'Get it in Feedback'} →</a>
+   <a className="text-link" href={moduleHref(key)+'?tab=feedback'}>{review?'See detailed review':'Get it in Reflect'} →</a>
   </div>
   <div className="st-block"><span className="st-label">Hand-ins</span>
-   <ul className="st-handins">{pieces.map((p:any)=>{const k=pieceKind(p);return <li key={p.id}>
+   {/* The latest two hand-ins show; earlier ones fold away so one busy module doesn't stretch the row (site edits, item 5). */}
+   {(()=>{const row=(p:any)=>{const k=pieceKind(p);return <li key={p.id}>
     <Thumb p={p}/>
     <div className="st-handin-text"><strong>{k.label}</strong><span className="small">Hand-in {p.attempt} · <DateText value={p.createdAt}/></span>
      {(p.uploads||[]).length>0&&<span className="st-files">{p.uploads.map((f:any)=><span key={f.id}><a className="text-link" href={'/api/file/'+f.id} target="_blank" rel="noreferrer">{f.name}</a><button type="button" aria-label={'Remove '+f.name} disabled={busy} onClick={()=>removeFile(p.id,f.id)}><X size={12}/></button></span>)}</span>}
@@ -79,9 +80,10 @@ function ModuleCard({level,index,reviews,ids,setIds,isNext}:{level:Level;index:n
     </div>
     <div className="st-handin-actions">
      <CheckField checked={ids.includes(p.id)} onChange={(on:boolean)=>toggle(p.id,on)}>Portfolio</CheckField>
-     <Button variant="ghost" size="sm" disabled={busy} aria-label="Remove from My Work" onClick={()=>removePiece(p.id)}><Trash2 size={14}/></Button>
+     <Button variant="ghost" size="sm" className="sg-danger" disabled={busy} aria-label="Remove from My Work" title="Remove from My Work" onClick={()=>removePiece(p.id)}><Trash2 size={14}/></Button>
     </div>
-   </li>})}</ul>
+   </li>};
+    return <><ul className="st-handins">{pieces.slice(0,2).map(row)}</ul>{pieces.length>2&&<details className="st-more"><summary>Earlier hand-ins ({pieces.length-2})</summary><ul className="st-handins">{pieces.slice(2).map(row)}</ul></details>}</>})()}
   </div>
   {(latest.notes||latest.answer)&&<div className="st-block"><span className="st-label">Your note</span><p className="st-note prewrap">{latest.answer||latest.notes}</p>{latest.answer&&latest.notes&&<p className="st-note small prewrap">{latest.notes}</p>}</div>}
  </article>;

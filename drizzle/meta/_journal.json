@@ -50,6 +50,20 @@
       "when": 1792031767708,
       "tag": "0006_uneven_the_professor",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1792386312000,
+      "tag": "0007_ids_and_support",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1792497952719,
+      "tag": "0008_pilot_tracker",
+      "breakpoints": true
     }
   ]
 }

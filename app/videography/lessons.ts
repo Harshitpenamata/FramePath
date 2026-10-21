@@ -985,6 +985,14 @@ export const requireLessonsForTask=false;
 export const videoId=(v:ModuleVideo)=>v.youtubeId?'yt:'+v.youtubeId+'@'+(v.start||0):v.vimeoId?'vm:'+v.vimeoId:'url:'+v.url;
 export type LessonMark={v:string[];t:boolean};
 // dead: video ids the health check found removed or not embeddable (app/video-health.ts). They don't count.
+// A question that names a video ("from …") only shows when that video is in the lesson the learner sees.
+// Style project lessons (B13, I13, A13) show different videos for each style, and some lesson videos were
+// replaced, so a question about a video the learner can't watch is left out (audit F05).
+const titleKey=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+export function questionsForVideos<Q extends {video:string}>(questions:Q[],videos:{title:string}[]):Q[]{
+ const titles=videos.map(v=>titleKey(v.title));
+ return questions.filter(q=>{if(!q.video)return true;const v=titleKey(q.video);return titles.some(t=>t===v||t.includes(v)||v.includes(t))});
+}
 export function lessonNeeds(moduleId:string,index:number,pathway:Pathway,dead:string[]=[]){return lessonVideos(moduleId,index,pathway).map(videoId).filter(id=>!dead.includes(id))}
 export function lessonFinished(moduleId:string,index:number,pathway:Pathway,mark?:LessonMark,dead:string[]=[]){
  return !!mark?.t&&lessonNeeds(moduleId,index,pathway,dead).every(id=>mark.v.includes(id));

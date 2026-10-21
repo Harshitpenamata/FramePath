@@ -1,0 +1,18 @@
+// Support tickets: the categories a learner chooses from, and the statuses support moves a ticket through.
+// Shared by the Report a problem dialog, the ticket API and the admin queue.
+export const ticketCategories=[
+ ['video','A video won’t play or is missing'],
+ ['content','Something in a lesson or question is wrong'],
+ ['task','Handing in my work'],
+ ['review','My AI review'],
+ ['plan','My plan, dates or progress'],
+ ['account','Signing in or my account'],
+ ['membership','Membership or checkout'],
+ ['other','Something else'],
+] as const;
+export type TicketCategory=typeof ticketCategories[number][0];
+export const categoryLabel=(id:string)=>ticketCategories.find(c=>c[0]===id)?.[1]||'Something else';
+export const ticketStatuses=[['open','Open'],['in_progress','In progress'],['resolved','Resolved']] as const;
+export const statusLabel=(id:string)=>ticketStatuses.find(s=>s[0]===id)?.[1]||id;
+// A learner can send up to this many tickets a day, and messages between these lengths.
+export const ticketsPerDay=5,messageMin=10,messageMax=2000;

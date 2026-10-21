@@ -28,3 +28,4 @@
 .library-resource .cluster-pills{margin-top:8px}
 .library-resource>details.library-resource-copy{display:block;padding:0 6px 4px;font-size:.85rem;color:var(--muted-foreground)}
 .resource-topic-art{height:104px}
+@media(max-width:760px){.library-resource,.library-resource-copy{grid-template-columns:1fr}.library-resource-copy>[data-slot=button]{grid-column:1;grid-row:auto;justify-self:start;margin-top:var(--s3)}}

@@ -93,17 +93,74 @@ After review, the pages were measured with a script (button sizes, heading sizes
 ## Performance
 
 - **Legacy stylesheets:** moved out of the shared bundle into the pages that use them (`app/legacy-styles.ts`). Each new page's styles load only with that page.
-- **Shared styles:** 47.5 KB of the 60 KB budget.
+- **Shared styles:** 48.5 KB of the 60 KB budget.
 - **Photos:** served at 900 and 1800 px wide (1.9 MB for all 24 files) and lazy-loaded.
+
+## Site edits and audit fixes (19 Oct 2026)
+
+From `FramePath Site Final Edits.pdf` and the functional audit of staging (18 Oct 2026). The full map is in `docs/plans/2026-10-final-edits.md`.
+
+**Site edits**
+
+| # | Change |
+|---|---|
+| Banner | The home hero is now five slides with the supplied copy. Each has a photo, changes every 5 seconds, pauses on hover and keyboard focus, has dots, arrows and a pause button, and stays still for reduced motion |
+| 1 | The "Curated by industry leaders · …" line under the home buttons is removed |
+| 2 | "Make another plan" opens the course picker on the home page, not the level check |
+| 3 | Plans can be named on the review step and renamed on the plan page. Leaving the name empty brings back "Videography · pathway". Each plan shows a course ID such as `VID-B-4737` (course, level letter, four digits that stay the same for the plan) |
+| 4 | Module header in two columns: title and details on the left; picture, tag and summary on the right |
+| 5 | My work cards: three a row. Each file name has its own line and is cut off with "…" when long. Portfolio and delete sit on their own row. Older hand-ins fold under "Earlier hand-ins" |
+| 6 | New lesson layout: a header with video progress, then 01 / Watch (player, a strip of the lesson's videos, what to watch for), then 02 / Think it through, then the way on |
+| 6 | The questions open only after every video in the lesson is watched. They show one at a time, with lettered answers and progress dots. Next lesson waits until the lesson is finished |
+| 7 | The questions inside Watch are now called "Think it through"; the Reflect tab keeps its name. "Get it in Feedback" now says "Get it in Reflect" |
+
+**Audit findings**
+
+| # | Problem | Fix |
+|---|---|---|
+| F01 | A start date in the past was accepted | The server allowed one day in the past and used the UTC date. It now uses the India date and accepts today or later; the date fields ignore typed past dates |
+| F02 | The Intermediate filter hid 11 resources | "Intermediate / advanced" was tagged advanced only; it is now tagged both |
+| F03 | Membership said AI can't watch videos | It now uses the same sentence as Help and Safety |
+| F04 | The Documentary B13 heading said "Wildlife & nature" | The style project is named after the plan's pathway, like the breadcrumb |
+| F05 | Questions named videos the lesson doesn't show | A question naming a video that isn't in the lesson is left out. This applied to 65 citations across 24 lessons; every lesson still has at least one question |
+| — | Android filter showed iPhone and Mac guides | They are tagged iPhone-only or desktop-only |
+| — | "Skip to content" didn't move focus | Focus now moves into the page |
+| — | Membership's "Browse pathways" opened My courses | The button is now called "My courses" |
+
+**Buttons (Apple's button rules, in the Studio Grid look)**
+- **Targets:** every control has a target of at least 44 by 44px.
+- **Press state:** every button visibly reacts when pressed.
+- **Lime:** marks the main action only; a selected lesson uses a cream fill.
+- **Destructive actions:** red, never the main button.
+- **Busy labels:** slow actions say what they are doing.
+
+**Buttons (Make it Clear's button guide)**
+- **Focus:** the ring sits 3px away from the control, so it shows on lime buttons. It turns black on the cream header and lime panels, where lime was only 1.16:1.
+- **Hover:** ghost buttons now have a hover state.
+- **Contrast:** every button and text label measured at WCAG AAA (7:1) on 9 pages. The red for delete actions is lightened for margin (7.6:1).
+- **One-line labels:** "Open resource" no longer wraps on phones. The plan page button says "Continue", with "Next up: module name" above it.
+
+**Not changed:** five older flows (the beginner session, the legacy onboarding and lesson pages) still say AI can't watch video. The current site doesn't link to them, so they were left alone.
+
+## User IDs, Course IDs and support tickets
+
+Full design: `docs/plans/2026-10-ids-and-support.md`.
+
+- **IDs:** every account gets a User ID (`FP-10001`) and every plan a Course ID (`VID-B-1001`). Both come from database counters, so they are unique and never reused. A Course ID never changes, even when a plan is renamed, moves up a level or is deleted.
+- **Report a problem:** the module, plan, Help and Account pages each have a "Report a problem" button. A ticket (`T-1001`) records the User ID, Course ID, pathway, plan name, level, module, lesson and page, so support doesn't have to ask.
+- **Learners:** they see their User ID, tickets and replies in My account → Help requests.
+- **Admins:** a support queue that finds tickets by `T-`, `FP-`, `VID-` or email, with status, a reply to the learner and a staff-only note. "Find a learner" also accepts User and Course IDs.
+- **Database migration `0007`** (adds tables and one column; changes nothing existing). **Run `npm run db:migrate:production` before deploying this to production.** Staging is already migrated.
+- **No alerts yet:** neither staff nor learners get an email or WhatsApp message when a ticket is raised or answered. Replies appear in My account.
 
 ## Not included
 
 - The "Get notified" buttons on the coming-soon crafts in the home mockup. There is nothing behind them yet.
-- WhatsApp updates (PR #28) are not in `main`, so they are not on this branch.
+- WhatsApp updates (PR #28) were merged into `main` later, and `main` has been merged into this branch. Their Account panel keeps its original style.
 
 ## Checks
 
-- `node --test tests/*.test.mjs`: 101 pass
+- `node --test tests/*.test.mjs`: 106 pass. New tests cover F01, F02, F04 and F05, the Android filter, plan names and course IDs
 - `npx tsc`: clean
 - `npm run build`: all budgets pass
 - Every page was compared with its mockup by screenshot at 1536px, signed in and signed out, and checked at 390px

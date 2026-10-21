@@ -1,12 +1,14 @@
 'use client';
 import React,{useState} from 'react';
-import {ArrowRight,BookOpen,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
+import {ArrowRight,BookOpen,Pencil,TriangleAlert,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {toast} from 'sonner';
 import {useLearning,Panel,Go,Badge,isExplore,Photo} from '../ui';
 import './dashboard.css';
-import {levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,courseNames,type Programme,type Level,type Mode} from './programme';
+import {liveSkills,behindBy,moduleArea,levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,defaultPlanTitle,courseId,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
+import {ReportProblem} from '../support';
+import {track} from '../track';
 
 const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
 const stageColor:Record<string,string>={Ideas:'var(--vg-s1)',Planning:'var(--vg-s2)',Filming:'var(--vg-s3)',Editing:'var(--vg-s4)','Your pathway':'var(--vg-s5)','Final project':'var(--vg-s6)'};
@@ -23,12 +25,12 @@ function overview(p:Programme){
  return `You start at ${levelNames[p.level]} level. You are strongest in ${strong.join(' and ')}. You will get extra practice in ${gaps.join(' and ')}. There are ${modulesFor(p.level).length} modules. You go from ideas to planning, filming and editing. Then you make a ${(primary?.label||'').toLowerCase()} project and a final video of your own.`;
 }
 
-export function HeatMap({p}:{p:Programme}){
+export function HeatMap({p,live}:{p:Programme;live?:ReturnType<typeof liveSkills>}){
  // Each skill row fills the level columns its score reaches: <40 Beginner, 40–69 Intermediate, 70+ Advanced.
  const band=(score:number)=>score>=70?2:score>=40?1:0;
  return <div className="vg-heat" role="table" aria-label="Current level by skill area">
   <div role="row" className="vg-heat-row head"><span role="columnheader">Skill area</span>{levels.map(l=><span role="columnheader" key={l}>{levelNames[l]}</span>)}<span role="columnheader">Score</span></div>
-  {skillAreas.map(a=>{const score=p.assessment.areas[a.id];const b=band(score);return <div role="row" className="vg-heat-row" key={a.id}><span role="rowheader">{a.label}</span>{levels.map((l,i)=><span role="cell" key={l} className="vg-heat-cell" data-on={i<=b} aria-label={i<=b?levelNames[l]+' reached':levelNames[l]+' not yet'}/>)}<span role="cell" className="vg-heat-score">{score}</span></div>})}
+  {skillAreas.map(a=>{const l=live?.[a.id],score=l?l.now:p.assessment.areas[a.id];const b=band(score);return <div role="row" className="vg-heat-row" key={a.id}><span role="rowheader">{a.label}</span>{levels.map((l,i)=><span role="cell" key={l} className="vg-heat-cell" data-on={i<=b} aria-label={i<=b?levelNames[l]+' reached':levelNames[l]+' not yet'}/>)}<span role="cell" className="vg-heat-score">{score}{l&&l.evidence>0&&l.now!==l.start&&<small className={l.now>l.start?'up':'down'}> was {l.start}</small>}</span></div>})}
  </div>;
 }
 
@@ -60,7 +62,7 @@ function StartDate({p,busy,update}:{p:Programme;busy:boolean;update:(u:any)=>Pro
  return <div className="vg-delay"><span className="vg-label">Start date</span>
   <p className="small">{n>0?`Your plan starts in ${n} day${n>1?'s':''}, on ${formatDate(start)}.`:n===0?'Your plan starts today.':`You started on ${formatDate(start)}.`} Change it if you need more time.</p>
   <div className="vg-chips" role="group" aria-label="Pick a start date">{choices.map(([label,date])=><button type="button" key={label} disabled={busy} aria-pressed={start===date} className={start===date?'selected':''} onClick={()=>update({startDate:date})}>{label}<small>{formatDate(date)}</small></button>)}</div>
-  <label className="vg-field">Or pick a date <input type="date" min={today()} max={addDays(today(),180)} value={start>=today()?start:''} disabled={busy} onChange={e=>{if(e.target.value)update({startDate:e.target.value})}}/></label>
+  <label className="vg-field">Or pick a date <input type="date" min={today()} max={addDays(today(),180)} value={start>=today()?start:''} disabled={busy} onChange={e=>{const v=e.target.value;if(v&&v>=today()&&v<=addDays(today(),180))update({startDate:v})}}/></label>
  </div>;
 }
 
@@ -70,30 +72,84 @@ const modes:{id:Mode;title:string;price:string;Icon:any;points:string[]}[]=[
 ];
 
 // My courses (/workspace): the learner's plans as tiles, up to three across all courses. Opening one shows its page.
+// The plan's name, which the learner can change, and its course ID (site edits, item 3).
+function PlanName({p}:{p:Programme}){
+ const {mutate,busy}=useLearning();
+ const [editing,setEditing]=useState(false),[value,setValue]=useState('');
+ const save=async(e:React.FormEvent)=>{e.preventDefault();if(await mutate('plan_rename',{id:p.id,name:value}))setEditing(false)};
+ return <div className="db-name">
+  {editing?<form className="db-rename" onSubmit={save}><label className="vg-field">Pathway name<input autoFocus value={value} maxLength={60} placeholder={defaultPlanTitle(p)} onChange={e=>setValue(e.target.value)}/></label>
+    <div className="button-row"><Button type="submit" disabled={busy}>{busy?'Saving…':'Save name'}</Button><Button type="button" variant="outline" onClick={()=>setEditing(false)}>Cancel</Button></div><p className="small">Leave it empty to use “{defaultPlanTitle(p)}”.</p></form>
+   :<><h1>{p.name||p.primaryPathway}</h1><div className="db-id">{courseId(p)&&<span>Course ID <strong>{courseId(p)}</strong></span>}<button type="button" className="text-link" onClick={()=>{setValue(p.name||'');setEditing(true)}}><Pencil size={14}/>Rename</button></div></>}
+ </div>;
+}
+
+// Under the stage strip: a nudge when the learner is behind (with new dates), a note when a stage is finished, and
+// suggestions for skills their AI reviews show are weak.
+const areaSearch:Record<string,string>={story:'story',planning:'shot list',camera:'camera','light-sound':'sound',editing:'editing',finishing:'colour'};
+function PlanNudges({p,live,reviews,mods}:{p:Programme;live:ReturnType<typeof liveSkills>;reviews:Record<string,any>;mods:ReturnType<typeof modulesFor>}){
+ const {s,mutate,busy}=useLearning();
+ const late=behindBy(p,s.progress);
+ const finished=stageOrder.filter(st=>{const ms=mods.map((m,k)=>({m,k})).filter(x=>x.m.stageLabel===st);return ms.length>0&&ms.every(x=>s.progress?.[moduleKey(p.level,x.k)])});
+ const latest=finished[finished.length-1],seenKey='fp-milestone-'+p.id+'-'+latest;
+ const [seen,setSeen]=useState(true);
+ React.useEffect(()=>{try{setSeen(!latest||localStorage.getItem(seenKey)==='1')}catch{setSeen(true)}},[seenKey]);
+ const weak=skillAreas.filter(a=>live[a.id].evidence>0&&live[a.id].now<50).slice(0,2);
+ const lessonFor=(area:string)=>{const i=mods.findIndex((m,k)=>moduleArea(m)===area&&reviews[moduleKey(p.level,k)]?.review?.revisit);return i<0?null:{key:moduleKey(p.level,i),title:mods[i].title,lesson:reviews[moduleKey(p.level,i)].review.revisit}};
+ if(!late&&(seen||!latest)&&!weak.length)return null;
+ return <section className="db-nudges">
+  {late&&<div className="db-nudge late"><CalendarClock size={20}/><div><strong>You’re {late.days} {late.days===1?'day':'days'} behind your dates.</strong><p className="small">That’s fine. Move your remaining modules forward from today, at {p.schedule.hoursPerWeek} hours a week.</p></div><Button disabled={busy} onClick={()=>mutate('plan_reschedule',{id:p.id})}>{busy?'Updating…':'Update my dates'}</Button></div>}
+  {latest&&!seen&&<div className="db-nudge done"><Check size={20}/><div><strong>{latest} stage finished.</strong><p className="small">Nice work. Pick your best piece from it for your portfolio.</p></div><div className="button-row"><Go href="/portfolio" outline>Choose for my portfolio</Go><Button variant="ghost" onClick={()=>{try{localStorage.setItem(seenKey,'1')}catch{}setSeen(true)}}>Dismiss</Button></div></div>}
+  {weak.length>0&&<div className="db-nudge tips"><Sparkles size={20}/><div><strong>Suggested for you</strong><p className="small">Your AI reviews show these skills need more practice.</p>
+   <ul>{weak.map(a=>{const l=lessonFor(a.id);return <li key={a.id}><strong>{a.label}</strong> ({live[a.id].now}){l&&<> · <a className="text-link" href={`/explore/video-${p.level}/${mods.findIndex(m=>m.title===l.title)}?tab=watch&lesson=${l.lesson}`}>Rewatch lesson {l.lesson} of {l.title}</a></>} · <a className="text-link" href={'/resources?q='+encodeURIComponent(areaSearch[a.id])}>Find resources</a></li>})}</ul></div></div>}
+ </section>;
+}
+
+// "Today" on My courses: the one next thing to do on the open plan, with roughly how long it takes. A module's
+// lessons are its topics, in order; a lesson counts as done once its questions are (the videos come first).
+function TodayCard(){
+ const {s}=useLearning();const p=s.programme as Programme|undefined;if(!p)return null;
+ const mods=modulesFor(p.level),i=mods.findIndex((_,k)=>!s.progress?.[moduleKey(p.level,k)]);
+ if(i<0)return <section className="db-today"><span className="kicker">TODAY</span><h2>You’ve finished every module of {planTitle(p)}.</h2><Go href={'/workspace/'+p.id}>See your plan<ArrowRight size={18}/></Go></section>;
+ const m=mods[i],key=moduleKey(p.level,i),marks=s.lessonProgress?.[key]||{},lesson=m.topics.findIndex((_:string,n:number)=>!marks[n]?.t);
+ const late=behindBy(p,s.progress),minutes=Math.round(m.hours*60/(m.topics.length+1)/5)*5;
+ const href=`/explore/video-${p.level}/${i}`+(lesson<0?'?tab=make':`?tab=watch&lesson=${lesson+1}`);
+ return <section className="db-today"><span className="kicker">TODAY · {planTitle(p)}</span>
+  <h2>{lesson<0?<>Hand in: {m.taskName}</>:<>Lesson {lesson+1} of {m.topics.length}: {m.topics[lesson]}</>}</h2>
+  <p className="small">{m.id} · {m.title} · about {lesson<0?Math.round(m.hours*60/(m.topics.length+1)/5)*5:minutes} min{late?<> · <a className="text-link" href={'/workspace/'+p.id}>{late.days} {late.days===1?'day':'days'} behind: update your dates</a></>:null}</p>
+  <Go href={href}><span onClick={()=>track('today_clicked',{module:key,lesson:lesson+1})}>{lesson<0?'Go to the task':'Start this lesson'}</span><ArrowRight size={18}/></Go>
+ </section>;
+}
+
 export function MyCourses(){
  const {s,user,loaded,mutate,busy}=useLearning();
+ const [deleting,setDeleting]=useState<Programme|null>(null);
  if(!loaded)return <Panel><p role="status">Opening your courses…</p></Panel>;
  const plans=plansOf(s);
  return <div className="db">
   <section className="db-head"><div><h1>My courses</h1><p className="lede">The plans you’ve made for yourself. You can follow up to {maxPlans} at a time, across any course.</p></div><span className="db-count">{plans.length} of {maxPlans} plans</span></section>
+  {plans.length>0&&<TodayCard/>}
   {!plans.length?<section className="db-empty">
     <div><h2 className="display">Make your first plan.</h2><p className="lede">Pick a course, answer a short level check and set your time.</p><Go href="/start">Make your first plan<ArrowRight size={18}/></Go>{!user&&<a className="db-signin" href="/auth/google?return_to=%2Fworkspace">Sign in to keep your plans and work.</a>}</div>
     <svg className="db-path" viewBox="0 0 560 140" fill="none" aria-hidden="true"><path d="M12 116H170c18 0 26-10 26-26V52c0-18 12-28 30-28h86c18 0 30 10 30 28v14c0 18 12 28 30 28h136" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="116" r="10" fill="#0b0b0b" stroke="currentColor" strokeWidth="2"/><circle cx="270" cy="24" r="10" fill="#0b0b0b" stroke="currentColor" strokeWidth="2"/><circle cx="530" cy="94" r="20" fill="var(--primary)"/><path d="M522 94h16m-6-6 6 6-6 6" stroke="#0b0b0b" strokeWidth="2.4"/></svg>
    </section>
   :<div className="db-plans">
    {plans.map(p=>{const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]||s.planProgress?.[p.id!]?.[moduleKey(p.level,i)]).length;
-    return <a key={p.id} className={'db-plan'+(p.id===s.programme?.id?' active':'')} href={'/workspace/'+p.id}>
+    return <div key={p.id} className={'db-plan'+(p.id===s.programme?.id?' active':'')}>
      <span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]}</span>
-     <strong className="display">{p.primaryPathway}</strong>
+     <a className="db-plan-link" href={'/workspace/'+p.id}><strong className="display">{p.name||p.primaryPathway}</strong></a>
+     {courseId(p)&&<span className="small db-plan-id">Course ID {courseId(p)}</span>}
+     <button type="button" className="db-plan-delete" aria-label={'Delete '+planTitle(p)} title="Delete this plan" onClick={()=>setDeleting(p)}><Trash2 size={16}/>Delete</button>
      <div className="vg-course-bar" aria-hidden="true"><span style={{width:Math.round(done/mods.length*100)+'%'}}/></div>
      <span className="small">{done} / {mods.length} modules · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</span>
-     <span className="db-plan-foot">{done?'Continue':'Open'}<span className="sg-arrow"><ArrowRight size={16}/></span></span>
-    </a>})}
-   {plans.length<maxPlans?<a className="db-plan add" href="/start"><Plus size={26}/><strong>Make another plan</strong><span className="small">Pick a course, answer a short level check and set your time.</span></a>
-    :<div className="db-plan add"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one from its page to make another.</span></div>}
+     <span className="db-plan-foot" aria-hidden="true">{done?'Continue':'Open'}<span className="sg-arrow"><ArrowRight size={16}/></span></span>
+    </div>})}
+   {plans.length<maxPlans?<a className="db-plan add" href="/#crafts"><Plus size={26}/><strong>Make another plan</strong><span className="small">Pick a course, answer a short level check and set your time.</span></a>
+    :<div className="db-plan add"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one to make another.</span></div>}
   </div>}
   {!plans.length&&s.profile&&<div className="button-row"><Go href="/workspace/previous" outline>Open my previous learning</Go><Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button></div>}
   {!user&&plans.length>0&&<p className="small">Sign in to keep your plans and work.</p>}
+  {deleting&&<DeletePlanDialog p={deleting} open onClose={()=>setDeleting(null)}/>}
  </div>;
 }
 
@@ -111,6 +167,9 @@ export function PlanPage({id}:{id:string}){
 
 function ProgrammeDashboard(){
  const {s,user,loaded,mutate,busy}=useLearning();
+ // The latest AI review of each module, so skill levels and suggestions keep up with the learner.
+ const [byModule,setByModule]=useState<Record<string,any>>({});
+ React.useEffect(()=>{if(user)fetch('/api/review?all=video').then(r=>r.ok?r.json():{reviews:{}}).then((d:any)=>{const out:Record<string,any>={};for(const r of Object.values(d.reviews||{}) as any[])if(r.lessonKey&&(!out[r.lessonKey]||out[r.lessonKey].createdAt<r.createdAt))out[r.lessonKey]={...r,ratings:r.review?.ratings||r.review?.criteria?.map((c:any)=>c.rating)||[]};setByModule(out)}).catch(()=>{})},[user]);
  const [hours,setHours]=useState<number|null>(null);
  const [upgrading,setUpgrading]=useState(false);
  if(!loaded)return <Panel><p role="status">Opening your plan…</p></Panel>;
@@ -118,6 +177,7 @@ function ProgrammeDashboard(){
  if(!p)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}{s.profile&&<Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button>}</div></Panel>;
  const selfActive=isExplore(s),mentorActive=['paid','active'].includes(s.craft?.status);
  const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]).length;
+ const live=liveSkills(p,Object.fromEntries(Object.entries(byModule).map(([k,r]:any)=>[k,{ratings:r.ratings}])));
  const nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(p.level,i)]);
  const update=(u:any)=>mutate('programme_update',{update:u});
  async function chooseMode(m:Mode){const saved=await update({mode:m});if(!saved)return;if(m==='self'&&!selfActive)window.location.assign('/membership?return_to=%2Fworkspace')}
@@ -131,19 +191,27 @@ function ProgrammeDashboard(){
  return <div className="vg-dashboard">
   <div className="breadcrumbs db-crumbs"><a href="/workspace">My courses</a><span>/</span><span>{planTitle(p)}</span></div>
   <section className="db-hero">
-   <div className="db-hero-text"><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><h1>{p.primaryPathway}</h1><p className="lede">{levelSummary[p.level]}</p>
+   <div className="db-hero-text"><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><PlanName p={p}/><p className="lede">{levelSummary[p.level]}</p>
     <p className="db-meta"><PlayCircle size={18}/>{done}/{mods.length} modules done · {p.schedule.totalHours} hours · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</p>
-    <div className="button-row">{nextIndex>=0&&<Go href={`/explore/${'video-'+p.level}/${nextIndex}`}>{done?'Continue':'Start'}: {moduleLesson(mods[nextIndex],projectLabel(p)).title}<ArrowRight size={18}/></Go>}
+    {/* One-line button labels: the module's name sits above the button. */}
+    {nextIndex>=0&&<p className="db-next">Next up: <strong>{moduleLesson(mods[nextIndex],projectLabel(p)).title}</strong></p>}
+    <div className="button-row">{nextIndex>=0&&<Go href={`/explore/${'video-'+p.level}/${nextIndex}`}>{done?'Continue':'Start'}<ArrowRight size={18}/></Go>}
      {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
      <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div>
    </div>
    <Photo slot="project" className="db-hero-photo"/>
   </section>
-  <ol className="db-stages" aria-label="Stages">{stageOrder.map((st,i)=>{const ms=mods.map((m,k)=>({m,k})).filter(x=>x.m.stageLabel===st);if(!ms.length)return null;const all=ms.every(x=>s.progress?.[moduleKey(p.level,x.k)]);return <li key={st} className={all?'done':''}><a href={`/explore/video-${p.level}/${ms.find(x=>!s.progress?.[moduleKey(p.level,x.k)])?.k??ms[0].k}`}><span className="display">{String(i+1).padStart(2,'0')}</span><strong>{st}</strong><span className="sg-arrow">{all?<Check size={16}/>:<ArrowRight size={16}/>}</span></a></li>})}</ol>
+  {/* Progress, not navigation: finished stages are filled, the current one is outlined, the rest wait. */}
+  {(()=>{const rows=stageOrder.map(st=>{const ms=mods.map((m,k)=>({m,k})).filter(x=>x.m.stageLabel===st);return {st,ms,all:ms.length>0&&ms.every(x=>s.progress?.[moduleKey(p.level,x.k)])}}).filter(r=>r.ms.length);
+   const now=rows.findIndex(r=>!r.all);
+   return <ol className="db-stages" aria-label="Your progress through the stages">{rows.map((r,i)=><li key={r.st} className={r.all?'done':i===now?'now':''} aria-current={i===now?'step':undefined}>
+    <span className="display">{String(i+1).padStart(2,'0')}</span><strong>{r.st}</strong>
+    {r.all?<span className="db-stage-mark"><Check size={16}/><span className="sr-only">Finished</span></span>:i===now?<span className="db-stage-now">Now</span>:null}</li>)}</ol>})()}
 
+  <PlanNudges p={p} live={live} reviews={byModule} mods={mods}/>
   <details className="sg-acc" open><summary><Target size={20}/>What you’ll be able to do</summary><PathwayOutcome p={p}/></details>
   <details className="sg-acc"><summary><BookOpen size={20}/>Your learning plan</summary><p>{overview(p)}</p><PathwayInfographic p={p}/></details>
-  <details className="sg-acc"><summary><Sparkles size={20}/>Your level in each skill</summary><HeatMap p={p}/><p className="small">Based on your 12 answers. Your tasks will show more.</p></details>
+  <details className="sg-acc"><summary><Sparkles size={20}/>Your level in each skill</summary><HeatMap p={p} live={live}/><p className="small">Starts from your 12 answers, then each AI-reviewed task in a skill counts as much again.</p></details>
   <details className="sg-acc"><summary><CalendarClock size={20}/>Your dates</summary>
     <div className="vg-dates"><div><span className="small">Start</span><strong>{formatDate(p.schedule.startDate)}</strong></div><ArrowRight/><div><span className="small">End</span><strong>{formatDate(p.schedule.endDate)}</strong></div></div>
     <p className="small">{p.schedule.totalHours} hours · {p.schedule.hoursPerWeek} h/week (recommended {p.schedule.recommendedHoursPerWeek}) · {p.schedule.weeks} weeks · ≈ {p.schedule.minutesPerDay} min/day over {p.schedule.daysPerWeek} days</p>
@@ -165,7 +233,7 @@ function ProgrammeDashboard(){
   </section>}
 
   <ModuleList p={p}/>
-  <DeletePlan id={p.id!}/>
+  <div className="db-foot-actions"><ReportProblem planId={p.id} variant="ghost" label="Report a problem with this plan"/><DeletePlan p={p}/></div>
  </div>;
 }
 
@@ -188,21 +256,26 @@ export function ModuleList({p,level}:{p?:Programme;level?:Level}){
 }
 
 // Delete this plan: keep the work (hand-ins, feedback and progress stay) or delete the plan's work too.
-function DeletePlan({id}:{id:string}){
+// Deleting a plan (from My courses or the plan's page): a warning dialog with two choices. Keeping the work
+// leaves hand-ins, feedback and progress for a new plan at the same level; deleting the work can't be undone.
+function DeletePlanDialog({p,open,onClose,onDeleted}:{p:Programme;open:boolean;onClose:()=>void;onDeleted?:()=>void}){
  const {mutate,busy}=useLearning();
+ const ref=React.useRef<HTMLDialogElement>(null);
+ const [keepWork,setKeepWork]=useState(true);
+ React.useEffect(()=>{const d=ref.current;if(!d)return;if(open&&!d.open){setKeepWork(true);d.showModal()}else if(!open&&d.open)d.close()},[open]);
+ const run=async()=>{if(await mutate('plan_delete',{id:p.id,keepWork})){onClose();onDeleted?.()}};
+ return <dialog ref={ref} className="sg-dialog" aria-labelledby={'del-'+p.id} onClose={onClose} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
+  <h2 id={'del-'+p.id}>Delete “{planTitle(p)}”?</h2>
+  <p className="sg-warning" role="alert"><TriangleAlert size={20}/><span><strong>This can’t be undone.</strong> Deleting a plan is permanent, and you could lose your progress.</span></p>
+  <fieldset className="sg-choices" aria-label="What to delete">
+   <label><input type="radio" name={'del-mode-'+p.id} checked={keepWork} onChange={()=>setKeepWork(true)}/><span><strong>Delete the plan, keep my work</strong><span className="small">Your hand-ins, feedback and progress stay, so a new plan at this level picks up where you are.</span></span></label>
+   <label><input type="radio" name={'del-mode-'+p.id} checked={!keepWork} onChange={()=>setKeepWork(false)}/><span><strong>Delete the plan and its work</strong><span className="small">Also removes this level’s hand-ins, feedback and lesson progress, unless another of your plans is at the same level.</span></span></label>
+  </fieldset>
+  <div className="button-row"><Button variant="outline" onClick={onClose} disabled={busy}>Cancel</Button><Button variant="destructive" onClick={run} disabled={busy}>{busy?'Deleting…':keepWork?'Delete plan':'Delete plan and work'}</Button></div>
+ </dialog>;
+}
+function DeletePlan({p}:{p:Programme}){
  const [open,setOpen]=useState(false);
- async function run(keepWork:boolean){
-  const ask=keepWork?'Delete this plan? Your hand-ins, feedback and progress stay.'
-   :'Delete this plan and its work? Hand-ins and lesson progress for this level are removed, unless another of your plans is at the same level. This can’t be undone.';
-  if(!window.confirm(ask))return;
-  if(await mutate('plan_delete',{id,keepWork}))window.location.assign('/workspace');
- }
- return <section className="vg-delete-plan">{open?<>
-  <h2>Delete this plan</h2>
-  <div className="vg-delete-options">
-   <div><strong>Delete the plan, keep my work</strong><p className="small">The plan goes. Hand-ins, feedback and progress stay, so a new plan at this level picks up where you are.</p><Button variant="outline" disabled={busy} onClick={()=>run(true)}>Delete plan only</Button></div>
-   <div><strong>Delete the plan and its work</strong><p className="small">Also removes this level’s hand-ins and lesson progress, unless another plan uses the same level. Can’t be undone.</p><Button variant="destructive" disabled={busy} onClick={()=>run(false)}>Delete plan and work</Button></div>
-  </div>
-  <Button variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button>
- </>:<Button variant="ghost" className="vg-delete-open" onClick={()=>setOpen(true)}><Trash2 size={16}/>Delete this plan</Button>}</section>;
+ return <section className="vg-delete-plan"><Button variant="ghost" className="vg-delete-open sg-danger" onClick={()=>setOpen(true)}><Trash2 size={16}/>Delete this plan</Button>
+  <DeletePlanDialog p={p} open={open} onClose={()=>setOpen(false)} onDeleted={()=>window.location.assign('/workspace')}/></section>;
 }

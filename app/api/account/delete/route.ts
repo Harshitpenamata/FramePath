@@ -22,6 +22,8 @@ export async function POST(req:Request){try{
   db().prepare('DELETE FROM goal_logs WHERE user_id=?').bind(id),
   db().prepare('DELETE FROM onboarding_attempts WHERE user_id=?').bind(id),
   db().prepare('DELETE FROM uploads WHERE user_id=?').bind(id),
+  db().prepare('DELETE FROM support_tickets WHERE user_id=?').bind(id),
+  db().prepare('DELETE FROM course_ids WHERE user_id=?').bind(id),
   db().prepare('DELETE FROM learners WHERE user_id=?').bind(id),
  ]);
  return Response.json({deleted:true,files:files.length},{headers:{'Cache-Control':'no-store'}});

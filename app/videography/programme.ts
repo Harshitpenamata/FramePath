@@ -196,7 +196,8 @@ export const maxHoursPerWeek=30;
 export type Schedule={level:Level;totalHours:number;hoursPerWeek:number;recommendedHoursPerWeek:number;weeks:number;startDate:string;endDate:string;minutesPerDay:number;daysPerWeek:number};
 const isoDate=(d:Date)=>d.toISOString().slice(0,10);
 export function addDays(date:string,days:number){const d=new Date(date+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+days);return isoDate(d)}
-export function today(){return isoDate(new Date())}
+// Learners are in India, so "today" is the India date. The browser and the server share this, so they always agree.
+export function today(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata'}).format(new Date())}
 // Recommended rhythm comes from the level; learners may only increase their weekly hours.
 export function schedule(level:Level,hoursPerWeek?:number,startDate?:string,daysPerWeek=5):Schedule{
  const r=rhythm[level];
@@ -207,7 +208,7 @@ export function schedule(level:Level,hoursPerWeek?:number,startDate?:string,days
  return {level,totalHours:r.hours,hoursPerWeek:hours,recommendedHoursPerWeek:r.hoursPerWeek,weeks,startDate:start,endDate:addDays(start,weeks*7-1),minutesPerDay:Math.round(hours*60/days/5)*5,daysPerWeek:days};
 }
 
-export type Programme={version:1;course:'videography';id?:string;interests:string[];primaryPathway:Pathway;assessment:Assessment;level:Level;schedule:Schedule;mode:Mode|null;createdAt:string;updatedAt:string};
+export type Programme={version:1;course:'videography';id?:string;name?:string;courseId?:string;interests:string[];primaryPathway:Pathway;assessment:Assessment;level:Level;schedule:Schedule;mode:Mode|null;createdAt:string;updatedAt:string};
 // Validates client input and recomputes every derived value server-side.
 export function buildProgramme(input:any,previous?:Programme|null):Programme{
  if(input?.course!=='videography')throw new Error('Only Videography is open right now.');
@@ -221,9 +222,11 @@ export function buildProgramme(input:any,previous?:Programme|null):Programme{
  const active:Pathway=previous&&input.answers===undefined?previous.primaryPathway:interestFor(ids[0] as string)!.pathway;
  // An unchanged start date is kept even once it is in the past; a new one must be from today to 180 days ahead.
  const keptStart=previous&&input.startDate===previous.schedule.startDate;
- const start=keptStart||typeof input.startDate==='string'&&input.startDate>=addDays(today(),-1)&&input.startDate<=addDays(today(),180)?input.startDate:today();
+ const start=keptStart||typeof input.startDate==='string'&&input.startDate>=today()&&input.startDate<=addDays(today(),180)?input.startDate:today();
  const now=new Date().toISOString();
- return {version:1,course:'videography',interests:ids as string[],primaryPathway:active,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self'].includes(input.mode)?input.mode:previous?.mode==='mentor'?null:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
+ // The learner's own name for the plan (optional); updates keep it unless a new one is sent.
+ const name=input.name!==undefined?planName(input.name):previous?.name;
+ return {version:1,course:'videography',...(name?{name}:{}),...(previous?.courseId?{courseId:previous.courseId}:{}),interests:ids as string[],primaryPathway:active,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self'].includes(input.mode)?input.mode:previous?.mode==='mentor'?null:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
 }
 
 // ---- Modules as lesson paths ----
@@ -240,7 +243,8 @@ export const isFreeModule=(key:string)=>{const v=parseVideoKey(key);return !!v&&
 export const stagePhase=(stage:string)=>stage==='concepts'||stage==='preproduction'?'pre' as const:stage==='postproduction'?'post' as const:'production' as const;
 
 // The learner's main project name, from their first interest (e.g. "Wildlife & nature").
-export const projectLabel=(p?:Programme|null)=>p?(interestFor(p.interests.find(id=>interestFor(id)?.pathway===p.primaryPathway)||'')?.label||p.primaryPathway):undefined;
+// The style project (B13, I13, A13) is named after the plan's pathway, the same name the plan and its breadcrumb use (audit F04).
+export const projectLabel=(p?:Programme|null)=>p?p.primaryPathway:undefined;
 // When each module of a plan is due: modules in order, at the plan's weekly hours, from its start date.
 export function moduleDueDates(p:Programme){let hours=0;return modulesFor(p.level).map((m,i)=>{hours+=m.hours;return {key:moduleKey(p.level,i),module:m,due:addDays(p.schedule.startDate,Math.max(0,Math.ceil(hours/p.schedule.hoursPerWeek*7)-1))}})}
 // My courses: a learner's plans, up to three across all courses. state.programme is the plan that's open;
@@ -248,7 +252,12 @@ export function moduleDueDates(p:Programme){let hours=0;return modulesFor(p.leve
 export const maxPlans=3;
 export function plansOf(s:any):Programme[]{return Array.isArray(s?.plans)?s.plans:s?.programme?[s.programme]:[]}
 export const courseNames:Record<string,string>={videography:'Videography'};
-export const planTitle=(p:Programme)=>(courseNames[p.course]||p.course)+' · '+p.primaryPathway;
+// A plan's name: the learner's own, or the course and pathway. Names are one line, up to 60 characters.
+export const planName=(v:any)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,60);
+export const defaultPlanTitle=(p:Programme)=>(courseNames[p.course]||p.course)+' · '+p.primaryPathway;
+export const planTitle=(p:Programme)=>p.name||defaultPlanTitle(p);
+// Course ID (VID-B-1001): given by the server when the plan is made (app/ids.ts) and never changed.
+export const courseId=(p:Programme)=>p.courseId||'';
 // The style project module of each level (B13, I13, A13): its hand-in is kept separately for each course.
 export const styleModuleKeys=levels.flatMap(l=>modulesFor(l).flatMap((m,i)=>m.stage==='selected-pathway'?[moduleKey(l,i)]:[]));
 // Converts a curriculum module into the shared Lesson shape used by assignments and scoring.
@@ -279,4 +288,35 @@ export function handInMissing(m:CurriculumModule,h:HandIn,selfCheck=true):string
   for(const q of reflectionQuestions)if((h.reflections[q.id]||'').trim().length<10)missing.push('answer “'+q.label+'”');
  }
  return missing;
+}
+
+// ---- Adapting the plan as the learner goes ----
+// Which skill area a module mostly trains, from its stage and title (style project and final project: none).
+export function moduleArea(m:CurriculumModule):SkillArea|null{
+ const t=m.title.toLowerCase();
+ if(m.stageLabel==='Ideas')return 'story';
+ if(m.stageLabel==='Planning')return 'planning';
+ if(m.stageLabel==='Filming')return /light|sound|speaker|interview/.test(t)?'light-sound':'camera';
+ if(m.stageLabel==='Editing')return /colour|color|title|caption|export|sound|music|mix/.test(t)?'finishing':'editing';
+ return null;
+}
+// Skill levels that keep up with the learner: the starting check counts once, and each AI-reviewed module in
+// that area counts once more (its checks' average, 0–4 as 0–100). reviews: the latest review per module key.
+export function liveSkills(p:Programme,reviews:Record<string,{ratings:(number|null)[]}>){
+ const out={} as Record<SkillArea,{start:number;now:number;evidence:number}>;
+ for(const a of skillAreas){const start=p.assessment.areas[a.id];let sum=start,n=0;
+  modulesFor(p.level).forEach((m,i)=>{const r=reviews[moduleKey(p.level,i)];if(moduleArea(m)!==a.id||!r)return;const got=r.ratings.filter((x):x is number=>x!==null);if(!got.length)return;sum+=got.reduce((x,y)=>x+y,0)/got.length/4*100;n++});
+  out[a.id]={start,now:Math.round(sum/(n+1)),evidence:n}}
+ return out;
+}
+// How far behind the plan's dates the learner is: the first unfinished module and how many days past its due date.
+export function behindBy(p:Programme,progress:Record<string,any>,on=today()){
+ const next=moduleDueDates(p).find(d=>!progress?.[d.key]?.done);if(!next)return null;
+ const days=Math.round((Date.parse(on)-Date.parse(next.due))/86400000);return days>0?{days,key:next.key,due:next.due}:null;
+}
+// New start date that puts the next unfinished module due from today, at the plan's weekly hours: the hours already
+// done are counted as time spent, so only what's left is spread forward.
+export function catchUpStart(p:Programme,progress:Record<string,any>,on=today()){
+ const doneHours=modulesFor(p.level).reduce((h,m,i)=>h+(progress?.[moduleKey(p.level,i)]?.done?m.hours:0),0);
+ return addDays(on,-Math.floor(doneHours/p.schedule.hoursPerWeek*7));
 }

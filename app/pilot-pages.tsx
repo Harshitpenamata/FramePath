@@ -1,6 +1,7 @@
 'use client';
 import {ArrowRight} from 'lucide-react';
 import './help.css';
+import {ReportProblem} from './support';
 import './legacy-styles';
 import React,{useState} from 'react';
 import {Button} from '@/components/ui/button';
@@ -22,4 +23,4 @@ export function PilotHelp(){return <><section className="hp"><div className="hp-
 <details className="sg-acc hp-q"><summary>Where do I start?</summary><p>Pick what you like to film and answer 12 quick questions. We build a plan around your level and time. Open My courses any time to carry on.</p></details>
 <details className="sg-acc hp-q"><summary>How do I learn and get feedback?</summary><p>Watch, try the task, then check your work. AI reads your notes and photos, and watches your videos and YouTube or Google Drive links, picture and sound.</p><p>In Reflect, see your AI review, note one thing to fix, and flag a review if it seems wrong. You can move on with any score.</p><a className="text-link" href="/safety">Recording and sharing safely</a></details>
 <details className="sg-acc hp-q"><summary>What is free, and what is not real yet?</summary><p>Free: watch every module and do the tasks in the first two. Self-paced unlocks the rest. Mentorship is coming soon. Checkout is practice only.</p><p>Your work is private unless you choose to publish selected portfolio pieces.</p><Go href="/membership" outline>See access details</Go></details>
-</div></section><div className="hp-photos"><Photo slot="help-1"/><Photo slot="help-2"/><Photo slot="help-3"/></div></>}
+<div className="hp-report"><p className="small">Still stuck? Tell us what happened and we’ll get back to you in My account.</p><ReportProblem/></div></div></section><div className="hp-photos"><Photo slot="help-1"/><Photo slot="help-2"/><Photo slot="help-3"/></div></>}

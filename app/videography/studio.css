@@ -110,3 +110,16 @@
 .cm-hero{margin-bottom:var(--s7);align-items:center}
 .wa-settings{display:grid;gap:12px}.wa-kinds{display:grid;gap:6px;border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;margin:0}.wa-kinds label{display:flex;gap:8px}.wa-quiet{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.wa-quiet select{font:inherit;padding:4px 8px;border-radius:var(--radius);background:var(--card);color:var(--foreground);border:1px solid var(--border)}
 .wa-quiet select{width:auto;min-width:96px;flex:0 0 auto}.wa-quiet span{white-space:nowrap}
+/* My work modules (site edits, item 5): three cards a row, one clear layout per hand-in */
+.st-module-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,400px),1fr))}
+.st-handins li{grid-template-columns:44px minmax(0,1fr);gap:var(--s2) var(--s3);padding:var(--s3)}
+.st-handins li>.st-handin-actions{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;border-top:var(--soft-line);padding-top:var(--s2);font-size:.875rem}
+.st-files{display:grid;gap:var(--s1);font-size:.8125rem}
+.st-files span{display:flex;align-items:center;gap:var(--s1);min-width:0}
+.st-files a{flex:1;min-width:0;max-width:none}
+.st-files button{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;position:relative}
+.st-files button::after{content:'';position:absolute;inset:-6px}
+.st-files button:hover{background:#f2eee412;color:var(--foreground)}
+.st-more{margin-top:var(--s2)}
+.st-more>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:.875rem;font-weight:600;color:var(--foreground)}
+.st-more>.st-handins{margin-top:var(--s2)}
