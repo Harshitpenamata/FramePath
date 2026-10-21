@@ -227,3 +227,11 @@ label:has(>input[type=radio]),label:has(>input[type=checkbox]){min-height:44px;d
 .sg-admin-tickets{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 var(--s3);color:#0b0b0b;font-weight:600;text-decoration:none}
 .sg-count{display:grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#0b0b0b;color:var(--primary);font-size:.75rem}
 .sg-tickets li.fresh{border-color:var(--primary)}
+/* Logo */
+.brand-logo{display:block;height:40px;width:auto}
+.footer .brand-logo{height:28px}
+.ac-card .brand-logo{height:40px}
+/* Header keeps one row on desktop (admins also have Tickets in the menu) */
+@media(min-width:761px){.topbar{flex-wrap:nowrap}.topbar .main-nav{gap:28px}}
+.topbar .main-nav .sg-admin-tickets{padding:9px 0;min-height:0}
+@media(max-width:760px){.brand-logo{height:28px}}
