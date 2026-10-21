@@ -10,6 +10,12 @@ export default {
       url.protocol = "https:";
       return Response.redirect(url.href, 301);
     }
+    // One address: requests to an alias (www, the old avinyainteractive address) go to the main one, path kept.
+    const main = (env as { SITE_URL?: string }).SITE_URL ? new URL((env as { SITE_URL?: string }).SITE_URL!).hostname : "";
+    if (main && url.hostname !== main && url.hostname !== "127.0.0.1" && url.hostname !== "localhost" && url.hostname !== "framepath.internal") {
+      url.hostname = main;
+      return Response.redirect(url.href, 301);
+    }
     let binding = ctx.props?.CONNECTORS;
     // Local preview emulates the same request-scoped capability. This branch and
     // the auxiliary service binding are absent from production builds.

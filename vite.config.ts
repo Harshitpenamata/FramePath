@@ -46,7 +46,8 @@ if (!target) throw new Error(`Unknown FRAMEPATH_ENV "${deployEnv}". Use producti
 const deployConfig = {
   name: target.worker,
   workers_dev: false,
-  routes: [{ pattern: target.domain, custom_domain: true }],
+  // The main address, plus any aliases (e.g. www, an old address); the worker redirects aliases to the main one.
+  routes: [target.domain, ...((target as { aliases?: string[] }).aliases ?? [])].map((pattern) => ({ pattern, custom_domain: true })),
   d1_databases: [{ binding: d1, database_name: target.d1.name, database_id: target.d1.id }],
   r2_buckets: [{ binding: r2, bucket_name: target.r2 }],
   // Hourly: lesson video health checks and queued AI work (build/sites-worker.ts → app/jobs.ts).
