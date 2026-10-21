@@ -22,7 +22,9 @@ export async function GET(req:Request){
   if(!env.GOOGLE_CLIENT_ID||!env.GOOGLE_CLIENT_SECRET)return failure(req,'Sign-in is not configured.');
 
   const res=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({code,client_id:env.GOOGLE_CLIENT_ID,client_secret:env.GOOGLE_CLIENT_SECRET,redirect_uri:url.origin+'/auth/callback',grant_type:'authorization_code',code_verifier:flow.verifier})});
-  if(!res.ok)return failure(req,'Google could not confirm your sign-in. Please try again.');
+  // Google's error code (e.g. invalid_client = wrong client secret, invalid_grant = code already used or expired) goes to
+  // the logs so a failed sign-in can be diagnosed. The body never contains our secret.
+  if(!res.ok){const e=await res.json().catch(()=>({})) as {error?:string;error_description?:string};console.error('Google token exchange failed',res.status,e.error||'',String(e.error_description||'').slice(0,160),url.origin);return failure(req,'Google could not confirm your sign-in. Please try again.')}
   const {id_token}=await res.json() as {id_token?:string};
   let claims:{iss?:string;aud?:string;exp:number;nonce?:string;sub?:string;email?:string;email_verified?:boolean;name?:unknown};
   try{const part=id_token!.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');claims=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(part),c=>c.charCodeAt(0))))}catch{return failure(req,'Google returned an unreadable response.')}
