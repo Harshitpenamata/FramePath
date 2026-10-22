@@ -437,6 +437,46 @@
     "why": "A simple structure keeps viewers watching at the start, guides them through the points, and tells them what to do at the end.",
     "video": "How to Write a Script for a YouTube Video (Made Easy!)"
    }
+  ],
+  [
+   {
+    "q": "In the AI storyboard video, what do you still do yourself after the AI makes the frames?",
+    "options": [
+     [
+      "Check each frame can really be filmed and pick the shots you need.",
+      ""
+     ],
+     [
+      "Nothing. The frames are ready to shoot.",
+      "AI frames often show shots you can’t film with your gear or location."
+     ],
+     [
+      "Redraw every frame by hand.",
+      "Keep the useful frames and fix only what doesn’t work."
+     ]
+    ],
+    "why": "AI gives you options fast. You decide what’s realistic.",
+    "video": "How to Make a Storyboard with AI"
+   },
+   {
+    "q": "An AI storyboard of your aunt’s pickle stall shows a crowd of fifty customers. There are usually five. What do you do?",
+    "options": [
+     [
+      "Change the frame to match what you’ll really see, like a few regulars chatting.",
+      ""
+     ],
+     [
+      "Hire extras to match the AI frame.",
+      "The video should show the stall as it really is."
+     ],
+     [
+      "Keep the frame and hope it works out.",
+      "On the day you won’t be able to film it."
+     ]
+    ],
+    "why": "A storyboard is a plan for the real shoot, not a wish list.",
+    "video": ""
+   }
   ]
  ],
  "B03": [
@@ -679,6 +719,46 @@
     "why": "The video explains that keeping footage safe starts before you record, so you know where files will go and how they will be stored.",
     "video": "Planning to Preserve Video for Human Rights"
    }
+  ],
+  [
+   {
+    "q": "In the script breakdown video, what happens after the tool tags the cast, props and locations?",
+    "options": [
+     [
+      "Every tag is checked against the script before the shoot.",
+      ""
+     ],
+     [
+      "The tags go straight into the shoot plan.",
+      "Tools can miss or invent items. A quick check saves trouble on the day."
+     ],
+     [
+      "The script is rewritten to match the tags.",
+      "The script leads. The tags only list what it needs."
+     ]
+    ],
+    "why": "Use the AI list as a first draft, then check it.",
+    "video": "Script Breakdown: Filmustage Tutorial"
+   },
+   {
+    "q": "An AI breakdown of your short film misses that a character drinks chai in scene 3. Whose job is it to catch that?",
+    "options": [
+     [
+      "Yours, by reading the script against the breakdown.",
+      ""
+     ],
+     [
+      "The AI tool’s, so it’s not your problem.",
+      "On the day, the missing cup is your problem."
+     ],
+     [
+      "The actor’s, who can bring one.",
+      "Props should be covered before anyone arrives."
+     ]
+    ],
+    "why": "You own the plan, even when a tool helps write it.",
+    "video": ""
+   }
   ]
  ],
  "B04": [
@@ -899,6 +979,46 @@
     ],
     "why": "Some settings are baked into the clip when you record. Checking them first saves you from footage you can't use.",
     "video": "Basic CAMERA SETTINGS for beginners filmmaking"
+   }
+  ],
+  [
+   {
+    "q": "In the auto framing video, what is the camera’s automatic framing compared with?",
+    "options": [
+     [
+      "A shot framed by hand.",
+      ""
+     ],
+     [
+      "A shot filmed on a phone.",
+      "The comparison is between automatic and manual framing."
+     ],
+     [
+      "A still photo of the same scene.",
+      "The lesson compares two ways of framing moving video."
+     ]
+    ],
+    "why": "Seeing both side by side shows when auto framing helps.",
+    "video": "AI-based Auto Framing with Sony ZV-E1"
+   },
+   {
+    "q": "You film a dancer with auto framing on. It keeps her face centred but crops her feet. What matters most here?",
+    "options": [
+     [
+      "Her full movement, so frame wide enough to see her feet.",
+      ""
+     ],
+     [
+      "Keeping her face centred at all times.",
+      "In dance, the feet and body tell the story."
+     ],
+     [
+      "Using auto framing because it’s newer.",
+      "A tool only helps if it shows what matters."
+     ]
+    ],
+    "why": "Frame for the story, not for the feature.",
+    "video": ""
    }
   ]
  ],
@@ -2085,6 +2205,46 @@
     "why": "The video explains that editors trust their feeling of the moment and the performance to choose the cut point.",
     "video": "How Does an Editor Think and Feel?"
    }
+  ],
+  [
+   {
+    "q": "In the text-based editing video, what do you check after cutting from the transcript?",
+    "options": [
+     [
+      "The pacing and the cut points, by watching the edit.",
+      ""
+     ],
+     [
+      "Only the spelling in the transcript.",
+      "Viewers watch and listen to the cut, not the text."
+     ],
+     [
+      "Nothing. The text cut is final.",
+      "Text cuts can clip words or leave jumps you only notice when watching."
+     ]
+    ],
+    "why": "The transcript speeds up the rough cut. Watching makes it good.",
+    "video": "Text-Based Editing Powered by AI"
+   },
+   {
+    "q": "The transcript says your interviewee said “two years”, but they actually said “ten years”. What do you do?",
+    "options": [
+     [
+      "Fix the transcript and keep their real words in the edit.",
+      ""
+     ],
+     [
+      "Leave it. Nobody reads the transcript.",
+      "A wrong transcript can lead you to cut the wrong part."
+     ],
+     [
+      "Cut that part out to be safe.",
+      "You may lose an important moment. Fix the text instead."
+     ]
+    ],
+    "why": "Check transcripts against what was really said.",
+    "video": ""
+   }
   ]
  ],
  "B10": [
@@ -2344,6 +2504,46 @@
      ]
     ],
     "why": "Each track's licence says how you may use it, like whether business use is allowed or credit is needed. Checking it protects you and your client.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the speech enhancement video, how do you decide how much clean-up to use?",
+    "options": [
+     [
+      "Compare the processed and original voice and keep it sounding natural.",
+      ""
+     ],
+     [
+      "Always use the highest setting.",
+      "Too much processing makes voices sound robotic."
+     ],
+     [
+      "Use whatever setting the tool picks.",
+      "The tool doesn’t know how your scene should sound."
+     ]
+    ],
+    "why": "Listen before and after. Your ears decide.",
+    "video": "Premiere Pro Enhance Speech Tutorial"
+   },
+   {
+    "q": "You recorded an interview next to a busy road. What’s the best fix?",
+    "options": [
+     [
+      "Record again somewhere quieter if you can, then use AI clean-up for what’s left.",
+      ""
+     ],
+     [
+      "Rely on AI clean-up to fix everything.",
+      "Clean-up helps, but a clean recording always sounds better."
+     ],
+     [
+      "Add music over it.",
+      "Music makes speech harder to hear, not easier."
+     ]
+    ],
+    "why": "Good sound starts at the recording. AI is the backup.",
     "video": ""
    }
   ]
@@ -2788,6 +2988,46 @@
     "why": "Each export makes a new file. Only by watching the new one can you be sure the fix worked and nothing else broke.",
     "video": ""
    }
+  ],
+  [
+   {
+    "q": "In the subtitles video, what do you do after the captions are generated?",
+    "options": [
+     [
+      "Correct the words and timing, then check they’re easy to read in the export.",
+      ""
+     ],
+     [
+      "Export straight away.",
+      "Auto captions often get names and timing wrong."
+     ],
+     [
+      "Delete them and type every caption by hand.",
+      "Correcting generated captions is much faster."
+     ]
+    ],
+    "why": "Generate, correct, then check in the final video.",
+    "video": "Animated Subtitles in DaVinci Resolve"
+   },
+   {
+    "q": "Your video mixes Hindi and English. The auto captions spell the Hindi words oddly. What do you do?",
+    "options": [
+     [
+      "Fix them so they read naturally for your viewers.",
+      ""
+     ],
+     [
+      "Leave them. People will understand.",
+      "Wrong words make captions harder to follow, especially on mute."
+     ],
+     [
+      "Remove the Hindi words from the video.",
+      "The way people really speak is part of the video."
+     ]
+    ],
+    "why": "Captions should match how people really speak.",
+    "video": ""
+   }
   ]
  ],
  "B13": [
@@ -3109,6 +3349,208 @@
     ],
     "why": "A clear name and a known folder stop you from sending the wrong or older version by mistake.",
     "video": "Share your videos fast using Quick Export"
+   }
+  ]
+ ],
+ "B-PS": [
+  [
+   {
+    "q": "In the talk on speaking, what helps people want to listen?",
+    "options": [
+     [
+      "Speaking with honesty, clarity and a steady pace.",
+      ""
+     ],
+     [
+      "Speaking as fast as possible to fit more in.",
+      "Rushing makes people stop listening."
+     ],
+     [
+      "Using as many big words as you can.",
+      "Plain words are easier to follow."
+     ]
+    ],
+    "why": "Clear and honest beats long and clever.",
+    "video": "How to Speak So That People Want to Listen"
+   },
+   {
+    "q": "You have one minute to introduce yourself to a café owner. What do you include?",
+    "options": [
+     [
+      "Who you are, what you make, and one example that fits them.",
+      ""
+     ],
+     [
+      "Every video you’ve ever made.",
+      "Too much for one minute. They’ll remember nothing."
+     ],
+     [
+      "Your camera model and settings.",
+      "Clients care about what you can do for them."
+     ]
+    ],
+    "why": "Short, clear and about them.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the video on asking better questions, what comes after you ask a question?",
+    "options": [
+     [
+      "Listening fully, then following up on what they said.",
+      ""
+     ],
+     [
+      "Moving straight to your next prepared question.",
+      "You miss the most useful details."
+     ],
+     [
+      "Explaining what you would do.",
+      "Listen first. Your ideas come later."
+     ]
+    ],
+    "why": "Good questions only work if you listen to the answers.",
+    "video": "How to Ask Better Questions — The Art of Listening & Communication"
+   },
+   {
+    "q": "A client says, “I just want something nice.” What’s a good next question?",
+    "options": [
+     [
+      "“Who do you want to watch it, and what should they do afterwards?”",
+      ""
+     ],
+     [
+      "“Do you want it in 4K?”",
+      "That doesn’t tell you what “nice” means to them."
+     ],
+     [
+      "“OK, I’ll make something nice.”",
+      "You’ll guess, and probably guess wrong."
+     ]
+    ],
+    "why": "Open questions turn vague wishes into a clear goal.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the feedback talk, what makes feedback useful?",
+    "options": [
+     [
+      "Specific things you noticed, not vague labels.",
+      ""
+     ],
+     [
+      "Saying everything is great.",
+      "It feels kind but doesn’t help them improve."
+     ],
+     [
+      "Listing every mistake at once.",
+      "Too much at once is hard to act on."
+     ]
+    ],
+    "why": "Specific feedback is easier to hear and act on.",
+    "video": "The Secret to Giving Great Feedback"
+   },
+   {
+    "q": "Your classmate’s video has shaky shots in the middle. What’s the most useful thing to say?",
+    "options": [
+     [
+      "“The shots from 0:40 to 1:00 shake. A stand, or leaning on a wall, could help.”",
+      ""
+     ],
+     [
+      "“It’s bad.”",
+      "That doesn’t say what or how to fix it."
+     ],
+     [
+      "“It’s fine,” to be nice.",
+      "They lose the chance to improve."
+     ]
+    ],
+    "why": "Say what you saw, where, and one idea to fix it.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the video on first client meetings, what do you set out early?",
+    "options": [
+     [
+      "How you’ll work together: what’s included, timing and who decides.",
+      ""
+     ],
+     [
+      "Your full price list.",
+      "Price matters, but the working terms come first."
+     ],
+     [
+      "Your favourite filmmakers.",
+      "Clients want to know how the project will run."
+     ]
+    ],
+    "why": "Clear terms at the start prevent trouble later.",
+    "video": "Establish the Terms of Engagement During the First Client Meeting"
+   },
+   {
+    "q": "After a meeting, the client says, “Let’s talk again soon.” What do you do the same day?",
+    "options": [
+     [
+      "Send a short written summary of what you agreed and the next steps.",
+      ""
+     ],
+     [
+      "Wait for them to call.",
+      "Things get forgotten. A summary keeps you both on track."
+     ],
+     [
+      "Start filming straight away.",
+      "You haven’t confirmed the details yet."
+     ]
+    ],
+    "why": "Write it down and send it the same day.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the video on landing clients with YouTube, what kind of video brings in clients?",
+    "options": [
+     [
+      "One that shows how you solve a real problem for clients like them.",
+      ""
+     ],
+     [
+      "One showing off your newest camera.",
+      "Clients care about results, not gear."
+     ],
+     [
+      "A long list of your services.",
+      "A list tells. A sample shows."
+     ]
+    ],
+    "why": "Show the result a client wants to buy.",
+    "video": "How to Land More Clients Using YouTube! — 3 Examples"
+   },
+   {
+    "q": "You want to film for gyms. Which first sample is most useful?",
+    "options": [
+     [
+      "A short video for one gym that shows its classes and the people who come.",
+      ""
+     ],
+     [
+      "A wedding highlight film.",
+      "A gym owner can’t picture their own video from it."
+     ],
+     [
+      "A tutorial about colour grading.",
+      "It shows skill, but not what a gym would get."
+     ]
+    ],
+    "why": "Make the sample your future client wants to see.",
+    "video": ""
    }
   ]
  ]

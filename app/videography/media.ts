@@ -128,6 +128,7 @@ export const moduleImages:Record<string,ModuleImage>={
  B01:I.story,B02:I.plan,B03:I.prepare,B04:I.camera,B05:I.frame,B06:I.light,B07:I.sound,B08:I.organise,B09:I.edit,B10:I.sound,B11:I.colour,B12:I.deliver,B13:I.context,B14:I.story,
  I01:I.story,I02:I.plan,I03:I.prepare,I04:I.camera,I05:I.frame,I06:I.lightShape,I07:I.interview,I08:I.organise,I09:I.pace,I10:I.sound,I11:I.colour,I12:I.deliver,I13:I.event,I14:I.field,
  A01:I.context,A02:I.field,A03:I.plan,A04:I.camera,A05:I.interview,A06:I.lightShape,A07:I.sound,A08:I.archive,A09:I.pace,A10:I.sound,A11:I.colour,A12:I.deliver,A13:I.event,A14:I.field,
+ 'B-PS':I.interview,'I-PS':I.interview,'A-PS':I.interview,
 };
 const sizes=[480,960,1440];
 export function imageSrcSet(image:ModuleImage){return sizes.map(w=>`${image.base}-${w}.webp ${w}w`).join(', ')}

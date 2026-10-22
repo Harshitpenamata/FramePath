@@ -28,7 +28,7 @@ import {scoreAttempt,moduleInfo,sequenceFor,assignmentRubric} from '../../learni
 import {ensureUserId,ensureCourseId,retireCourseId} from '../../ids';
 import {logEvent,today as dayNow} from '../../events';
 import {questionsForVideos,lessonVideos} from '../../videography/lessons';
-import {behindBy,catchUpStart} from '../../videography/programme';
+import {behindBy,catchUpStart,rhythm,schedule} from '../../videography/programme';
 // Reflect question banks, loaded only when a learner tests out of a module.
 const reflectBanks={beginner:()=>import('../../videography/reflect/beginner.json'),intermediate:()=>import('../../videography/reflect/intermediate.json'),advanced:()=>import('../../videography/reflect/advanced.json')};
 import {isAdmin} from '../admin/health/route';
@@ -46,6 +46,10 @@ export async function GET(req:Request){try{const user=await identity();await ado
  for(const p of data.state.plans||[])if(await ensureCourseId(user.userId,p))ided=true;
  const open=data.state.programme&&(data.state.plans||[]).find((p:any)=>p.id===data.state.programme.id);
  if(open&&data.state.programme.courseId!==open.courseId){data.state.programme.courseId=open.courseId;ided=true}
+ // Curriculum updates can change a level's total hours (22 Oct 2026: a professional-skills module per level). Plans made
+ // before keep their start date, weekly hours and days, and get new dates from the new total.
+ for(const p of [...(data.state.plans||[]),data.state.programme].filter(Boolean))if(p.schedule&&p.schedule.totalHours!==rhythm[p.level as Level]?.hours){
+  p.schedule=schedule(p.level,p.schedule.hoursPerWeek,p.schedule.startDate,p.schedule.daysPerWeek);ided=true}
  if(ided)data={state:data.state,revision:await saveState(user.userId,data.state,data.revision)};
  // Ticket alerts: replies the learner hasn't seen yet; for admins, how many tickets are open.
  const unseen:any=await db().prepare("SELECT COUNT(DISTINCT t.id) AS n FROM support_tickets t JOIN ticket_messages m ON m.ticket_id=t.id AND m.author='staff' WHERE t.user_id=? AND m.created_at>COALESCE(t.learner_seen_at,0)").bind(user.userId).first();

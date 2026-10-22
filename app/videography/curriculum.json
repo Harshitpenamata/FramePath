@@ -326,6 +326,31 @@
   ]
  },
  {
+  "id": "B-PS",
+  "level": "beginner",
+  "stage": "professional",
+  "stageLabel": "Working with people",
+  "title": "Work with people and present your work",
+  "taskName": "Your first client meeting",
+  "hours": 5,
+  "outcome": "Talk about your work clearly, listen well and agree next steps in writing.",
+  "topics": [
+   "Speak so people listen",
+   "Ask questions, then listen",
+   "Give and take feedback",
+   "Run a first meeting",
+   "Show what you can do"
+  ],
+  "assignment": "Plan a short video for a real or practice client, like a shop, a friend or a club. Share the questions you asked, a summary of their answers (who it’s for, the goal and any limits), and the follow-up message you sent confirming what you’ll make, who does what and when.",
+  "evidence": "Your questions found the real goal, your summary matches what they said, and your follow-up is clear and polite.",
+  "handIn": "text",
+  "checks": [
+   "Your questions are open and find the audience, goal and limits",
+   "Your summary matches what the client said",
+   "Your follow-up confirms what, who and when, politely"
+  ]
+ },
+ {
   "id": "B14",
   "level": "beginner",
   "stage": "final-project",
@@ -680,6 +705,32 @@
    "Your work fits the brief for your style",
    "Your plan, shots and edit suit that style",
    "You shared your plan, clips, edit and versions"
+  ]
+ },
+ {
+  "id": "I-PS",
+  "level": "intermediate",
+  "stage": "professional",
+  "stageLabel": "Working with people",
+  "title": "Win clients and pitch your ideas",
+  "taskName": "Client pitch pack",
+  "hours": 8,
+  "outcome": "Find what a client really needs, pitch an idea, and handle price and revisions.",
+  "topics": [
+   "Diagnose before you sell",
+   "Sell the idea with a treatment",
+   "Handle revision notes",
+   "Say your price with confidence",
+   "Make a simple marketing plan"
+  ],
+  "assignment": "For a real or practice client, share your discovery questions and what you learned, a one-page treatment for your idea, your price and what it includes, and your reply to two revision notes that clash.",
+  "evidence": "Your idea solves the client’s real problem, your price is clear about what’s included, and your revision reply is calm and specific.",
+  "handIn": "text",
+  "checks": [
+   "Discovery found the real audience, problem and goal",
+   "The treatment shows the idea, the look and why it fits",
+   "The price says what’s included and what isn’t",
+   "The revision reply finds the concern and proposes one plan"
   ]
  },
  {
@@ -1041,6 +1092,32 @@
    "Your work meets your style’s standards",
    "You shared tests and reasons for key choices",
    "You handled real limits without relying on costly gear"
+  ]
+ },
+ {
+  "id": "A-PS",
+  "level": "advanced",
+  "stage": "professional",
+  "stageLabel": "Working with people",
+  "title": "Lead teams and win approval",
+  "taskName": "Leadership and pitch pack",
+  "hours": 10,
+  "outcome": "Lead a crew, handle hard client situations, price your value and pitch for approval.",
+  "topics": [
+   "Turn a crew into a team",
+   "Handle difficult clients",
+   "Price on value",
+   "Pick your niche",
+   "Pitch for a yes"
+  ],
+  "assignment": "Share a crew briefing for a complex shoot, your plan for a client with clashing stakeholders and a fixed deadline, three service options with prices and outcomes, a short positioning statement, and the outline of a pitch that ends with a clear request.",
+  "evidence": "Your briefing makes roles and escalation clear, your client plan protects the deadline and the relationship, and your pitch builds to a clear request.",
+  "handIn": "text",
+  "checks": [
+   "The crew briefing sets roles and how to raise problems",
+   "The client plan handles the clash and protects the deadline",
+   "The three options link price to outcomes",
+   "The pitch ends with a clear request"
   ]
  },
  {

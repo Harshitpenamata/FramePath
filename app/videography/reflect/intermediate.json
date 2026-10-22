@@ -721,6 +721,46 @@
     "why": "Having another person ready keeps the shoot on track either way. Telling the client early means nobody is surprised.",
     "video": ""
    }
+  ],
+  [
+   {
+    "q": "In the AI breakdown walkthrough, what do you do with the schedule changes it suggests?",
+    "options": [
+     [
+      "Check each one against the crew, location and production limits before accepting it.",
+      ""
+     ],
+     [
+      "Accept them all to save time.",
+      "The tool doesn’t know every real-world limit."
+     ],
+     [
+      "Ignore them all.",
+      "Some suggestions can save real time. Check them."
+     ]
+    ],
+    "why": "AI suggestions are proposals. You approve them.",
+    "video": "Filmustage AI Dude walkthrough"
+   },
+   {
+    "q": "An AI tool moves your night market scene to the morning to save a day. What’s the problem?",
+    "options": [
+     [
+      "The market only looks right at night, so the scene changes.",
+      ""
+     ],
+     [
+      "There’s no problem. A day saved is good.",
+      "Saving a day isn’t worth losing the scene."
+     ],
+     [
+      "Mornings are harder to light.",
+      "The bigger issue is that the scene no longer matches the script."
+     ]
+    ],
+    "why": "Check that changes keep what the story needs.",
+    "video": ""
+   }
   ]
  ],
  "I04": [
@@ -1969,6 +2009,46 @@
     "why": "A rising number with a date shows the order of every cut, so you can open the right one at once.",
     "video": ""
    }
+  ],
+  [
+   {
+    "q": "In the media intelligence video, what do you do with AI search results?",
+    "options": [
+     [
+      "Check them against the real footage and pick your selects.",
+      ""
+     ],
+     [
+      "Use every result in the edit.",
+      "Search returns near-misses as well as good shots."
+     ],
+     [
+      "Delete the clips the search didn’t find.",
+      "Search misses things. Those clips may still be useful."
+     ]
+    ],
+    "why": "Search narrows things down. You still choose.",
+    "video": "Media Intelligence & New Search Panel"
+   },
+   {
+    "q": "You search 300 wedding clips for “rings” and get 6. You remember filming more. What next?",
+    "options": [
+     [
+      "Skim the ceremony clips to find the ones search missed.",
+      ""
+     ],
+     [
+      "Use the 6 and move on.",
+      "You might miss the best ring shot."
+     ],
+     [
+      "Assume the others were deleted.",
+      "More likely they just weren’t tagged well."
+     ]
+    ],
+    "why": "Use search to start, not to finish.",
+    "video": ""
+   }
   ]
  ],
  "I09": [
@@ -2210,6 +2290,46 @@
     ],
     "why": "The same footage can feel tense or calm depending on the edit. So when feedback says a part feels wrong, you can often fix it by re-cutting.",
     "video": "How Editors Cut the Same Scene in 2 Completely Different Ways"
+   }
+  ],
+  [
+   {
+    "q": "In the Smart Switch video, what do you refine after the AI switches angles?",
+    "options": [
+     [
+      "Reactions, how long each shot holds and the timing of the cuts.",
+      ""
+     ],
+     [
+      "Nothing. The AI cut is final.",
+      "The AI follows who’s talking, not what matters."
+     ],
+     [
+      "Only the colour of each angle.",
+      "Colour helps, but the switches still need editing."
+     ]
+    ],
+    "why": "The AI makes a first pass. The editor makes it work.",
+    "video": "Smart Switch Multicam Editing"
+   },
+   {
+    "q": "In a podcast edit, the AI cuts to the speaker every time. The host laughs at a joke off-camera. What do you do?",
+    "options": [
+     [
+      "Cut to the host’s laugh. Reactions bring the moment to life.",
+      ""
+     ],
+     [
+      "Leave it on the speaker.",
+      "You lose a reaction that makes the moment fun."
+     ],
+     [
+      "Cut to the wide shot.",
+      "The laugh is clearer on the host’s angle."
+     ]
+    ],
+    "why": "Edit for reactions and story, not just for who’s talking.",
+    "video": ""
    }
   ]
  ],
@@ -2470,6 +2590,46 @@
      ]
     ],
     "why": "Checking on the devices your audience uses shows whether the speech stays clear above the music.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the RX 11 video, what do you compare before putting the repaired dialogue back?",
+    "options": [
+     [
+      "Clarity, artefacts and how much natural room sound is left.",
+      ""
+     ],
+     [
+      "Only the loudness.",
+      "Loudness is one part. Artefacts and room sound matter too."
+     ],
+     [
+      "Nothing. Repaired audio is always better.",
+      "Over-processing can sound worse than the original."
+     ]
+    ],
+    "why": "Fix, compare and keep it natural.",
+    "video": "Remove Background Noise with RX 11 + Audio Post-production Tips"
+   },
+   {
+    "q": "You remove all the echo from a voice recorded in a big hall. Now it sounds like a different room from the pictures. What do you do?",
+    "options": [
+     [
+      "Leave a little room sound so it matches what viewers see.",
+      ""
+     ],
+     [
+      "Remove the echo from every clip.",
+      "The sound should still feel like the place on screen."
+     ],
+     [
+      "Add music over it.",
+      "That hides the problem without fixing it."
+     ]
+    ],
+    "why": "Sound should match the space on screen.",
     "video": ""
    }
   ]
@@ -3237,6 +3397,248 @@
     ],
     "why": "Changing pace gives the viewer contrast. Slower moments let things land, and faster parts lift the energy.",
     "video": "Pacing in Film Editing — Techniques Every High-End Editor Must Know"
+   }
+  ],
+  [
+   {
+    "q": "In the video on using AI to make a real film, what is AI used for?",
+    "options": [
+     [
+      "Jobs around the real footage, like planning and some extra shots.",
+      ""
+     ],
+     [
+      "Making the whole film without a camera.",
+      "The case study mixes AI with filmed material."
+     ],
+     [
+      "Only the music.",
+      "It covers much more than music."
+     ]
+    ],
+    "why": "AI supports the film. Real footage carries it.",
+    "video": "How I Use AI to Make a REAL Film (Full Tutorial)"
+   },
+   {
+    "q": "In the AI filmmaking tutorial mixed with real footage, what makes the added shots fit?",
+    "options": [
+     [
+      "Matching the real footage’s story, continuity and look.",
+      ""
+     ],
+     [
+      "Making them as dramatic as possible.",
+      "Dramatic shots that don’t match stand out badly."
+     ],
+     [
+      "Adding them anywhere.",
+      "Shots need to fit the sequence."
+     ]
+    ],
+    "why": "Added shots must look like they belong.",
+    "video": "AI Filmmaking Tutorial (Mixed with Real Shot Footage)"
+   }
+  ]
+ ],
+ "I-PS": [
+  [
+   {
+    "q": "In the video on diagnosing before selling, what do you find out first?",
+    "options": [
+     [
+      "The client’s real problem and the outcome they need.",
+      ""
+     ],
+     [
+      "Which camera they want you to use.",
+      "That’s a later detail."
+     ],
+     [
+      "How fast you can deliver.",
+      "Speed matters less than solving the right problem."
+     ]
+    ],
+    "why": "Diagnose first, then suggest the fix.",
+    "video": "Ask Questions to Diagnose the Problem Instead of Selling"
+   },
+   {
+    "q": "A restaurant wants “a video for Instagram”. Your questions show weekday lunches are empty. What should the video aim for?",
+    "options": [
+     [
+      "Getting office workers in for weekday lunch.",
+      ""
+     ],
+     [
+      "Showing the whole menu.",
+      "That doesn’t fix the empty lunches."
+     ],
+     [
+      "Looking as stylish as possible.",
+      "Style helps only if it serves the goal."
+     ]
+    ],
+    "why": "The real problem decides what you make.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the director’s treatment guide, what should a treatment show?",
+    "options": [
+     [
+      "The idea, the visual approach, the tone and why it suits the brief.",
+      ""
+     ],
+     [
+      "The full budget breakdown.",
+      "That usually goes in the proposal, not the treatment."
+     ],
+     [
+      "A list of crew names.",
+      "The treatment is about the idea."
+     ]
+    ],
+    "why": "A treatment sells the idea and the feeling.",
+    "video": "Director’s Treatment: The Ultimate Guide to a Winning Pitch"
+   },
+   {
+    "q": "Your treatment for a school’s annual day film has lovely reference images but no reason they fit. What’s missing?",
+    "options": [
+     [
+      "Why this approach works for the school’s audience and goal.",
+      ""
+     ],
+     [
+      "More reference images.",
+      "More pictures won’t explain the choice."
+     ],
+     [
+      "Your camera list.",
+      "Gear doesn’t sell the idea."
+     ]
+    ],
+    "why": "Always connect your idea to the client’s goal.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the video on client revisions, what do you do with unclear notes?",
+    "options": [
+     [
+      "Find the worry behind them, then agree a plan for the changes.",
+      ""
+     ],
+     [
+      "Make every change exactly as written.",
+      "Notes can clash or miss the real issue."
+     ],
+     [
+      "Ignore the ones you disagree with.",
+      "That damages trust."
+     ]
+    ],
+    "why": "Clarify first, then revise.",
+    "video": "How to Deal with Client Revisions"
+   },
+   {
+    "q": "A client writes, “Make it pop more.” What’s the best reply?",
+    "options": [
+     [
+      "Ask which moments feel flat and what they want viewers to feel there.",
+      ""
+     ],
+     [
+      "Add effects everywhere.",
+      "That may not be what they meant."
+     ],
+     [
+      "Say it already pops.",
+      "That ends the conversation without solving anything."
+     ]
+    ],
+    "why": "Turn vague notes into specific ones with questions.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the pricing role-play, what happens once the price is said?",
+    "options": [
+     [
+      "It’s stated clearly, and the conversation carries on calmly.",
+      ""
+     ],
+     [
+      "The seller apologises and lowers it.",
+      "That signals the price wasn’t real."
+     ],
+     [
+      "The seller avoids saying a number.",
+      "That creates confusion and doubt."
+     ]
+    ],
+    "why": "Say the price clearly and own it.",
+    "video": "How to Say Your Price — Sales Roleplay"
+   },
+   {
+    "q": "Your quote is ₹40,000. The client’s budget is ₹25,000. What do you offer?",
+    "options": [
+     [
+      "A smaller scope that fits ₹25,000, like one video instead of three.",
+      ""
+     ],
+     [
+      "The same work for ₹25,000.",
+      "You undervalue your work and set a pattern."
+     ],
+     [
+      "Nothing. Walk away.",
+      "You might find a version that works for both of you."
+     ]
+    ],
+    "why": "Change the scope to fit the budget, not your price.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the marketing plan video, what does a good plan start with?",
+    "options": [
+     [
+      "Who you want to reach and what they need.",
+      ""
+     ],
+     [
+      "Posting as often as possible.",
+      "Without a target, posting is random."
+     ],
+     [
+      "Buying ads straight away.",
+      "Ads without a plan waste money."
+     ]
+    ],
+    "why": "Know your audience before you plan posts.",
+    "video": "Copy This 5 Step System to Write the Perfect Marketing Plan"
+   },
+   {
+    "q": "You want wedding clients in Jaipur. Which 30-day plan is best?",
+    "options": [
+     [
+      "Weekly reels from real weddings, a behind-the-scenes post and a collaboration with a planner.",
+      ""
+     ],
+     [
+      "One long post about your gear.",
+      "Couples want to see weddings, not gear."
+     ],
+     [
+      "Random posts whenever you remember.",
+      "Steady posting builds trust."
+     ]
+    ],
+    "why": "Small, regular posts aimed at one audience work best.",
+    "video": ""
    }
   ]
  ]

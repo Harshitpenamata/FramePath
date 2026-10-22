@@ -5,13 +5,12 @@ import {Button} from '@/components/ui/button';
 import {toast} from 'sonner';
 import {useLearning,Panel,Go,Badge,isExplore,Photo,confirmAction} from '../ui';
 import './dashboard.css';
-import {liveSkills,behindBy,moduleArea,levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,defaultPlanTitle,courseId,courseNames,type Programme,type Level,type Mode} from './programme';
+import {stageOrder,liveSkills,behindBy,moduleArea,levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,defaultPlanTitle,courseId,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
 import {ReportProblem} from '../support';
 import {track} from '../track';
 
-const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
-const stageColor:Record<string,string>={Ideas:'var(--vg-s1)',Planning:'var(--vg-s2)',Filming:'var(--vg-s3)',Editing:'var(--vg-s4)','Your pathway':'var(--vg-s5)','Final project':'var(--vg-s6)'};
+const stageColor:Record<string,string>={Ideas:'var(--vg-s1)',Planning:'var(--vg-s2)',Filming:'var(--vg-s3)',Editing:'var(--vg-s4)','Your pathway':'var(--vg-s5)','Working with people':'var(--vg-s7)','Final project':'var(--vg-s6)'};
 
 // Week ranges per stage when modules run in order at the learner's weekly hours.
 function stageTimeline(p:Programme){
