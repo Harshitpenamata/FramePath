@@ -1,6 +1,7 @@
 import {db,identity,readState,checkOrigin,fail,errorResponse} from '../../service';
 import {ensureUserId,ensureCourseId,nextNumber} from '../../ids';
 import {plansOf,planTitle,parseVideoKey,moduleLesson,projectLabel,courseNames} from '../../videography/programme';
+import {ticketCreatedAlert} from '../../email';
 import {ticketCategories,ticketsPerDay,messageMin,messageMax} from '../../support-shared';
 export const dynamic='force-dynamic';
 const noStore={headers:{'Cache-Control':'no-store'}};
@@ -36,5 +37,6 @@ export async function POST(req:Request){try{
  await db().prepare(`INSERT INTO support_tickets(id,user_id,public_user_id,course_id,plan_id,course,pathway,plan_name,level,module_key,module_title,lesson,page,category,message,status,reply,note,context,created_at,updated_at)
   VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'open','','',?,?,?)`).bind(id,u.userId,publicId,plan?.courseId||null,plan?.id||null,plan?(courseNames[plan.course]||plan.course):null,plan?.primaryPathway||null,plan?planTitle(plan):null,
   mod?.level||plan?.level||null,mod?b.moduleKey:null,mod?`${mod.module.id} · ${moduleLesson(mod.module,projectLabel(plan)).title}`:null,lesson,page,b.category,message,JSON.stringify(context),now,now).run();
+ await ticketCreatedAlert({id,publicUserId:publicId,courseId:plan?.courseId||null,category:b.category,message,moduleTitle:mod?mod.module.id:null,email:u.email||''});
  return Response.json({ticket:{id,courseId:plan?.courseId||null,publicUserId:publicId}},noStore);
 }catch(e){return errorResponse(e)}}

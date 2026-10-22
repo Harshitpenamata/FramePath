@@ -64,6 +64,13 @@
       "when": 1792497952719,
       "tag": "0008_pilot_tracker",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1792655744009,
+      "tag": "0009_email_alerts",
+      "breakpoints": true
     }
   ]
 }

@@ -1,6 +1,7 @@
 import {db,identity,checkOrigin,fail,errorResponse} from '../../../service';
 import {isAdmin} from '../health/route';
 import {ticketStatuses} from '../../../support-shared';
+import {ticketReplyAlert} from '../../../email';
 export const dynamic='force-dynamic';
 const noStore={headers:{'Cache-Control':'no-store'}};
 
@@ -28,5 +29,7 @@ export async function POST(req:Request){try{
  const reply=String(b.reply||'').trim().slice(0,2000),note=String(b.note||'').trim().slice(0,2000);
  const r=await db().prepare('UPDATE support_tickets SET status=?,reply=?,note=?,updated_at=? WHERE id=?').bind(b.status,reply,note,Date.now(),String(b.id||'')).run();
  if(!r.meta.changes)return fail('That ticket no longer exists.',404);
+ // Emails the learner once per distinct reply text.
+ if(reply)await ticketReplyAlert(String(b.id));
  return Response.json({ok:true},noStore);
 }catch(e){return errorResponse(e)}}
