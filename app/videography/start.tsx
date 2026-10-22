@@ -5,7 +5,7 @@ import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Photo} from '../ui';
 import type {PhotoSlot} from '../photos';
 import './home.css';
-import {BannerSymbols,banners} from './hero-banners';
+import {banners} from './hero-banners';
 import {track} from '../track';
 import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,maxPlans,plansOf,type Level,type Answer,type Visual} from './programme';
 
@@ -50,9 +50,7 @@ function HeroSlides({actions}:{actions:React.ReactNode}){
  const n=banners.length,go=(i:number)=>setAt((i+n)%n);
  useEffect(()=>{if(paused||held||still)return;const t=setTimeout(()=>go(at+1),5000);return ()=>clearTimeout(t)},[at,paused,held,still]);
  return <section className="hm-hero hm-banner" aria-roledescription="carousel" aria-label="About Framepath" onFocus={e=>{if(e.target.matches(':focus-visible'))setHeld(true)}} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setHeld(false)}}>
-  <BannerSymbols/>
-  <div className="hm-banner-frame">{banners.map((x,i)=>{const H=i===0?'h1':'h2';return <article key={i} className={'hb-slide'+(i===at?' on':'')} aria-hidden={i!==at} role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`}>
-   <div className="hb-copy"><p className="hb-eyebrow">{x.eyebrow}</p><H className="hb-head">{x.head}</H><p className="hb-line">{x.line}</p></div>{x.art}</article>})}</div>
+  <div className="hm-banner-frame">{banners.map((x,i)=>{const H=i===0?'h1':'h2';return <article key={i} className={`hb-slide hb-b${i+1}`+(i===at?' on':'')} aria-hidden={i!==at} role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`}>{x(H)}</article>})}</div>
   <div className="hm-banner-bar">
    {actions}
    <div className="hm-slide-nav">
