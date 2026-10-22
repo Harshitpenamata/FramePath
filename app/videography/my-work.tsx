@@ -60,9 +60,8 @@ function ModuleCard({level,index,reviews,ids,setIds,isNext}:{level:Level;index:n
  const head=<div className="st-module-head"><div><span className="st-label">Module {index+1}</span><h3>{m.title}</h3></div><a className="st-icon-link" href={moduleHref(key)} aria-label={'Open module '+(index+1)}><ArrowRight size={16}/></a></div>;
  if(!pieces.length)return <article className={'st-card st-module '+(isNext?'next':'later')}>
   {head}
-  <div className="st-placeholder" aria-hidden="true">{pad(index+1)}</div>
-  {isNext?<><strong>Room for your next hand-in</strong><p className="small">Your task and feedback will appear here as you work through this module.</p><Go href={moduleHref(key)} outline>Go to module</Go></>
-   :<><strong>{m.taskName}</strong><p className="small">{m.outcome}</p><span className="st-chip">Coming up next</span></>}
+  {isNext?<><div className="st-placeholder" aria-hidden="true">{pad(index+1)}</div><strong>Room for your next hand-in</strong><p className="small">Your task and feedback will appear here as you work through this module.</p><Go href={moduleHref(key)}>Go to module</Go></>
+   :<><strong>{m.taskName}</strong><p className="small">{m.outcome}</p></>}
  </article>;
  return <article className="st-card st-module done">
   {head}

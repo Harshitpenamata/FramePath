@@ -307,3 +307,9 @@ p,li{text-wrap:pretty}
  .db-stages li{position:relative;padding-right:36px}
 }
 @media (max-width:640px){.db-stages li{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:4px}}
+/* One lead per screen: the plan's Continue, the lesson card, My work's next hand-in. What sits beside them steps back. */
+.db-hero .button-row>a[data-slot=button]{min-height:52px;padding-inline:28px;font-size:1rem}
+.db-hero .vg-soon{border-color:transparent!important;background:none!important;color:var(--muted-foreground)}
+.vg-testout:not(.open):not(.ok){background:none!important;padding:0;margin-bottom:var(--s3);color:var(--muted-foreground)}
+.st-module.next{border:var(--line)!important}
+.st-module.later{opacity:.6}
