@@ -121,7 +121,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
 function WaitingTips(){
  const [i,setI]=useState(()=>Math.floor(Math.random()*waitingTips.length));
  useEffect(()=>{const t=setInterval(()=>setI(n=>(n+1)%waitingTips.length),7000);return ()=>clearInterval(t)},[]);
- return <Panel className="vg-waiting"><p role="status"><span className="vg-spinner" aria-hidden="true"/>AI is reviewing your work. This can take up to a minute…</p><p className="vg-tip"><span className="eyebrow">WHILE YOU WAIT</span>{waitingTips[i]}</p></Panel>;
+ return <Panel className="vg-waiting"><p role="status"><span className="vg-spinner" aria-hidden="true"/>AI is reviewing your work. This can take up to a minute…</p><p className="vg-tip"><span className="eyebrow">While you wait</span>{waitingTips[i]}</p></Panel>;
 }
 
 type Flag={reason:string;status:'open'|'fine'|'refunded';note:string};

@@ -181,10 +181,10 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
    <article className="vg-lesson-card">
     <header className="vg-lesson-intro">
      <LessonSketch key={m.id+index} src={`/sketches/${m.id}-${index+1}`} title={item.title}/>
-     <div className="vg-lesson-about"><span className="eyebrow">LESSON {index+1} OF {lessons.length}</span><h2>{item.title}</h2><p className="vg-idea">{item.idea}</p></div>
+     <div className="vg-lesson-about"><span className="eyebrow">Lesson {index+1} of {lessons.length}</span><h2>{item.title}</h2><p className="vg-idea">{item.idea}</p></div>
      {live.length>0&&<div className="vg-lesson-progress"><span className="vg-dots" aria-hidden="true">{live.map(v=><i key={videoId(v)} className={watched(v)?'done':''}/>)}</span><span className="small">{live.filter(watched).length} of {live.length} {live.length===1?'video':'videos'} watched</span></div>}
     </header>
-    <section className="vg-lesson-part"><div className="vg-part-head"><h3><span>01 /</span> Watch</h3>{live.length>0&&<span className="eyebrow">{live.length} {live.length===1?'VIDEO':'VIDEOS'}</span>}</div>
+    <section className="vg-lesson-part"><div className="vg-part-head"><h3><span>01 /</span> Watch</h3>{live.length>0&&<span className="eyebrow">{live.length} {live.length===1?'video':'videos'}</span>}</div>
      <VideoPanel videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined}/></section>
     <section className="vg-lesson-part"><div className="vg-part-head"><h3><span>02 /</span> Think it through</h3></div><p className="small vg-part-lede">Turn what you watched into a practical decision.</p>
      {!open?<SelfPacedLock moduleKey={moduleKey} what="Think it through questions"/>
