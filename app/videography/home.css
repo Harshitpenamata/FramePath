@@ -95,14 +95,47 @@
 @media(max-width:760px){.hm-craft-photo,.hm-craft.live .hm-craft-photo{width:44%}.hm-craft-blurb{max-width:54%}}
 /* Home banner slides */
 @media(max-width:900px){.hm-slide-nav{gap:var(--s1)}.hm-slide-dots button{width:32px}}
-/* Home banner images */
-.hm-banner{display:grid;gap:var(--s5);padding-top:var(--s5)}
-.hm-banner-frame{display:grid;aspect-ratio:2070/760;border-radius:var(--radius);overflow:hidden;border:var(--soft-line);background:#000}
-.hm-banner-img{grid-area:1/1;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
-.hm-banner-img.on{opacity:1}
 .hm-banner-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--s4)}
 .hm-banner-bar .hm-slide-pause{margin-left:var(--s2)}
-@media(prefers-reduced-motion:reduce){.hm-banner-img{transition:none}}
+/* Home banners: live text beside flat SVG drawings (hero-banners.tsx). Slides sit on top of each other and fade. */
+.hm-banner{display:grid;gap:var(--s5);padding-top:var(--s5)}
+.hm-banner-frame{display:grid;grid-template-columns:minmax(0,1fr);width:100%;min-width:0;container-type:inline-size;border-radius:var(--radius);overflow:hidden;border:var(--soft-line);background:#000;
+ --hb-cream:#f2eee4;--hb-lime:#d6e86b;--hb-muted:#a7a399;--hb-track:#424242}
+.hb-defs{position:absolute;width:0;height:0;overflow:hidden}
+.hb-slide{grid-area:1/1;min-width:0;aspect-ratio:2.73/1;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:center;gap:3%;padding:4%;
+ opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s .6s}
+.hb-slide.on{opacity:1;visibility:visible;transition:opacity .6s ease}
+.hb-copy{min-width:0}
+.hb-eyebrow{margin:0 0 1.3cqw;color:var(--hb-muted);font-size:1.6cqw;line-height:1.4}
+.hm-banner-frame .hb-head{margin:0;max-width:none;color:var(--hb-cream);font-family:var(--display);font-weight:400;font-size:4.6cqw;line-height:1.1;letter-spacing:-.015em;text-transform:uppercase;text-wrap:balance}
+.hm-banner-frame .hb-head span{color:var(--hb-lime)}
+.hb-line{max-width:48ch;margin:1.5cqw 0 0;color:var(--hb-muted);font-size:1.75cqw;line-height:1.4;text-wrap:pretty}
+.hb-art{display:block;width:100%;height:auto;overflow:visible;color:var(--hb-cream)}
+.hb-art .hb-panel{fill:#000;stroke:var(--hb-cream);stroke-width:2.5}
+.hb-art :is(.hb-paper,.hb-cream-fill){fill:var(--hb-cream)}
+.hb-art :is(.hb-black,.hb-ink){fill:#000;color:#000}
+.hb-art .hb-lime-fill{fill:var(--hb-lime)}
+.hb-art .hb-lime{color:var(--hb-lime)}
+.hb-art .hb-muted-fill{fill:var(--hb-muted)}
+.hb-art .hb-cream-stroke{stroke:var(--hb-cream)}
+.hb-art .hb-muted-stroke{stroke:var(--hb-muted)}
+.hb-art .hb-tab{fill:var(--hb-lime);stroke:#000;stroke-width:1.5}
+.hb-art .hb-cut-paper{--hb-cut:var(--hb-cream)}
+.hb-art .hb-cut-lime{--hb-cut:var(--hb-lime)}
+.hb-art :is(.hb-track,.hb-value){fill:none;stroke-width:15}
+.hb-art .hb-track{stroke:var(--hb-track)}
+.hb-art .hb-value{stroke:var(--hb-cream);stroke-linecap:round}
+.hb-art .hb-chat-front{stroke:#000;stroke-width:4;stroke-linejoin:round}
+@media(max-width:760px){
+ .hb-slide{aspect-ratio:auto;grid-template-columns:1fr;align-content:start;gap:24px;padding:8% 6%}
+ .hb-eyebrow{margin-bottom:16px;font-size:clamp(12px,3.5cqw,17px)}
+ .hm-banner-frame .hb-head{font-size:clamp(28px,8.6cqw,54px);line-height:1.12}
+ .hb-line{margin-top:18px;font-size:clamp(14px,3.8cqw,19px);line-height:1.5}
+ .hb-art{width:min(100%,440px);justify-self:center}
+}
+.hm-banner-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--s4)}
+.hm-banner-bar .hm-slide-pause{margin-left:var(--s2)}
+@media(prefers-reduced-motion:reduce){.hb-slide,.hb-slide.on{transition:none}}
 /* Banner controls: arrows, dots, pause */
 .hm-slide-nav{display:flex;align-items:center;gap:var(--s3)}
 .hm-slide-dots{display:flex;gap:2px}
@@ -115,19 +148,6 @@
 @media(max-width:760px){.hm-banner{gap:var(--s4)}.hm-banner-bar{flex-direction:column;align-items:stretch}.hm-banner-bar .hm-slide-nav{justify-content:center}.hm-banner-frame{border-radius:16px}}
 .hm-banner{grid-template-columns:minmax(0,1fr)}
 @media(max-width:760px){.hm-slide-nav{gap:var(--s1)}.hm-slide-dots button{width:32px}.hm-banner-bar>*{min-width:0;max-width:100%}}
-/* Phone banner: the slide's words as real text instead of the (unreadable) small image */
-.hm-banner-text{display:none}
-@media(max-width:760px){
- .hm-banner-frame{display:none}
- .hm-banner-text{display:grid;padding:var(--s6) var(--s5);border-radius:20px;background:#000;border:var(--soft-line);min-height:300px}
- .hm-bt{grid-area:1/1;display:grid;gap:var(--s3);align-content:center;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility 0s .5s}
- .hm-bt.on{opacity:1;visibility:visible;transition:opacity .5s ease}
- .hm-bt-kicker{font-size:.875rem;color:var(--muted-foreground)}
- .hm-bt-head{margin:0;font-family:var(--display);text-transform:uppercase;font-size:2.1rem;line-height:.95;color:var(--foreground);text-wrap:balance}
- .hm-bt-head em{font-style:normal;color:var(--primary)}
- .hm-bt-line{margin:0;color:var(--foreground)}
-}
-@media(prefers-reduced-motion:reduce){.hm-bt,.hm-bt.on{transition:none}}
 /* "Pick your craft. We'll build the path." fits its narrow card in two lines */
 .hm-intro h2{font-size:clamp(2.1rem,3.3vw,3.2rem)}
 @media(max-width:760px){.hm-intro h2{font-size:2rem}}

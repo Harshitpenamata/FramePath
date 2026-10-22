@@ -260,3 +260,51 @@ p,li{text-wrap:pretty}
 
 /* Community: text-only pieces on a flat surface */
 .vg-show-text{background:#151515!important}
+
+/* ================= Studio Grid, refined =================
+   1. The cream outline marks the one main thing on a screen; everything else is a quiet surface one tone up.
+   2. Labels inside sections are sentence case; only the label above a page's title keeps the tracked capitals.
+   3. Space, not divider lines, separates things inside cards and lists.
+   Page stylesheets load after this one, so these rules use !important where they replace a page's own border. */
+:root{--surface:#141413;--surface-hover:#1b1b19}
+/* 1 · Surfaces */
+.panel,.vg-card,.st-card,details.sg-acc,.hm-intro,.hm-craft:not(.live),.hm-way,.db-plan,.vg-stage-group,.vg-mode,.db-nudge,
+.vg-make>.vg-task-brief,.vg-quiz,.vg-revisit,.ac-links a,.sf-card,.rs-hero,.rs-filters,.library-resource,.st-module,
+.sg-tickets li,.vg-testout,.vg-video-list button,.vg-link-card,.st-handins li,.admin-ticket{border-color:transparent!important;background:var(--surface)!important}
+.ac-links a:hover,.library-resource:hover,.st-module:hover,.vg-revisit:hover,.db-plan:hover,details.sg-acc:hover{background:var(--surface-hover)!important}
+/* the main thing on each screen keeps the cream outline */
+.vg-lesson-card,.vg-make .vg-form-block,.sp-card,.db-empty,.sg-gate,.ac-hero,.sf-checks,.sg-dialog{border:var(--line)!important}
+/* chosen and current things keep their lime outline */
+.db-plan.active,.vg-mode.chosen,.db-nudge.late,.vg-testout.ok,.sg-tickets li.fresh{border-color:var(--primary)!important}
+.db-today{border-color:var(--primary)!important}
+/* home: craft cards and steps as surfaces with gaps */
+.hm-how ol{border:0!important;gap:var(--s3)!important;background:none!important}
+.hm-how li{border:0!important;border-radius:var(--radius)!important;background:var(--surface)!important}
+/* plan: the stage strip becomes separate tiles */
+.db-stages{border:0!important;gap:var(--s2);overflow:visible!important}
+.db-stages li{border:0!important;border-radius:18px;background:var(--surface)}
+.db-stages li.done{background:var(--primary)}
+.db-stages li.now{background:var(--surface);box-shadow:inset 0 0 0 2px var(--primary)}
+/* 2 · Labels inside sections: sentence case */
+.eyebrow,.kicker,.st-label,.st-kicker,.vg-part-head .eyebrow{text-transform:none!important;letter-spacing:0!important;font-size:.875rem!important;font-weight:600;color:var(--muted-foreground)}
+.page-head .kicker,.db-hero .kicker,.ac-card .kicker,.sf-side .kicker,.rs-hero .kicker,.vg-empty .eyebrow,.cm-share .kicker{text-transform:uppercase!important;letter-spacing:.2em!important;font-size:.8125rem!important;color:var(--foreground)}
+/* 3 · Space instead of divider lines */
+.sf-checks li+li,.vg-task-meta,.vg-lesson-intro,.vg-lesson-foot,.vg-video-about,.vg-rate,.ac-links,.sf-foot,.st-handins li>.st-handin-actions,.vg-video-strip li+li{border:0!important}
+.sf-cols strong+strong,.vg-lesson-about{border-left:0!important}
+.vg-lesson-about{padding-left:0!important}
+.st-stats>*+*{border-left:0!important}
+.st-module>header,.st-module .st-module-head{border-bottom:0!important}
+.footer{border-top:0!important;margin-top:var(--s9)!important}
+@media(max-width:760px){.topbar .main-nav{border-top:0!important}}
+.vg-video-strip{border:0!important;gap:var(--s2)}
+.vg-video-strip button{background:var(--surface)!important;border-radius:14px}
+.st-chip,.st-portfolio-grid label{text-transform:none;letter-spacing:0}
+@media (max-width:640px){
+ .db-stages li{min-width:0;flex-wrap:wrap;row-gap:4px}
+ .db-stages li strong,.db-stages li span:not(.db-stage-mark):not(.db-stage-now){word-break:normal;overflow-wrap:normal;hyphens:none}
+ .db-stage-mark,.db-stage-now{margin-left:auto;writing-mode:horizontal-tb;white-space:nowrap}
+ .db-stage-mark{position:absolute;top:8px;right:8px}
+ .db-stage-now{position:absolute;top:8px;right:8px;padding:2px 6px}
+ .db-stages li{position:relative;padding-right:36px}
+}
+@media (max-width:640px){.db-stages li{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:4px}}

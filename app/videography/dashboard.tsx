@@ -110,11 +110,11 @@ function PlanNudges({p,live,reviews,mods}:{p:Programme;live:ReturnType<typeof li
 function TodayCard(){
  const {s}=useLearning();const p=s.programme as Programme|undefined;if(!p)return null;
  const mods=modulesFor(p.level),i=mods.findIndex((_,k)=>!s.progress?.[moduleKey(p.level,k)]);
- if(i<0)return <section className="db-today"><span className="kicker">TODAY</span><h2>You’ve finished every module of {planTitle(p)}.</h2><Go href={'/workspace/'+p.id}>See your plan<ArrowRight size={18}/></Go></section>;
+ if(i<0)return <section className="db-today"><span className="kicker">Today</span><h2>You’ve finished every module of {planTitle(p)}.</h2><Go href={'/workspace/'+p.id}>See your plan<ArrowRight size={18}/></Go></section>;
  const m=mods[i],key=moduleKey(p.level,i),marks=s.lessonProgress?.[key]||{},lesson=m.topics.findIndex((_:string,n:number)=>!marks[n]?.t);
  const late=behindBy(p,s.progress),minutes=Math.round(m.hours*60/(m.topics.length+1)/5)*5;
  const href=`/explore/video-${p.level}/${i}`+(lesson<0?'?tab=make':`?tab=watch&lesson=${lesson+1}`);
- return <section className="db-today"><span className="kicker">TODAY · {planTitle(p)}</span>
+ return <section className="db-today"><span className="kicker">Today · {planTitle(p)}</span>
   <h2>{lesson<0?<>Hand in: {m.taskName}</>:<>Lesson {lesson+1} of {m.topics.length}: {m.topics[lesson]}</>}</h2>
   <p className="small">{m.id} · {m.title} · about {lesson<0?Math.round(m.hours*60/(m.topics.length+1)/5)*5:minutes} min{late?<> · <a className="text-link" href={'/workspace/'+p.id}>{late.days} {late.days===1?'day':'days'} behind: update your dates</a></>:null}</p>
   <Go href={href} onClick={()=>track('today_clicked',{module:key,lesson:lesson+1})}>{lesson<0?'Go to the task':'Start this lesson'}<ArrowRight size={18}/></Go>
@@ -221,7 +221,7 @@ function ProgrammeDashboard(){
     <StartDate p={p} busy={busy} update={update}/>
   </details>
 
-  {(!decided||upgrading)&&shown.length>0&&<section id="vg-modes"><span className="eyebrow">HOW YOU LEARN</span><h2>{decided?'Upgrade your learning':'How do you want to learn?'}</h2>
+  {(!decided||upgrading)&&shown.length>0&&<section id="vg-modes"><span className="eyebrow">How you learn</span><h2>{decided?'Upgrade your learning':'How do you want to learn?'}</h2>
    <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?paid:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}><div className="vg-mode-body">
     <div className="row between"><span className={'vg-mode-tag'+(m.id==='self'?' on':'')}>{m.title}</span>{chosen&&<Badge tone="green">Your mode</Badge>}</div><strong className="vg-price">{m.price}</strong>
     <ul>{m.points.map(x=><li key={x}><Check size={15}/>{x}</li>)}</ul>
@@ -245,7 +245,7 @@ export function ModuleList({p,level}:{p?:Programme;level?:Level}){
  const entitled=isExplore(s)||['paid','active'].includes(s.craft?.status);
  const mods=modulesFor(lv),nextIndex=mods.findIndex((_,i)=>!s.progress?.[moduleKey(lv,i)]);
  const groups=stageOrder.map(stage=>({stage,items:mods.map((m,i)=>({m,i})).filter(x=>x.m.stageLabel===stage)})).filter(g=>g.items.length);
- return <section className="vg-modules"><span className="eyebrow">YOUR MODULES · {levelNames[lv].toUpperCase()}</span><h2>Start here and work down</h2>
+ return <section className="vg-modules"><span className="eyebrow">Your modules · {levelNames[lv]}</span><h2>Start here and work down</h2>
   {groups.map(g=>{const done=g.items.filter(x=>s.progress?.[moduleKey(lv,x.i)]).length,all=done===g.items.length;return <details key={g.stage} className={'vg-stage-group'+(all?' done':'')} open={g.items.some(x=>x.i===nextIndex)||(nextIndex<0&&g===groups[0])}>
    <summary><span className="vg-stage-dot" style={{background:stageColor[g.stage]}}>{all?<Check size={14}/>:null}</span><strong>{g.stage}</strong><span className="small">{g.items.length} module{g.items.length>1?'s':''} · {done} done</span><ChevronDown size={18} className="vg-stage-chev"/></summary>
    <ol>{g.items.map(({m,i})=>{const key=moduleKey(lv,i),done=!!s.progress?.[key],free=i<freeModuleCount;return <li key={m.id} className={done?'done':''}>

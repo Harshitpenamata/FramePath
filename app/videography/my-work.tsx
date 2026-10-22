@@ -13,7 +13,8 @@ import './studio.css';
 export function WorkSwitch({current}:{current:'work'|'portfolio'}){return <nav className="sg-switch" aria-label="My work sections"><a href="/portfolio" aria-current={current==='work'?'page':undefined}>My work</a><a href="/my-portfolio" aria-current={current==='portfolio'?'page':undefined}>Portfolio</a></nav>}
 
 // My Work: where a learner sees progress, every module's hand-ins with AI feedback, and builds a portfolio.
-const pad=(n:number)=>String(n).padStart(2,'0');
+// Counts as plain numbers (no zero padding).
+const pad=(n:number)=>String(n);
 function pieceKind(p:any){
  const files=p.uploads||[];
  if(files.some((f:any)=>String(f.type).startsWith('video/')))return {label:'Video submission',Icon:Film};
@@ -56,7 +57,7 @@ function ModuleCard({level,index,reviews,ids,setIds,isNext}:{level:Level;index:n
  async function removePiece(id:string){if(!await confirmAction('This piece and its files leave My Work and your portfolio. This can’t be undone.','Remove this piece'))return;if(await mutate('submission_remove',{id}))setIds(prev=>prev.filter(x=>x!==id))}
  async function removeFile(id:string,uploadId:string){if(await confirmAction('The file is removed from this piece.','Remove this file'))await mutate('submission_file_remove',{id,uploadId})}
  function toggle(id:string,on:boolean){if(on&&ids.length>=9){toast.error('Pick up to nine pieces to share.');return}setIds(prev=>on?[...prev,id]:prev.filter(v=>v!==id))}
- const head=<div className="st-module-head"><div><span className="st-label">Module {pad(index+1)}</span><h3>{m.title}</h3></div><a className="st-icon-link" href={moduleHref(key)} aria-label={'Open module '+(index+1)}><ArrowRight size={16}/></a></div>;
+ const head=<div className="st-module-head"><div><span className="st-label">Module {index+1}</span><h3>{m.title}</h3></div><a className="st-icon-link" href={moduleHref(key)} aria-label={'Open module '+(index+1)}><ArrowRight size={16}/></a></div>;
  if(!pieces.length)return <article className={'st-card st-module '+(isNext?'next':'later')}>
   {head}
   <div className="st-placeholder" aria-hidden="true">{pad(index+1)}</div>
@@ -129,7 +130,7 @@ export function MyWorkStudio(){
   {loaded&&!user&&<Gate>{null}</Gate>}</div>
   {(!loaded||user)&&<Gate>
    <StatusCard level={level} reviews={reviews}/>
-   <section className="st-modules"><div className="st-row"><div><span className="st-kicker">Manage / details</span><h2>Your modules</h2></div><span className="small">Every hand-in, all in one place.</span></div>
+   <section className="st-modules"><div className="st-row"><div><h2>Your modules</h2></div><span className="small">Every hand-in, all in one place.</span></div>
     <div className="st-module-grid">{mods.map((_,i)=><div id={'mod-'+moduleKey(level,i)} key={i}><ModuleCard level={level} index={i} reviews={reviews} ids={ids} setIds={setIds} isNext={i===nextIndex}/></div>)}</div>
    </section>
    {other.length>0&&<section className="st-other"><h2>Other work</h2><p className="small">Hand-ins from other levels and earlier practice.</p><WorkFolders ids={ids} setIds={setIds} keys={[...new Set<string>(other.map((p:any)=>p.key))]}/></section>}

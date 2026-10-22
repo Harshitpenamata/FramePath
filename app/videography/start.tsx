@@ -5,6 +5,7 @@ import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Photo} from '../ui';
 import type {PhotoSlot} from '../photos';
 import './home.css';
+import {BannerSymbols,banners} from './hero-banners';
 import {track} from '../track';
 import {courses,interests,interestFor,questionCount,nextQuestion,optionOrder,assess,schedule,levelNames,levelSummary,rhythm,maxHoursPerWeek,addDays,today,maxPlans,plansOf,type Level,type Answer,type Visual} from './programme';
 
@@ -40,32 +41,23 @@ const crafts:{id:string;n:string;title:string;blurb:string;photo:PhotoSlot;live?
  {id:'animation',n:'04',title:'Animation · 2D | 3D',blurb:'Bring characters and worlds to life.',photo:'home-animation'},
  {id:'motion-graphics',n:'05',title:'Motion Graphics',blurb:'Make text and shapes move with purpose.',photo:'home-motion'},
 ];
-// Home banner: five designed banner images (Assets/fontpage) that change every 5 seconds. Each image's words are
-// its alt text, so screen readers hear them. Pauses while a keyboard user is in it and with the pause button, and
-// stays still for people who ask their device for reduced motion. Served from public/banners at 1000 and 2070 wide.
-// On phones the banners are too small to read, so each slide's words are also set as real text (kicker, headline
-// with its highlighted part, line), shown instead of the image below 760px.
-const heroSlides:{n:number;alt:string;kicker:string;head:[string,string,string];line:string}[]=[
- {n:1,alt:'India’s first full-stack creative education platform. Your creative career, mapped by industry leaders. Powered by AI. From your first frame to your first film, beginner to advanced, all in one place.',kicker:'India’s first full-stack creative education platform',head:['Your creative career, mapped by industry leaders.','Powered by AI.',''],line:'From your first frame to your first film, beginner to advanced, all in one place.'},
- {n:2,alt:'Curated by people who’ve done it. Most of our industry leaders never went to film school. They learned from the internet and from great mentors. Now they’ve mapped the path for you.',kicker:'Curated by people who’ve done it',head:['Most of our industry leaders','never went','to film school.'],line:'They learned from the internet and from great mentors. Now they’ve mapped the path for you.'},
- {n:3,alt:'Beginner to advanced. 700+ curated pathways. In every course. From first steps to advanced craft, the whole climb is mapped.',kicker:'Beginner to advanced',head:['','700+','curated pathways. In every course.'],line:'From first steps to advanced craft, the whole climb is mapped.'},
- {n:4,alt:'Your pathway is free. Know a little? Know a lot? Start right there. Share what you know and how far you’ve come. We map what comes next.',kicker:'Your pathway is free',head:['Know a little? Know a lot?','Start right there.',''],line:'Share what you know and how far you’ve come. We map what comes next.'},
- {n:5,alt:'Learn your way. Learn with AI. Or learn with a mentor. Self-paced with AI-driven assignments and feedback, or a mentor-led program.',kicker:'Learn your way',head:['Learn with','AI.','Or learn with a mentor.'],line:'Self-paced with AI-driven assignments and feedback, or a mentor-led program.'},
-];
+// Home banner: the five designed banners (hero-banners.tsx), live text beside flat drawings, changing every 5
+// seconds. Pauses while a keyboard user is in it and with the pause button, and stays still for people who ask their
+// device for reduced motion. The first banner's headline is the page's h1; the others are h2s.
 function HeroSlides({actions}:{actions:React.ReactNode}){
  const [at,setAt]=useState(0),[paused,setPaused]=useState(false),[held,setHeld]=useState(false),[still,setStill]=useState(false);
  useEffect(()=>{const m=window.matchMedia('(prefers-reduced-motion: reduce)');setStill(m.matches||document.documentElement.classList.contains('ui-reduced-motion'))},[]);
- const n=heroSlides.length,go=(i:number)=>setAt((i+n)%n);
+ const n=banners.length,go=(i:number)=>setAt((i+n)%n);
  useEffect(()=>{if(paused||held||still)return;const t=setTimeout(()=>go(at+1),5000);return ()=>clearTimeout(t)},[at,paused,held,still]);
  return <section className="hm-hero hm-banner" aria-roledescription="carousel" aria-label="About Framepath" onFocus={e=>{if(e.target.matches(':focus-visible'))setHeld(true)}} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setHeld(false)}}>
-  <h1 className="sr-only">Framepath: your creative career, mapped by industry leaders. Powered by AI.</h1>
-  <div className="hm-banner-frame">{heroSlides.map((x,i)=><img key={x.n} className={'hm-banner-img'+(i===at?' on':'')} src={`/banners/hero-${x.n}-2070.webp`} srcSet={`/banners/hero-${x.n}-1000.webp 1000w, /banners/hero-${x.n}-2070.webp 2070w`} sizes="(max-width: 1460px) 100vw, 1460px" width={2070} height={760} alt={x.alt} aria-hidden={i!==at} loading={i===0?'eager':'lazy'} decoding="async" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`}/>)}</div>
-  <div className="hm-banner-text">{heroSlides.map((x,i)=><div key={x.n} className={'hm-bt'+(i===at?' on':'')}><span className="hm-bt-kicker">{x.kicker}</span><p className="hm-bt-head">{x.head[0]} <em>{x.head[1]}</em> {x.head[2]}</p><p className="hm-bt-line">{x.line}</p></div>)}</div>
+  <BannerSymbols/>
+  <div className="hm-banner-frame">{banners.map((x,i)=>{const H=i===0?'h1':'h2';return <article key={i} className={'hb-slide'+(i===at?' on':'')} aria-hidden={i!==at} role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`}>
+   <div className="hb-copy"><p className="hb-eyebrow">{x.eyebrow}</p><H className="hb-head">{x.head}</H><p className="hb-line">{x.line}</p></div>{x.art}</article>})}</div>
   <div className="hm-banner-bar">
    {actions}
    <div className="hm-slide-nav">
     <button type="button" className="sg-arrow" aria-label="Previous slide" onClick={()=>go(at-1)}><ChevronLeft size={18}/></button>
-    <span className="hm-slide-dots">{heroSlides.map((_,i)=><button key={i} type="button" aria-label={`Slide ${i+1}`} aria-current={i===at?'true':undefined} onClick={()=>go(i)}/>)}</span>
+    <span className="hm-slide-dots">{banners.map((_,i)=><button key={i} type="button" aria-label={`Slide ${i+1}`} aria-current={i===at?'true':undefined} onClick={()=>go(i)}/>)}</span>
     <button type="button" className="sg-arrow" aria-label="Next slide" onClick={()=>go(at+1)}><ChevronRight size={18}/></button>
     {!still&&<button type="button" className="hm-slide-pause" onClick={()=>setPaused(p=>!p)} aria-label={paused?'Play slides':'Pause slides'}>{paused?<Play size={16}/>:<Pause size={16}/>}</button>}
    </div>
@@ -147,7 +139,7 @@ export function ProgrammeStart(){
   <ol className="vg-stepper sp-stepper" aria-label="Plan setup steps">{steps.map((label,i)=><li key={label} className={i===step?'current':i<step?'done':''}><span>{i<step?<Check size={14}/>:i+1}</span>{label}</li>)}</ol>
 
   {step===0&&<Panel className="vg-panel">
-   <span className="eyebrow">VIDEOGRAPHY · STEP 1</span>
+   <span className="eyebrow">Videography · step 1</span>
    <div className="sp-tiles" role="group" aria-label="What do you want to film?">{interests.map(i=>{const at=draft.interests.indexOf(i.id),Icon=interestIcons[i.id]||Film;return <button type="button" key={i.id} aria-pressed={at>=0} className={'sp-tile'+(at>=0?' on':'')} onClick={()=>{if(!draft.interests.length&&at<0)track('plan_started',{interest:i.id});update({interests:at>=0?draft.interests.filter(x=>x!==i.id):[...draft.interests,i.id]})}}><Icon size={20}/><span>{i.label}</span>{at>=0&&<b aria-label={at===0?'Main project':'Pick '+(at+1)}>{at+1}</b>}</button>})}</div>
    {draft.interests.length>0&&<ol className="vg-chosen">{draft.interests.map((id,i)=><li key={id}>{i===0?<Star size={14} aria-label="Primary"/>:<span className="vg-rank">{i+1}</span>}{interestFor(id)?.label}{i>0&&<button type="button" className="vg-link" onClick={()=>update({interests:[id,...draft.interests.filter(x=>x!==id)]})}>Make main</button>}<button type="button" aria-label={'Remove '+interestFor(id)?.label} onClick={()=>update({interests:draft.interests.filter(x=>x!==id)})}><X size={14}/></button></li>)}</ol>}
    {draft.interests[0]&&<p className="small">Main project: <strong>{interestFor(draft.interests[0])!.label}</strong></p>}
@@ -158,7 +150,7 @@ export function ProgrammeStart(){
   </Panel>}
 
   {step===1&&<Panel className="vg-panel">
-   <div className="row between"><span className="eyebrow">LEVEL CHECK · QUESTION {Math.min(draft.answers.length+1,questionCount)} OF {questionCount}</span></div>
+   <div className="row between"><span className="eyebrow">Level check · question {Math.min(draft.answers.length+1,questionCount)} of {questionCount}</span></div>
    <div className="vg-progress" role="progressbar" aria-label="Level check progress" aria-valuemin={0} aria-valuemax={questionCount} aria-valuenow={draft.answers.length}><span style={{width:`${draft.answers.length/questionCount*100}%`}}/></div>
    {current?<>
     {current.kind==='check'&&<span className="vg-check-tag">Quick skill check</span>}
@@ -170,7 +162,7 @@ export function ProgrammeStart(){
   </Panel>}
 
   {step===2&&result&&<Panel className="vg-panel">
-   <span className="eyebrow">STEP 3 · YOUR TIME</span>
+   <span className="eyebrow">Step 3 · your time</span>
    <p className="small">Skill checks: {result.checks.right} of {result.checks.total} right.</p>
    <div className="vg-time-grid">
     <div className="vg-stat"><Clock size={20}/><strong>{plan.recommendedHoursPerWeek} h / week</strong><span>Suggested for {rhythm[level].hours} hours of learning</span></div>
@@ -186,7 +178,7 @@ export function ProgrammeStart(){
   </Panel>}
 
   {step===3&&result&&<Panel className="vg-panel">
-   <span className="eyebrow">STEP 4 · REVIEW</span>
+   <span className="eyebrow">Step 4 · review</span>
    <label className="vg-field">Pathway name<input value={draft.name??''} maxLength={60} placeholder={'Videography · '+(interestFor(draft.interests[0])?.pathway||'')} onChange={e=>update({name:e.target.value})}/><span className="small">Optional. You can change it later on your plan.</span></label>
    <dl className="vg-review">
     <div><dt>Course</dt><dd>Videography</dd></div>

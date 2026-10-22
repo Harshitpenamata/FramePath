@@ -41,7 +41,7 @@ export function ReflectStep({moduleId,index,tool,videos,onSolved}:{moduleId:stri
  if(!questions)return <LessonTool tool={tool} onSolved={onSolved}/>;
  return <div className="vg-reflect">
   <div className="vg-quiz">
-   <div className="vg-quiz-top"><span className="eyebrow">QUESTION {at+1} OF {questions.length}</span><span className="vg-dots" aria-hidden="true">{questions.map((_,i)=><i key={i} className={right.has(i)?'done':i===at?'now':''}/>)}</span></div>
+   <div className="vg-quiz-top"><span className="eyebrow">Question {at+1} of {questions.length}</span><span className="vg-dots" aria-hidden="true">{questions.map((_,i)=><i key={i} className={right.has(i)?'done':i===at?'now':''}/>)}</span></div>
    <Question key={moduleId+index+at} item={questions[at]} n={at+1} total={questions.length} onRight={()=>setRight(s=>new Set(s).add(at))}/>
    {right.has(at)&&at<questions.length-1&&<button type="button" className="vg-next-q" onClick={()=>setAt(at+1)}>Next question<ArrowRight size={16}/></button>}
   </div>

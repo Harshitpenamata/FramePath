@@ -93,7 +93,7 @@ export function MyPortfolio(){
  <div className={'st-hero'+(loaded&&!user?' split':'')}><PageHead title="Your portfolio">Pick your best pieces in My work, then choose who can see them.</PageHead>{loaded&&!user&&<Gate>{null}</Gate>}</div>
  {(!loaded||user)&&<Gate>
   <section className="cm-share st-card">
-   <div><span className="kicker">WHO CAN SEE YOUR PORTFOLIO</span><h2>Sharing</h2></div>
+   <div><span className="kicker">Who can see your portfolio</span><h2>Sharing</h2></div>
    <div className="cm-vis" role="radiogroup" aria-label="Who can see your portfolio">{visibilities.map(v=><button type="button" role="radio" aria-checked={choice===v.id} key={v.id} className={choice===v.id?'selected':''} onClick={()=>setChoice(v.id)}><v.Icon size={18}/><strong>{v.label}</strong><span className="small">{v.text}</span></button>)}</div>
    {choice==='public'&&s.consent?.age!=='adult'&&<p className="notice">{s.consent?'Public portfolios are for learners 18 and over. You can still share yours by link: choose Unlisted.':<>Before sharing publicly, tell us your age group: <Button size="sm" variant="outline" onClick={()=>mutate('consent_save',{age:'adult'})}>I’m 18 or older</Button> <Button size="sm" variant="outline" onClick={()=>mutate('consent_save',{age:'guardian'})}>I’m 13 to 17</Button></>}</p>}
    {needsConsent&&<CheckField checked={consent} onChange={setConsent}>I have permission to share this work, and everyone you can recognise in it has agreed to it being shared.</CheckField>}
