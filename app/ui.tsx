@@ -59,7 +59,7 @@ export function Shell({children,home=false}:any){
 export function Photo({slot,alt='',className='',priority=false}:{slot:import('./photos').PhotoSlot;alt?:string;className?:string;priority?:boolean}){const n=photoSlots[slot];return <img className={'sg-photo '+className} width={1800} height={1200} src={'/photos/'+n+'-1800.jpg'} srcSet={'/photos/'+n+'-900.jpg 900w, /photos/'+n+'-1800.jpg 1800w'} sizes="(max-width: 900px) 100vw, 50vw" alt={alt} loading={priority?'eager':'lazy'} decoding="async"/>}
 // The Framepath mark: four corner brackets, like a camera frame guide.
 // The Framepath logo (mark and name): dark on the cream header, light on dark backgrounds. public/brand, 2x for sharp screens.
-export function Logo({light=false,height=34}:{light?:boolean;height?:number}){return <img className="brand-logo" src={light?'/brand/logo-light.png':'/brand/logo-dark.png'} width={Math.round(height*414/96)} height={height} alt="Framepath"/>}
+export function Logo({light=false,height=34}:{light?:boolean;height?:number}){return <img className="brand-logo" src={light?'/brand/logo-light.svg':'/brand/logo-dark.svg'} width={Math.round(height*906/211)} height={height} alt="Framepath"/>}
 export function PageHead({eyebrow,title,children,action}:any){return <div className="page-head"><div>{eyebrow&&<div className="kicker">{eyebrow}</div>}<h1>{title}</h1>{children&&<p className="lede">{children}</p>}</div>{action}</div>}
 export function Panel({children,className=''}:any){return <section className={'panel '+className}>{children}</section>}
 export function Badge({children,tone=''}:any){return <span className={'badge '+tone}>{children}</span>}
