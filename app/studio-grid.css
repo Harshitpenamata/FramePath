@@ -36,7 +36,6 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 .topbar .main-nav a,.topbar .main-nav summary{color:#0b0b0b}
 .topbar .main-nav a[aria-current=page]{border-bottom:2px solid #0b0b0b}
 .topbar .account-link{background:#0b0b0b;color:#f2eee4;border:0;border-radius:999px;padding:12px 26px;font-weight:600;white-space:nowrap}
-.topbar .demo-disclosure summary{color:#0b0b0b;border-color:#0b0b0b55}
 .topbar .header-popover{background:#141414;color:#f2eee4;border:var(--line);border-radius:18px}
 .topbar .mobile-menu{color:#0b0b0b}
 @media(max-width:760px){.topbar{width:calc(100% - 24px);margin-top:12px;padding:8px 8px 8px 18px}.topbar .brand{font-size:1.3rem}.main-nav{top:84px;background:#f2eee4;border-radius:22px;margin:0 12px}.topbar .main-nav a{color:#0b0b0b}}
