@@ -1,143 +1,224 @@
-// Home banner artwork: the five designed banners as live HTML text beside flat SVG drawings (from the designer's
-// banner HTML/CSS). The words are real text, so search engines and screen readers read them and they stay sharp.
-// Class names carry an hb- prefix so they can't collide with the site's own (.panel, .eyebrow, ...).
+// Home banners: the five designed banners as live HTML text over flat SVG drawings (from the designer's HTML/CSS,
+// converted). The words are real text, so search engines and screen readers read them. Each banner's headline uses
+// the tag it's given (h1 for the first banner, h2 for the rest). Class names carry an hb- prefix so they can't
+// collide with the site's own; the styles are in home.css.
 import React from 'react';
 
-export type Banner={eyebrow:string;head:React.ReactNode;line:string;art:React.ReactNode};
-
-// Shared drawings, used by the slides through <use href="#hb-...">.
-export function BannerSymbols(){
- return <svg className="hb-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-  <defs>
-   <symbol id="hb-play" viewBox="0 0 100 100"><path d="M29 16Q23 12 23 21V79Q23 88 30 84L82 55Q90 50 82 45Z" fill="currentColor"/></symbol>
-   <symbol id="hb-spark" viewBox="0 0 100 100"><path d="M50 0C44 34 34 44 0 50C34 56 44 66 50 100C56 66 66 56 100 50C66 44 56 34 50 0Z" fill="currentColor"/></symbol>
-   <symbol id="hb-crop" viewBox="0 0 100 100"><path d="M32 8H8V32M68 8H92V32M8 68V92H32M68 92H92V68" fill="none" stroke="currentColor" strokeWidth="7"/></symbol>
-   <symbol id="hb-nib" viewBox="0 0 100 100"><path d="M48 5L14 60L29 92H71L86 60L52 5V51A9 9 0 1 1 48 51Z" fill="currentColor"/></symbol>
-   <symbol id="hb-pencil" viewBox="0 0 100 100">
-    <path d="M16 66L65 17L84 36L35 85L10 91Z" fill="currentColor"/>
-    <path d="M70 12L77 5Q81 1 85 5L96 16Q100 20 96 24L89 31Z" fill="currentColor"/>
-    <path d="M16 70L30 84L12 89Z" fill="#000"/>
-   </symbol>
-   <symbol id="hb-aperture" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="44" fill="currentColor"/>
-    <g fill="none" strokeWidth="4" style={{stroke:'var(--hb-cut,#000)'}}>
-     {[0,60,120,180,240,300].map(r=><path key={r} d="M50 50L72 12" transform={r?`rotate(${r} 50 50)`:undefined}/>)}
-    </g>
-   </symbol>
-   <symbol id="hb-wave" viewBox="0 0 100 100"><path d="M10 44V56M26 30V70M42 13V87M58 23V77M74 35V65M90 44V56" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round"/></symbol>
-   <symbol id="hb-chat" viewBox="0 0 100 100"><path d="M19 10H81Q95 10 95 25V66Q95 81 80 81H44L23 97V81H19Q5 81 5 66V25Q5 10 19 10Z" fill="currentColor"/></symbol>
-   <symbol id="hb-cursor" viewBox="0 0 100 100"><path d="M18 8L84 60L55 65L70 89L55 97L41 71L23 91Z" fill="#000" strokeWidth="3" strokeLinejoin="round" style={{stroke:'var(--hb-cream)'}}/></symbol>
-   <symbol id="hb-check" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="39" fill="none" stroke="currentColor" strokeWidth="5"/>
-    <path d="M29 51L43 65L73 34" fill="none" stroke="currentColor" strokeWidth="6"/>
-   </symbol>
-  </defs>
- </svg>;
-}
-
-const Art=({children}:{children:React.ReactNode})=><svg className="hb-art" viewBox="0 0 640 500" aria-hidden="true" focusable="false">{children}</svg>;
+export type Banner=(H:React.ElementType)=>React.ReactNode;
 
 export const banners:Banner[]=[
- {eyebrow:'India’s first full-stack creative education platform',
-  head:<>Your creative career, mapped by industry leaders. <span>Powered by AI.</span></>,
-  line:'From your first frame to your first film, beginner to advanced, all in one place.',
-  art:<Art>
-   <rect className="hb-panel" x="385" y="25" width="220" height="205" rx="24"/>
-   <use href="#hb-nib" x="450" y="53" width="90" height="105"/>
-   <rect className="hb-paper" x="425" y="285" width="195" height="185" rx="22"/>
-   <use className="hb-ink hb-cut-paper" href="#hb-aperture" x="457" y="315" width="130" height="130"/>
-   <rect className="hb-paper" x="35" y="95" width="465" height="345" rx="25"/>
-   <g className="hb-ink"><circle cx="65" cy="120" r="6"/><circle cx="85" cy="120" r="6"/><circle cx="105" cy="120" r="6"/></g>
-   <rect className="hb-black" x="58" y="145" width="419" height="217" rx="16"/>
-   <use href="#hb-crop" x="173" y="164" width="182" height="182"/>
-   <use href="#hb-play" x="217" y="206" width="95" height="95"/>
-   <use className="hb-ink" href="#hb-play" x="62" y="380" width="30" height="30"/>
-   <rect className="hb-muted-fill" x="114" y="380" width="158" height="22" rx="6"/>
-   <rect className="hb-lime-fill" x="284" y="380" width="190" height="22" rx="6"/>
-   <rect className="hb-muted-fill" x="114" y="411" width="244" height="10" rx="5"/>
-   <rect className="hb-tab" x="470" y="208" width="98" height="98" rx="24"/>
-   <use className="hb-ink" href="#hb-spark" x="489" y="227" width="60" height="60"/>
-  </Art>},
- {eyebrow:'Curated by people who’ve done it',
-  head:<>Most of our industry leaders <span>never went</span> to film school.</>,
-  line:'They learned from the internet and from great mentors. Now they’ve mapped the path for you.',
-  art:<Art>
-   <rect className="hb-panel" x="320" y="25" width="295" height="220" rx="23"/>
-   <path className="hb-cream-fill" d="M355 100V78Q355 52 383 49V64Q369 66 369 78H383V110H355ZM399 100V78Q399 52 427 49V64Q413 66 413 78H427V110H399Z"/>
-   <g className="hb-muted-stroke" strokeWidth="8" strokeLinecap="round"><path d="M451 80H581M451 104H562M451 128H530"/></g>
-   <use href="#hb-pencil" x="518" y="149" width="65" height="65"/>
-   <rect className="hb-paper" x="30" y="145" width="440" height="310" rx="25"/>
-   <rect className="hb-black" x="52" y="168" width="396" height="220" rx="16"/>
-   <use href="#hb-crop" x="160" y="190" width="176" height="176"/>
-   <use href="#hb-play" x="202" y="231" width="94" height="94"/>
-   <use className="hb-ink" href="#hb-play" x="56" y="409" width="27" height="27"/>
-   <path d="M109 422H390" className="hb-muted-stroke" strokeWidth="9" strokeLinecap="round"/>
-   <path d="M109 422H244" stroke="#000" strokeWidth="9" strokeLinecap="round"/>
-   <circle cx="244" cy="422" r="13" className="hb-black"/>
-   <rect className="hb-tab" x="442" y="252" width="99" height="99" rx="24"/>
-   <use className="hb-ink" href="#hb-spark" x="463" y="273" width="57" height="57"/>
-  </Art>},
- {eyebrow:'Beginner to advanced',
-  head:<>700+ curated pathways. In <span>every course.</span></>,
-  line:'From first steps to advanced craft, the whole climb is mapped.',
-  art:<Art>
-   <rect className="hb-panel" x="436" y="30" width="169" height="200" rx="23"/>
-   <use className="hb-lime" href="#hb-spark" x="505" y="83" width="58" height="58"/>
-   <rect className="hb-panel" x="35" y="86" width="515" height="370" rx="25"/>
-   <rect className="hb-panel" x="55" y="108" width="148" height="151" rx="20"/>
-   <rect className="hb-panel" x="218" y="108" width="148" height="151" rx="20"/>
-   <rect className="hb-lime-fill" x="381" y="108" width="148" height="151" rx="20"/>
-   <rect className="hb-panel" x="55" y="278" width="148" height="151" rx="20"/>
-   <rect className="hb-panel" x="218" y="278" width="148" height="151" rx="20"/>
-   <rect className="hb-panel" x="381" y="278" width="148" height="151" rx="20"/>
-   <use href="#hb-crop" x="87" y="141" width="84" height="84"/>
-   <use href="#hb-play" x="250" y="141" width="84" height="84"/>
-   <use className="hb-ink hb-cut-lime" href="#hb-aperture" x="408" y="135" width="94" height="94"/>
-   <use href="#hb-nib" x="86" y="307" width="86" height="86"/>
-   <use href="#hb-wave" x="246" y="310" width="92" height="92"/>
-   <g className="hb-cream-fill">
-    <rect x="402" y="309" width="105" height="45" rx="5"/>
-    <rect x="402" y="365" width="47" height="42" rx="5"/>
-    <rect x="460" y="365" width="47" height="42" rx="5"/>
-   </g>
-  </Art>},
- {eyebrow:'Your pathway is free',
-  head:<>Know a little?<br/> Know a lot?<br/> Start <span>right there.</span></>,
-  line:'Share what you know and how far you’ve come. We map what comes next.',
-  art:<Art>
-   <rect className="hb-paper" x="130" y="65" width="460" height="382" rx="24"/>
-   <rect className="hb-panel" x="20" y="151" width="184" height="248" rx="22"/>
-   <rect className="hb-tab" x="214" y="116" width="192" height="300" rx="24"/>
-   <rect className="hb-panel" x="416" y="151" width="184" height="248" rx="22"/>
-   <circle className="hb-track" cx="112" cy="242" r="51"/>
-   <circle className="hb-value" cx="112" cy="242" r="51" pathLength={100} strokeDasharray="22 100" transform="rotate(-90 112 242)"/>
-   <circle cx="310" cy="230" r="55" fill="none" stroke="#8C9649" strokeWidth="15"/>
-   <circle cx="310" cy="230" r="55" fill="none" stroke="#000" strokeWidth="15" strokeLinecap="round" pathLength={100} strokeDasharray="57 100" transform="rotate(-90 310 230)"/>
-   <circle className="hb-track" cx="508" cy="242" r="51"/>
-   <circle className="hb-value" cx="508" cy="242" r="51" pathLength={100} strokeDasharray="97 100" transform="rotate(-90 508 242)"/>
-   <use href="#hb-cursor" x="330" y="247" width="76" height="90"/>
-   <g strokeWidth="13" strokeLinecap="round">
-    <path className="hb-cream-stroke" d="M54 330H155M450 330H552"/>
-    <path className="hb-muted-stroke" d="M54 354H128M450 354H524"/>
-    <path stroke="#000" d="M251 339H358"/>
-    <path className="hb-muted-stroke" d="M251 365H368"/>
-   </g>
-  </Art>},
- {eyebrow:'Learn your way',
-  head:<>Learn with AI.<br/> Or learn with<br/> <span>a mentor.</span></>,
-  line:'Self-paced with AI-driven assignments and feedback, or a mentor-led program.',
-  art:<Art>
-   <rect className="hb-paper" x="280" y="65" width="135" height="355" rx="23"/>
-   <rect className="hb-panel" x="35" y="90" width="305" height="290" rx="24"/>
-   <rect className="hb-panel" x="328" y="145" width="285" height="290" rx="24"/>
-   <use href="#hb-crop" x="82" y="135" width="210" height="210"/>
-   <use href="#hb-spark" x="112" y="165" width="150" height="150"/>
-   <rect className="hb-tab" x="5" y="159" width="83" height="83" rx="19"/>
-   <use className="hb-ink" href="#hb-check" x="17" y="171" width="59" height="59"/>
-   <use href="#hb-chat" x="428" y="260" width="140" height="140"/>
-   <use className="hb-chat-front" href="#hb-chat" x="369" y="207" width="150" height="150"/>
-   <g className="hb-ink"><circle cx="410" cy="257" r="8"/><circle cx="438" cy="257" r="8"/><circle cx="466" cy="257" r="8"/></g>
-   <circle className="hb-tab" cx="555" cy="226" r="38"/>
-   <use className="hb-ink" href="#hb-pencil" x="534" y="204" width="43" height="43"/>
-  </Art>},
+(H)=><>
+<div className="hb-copy">
+      <p className="hb-eyebrow">India’s first full-stack creative education platform.</p>
+      <H className="hb-head">Your creative career,<br/>{' '}mapped by industry leaders.<br/>{' '}<span>Powered by AI.</span></H>
+      <p className="hb-desc">From your first frame to your first film, beginner to advanced, all in one place.</p>
+    </div>
+
+    <svg className="hb-art" viewBox="1480 125 530 510" aria-hidden="true" focusable="false">
+      <g className="hb-l hb-muted" strokeWidth="1.8">
+        <path d="M1919 235V155H1545Q1521 155 1521 179V569Q1521 594 1545 594H1919V351"/>
+        <path d="M1917 195H1593Q1569 195 1569 219V530Q1569 555 1593 555H1919"/>
+        <path d="M1971 276V236H1655Q1631 236 1631 260V495Q1631 520 1655 520H1971V365"/>
+      </g>
+      <g className="hb-l hb-muted hb-dotted" strokeWidth="2">
+        <path d="M1480 502H1569M1665 320H1856M1815 426H1856V320M1919 236V320"/>
+      </g>
+      <path className="hb-l hb-ink" strokeWidth="2.7"
+        d="M1569 502H1660Q1704 502 1704 458V449Q1704 426 1727 426H1788Q1815 426 1815 399V351Q1815 320 1846 320H1971"/>
+      <circle className="hb-f-muted" cx="1665" cy="320" r="5"/>
+      <g className="hb-f-lime">
+        <circle cx="1569" cy="502" r="7.5"/>
+        <circle cx="1704" cy="429" r="7.5"/>
+        <circle cx="1815" cy="424" r="7.5"/>
+        <circle cx="1856" cy="320" r="7.5"/>
+      </g>
+      <path className="hb-l hb-lime" strokeWidth="7"
+        d="M1939 320H2003M1971 288V352M1948 297L1994 343M1994 297L1948 343"/>
+    </svg>
+
+    <svg className="hb-frame" viewBox="0 0 2048 751" aria-hidden="true" focusable="false">
+      <g className="hb-l hb-muted hb-faint" strokeWidth="1.4">
+        <path d="M127 76H1921M127 676H1921M77 183V351M77 383V576M1477 76V302M1477 439V476M1477 514V676M1735 0V751M1024 46V106M1024 646V706M1480 320H1919"/>
+      </g>
+      <path className="hb-l hb-ink" strokeWidth="1.8"
+        d="M58 76H100M79 55V97M1948 76H1990M1969 55V97M58 676H100M79 655V697M1948 676H1990M1969 655V697"/>
+      <path className="hb-f-muted"
+        d="M69 136h16v16H69Z M69 360h16v16H69Z M69 607h16v16H69Z M1964 152h16v16h-16Z M1964 607h16v16h-16Z M1469 490h16v16h-16Z"/>
+      <path className="hb-l hb-muted hb-dotted" strokeWidth="3"
+        d="M1815 104H1920M1788 649H1920"/>
+      <path className="hb-f-lime"
+        d="M130 579C215 558 348 550 430 553C458 554 477 556 472 560C459 565 421 571 420 575C420 586 547 569 624 567C688 565 757 569 820 574C737 572 673 573 620 576C537 579 443 593 418 584C409 580 411 572 427 569L449 562C370 558 232 571 134 587Z"/>
+    </svg>
+</>,
+(H)=><>
+<div className="hb-copy">
+      <p className="hb-eyebrow">Curated by people who’ve done it.</p>
+      <H className="hb-head">Most of our industry leaders<br/>{' '}<span>never went</span> to film school.</H>
+      <p className="hb-desc">They learned from the internet and from great mentors.<br/>{' '}Now they’ve mapped the path for you.</p>
+    </div>
+
+    <svg className="hb-art" viewBox="1490 140 460 460" aria-hidden="true" focusable="false">
+      <g className="hb-l hb-ink" strokeWidth="4">
+        <path d="M1536 160H1797V412H1536Z"/>
+        <path d="M1665 582V389H1697V374H1717V358H1763V335H1931V582Z"/>
+      </g>
+      <path className="hb-l hb-muted" strokeWidth="4" strokeDasharray="4 17"
+        d="M1849 148V265M1578 430V540"/>
+      <path className="hb-l hb-lime" strokeWidth="4" strokeLinecap="round"
+        d="M1592 398C1650 324 1735 276 1800 275C1876 274 1890 325 1850 382C1810 441 1714 477 1646 464C1568 449 1603 386 1669 335"/>
+      <path className="hb-l hb-lime" strokeWidth="2"
+        d="M1593 399C1640 324 1725 279 1816 275"/>
+      <rect className="hb-f-lime" x="1753" y="347" width="20" height="20"/>
+      <rect className="hb-f-muted" x="1515" y="528" width="18" height="18"/>
+    </svg>
+
+    <svg className="hb-frame" viewBox="0 0 2048 751" aria-hidden="true" focusable="false">
+      <path className="hb-l hb-muted hb-faint" strokeWidth="1.4"
+        d="M605 108H1920M570 649H1723M385 0V127M1398 0V204M1399 508V751M73 334V551M0 512H98M1785 520H2048M1971 417V622"/>
+      <path className="hb-l hb-muted" strokeWidth="1.8"
+        d="M53 81H109M81 53V109M1941 81H1997M1969 53V109M53 669H109M81 641V697M1941 669H1997M1969 641V697"/>
+      <path className="hb-f-muted"
+        d="M158 108h14v14h-14Z M1392 102h12v12h-12Z M1394 643h12v12h-12Z M1939 144h14v14h-14Z"/>
+      <path className="hb-l hb-muted" strokeWidth="4" strokeDasharray="4 17"
+        d="M418 83H557M1753 650H1900"/>
+    </svg>
+</>,
+(H)=><>
+<div className="hb-copy">
+      <p className="hb-eyebrow">Beginner to advanced.</p>
+      <H className="hb-head"><span>700+</span> curated pathways.<br/>{' '}In every course.</H>
+      <p className="hb-desc">From first steps to advanced craft, the whole climb is mapped.</p>
+    </div>
+
+    <svg className="hb-art" viewBox="1410 150 510 475" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="hb-depth-dots" width="18" height="18"
+          patternUnits="userSpaceOnUse">
+          <circle className="hb-f-muted" cx="3" cy="3" r="1.3"/>
+        </pattern>
+      </defs>
+      <g className="hb-l hb-muted" strokeWidth="1.9">
+        <path d="M1442 448H1735V597H1442Z"/>
+        <path d="M1625 317H1806V394H1901V171H1713V352H1901"/>
+        <path d="M1625 317V597M1735 352V597M1713 171H1901V394"/>
+      </g>
+      <path className="hb-l hb-muted hb-faint" strokeWidth="1"
+        d="M1468 448V597M1532 448V597M1561 448V597M1591 448V597M1442 511H1735M1625 483H1735M1735 352V394M1790 171V394M1878 171V394M1790 203H1901"/>
+      <g fill="url(#hb-depth-dots)">
+        <rect x="1635" y="365" width="72" height="65"/>
+        <rect x="1635" y="497" width="85" height="82"/>
+        <rect x="1727" y="217" width="132" height="87"/>
+      </g>
+      <path className="hb-l hb-lime" strokeWidth="3.1"
+        d="M1468 566H1518Q1560 566 1560 524V502Q1560 466 1596 466H1671Q1712 466 1712 425V378Q1712 342 1748 342H1788Q1823 342 1823 307V245Q1823 205 1863 205H1876"/>
+      <path className="hb-l hb-lime" strokeWidth="2.8"
+        d="M1847 247L1871 223M1847 223H1871V247"/>
+      <path className="hb-f-lime"
+        d="M1458 556h20v20h-20Z M1703 342h19v20h-19Z M1866 195h20v20h-20Z"/>
+    </svg>
+
+    <svg className="hb-frame" viewBox="0 0 2048 751" aria-hidden="true" focusable="false">
+      <path className="hb-l hb-muted hb-faint" strokeWidth="1.4"
+        d="M154 93H1894M154 663H1894M103 139V622M1945 139V622M1395 93V203M1395 555V663M1790 94V148M1879 545V713M1756 526H1996M57 437H128M1366 512H1420M1922 203H1970M1142 65V121M1145 637V703"/>
+      <path className="hb-l hb-muted" strokeWidth="1.8"
+        d="M78 93H128M103 68V118M1920 93H1970M1945 68V118M78 662H128M103 637V687M1920 662H1970M1945 637V687"/>
+      <path className="hb-f-muted"
+        d="M79 302h14v14H79Z M1956 386h14v14h-14Z M1956 409h14v14h-14Z"/>
+      <path className="hb-l hb-muted hb-dotted" strokeWidth="2.5"
+        d="M657 117H733M657 133H733M1503 115H1615M1475 641H1580M735 690H844"/>
+      <path className="hb-f-lime"
+        d="M128 387C217 367 337 363 423 367C445 367 458 370 448 373L410 383L439 371C363 372 280 379 217 388L256 376C206 379 166 385 128 390Z"/>
+    </svg>
+</>,
+(H)=><>
+<div className="hb-copy">
+      <p className="hb-eyebrow">Your pathway is free.</p>
+      <H className="hb-head">Know a little?<br/>{' '}Know a lot?<br/>{' '}<span>Start right there.</span></H>
+      <p className="hb-desc">Share what you know and how far you’ve come. We map what comes next.</p>
+    </div>
+
+    <svg className="hb-art" viewBox="1260 175 700 380" aria-hidden="true" focusable="false">
+      <path className="hb-l hb-muted hb-faint" strokeWidth="1.6"
+        d="M1334 196V535M1604 247H1852V522H1703M1291 366H1350M1836 247H1852M1836 522H1868"/>
+      <path className="hb-l hb-muted hb-dotted" strokeWidth="2.3"
+        d="M1531 197H1690V522H1531Z"/>
+      <g className="hb-f-muted">
+        <rect x="1685" y="191" width="11" height="11"/>
+        <rect x="1685" y="516" width="11" height="11"/>
+        <circle cx="1531" cy="197" r="3"/>
+        <circle cx="1531" cy="522" r="3"/>
+      </g>
+      <g className="hb-l hb-ink" strokeWidth="2.7">
+        <path d="M1351 247H1555C1621 247 1611 346 1691 346H1713Q1740 346 1749 366"/>
+        <path d="M1351 366H1749"/>
+        <path d="M1351 482H1555C1621 482 1611 386 1691 386H1713Q1740 386 1749 366"/>
+      </g>
+      <circle className="hb-f-ink" cx="1334" cy="247" r="11"/>
+      <circle className="hb-f-muted" cx="1334" cy="366" r="12"/>
+      <g className="hb-f-lime">
+        <circle cx="1334" cy="482" r="12"/>
+        <circle cx="1749" cy="366" r="12"/>
+      </g>
+      <path className="hb-l hb-lime" strokeWidth="3.2"
+        d="M1767 366H1941L1921 347M1941 366L1921 385"/>
+      <path className="hb-l hb-lime" strokeWidth="3"
+        d="M1281 252C1266 225 1352 196 1382 212C1414 229 1349 291 1299 277C1254 264 1303 214 1356 208C1403 202 1390 229 1380 242"/>
+    </svg>
+
+    <svg className="hb-frame" viewBox="0 0 2048 751" aria-hidden="true" focusable="false">
+      <path className="hb-l hb-muted hb-faint" strokeWidth="1.4"
+        d="M127 79H1919M127 666H1919M78 181V351M78 378V596M1334 87V207M1334 530V590M1690 550V713M1967 115V277M1967 310V550M1967 572V634M1024 49V109M1024 644V695"/>
+      <path className="hb-l hb-ink" strokeWidth="1.8"
+        d="M61 79H103M82 58V100M1946 79H1988M1967 58V100M61 667H103M82 646V688M1946 667H1988M1967 646V688"/>
+      <path className="hb-f-muted"
+        d="M70 137h16v16H70Z M70 355h16v16H70Z M70 606h16v16H70Z M1960 142h16v16h-16Z M1960 287h16v16h-16Z M1960 550h16v16h-16Z"/>
+      <path className="hb-l hb-muted hb-dotted" strokeWidth="2.5"
+        d="M1801 112H1915M1801 638H1915M1690 87V185"/>
+      <path className="hb-f-lime"
+        d="M130 579C232 560 365 554 469 559C507 560 528 564 519 570L467 582C517 585 612 568 693 569C755 568 824 574 871 580C800 576 736 576 682 579C605 583 479 598 448 588C429 581 441 575 481 569C375 565 237 578 135 586Z"/>
+    </svg>
+</>,
+(H)=><>
+<div className="hb-copy">
+      <p className="hb-eyebrow">Learn your way.</p>
+      <H className="hb-head">Learn with <span>AI.</span><br/>{' '}Or learn with a mentor.</H>
+      <p className="hb-desc">Self-paced with AI-driven assignments and feedback, or a mentor-led program.</p>
+    </div>
+
+    <svg className="hb-art" viewBox="1280 150 640 480" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="hb-learning-dots" width="27" height="29"
+          patternUnits="userSpaceOnUse" x="1346" y="208">
+          <circle className="hb-f-ink" cx="2" cy="2" r="1.9"/>
+        </pattern>
+      </defs>
+      <g className="hb-l hb-muted" strokeWidth="2.2">
+        <path d="M1316 176H1627V355H1316Z"/>
+        <path d="M1627 311H1894V513H1627Z"/>
+      </g>
+      <rect x="1344" y="206" width="250" height="127"
+        fill="url(#hb-learning-dots)"/>
+      <path className="hb-l hb-lime" strokeWidth="5" strokeLinecap="round"
+        d="M1443 266C1514 265 1544 286 1555 333C1566 383 1587 397 1665 395"/>
+      <g className="hb-bubbles" strokeWidth="3.4">
+        <path d="M1682 351H1805Q1822 351 1822 368V416Q1822 433 1805 433H1698L1681 450V433Q1665 433 1665 416V368Q1665 351 1682 351Z"/>
+        <path d="M1755 400H1849Q1865 400 1865 417V454Q1865 471 1849 471H1843V488L1823 471H1755Q1739 471 1739 454V417Q1739 400 1755 400Z"/>
+      </g>
+      <path className="hb-f-lime"
+        d="M1468 601C1533 572 1608 544 1636 542C1668 538 1628 563 1605 578C1585 591 1567 604 1554 613C1632 581 1701 562 1769 561C1711 570 1643 583 1585 608C1559 619 1532 625 1546 607C1563 589 1603 565 1625 550C1581 561 1517 588 1470 607C1464 609 1462 604 1468 601Z"/>
+    </svg>
+
+    <svg className="hb-frame" viewBox="0 0 2048 751" aria-hidden="true" focusable="false">
+      <path className="hb-l hb-muted hb-faint" strokeWidth="1.4"
+        d="M515 113H1627M385 643H1518M86 181V269M86 315V520M1266 80V296M1266 586V678M1231 256H1316M1627 197H1849M1549 356V478M1766 261V311M1962 355V586M1894 471H1997"/>
+      <path className="hb-l hb-ink" strokeWidth="1.8"
+        d="M60 103H112M86 77V129M1936 103H1988M1962 77V129M60 643H112M86 617V669M1936 643H1988M1962 617V669"/>
+      <path className="hb-l hb-muted" strokeWidth="1" d="M469 189H761"/>
+      <path className="hb-f-muted"
+        d="M79 283h17v17H79Z M79 552h17v17H79Z M1954 196h16v16h-16Z M1954 315h16v16h-16Z"/>
+      <path className="hb-l hb-muted" strokeWidth="5" strokeDasharray="5 14"
+        d="M286 115H471M158 643H338M1716 643H1900"/>
+      <path className="hb-f-lime" d="M155 175h17v17h-17Z"/>
+    </svg>
+</>
 ];
