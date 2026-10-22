@@ -115,3 +115,19 @@
 @media(max-width:760px){.hm-banner{gap:var(--s4)}.hm-banner-bar{flex-direction:column;align-items:stretch}.hm-banner-bar .hm-slide-nav{justify-content:center}.hm-banner-frame{border-radius:16px}}
 .hm-banner{grid-template-columns:minmax(0,1fr)}
 @media(max-width:760px){.hm-slide-nav{gap:var(--s1)}.hm-slide-dots button{width:32px}.hm-banner-bar>*{min-width:0;max-width:100%}}
+/* Phone banner: the slide's words as real text instead of the (unreadable) small image */
+.hm-banner-text{display:none}
+@media(max-width:760px){
+ .hm-banner-frame{display:none}
+ .hm-banner-text{display:grid;padding:var(--s6) var(--s5);border-radius:20px;background:#000;border:var(--soft-line);min-height:300px}
+ .hm-bt{grid-area:1/1;display:grid;gap:var(--s3);align-content:center;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility 0s .5s}
+ .hm-bt.on{opacity:1;visibility:visible;transition:opacity .5s ease}
+ .hm-bt-kicker{font-size:.875rem;color:var(--muted-foreground)}
+ .hm-bt-head{margin:0;font-family:var(--display);text-transform:uppercase;font-size:2.1rem;line-height:.95;color:var(--foreground);text-wrap:balance}
+ .hm-bt-head em{font-style:normal;color:var(--primary)}
+ .hm-bt-line{margin:0;color:var(--foreground)}
+}
+@media(prefers-reduced-motion:reduce){.hm-bt,.hm-bt.on{transition:none}}
+/* "Pick your craft. We'll build the path." fits its narrow card in two lines */
+.hm-intro h2{font-size:clamp(2.1rem,3.3vw,3.2rem)}
+@media(max-width:760px){.hm-intro h2{font-size:2rem}}

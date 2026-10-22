@@ -3,7 +3,7 @@ import React,{useEffect,useState} from 'react';
 import {ArrowLeft,Folder,Sparkles,Trash2,X} from 'lucide-react';
 import {toast} from 'sonner';
 import {Button} from '@/components/ui/button';
-import {useLearning,Panel,CheckField,SubmissionCard,DateText,labelForKey} from '../ui';
+import {useLearning,Panel,CheckField,SubmissionCard,DateText,labelForKey,confirmAction} from '../ui';
 import {parseVideoKey,modulesFor,moduleKey,levelNames,type Level} from './programme';
 import {moduleHref} from '../learning-rules';
 import {Showcase,itemsFromSubmissions} from './showcase';
@@ -60,8 +60,8 @@ export function WorkFolders({ids,setIds,keys:only}:{ids:string[];setIds:(fn:(pre
  const reviews=useVideoReviews(),from=useFromKey();
  const keys=[...new Set<string>(s.submissions.map((x:any)=>x.key))].filter(k=>!only||only.includes(k)).sort((a,b)=>folderOrder(a)-folderOrder(b));
  useEffect(()=>{if(from)document.getElementById('folder-'+from)?.scrollIntoView({block:'start'})},[from]);
- async function removePiece(id:string){if(!window.confirm('Remove this piece from My Work? This can’t be undone.'))return;if(await mutate('submission_remove',{id}))setIds(prev=>prev.filter(x=>x!==id))}
- async function removeFile(id:string,uploadId:string){if(window.confirm('Remove this file from the piece?'))await mutate('submission_file_remove',{id,uploadId})}
+ async function removePiece(id:string){if(!await confirmAction('This piece and its files leave My Work and your portfolio. This can’t be undone.','Remove this piece'))return;if(await mutate('submission_remove',{id}))setIds(prev=>prev.filter(x=>x!==id))}
+ async function removeFile(id:string,uploadId:string){if(await confirmAction('The file is removed from this piece.','Remove this file'))await mutate('submission_file_remove',{id,uploadId})}
  return <div className="vg-folders">{keys.map(key=>{const pieces=s.submissions.filter((x:any)=>x.key===key);return <Panel key={key}><details className="vg-folder" id={'folder-'+key} open={!from||from===key}>
   <summary><Folder size={20}/>{folderName(key)}<span className="small">({pieces.length})</span></summary>
   <div className="stack">{pieces.map((p:any)=><div key={p.id} className="vg-piece">

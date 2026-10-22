@@ -90,7 +90,7 @@ function ExposureTool({tool,report}:{tool:Extract<Tool,{kind:'exposure'}>}&R){
  }
  const slider=(label:string,values:string[],v:number,set:(n:number)=>void,hint:string)=><label className="vg-slider">{label}: <strong>{values[v]}</strong><span className="small">{hint}</span><input type="range" min={0} max={values.length-1} value={v} onChange={e=>{set(Number(e.target.value));report(null)}}/></label>;
  return <><div className="vg-sim" aria-label="Picture preview">
-   <img src="/lessons/story-01-960.webp" alt="" style={{filter:`brightness(${Math.pow(2,off*0.55).toFixed(2)}) blur(${blur}px)`}}/>
+   <img src="/lessons/story-01-960.webp" width={960} height={640} alt="" style={{filter:`brightness(${Math.pow(2,off*0.55).toFixed(2)}) blur(${blur}px)`}}/>
    <span className="vg-grain" style={{opacity:Math.max(0,iso-2)*0.16}}/>
    <span className="vg-sim-tag">{off===0?'Just right':off<0?'Too dark':'Too bright'}</span></div>
   {slider('Aperture',apertures,a,setA,'Lower number = more light, blurrier background')}
@@ -104,7 +104,7 @@ function WhiteBalanceTool({tool,report}:{tool:Extract<Tool,{kind:'whitebalance'}
  const [k,setK]=useState(5600);
  const t=Math.max(-1,Math.min(1,(k-scene)/2500));
  function check(){report(Math.abs(k-scene)<=400?{ok:true,text:`Natural colour at about ${k}K. The camera now matches the light in the room.`}:{ok:false,text:t>0?'Still too orange. Move the slider left (cooler).':'Now too blue. Move the slider right (warmer).'})}
- return <><div className="vg-sim"><img src="/lessons/story-01-960.webp" alt=""/><span className="vg-tint" style={{background:t>0?'#ff8a00':'#2f6dff',opacity:Math.abs(t)*0.38}}/></div>
+ return <><div className="vg-sim"><img src="/lessons/story-01-960.webp" width={960} height={640} alt=""/><span className="vg-tint" style={{background:t>0?'#ff8a00':'#2f6dff',opacity:Math.abs(t)*0.38}}/></div>
   <label className="vg-slider">White balance: <strong>{k}K</strong><span className="small">Left = cooler (bluer), right = warmer (more orange)</span><input type="range" min={2500} max={9000} step={100} value={k} onChange={e=>{setK(Number(e.target.value));report(null)}}/></label>
   <Button type="button" onClick={check}>Check colour</Button></>;
 }

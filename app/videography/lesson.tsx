@@ -52,7 +52,7 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
    <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons">Watch</TabsTrigger><TabsTrigger value="task">Make</TabsTrigger><TabsTrigger value="feedback">Reflect</TabsTrigger>{last&&<TabsTrigger value="finish">Finish</TabsTrigger>}</TabsList>
    {/* Module header (site edits, item 4): title on the left; the picture, tag and summary on the right. */}
    <header className="ls-head"><div className="ls-title"><h1>{lesson.title}</h1><p className="ls-meta">Module {parsed.index+1} of {mods.length} <span>·</span> {parsed.module.hours} h <span>·</span> {parsed.module.stageLabel}</p></div>
-    <figure className="ls-hero">{image&&<img src={`${image.base}-960.webp`} srcSet={imageSrcSet(image)} sizes="(max-width: 900px) 100vw, 640px" alt={image.alt}/>}
+    <figure className="ls-hero">{image&&<img src={`${image.base}-960.webp`} width={960} height={640} srcSet={imageSrcSet(image)} sizes="(max-width: 900px) 100vw, 640px" alt={image.alt}/>}
      <figcaption><span className="ls-tags"><Badge>{parsed.module.id} · {parsed.module.stageLabel}</Badge>{parsed.index<freeModuleCount&&<Badge tone="green"><Gift size={12}/> Free</Badge>}</span><p className="ls-outcome">{parsed.module.outcome}</p><span className="small">About {parsed.module.hours} hours{lessonCount>0&&` · ${lessonCount} lessons`}</span></figcaption></figure></header>
    <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}} onLesson={(index,count)=>setLessonAt({index,count})}/></TabsContent>
    <TabsContent value="task">{loaded&&<TaskTab moduleKey={key} onHandedIn={id=>{setReviewNow(id);setTab('feedback')}}/>}</TabsContent>

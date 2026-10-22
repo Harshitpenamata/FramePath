@@ -43,12 +43,14 @@ const crafts:{id:string;n:string;title:string;blurb:string;photo:PhotoSlot;live?
 // Home banner: five designed banner images (Assets/fontpage) that change every 5 seconds. Each image's words are
 // its alt text, so screen readers hear them. Pauses while a keyboard user is in it and with the pause button, and
 // stays still for people who ask their device for reduced motion. Served from public/banners at 1000 and 2070 wide.
-const heroSlides:{n:number;alt:string}[]=[
- {n:1,alt:'India’s first full-stack creative education platform. Your creative career, mapped by industry leaders. Powered by AI. From your first frame to your first film, beginner to advanced, all in one place.'},
- {n:2,alt:'Curated by people who’ve done it. Most of our industry leaders never went to film school. They learned from the internet and from great mentors. Now they’ve mapped the path for you.'},
- {n:3,alt:'Beginner to advanced. 700+ curated pathways. In every course. From first steps to advanced craft, the whole climb is mapped.'},
- {n:4,alt:'Your pathway is free. Know a little? Know a lot? Start right there. Share what you know and how far you’ve come. We map what comes next.'},
- {n:5,alt:'Learn your way. Learn with AI. Or learn with a mentor. Self-paced with AI-driven assignments and feedback, or a mentor-led program.'},
+// On phones the banners are too small to read, so each slide's words are also set as real text (kicker, headline
+// with its highlighted part, line), shown instead of the image below 760px.
+const heroSlides:{n:number;alt:string;kicker:string;head:[string,string,string];line:string}[]=[
+ {n:1,alt:'India’s first full-stack creative education platform. Your creative career, mapped by industry leaders. Powered by AI. From your first frame to your first film, beginner to advanced, all in one place.',kicker:'India’s first full-stack creative education platform',head:['Your creative career, mapped by industry leaders.','Powered by AI.',''],line:'From your first frame to your first film, beginner to advanced, all in one place.'},
+ {n:2,alt:'Curated by people who’ve done it. Most of our industry leaders never went to film school. They learned from the internet and from great mentors. Now they’ve mapped the path for you.',kicker:'Curated by people who’ve done it',head:['Most of our industry leaders','never went','to film school.'],line:'They learned from the internet and from great mentors. Now they’ve mapped the path for you.'},
+ {n:3,alt:'Beginner to advanced. 700+ curated pathways. In every course. From first steps to advanced craft, the whole climb is mapped.',kicker:'Beginner to advanced',head:['','700+','curated pathways. In every course.'],line:'From first steps to advanced craft, the whole climb is mapped.'},
+ {n:4,alt:'Your pathway is free. Know a little? Know a lot? Start right there. Share what you know and how far you’ve come. We map what comes next.',kicker:'Your pathway is free',head:['Know a little? Know a lot?','Start right there.',''],line:'Share what you know and how far you’ve come. We map what comes next.'},
+ {n:5,alt:'Learn your way. Learn with AI. Or learn with a mentor. Self-paced with AI-driven assignments and feedback, or a mentor-led program.',kicker:'Learn your way',head:['Learn with','AI.','Or learn with a mentor.'],line:'Self-paced with AI-driven assignments and feedback, or a mentor-led program.'},
 ];
 function HeroSlides({actions}:{actions:React.ReactNode}){
  const [at,setAt]=useState(0),[paused,setPaused]=useState(false),[held,setHeld]=useState(false),[still,setStill]=useState(false);
@@ -58,6 +60,7 @@ function HeroSlides({actions}:{actions:React.ReactNode}){
  return <section className="hm-hero hm-banner" aria-roledescription="carousel" aria-label="About Framepath" onFocus={e=>{if(e.target.matches(':focus-visible'))setHeld(true)}} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setHeld(false)}}>
   <h1 className="sr-only">Framepath: your creative career, mapped by industry leaders. Powered by AI.</h1>
   <div className="hm-banner-frame">{heroSlides.map((x,i)=><img key={x.n} className={'hm-banner-img'+(i===at?' on':'')} src={`/banners/hero-${x.n}-2070.webp`} srcSet={`/banners/hero-${x.n}-1000.webp 1000w, /banners/hero-${x.n}-2070.webp 2070w`} sizes="(max-width: 1460px) 100vw, 1460px" width={2070} height={760} alt={x.alt} aria-hidden={i!==at} loading={i===0?'eager':'lazy'} decoding="async" role="group" aria-roledescription="slide" aria-label={`${i+1} of ${n}`}/>)}</div>
+  <div className="hm-banner-text">{heroSlides.map((x,i)=><div key={x.n} className={'hm-bt'+(i===at?' on':'')}><span className="hm-bt-kicker">{x.kicker}</span><p className="hm-bt-head">{x.head[0]} <em>{x.head[1]}</em> {x.head[2]}</p><p className="hm-bt-line">{x.line}</p></div>)}</div>
   <div className="hm-banner-bar">
    {actions}
    <div className="hm-slide-nav">
@@ -77,12 +80,12 @@ export function VideographyHome(){
   <HeroSlides actions={<div className="button-row"><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go><Go href="#crafts" outline>Explore courses</Go></div>}/>
 
   <section className="hm-grid" id="crafts" aria-label="Choose your craft">
-   <div className="hm-intro"><span className="kicker">Choose your craft</span><h2 className="display">Pick your craft. We’ll build the path.</h2><p>Each course runs from beginner to advanced, designed by industry practitioners.</p><a className="sg-arrow" href={startHref} aria-label={startLabel}><ArrowRight size={18}/></a></div>
-   {crafts.map(c=>{const body=<><Photo slot={c.photo} className="hm-craft-photo"/><span className="hm-craft-n">{c.n}</span><strong className="display">{c.title}</strong><span className="hm-craft-blurb">{c.blurb}</span><span className="hm-craft-foot">{c.live?<>Start · Phase 1</>:<>Coming soon</>}<span className="sg-arrow"><ArrowRight size={16}/></span></span>{c.live&&<span className="hm-live">Live now</span>}</>;
+   <div className="hm-intro"><h2 className="display">Pick your craft. We’ll build the path.</h2><p>Each course runs from beginner to advanced, designed by industry practitioners.</p><a className="sg-arrow" href={startHref} aria-label={startLabel}><ArrowRight size={18}/></a></div>
+   {crafts.map(c=>{const body=<><Photo slot={c.photo} className="hm-craft-photo"/><strong className="display">{c.title}</strong><span className="hm-craft-blurb">{c.blurb}</span><span className="hm-craft-foot">{c.live?<>Start · Phase 1</>:<>Coming soon</>}<span className="sg-arrow"><ArrowRight size={16}/></span></span>{c.live&&<span className="hm-live">Live now</span>}</>;
     return c.live?<a key={c.id} href={startHref} className="hm-craft live">{body}</a>:<div key={c.id} className="hm-craft" aria-disabled="true">{body}</div>})}
   </section>
 
-  <section className="hm-ways"><span className="kicker">Two ways to learn</span><h2 className="display">Learn your way.</h2>
+  <section className="hm-ways"><h2 className="display">Learn your way.</h2>
    <div className="hm-way-grid">
     <article className="hm-way"><span className="hm-num">1</span><h3>Self-paced with AI</h3><p>Learn on your schedule. Get AI-driven assignments and instant, specific feedback on your work.</p><ul>{['AI-driven assignments','Instant feedback on your work','Start any time, go at your pace'].map(x=><li key={x}><Check size={16}/>{x}</li>)}</ul></article>
     <article className="hm-way"><span className="hm-num">2</span><h3>Mentor-led program</h3><p>Learn alongside working professionals with live guidance, reviews and accountability.</p><ul>{['Live sessions with industry mentors','Personal reviews of your work','Cohort accountability'].map(x=><li key={x}><Check size={16}/>{x}</li>)}</ul></article>
@@ -90,7 +93,7 @@ export function VideographyHome(){
    <p className="small">Not sure which fits? Your pathway report will recommend one.</p>
   </section>
 
-  <section className="hm-how"><span className="kicker">How it works</span><h2 className="display">Your personal pathway in four steps.</h2>
+  <section className="hm-how"><h2 className="display">Your personal pathway in four steps.</h2>
    <ol>{[['Tell us your craft','Choose the interests you want to build.'],['Check your level','12 quick questions so you start in the right place.'],['Set your time','Tell us your hours per week and we’ll plan around your life.'],['Get your pathway','A personal roadmap with milestones and clear dates.']].map(([t,d],i)=><li key={t}><span className="hm-num">{i+1}</span><strong>{t}</strong><p>{d}</p></li>)}</ol>
   </section>
 
