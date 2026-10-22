@@ -54,3 +54,6 @@ export const reviewRatings=sqliteTable('review_ratings',{jobId:text('job_id').pr
 export const emailLog=sqliteTable('email_log',{id:text('id').primaryKey(),userId:text('user_id'),kind:text('kind').notNull(),dedupe:text('dedupe').notNull(),toAddress:text('to_address').notNull(),status:text('status').notNull(),createdAt:integer('created_at').notNull()},t=>[uniqueIndex('idx_email_log_dedupe').on(t.dedupe),index('idx_email_log_user').on(t.userId,t.kind,t.createdAt)]);
 // Learners who turned off reminder emails (the link in each reminder, or My account). Replies to their tickets still send.
 export const emailOptouts=sqliteTable('email_optouts',{userId:text('user_id').primaryKey(),createdAt:integer('created_at').notNull()});
+// A ticket's conversation after the learner's first message (support_tickets.message): support's replies and the
+// learner's follow-ups, oldest first. (support_tickets.reply is no longer written; 0010 copied old replies here.)
+export const ticketMessages=sqliteTable('ticket_messages',{id:text('id').primaryKey(),ticketId:text('ticket_id').notNull(),author:text('author').notNull(),authorEmail:text('author_email'),body:text('body').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_ticket_messages_ticket').on(t.ticketId,t.createdAt)]);

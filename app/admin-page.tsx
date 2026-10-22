@@ -3,7 +3,9 @@ import React,{useEffect,useState} from 'react';
 import {Panel,PageHead,Badge} from './ui';
 import {Button} from '@/components/ui/button';
 import './videography/studio.css';
-import {categoryLabel,statusLabel,ticketStatuses} from './support-shared';
+import {categoryLabel,statusLabel,replyMax} from './support-shared';
+import {Thread} from './support';
+import {toast} from 'sonner';
 
 // /admin: AI spend and queue, and lesson videos that need replacing. The server only answers admins (ADMIN_EMAILS).
 export function AdminHealth(){
@@ -144,24 +146,34 @@ function SupportQueue(){
   {!d?<p className="small" role="status">Loading…</p>:!d.tickets.length?<p className="small">No tickets.</p>:d.tickets.map((t:any)=><Ticket key={t.id+t.updated_at} t={t} onSaved={()=>load()}/>)}
  </Panel>;
 }
+// One ticket: where it came from, the conversation, and the actions. Sending a reply moves it to in progress (or
+// resolved), and the learner gets an email; resolving and reopening are buttons, never a status to remember to set.
 function Ticket({t,onSaved}:{t:any;onSaved:()=>void}){
- const [status,setStatus]=useState(t.status),[reply,setReply]=useState(t.reply||''),[note,setNote]=useState(t.note||''),[busy,setBusy]=useState(false),[error,setError]=useState('');
- const save=async()=>{setBusy(true);setError('');try{const r=await fetch('/api/admin/support',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:t.id,status,reply,note})});const j:any=await r.json();if(!r.ok)throw Error(j.error);onSaved()}catch(e:any){setError(e.message)}finally{setBusy(false)}};
+ const [reply,setReply]=useState(''),[note,setNote]=useState(t.note||''),[busy,setBusy]=useState(''),[error,setError]=useState('');
+ const act=async(action:string,extra:any,done:string)=>{setBusy(action+(extra.resolve?'+':''));setError('');try{const r=await fetch('/api/admin/support',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:t.id,action,...extra})});const j:any=await r.json();if(!r.ok)throw Error(j.error);toast.success(done);if(action!=='note')onSaved()}catch(e:any){setError(e.message)}finally{setBusy('')}};
+ const to=t.email||t.context?.email||'the learner',resolved=t.status==='resolved';
  const when=(n:number)=>new Date(n).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'});
- return <details className="admin-ticket" open={t.status!=='resolved'}><summary><strong>{t.id}</strong> · {categoryLabel(t.category)} · <span className={'badge sg-status '+t.status}>{statusLabel(t.status)}</span> · {when(t.created_at)}</summary>
+ return <details className="admin-ticket" open={!resolved}><summary><strong>{t.id}</strong> · {categoryLabel(t.category)} · <span className={'badge sg-status '+t.status}>{statusLabel(t.status)}</span> · {when(t.created_at)}</summary>
   <dl className="admin-ticket-context">
    <div><dt>User ID</dt><dd>{t.public_user_id} · {t.email||t.context?.email||'no email'}</dd></div>
    <div><dt>Course ID</dt><dd>{t.course_id||'—'}</dd></div>
-   <div><dt>Plan</dt><dd>{[t.course,t.pathway,t.plan_name,t.level].filter(Boolean).join(' · ')||'—'}</dd></div>
+   <div><dt>Plan</dt><dd>{[...new Set([t.course,t.pathway,t.plan_name,t.level].filter(Boolean).flatMap((v:string)=>v.split(' · ')))].join(' · ')||'—'}</dd></div>
    <div><dt>Where</dt><dd>{[t.module_title,t.lesson&&'Lesson '+t.lesson].filter(Boolean).join(' · ')||'—'} · <a className="text-link" href={t.page} target="_blank" rel="noreferrer">{t.page}</a></dd></div>
    <div><dt>Device</dt><dd className="small">{t.context?.viewport} · {t.context?.browser}</dd></div>
   </dl>
-  <p className="prewrap">{t.message}</p>
-  <label>Status<select value={status} onChange={e=>setStatus(e.target.value)}>{ticketStatuses.map(([k,l])=><option key={k} value={k}>{l}</option>)}</select></label>
-  <label>Reply to the learner (shown in their account)<textarea value={reply} onChange={e=>setReply(e.target.value)} rows={3}/></label>
-  <label>Staff note (not shown)<textarea value={note} onChange={e=>setNote(e.target.value)} rows={2}/></label>
+  <Thread t={t} viewer="staff"/>
+  {resolved?<div className="button-row"><Button variant="outline" disabled={!!busy} onClick={()=>act('reopen',{},`${t.id} reopened.`)}>{busy==='reopen'?'Reopening…':'Reopen'}</Button></div>
+   :<><label>Reply to {to}<textarea value={reply} onChange={e=>setReply(e.target.value)} rows={3} maxLength={replyMax} placeholder="They’ll get it by email and in My account."/></label>
+    <div className="button-row">
+     <Button disabled={!!busy||!reply.trim()} onClick={()=>act('reply',{body:reply},`Reply sent to ${to}. ${t.id} is in progress.`)}>{busy==='reply'?'Sending…':'Send reply'}</Button>
+     <Button variant="outline" disabled={!!busy||!reply.trim()} onClick={()=>act('reply',{body:reply,resolve:true},`Reply sent to ${to}. ${t.id} is resolved.`)}>{busy==='reply+'?'Sending…':'Send and resolve'}</Button>
+     <Button variant="outline" disabled={!!busy} onClick={()=>act('resolve',{},`${t.id} resolved. ${to} has been told.`)}>{busy==='resolve'?'Resolving…':'Resolve without reply'}</Button>
+    </div></>}
+  <details className="admin-note"><summary>Staff note{t.note?' (has a note)':''}</summary>
+   <label>Only staff see this<textarea value={note} onChange={e=>setNote(e.target.value)} rows={2}/></label>
+   <div className="button-row"><Button variant="outline" disabled={!!busy} onClick={()=>act('note',{note},'Note saved.')}>{busy==='note'?'Saving…':'Save note'}</Button></div>
+  </details>
   {error&&<p className="small" role="alert">{error}</p>}
-  <div className="button-row"><Button disabled={busy} onClick={save}>{busy?'Saving…':'Save ticket'}</Button></div>
  </details>;
 }
 

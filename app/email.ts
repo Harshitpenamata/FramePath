@@ -1,13 +1,14 @@
 import {env} from 'cloudflare:workers';
 import {db} from './service';
-import {sign,verify,sha256} from './session';
+import {sign,verify} from './session';
 import {siteUrl} from './whatsapp';
 import {plansOf,planTitle,behindBy,parseVideoKey,moduleLesson,projectLabel,today} from './videography/programme';
 
 // Email alerts through Resend (RESEND_API_KEY; sender EMAIL_FROM). Each send is logged in email_log under a dedupe key,
 // so the same alert never goes twice. Without a key nothing is sent: the alert is logged as 'skipped'.
 //  - ticket_new: a learner raised a ticket → every ADMIN_EMAILS address
-//  - ticket_reply: support replied → the learner
+//  - ticket_reply / ticket_resolved: support replied or resolved → the learner
+//  - ticket_followup: the learner replied on a ticket → every ADMIN_EMAILS address
 //  - review_ready: a queued AI review finished in the hourly job → the learner
 //  - reminder: the open plan is 2+ days behind → the learner, at most every 4 days, at 9am India time. Has an unsubscribe link.
 const setting=(k:string)=>String((env as any)[k]||process.env[k]||'');
@@ -60,18 +61,37 @@ export function ticketCreatedAlert(t:{id:string;publicUserId:string;courseId?:st
  return quiet(Promise.all(adminEmails().map(to=>sendEmail({to,kind:'ticket_new',dedupe:`ticket_new:${t.id}:${to}`,
   subject:`New ticket ${t.id} (${t.category})`,heading:`New ticket ${t.id}`,
   lines:[`From ${t.email||'a learner'} · ${t.publicUserId}${t.courseId?' · '+t.courseId:''}${t.moduleTitle?' · '+t.moduleTitle:''}`],
-  quote:t.message,button:{label:'Open support tickets',href:siteUrl()+'/admin'}}))));
+  quote:t.message,button:{label:'Open support tickets',href:siteUrl()+'/admin#tickets'}}))));
 }
 
-export function ticketReplyAlert(ticketId:string){
+// A support reply → the learner, once per message.
+export function ticketReplyAlert(ticketId:string,messageId:string){
  return quiet((async()=>{
-  const t:any=await db().prepare('SELECT t.id,t.user_id,t.reply,t.status,l.email FROM support_tickets t LEFT JOIN learners l ON l.user_id=t.user_id WHERE t.id=?').bind(ticketId).first();
-  if(!t?.email||!t.reply)return;
-  await sendEmail({to:t.email,userId:t.user_id,kind:'ticket_reply',dedupe:`ticket_reply:${t.id}:${await sha256(t.reply)}`,
+  const t:any=await db().prepare('SELECT t.id,t.user_id,t.status,l.email,m.body FROM support_tickets t JOIN ticket_messages m ON m.ticket_id=t.id LEFT JOIN learners l ON l.user_id=t.user_id WHERE t.id=? AND m.id=?').bind(ticketId,messageId).first();
+  if(!t?.email)return;
+  await sendEmail({to:t.email,userId:t.user_id,kind:'ticket_reply',dedupe:`ticket_reply:${messageId}`,
    subject:`We replied to your request ${t.id}`,heading:`We replied to your request ${t.id}`,
-   lines:[t.status==='resolved'?'We’ve marked it resolved. If something’s still wrong, report it again from the page.':'Here’s our reply:'],
-   quote:t.reply,button:{label:'See it in My account',href:siteUrl()+'/settings'}});
+   lines:[t.status==='resolved'?'We’ve also marked it resolved. If it’s still not right, reply in My account and it opens again.':'You can reply in My account.'],
+   quote:t.body,button:{label:'Open my help requests',href:siteUrl()+'/settings#help-requests'}});
  })());
+}
+// Support resolved a ticket without a reply → a short note to the learner.
+export function ticketResolvedAlert(ticketId:string,at:number){
+ return quiet((async()=>{
+  const t:any=await db().prepare('SELECT t.id,t.user_id,l.email FROM support_tickets t LEFT JOIN learners l ON l.user_id=t.user_id WHERE t.id=?').bind(ticketId).first();
+  if(!t?.email)return;
+  await sendEmail({to:t.email,userId:t.user_id,kind:'ticket_resolved',dedupe:`ticket_resolved:${t.id}:${at}`,
+   subject:`Your request ${t.id} is resolved`,heading:`Your request ${t.id} is resolved`,
+   lines:['We’ve marked it resolved. If it’s still not right, reply in My account and it opens again.'],
+   button:{label:'Open my help requests',href:siteUrl()+'/settings#help-requests'}});
+ })());
+}
+// The learner followed up on a ticket → every admin.
+export function learnerReplyAlert(t:{id:string;publicUserId:string;email?:string},messageId:string,body:string){
+ return quiet(Promise.all(adminEmails().map(to=>sendEmail({to,kind:'ticket_followup',dedupe:`ticket_followup:${messageId}:${to}`,
+  subject:`${t.id}: the learner replied`,heading:`${t.id}: the learner replied`,
+  lines:[`From ${t.email||'the learner'} · ${t.publicUserId}. The ticket is open again.`],
+  quote:body,button:{label:'Open support tickets',href:siteUrl()+'/admin#tickets'}}))));
 }
 
 export function reviewReadyAlert(userId:string,jobId:string,lessonKey:string){
