@@ -235,3 +235,28 @@ label:has(>input[type=radio]),label:has(>input[type=checkbox]){min-height:44px;d
 @media(min-width:761px){.topbar{flex-wrap:nowrap}.topbar .main-nav{gap:28px}}
 .topbar .main-nav .sg-admin-tickets{padding:9px 0;min-height:0}
 @media(max-width:760px){.brand-logo{height:28px}}
+/* UI review fixes (taste skill + Vercel guidelines) */
+html,body,.footer a{font-family:var(--body)}
+h1,h2,h3,.display{text-wrap:balance}
+p,li{text-wrap:pretty}
+.vg-ai-score,.db-count,.vg-heat-score,.st-stats strong,.sg-count,.db-plan-id,.db-id strong,.vg-delta{font-variant-numeric:tabular-nums}
+.kicker,.eyebrow{font-size:.8125rem}
+.badge{font-size:.8125rem}
+.small{font-size:max(.8125rem,1em*.875)}
+/* Headlines stay at two lines: phones get a smaller floor for page titles */
+@media(max-width:760px){:root{--t-h1:clamp(2.4rem,10.5vw,3rem);--t-h2:clamp(2rem,9vw,2.6rem)}}
+/* Disabled buttons: readable label (5.2:1) */
+[data-slot=button]:disabled{color:#a09c92!important}
+/* Motion: sections and cards rise into place as they scroll into view (scroll-driven, no script; absent where
+   unsupported or when the visitor asks for less motion). */
+/* Movement only: content is never hidden, so nothing is blank if an element hasn't scrolled into view yet. */
+@keyframes sg-rise{from{transform:translateY(24px)}to{transform:none}}
+@supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){
+ main.page>section,main.page>.panel,main.page>.two-col>*,.hm-craft,.hm-ways .hm-way,.hm-how li,.db-plan,.st-module,.library-resource,.vg-stage-group,.sg-tickets li,.hp-q,.sf-acc,.cm-grid>*{animation:sg-rise linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+}}
+/* App screens: repeated items get a quiet border; the cream outline stays for hero cards and single panels */
+.st-module,.vg-stage-group{border-color:#3a3935!important}
+.st-module:hover{border-color:var(--border)!important}
+
+/* Community: text-only pieces on a flat surface */
+.vg-show-text{background:#151515!important}

@@ -24,3 +24,6 @@
 .sf-main .sf-acc{margin:0}
 .sf-acc summary{font-size:1.125rem;font-weight:600}
 .sf-cols strong{font-size:1.3rem}
+/* The page title fits its half-width column in two lines */
+.sf-side h1,.sf-h{font-size:clamp(2.6rem,4.6vw,4.4rem)}
+@media(max-width:900px){.sf-side h1,.sf-h{font-size:clamp(2.2rem,9vw,3rem)}}

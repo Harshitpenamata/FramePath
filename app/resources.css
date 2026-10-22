@@ -29,3 +29,9 @@
 .library-resource>details.library-resource-copy{display:block;padding:0 6px 4px;font-size:.85rem;color:var(--muted-foreground)}
 .resource-topic-art{height:104px}
 @media(max-width:760px){.library-resource,.library-resource-copy{grid-template-columns:1fr}.library-resource-copy>[data-slot=button]{grid-column:1;grid-row:auto;justify-self:start;margin-top:var(--s3)}}
+/* UI review: a quieter header so the list starts on the first screen; sentence-case tags; softer row borders */
+.rs-hero{padding:var(--s6) var(--s6);gap:var(--s5)}
+.rs-hero h1{font-size:clamp(2.4rem,4.4vw,4rem)}
+.resource-topic-art small{text-transform:none;letter-spacing:0;font-size:.8125rem}
+.library-resource{border-color:#3a3935}
+.library-resource:hover{border-color:var(--border)}

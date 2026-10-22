@@ -3,7 +3,7 @@ import React,{useEffect,useState} from 'react';
 import {ArrowRight,FileText,Film,Image as ImageIcon,Link2,Sparkles,Trash2,X} from 'lucide-react';
 import {toast} from 'sonner';
 import {Button} from '@/components/ui/button';
-import {useLearning,Panel,Go,Action,CheckField,Gate,PageHead,DateText} from '../ui';
+import {useLearning,Panel,Go,Action,CheckField,Gate,PageHead,DateText,confirmAction} from '../ui';
 import {moduleHref} from '../learning-rules';
 import {levelNames,modulesFor,moduleKey,type Level} from './programme';
 import {useVideoReviews,WorkFolders} from './work-folders';
@@ -24,7 +24,7 @@ function pieceKind(p:any){
 
 function Thumb({p}:{p:any}){
  const f=(p.uploads||[])[0],{Icon}=pieceKind(p);
- if(f&&String(f.type).startsWith('image/'))return <img className="st-thumb" src={'/api/file/'+f.id} alt="" loading="lazy"/>;
+ if(f&&String(f.type).startsWith('image/'))return <img className="st-thumb" src={'/api/file/'+f.id} width={52} height={52} alt="" loading="lazy"/>;
  if(f&&String(f.type).startsWith('video/'))return <video className="st-thumb" src={'/api/file/'+f.id+'#t=0.5'} muted playsInline preload="metadata" aria-hidden="true"/>;
  return <span className="st-thumb st-thumb-icon"><Icon size={18}/></span>;
 }
@@ -53,8 +53,8 @@ function ModuleCard({level,index,reviews,ids,setIds,isNext}:{level:Level;index:n
  const m=modulesFor(level)[index],key=moduleKey(level,index);
  const pieces=s.submissions.filter((p:any)=>p.key===key&&p.handIn);
  const latest=pieces[0],review=latest&&reviews?.[latest.id]?.review;
- async function removePiece(id:string){if(!window.confirm('Remove this piece from My Work? This can’t be undone.'))return;if(await mutate('submission_remove',{id}))setIds(prev=>prev.filter(x=>x!==id))}
- async function removeFile(id:string,uploadId:string){if(window.confirm('Remove this file from the piece?'))await mutate('submission_file_remove',{id,uploadId})}
+ async function removePiece(id:string){if(!await confirmAction('This piece and its files leave My Work and your portfolio. This can’t be undone.','Remove this piece'))return;if(await mutate('submission_remove',{id}))setIds(prev=>prev.filter(x=>x!==id))}
+ async function removeFile(id:string,uploadId:string){if(await confirmAction('The file is removed from this piece.','Remove this file'))await mutate('submission_file_remove',{id,uploadId})}
  function toggle(id:string,on:boolean){if(on&&ids.length>=9){toast.error('Pick up to nine pieces to share.');return}setIds(prev=>on?[...prev,id]:prev.filter(v=>v!==id))}
  const head=<div className="st-module-head"><div><span className="st-label">Module {pad(index+1)}</span><h3>{m.title}</h3></div><a className="st-icon-link" href={moduleHref(key)} aria-label={'Open module '+(index+1)}><ArrowRight size={16}/></a></div>;
  if(!pieces.length)return <article className={'st-card st-module '+(isNext?'next':'later')}>

@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 import {ArrowRight,BookOpen,Pencil,TriangleAlert,CalendarClock,Check,ChevronDown,Gift,Lock,PlayCircle,Plus,Sparkles,Target,Trash2,UserRound,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {toast} from 'sonner';
-import {useLearning,Panel,Go,Badge,isExplore,Photo} from '../ui';
+import {useLearning,Panel,Go,Badge,isExplore,Photo,confirmAction} from '../ui';
 import './dashboard.css';
 import {liveSkills,behindBy,moduleArea,levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,defaultPlanTitle,courseId,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
@@ -78,7 +78,7 @@ function PlanName({p}:{p:Programme}){
  const [editing,setEditing]=useState(false),[value,setValue]=useState('');
  const save=async(e:React.FormEvent)=>{e.preventDefault();if(await mutate('plan_rename',{id:p.id,name:value}))setEditing(false)};
  return <div className="db-name">
-  {editing?<form className="db-rename" onSubmit={save}><label className="vg-field">Pathway name<input autoFocus value={value} maxLength={60} placeholder={defaultPlanTitle(p)} onChange={e=>setValue(e.target.value)}/></label>
+  {editing?<form className="db-rename" onSubmit={save}><label className="vg-field">Pathway name<input autoFocus name="planName" autoComplete="off" value={value} maxLength={60} placeholder={defaultPlanTitle(p)} onChange={e=>setValue(e.target.value)}/></label>
     <div className="button-row"><Button type="submit" disabled={busy}>{busy?'Saving…':'Save name'}</Button><Button type="button" variant="outline" onClick={()=>setEditing(false)}>Cancel</Button></div><p className="small">Leave it empty to use “{defaultPlanTitle(p)}”.</p></form>
    :<><h1>{p.name||p.primaryPathway}</h1><div className="db-id">{courseId(p)&&<span>Course ID <strong>{courseId(p)}</strong></span>}<button type="button" className="text-link" onClick={()=>{setValue(p.name||'');setEditing(true)}}><Pencil size={14}/>Rename</button></div></>}
  </div>;
@@ -117,7 +117,7 @@ function TodayCard(){
  return <section className="db-today"><span className="kicker">TODAY · {planTitle(p)}</span>
   <h2>{lesson<0?<>Hand in: {m.taskName}</>:<>Lesson {lesson+1} of {m.topics.length}: {m.topics[lesson]}</>}</h2>
   <p className="small">{m.id} · {m.title} · about {lesson<0?Math.round(m.hours*60/(m.topics.length+1)/5)*5:minutes} min{late?<> · <a className="text-link" href={'/workspace/'+p.id}>{late.days} {late.days===1?'day':'days'} behind: update your dates</a></>:null}</p>
-  <Go href={href}><span onClick={()=>track('today_clicked',{module:key,lesson:lesson+1})}>{lesson<0?'Go to the task':'Start this lesson'}</span><ArrowRight size={18}/></Go>
+  <Go href={href} onClick={()=>track('today_clicked',{module:key,lesson:lesson+1})}>{lesson<0?'Go to the task':'Start this lesson'}<ArrowRight size={18}/></Go>
  </section>;
 }
 
@@ -147,7 +147,7 @@ export function MyCourses(){
    {plans.length<maxPlans?<a className="db-plan add" href="/#crafts"><Plus size={26}/><strong>Make another plan</strong><span className="small">Pick a course, answer a short level check and set your time.</span></a>
     :<div className="db-plan add"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one to make another.</span></div>}
   </div>}
-  {!plans.length&&s.profile&&<div className="button-row"><Go href="/workspace/previous" outline>Open my previous learning</Go><Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button></div>}
+  {!plans.length&&s.profile&&<div className="button-row"><Go href="/workspace/previous" outline>Open my previous learning</Go><Button variant="ghost" disabled={busy} onClick={async()=>{if(await confirmAction('Your previous learning plan will be deleted. This can’t be undone.','Delete previous learning'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button></div>}
   {!user&&plans.length>0&&<p className="small">Sign in to keep your plans and work.</p>}
   {deleting&&<DeletePlanDialog p={deleting} open onClose={()=>setDeleting(null)}/>}
  </div>;
@@ -174,7 +174,7 @@ function ProgrammeDashboard(){
  const [upgrading,setUpgrading]=useState(false);
  if(!loaded)return <Panel><p role="status">Opening your plan…</p></Panel>;
  const p:Programme|undefined=s.programme;
- if(!p)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}{s.profile&&<Button variant="ghost" disabled={busy} onClick={async()=>{if(window.confirm('Delete your previous learning plan? This can’t be undone.'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button>}</div></Panel>;
+ if(!p)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go>{s.profile&&<Go href="/workspace/previous" outline>Open my previous learning</Go>}{s.profile&&<Button variant="ghost" disabled={busy} onClick={async()=>{if(await confirmAction('Your previous learning plan will be deleted. This can’t be undone.','Delete previous learning'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button>}</div></Panel>;
  const selfActive=isExplore(s),mentorActive=['paid','active'].includes(s.craft?.status);
  const mods=modulesFor(p.level),done=mods.filter((_,i)=>s.progress?.[moduleKey(p.level,i)]).length;
  const live=liveSkills(p,Object.fromEntries(Object.entries(byModule).map(([k,r]:any)=>[k,{ratings:r.ratings}])));

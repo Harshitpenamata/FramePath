@@ -3,7 +3,7 @@ import React,{useEffect,useMemo,useState} from 'react';
 import {Copy,Flag,Globe2,Heart,Link2,Lock,Trash2} from 'lucide-react';
 import {toast} from 'sonner';
 import {Button} from '@/components/ui/button';
-import {useLearning,Panel,Go,Action,CheckField,PageHead,Gate,Photo} from '../ui';
+import {useLearning,Panel,Go,Action,CheckField,PageHead,Gate,Photo,confirmAction} from '../ui';
 import {levelNames,type Level} from './programme';
 import {Showcase,itemsFromPublic,itemsFromSubmissions,type ShowItem} from './showcase';
 import {useVideoReviews} from './work-folders';
@@ -25,7 +25,7 @@ function PieceSocial({token,pieceId}:{token:string;pieceId:string}){
  const setComments=(fn:(c:any[])=>any[])=>setData((d:any)=>({...d,comments:{...d.comments,[pieceId]:fn(d.comments[pieceId]||[])}}));
  async function like(){try{const r=await post({action:'like',token,pieceId,on:!liked});setData((d:any)=>({...d,likes:{...d.likes,[pieceId]:r.likes},liked:r.liked?[...d.liked,pieceId]:d.liked.filter((x:string)=>x!==pieceId)}))}catch(e:any){toast.error(e.message)}}
  async function send(e:React.FormEvent){e.preventDefault();if(text.trim().length<2)return;setSending(true);try{const r=await post({action:'comment',token,pieceId,body:text});setText('');if(r.comment.pending)toast.info('Thanks. Your comment will appear once it’s been checked.');else setComments(c=>[...c,r.comment])}catch(e:any){toast.error(e.message)}finally{setSending(false)}}
- async function remove(id:string){if(!window.confirm('Delete this comment?'))return;try{await post({action:'delete',commentId:id});setComments(c=>c.filter(x=>x.id!==id))}catch(e:any){toast.error(e.message)}}
+ async function remove(id:string){if(!await confirmAction('The comment is deleted for everyone.','Delete this comment'))return;try{await post({action:'delete',commentId:id});setComments(c=>c.filter(x=>x.id!==id))}catch(e:any){toast.error(e.message)}}
  async function report(id:string){const reason=window.prompt('What’s wrong with this comment?','Unkind or off-topic');if(reason===null)return;try{await post({action:'report',commentId:id,reason:reason.slice(0,300)||'Reported'});setComments(c=>c.filter(x=>x.id!==id));toast.success('Thanks. The comment is hidden while we look at it.')}catch(e:any){toast.error(e.message)}}
  return <div className="cm-social">
   {data.signedIn?<button type="button" className={'cm-like'+(liked?' on':'')} aria-pressed={liked} onClick={like}><Heart size={16}/>{likes} {likes===1?'like':'likes'}</button>
@@ -90,7 +90,7 @@ export function MyPortfolio(){
  async function apply(){if(choice==='private')await mutate('portfolio_unpublish');else await mutate('portfolio_publish',{consent:true,visibility:choice});setConsent(false)}
  return <div className="st-page">
  <WorkSwitch current="portfolio"/>
- <div className={'st-hero'+(loaded&&!user?' split':'')}><PageHead eyebrow="PORTFOLIO" title="Your portfolio">Pick your best pieces in My work, then choose who can see them.</PageHead>{loaded&&!user&&<Gate>{null}</Gate>}</div>
+ <div className={'st-hero'+(loaded&&!user?' split':'')}><PageHead title="Your portfolio">Pick your best pieces in My work, then choose who can see them.</PageHead>{loaded&&!user&&<Gate>{null}</Gate>}</div>
  {(!loaded||user)&&<Gate>
   <section className="cm-share st-card">
    <div><span className="kicker">WHO CAN SEE YOUR PORTFOLIO</span><h2>Sharing</h2></div>
@@ -117,7 +117,7 @@ export function CommunityGallery(){
  useEffect(()=>{fetch('/api/community').then(async r=>{const d:any=await r.json();if(!r.ok)throw Error(d.error);setData(d)}).catch(e=>setError(e.message||'The community is unavailable right now.'))},[]);
  const items=useMemo(()=>data?data.portfolios.flatMap((p:any)=>itemsFromPublic(p.items,p.token).map(i=>({...i,owner:p.name}))):[],[data]);
  return <>
-  <section className="cm-hero"><PageHead eyebrow="COMMUNITY" title="What other learners are making.">Practice work from learners who chose to share their portfolio publicly. Open a piece to like it or leave a comment.</PageHead><Photo slot="community" className="cm-hero-photo"/></section>
+  <section className="cm-hero"><PageHead title="What other learners are making.">Practice work from learners who chose to share their portfolio publicly. Open a piece to like it or leave a comment.</PageHead><Photo slot="community" className="cm-hero-photo"/></section>
   {error?<Panel><p>{error}</p></Panel>:!data?<Panel><p role="status">Loading the community…</p></Panel>
    :<Showcase items={items} social={socialFor}
      tileExtra={i=>{const n=data.likes[i.token+':'+i.id]||0;return n?<span className="cm-tile-likes"><Heart size={13}/>{n}</span>:null}}
