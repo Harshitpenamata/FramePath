@@ -312,7 +312,10 @@ p,li{text-wrap:pretty}
 .db-hero .vg-soon{border-color:transparent!important;background:none!important;color:var(--muted-foreground)}
 .vg-testout:not(.open):not(.ok){background:none!important;padding:0;margin-bottom:var(--s3);color:var(--muted-foreground)}
 .st-module.next{border:var(--line)!important}
-.st-module.later{opacity:.6}
+/* Later modules and stages step back with grey text, never with transparency (faded text fails contrast). */
+.st-card.st-module.later{opacity:1}
+.st-module.later h3{color:var(--muted-foreground)}
+.vg-stage-steps li:not(.current){opacity:1}
 /* Ticket conversations (support.tsx Thread): the learner's messages on the left, Framepath's marked in lime. */
 .sg-thread{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2)}
 .sg-thread li{display:grid;gap:4px;padding:var(--s3);border-radius:12px;background:#0b0b0b}
@@ -325,3 +328,6 @@ p,li{text-wrap:pretty}
 .admin-note[open]{display:grid;gap:var(--s2)}
 .sg-tickets .sg-thread li{padding:var(--s3);border-radius:12px;background:#0b0b0b!important;animation:none}
 .sg-tickets .sg-thread li.staff,.admin-ticket .sg-thread li.staff{background:#d6e86b14!important}
+/* The More menu is dark: its links need light text (the cream header's links are dark). */
+.topbar .header-popover a{color:#f2eee4}
+.topbar .header-popover a:hover,.topbar .header-popover a[aria-current=page]{background:#ffffff14;color:var(--primary)}
