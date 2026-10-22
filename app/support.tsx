@@ -4,7 +4,8 @@ import {LifeBuoy,Check} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning} from './ui';
 import {plansOf,planTitle,parseVideoKey,moduleLesson,projectLabel} from './videography/programme';
-import {ticketCategories,categoryLabel,statusLabel,messageMin,messageMax} from './support-shared';
+import {ticketCategories,categoryLabel,learnerStatusLabel,messageMin,messageMax,replyMax} from './support-shared';
+import {toast} from 'sonner';
 
 // "Report a problem": a learner tells us what's wrong, and the ticket carries where they were (User ID, Course ID,
 // pathway, module, lesson, page) so support knows the context without asking. The dialog shows what's attached.
@@ -46,10 +47,19 @@ export function ReportProblem({planId,moduleKey,lesson,category:preset='',label=
 }
 
 // My account → Help requests: the learner's User ID and their tickets with support's replies.
+// A ticket's conversation: the learner's first message, then each reply in order. viewer decides the names.
+export function Thread({t,viewer}:{t:any;viewer:'learner'|'staff'}){
+ const when=(n:number)=>new Date(n).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'});
+ const who=(m:any)=>m.author==='staff'?(viewer==='staff'&&m.author_email?'Framepath · '+m.author_email:'Framepath'):viewer==='learner'?'You':'Learner';
+ const all=[{id:'first',author:'learner',body:t.message,created_at:t.created_at},...(t.messages||[])];
+ return <ol className="sg-thread">{all.map(m=><li key={m.id} className={m.author}><span className="small"><strong>{who(m)}</strong> · {when(m.created_at)}</span><p className="prewrap">{m.body}</p></li>)}</ol>;
+}
+
 export function HelpRequests(){
  const {user}=useLearning();
  const [tickets,setTickets]=useState<any[]|null>(null);
- useEffect(()=>{if(user)fetch('/api/support').then(r=>r.json()).then((d:any)=>setTickets(d.tickets||[])).catch(()=>setTickets([]))},[user]);
+ const load=()=>fetch('/api/support').then(r=>r.json()).then((d:any)=>setTickets(d.tickets||[])).catch(()=>setTickets([]));
+ useEffect(()=>{if(user)load()},[user]);
  // Once new replies are on screen, mark them seen so the header dot clears; they stay highlighted until the page reloads.
  useEffect(()=>{if(tickets?.some(t=>t.fresh))fetch('/api/support/seen',{method:'POST'}).catch(()=>{})},[tickets]);
  if(!user)return null;
@@ -58,10 +68,21 @@ export function HelpRequests(){
   <p className="small">Your User ID is <strong className="sg-id">{(user as any).publicId||'…'}</strong>. Quote it, with a course ID or ticket number, if you contact us.</p>
   {tickets===null?<p className="small" role="status">Loading…</p>:!tickets.length?<p className="small">No requests yet.</p>:
    <ul className="sg-tickets">{tickets.map(t=><li key={t.id} className={t.fresh?'fresh':''}>
-    <div className="row between"><strong>{t.id} · {categoryLabel(t.category)}</strong><span className={'badge sg-status '+t.status}>{statusLabel(t.status)}</span></div>
-    <span className="small">{[t.course_id,t.plan_name,t.module_title,t.lesson&&'Lesson '+t.lesson].filter(Boolean).join(' · ')} · {new Date(t.created_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</span>
-    <p className="small prewrap">{t.message}</p>
-    {t.reply&&<p className="sg-reply"><strong>{t.fresh?'New reply':'Reply'} from Framepath:</strong> {t.reply}</p>}
+    <div className="row between"><strong>{t.id} · {categoryLabel(t.category)}</strong><span className={'badge sg-status '+t.status}>{t.fresh?'New reply':learnerStatusLabel(t.status)}</span></div>
+    <span className="small">{[t.course_id,t.plan_name,t.module_title,t.lesson&&'Lesson '+t.lesson].filter(Boolean).join(' · ')}</span>
+    <Thread t={t} viewer="learner"/>
+    <LearnerReply t={t} onSent={load}/>
    </li>)}</ul>}
  </section>;
+}
+// The learner answers support, or says a resolved problem is back (which reopens the ticket).
+function LearnerReply({t,onSent}:{t:any;onSent:()=>void}){
+ const [open,setOpen]=useState(false),[body,setBody]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ const resolved=t.status==='resolved';
+ if(!open)return <div><Button variant="outline" size="sm" onClick={()=>setOpen(true)}>{resolved?'Still a problem? Reply':'Reply'}</Button></div>;
+ async function send(){setBusy(true);setError('');try{const r=await fetch('/api/support/reply',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:t.id,body})});const j:any=await r.json();if(!r.ok)throw Error(j.error);
+  toast.success(resolved?'Sent. We’ve opened your request again.':'Reply sent.');setBody('');setOpen(false);onSent()}catch(e:any){setError(e.message)}finally{setBusy(false)}}
+ return <div className="sg-reply-form"><label>Your reply<textarea rows={3} maxLength={replyMax} value={body} onChange={e=>setBody(e.target.value)} autoFocus/></label>
+  {error&&<p className="small" role="alert">{error}</p>}
+  <div className="button-row"><Button disabled={busy||!body.trim()} onClick={send}>{busy?'Sending…':'Send reply'}</Button><Button variant="outline" disabled={busy} onClick={()=>{setOpen(false);setBody('')}}>Cancel</Button></div></div>;
 }

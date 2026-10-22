@@ -48,7 +48,7 @@ export async function GET(req:Request){try{const user=await identity();await ado
  if(open&&data.state.programme.courseId!==open.courseId){data.state.programme.courseId=open.courseId;ided=true}
  if(ided)data={state:data.state,revision:await saveState(user.userId,data.state,data.revision)};
  // Ticket alerts: replies the learner hasn't seen yet; for admins, how many tickets are open.
- const unseen:any=await db().prepare("SELECT COUNT(*) AS n FROM support_tickets WHERE user_id=? AND reply<>'' AND (learner_seen_at IS NULL OR learner_seen_at<updated_at)").bind(user.userId).first();
+ const unseen:any=await db().prepare("SELECT COUNT(DISTINCT t.id) AS n FROM support_tickets t JOIN ticket_messages m ON m.ticket_id=t.id AND m.author='staff' WHERE t.user_id=? AND m.created_at>COALESCE(t.learner_seen_at,0)").bind(user.userId).first();
  const admin=isAdmin(user.email),openTickets:any=admin?await db().prepare("SELECT COUNT(*) AS n FROM support_tickets WHERE status='open'").first():null;
  return Response.json({...data,user:{name:user.fullName||'Learner',email:user.email,publicId,unseenReplies:Number(unseen?.n||0),...(admin?{admin:true,openTickets:Number(openTickets?.n||0)}:{})},usage:await usage(user.userId,data.state)},{headers:{'Cache-Control':'no-store'}})}catch(e){return errorResponse(e)}}
 export async function POST(req:Request){try{

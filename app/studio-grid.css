@@ -313,3 +313,15 @@ p,li{text-wrap:pretty}
 .vg-testout:not(.open):not(.ok){background:none!important;padding:0;margin-bottom:var(--s3);color:var(--muted-foreground)}
 .st-module.next{border:var(--line)!important}
 .st-module.later{opacity:.6}
+/* Ticket conversations (support.tsx Thread): the learner's messages on the left, Framepath's marked in lime. */
+.sg-thread{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2)}
+.sg-thread li{display:grid;gap:4px;padding:var(--s3);border-radius:12px;background:#0b0b0b}
+.sg-thread li.staff{border-left:3px solid var(--primary);background:#d6e86b0f}
+.sg-thread p{margin:0}
+.sg-reply-form{display:grid;gap:var(--s2)}
+.sg-reply-form label,.admin-note label{display:grid;gap:var(--s1)}
+.sg-reply-form textarea,.admin-note textarea{font:inherit;padding:var(--s2);border-radius:10px;border:var(--soft-line);background:#0b0b0b;color:var(--foreground)}
+.admin-note>summary{cursor:pointer;color:var(--muted-foreground);min-height:44px;display:flex;align-items:center}
+.admin-note[open]{display:grid;gap:var(--s2)}
+.sg-tickets .sg-thread li{padding:var(--s3);border-radius:12px;background:#0b0b0b!important;animation:none}
+.sg-tickets .sg-thread li.staff,.admin-ticket .sg-thread li.staff{background:#d6e86b14!important}
