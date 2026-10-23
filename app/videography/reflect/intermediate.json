@@ -727,15 +727,15 @@
     "q": "In the AI breakdown walkthrough, what do you do with the schedule changes it suggests?",
     "options": [
      [
-      "Check each one against the crew, location and production limits before accepting it.",
+      "Check each one against crew, location and limits before accepting.",
       ""
      ],
      [
-      "Accept them all to save time.",
+      "Accept them all, since the tool has already worked it out.",
       "The tool doesn’t know every real-world limit."
      ],
      [
-      "Ignore them all.",
+      "Ignore them and stick to the schedule you made yourself.",
       "Some suggestions can save real time. Check them."
      ]
     ],
@@ -2297,15 +2297,15 @@
     "q": "In the Smart Switch video, what do you refine after the AI switches angles?",
     "options": [
      [
-      "Reactions, how long each shot holds and the timing of the cuts.",
+      "Reactions, how long shots hold and the timing of each cut.",
       ""
      ],
      [
-      "Nothing. The AI cut is final.",
+      "Nothing. The AI’s angle switches are final once it’s done.",
       "The AI follows who’s talking, not what matters."
      ],
      [
-      "Only the colour of each angle.",
+      "Only the colour, so each angle matches the others.",
       "Colour helps, but the switches still need editing."
      ]
     ],
@@ -2316,15 +2316,15 @@
     "q": "In a podcast edit, the AI cuts to the speaker every time. The host laughs at a joke off-camera. What do you do?",
     "options": [
      [
-      "Cut to the host’s laugh. Reactions bring the moment to life.",
+      "Cut to the host’s laugh. The reaction makes the moment.",
       ""
      ],
      [
-      "Leave it on the speaker.",
+      "Stay on the speaker, as the AI chose, until they finish.",
       "You lose a reaction that makes the moment fun."
      ],
      [
-      "Cut to the wide shot.",
+      "Cut to the wide shot so you can see both people at once.",
       "The laugh is clearer on the host’s angle."
      ]
     ],
@@ -3486,15 +3486,15 @@
     "q": "In the director’s treatment guide, what should a treatment show?",
     "options": [
      [
-      "The idea, the visual approach, the tone and why it suits the brief.",
+      "The idea, the look, the tone and why it suits the brief.",
       ""
      ],
      [
-      "The full budget breakdown.",
+      "A full budget breakdown, line by line, for the client.",
       "That usually goes in the proposal, not the treatment."
      ],
      [
-      "A list of crew names.",
+      "A list of crew names and the gear each person brings.",
       "The treatment is about the idea."
      ]
     ],
@@ -3505,15 +3505,15 @@
     "q": "Your treatment for a school’s annual day film has lovely reference images but no reason they fit. What’s missing?",
     "options": [
      [
-      "Why this approach works for the school’s audience and goal.",
+      "Why this approach suits the school’s audience and goal.",
       ""
      ],
      [
-      "More reference images.",
+      "More reference images, so the look is even clearer.",
       "More pictures won’t explain the choice."
      ],
      [
-      "Your camera list.",
+      "Your camera and lens list, to show the quality.",
       "Gear doesn’t sell the idea."
      ]
     ],
@@ -3545,15 +3545,15 @@
     "q": "A client writes, “Make it pop more.” What’s the best reply?",
     "options": [
      [
-      "Ask which moments feel flat and what they want viewers to feel there.",
+      "Ask which moments feel flat and how viewers should feel.",
       ""
      ],
      [
-      "Add effects everywhere.",
+      "Add effects and faster cuts all through the video.",
       "That may not be what they meant."
      ],
      [
-      "Say it already pops.",
+      "Explain politely that it already pops as it is.",
       "That ends the conversation without solving anything."
      ]
     ],
@@ -3585,15 +3585,15 @@
     "q": "Your quote is ₹40,000. The client’s budget is ₹25,000. What do you offer?",
     "options": [
      [
-      "A smaller scope that fits ₹25,000, like one video instead of three.",
+      "A smaller scope that fits ₹25,000, like one video, not three.",
       ""
      ],
      [
-      "The same work for ₹25,000.",
+      "The same three videos at ₹25,000, to win the client.",
       "You undervalue your work and set a pattern."
      ],
      [
-      "Nothing. Walk away.",
+      "Nothing. Walk away, since the budget is too low.",
       "You might find a version that works for both of you."
      ]
     ],
@@ -3625,15 +3625,15 @@
     "q": "You want wedding clients in Jaipur. Which 30-day plan is best?",
     "options": [
      [
-      "Weekly reels from real weddings, a behind-the-scenes post and a collaboration with a planner.",
+      "Weekly reels from real weddings, behind-the-scenes and a planner collab.",
       ""
      ],
      [
-      "One long post about your gear.",
+      "One long post about your cameras, lenses and editing setup.",
       "Couples want to see weddings, not gear."
      ],
      [
-      "Random posts whenever you remember.",
+      "Posts whenever you remember, on any topic that comes up.",
       "Steady posting builds trust."
      ]
     ],

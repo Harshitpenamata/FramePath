@@ -1047,15 +1047,15 @@
     "q": "In the hybrid AI and live action video, what do you plan on set so the composite works?",
     "options": [
      [
-      "Clean plates and reference objects, with matching perspective and focus.",
+      "Clean plates and reference objects, matching perspective and focus.",
       ""
      ],
      [
-      "Nothing. AI fixes it in post.",
+      "Nothing extra. The AI tools can fix it all in post.",
       "Without plates and references, the composite looks fake."
      ],
      [
-      "Only the final performance.",
+      "Only the final performance, with the best take marked.",
       "The compositor needs more than the take."
      ]
     ],
@@ -1070,11 +1070,11 @@
       ""
      ],
      [
-      "Just the take with the actor.",
+      "Just the take with the actor, framed the way you want it.",
       "The compositor needs references to match."
      ],
      [
-      "A photo of a real bookshelf.",
+      "A photo of a real bookshelf for the AI to copy from.",
       "Helpful, but the plate and camera details matter more."
      ]
     ],
@@ -2152,15 +2152,15 @@
     "q": "You hand a project to another editor. What should go with the AI mattes?",
     "options": [
      [
-      "The source shots, the rendered mattes, and names that show the shot and version.",
+      "Source shots, rendered mattes, and names with shot and version.",
       ""
      ],
      [
-      "Only the final video.",
+      "Only the final exported video, so the files stay small.",
       "They can’t make changes without the sources."
      ],
      [
-      "The mattes without names.",
+      "The mattes in one folder, without renaming them.",
       "They won’t know which matte belongs to which shot."
      ]
     ],
@@ -2979,11 +2979,11 @@
       ""
      ],
      [
-      "The grade is too strong.",
+      "The grade is too strong and needs turning down overall.",
       "The problem is where the mask is, not how strong the grade is."
      ],
      [
-      "The footage is broken.",
+      "The footage is damaged and the shot needs re-exporting.",
       "The footage is fine. The mask moved."
      ]
     ],
@@ -3423,11 +3423,11 @@
       ""
      ],
      [
-      "Only the final shot.",
+      "Only the final shot, so you can copy the look later.",
       "You’d miss how it was put together."
      ],
      [
-      "Only the AI prompts.",
+      "Only the AI prompts, since they create the effect.",
       "The filming and compositing matter as much."
      ]
     ],
@@ -3438,15 +3438,15 @@
     "q": "In the Autodesk Flow Studio intro, what does the tool do with a filmed performance?",
     "options": [
      [
-      "It moves the actor’s performance into an editable CG character workflow.",
+      "It moves the actor’s performance onto an editable CG character.",
       ""
      ],
      [
-      "It makes a performance with no actor.",
+      "It creates a whole performance without needing any actor.",
       "The tool starts from a filmed performance."
      ],
      [
-      "It colour grades the footage.",
+      "It colour grades the footage to match a CG scene.",
       "Its job is moving the performance into CG."
      ]
     ],
@@ -3739,15 +3739,15 @@
     "q": "Mid-shoot, your assistant notices a memory card error but is afraid to say so. What would have helped?",
     "options": [
      [
-      "A briefing that asked everyone to raise problems straight away, without blame.",
+      "A briefing asking everyone to raise problems at once, without blame.",
       ""
      ],
      [
-      "A stricter rule against mistakes.",
+      "A stricter rule that mistakes on set won’t be accepted.",
       "Fear of blame is why they stayed quiet."
      ],
      [
-      "More expensive memory cards.",
+      "Buying more expensive memory cards for the whole crew.",
       "Gear fails sometimes. People need to report it."
      ]
     ],
@@ -3819,15 +3819,15 @@
     "q": "Which set of options is strongest for a brand film?",
     "options": [
      [
-      "A basic edit, a film with social cut-downs, and a full campaign package, each with clear outcomes.",
+      "Basic edit, film plus social cut-downs, full campaign, each with clear outcomes.",
       ""
      ],
      [
-      "One option at one price.",
+      "One option at one price, so the choice is simple for them.",
       "Clients can’t choose what fits them."
      ],
      [
-      "Three options at the same price.",
+      "Three options at the same price, with different extras.",
       "Options should differ in value and price."
      ]
     ],
@@ -3859,15 +3859,15 @@
     "q": "Which proof best supports “I make films for Indian wedding planners”?",
     "options": [
      [
-      "Three planner case studies, with the planners’ own words about the results.",
+      "Three case studies with planners’ own words about results.",
       ""
      ],
      [
-      "A showreel of landscapes.",
+      "A polished showreel of your best landscape and travel shots.",
       "It doesn’t prove the niche."
      ],
      [
-      "A list of your cameras.",
+      "A list of your cameras, lenses and lighting gear.",
       "Gear isn’t proof of results."
      ]
     ],
@@ -3880,15 +3880,15 @@
     "q": "In the talk on great talks, what structure do strong pitches use?",
     "options": [
      [
-      "Moving between how things are and how they could be, ending with a call to action.",
+      "Moving between how things are and could be, ending with a call to action.",
       ""
      ],
      [
-      "Listing facts in order.",
+      "Listing the key facts in order, from the first to the last.",
       "Facts alone rarely move people."
      ],
      [
-      "Starting with your life story.",
+      "Starting with your own life story and how you began.",
       "Lead with the audience’s world, not yours."
      ]
     ],
@@ -3899,15 +3899,15 @@
     "q": "You pitch a campaign to a brand’s marketing team. How do you end?",
     "options": [
      [
-      "With a clear request, like approval and budget for the first phase.",
+      "With a clear request, like approval and budget for phase one.",
       ""
      ],
      [
-      "“Let me know what you think.”",
+      "“Let me know what you think, and we can talk again.”",
       "Vague endings rarely get decisions."
      ],
      [
-      "With a list of your awards.",
+      "With a list of your awards and best-known clients.",
       "Proof belongs earlier. End with the ask."
      ]
     ],
