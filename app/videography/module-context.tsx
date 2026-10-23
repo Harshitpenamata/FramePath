@@ -1,10 +1,10 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,Check,ExternalLink,Lightbulb,ListChecks,LockKeyhole,Maximize2,Play,X} from 'lucide-react';
+import {ArrowLeft,ArrowRight,Check,ChevronDown,ClipboardList,Clapperboard,ExternalLink,Gift,Lightbulb,ListChecks,LockKeyhole,Maximize2,Play,Scissors,Users,Video,Waypoints,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
-import {stageOrder,parseVideoKey,moduleLesson,projectLabel,isFreeModule,modulesFor,moduleKey as keyOf,type Pathway} from './programme';
+import {stageOrder,parseVideoKey,moduleLesson,projectLabel,isFreeModule,type Pathway} from './programme';
 import {videosFor,type ModuleVideo} from './media';
 import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
 import {ReflectStep,TestOut} from './reflect';
@@ -15,9 +15,30 @@ const stages=stageOrder;
 export const canPractise=(s:any,key:string)=>isFreeModule(key)||isExplore(s)||['paid','active'].includes(s.craft?.status);
 export const taskLabel=(moduleId:string)=>'Task '+moduleId;
 
-// The six steps of the course, with this module's step highlighted.
-function StageDiagram({current,done=[]}:{current:string;done?:string[]}){
- return <ol className="vg-stage-steps">{stages.map((s,i)=><li key={s} className={[s===current&&'current',done.includes(s)&&'done'].filter(Boolean).join(' ')} aria-current={s===current?'step':undefined}><span>{done.includes(s)?<Check size={13}/>:i+1}</span>{s}</li>)}</ol>;
+// The steps of making a video, with this module's step in lime. Finished steps get a small tick.
+const stageIcons:Record<string,React.ComponentType<{size?:number;'aria-hidden'?:boolean}>>={'Ideas':Lightbulb,'Planning':ClipboardList,'Filming':Video,'Editing':Scissors,'Your pathway':Waypoints,'Working with people':Users,'Final project':Clapperboard};
+// Longer names go on two lines after the first word ("Final / project"), as in the design.
+const stageName=(s:string)=>{const i=s.indexOf(' ');return s.length>10&&i>0?<>{s.slice(0,i)}<br/>{s.slice(i+1)}</>:s};
+export function PathwayStrip({current,done=[]}:{current:string;done?:string[]}){
+ return <section className="mv-pathway" aria-labelledby="mv-pathway-title"><h2 id="mv-pathway-title">Where this fits in making a video</h2>
+  <ol>{stages.map((s,i)=>{const Icon=stageIcons[s]||Lightbulb;return <li key={s} className={[s===current&&'current',done.includes(s)&&'done'].filter(Boolean).join(' ')} aria-current={s===current?'step':undefined}>
+   <span className="mv-stage-icon"><Icon size={14} aria-hidden/>{done.includes(s)&&s!==current&&<Check className="mv-stage-tick" size={9} aria-label="done"/>}</span><span className="mv-stage-name">{stageName(s)}</span>{i<stages.length-1&&<ArrowRight className="mv-stage-arrow" size={12} aria-hidden/>}</li>})}</ol>
+ </section>;
+}
+
+// The module's lessons as a dropdown beside the player: the open lesson on the button, every lesson in the list.
+function LessonPicker({lessons,index,done,onPick}:{lessons:{title:string;optional?:string}[];index:number;done:(i:number)=>boolean;onPick:(i:number)=>void}){
+ const [open,setOpen]=useState(true),btn=useRef<HTMLButtonElement>(null);
+ // Open beside the player on wide screens; closed on phones, where the list would push the lesson down.
+ useEffect(()=>{if(window.matchMedia('(max-width: 1000px)').matches)setOpen(false)},[]);
+ const n=(i:number)=>String(i+1).padStart(2,'0');
+ return <div className={'mv-picker'+(open?' open':'')} onKeyDown={e=>{if(e.key==='Escape'&&open){setOpen(false);btn.current?.focus()}}}>
+  <button ref={btn} type="button" className="mv-picker-btn" aria-expanded={open} aria-controls="mv-lesson-list" onClick={()=>setOpen(o=>!o)}>
+   <span className="mv-n">{n(index)}</span><span className="mv-picker-title">{lessons[index]?.title}</span><ChevronDown className="mv-chev" size={18} aria-hidden/></button>
+  {open&&<ul id="mv-lesson-list" className="mv-picker-list" aria-label="Lessons in this module">{lessons.map((x,i)=><li key={x.title}>
+   <button type="button" className={i===index?'current':''} aria-current={i===index?'true':undefined} onClick={()=>onPick(i)}>
+    <span className="mv-play"><Play size={11} aria-hidden/></span><span className="mv-n">{n(i)}</span><span className="mv-item-title">{x.title}{x.optional&&<small className="vg-optional-tag">Optional</small>}</span>{done(i)&&<Check className="mv-done" size={18} aria-label="finished"/>}</button></li>)}</ul>}
+ </div>;
 }
 
 function embedUrl(v:ModuleVideo){return v.youtubeId?`https://www.youtube-nocookie.com/embed/${v.youtubeId}?autoplay=1&rel=0&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}${v.start?'&start='+v.start:''}`:`https://player.vimeo.com/video/${v.vimeoId}?autoplay=1${v.start?'#t='+v.start+'s':''}`}
@@ -94,7 +115,8 @@ function useTrackingFallback(frame:React.RefObject<HTMLIFrameElement|null>,v:Mod
  return {blocked,ready:blocked&&left===0,wait:Math.floor(left/60)+':'+String(left%60).padStart(2,'0')};
 }
 
-export function VideoPanel({videos:all,watched=[],onWatched}:{videos:ModuleVideo[];watched?:string[];onWatched?:(id:string)=>void}){
+// under: shown straight beneath the player (the module page puts the lesson title and Next lesson there).
+export function VideoPanel({videos:all,watched=[],onWatched,under}:{videos:ModuleVideo[];watched?:string[];onWatched?:(id:string)=>void;under?:React.ReactNode}){
  const dead=useDeadVideos(),videos=all.filter(v=>!dead.includes(videoId(v)));
  const playable=videos.filter(v=>v.youtubeId||v.vimeoId),links=videos.filter(v=>v.url);
  const [active,setActive]=useState(0),[playing,setPlaying]=useState(false),[reader,setReader]=useState<ModuleVideo|null>(null);
@@ -103,7 +125,7 @@ export function VideoPanel({videos:all,watched=[],onWatched}:{videos:ModuleVideo
  const v=playable[active]||playable[0];
  useWatchTracker(frame,v,playing&&!!onWatched,()=>v&&onWatched?.(videoId(v)));
  const fallback=useTrackingFallback(frame,v,playing&&!!onWatched);
- if(!videos.length)return null;
+ if(!videos.length)return under?<div className="vg-video">{under}</div>:null;
  const seen=(x:ModuleVideo)=>watched.includes(videoId(x));
  const cards=links.length>0&&<div className="vg-video-links">{links.map(x=><a key={x.title+x.url} className={'vg-link-card'+(onWatched&&seen(x)?' watched':'')} href={x.url} target="_blank" rel="noopener noreferrer" onClick={e=>{onWatched?.(videoId(x));if(canFrame(x.url)){e.preventDefault();setReader(x)}}}>
    <span><strong>{x.title}</strong><small>{x.creator}{x.section?' · '+x.section:''}</small><small>{x.focus}</small></span>
@@ -114,6 +136,7 @@ export function VideoPanel({videos:all,watched=[],onWatched}:{videos:ModuleVideo
   {v&&<div className="vg-video-frame">{playing
    ?<iframe ref={frame} src={embedUrl(v)} title={v.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen loading="lazy"/>
    :<button type="button" className="vg-video-cover" onClick={()=>setPlaying(true)} style={v.youtubeId?{backgroundImage:`url(https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg)`}:undefined} aria-label={'Play '+v.title}><span className="vg-play"><Play size={30}/></span></button>}</div>}
+  {under}
   {playable.length>1&&<ol className="vg-video-strip" aria-label="Videos in this lesson">{playable.map((x,i)=><li key={x.title+i}><button type="button" className={[i===active&&'active',onWatched&&seen(x)&&'watched'].filter(Boolean).join(' ')} aria-current={i===active?'true':undefined} onClick={()=>{setActive(i);setPlaying(false)}}><span className="vg-strip-n">{onWatched&&seen(x)?<Check size={14}/>:String(i+1).padStart(2,'0')}</span><span className="vg-strip-t">{x.title}<small>{x.creator}</small></span></button></li>)}</ol>}
   {v&&<div className="vg-video-about">
    <h4>{v.title}</h4><span className="small">{v.creator}{v.start?' · starts at '+clock(v.start):''}</span>
@@ -172,31 +195,40 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  // Videos still online; the questions open once they are all watched. Next lesson waits until the lesson is finished.
  const live=videos.filter(v=>!dead.includes(videoId(v))),watched=(v:ModuleVideo)=>!!mark?.v.includes(videoId(v)),allWatched=live.every(watched),locked=!!user&&open&&!done(at);
  const go=(i:number)=>{setIndex(i);document.getElementById('vg-lesson-top')?.scrollIntoView({behavior:'smooth',block:'start'})};
+ // Videos still online across every lesson of the module, for the label over the lesson list.
+ const moduleVideos=lessons.reduce((n,_,i)=>n+lessonVideos(m.id,i,pathway).filter(v=>!dead.includes(videoId(v))).length,0);
+ const nextBtn=at<lessons.length-1?<Button variant="outline" className="mv-next" disabled={locked} onClick={()=>go(at+1)}>Next lesson<ArrowRight size={16}/></Button>:<Button variant="outline" className="mv-next" disabled={locked} onClick={onTask}>Go to the task<ArrowRight size={16}/></Button>;
  return <div className="vg-context">
-  <section><h3>Where this fits in making a video</h3><StageDiagram current={m.stageLabel} done={[...new Set(modulesFor(parsed.level).map(x=>x.stageLabel))].filter(st=>modulesFor(parsed.level).every((x,i)=>x.stageLabel!==st||!!s.progress?.[keyOf(parsed.level,i)]))}/></section>
   {m.stage==='selected-pathway'&&<p className="notice">Your course: <strong>{pathway}</strong>. Switch between your styles under My courses on your Journey page.</p>}
 
   {item?<section className="vg-lessons" id="vg-lesson-top">
+   {/* Video first: the player with the open lesson's title and Next lesson under it; the lessons, module summary
+       and tags beside it. The lesson's idea, its questions and the way on follow below. */}
+   <div className="mv-stage">
+    <div className="mv-main"><VideoPanel videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined}
+     under={<div className="mv-now"><div><h2>{String(at+1).padStart(2,'0')} / {item.title}</h2><p>Lesson {at+1} of {lessons.length}</p></div>{nextBtn}</div>}/></div>
+    <aside className="mv-side" aria-label="Lessons">
+     <span className="mv-side-label">Lessons · {moduleVideos} {moduleVideos===1?'video':'videos'}</span>
+     <LessonPicker lessons={lessons} index={at} done={done} onPick={go}/>
+     <p className="mv-desc">{m.outcome}</p>
+     <div className="ls-tags"><Badge>{m.id} · {m.stageLabel}</Badge>{isFreeModule(moduleKey)&&<Badge tone="green"><Gift size={12}/> Free</Badge>}</div>
+    </aside>
+   </div>
    {user&&open&&!lessons.every((l,i)=>l.optional||done(i))&&<TestOut moduleId={m.id} moduleKey={moduleKey} lessonCount={lessons.length} videosFor={i=>lessonVideos(m.id,i,pathway)} mutate={mutate} busy={busy} result={s.lastTestOut}/>}
-   <ol className="vg-lesson-steps" aria-label="Lessons">{lessons.map((x,i)=><li key={x.title}><button type="button" className={(i===index?'current ':'')+(done(i)?'done':'')} aria-current={i===index?'step':undefined} onClick={()=>go(i)}><span>{done(i)?<Check size={14}/>:i+1}</span>{x.title}{x.optional&&<small className="vg-optional-tag">Optional</small>}</button></li>)}</ol>
-   {/* Lesson layout (site edits, item 6): header with progress, 01 Watch, 02 Think it through (opens once the
-       videos are watched), then the way on. */}
    <article className="vg-lesson-card">
     <header className="vg-lesson-intro">
-     <LessonSketch key={m.id+index} src={`/sketches/${m.id}-${index+1}`} title={item.title}/>
-     <div className="vg-lesson-about"><span className="eyebrow">Lesson {index+1} of {lessons.length}</span><h2>{item.title}</h2>{item.optional&&<p className="vg-optional">Optional · {item.optional}. Watch if you can; you don’t need it to finish the module.</p>}<p className="vg-idea">{item.idea}</p></div>
+     <LessonSketch key={m.id+at} src={`/sketches/${m.id}-${at+1}`} title={item.title}/>
+     <div className="vg-lesson-about"><span className="eyebrow">The idea</span>{item.optional&&<p className="vg-optional">Optional · {item.optional}. Watch if you can; you don’t need it to finish the module.</p>}<p className="vg-idea">{item.idea}</p></div>
      {live.length>0&&<div className="vg-lesson-progress"><span className="vg-dots" aria-hidden="true">{live.map(v=><i key={videoId(v)} className={watched(v)?'done':''}/>)}</span><span className="small">{live.filter(watched).length} of {live.length} {live.length===1?'video':'videos'} watched</span></div>}
     </header>
-    <section className="vg-lesson-part"><div className="vg-part-head"><h3><span>01 /</span> Watch</h3>{live.length>0&&<span className="eyebrow">{live.length} {live.length===1?'video':'videos'}</span>}</div>
-     <VideoPanel videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined}/></section>
-    <section className="vg-lesson-part"><div className="vg-part-head"><h3><span>02 /</span> Think it through</h3></div><p className="small vg-part-lede">Turn what you watched into a practical decision.</p>
+    <section className="vg-lesson-part"><div className="vg-part-head"><h3>Think it through</h3></div><p className="small vg-part-lede">Turn what you watched into a practical decision.</p>
      {!open?<SelfPacedLock moduleKey={moduleKey} what="Think it through questions"/>
       :user&&!allWatched?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Watch {live.length===1?'the video':`all ${live.length} videos`} to open these questions.</strong><p className="small">{live.filter(watched).length} of {live.length} watched so far.</p></div></div>
-      :<ReflectStep moduleId={m.id} index={index} tool={item.tool} videos={videos} onSolved={()=>{if(!mark?.t)save({tool:true})}}/>}</section>
+      :<ReflectStep moduleId={m.id} index={at} tool={item.tool} videos={videos} onSolved={()=>{if(!mark?.t)save({tool:true})}}/>}</section>
     <footer className="vg-lesson-foot">
      <p className={'small'+(done(at)?' ok':'')}>{!user||!open?'':done(at)?<><Check size={14}/> Lesson finished</>:`Complete ${live.length===1?'the video':live.length?`all ${live.length} videos`:'this lesson'} and the questions to continue.`}</p>
-     <div className="button-row">{index>0&&<Button variant="outline" onClick={()=>go(index-1)}><ArrowLeft size={16}/>Previous lesson</Button>}
-      {index<lessons.length-1?<Button disabled={locked} onClick={()=>go(index+1)}>Next lesson<ArrowRight size={16}/></Button>:<Button disabled={locked} onClick={onTask}>Go to the task<ArrowRight size={16}/></Button>}</div>
+     <div className="button-row">{at>0&&<Button variant="outline" onClick={()=>go(at-1)}><ArrowLeft size={16}/>Previous lesson</Button>}
+      {at<lessons.length-1?<Button disabled={locked} onClick={()=>go(at+1)}>Next lesson<ArrowRight size={16}/></Button>:<Button disabled={locked} onClick={onTask}>Go to the task<ArrowRight size={16}/></Button>}</div>
     </footer>
    </article>
   </section>:<>
