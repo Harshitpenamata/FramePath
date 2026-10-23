@@ -146,7 +146,6 @@ export function MyCourses(){
    {plans.length<maxPlans?<a className="db-plan add" href="/#crafts"><Plus size={26}/><strong>Make another plan</strong><span className="small">Pick a course, answer a short level check and set your time.</span></a>
     :<div className="db-plan add"><strong>{maxPlans} of {maxPlans} plans</strong><span className="small">Delete one to make another.</span></div>}
   </div>}
-  {!plans.length&&s.profile&&<div className="button-row"><Go href="/workspace/previous" outline>Open my previous learning</Go><Button variant="ghost" disabled={busy} onClick={async()=>{if(await confirmAction('Your previous learning plan will be deleted. This can’t be undone.','Delete previous learning'))await mutate('plan_delete',{previous:true})}}><Trash2 size={16}/>Delete previous learning</Button></div>}
   {!user&&plans.length>0&&<p className="small">Sign in to keep your plans and work.</p>}
   {deleting&&<DeletePlanDialog p={deleting} open onClose={()=>setDeleting(null)}/>}
  </div>;
