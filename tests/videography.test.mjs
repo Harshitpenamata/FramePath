@@ -209,6 +209,16 @@ test('style extra lessons: after the shared lessons, only for their style, a wor
  assert.equal(n,52);
 });
 
+test('style extra lessons have their own sketch, named by style so two styles never share a clip',()=>{
+ const St=load(path.join(root,'app/videography/style-lessons.ts'));const seen=new Set();
+ for(const [id,list] of Object.entries(St.styleLessons))for(const style of new Set(list.map(l=>l.style))){
+  const shared=Les.lessonsFor(id).length;assert.equal(Les.sketchId(id,0,style),id+'-1');
+  Les.lessonsFor(id,style).slice(shared).forEach((_,k)=>{const sid=Les.sketchId(id,shared+k,style);assert.ok(!seen.has(sid),sid+' shared');seen.add(sid);
+   for(const ext of ['mp4','webp']){const f=path.join(root,'public/sketches',sid+'.'+ext);assert.ok(fs.existsSync(f),f);assert.ok(fs.statSync(f).size<300000,f+' is too big')}});
+ }
+ assert.equal(seen.size,52);
+});
+
 test('every lesson has its sketchbook clip and poster',()=>{
  for(const m of P.curriculumModules)Les.lessonsFor(m.id).forEach((_,i)=>{for(const ext of ['mp4','webp']){const f=path.join(root,'public/sketches',`${m.id}-${i+1}.${ext}`);assert.ok(fs.existsSync(f),f);assert.ok(fs.statSync(f).size<300000,f+' is too big')}});
 });
