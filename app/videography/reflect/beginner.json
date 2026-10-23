@@ -462,15 +462,15 @@
     "q": "An AI storyboard of your aunt’s pickle stall shows a crowd of fifty customers. There are usually five. What do you do?",
     "options": [
      [
-      "Change the frame to match what you’ll really see, like a few regulars chatting.",
+      "Redraw it to match what you’ll really see: a few regulars chatting.",
       ""
      ],
      [
-      "Hire extras to match the AI frame.",
+      "Hire extras so the stall looks as busy as the AI frame.",
       "The video should show the stall as it really is."
      ],
      [
-      "Keep the frame and hope it works out.",
+      "Keep the frame as it is and hope a crowd turns up.",
       "On the day you won’t be able to film it."
      ]
     ],
@@ -2512,15 +2512,15 @@
     "q": "In the speech enhancement video, how do you decide how much clean-up to use?",
     "options": [
      [
-      "Compare the processed and original voice and keep it sounding natural.",
+      "Compare with the original and keep the voice sounding natural.",
       ""
      ],
      [
-      "Always use the highest setting.",
+      "Always turn it up to the highest setting for the cleanest sound.",
       "Too much processing makes voices sound robotic."
      ],
      [
-      "Use whatever setting the tool picks.",
+      "Use whatever setting the tool picks for you automatically.",
       "The tool doesn’t know how your scene should sound."
      ]
     ],
@@ -2531,15 +2531,15 @@
     "q": "You recorded an interview next to a busy road. What’s the best fix?",
     "options": [
      [
-      "Record again somewhere quieter if you can, then use AI clean-up for what’s left.",
+      "Re-record somewhere quieter if you can, then clean up what’s left.",
       ""
      ],
      [
-      "Rely on AI clean-up to fix everything.",
+      "Keep the road take and let AI clean-up remove all the traffic.",
       "Clean-up helps, but a clean recording always sounds better."
      ],
      [
-      "Add music over it.",
+      "Add music over the interview so the traffic is harder to notice.",
       "Music makes speech harder to hear, not easier."
      ]
     ],
@@ -3417,15 +3417,15 @@
     "q": "A client says, “I just want something nice.” What’s a good next question?",
     "options": [
      [
-      "“Who do you want to watch it, and what should they do afterwards?”",
+      "“Who should watch it, and what should they do afterwards?”",
       ""
      ],
      [
-      "“Do you want it in 4K?”",
+      "“Do you want it shot in 4K, or is HD enough for you?”",
       "That doesn’t tell you what “nice” means to them."
      ],
      [
-      "“OK, I’ll make something nice.”",
+      "“OK, I’ll make something nice and send it to you to see.”",
       "You’ll guess, and probably guess wrong."
      ]
     ],
@@ -3457,15 +3457,15 @@
     "q": "Your classmate’s video has shaky shots in the middle. What’s the most useful thing to say?",
     "options": [
      [
-      "“The shots from 0:40 to 1:00 shake. A stand, or leaning on a wall, could help.”",
+      "“The shots at 0:40–1:00 shake. Try a stand or a wall to lean on.”",
       ""
      ],
      [
-      "“It’s bad.”",
+      "“It’s bad. You should probably redo the whole thing.”",
       "That doesn’t say what or how to fix it."
      ],
      [
-      "“It’s fine,” to be nice.",
+      "“It’s fine, honestly,” so you don’t hurt their feelings.",
       "They lose the chance to improve."
      ]
     ],
@@ -3478,15 +3478,15 @@
     "q": "In the video on first client meetings, what do you set out early?",
     "options": [
      [
-      "How you’ll work together: what’s included, timing and who decides.",
+      "How you’ll work: what’s included, timing and who decides.",
       ""
      ],
      [
-      "Your full price list.",
+      "Your full price list, so they know the cost up front.",
       "Price matters, but the working terms come first."
      ],
      [
-      "Your favourite filmmakers.",
+      "Your favourite filmmakers, so they can see your taste.",
       "Clients want to know how the project will run."
      ]
     ],
@@ -3497,15 +3497,15 @@
     "q": "After a meeting, the client says, “Let’s talk again soon.” What do you do the same day?",
     "options": [
      [
-      "Send a short written summary of what you agreed and the next steps.",
+      "Send a short written summary of what you agreed and what’s next.",
       ""
      ],
      [
-      "Wait for them to call.",
+      "Wait for them to call you, so you don’t seem too pushy.",
       "Things get forgotten. A summary keeps you both on track."
      ],
      [
-      "Start filming straight away.",
+      "Start filming straight away so you don’t lose any time.",
       "You haven’t confirmed the details yet."
      ]
     ],
@@ -3537,15 +3537,15 @@
     "q": "You want to film for gyms. Which first sample is most useful?",
     "options": [
      [
-      "A short video for one gym that shows its classes and the people who come.",
+      "A short video for one gym, showing its classes and members.",
       ""
      ],
      [
-      "A wedding highlight film.",
+      "Your best wedding highlight film, since it shows your skill.",
       "A gym owner can’t picture their own video from it."
      ],
      [
-      "A tutorial about colour grading.",
+      "A tutorial on colour grading to show your technical level.",
       "It shows skill, but not what a gym would get."
      ]
     ],

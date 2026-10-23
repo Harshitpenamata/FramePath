@@ -341,7 +341,7 @@
    "Run a first meeting",
    "Show what you can do"
   ],
-  "assignment": "Plan a short video for a real or practice client, like a shop, a friend or a club. Share the questions you asked, a summary of their answers (who it’s for, the goal and any limits), and the follow-up message you sent confirming what you’ll make, who does what and when.",
+  "assignment": "Plan a short video for a real or practice client, like a shop, a friend or a club. Share the questions you asked and a summary of the answers: who it’s for, the goal and any limits. Then share your follow-up message confirming what you’ll make, who does what and when.",
   "evidence": "Your questions found the real goal, your summary matches what they said, and your follow-up is clear and polite.",
   "handIn": "text",
   "checks": [
@@ -723,12 +723,11 @@
    "Say your price with confidence",
    "Make a simple marketing plan"
   ],
-  "assignment": "For a real or practice client, share your discovery questions and what you learned, a one-page treatment for your idea, your price and what it includes, and your reply to two revision notes that clash.",
-  "evidence": "Your idea solves the client’s real problem, your price is clear about what’s included, and your revision reply is calm and specific.",
+  "assignment": "Work with a real or practice client. Share your discovery questions and what you learned. Add a one-page treatment, your price and what it includes. Finish with your reply to two revision notes that clash.",
+  "evidence": "Your idea solves the client’s real problem. Your price is clear about what’s included. Your revision reply is calm and specific.",
   "handIn": "text",
   "checks": [
-   "Discovery found the real audience, problem and goal",
-   "The treatment shows the idea, the look and why it fits",
+   "Discovery found the real problem, and the treatment shows an idea that fits",
    "The price says what’s included and what isn’t",
    "The revision reply finds the concern and proposes one plan"
   ]
@@ -1110,14 +1109,13 @@
    "Pick your niche",
    "Pitch for a yes"
   ],
-  "assignment": "Share a crew briefing for a complex shoot, your plan for a client with clashing stakeholders and a fixed deadline, three service options with prices and outcomes, a short positioning statement, and the outline of a pitch that ends with a clear request.",
-  "evidence": "Your briefing makes roles and escalation clear, your client plan protects the deadline and the relationship, and your pitch builds to a clear request.",
+  "assignment": "Share a crew briefing for a complex shoot. Add your plan for a client with clashing stakeholders and a fixed deadline. Include three service options with prices and outcomes, and a short positioning statement. End with a pitch outline that closes with a clear request.",
+  "evidence": "Your briefing makes roles and escalation clear. Your client plan protects the deadline and the relationship. Your pitch builds to a clear request.",
   "handIn": "text",
   "checks": [
    "The crew briefing sets roles and how to raise problems",
    "The client plan handles the clash and protects the deadline",
-   "The three options link price to outcomes",
-   "The pitch ends with a clear request"
+   "The three options link price to outcomes, and the pitch ends with a clear request"
   ]
  },
  {

@@ -63,7 +63,7 @@ export const extraLessons:Record<string,Extra[]>={
    'AI helps around the edges. The heart of the story is real.'),['lib:I14-6','lib:I14-7'])],
 
  // ---- Advanced: AI ----
- A04:[L('Plan a hybrid AI shot on set','If AI will add or change something in a shot, plan it while filming: clean plates, a reference object and notes on the lens and light.',
+ A04:[L('Plan a hybrid AI shot on set','If AI will add or change something in a shot, plan it while filming. Get clean plates, a reference object and notes on lens and light.',
   spot('You’ll add an AI element to a street shot later. What should you capture on set?',
    [['A clean plate with no people in it',true],['A reference object in the same light',true],['Notes on lens, height and focus',true],['Only the final take',false]],
    'What you capture on set decides how real the result looks.'),['lib:A04-4'])],
@@ -74,7 +74,7 @@ export const extraLessons:Record<string,Extra[]>={
   spot('Which of these mean the mask needs fixing?',
    [['The edge flickers around the hair',true],['The mask slips off the face when they turn',true],['The mask holds steady for the whole shot',false],['Part of the background sits inside the mask',true]],
    'Check frame by frame wherever the subject moves fast.'),['lib:A11-4'],'needs DaVinci Resolve Studio')],
- A13:[L('Mix AI shots with live action','See how filmmakers blend real footage with generated elements: what they filmed, what AI made, and how they matched the two.',
+ A13:[L('Mix AI shots with live action','See how filmmakers blend real footage with AI: what they filmed, what AI made and how they matched them.',
   pick('What makes an AI element look like part of the real shot?',
    ['Matching the light direction, colour and camera movement of the real footage',true,'Yes. Match the real footage, not the other way round.'],
    ['Making the AI element as detailed as possible',false,'Detail doesn’t help if the light is wrong.'],
