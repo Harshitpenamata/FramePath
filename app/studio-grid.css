@@ -342,3 +342,4 @@ p,li{text-wrap:pretty}
 .db-stages li{align-items:center;text-align:center;padding-inline:36px}
 /* Footer links: a 44px tap height on touch screens. */
 .footer>div a{display:inline-flex;align-items:center;min-height:44px}
+.privacy-list{display:grid;gap:14px;margin:12px 0 0}.privacy-list dt{font-weight:700}.privacy-list dd{margin:2px 0 0}.privacy-list em{display:block;font-style:normal;color:var(--muted-foreground)}

@@ -33,9 +33,9 @@ const safetyItems:[string,string][]=[
  ['Drone and specialist work','Use ground-based plans until current official requirements, operator competence and local permissions have been checked. A learning score is not a flight authorisation or a safety certification.'],
  ['Uploads and AI','Only upload non-sensitive practice you own or may share. Content declarations and image screening do not verify consent or privacy. AI feedback reads your text and photos (Anthropic’s Claude) and watches your videos and YouTube or Google Drive links, picture and sound (Google’s Gemini). Videos sent for watching are deleted from Google straight after.'],
  ['People in your work','Everyone you can recognise in an upload must have agreed to be filmed, and to it being shared if you put it in your portfolio. Never upload identifying footage of children.'],
- ['Age','FramePath is for learners 13 and over. Learners under 18 need a parent or guardian’s agreement, and can share their portfolio by link but not publicly in Community.'],
- ['Your data','Your work is stored privately on Cloudflare. AI providers only receive what is needed for each review or check. You can delete any unused upload, and delete your whole account and everything in it, from My account.'],
- ['Your portfolio','Work starts private. Publish only selected, safe material with permission from everyone affected; sharing a snapshot with a demo mentor is a separate consent decision. You can unpublish your portfolio.']
+ ['Age','The FramePath pilot is for people aged 18 and over.'],
+ ['Your data','Your work is stored privately on Cloudflare. AI providers only receive what is needed for each review or check. You can delete any unused upload, and delete your whole account and everything in it, from My account. The privacy notice (framepath.ai/privacy) explains what we collect, why, and your rights.'],
+ ['Your portfolio','Work starts private. Publish only selected, safe material with permission from everyone affected; You can unpublish your portfolio at any time.']
  ];
 const safetyIcons:Record<string,React.ReactNode>={'Ask separately about recording and sharing':<Users size={20}/>,'Children and vulnerable people':<Baby size={20}/>,'Events and public places':<MapPin size={20}/>,'Evidence and health':<FileText size={20}/>,'Music and third-party material':<Music size={20}/>,'Drone and specialist work':<Plane size={20}/>};
 const privacyTitles=['Uploads and AI','People in your work','Age','Your data','Your portfolio'];
