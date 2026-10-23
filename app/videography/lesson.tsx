@@ -80,7 +80,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
  if(blocker)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Hand in the module before this one first.</h2><p>Finish “{moduleInfo(blocker).lesson.title}” to unlock this task. You can still watch this module.</p><Go href={moduleHref(blocker)+'?tab=task'}>Go to that module</Go></Panel>;
  // The task opens once every lesson in this module is finished (videos watched, practice tools solved).
  const dead=useDeadVideos();
- const lessons=lessonsFor(m.id),lessonState=lessonsStatus(m.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[key],dead);
+ const lessons=lessonsFor(m.id,s.programme?.primaryPathway),lessonState=lessonsStatus(m.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[key],dead);
  if(requireLessonsForTask&&lessonState.done<lessonState.total)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Finish the lessons to unlock this task.</h2><p>{lessonState.done} of {lessonState.total} lessons done. In each lesson, watch the videos and answer the Reflect questions.</p>
   <ol className="vg-unlock-list">{lessons.map((l,i)=><li key={l.title} className={lessonState.finished[i]?'ok':''}>{lessonState.finished[i]?<Check size={16}/>:<span>{i+1}</span>}<a className="text-link" href={moduleHref(key)+'?lesson='+(i+1)}>{l.title}</a></li>)}</ol></Panel>;
  async function handIn(){
@@ -150,7 +150,7 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
  const review=reviews?.find(r=>r.submissionId===piece.id);
  // The review of the hand-in before this one, to show what changed; and the module's lesson titles for 'Rewatch'.
  const prev=review?reviews!.find(r=>r.submissionId!==piece.id&&r.createdAt<review.createdAt):undefined;
- const lessonTitles=lessonsFor(parseVideoKey(key)!.module.id).map((l:any)=>l.title);
+ const lessonTitles=lessonsFor(parseVideoKey(key)!.module.id,s.programme?.primaryPathway).map((l:any)=>l.title);
  const canReview=allowance?.eligible&&allowance.used<allowance.limit;
  const rated=Array.isArray(piece.selfRatings);
  return <div className="vg-reflect">

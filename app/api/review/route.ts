@@ -57,7 +57,7 @@ export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promi
  // Videography: the module's lessons (so the review can point to one to revisit) and this module's previous
  // review of a different hand-in (so it can say what changed).
  const vmod=isVideoKey(key)?parseVideoKey(key):null,vpath=s.programme?.primaryPathway||'Documentary';
- const moduleLessons=vmod?lessonsFor(vmod.module.id).map((l:any,i:number)=>({lesson:i+1,title:l.title,videos:lessonVideos(vmod.module.id,i,vpath).map((v:any)=>v.title)})):[];
+ const moduleLessons=vmod?lessonsFor(vmod.module.id,vpath).map((l:any,i:number)=>({lesson:i+1,title:l.title,videos:lessonVideos(vmod.module.id,i,vpath).map((v:any)=>v.title)})):[];
  const prevRow:any=vmod?await db().prepare("SELECT answer FROM ai_jobs WHERE user_id=? AND kind='feedback' AND status='complete' AND json_extract(CASE WHEN json_valid(answer) THEN answer ELSE '{}' END,'$.lessonKey')=? AND json_extract(CASE WHEN json_valid(answer) THEN answer ELSE '{}' END,'$.submissionId')<>? ORDER BY created_at DESC LIMIT 1").bind(u.userId,key,submissionId).first():null;
  const prev=prevRow?JSON.parse(prevRow.answer).review:null;
  const allowance=await access(u.userId,s,key);if(!allowance.eligible)throw Object.assign(new Error('Annual access includes AI reviews beyond your two starter pathways.'),{status:403});

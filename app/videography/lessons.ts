@@ -2,6 +2,7 @@ import {V,pathwayVideos,videoLibrary,fromLibrary,pathwayLibrary,type ModuleVideo
 import type {Pathway} from './programme';
 import lessonExtras from './lesson-videos.json';
 import {extraLessons} from './lessons-ai-ps';
+import {styleLessonsFor} from './style-lessons';
 
 // Lessons inside a module: one per curriculum topic. Each lesson has Watch (an idea and videos)
 // and Reflect (a small interactive tool). Every module has lessons; Intermediate and Advanced are added below.
@@ -277,7 +278,8 @@ export const moduleLessons:Record<string,ModuleLessonItem[]>={
  ],
 };
 
-export const lessonsFor=(moduleId:string)=>moduleLessons[moduleId]||[];
+// With a style, that style's extra lessons follow the shared ones (so shared lesson numbers never move).
+export const lessonsFor=(moduleId:string,pathway?:string):(ModuleLessonItem&{style?:string})[]=>[...(moduleLessons[moduleId]||[]),...styleLessonsFor(moduleId,pathway)];
 
 // Which videos each Beginner lesson shows, lesson by lesson. 'lib:<id>' is a row of the curated video library
 // ('@<seconds>' starts it at that section); 'path' is the library's rows for the learner's style; other names are
@@ -1009,8 +1011,8 @@ export function lessonFinished(moduleId:string,index:number,pathway:Pathway,mark
 }
 // How far a learner is through a module's lessons (marks come from state.lessonProgress[moduleKey]).
 export function lessonsStatus(moduleId:string,pathway:Pathway,marks:Record<string,LessonMark>|undefined,dead:string[]=[]){
- const lessons=lessonsFor(moduleId),finished=lessons.map((_,i)=>lessonFinished(moduleId,i,pathway,marks?.[i],dead));
+ const lessons=lessonsFor(moduleId,pathway),finished=lessons.map((_,i)=>lessonFinished(moduleId,i,pathway,marks?.[i],dead));
  // Optional lessons show their ticks but aren't needed to finish the module.
- const required=lessons.map((l,i)=>i).filter(i=>!lessons[i].optional);
+ const required=lessons.map((l,i)=>i).filter(i=>!lessons[i].optional&&!lessons[i].style);
  return {total:required.length,done:required.filter(i=>finished[i]).length,finished};
 }
