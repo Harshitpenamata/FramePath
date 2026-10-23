@@ -27,6 +27,7 @@
     "src/scenes-intermediate.js",
     "src/scenes-advanced.js",
     "src/scenes-ai-ps.js",
+    "src/scenes-style.js",
     "src/timeline.js",
     "src/bridges.js",
     "kit/morph.js",

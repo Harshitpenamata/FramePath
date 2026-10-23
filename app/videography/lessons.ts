@@ -279,6 +279,12 @@ export const moduleLessons:Record<string,ModuleLessonItem[]>={
 };
 
 // With a style, that style's extra lessons follow the shared ones (so shared lesson numbers never move).
+// The sketchbook clip for a lesson: /sketches/<id>.mp4. Shared lessons are <module>-<n> (B06-3); a style's extra
+// lessons are <module>-<style>-<n> (I05-wedding-1), because two styles' extras can share a lesson number.
+export function sketchId(moduleId:string,index:number,pathway?:string){
+ const shared=lessonsFor(moduleId).length;if(index<shared)return moduleId+'-'+(index+1);
+ const style=lessonsFor(moduleId,pathway)[index]?.style||'';return moduleId+'-'+style.toLowerCase().replace(/\s+/g,'-')+'-'+(index-shared+1);
+}
 export const lessonsFor=(moduleId:string,pathway?:string):(ModuleLessonItem&{style?:string})[]=>[...(moduleLessons[moduleId]||[]),...styleLessonsFor(moduleId,pathway)];
 
 // Which videos each Beginner lesson shows, lesson by lesson. 'lib:<id>' is a row of the curated video library

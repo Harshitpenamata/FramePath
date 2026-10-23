@@ -6,7 +6,7 @@ import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
 import {stageOrder,parseVideoKey,moduleLesson,projectLabel,isFreeModule,type Pathway} from './programme';
 import {videosFor,type ModuleVideo} from './media';
-import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
+import {lessonsFor,sketchId,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
 import {ReflectStep,TestOut} from './reflect';
 import {moduleResources} from './module-resources';
 
@@ -235,7 +235,7 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
    {user&&open&&!lessons.every((l,i)=>l.optional||l.style||done(i))&&<TestOut moduleId={m.id} moduleKey={moduleKey} lessonCount={lessons.length} videosFor={i=>lessonVideos(m.id,i,pathway)} mutate={mutate} busy={busy} result={s.lastTestOut}/>}
    <article className="vg-lesson-card">
     <header className="vg-lesson-intro">
-     <LessonSketch key={m.id+at} src={`/sketches/${m.id}-${at+1}`} title={item.title}/>
+     <LessonSketch key={m.id+at} src={'/sketches/'+sketchId(m.id,at,pathway)} title={item.title}/>
      <div className="vg-lesson-about"><span className="eyebrow">The idea</span>{item.optional&&<p className="vg-optional">Optional · {item.optional}. Watch if you can; you don’t need it to finish the module.</p>}{item.style&&<p className="vg-optional">An extra lesson for {item.style}: what your style does differently here. You don’t need it to finish the module.</p>}<p className="vg-idea">{item.idea}</p></div>
      {live.length>0&&<div className="vg-lesson-progress"><span className="vg-dots" aria-hidden="true">{live.map(v=><i key={videoId(v)} className={watched(v)?'done':''}/>)}</span><span className="small">{live.filter(watched).length} of {live.length} {live.length===1?'video':'videos'} watched</span></div>}
     </header>
