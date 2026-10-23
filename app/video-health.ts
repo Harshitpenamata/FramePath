@@ -38,7 +38,7 @@ export async function checkVideo(v:ModuleVideo):Promise<Omit<VideoHealth,'id'>>{
   const xfo=(r.headers.get('x-frame-options')||'').toLowerCase(),fa=(r.headers.get('content-security-policy')||'').match(/frame-ancestors[^;]*/)?.[0]||'';
   await r.body?.cancel();
   if(/deny|sameorigin/.test(xfo)||(fa&&!fa.includes('*')))return {status:'noframe',detail:'Page: loads, but opens in a new tab'};
-  return {status:'ok',detail:'Page: loads inside FramePath'};
+  return {status:'ok',detail:'Page: loads inside Framepath'};
  }catch(e:any){return {status:'ok',detail:'Check failed ('+String(e?.message||e).slice(0,80)+'); not treated as dead'}}
 }
 

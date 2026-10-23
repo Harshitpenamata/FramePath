@@ -142,8 +142,8 @@ export function ProgrammeStart(){
    {draft.interests.length>0&&<ol className="vg-chosen">{draft.interests.map((id,i)=><li key={id}>{i===0?<Star size={14} aria-label="Primary"/>:<span className="vg-rank">{i+1}</span>}{interestFor(id)?.label}{i>0&&<button type="button" className="vg-link" onClick={()=>update({interests:[id,...draft.interests.filter(x=>x!==id)]})}>Make main</button>}<button type="button" aria-label={'Remove '+interestFor(id)?.label} onClick={()=>update({interests:draft.interests.filter(x=>x!==id)})}><X size={14}/></button></li>)}</ol>}
    {draft.interests[0]&&<p className="small">Main project: <strong>{interestFor(draft.interests[0])!.label}</strong></p>}
    {!s.consent&&<fieldset className="vg-age"><legend>How old are you?</legend>
-    {([['adult','I’m 18 or older'],['guardian','I’m 13 to 17, and a parent or guardian agrees I can use FramePath']] as const).map(([id,label])=><label key={id}><input type="radio" name="age" checked={draft.age===id} onChange={()=>update({age:id})}/> {label}</label>)}
-    <p className="small">FramePath isn’t for children under 13. Learners under 18 can share their portfolio by link, but not publicly in Community.</p></fieldset>}
+    {([['adult','I’m 18 or older'],['guardian','I’m 13 to 17, and a parent or guardian agrees I can use Framepath']] as const).map(([id,label])=><label key={id}><input type="radio" name="age" checked={draft.age===id} onChange={()=>update({age:id})}/> {label}</label>)}
+    <p className="small">Framepath isn’t for children under 13. Learners under 18 can share their portfolio by link, but not publicly in Community.</p></fieldset>}
    <div className="button-row"><Button disabled={!draft.interests.length||(!s.consent&&!draft.age)} onClick={()=>setStep(draft.answers.length===questionCount?2:1)}>Next: 12 quick questions <ArrowRight size={16}/></Button></div>
   </Panel>}
 
