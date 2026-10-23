@@ -1,4 +1,5 @@
 import curriculum from './curriculum.json';
+import styleTasks from './style-tasks.json';
 import type {Lesson} from '../catalog';
 
 // Phase-1 programme: course selection, interests, level assessment and schedule.
@@ -263,9 +264,12 @@ export const courseId=(p:Programme)=>p.courseId||'';
 // The style project module of each level (B13, I13, A13): its hand-in is kept separately for each course.
 export const styleModuleKeys=levels.flatMap(l=>modulesFor(l).flatMap((m,i)=>m.stage==='selected-pathway'?[moduleKey(l,i)]:[]));
 // Converts a curriculum module into the shared Lesson shape used by assignments and scoring.
+// The task in the learner's own style (Wedding, Corporate, Social media; from the style layer sheet). Same skill,
+// evidence and checks as the shared task, so the AI review still applies. Other styles keep the shared task.
+export const styleTask=(moduleId:string,project?:string)=>project?(styleTasks as Record<string,Record<string,string>>)[moduleId]?.[project]:undefined;
 export function moduleLesson(m:CurriculumModule,project?:string):Lesson{
  const title=m.stage==='selected-pathway'&&project?`Your ${project} project`:m.title;
- return {title,minutes:m.hours*60,learn:m.outcome+' '+m.topics.join(', ')+'.',do:m.assignment,checks:[...m.checks],resource:-1};
+ return {title,minutes:m.hours*60,learn:m.outcome+' '+m.topics.join(', ')+'.',do:styleTask(m.id,project)||m.assignment,checks:[...m.checks],resource:-1};
 }
 export const videoPaths=levels.map(level=>({id:videoPathId(level),title:'Videography · '+levelNames[level],short:levelNames[level],description:levelSummary[level],outcome:levelSummary[level],duration:rhythm[level].weeks+' WEEKS · '+rhythm[level].hours+' HOURS',number:String(levels.indexOf(level)+1).padStart(2,'0'),lessons:modulesFor(level).map(m=>moduleLesson(m))}));
 export const curriculumModules=curriculum;

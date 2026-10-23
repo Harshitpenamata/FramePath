@@ -1,0 +1,227 @@
+{
+ "A-PS": {
+  "Wedding": "Share a crew briefing for a multi-function wedding. Add your plan for a family with clashing wishes and a fixed delivery date, three packages with prices and what each includes, and a short positioning statement for your wedding business. End with a pitch outline that closes with a clear request.",
+  "Corporate": "Share a crew briefing for a corporate shoot with senior staff. Add your plan for clashing stakeholders and a fixed launch date, three service options with prices and outcomes, and a short positioning statement for your business. End with a pitch outline that closes with a clear request.",
+  "Social media": "Share a briefing for a content shoot day with a creator and a small crew. Add your plan for a brand with clashing teams and a fixed campaign date, three monthly retainer options with prices and outcomes, and a short positioning statement. End with a pitch outline that closes with a clear request."
+ },
+ "A01": {
+  "Wedding": "For one couple's brief, develop two very different film ideas, like a documentary of the family's traditions and a cinematic love story. Share both plans, reference pictures, sound ideas, and why you chose one.",
+  "Corporate": "For one company's brief, develop two very different ideas, like a customer's story and a bold brand film. Share both plans, reference pictures, sound ideas, and why you chose one.",
+  "Social media": "For one brand, develop two very different series ideas, like an expert-tips series and a behind-the-scenes series. Share both plans, reference posts, sound ideas, and why you chose one."
+ },
+ "A02": {
+  "Wedding": "Research a couple's story: talk to family and friends, check names, dates and rituals, and list the old photos you will need. Test one key idea with a venue visit, an interview or a test shot. Note what you learned.",
+  "Corporate": "Research a company's story: interview staff and a customer, check facts and figures with the client, and get access to the places you will film. Test one key idea and note what you learned.",
+  "Social media": "Research what works on the account and on similar accounts (formats, hooks, posting times, comments). Test one key idea with a test post or a rehearsal. Note what you learned."
+ },
+ "A03": {
+  "Wedding": "Share a full production pack for a wedding over several days: crew, budget, a schedule for each function, roles and approvals. Then deal with a change, like a function moved by two hours or a second shooter dropping out. Note the effect on cost, time and quality.",
+  "Corporate": "Share a full production pack for a company shoot: budget, schedule, roles, client approvals and what you will deliver. Then deal with a change, like the founder having only 15 minutes. Note the effect on cost, time and quality.",
+  "Social media": "Share a full production pack for a month of content: budget, shoot days, posting calendar, roles and approvals. Then deal with a change, like a trend you need to react to this week. Note the effect on cost, time and quality."
+ },
+ "A04": {
+  "Wedding": "Test your camera setup for a dim sangeet hall and a bright outdoor haldi, from filming to export, with two cameras if you can. Share the settings, results and limits.",
+  "Corporate": "Test your camera setup for an interview under office lights and for product or work shots, from filming to export. Share the settings, results and limits.",
+  "Social media": "Test your vertical setup at night and in bright daylight, from filming to export to how the platform compresses it. Share the settings, results and limits."
+ },
+ "A05": {
+  "Wedding": "Direct the couple in a portrait session or their entry with several camera angles, using simple actions instead of poses. Do it again with less time. Share your plans and clips.",
+  "Corporate": "Direct a founder or staff interview or a product demo with several camera angles. Do it again with less time. Share your plans and clips.",
+  "Social media": "Direct a creator or a brand's team member in a short talking-to-camera piece or skit with several angles. Do it again with less time. Share your plans and clips."
+ },
+ "A06": {
+  "Wedding": "Plan two connected light setups for a wedding evening, like the getting-ready room and the stage, so skin tones match. Change the location a little and adapt. Share sketches, stills and notes.",
+  "Corporate": "Plan two connected setups for a company shoot, like an interview and the extra shots in the same office, so they match. Change the location a little and adapt. Share sketches, stills and notes.",
+  "Social media": "Plan two connected setups for a series that viewers will recognise every week. Change the location a little and adapt. Share sketches, stills and notes."
+ },
+ "A07": {
+  "Wedding": "Record a speech or the vows with a main and a backup recording, like a lapel mic and a second recorder. Then fix a pretend failure using the copies.",
+  "Corporate": "Record a two-person conversation or a small panel with a main and a backup recording. Then fix a pretend failure using the copies.",
+  "Social media": "Record a two-person podcast-style talk or a street interview with a main and a backup recording. Then fix a pretend failure using the copies."
+ },
+ "A08": {
+  "Wedding": "Hand a wedding project to another learner as if they were your second editor: folders by function and camera, notes, and the family's music choices. Do a recovery test. Check the final edit uses the right files.",
+  "Corporate": "Hand a business project to another learner as if to the client's agency: folders, logos, fonts, approvals and notes. Do a recovery test. Check the final edit uses the right files.",
+  "Social media": "Hand a content project to another learner as if to the account's next editor: templates, fonts, music licences and notes. Do a recovery test. Check the final edit uses the right files."
+ },
+ "A09": {
+  "Wedding": "Make two versions of a wedding film with different structures, like in time order or built around a speech. Show them, do two rounds of changes and keep a log of feedback.",
+  "Corporate": "Make two versions of a business video with different structures, like problem and solution or a customer's story. Show them, do two rounds of changes and keep a log of feedback.",
+  "Social media": "Make two versions of a reel with different structures. Show them or post both as a test, do two rounds of changes and keep a log of feedback and results."
+ },
+ "A10": {
+  "Wedding": "Finish the sound on a tricky wedding scene, like vows over a loud crowd or a dhol. Share the mix, the separate sound parts and notes on any fixes.",
+  "Corporate": "Finish the sound on a tricky company scene, like an interview in a noisy factory. Share the mix, the separate sound parts and notes on any fixes.",
+  "Social media": "Finish the sound on a tricky reel, like speech outdoors with music on top, mixed for phone speakers. Share the mix, the separate sound parts and notes on any fixes."
+ },
+ "A11": {
+  "Wedding": "Match clips from more than one camera and phone at a wedding and create a look the couple approves, with true skin tones and outfit colours. Compare the edit with the exported file.",
+  "Corporate": "Match clips from different cameras and create a look that fits the brand's guidelines. Compare the edit with the exported file.",
+  "Social media": "Match clips from a phone and a camera and create a look for the account. Compare the edit with the file after it is uploaded to the platform."
+ },
+ "A12": {
+  "Wedding": "Deliver the main wedding film, a teaser, captions for speeches, and a handover note for the family saying where the files are kept.",
+  "Corporate": "Deliver the main film, a shorter version, captions and a handover note listing the files, music licences and where the video may be used.",
+  "Social media": "Deliver the main video, a cut-down for each platform, captions and a handover note with the posting text and music licences."
+ },
+ "A13": {
+  "Wedding": "Complete an advanced wedding project of real functions, with permission. Share tests, original clips, all versions (film and teaser) and why you made key choices.",
+  "Corporate": "Complete an advanced project for a real client, like a brand film or a campaign. Share tests, original clips, all versions and why you made key choices.",
+  "Social media": "Complete an advanced series for a real account. Share tests, original clips, all versions, how they did, and why you made key choices."
+ },
+ "A14": {
+  "Wedding": "Share your plan, production pack, tests, clips, project, final versions, change log and a short case study of a wedding film.",
+  "Corporate": "Share your plan, production pack, tests, clips, project, final versions, change log and a short case study of a client video.",
+  "Social media": "Share your plan, production pack, tests, clips, project, final versions, change log and a short case study of a social media campaign."
+ },
+ "B-PS": {
+  "Wedding": "Plan a short video for a real or practice family event. Share the questions you asked the family and a summary of the answers: who it's for, the moments that matter and any limits (rituals not to film, guests to avoid). Then share your follow-up message confirming what you'll make, who does what and when.",
+  "Corporate": "Plan a short video for a real or practice business, like a shop or a startup. Share the questions you asked the owner and a summary of the answers: who it's for, the goal and any limits (budget, brand rules, staff who don't want to appear). Then share your follow-up message confirming what you'll make, who does what and when.",
+  "Social media": "Plan a reel for a real or practice account, like a friend's small business or a club. Share the questions you asked and a summary of the answers: who it's for, the goal (followers, enquiries, sales) and any limits. Then share your follow-up message confirming what you'll make, when it posts and who approves it."
+ },
+ "B01": {
+  "Wedding": "Watch two short wedding films and note how each tells the couple's story. Then put six photos from a family function (a puja, a birthday, a cousin's engagement) in order to show what happened. Add two lines on what you want the family to feel. Ask before using anyone's photos.",
+  "Corporate": "Watch two short company or shop videos and note how each tells its story. Then put six photos of a local business at work (a tailor, a café, a print shop) in order to show how something is made or served. Add two lines on what a customer should understand. Ask the owner first.",
+  "Social media": "Watch two reels or Shorts that tell a story in under 60 seconds and note how. Then put six photos in order to show something done from start to finish, like making chai or a room makeover. Add two lines on what a viewer should get before they scroll."
+ },
+ "B02": {
+  "Wedding": "Write a one-page plan for a 60-second video of a small family function, like a haldi, a griha pravesh or a birthday. Include the main moment, who matters most, how long it is, the shots you need and anything people will say, like a blessing.",
+  "Corporate": "Write a one-page plan for a 60-second video about a local business: what it does and why customers come back. Include the main message, who will watch, how long it is, the shots you need and what the owner will say.",
+  "Social media": "Write a one-page plan for a 30 to 45 second vertical video for Instagram or YouTube Shorts. Include the hook for the first 2 seconds, the main message, the shots you need, any text on screen and what people will say."
+ },
+ "B03": {
+  "Wedding": "Make a list of 6 to 10 shots for a family function, a gear checklist (charged batteries, free space, a power bank) and a schedule that follows the function's timings. Ask the hosts and anyone you will film for permission. Record a short test in the venue's light, copy it to your computer and check it plays.",
+  "Corporate": "Make a list of 6 to 10 shots at a workplace, a gear checklist and a schedule that fits around working hours. Get the owner's permission and ask staff and customers before you film them. Record a short test, copy it to your computer and check it plays.",
+  "Social media": "Make a list of 6 to 10 vertical shots, a gear checklist (phone, something steady to rest it on, light) and a simple schedule. Ask anyone who will appear, and check the place allows filming. Record a short 9:16 test, copy it to your computer and check it plays."
+ },
+ "B04": {
+  "Wedding": "Film three things you would meet at a wedding: a dim hall or home, outside in daylight, and something moving like a procession or people dancing. Watch each clip, fix one problem (too dark, shaky, out of focus) and film it again. Share both versions.",
+  "Corporate": "Film three things at a workplace: inside an office or shop, the entrance or signboard outside, and something moving like a machine or someone at work. Watch each clip, fix one problem and film it again. Share both versions.",
+  "Social media": "Film three vertical clips: indoors, outdoors, and something moving, like walking with the phone or a product turning. Watch each one on your phone, fix one problem and film it again. Share both versions."
+ },
+ "B05": {
+  "Wedding": "Film the bride or groom getting ready in 5 to 8 shots: one wide of the room, the action (buttoning the sherwani, pinning the dupatta), and one close-up detail like the jewellery or mehndi. Share your clips and shot list.",
+  "Corporate": "Film someone at work in 5 to 8 shots: one wide of the workplace, the action (a tailor cutting cloth, someone pouring coffee), and one close-up detail like hands or the product. Ask them first. Share your clips and shot list.",
+  "Social media": "Film one quick process in 5 to 8 vertical shots: one wide to set the scene, the action, and one close-up detail that would stop someone scrolling. Share your clips and shot list."
+ },
+ "B06": {
+  "Wedding": "Film someone in light that looks bad, like harsh noon sun or a dark corner under tube lights at a function. Then move them, the camera or the light (to a window, into shade, a lamp turned towards them) to fix it. Share the before and after.",
+  "Corporate": "Film someone at their desk or counter where the light looks bad, like a bright window behind them or overhead tube lights. Move them, the camera or a lamp to fix it. Share the before and after.",
+  "Social media": "Film a talking-to-camera clip in bad light, like a window behind you or one ceiling light. Fix it by facing a window, moving, or adding a lamp. Share the before and after as vertical clips."
+ },
+ "B07": {
+  "Wedding": "Record a 20 to 30 second blessing or message for a couple from a family member, plus some natural sound like laughter, music or bangles. Listen back on headphones, find a problem and record again if needed.",
+  "Corporate": "Record a 60-second introduction from a colleague or shop owner explaining what their business does. Use a lapel or phone mic close to them, frame them at eye level, and share the clip with your setup notes.",
+  "Social media": "Record a 20 to 30 second talking-to-camera clip for a reel, plus natural sound that fits it, like food sizzling or a busy street. Listen back on headphones, find a problem and record again if needed."
+ },
+ "B08": {
+  "Wedding": "Copy clips from a family function into folders named by event, then by camera or phone, and keep the original files safe. Start an editing project, close it and open it again. Share a picture of your folders and project.",
+  "Corporate": "Copy clips from a business shoot into folders named by client, date and type (interview, extra shots, logos). Start an editing project, close it and open it again. Share a picture of your folders and project.",
+  "Social media": "Copy your clips into named folders (clips, music, text and graphics, exports) so one shoot can make several reels. Start a project in CapCut, VN or DaVinci Resolve, close it and open it again. Share a picture of your folders and project."
+ },
+ "B09": {
+  "Wedding": "Edit a 45 to 60 second highlight of a family function. Show it to someone from the family, then fix one part that was confusing or too long. Share both versions.",
+  "Corporate": "Edit a 45 to 60 second video about a local business. Show it to the owner or a friend, then fix one part that was confusing or too long. Share both versions.",
+  "Social media": "Edit a 30 to 45 second vertical video with a hook in the first 2 seconds. Show it to someone, ask where they would have scrolled away, and fix that part. Share both versions."
+ },
+ "B10": {
+  "Wedding": "Add sound to your function video: a blessing or speech, natural sound from the event, and a song if it helps. Keep voices clearly louder than the music. Share the video and say why you used each sound.",
+  "Corporate": "Add the owner's voice, natural sound from the workplace and quiet music if it helps. Keep the voice clearly louder than the music. Share the video and say why you used each sound.",
+  "Social media": "Add a voice-over or talking clip, natural sound and music to your reel. Check it works with the sound on and with the sound off. Share the video and say why you used each sound."
+ },
+ "B11": {
+  "Wedding": "Fix three shots from a function that don't match, like warm indoor light next to cool daylight, while keeping skin tones and outfit colours true. Share before and after pictures.",
+  "Corporate": "Fix three shots of a workplace that don't match, so the place, the people and the product look the same in every shot. Share before and after pictures.",
+  "Social media": "Fix three vertical shots that don't match, so your reel looks like one video and not clips from different days. Share before and after pictures."
+ },
+ "B12": {
+  "Wedding": "Export your function video with a title (names and date spelled correctly, in English and the family's language if they want) and captions for speeches. Watch the final file and fill in the checklist.",
+  "Corporate": "Export your business video with a title (the business name spelled exactly as on its signboard) and captions. Watch the final file and fill in the checklist.",
+  "Social media": "Export a 30-second vertical (9:16) video with burned-in captions, a hook in the first 2 seconds and a clear last frame. Share the video and a screenshot of it playing on a phone with the sound off."
+ },
+ "B13": {
+  "Wedding": "Make a 60 to 90 second wedding-style video of a real small function, with the family's permission: the preparations, the main moment and the people. Share the video, your plan and your original clips.",
+  "Corporate": "Make a 60 to 90 second video for a real local business that shows what it does and why people choose it, with the owner's permission. Share the video, your plan and your original clips.",
+  "Social media": "Make a 30 to 60 second vertical video for a real account, yours or a small business's, with a hook, captions and a clear ending. Share the video, your plan and your original clips."
+ },
+ "B14": {
+  "Wedding": "Make a new 60 to 90 second film of a different family occasion, like an engagement, an anniversary or a festival at home, with permission. Share your plan, shot list, original clips, project and final video.",
+  "Corporate": "Make a new 60 to 90 second video for a different business or a community group, like an NGO or a school event, with permission. Share your plan, shot list, original clips, project and final video.",
+  "Social media": "Make a new 60 to 90 second vertical video on a different topic, like a how-to or a day in the life. Share your plan, shot list, original clips, project and final video."
+ },
+ "I-PS": {
+  "Wedding": "Work with a real or practice couple. Share your discovery questions and what you learned, a one-page treatment for their film, your package price and what it includes. Finish with your reply to two family revision notes that clash, like \"more of the rituals\" and \"make it shorter\".",
+  "Corporate": "Work with a real or practice company. Share your discovery questions and what you learned, a one-page treatment, your price and what it includes. Finish with your reply to two revision notes that clash, like marketing asking for a shorter cut and the founder asking for more history.",
+  "Social media": "Work with a real or practice brand. Share your discovery questions and what you learned, a one-page treatment for a set of reels, your monthly price and what it includes. Finish with your reply to two revision notes that clash, like \"follow this trend\" and \"keep it on brand\"."
+ },
+ "I01": {
+  "Wedding": "Plan one couple's story two ways: as an emotional highlight film and as a fun, fast reel. Pick one and explain why. Make a short sequence to test it.",
+  "Corporate": "Plan one company two ways, like a bakery as a founder's story and as a product advert. Pick one and explain why. Make a short sequence to test it.",
+  "Social media": "Plan one subject two ways for social media, like a café as a day-in-the-life vlog and as a 15-second product reel. Pick one and explain why. Make a short vertical sequence to test it."
+ },
+ "I02": {
+  "Wedding": "A couple says \"make our wedding film\". Write a one-page brief (the functions, the people who matter, rituals, style, length and delivery dates), a creative plan and notes from talking to them.",
+  "Corporate": "A client says \"make a video about our business\". Write a one-page brief (goals, who will watch, key messages, where it will be used), a creative plan and your research notes.",
+  "Social media": "A brand says \"we need reels\". Write a one-page brief for three reels (goals, who will watch, platform, posting dates and what success looks like, like saves or enquiries), a creative plan and notes on what similar accounts post."
+ },
+ "I03": {
+  "Wedding": "Share your plan for one wedding function: shot plan, timings of the rituals, gear list, budget, permissions (venue, family, photographer) and a backup plan for a power cut or a late baraat. Then update the plan after one thing changes.",
+  "Corporate": "Share your plan for a shoot at a workplace: shot plan, schedule around working hours, gear list, budget, permissions (company, staff, customers) and a backup plan. Then update the plan after one thing changes, like a key person not being free.",
+  "Social media": "Share your plan for a one-day shoot that makes several reels: shot plan, schedule, gear list, budget, permissions (people and places, including public places) and a backup plan. Then update the plan after one thing changes, like rain."
+ },
+ "I04": {
+  "Wedding": "Film one sequence in a dim, warm hall (sangeet lights or diyas) and one in harsh outdoor sun (a haldi or a baraat). Share camera tests and explain your settings.",
+  "Corporate": "Film one sequence in an office under mixed lights and one outside the entrance in tricky light. Share camera tests and explain your settings.",
+  "Social media": "Film one vertical sequence indoors at night and one outdoors in harsh light, so both can sit in the same reel. Share camera tests and explain your settings."
+ },
+ "I05": {
+  "Wedding": "Film a moment the family can repeat for you, like tying the safa or a rehearsal of the couple's entry, using a limited number of shots. Share your clips and a 45 to 60 second edit.",
+  "Corporate": "Film a work process you can repeat, like making a product or serving a customer, using a limited number of shots. Share your clips and a 45 to 60 second edit.",
+  "Social media": "Film an activity you can repeat, like a recipe or a styling routine, in vertical shots that cut together. Share your clips and a 45 to 60 second edit."
+ },
+ "I06": {
+  "Wedding": "Create two looks for one person getting ready with simple gear, like soft window light and warm lamp light for an evening function. Share clips, a light sketch and a still from each.",
+  "Corporate": "Create two looks for one interview with simple gear: a bright, clean company look and a moodier founder-story look. Share clips, a light sketch and a still from each.",
+  "Social media": "Create two looks for one talking-to-camera setup with simple gear (a window, a lamp or a ring light): bright and even for tips, and dramatic for a story reel. Share clips, a light sketch and a still from each."
+ },
+ "I07": {
+  "Wedding": "Record a short interview with a family member about the couple, and an activity like a dance practice. Also record room sound and background sound. Find and fix one sound problem, like loud music or a crowd.",
+  "Corporate": "Record an interview with a staff member or founder, and an activity at work. Also record room sound and background sound. Find and fix one sound problem, like an air conditioner or traffic.",
+  "Social media": "Record a talking-to-camera clip or a short street interview, and an activity. Also record room sound and background sound. Find and fix one sound problem, like wind or a noisy street."
+ },
+ "I08": {
+  "Wedding": "Organise a function shoot with clips from more than one camera or phone by event and camera, sync the interview and speech sound, and pick your best takes. Check that you can relink missing files.",
+  "Corporate": "Organise your business shoot with names the client would understand, sync the interview sound and pick your best takes. Check that you can relink missing files.",
+  "Social media": "Organise one shoot so it can feed several reels: mark your best moments, sync any voice recorded separately and pick your best takes. Check that you can relink missing files."
+ },
+ "I09": {
+  "Wedding": "Make a rough edit of a wedding highlight and try two openings, like starting with a vow or with the preparations. Show it to others, then share a better version with notes on what you changed.",
+  "Corporate": "Make a rough edit of your business video and try two openings, like the founder speaking or the product in action. Show it to others, then share a better version with notes on what you changed.",
+  "Social media": "Make a rough edit of your reel and try two different hooks for the first 2 seconds. Show both to others, then share a better version with notes on what you changed."
+ },
+ "I10": {
+  "Wedding": "Finish the sound for your wedding edit: clean speeches, natural sound from the rituals, and music that makes room for vows and laughter. Share a before and after, and check it on headphones and a phone speaker.",
+  "Corporate": "Finish the sound for your business video: clear voices, quiet music and room sound that hides the cuts. Share a before and after, and check it on headphones and laptop speakers.",
+  "Social media": "Finish the sound for your reel: voice, music and sound effects that fit the cuts and work on a phone speaker. Share a before and after, and check it on headphones and a phone."
+ },
+ "I11": {
+  "Wedding": "Share a fixed version and a styled version of your wedding edit that keep skin tones and outfit colours true, with before and after stills.",
+  "Corporate": "Share a fixed version and a styled version of your business video that keep the brand's colours accurate, with before and after stills.",
+  "Social media": "Share a fixed version and a styled version of your reel that look right on a phone and match the account's look, with before and after stills."
+ },
+ "I12": {
+  "Wedding": "Deliver your main wedding film, a 60-second teaser the family can share, captions for speeches and a quality checklist. Get feedback from the family once and make the changes.",
+  "Corporate": "Deliver your main business video, a short version for social media, captions and a quality checklist. Get feedback from the client once and make the changes.",
+  "Social media": "Deliver your main vertical video, a 15-second cut-down, captions and a quality checklist. Get feedback once and make the changes."
+ },
+ "I13": {
+  "Wedding": "Complete a wedding-style project of a real function with the family's permission. Share your plan, original clips, edit and a teaser version.",
+  "Corporate": "Complete a project for a real business or organisation, like a short brand or explainer video. Share your plan, original clips, edit and a version for social media.",
+  "Social media": "Complete a set of three reels for a real account. Share your plan, original clips, edits, and how each one did if you posted them."
+ },
+ "I14": {
+  "Wedding": "Share your production plan, a wedding or family-event film, one extra version (a teaser or a reel), your project and a short reflection.",
+  "Corporate": "Share your production plan, a business video, one extra version for social media, your project and a short reflection.",
+  "Social media": "Share your production plan, a main vertical video, one extra version, your project and a short reflection on what you would post next."
+ }
+}

@@ -179,6 +179,14 @@ test('every task has a short name, and every style has an outcome',()=>{
  for(const l of P.levels)assert.ok(P.finalProject[l].length>10);
 });
 
+test('style tasks: Wedding, Corporate and Social media get their own task in every module; other styles keep the shared one',()=>{
+ for(const m of P.curriculumModules){
+  for(const style of ['Wedding','Corporate','Social media']){const t=P.moduleLesson(m,style).do;assert.ok(t.length>40,m.id+' '+style);assert.notEqual(t,m.assignment,m.id+' '+style)}
+  for(const style of ['Documentary','Travel',undefined])assert.equal(P.moduleLesson(m,style).do,m.assignment,m.id+' '+style);
+  assert.deepEqual(P.moduleLesson(m,'Wedding').checks,P.moduleLesson(m).checks,m.id+' keeps its checks');
+ }
+});
+
 test('every lesson has its sketchbook clip and poster',()=>{
  for(const m of P.curriculumModules)Les.lessonsFor(m.id).forEach((_,i)=>{for(const ext of ['mp4','webp']){const f=path.join(root,'public/sketches',`${m.id}-${i+1}.${ext}`);assert.ok(fs.existsSync(f),f);assert.ok(fs.statSync(f).size<300000,f+' is too big')}});
 });
