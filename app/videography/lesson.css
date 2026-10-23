@@ -228,3 +228,19 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 /* Phones and tablets: the lesson list comes straight after the player and its title, before the video notes. */
 @media(max-width:1000px){.mv-stage{display:flex;flex-direction:column;gap:18px}.mv-main,.mv-main .vg-video{display:contents}.mv-main .vg-video-frame{order:1;width:100%;align-self:stretch}.mv-now{order:2}.mv-side{order:3;margin:6px 0}.mv-main .vg-video>:not(.vg-video-frame):not(.mv-now){order:4}.vg-lesson .mv-toolbar{align-items:flex-start}}
 @media(max-width:600px){.mv-now{flex-wrap:wrap}.mv-pathway li{font-size:.75rem}.mv-stage-arrow{margin:0 6px 0 1px}.mv-picker-list button{min-height:52px}}
+
+/* Free resources to learn more (inside each module; the separate Resources page is retired) */
+.mv-resources{display:grid;gap:14px;border-top:var(--soft-line);padding-top:var(--s6)}
+.mv-resources h3{margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.8rem;letter-spacing:.01em}
+.mv-resources>p{margin:0}
+.mv-res-group{display:grid;gap:10px}
+.mv-res-group h4{margin:6px 0 0;font-size:1rem;color:var(--foreground)}
+.mv-res-group ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:10px}
+.mv-res{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;height:100%;padding:16px 18px;border:1px solid #3a3935;border-radius:14px;color:var(--foreground);text-decoration:none}
+.mv-res:hover{border-color:var(--primary)}
+.mv-res:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.mv-res span{display:grid;gap:4px}
+.mv-res strong{font-size:1rem;line-height:1.3}
+.mv-res small{color:var(--muted-foreground);font-size:.85rem;line-height:1.4}
+.mv-res small+small{color:var(--foreground)}
+.mv-res svg{flex:none;margin-top:3px;color:var(--muted-foreground)}

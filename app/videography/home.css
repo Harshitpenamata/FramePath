@@ -486,3 +486,5 @@
 @media(max-width:600px){.sp-stepper li{font-size:.8rem;text-align:center;overflow-wrap:normal;word-break:keep-all;hyphens:none}}
 @media(max-width:420px){.sp-tiles{gap:8px}.sp-tile{flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:12px;font-size:.84rem}.sp-tile svg{width:18px;height:18px;flex:none}}
 .hm-way .hm-soon{justify-self:start;padding:4px 12px;border:var(--line);border-radius:999px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-foreground)}
+/* Phones: the arrow follows the paragraph instead of sitting on top of it in the corner. */
+@media(max-width:760px){.hm-intro .sg-arrow{position:static;align-self:flex-end;flex:none}}

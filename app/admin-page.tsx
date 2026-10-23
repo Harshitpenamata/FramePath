@@ -38,7 +38,7 @@ export function AdminHealth(){
   <Panel><h2>Lesson videos</h2><p className="small">{d.videos.checked} of {d.videos.total} checked · last check {when(d.videos.lastCheck)}</p>
    <h3>Dead: hidden from lessons, replace these ({d.videos.dead.length})</h3>{list(d.videos.dead)}
    <h3>Failed one check, being watched ({d.videos.failingOnce.length})</h3>{list(d.videos.failingOnce)}
-   <h3>Open in a new tab, not inside FramePath ({d.videos.noframe.length})</h3>{list(d.videos.noframe)}
+   <h3>Open in a new tab, not inside Framepath ({d.videos.noframe.length})</h3>{list(d.videos.noframe)}
   </Panel>
  </>;
 }

@@ -85,7 +85,6 @@ function PlanName({p}:{p:Programme}){
 
 // Under the stage strip: a nudge when the learner is behind (with new dates), a note when a stage is finished, and
 // suggestions for skills their AI reviews show are weak.
-const areaSearch:Record<string,string>={story:'story',planning:'shot list',camera:'camera','light-sound':'sound',editing:'editing',finishing:'colour'};
 function PlanNudges({p,live,reviews,mods}:{p:Programme;live:ReturnType<typeof liveSkills>;reviews:Record<string,any>;mods:ReturnType<typeof modulesFor>}){
  const {s,mutate,busy}=useLearning();
  const late=behindBy(p,s.progress);
@@ -100,7 +99,7 @@ function PlanNudges({p,live,reviews,mods}:{p:Programme;live:ReturnType<typeof li
   {late&&<div className="db-nudge late"><CalendarClock size={20}/><div><strong>You’re {late.days} {late.days===1?'day':'days'} behind your dates.</strong><p className="small">That’s fine. Move your remaining modules forward from today, at {p.schedule.hoursPerWeek} hours a week.</p></div><Button disabled={busy} onClick={()=>mutate('plan_reschedule',{id:p.id})}>{busy?'Updating…':'Update my dates'}</Button></div>}
   {latest&&!seen&&<div className="db-nudge done"><Check size={20}/><div><strong>{latest} stage finished.</strong><p className="small">Nice work. Pick your best piece from it for your portfolio.</p></div><div className="button-row"><Go href="/portfolio" outline>Choose for my portfolio</Go><Button variant="ghost" onClick={()=>{try{localStorage.setItem(seenKey,'1')}catch{}setSeen(true)}}>Dismiss</Button></div></div>}
   {weak.length>0&&<div className="db-nudge tips"><Sparkles size={20}/><div><strong>Suggested for you</strong><p className="small">Your AI reviews show these skills need more practice.</p>
-   <ul>{weak.map(a=>{const l=lessonFor(a.id);return <li key={a.id}><strong>{a.label}</strong> ({live[a.id].now}){l&&<> · <a className="text-link" href={`/explore/video-${p.level}/${mods.findIndex(m=>m.title===l.title)}?tab=watch&lesson=${l.lesson}`}>Rewatch lesson {l.lesson} of {l.title}</a></>} · <a className="text-link" href={'/resources?q='+encodeURIComponent(areaSearch[a.id])}>Find resources</a></li>})}</ul></div></div>}
+   <ul>{weak.map(a=>{const l=lessonFor(a.id);return <li key={a.id}><strong>{a.label}</strong> ({live[a.id].now}){l&&<> · <a className="text-link" href={`/explore/video-${p.level}/${mods.findIndex(m=>m.title===l.title)}?tab=watch&lesson=${l.lesson}`}>Rewatch lesson {l.lesson} of {l.title}</a> · <a className="text-link" href={`/explore/video-${p.level}/${mods.findIndex(m=>m.title===l.title)}?tab=watch#free-resources`}>Free resources</a></>}</li>})}</ul></div></div>}
  </section>;
 }
 

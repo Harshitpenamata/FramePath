@@ -8,8 +8,23 @@ import {stageOrder,parseVideoKey,moduleLesson,projectLabel,isFreeModule,type Pat
 import {videosFor,type ModuleVideo} from './media';
 import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
 import {ReflectStep,TestOut} from './reflect';
+import {moduleResources} from './module-resources';
 
 const stages=stageOrder;
+
+// Free videos and guides from other creators for this module, grouped by topic, after the lessons.
+function FreeResources({moduleId,level,skip}:{moduleId:string;level:string;skip:string[]}){
+ const groups=moduleResources(moduleId,level,skip);
+ if(!groups.length)return null;
+ return <section className="mv-resources" id="free-resources" aria-labelledby="free-resources-title">
+  <h3 id="free-resources-title">Free resources to learn more</h3>
+  <p className="small">Optional. Free videos and guides from other creators, if you want to go further on this module.</p>
+  {groups.map(g=><div key={g.topic} className="mv-res-group"><h4>{g.topic}</h4>
+   <ul>{g.items.map(r=><li key={r.id}><a className="mv-res" href={r.source} target="_blank" rel="noopener noreferrer">
+    <span><strong>{r.title}</strong><small>{r.creator} · {r.youtubeId||r.vimeoId?'Video':'Guide'}</small><small>{r.focus}</small></span>
+    <ExternalLink size={16} aria-hidden/><span className="sr-only">(opens in a new tab)</span></a></li>)}</ul></div>)}
+ </section>;
+}
 
 // Free plan: tasks and lesson tools in the first two modules. Self-paced or Mentor-led opens the rest.
 export const canPractise=(s:any,key:string)=>isFreeModule(key)||isExplore(s)||['paid','active'].includes(s.craft?.status);
@@ -235,6 +250,8 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
    <section><h3>What you’ll learn</h3><ul className="vg-topics">{m.topics.map(t=><li key={t}>{t}</li>)}</ul></section>
    <section><h3>Watch</h3><VideoPanel videos={videosFor(m.id,pathway)}/></section>
   </>}
+
+  <FreeResources moduleId={m.id} level={parsed.level} skip={lessons.flatMap((_,i)=>lessonVideos(m.id,i,pathway).map(v=>v.youtubeId||v.url||''))}/>
 
   {(!item||at===lessons.length-1)&&<section className={'vg-assignment-preview'+(open?'':' locked')}>
    <span className="eyebrow">{taskLabel(m.id)}</span><h3><ListChecks size={18}/> {m.taskName}</h3>
