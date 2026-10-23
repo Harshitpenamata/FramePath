@@ -129,8 +129,8 @@ case 'lesson_progress':{
  const key=safeText(b.key,80,1),video=parseVideoKey(key);if(!video)throw new Error('Choose a Videography module.');
  // Lessons can be done ahead of earlier tasks, so only the plan is checked here (Free covers modules 1–2).
  if(!isFreeModule(key)&&!activeExplore(s)&&!craftEnrolled(s))throw new Error('This lesson’s practice is part of Self-paced.');
- const index=Number(b.index);if(!Number.isInteger(index)||index<0||index>=lessonsFor(video.module.id).length)throw new Error('That lesson doesn’t exist.');
  const pathway=s.programme?.primaryPathway||'Documentary';
+ const index=Number(b.index);if(!Number.isInteger(index)||index<0||index>=lessonsFor(video.module.id,pathway).length)throw new Error('That lesson doesn’t exist.');
  s.lessonProgress=s.lessonProgress||{};const marks=(s.lessonProgress[key]=s.lessonProgress[key]||{});const mark:LessonMark=(marks[index]=marks[index]||{v:[],t:false});
  if(b.video!==undefined){const id=safeText(b.video,300,1);if(!lessonNeeds(video.module.id,index,pathway).includes(id))throw new Error('That video isn’t part of this lesson.');if(!mark.v.includes(id)){mark.v.push(id);steps.push(['video_watched',{module:key,lesson:index+1},`video_watched:${user.userId}:${key}:${id}`])}}
  if(b.tool===true)mark.t=true;

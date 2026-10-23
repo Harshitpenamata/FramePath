@@ -244,3 +244,13 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .mv-res small{color:var(--muted-foreground);font-size:.85rem;line-height:1.4}
 .mv-res small+small{color:var(--foreground)}
 .mv-res svg{flex:none;margin-top:3px;color:var(--muted-foreground)}
+/* Lessons without a sketch yet: the idea takes the full width instead of the sketch's narrow column. */
+.vg-lesson-intro:not(:has(.vg-sketch)){grid-template-columns:minmax(0,1fr) auto}
+@media(max-width:760px){.vg-lesson-intro:not(:has(.vg-sketch)){grid-template-columns:minmax(0,1fr)}}
+/* A lesson without a video yet: the idea in the player's place. */
+.mv-novideo{display:grid;place-items:center;background:#141413;padding:clamp(20px,4vw,48px)}
+.mv-novideo>div{display:grid;gap:12px;max-width:44ch}
+.mv-novideo span{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary)}
+.mv-novideo p{margin:0;font-size:clamp(1.15rem,1.8vw,1.6rem);line-height:1.35;color:var(--foreground)}
+.mv-novideo small{color:var(--muted-foreground)}
+.mv-picker-list button.current .vg-optional-tag{color:#0b0b0b;border-color:#0b0b0b}

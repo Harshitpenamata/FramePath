@@ -187,6 +187,28 @@ test('style tasks: Wedding, Corporate and Social media get their own task in eve
  }
 });
 
+test('style extra lessons: after the shared lessons, only for their style, a working tool, and not needed to finish',()=>{
+ const St=load(path.join(root,'app/videography/style-lessons.ts'));let n=0;
+ for(const [id,list] of Object.entries(St.styleLessons)){
+  const shared=Les.lessonsFor(id).length;assert.ok(P.curriculumModules.some(m=>m.id===id),id);
+  for(const style of ['Wedding','Corporate','Social media']){
+   const all=Les.lessonsFor(id,style),mine=list.filter(l=>l.style===style);n+=mine.length;
+   assert.equal(all.length,shared+mine.length,id+' '+style);assert.deepEqual(all.slice(0,shared).map(l=>l.title),Les.lessonsFor(id).map(l=>l.title),id+' shared lessons keep their numbers');
+   assert.equal(Les.lessonsStatus(id,style,{},[]).total,Les.lessonsStatus(id,'Documentary',{},[]).total,id+' '+style+' finishing unchanged');
+  }
+  assert.equal(Les.lessonsFor(id,'Documentary').length,shared,id+' other styles get none');
+  for(const l of list){
+   assert.ok(l.idea.length>20);for(const sentence of l.idea.split(/(?<=[.!?])\s+/))assert.ok(sentence.split(/\s+/).length<=25,id+': '+sentence);
+   const t=l.tool;assert.ok(t.prompt.length>10,id+' '+l.title);
+   if(t.kind==='order')assert.ok(t.items.length>=3&&new Set(t.items).size===t.items.length,l.title);
+   if(t.kind==='sort'){assert.ok(t.groups.length>=2);assert.ok(t.items.every(([,g])=>g>=0&&g<t.groups.length));assert.ok(t.groups.every((_,g)=>t.items.some(([,x])=>x===g)),l.title+' empty group')}
+   if(t.kind==='pick')assert.equal(t.options.filter(o=>o[1]).length,1,l.title+' pick needs one right answer');
+   if(t.kind==='spot')assert.ok(t.items.some(x=>x[1])&&t.items.some(x=>!x[1]),l.title+' spot');
+  }
+ }
+ assert.equal(n,52);
+});
+
 test('every lesson has its sketchbook clip and poster',()=>{
  for(const m of P.curriculumModules)Les.lessonsFor(m.id).forEach((_,i)=>{for(const ext of ['mp4','webp']){const f=path.join(root,'public/sketches',`${m.id}-${i+1}.${ext}`);assert.ok(fs.existsSync(f),f);assert.ok(fs.statSync(f).size<300000,f+' is too big')}});
 });
