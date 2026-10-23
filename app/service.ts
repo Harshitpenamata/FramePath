@@ -1,6 +1,6 @@
 import {env} from 'cloudflare:workers';
 import {parseScenarioKey,isScenarioProfile} from './scenario-engine';
-import {getUser} from './user';
+import {getUser} from './user';import {logError} from './errors';
 import {isVideoKey,isFreeModule} from './videography/programme';
 import {freshState,mentors,paths,weeks} from './catalog';
 import {isFreePath,moduleInfo,blockingModule} from './learning-rules';
@@ -19,5 +19,5 @@ export function lessonKey(key:string,profile?:any){const info=moduleInfo(key,pro
 export function requireLesson(s:any,key:string){const scenario=parseScenarioKey(key);if(scenario&&(!isScenarioProfile(s.profile)||s.profile.request.scenario.use_case!==scenario.scenario.id))throw new Error('Personalise this task before saving its assignments. Your existing free allowances stay unchanged.');const info=lessonKey(key,s.profile);if(isVideoKey(key)&&!isFreeModule(key)&&!activeExplore(s)&&!craftEnrolled(s))throw new Error('This task needs Self-paced. Tasks in the first two modules are free.');if(!isVideoKey(key)&&info.scope==='explore'&&!isFreePath(info.pathId,s)&&!activeExplore(s))throw new Error('Annual access is needed to save work on this pathway. The first two pathways are free.');if(info.scope==='craft'&&s.craft?.status!=='active')throw new Error('Your mentor needs to approve your Craft pathway first.');const blocked=blockingModule(s,key);if(blocked)throw new Error('Finish the practice for '+moduleInfo(blocked,s.profile).lesson.title+' first.');return info}
 export function mentorFor(id:string){const m=mentors.find(x=>x.id===id);if(!m)throw new Error('Choose one of the available pilot mentors.');return m}
 export async function usage(id:string,s:any){const rows=await db().prepare("SELECT scope,kind,count(*) AS used FROM ai_jobs WHERE user_id=? AND status IN ('pending','complete') AND ((scope LIKE 'starter-help:%') OR (scope='explore' AND created_at>=?) OR (scope='craft' AND created_at>=?)) GROUP BY scope,kind").bind(id,new Date(s.membership?.startsAt||new Date()).getTime(),new Date(s.craft?.paidAt||new Date()).getTime()).all();return rows.results}
-export function errorResponse(e:any){console.error('Framepath request failed',e?.status||500,e?.name||'Error');return fail(e?.message||'Something went wrong. Your work has not been changed.',e?.status||400)}
+export function errorResponse(e:any){console.error('Framepath request failed',e?.status||500,e?.name||'Error');void logError('api',e,Number(e?.status)||400);return fail(e?.message||'Something went wrong. Your work has not been changed.',e?.status||400)}
 

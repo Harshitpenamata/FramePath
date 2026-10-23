@@ -43,6 +43,8 @@
 .vg-lesson [data-slot=tabs-list]{justify-content:flex-start!important;width:auto!important}
 .vg-make>.vg-task-brief{background:transparent;border:var(--line)}
 .vg-make .upload-box input[type=file]{opacity:0!important;position:absolute!important;inset:0!important;border:0!important}
+/* The safety questions sit inside the upload box; keep them above the invisible file picker so taps reach them. */
+.vg-make .upload-box .safety-intake{position:relative;z-index:1}
 .vg-lesson img:not(.sg-photo),.vg-module-hero img{filter:var(--photo-filter)}
 .vg-sketch{filter:none!important}
 /* Spacing and sizes (system) */

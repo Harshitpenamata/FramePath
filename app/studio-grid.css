@@ -340,3 +340,5 @@ p,li{text-wrap:pretty}
 .db-stages .db-stage-mark,.db-stages .db-stage-now{position:absolute;top:8px;right:8px;margin:0;white-space:nowrap;writing-mode:horizontal-tb}
 .db-stages .db-stage-now{padding:2px 6px}
 .db-stages li{align-items:center;text-align:center;padding-inline:36px}
+/* Footer links: a 44px tap height on touch screens. */
+.footer>div a{display:inline-flex;align-items:center;min-height:44px}

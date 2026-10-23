@@ -78,7 +78,7 @@ export function VideographyHome(){
   <section className="hm-ways"><h2 className="display">Learn your way.</h2>
    <div className="hm-way-grid">
     <article className="hm-way"><span className="hm-num">1</span><h3>Self-paced with AI</h3><p>Learn on your schedule. Get AI-driven assignments and instant, specific feedback on your work.</p><ul>{['AI-driven assignments','Instant feedback on your work','Start any time, go at your pace'].map(x=><li key={x}><Check size={16}/>{x}</li>)}</ul></article>
-    <article className="hm-way"><span className="hm-num">2</span><h3>Mentor-led program</h3><p>Learn alongside working professionals with live guidance, reviews and accountability.</p><ul>{['Live sessions with industry mentors','Personal reviews of your work','Cohort accountability'].map(x=><li key={x}><Check size={16}/>{x}</li>)}</ul></article>
+    <article className="hm-way"><span className="hm-num">2</span><h3>Mentor-led program</h3><p className="hm-soon">Coming soon</p></article>
    </div>
    <p className="small">Not sure which fits? Your pathway report will recommend one.</p>
   </section>

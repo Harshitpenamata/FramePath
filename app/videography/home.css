@@ -482,3 +482,7 @@
 /* "Pick your craft. We'll build the path." fits its narrow card in two lines */
 .hm-intro h2{font-size:clamp(2.1rem,3.3vw,3.2rem)}
 @media(max-width:760px){.hm-intro h2{font-size:2rem}}
+/* Phones: keep level-check step labels whole and let interest tiles fit their text (found in the pilot phone test). */
+@media(max-width:600px){.sp-stepper li{font-size:.8rem;text-align:center;overflow-wrap:normal;word-break:keep-all;hyphens:none}}
+@media(max-width:420px){.sp-tiles{gap:8px}.sp-tile{flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:12px;font-size:.84rem}.sp-tile svg{width:18px;height:18px;flex:none}}
+.hm-way .hm-soon{justify-self:start;padding:4px 12px;border:var(--line);border-radius:999px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-foreground)}
