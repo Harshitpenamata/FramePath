@@ -12,7 +12,7 @@ export const levels:Level[]=['beginner','intermediate','advanced'];
 export const levelNames:Record<Level,string>={beginner:'Beginner',intermediate:'Intermediate',advanced:'Advanced'};
 export const levelSummary:Record<Level,string>={beginner:'Learn the basics and make a simple, clear video',intermediate:'Make small videos on your own',advanced:'Lead your own projects in the style you choose'};
 // Suggested study rhythm from the curriculum overview sheet.
-export const rhythm:Record<Level,{weeks:number;hoursPerWeek:number;hours:number}>={beginner:{weeks:10,hoursPerWeek:8,hours:80},intermediate:{weeks:16,hoursPerWeek:9,hours:144},advanced:{weeks:24,hoursPerWeek:10,hours:240}};
+export const rhythm:Record<Level,{weeks:number;hoursPerWeek:number;hours:number}>={beginner:{weeks:11,hoursPerWeek:8,hours:85},intermediate:{weeks:17,hoursPerWeek:9,hours:152},advanced:{weeks:25,hoursPerWeek:10,hours:250}};
 
 export const courses=[
  {id:'videography',title:'Videography',blurb:'Plan, film, edit and share your videos.',active:true},
@@ -236,6 +236,8 @@ export const isVideoPath=(id:string)=>videoPathIds.includes(id);
 export function parseVideoKey(key:string){const m=/^video-(beginner|intermediate|advanced)-(\d{1,2})$/.exec(key);if(!m)return null;const level=m[1] as Level,index=Number(m[2]);const mod=modulesFor(level)[index];return mod?{level,index,module:mod}:null}
 export const isVideoKey=(key:string)=>!!parseVideoKey(key);
 export const modulesFor=(level:Level)=>curriculum.filter(m=>m.level===level);
+// The stages of a plan, in order. Every module belongs to one (its stageLabel).
+export const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Working with people','Final project'];
 export const moduleKey=(level:Level,index:number)=>videoPathId(level)+'-'+index;
 // Free tier: assignments on the first two modules of each level.
 export const freeModuleCount=2;

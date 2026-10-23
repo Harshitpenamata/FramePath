@@ -1041,6 +1041,46 @@
     "why": "Colour management links three things: how it was recorded, the space you edit in, and where it will be watched. If one link is wrong, the colours shift.",
     "video": "Color Management"
    }
+  ],
+  [
+   {
+    "q": "In the hybrid AI and live action video, what do you plan on set so the composite works?",
+    "options": [
+     [
+      "Clean plates and reference objects, with matching perspective and focus.",
+      ""
+     ],
+     [
+      "Nothing. AI fixes it in post.",
+      "Without plates and references, the composite looks fake."
+     ],
+     [
+      "Only the final performance.",
+      "The compositor needs more than the take."
+     ]
+    ],
+    "why": "Hybrid shots are made on set as much as in post.",
+    "video": "Hybrid AI and Live Action Filmmaking"
+   },
+   {
+    "q": "You plan to replace a plain wall with an AI-made bookshelf. What should you capture on set?",
+    "options": [
+     [
+      "A clean plate of the wall, the lens details and the light direction.",
+      ""
+     ],
+     [
+      "Just the take with the actor.",
+      "The compositor needs references to match."
+     ],
+     [
+      "A photo of a real bookshelf.",
+      "Helpful, but the plate and camera details matter more."
+     ]
+    ],
+    "why": "Capture what the compositor needs to match the shot.",
+    "video": ""
+   }
   ]
  ],
  "A05": [
@@ -2087,6 +2127,46 @@
     "why": "Splitting a big job into linked projects with locking stops two people overwriting each other's work.",
     "video": "Productions — collaborative long-form editing"
    }
+  ],
+  [
+   {
+    "q": "In the Magic Mask video, how do you avoid re-tracking masks after timeline changes?",
+    "options": [
+     [
+      "Render the mattes and reuse them, with clear filenames and versions.",
+      ""
+     ],
+     [
+      "Re-track every time something changes.",
+      "That wastes hours."
+     ],
+     [
+      "Keep only the final export.",
+      "You lose the chance to change the grade later."
+     ]
+    ],
+    "why": "Rendered, named mattes save time in every revision.",
+    "video": "Never Retrack Magic Mask 2 in Resolve"
+   },
+   {
+    "q": "You hand a project to another editor. What should go with the AI mattes?",
+    "options": [
+     [
+      "The source shots, the rendered mattes, and names that show the shot and version.",
+      ""
+     ],
+     [
+      "Only the final video.",
+      "They can’t make changes without the sources."
+     ],
+     [
+      "The mattes without names.",
+      "They won’t know which matte belongs to which shot."
+     ]
+    ],
+    "why": "A good handover can be picked up without asking you.",
+    "video": ""
+   }
   ]
  ],
  "A09": [
@@ -2870,6 +2950,46 @@
     "why": "Only the real screen tells you how the film will look. A short test saves you from surprises on the day.",
     "video": ""
    }
+  ],
+  [
+   {
+    "q": "In the AI Magic Mask tutorial, what do you check before grading inside the mask?",
+    "options": [
+     [
+      "The tracking and edges across the whole shot.",
+      ""
+     ],
+     [
+      "Only the first frame.",
+      "Masks can slip later in the shot."
+     ],
+     [
+      "Nothing. AI masks are always clean.",
+      "Fast movement and hair often cause problems."
+     ]
+    ],
+    "why": "Check the mask through the whole shot first.",
+    "video": "AI Magic Mask Tutorial: Using a Real Netflix Show"
+   },
+   {
+    "q": "You brighten a face with an AI mask. Halfway through, the brightness spills onto the wall. What happened?",
+    "options": [
+     [
+      "The mask lost track and needs fixing in that part of the shot.",
+      ""
+     ],
+     [
+      "The grade is too strong.",
+      "The problem is where the mask is, not how strong the grade is."
+     ],
+     [
+      "The footage is broken.",
+      "The footage is fine. The mask moved."
+     ]
+    ],
+    "why": "Fix the mask before you judge the grade.",
+    "video": ""
+   }
   ]
  ],
  "A12": [
@@ -3293,6 +3413,46 @@
     "why": "Each platform needs its own size and length, and a full check catches errors before the client does. Clear names help them post the right file.",
     "video": ""
    }
+  ],
+  [
+   {
+    "q": "In the hybrid AI and live-action VFX tutorial, what should you note down?",
+    "options": [
+     [
+      "What was filmed, what was generated and how they were combined.",
+      ""
+     ],
+     [
+      "Only the final shot.",
+      "You’d miss how it was put together."
+     ],
+     [
+      "Only the AI prompts.",
+      "The filming and compositing matter as much."
+     ]
+    ],
+    "why": "Study the whole process, not just the result.",
+    "video": "Hybrid AI / Live-action VFX Tutorial"
+   },
+   {
+    "q": "In the Autodesk Flow Studio intro, what does the tool do with a filmed performance?",
+    "options": [
+     [
+      "It moves the actor’s performance into an editable CG character workflow.",
+      ""
+     ],
+     [
+      "It makes a performance with no actor.",
+      "The tool starts from a filmed performance."
+     ],
+     [
+      "It colour grades the footage.",
+      "Its job is moving the performance into CG."
+     ]
+    ],
+    "why": "Real performances can drive CG characters.",
+    "video": "Intro to Live Action | Autodesk Flow Studio"
+   }
   ]
  ],
  "A14": [
@@ -3551,6 +3711,208 @@
     ],
     "why": "Every contracted version must be inspected on its own, because one wrong setting can get a file rejected by a platform or client.",
     "video": "Exporting & delivering projects"
+   }
+  ]
+ ],
+ "A-PS": [
+  [
+   {
+    "q": "In the talk on turning strangers into a team, what helps a new team work well?",
+    "options": [
+     [
+      "People feel safe to speak up, ask questions and admit problems.",
+      ""
+     ],
+     [
+      "A strict leader who never asks for input.",
+      "People then hide problems until they’re big."
+     ],
+     [
+      "Everyone working alone.",
+      "A shoot needs people to share information fast."
+     ]
+    ],
+    "why": "Feeling safe to speak up is what makes teams work.",
+    "video": "How to Turn a Group of Strangers into a Team"
+   },
+   {
+    "q": "Mid-shoot, your assistant notices a memory card error but is afraid to say so. What would have helped?",
+    "options": [
+     [
+      "A briefing that asked everyone to raise problems straight away, without blame.",
+      ""
+     ],
+     [
+      "A stricter rule against mistakes.",
+      "Fear of blame is why they stayed quiet."
+     ],
+     [
+      "More expensive memory cards.",
+      "Gear fails sometimes. People need to report it."
+     ]
+    ],
+    "why": "Make raising problems safe and expected.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the video on difficult clients, what helps most?",
+    "options": [
+     [
+      "Staying calm, setting clear terms and talking about the problem directly.",
+      ""
+     ],
+     [
+      "Agreeing to everything to keep them happy.",
+      "That leads to unpaid work and stress."
+     ],
+     [
+      "Arguing until you win.",
+      "You might win the point and lose the client."
+     ]
+    ],
+    "why": "Calm, clear terms protect you and the relationship.",
+    "video": "Dealing with Difficult Clients"
+   },
+   {
+    "q": "A client sends new feedback the day after the final deadline. What do you do?",
+    "options": [
+     [
+      "Reply quickly, explain what’s possible, and agree any extra time or cost.",
+      ""
+     ],
+     [
+      "Make all the changes for free that night.",
+      "That sets a pattern you can’t keep up."
+     ],
+     [
+      "Ignore the message.",
+      "That damages the relationship."
+     ]
+    ],
+    "why": "Respond fast, with options and clear terms.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the pricing talk, what should your price be linked to?",
+    "options": [
+     [
+      "The value and outcome for the client.",
+      ""
+     ],
+     [
+      "Only the hours you spend.",
+      "Clients buy outcomes, not hours."
+     ],
+     [
+      "What your competitors charge.",
+      "Their prices don’t reflect your value to this client."
+     ]
+    ],
+    "why": "Price follows the value you create.",
+    "video": "Pricing Design Work & Creativity"
+   },
+   {
+    "q": "Which set of options is strongest for a brand film?",
+    "options": [
+     [
+      "A basic edit, a film with social cut-downs, and a full campaign package, each with clear outcomes.",
+      ""
+     ],
+     [
+      "One option at one price.",
+      "Clients can’t choose what fits them."
+     ],
+     [
+      "Three options at the same price.",
+      "Options should differ in value and price."
+     ]
+    ],
+    "why": "Good options help the client choose.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the niche video, why choose a niche?",
+    "options": [
+     [
+      "It makes you easier to find, remember and recommend.",
+      ""
+     ],
+     [
+      "So you can charge less.",
+      "A niche usually lets you charge more."
+     ],
+     [
+      "Because general work isn’t allowed.",
+      "You can still take other work. The niche is what you’re known for."
+     ]
+    ],
+    "why": "Clear positioning brings the right clients.",
+    "video": "How to Pick a Profitable Niche for Your Creative Agency"
+   },
+   {
+    "q": "Which proof best supports “I make films for Indian wedding planners”?",
+    "options": [
+     [
+      "Three planner case studies, with the planners’ own words about the results.",
+      ""
+     ],
+     [
+      "A showreel of landscapes.",
+      "It doesn’t prove the niche."
+     ],
+     [
+      "A list of your cameras.",
+      "Gear isn’t proof of results."
+     ]
+    ],
+    "why": "Back your niche with relevant proof.",
+    "video": ""
+   }
+  ],
+  [
+   {
+    "q": "In the talk on great talks, what structure do strong pitches use?",
+    "options": [
+     [
+      "Moving between how things are and how they could be, ending with a call to action.",
+      ""
+     ],
+     [
+      "Listing facts in order.",
+      "Facts alone rarely move people."
+     ],
+     [
+      "Starting with your life story.",
+      "Lead with the audience’s world, not yours."
+     ]
+    ],
+    "why": "The contrast creates the wish to act.",
+    "video": "The Secret Structure of Great Talks"
+   },
+   {
+    "q": "You pitch a campaign to a brand’s marketing team. How do you end?",
+    "options": [
+     [
+      "With a clear request, like approval and budget for the first phase.",
+      ""
+     ],
+     [
+      "“Let me know what you think.”",
+      "Vague endings rarely get decisions."
+     ],
+     [
+      "With a list of your awards.",
+      "Proof belongs earlier. End with the ask."
+     ]
+    ],
+    "why": "Always finish with the decision you need.",
+    "video": ""
    }
   ]
  ]

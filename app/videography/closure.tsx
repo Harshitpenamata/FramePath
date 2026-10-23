@@ -2,10 +2,9 @@
 import React from 'react';
 import {Award,Check,Circle} from 'lucide-react';
 import {useLearning,Panel,Go,Action} from '../ui';
-import {levels,levelNames,levelSummary,modulesFor,moduleKey,moduleLesson,projectLabel,type Level} from './programme';
+import {stageOrder,levels,levelNames,levelSummary,modulesFor,moduleKey,moduleLesson,projectLabel,type Level} from './programme';
 import {useVideoReviews} from './work-folders';
 
-const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
 
 // Closes a level after its final module: what was learned, best work, and what comes next.
 export function LevelClosure({level}:{level:Level}){

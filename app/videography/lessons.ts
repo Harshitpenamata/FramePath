@@ -1,6 +1,7 @@
 import {V,pathwayVideos,videoLibrary,fromLibrary,pathwayLibrary,type ModuleVideo} from './media';
 import type {Pathway} from './programme';
 import lessonExtras from './lesson-videos.json';
+import {extraLessons} from './lessons-ai-ps';
 
 // Lessons inside a module: one per curriculum topic. Each lesson has Watch (an idea and videos)
 // and Reflect (a small interactive tool). Every module has lessons; Intermediate and Advanced are added below.
@@ -14,7 +15,9 @@ export type Tool=
  |{kind:'mix';prompt:string;music:boolean}
  |{kind:'frame';prompt:string;goal:'thirds'|'close'};
 type VideoRef=keyof typeof V|'pathway0'|'pathway1';
-export type ModuleLessonItem={title:string;idea:string;videos?:VideoRef[];tool:Tool};
+// optional: what the lesson needs (gear or paid software). Optional lessons are shown with that note and don't count
+// towards finishing the module.
+export type ModuleLessonItem={title:string;idea:string;videos?:VideoRef[];tool:Tool;optional?:string};
 
 const order=(prompt:string,items:string[],why:string):Tool=>({kind:'order',prompt,items,why});
 const sort=(prompt:string,groups:string[],items:[string,number][],why:string):Tool=>({kind:'sort',prompt,groups,items,why});
@@ -978,6 +981,13 @@ Object.assign(lessonVideoRefs,{
 // ---- Lesson completion: the task unlocks once every lesson in the module is finished.
 // A lesson is finished when each of its videos has been watched (YouTube/Vimeo: played for at least 70%;
 // videos on other sites: opened) and its practice tool has been solved.
+// AI and professional-skills lessons (lessons-ai-ps.ts) go after each module's own lessons, with their videos.
+for(const [id,list] of Object.entries(extraLessons)){
+ const own=moduleLessons[id]||[],refs=(lessonVideoRefs[id]||[]).slice(0,own.length);refs.length=own.length;
+ moduleLessons[id]=[...own,...list.map(({refs:_,...l})=>l)];
+ lessonVideoRefs[id]=[...refs,...list.map(l=>l.refs)];
+}
+
 export const watchShare=0.7;
 // Switch for locking each module's task until its lessons are finished. Off during testing; progress is still
 // tracked, so turning it on later counts lessons already finished.
@@ -999,6 +1009,8 @@ export function lessonFinished(moduleId:string,index:number,pathway:Pathway,mark
 }
 // How far a learner is through a module's lessons (marks come from state.lessonProgress[moduleKey]).
 export function lessonsStatus(moduleId:string,pathway:Pathway,marks:Record<string,LessonMark>|undefined,dead:string[]=[]){
- const total=lessonsFor(moduleId).length,finished=lessonsFor(moduleId).map((_,i)=>lessonFinished(moduleId,i,pathway,marks?.[i],dead));
- return {total,done:finished.filter(Boolean).length,finished};
+ const lessons=lessonsFor(moduleId),finished=lessons.map((_,i)=>lessonFinished(moduleId,i,pathway,marks?.[i],dead));
+ // Optional lessons show their ticks but aren't needed to finish the module.
+ const required=lessons.map((l,i)=>i).filter(i=>!lessons[i].optional);
+ return {total:required.length,done:required.filter(i=>finished[i]).length,finished};
 }

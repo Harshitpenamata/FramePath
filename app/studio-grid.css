@@ -331,3 +331,12 @@ p,li{text-wrap:pretty}
 /* The More menu is dark: its links need light text (the cream header's links are dark). */
 .topbar .header-popover a{color:#f2eee4}
 .topbar .header-popover a:hover,.topbar .header-popover a[aria-current=page]{background:#ffffff14;color:var(--primary)}
+/* Optional lessons (need gear or paid software): a quiet label on the tab and a note under the title. */
+.vg-optional-tag{margin-left:6px;padding:1px 8px;border-radius:999px;border:var(--soft-line);color:var(--muted-foreground);font-size:.7rem;font-weight:600}
+.vg-optional{margin:var(--s1) 0 0;color:var(--muted-foreground);font-size:.875rem}
+/* Seven stages: each tile shows its number above its name at every width, with the check or "Now" in the corner. */
+.db-stages li{position:relative;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:4px;min-width:0;padding-right:36px}
+.db-stages li strong{word-break:normal;overflow-wrap:normal;hyphens:none}
+.db-stages .db-stage-mark,.db-stages .db-stage-now{position:absolute;top:8px;right:8px;margin:0;white-space:nowrap;writing-mode:horizontal-tb}
+.db-stages .db-stage-now{padding:2px 6px}
+.db-stages li{align-items:center;text-align:center;padding-inline:36px}

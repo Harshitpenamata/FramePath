@@ -4,12 +4,12 @@ import {ArrowLeft,ArrowRight,Check,ExternalLink,Lightbulb,ListChecks,LockKeyhole
 import {Button} from '@/components/ui/button';
 import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
-import {parseVideoKey,moduleLesson,projectLabel,isFreeModule,modulesFor,moduleKey as keyOf,type Pathway} from './programme';
+import {stageOrder,parseVideoKey,moduleLesson,projectLabel,isFreeModule,modulesFor,moduleKey as keyOf,type Pathway} from './programme';
 import {videosFor,type ModuleVideo} from './media';
 import {lessonsFor,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
 import {ReflectStep,TestOut} from './reflect';
 
-const stages=['Ideas','Planning','Filming','Editing','Your pathway','Final project'];
+const stages=stageOrder;
 
 // Free plan: tasks and lesson tools in the first two modules. Self-paced or Mentor-led opens the rest.
 export const canPractise=(s:any,key:string)=>isFreeModule(key)||isExplore(s)||['paid','active'].includes(s.craft?.status);
@@ -128,17 +128,20 @@ export function VideoPanel({videos:all,watched=[],onWatched}:{videos:ModuleVideo
 
 // The lesson's sketchbook picture: a short silent clip that draws itself on, looping like a GIF.
 // It is muted before it loads (browsers only autoplay muted video), then played and kept playing while on screen.
+// Lessons without a sketch yet (the AI and professional-skills lessons) show none: the clip fails to load and it hides.
 function LessonSketch({src,title}:{src:string;title:string}){
- const ref=useRef<HTMLVideoElement>(null);
+ const ref=useRef<HTMLVideoElement>(null),[missing,setMissing]=useState(false);
  useEffect(()=>{
   const v=ref.current;if(!v)return;
   v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.loop=true;v.playsInline=true;
   v.src=src+'.mp4';v.load();
   const play=()=>{v.defaultPlaybackRate=v.playbackRate=sketchSpeed;v.play().catch(()=>{})};
-  v.addEventListener('canplay',play);play();
+  const gone=()=>setMissing(true);
+  v.addEventListener('canplay',play);v.addEventListener('error',gone);play();
   const io=new IntersectionObserver(([e])=>{if(e.isIntersecting)play()});io.observe(v);
-  return ()=>{v.removeEventListener('canplay',play);io.disconnect()};
+  return ()=>{v.removeEventListener('canplay',play);v.removeEventListener('error',gone);io.disconnect()};
  },[src]);
+ if(missing)return null;
  return <video ref={ref} className="vg-sketch" poster={src+'.webp'} muted loop playsInline autoPlay preload="auto" aria-label={'Sketch: '+title}/>;
 }
 
@@ -174,14 +177,14 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
   {m.stage==='selected-pathway'&&<p className="notice">Your course: <strong>{pathway}</strong>. Switch between your styles under My courses on your Journey page.</p>}
 
   {item?<section className="vg-lessons" id="vg-lesson-top">
-   {user&&open&&!lessons.every((_,i)=>done(i))&&<TestOut moduleId={m.id} moduleKey={moduleKey} lessonCount={lessons.length} videosFor={i=>lessonVideos(m.id,i,pathway)} mutate={mutate} busy={busy} result={s.lastTestOut}/>}
-   <ol className="vg-lesson-steps" aria-label="Lessons">{lessons.map((x,i)=><li key={x.title}><button type="button" className={(i===index?'current ':'')+(done(i)?'done':'')} aria-current={i===index?'step':undefined} onClick={()=>go(i)}><span>{done(i)?<Check size={14}/>:i+1}</span>{x.title}</button></li>)}</ol>
+   {user&&open&&!lessons.every((l,i)=>l.optional||done(i))&&<TestOut moduleId={m.id} moduleKey={moduleKey} lessonCount={lessons.length} videosFor={i=>lessonVideos(m.id,i,pathway)} mutate={mutate} busy={busy} result={s.lastTestOut}/>}
+   <ol className="vg-lesson-steps" aria-label="Lessons">{lessons.map((x,i)=><li key={x.title}><button type="button" className={(i===index?'current ':'')+(done(i)?'done':'')} aria-current={i===index?'step':undefined} onClick={()=>go(i)}><span>{done(i)?<Check size={14}/>:i+1}</span>{x.title}{x.optional&&<small className="vg-optional-tag">Optional</small>}</button></li>)}</ol>
    {/* Lesson layout (site edits, item 6): header with progress, 01 Watch, 02 Think it through (opens once the
        videos are watched), then the way on. */}
    <article className="vg-lesson-card">
     <header className="vg-lesson-intro">
      <LessonSketch key={m.id+index} src={`/sketches/${m.id}-${index+1}`} title={item.title}/>
-     <div className="vg-lesson-about"><span className="eyebrow">Lesson {index+1} of {lessons.length}</span><h2>{item.title}</h2><p className="vg-idea">{item.idea}</p></div>
+     <div className="vg-lesson-about"><span className="eyebrow">Lesson {index+1} of {lessons.length}</span><h2>{item.title}</h2>{item.optional&&<p className="vg-optional">Optional · {item.optional}. Watch if you can; you don’t need it to finish the module.</p>}<p className="vg-idea">{item.idea}</p></div>
      {live.length>0&&<div className="vg-lesson-progress"><span className="vg-dots" aria-hidden="true">{live.map(v=><i key={videoId(v)} className={watched(v)?'done':''}/>)}</span><span className="small">{live.filter(watched).length} of {live.length} {live.length===1?'video':'videos'} watched</span></div>}
     </header>
     <section className="vg-lesson-part"><div className="vg-part-head"><h3><span>01 /</span> Watch</h3>{live.length>0&&<span className="eyebrow">{live.length} {live.length===1?'video':'videos'}</span>}</div>
