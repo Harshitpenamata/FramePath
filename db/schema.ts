@@ -57,3 +57,5 @@ export const emailOptouts=sqliteTable('email_optouts',{userId:text('user_id').pr
 // A ticket's conversation after the learner's first message (support_tickets.message): support's replies and the
 // learner's follow-ups, oldest first. (support_tickets.reply is no longer written; 0010 copied old replies here.)
 export const ticketMessages=sqliteTable('ticket_messages',{id:text('id').primaryKey(),ticketId:text('ticket_id').notNull(),author:text('author').notNull(),authorEmail:text('author_email'),body:text('body').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_ticket_messages_ticket').on(t.ticketId,t.createdAt)]);
+// Server errors for the daily error email (app/errors.ts). Only the route, error type and a short message; never request bodies.
+export const errorLog=sqliteTable('error_log',{id:text('id').primaryKey(),source:text('source').notNull(),route:text('route'),status:integer('status').notNull(),name:text('name').notNull(),message:text('message').notNull(),createdAt:integer('created_at').notNull()},t=>[index('idx_error_log_date').on(t.createdAt)]);

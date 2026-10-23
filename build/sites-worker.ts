@@ -1,5 +1,6 @@
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
+import { logError, runWithRequest } from "../app/errors";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
 
 export default {
@@ -35,7 +36,11 @@ export default {
         },
       };
     }
-    return runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx));
+    // Crashes that escape the app are logged for the daily error email, then answered with a plain 500.
+    return runWithRequest(request, () => Promise.resolve(runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx))).catch(async (e: unknown) => {
+      await logError("worker", e, 500);
+      return new Response("Something went wrong. Please try again.", { status: 500, headers: { "Content-Type": "text/plain; charset=utf-8" } });
+    }));
   },
   // Hourly cron (vite.config.ts): video health checks and queued AI work. It calls the app's own job route
   // internally with a one-time token kept in memory, so the route can't be triggered from outside.

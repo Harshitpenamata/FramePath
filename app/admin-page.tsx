@@ -33,6 +33,7 @@ export function AdminHealth(){
   <PilotFunnel/>
   <SupportQueue/>
   <Storage/>
+<EmailChecks/>
   <Look/>
   <Panel><h2>Lesson videos</h2><p className="small">{d.videos.checked} of {d.videos.total} checked · last check {when(d.videos.lastCheck)}</p>
    <h3>Dead: hidden from lessons, replace these ({d.videos.dead.length})</h3>{list(d.videos.dead)}
@@ -196,6 +197,22 @@ function Storage(){
  return <Panel><h2>Storage</h2>
   <p>{mb(d.total.bytes)} in {d.total.files} files from {d.total.users} learners. <span className="small">Cloudflare R2 includes 10 GB free; after that about $0.015 per GB a month.</span></p>
   {d.top.length>0&&<table className="admin-table"><thead><tr><th>Learner</th><th>Files</th><th>Used</th></tr></thead><tbody>{d.top.map((r:any)=><tr key={r.user_id}><td>{r.email||r.user_id}</td><td>{r.files}</td><td>{mb(r.bytes)}</td></tr>)}</tbody></table>}
+ </Panel>;
+}
+
+// Email checks: send a test email (e.g. to a Gmail and an Outlook address) or the server-error summary now.
+function EmailChecks(){
+ const [to,setTo]=useState(''),[busy,setBusy]=useState(false),[result,setResult]=useState('');
+ async function send(body:any){setBusy(true);setResult('');
+  try{const r=await fetch('/api/admin/email-test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const d:any=await r.json().catch(()=>({}));
+   setResult(!r.ok?(d.error||'Not sent ('+(d.status||r.status)+').'):body.kind==='errors'?(d.errors?`Sent to ${d.sent} admin(s): ${d.errors} errors in the last 24 hours.`:'No server errors in the last 24 hours, so nothing was sent.'):`Sent to ${d.to}. Check the inbox and the spam folder.`)}
+  catch{setResult('Could not reach the server.')}finally{setBusy(false)}}
+ return <Panel><h2>Email checks</h2>
+  <p className="small">Send a test email to check it arrives in the inbox, not spam. Leave the address empty to send it to yourself.</p>
+  <div className="button-row"><input type="email" value={to} onChange={e=>setTo(e.target.value)} placeholder="someone@outlook.com" aria-label="Test email address" maxLength={200}/>
+   <Button disabled={busy} onClick={()=>send({kind:'test',to})}>Send test email</Button>
+   <Button variant="outline" disabled={busy} onClick={()=>send({kind:'errors'})}>Send error summary now</Button></div>
+  {result&&<p className="small" role="status">{result}</p>}
  </Panel>;
 }
 
