@@ -219,6 +219,12 @@ test('style extra lessons have their own sketch, named by style so two styles ne
  assert.equal(seen.size,52);
 });
 
+test('every task has its Before you start FAQ: what to hand in and 2-3 common mistakes',()=>{
+ const F=load(path.join(root,'app/videography/task-faq.ts'));
+ for(const m of P.curriculumModules){const f=F.taskFaq[m.id];assert.ok(f,m.id);assert.ok(f.handIn.length>40,m.id+' hand-in');assert.ok(f.mistakes.length>=2&&f.mistakes.length<=3,m.id+' mistakes');}
+ assert.equal(Object.keys(F.taskFaq).length,P.curriculumModules.length);
+});
+
 test('every lesson has its sketchbook clip and poster',()=>{
  for(const m of P.curriculumModules)Les.lessonsFor(m.id).forEach((_,i)=>{for(const ext of ['mp4','webp']){const f=path.join(root,'public/sketches',`${m.id}-${i+1}.${ext}`);assert.ok(fs.existsSync(f),f);assert.ok(fs.statSync(f).size<300000,f+' is too big')}});
 });
