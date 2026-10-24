@@ -18,6 +18,7 @@ Write plain, factual notes. Use MM:SS timestamps. Cover:
 - sound: speech (quote short key lines), clarity, loudness, background noise, wind, music, silences
 - editing: order of shots, pacing, cuts that jump, titles or captions and whether they are readable
 - the start and the end, and the total length
+- what a director would notice, still as description: what each shot is for, where the eye goes first, whether the light seems to come from a real source, whether cuts land on movement or on a beat, and the moment the video is strongest and weakest
 Describe, don't judge or score. If something can't be told, say so.
 Sound: only report sounds you actually hear. If the video has no sound or only silence, write "No sound" and set hasSpeech to false. Never guess speech from text or pictures on screen.`;
 const schema={type:'object',properties:{
@@ -49,13 +50,14 @@ async function upload(stream:ReadableStream,size:number,mime:string,name:string)
  return file as {name:string;uri:string;mimeType:string};
 }
 
-export async function watchVideo(src:Source):Promise<VideoWatch>{
+// focus: what this module's craft lens wants noticed (review-guide.ts), added to the instructions.
+export async function watchVideo(src:Source,focus=''):Promise<VideoWatch>{
  if(!geminiKey())return {ok:false,reason:'Video watching is not set up on this site.'};
  let file:{name:string;uri:string;mimeType:string}|null=null;
  try{
   const part='youtubeUrl' in src?{file_data:{file_uri:src.youtubeUrl}}:(file=await upload(src.stream,src.size,src.mime,src.name),{file_data:{mime_type:file.mimeType,file_uri:file.uri}});
   const r=await call(`/v1beta/models/${geminiModel()}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-   contents:[{parts:[part,{text:instructions}]}],
+   contents:[{parts:[part,{text:instructions+(focus?'\nFor this task, pay extra attention to: '+focus+'.':'')}]}],
    generationConfig:{responseMimeType:'application/json',responseJsonSchema:schema,temperature:0.2}})},3);
   const j:any=await r.json();
   const um=j.usageMetadata||{};await recordUsage('google',geminiModel(),'video-watch',um.promptTokenCount||0,(um.candidatesTokenCount||0)+(um.thoughtsTokenCount||0));
