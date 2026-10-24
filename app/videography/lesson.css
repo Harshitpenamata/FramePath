@@ -364,3 +364,17 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .mv-blocked p{margin:0}
 .mv-describe{padding-top:12px}
 .mv-idea{border-top:0;padding-top:0}
+.mv-picker-list button.current .vg-optional-tag{color:#0b0b0b;border-color:#0b0b0b}
+
+/* Make: "Before you start" FAQ under the task brief (pilot, 24 Oct 2026) */
+.vg-task-faq{display:grid;gap:8px;border-top:var(--soft-line);padding-top:18px}
+.vg-task-faq h3{margin:0 0 4px;font-family:var(--body);font-weight:700;text-transform:none;letter-spacing:0;font-size:1.05rem}
+.vg-task-faq details{border:1px solid #3a3935;border-radius:12px;padding:0 14px}
+.vg-task-faq summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;cursor:pointer;list-style:none;font-weight:600;color:var(--foreground)}
+.vg-task-faq summary::-webkit-details-marker{display:none}
+.vg-task-faq summary svg{flex:none;transition:transform .18s ease}
+.vg-task-faq details[open] summary svg{transform:rotate(180deg)}
+.vg-task-faq summary:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:6px}
+.vg-task-faq details>div{padding:0 0 14px;color:var(--foreground);line-height:1.55}
+.vg-task-faq p{margin:0}
+.vg-task-faq ul{margin:0;padding-left:18px;display:grid;gap:6px}
