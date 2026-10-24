@@ -219,6 +219,12 @@ test('style extra lessons have their own sketch, named by style so two styles ne
  assert.equal(seen.size,52);
 });
 
+test('AI reviews: every module has a director lens, and the house guide has its dos and donts',()=>{
+ const G=load(path.join(root,'app/videography/review-guide.ts'));
+ for(const m of P.curriculumModules){const l=G.directorLens(m.id);assert.ok(l&&l.role&&l.see.length>40&&l.watchFor.length>15,m.id)}
+ assert.ok(G.reviewGuide.includes('\nDO\n')&&G.reviewGuide.includes("\nDON'T\n"));
+});
+
 test('every lesson has its sketchbook clip and poster',()=>{
  for(const m of P.curriculumModules)Les.lessonsFor(m.id).forEach((_,i)=>{for(const ext of ['mp4','webp']){const f=path.join(root,'public/sketches',`${m.id}-${i+1}.${ext}`);assert.ok(fs.existsSync(f),f);assert.ok(fs.statSync(f).size<300000,f+' is too big')}});
 });
