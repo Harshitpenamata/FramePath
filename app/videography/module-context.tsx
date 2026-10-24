@@ -142,8 +142,10 @@ export function VideoPanel({videos:all,watched=[],onWatched,under,side}:{videos:
  useEffect(()=>{setActive(0);setPlaying(false)},[videos[0]?.title]);
  const items=side?videos:playable,cur=items[active]||items[0];
  const v=side?(cur&&(cur.youtubeId||cur.vimeoId)?cur:undefined):playable[active]||playable[0];
- // A page counts as opened once it is shown in the player.
- useEffect(()=>{if(side&&cur?.url&&canFrame(cur.url)&&!watched.includes(videoId(cur)))onWatched?.(videoId(cur))},[side&&cur?.url]);
+ // A page counts as opened once it is shown in the player. Re-runs with onWatched (new each render) because a save
+ // made while another is in flight is dropped; it stops once the page is in `watched`, or after 5 tries if saving fails.
+ const tries=useRef<Record<string,number>>({});
+ useEffect(()=>{if(!side||!cur?.url||!canFrame(cur.url)||watched.includes(videoId(cur))||!onWatched)return;const id=videoId(cur);if((tries.current[id]=(tries.current[id]||0)+1)<=5)onWatched(id)},[side&&cur?.url,onWatched,watched.length]);
  useWatchTracker(frame,v,playing&&!!onWatched,()=>v&&onWatched?.(videoId(v)));
  const fallback=useTrackingFallback(frame,v,playing&&!!onWatched);
  const underNode=(about:React.ReactNode)=>typeof under==='function'?under(about):under;
@@ -244,7 +246,7 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  const lessonCard=item&&<article className="vg-lesson-card">
     <section className="vg-lesson-part"><div className="vg-part-head"><h3>Think it through</h3>{live.length>0&&<div className="vg-lesson-progress"><span className="vg-dots" aria-hidden="true">{live.map(v=><i key={videoId(v)} className={watched(v)?'done':''}/>)}</span><span className="small">{live.filter(watched).length} of {live.length} {live.length===1?'video or guide':'videos and guides'} done</span></div>}</div><p className="small vg-part-lede">{live.length?'Turn what you watched into a practical decision.':'Put the idea into practice.'}</p>
      {!open?<SelfPacedLock moduleKey={moduleKey} what="Think it through questions"/>
-      :user&&!allWatched?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Watch {live.length===1?'the video':`all ${live.length} videos`} to open these questions.</strong><p className="small">{live.filter(watched).length} of {live.length} watched so far.</p></div></div>
+      :user&&!allWatched?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Finish {live.length===1?'the video or guide':`all ${live.length} videos and guides`} to open these questions.</strong><p className="small">{live.filter(watched).length} of {live.length} done so far.</p></div></div>
       :<ReflectStep moduleId={m.id} index={at} tool={item.tool} videos={videos} onSolved={()=>{if(!mark?.t)save({tool:true})}}/>}</section>
     <footer className="vg-lesson-foot">
      <p className={'small'+(done(at)?' ok':'')}>{!user||!open?'':done(at)?<><Check size={14}/> Lesson finished</>:`Complete ${live.length===1?'the video':live.length?`all ${live.length} videos`:'this lesson'} and the questions to continue.`}</p>
@@ -264,7 +266,7 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
   {item?<section className="vg-lessons" id="vg-lesson-top">
    {/* Everything in the first screen: the player with the lesson's idea and questions under it; the lessons as tabs,
        the open lesson's videos and the video's description beside it. */}
-   {videos.length>0?<VideoPanel videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined} under={under} side={side}/>
+   {videos.length>0?<VideoPanel key={m.id+'-'+at} videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined} under={under} side={side}/>
     // A lesson without a video yet (some style extras): the idea takes the player's place.
     :<div className="mv-stage"><div className="mv-main"><div className="vg-video"><div className="vg-video-frame mv-novideo"><div><span>Practice lesson</span><p>{item.idea}</p><small>Try the question below to put it into practice.</small></div></div>{under(null)}</div></div>
      <aside className="mv-side" aria-label="Lessons">{side({list:<p className="small">This lesson has no video yet.</p>})}</aside></div>}
