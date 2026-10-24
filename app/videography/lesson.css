@@ -277,14 +277,6 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .mv-vlist .mv-item-title{display:grid;gap:2px;font-size:.92rem;line-height:1.3}
 .mv-vlist small{color:var(--muted-foreground);font-size:.78rem}
 .mv-tabpanel .vg-video-links{display:grid;gap:6px}
-.mv-about{border-top:1px solid #3a3935;padding-top:10px}
-.mv-about summary{display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;font-size:.9rem;font-weight:600;color:var(--foreground)}
-.mv-about summary::-webkit-details-marker{display:none}
-.mv-about[open] .mv-chev{transform:rotate(180deg)}
-.mv-about summary:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px}
-.mv-about>div{display:grid;gap:4px;padding-top:10px}
-.mv-about strong{font-size:.95rem;line-height:1.3}
-.mv-about .vg-video-focus{margin:6px 0 0;font-size:.9rem}
 .mv-side .vg-watch-state{margin:0}
 .mv-side .mv-desc{font-size:.95rem;margin:0}
 
@@ -322,3 +314,49 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
  .mv-stage{grid-template-columns:minmax(560px,calc((100svh - 500px)*16/9)) minmax(320px,1fr)}
  .mv-main .vg-video-frame{width:100%;min-width:0}
 }
+
+/* Round three (24 Oct 2026, second walkthrough): more room in the title area, lesson tabs that name the open lesson,
+   guides shown in the player, the open item's description and the lesson idea under the player. */
+.vg-lesson .mv-head{gap:10px;margin:0 0 6px}
+.vg-lesson .mv-head h1{line-height:1}
+.vg-lesson .mv-head .ls-meta{line-height:1.4}
+.vg-lesson .mv-toolbar{margin:14px 0 24px;padding-bottom:20px;align-items:flex-end}
+.vg-lesson .mv-toolbar [data-slot=tabs-list]{align-self:flex-end}
+.mv-pathway{gap:12px}
+.mv-pathway h2{line-height:1.3}
+
+.mv-tabbar button.active{max-width:min(100%,300px)}
+.mv-tab-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.mv-tab-tags{margin:0;display:flex;gap:6px}
+.mv-tabpanel{gap:10px}
+
+.mv-page{background:#f7f4ec}
+.mv-page iframe{width:100%;height:100%;border:0;background:#fff}
+.mv-page-out{display:grid;place-items:center;background:#141413}
+.mv-page-card{display:grid;gap:10px;justify-items:start;max-width:46ch;padding:clamp(20px,4vw,40px)}
+.mv-page-card span{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary)}
+.mv-page-card strong{font-size:clamp(1.2rem,1.8vw,1.6rem);line-height:1.25;color:var(--foreground)}
+.mv-page-card p{margin:0;color:var(--foreground);line-height:1.5}
+.mv-page-card small{color:var(--muted-foreground);line-height:1.45}
+.mv-page-open{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;background:var(--primary);color:#0b0b0b;font-weight:700;text-decoration:none}
+.mv-page-open:focus-visible{outline:2px solid var(--foreground);outline-offset:3px}
+.mv-vlist .mv-play svg{margin-left:0}
+
+.mv-describe{display:grid;gap:14px;padding:16px 0 4px}
+.mv-videodesc{display:grid;gap:6px}
+.mv-videodesc-head{display:grid;gap:3px}
+.mv-videodesc-head strong{font-size:1.02rem;line-height:1.35}
+.mv-videodesc .vg-video-focus{margin:2px 0 0;line-height:1.5}
+.mv-videodesc .vg-watch-state{margin:0}
+.mv-idea{display:grid;gap:4px;padding-top:12px;border-top:var(--soft-line)}
+.mv-idea .vg-idea{margin:0;font-size:1.05rem;line-height:1.55;color:var(--foreground)}
+.mv-idea .vg-optional{margin:0}
+
+/* The lesson card now holds the progress and the questions, with room to breathe. */
+.mv-main .vg-lesson-card{gap:16px;padding:22px 24px}
+.mv-main .vg-lesson-intro{grid-template-columns:minmax(0,1fr);justify-items:end;padding-bottom:0}
+.mv-main .vg-lesson-part h3{margin:0 0 4px}
+.mv-main .vg-part-lede{margin:0 0 14px;line-height:1.5}
+.mv-main .vg-lesson-foot{padding-top:8px}
+.mv-main .vg-part-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.mv-main .vg-part-head .vg-lesson-progress{display:flex;align-items:center;gap:10px}

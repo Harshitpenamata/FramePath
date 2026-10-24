@@ -18,3 +18,15 @@ questions all in the first screen.
 Checked locally at 1920×1080, 1672×941, 1440×900, 1366×768, 1280×720 and 390×844: no sideways scroll; tabs, arrow
 keys, video list, description dropdown and the scroll arrow all work. On phones the order is player, lesson title,
 tabs and videos, then the idea and questions.
+
+## Second walkthrough (24 Oct 2026)
+- More space in the title area and between the title and the stage strip; looser line spacing in the lesson card.
+- The open lesson tab shows the lesson's name; the others show their number.
+- Under the player: the open video's or guide's title, creator and what to watch or read for, then the lesson's
+  idea. The "About this video" dropdown is gone.
+- Guides (web pages) are listed with the videos and open in the player area, not in a pop-up or a new tab, with an
+  "Open on <site>" link under the player. A site that refuses to be shown inside another site gets a card in the
+  player with an "Open on <site>" button (a new tab is the only way to show those).
+- Checked: the 26 guide links used in lessons; four sites load inside the player. adobe.com (12 links) blocks
+  automated browsers, so it could not be checked here; if it refuses to be shown inside for learners too, add it to
+  `noFrameHosts` in `module-context.tsx` and those guides switch to the "Open on adobe.com" card.
