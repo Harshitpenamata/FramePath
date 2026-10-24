@@ -16,7 +16,9 @@ export function AdminHealth(){
  const pct=Math.round(d.ai.spent/d.ai.budget*100),when=(t:number)=>t?new Date(t).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}):'never';
  const list=(rows:any[])=>rows.length?<ul className="admin-list">{rows.map(v=><li key={v.id}><strong>{v.title||v.id}</strong> · {v.creator}<br/><span className="small">{v.detail} · lessons {v.lessons.join(', ')} · checked {when(v.checkedAt)}</span></li>)}</ul>:<p className="small">None.</p>;
  return <>
-  <PageHead eyebrow="ADMIN" title="Health"/>
+  <PageHead eyebrow="ADMIN" title="Admin"/>
+  {/* Support tickets live only here (24 Oct 2026); they come first because they need answering. */}
+  <SupportQueue/>
   <Panel className={d.job.stale?'admin-alert':''}><h2>Hourly job</h2>
    {d.job.stale?<p><strong>{d.job.lastRun?'The hourly job hasn’t run since '+when(d.job.lastRun.at)+'.':'The hourly job has never run.'}</strong> Lesson videos aren’t being checked, and reviews and comments waiting in the queue won’t run until it does. If it has never run, the schedule isn’t registered: open Workers &amp; Pages in the Cloudflare dashboard once, then redeploy.</p>
     :<p><Badge tone="green">Running</Badge> Last run {when(d.job.lastRun.at)}: {d.job.lastRun.videos.checked} videos checked, {d.job.lastRun.reviews} queued reviews run, {d.job.lastRun.comments} comments checked{d.job.lastRun.aiPaused?' (AI was paused)':''}.</p>}
@@ -31,7 +33,6 @@ export function AdminHealth(){
   </Panel>
   <WhatsAppAdmin/>
   <PilotFunnel/>
-  <SupportQueue/>
   <Storage/>
 <EmailChecks/>
   <Look/>
