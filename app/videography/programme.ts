@@ -291,7 +291,6 @@ export function handInMissing(m:CurriculumModule,h:HandIn,selfCheck=true):string
  if(h.uploadIds.length>maxHandInFiles)missing.push('use up to '+maxHandInFiles+' files');
  if(selfCheck){
   if(h.ratings.length!==3||h.ratings.some(r=>!Number.isInteger(r)||r<0||r>4))missing.push('rate your work on all three checks');
-  for(const q of reflectionQuestions)if((h.reflections[q.id]||'').trim().length<10)missing.push('answer “'+q.label+'”');
  }
  return missing;
 }

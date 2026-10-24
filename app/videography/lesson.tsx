@@ -139,9 +139,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
    {lesson.checks.map((check,i)=><fieldset key={check} className="vg-rate"><legend>{check}</legend><div>{ratingScale.map((label,v)=><button type="button" key={label} className={draft.ratings[i]===v?'selected':''} aria-pressed={draft.ratings[i]===v} onClick={()=>update({ratings:draft.ratings.map((r,j)=>j===i?v:r)})}><strong>{v}</strong>{label}</button>)}</div></fieldset>)}
   </Panel>
 
-  <Panel className="vg-form-block"><h2>3. Think about it</h2>
-   {reflectionQuestions.map(q=><label key={q.id}>{q.label}<textarea rows={2} maxLength={600} value={draft.reflections[q.id]} onChange={e=>update({reflections:{...draft.reflections,[q.id]:e.target.value}})}/></label>)}
-  </Panel></>}
+</>}
 
   {missing.length>0&&<p className="small" role="status">To hand in: {missing.join(' · ')}.</p>}
   <Action disabled={missing.length>0||busy} onClick={handIn}>Hand in my work</Action>
@@ -157,6 +155,20 @@ function WaitingTips(){
 
 type Flag={reason:string;status:'open'|'fine'|'refunded';note:string};
 type Review={id:string;flag?:Flag|null;rating?:{helpful:number;comment:string}|null;submissionId?:string;createdAt:number;review:{total:number|null;summary:string;strength:string;improvement:string;nextStep:string;evidenceLimit:string;revisit?:number|null;revisitWhy?:string;progress?:string;criteria:{label:string;rating:number|null;feedback:string}[]}};
+// After the review: what went well and what to change next time, written with the feedback in front of you.
+function ReflectNotes({piece}:{piece:any}){
+ const {mutate,busy}=useLearning();
+ const [notes,setNotes]=useState({well:piece.reflections?.well||'',change:piece.reflections?.change||''}),[saved,setSaved]=useState(false);
+ useEffect(()=>{setNotes({well:piece.reflections?.well||'',change:piece.reflections?.change||''});setSaved(false)},[piece.id]);
+ const changed=notes.well!==(piece.reflections?.well||'')||notes.change!==(piece.reflections?.change||'');
+ return <Panel className="vg-form-block vg-reflect-notes"><h2>Think about it</h2>
+  {piece.selfScore!=null&&<p className="small">Your own rating: {piece.selfScore}/100</p>}
+  <p className="small">With the review in front of you. Optional, saved with this piece in My Work.</p>
+  {reflectionQuestions.map(q=><label key={q.id}>{q.label}<textarea rows={2} maxLength={600} value={notes[q.id]} onChange={e=>{setNotes({...notes,[q.id]:e.target.value});setSaved(false)}}/></label>)}
+  <div className="button-row"><Button variant="outline" disabled={busy||!changed} onClick={async()=>{if(await mutate('video_reflect',{id:piece.id,...notes}))setSaved(true)}}>Save</Button>{saved&&<span className="small" role="status"><Check size={14}/> Saved</span>}</div>
+ </Panel>;
+}
+
 function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;requestFor:string;onFinish?:()=>void}){
  const {s}=useLearning();
  const piece=s.submissions.find((x:any)=>x.key===key);
@@ -199,7 +211,7 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
    {error&&<p role="alert" className="notice">{error}</p>}
    {canReview?<><p>Get feedback on the work you handed in.</p><Button onClick={()=>requestReview(piece.id)}>Get my AI review</Button></>:allowance&&<p>{allowance.eligible?'You’ve used both AI reviews for this module, so this hand-in won’t get one. It’s saved in My Work.':'AI reviews for this module are part of Self-paced. Your work is saved in My Work.'}{rated?' Your own rating is below.':''}</p>}
   </Panel>}
-  {rated&&<Panel><h2>What you said</h2><p className="small">Your rating: {piece.selfScore}/100</p><p><strong>What went well:</strong> {piece.reflections?.well}</p><p><strong>What you would change:</strong> {piece.reflections?.change}</p></Panel>}
+  <ReflectNotes piece={piece}/>
   {allowance&&<p className="small">AI reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} The AI reads your text and photos, and watches your videos and YouTube or Google Drive links, picture and sound.</p>}
   <div className="button-row"><Go href={'/portfolio?from='+encodeURIComponent(key)} outline>See it in My Work</Go>{onFinish&&<Button onClick={onFinish}><Flag size={16}/>Finish the level</Button>}</div>
  </div>;

@@ -145,6 +145,7 @@ test('self-check: beginner modules 1–3 skip it; it starts at beginner module 4
  const m=P.curriculumModules.find(x=>x.id==='B01');const work={answer:'',notes:'I put six photos in order.',url:'https://example.com/v',uploadIds:[],ratings:[],reflections:{well:'',change:''}};
  assert.deepEqual(P.handInMissing(m,work,false),[],'no ratings or reflections needed when self-check is off');
  assert.ok(P.handInMissing(m,work,true).some(x=>x.includes('rate your work')));
+ assert.deepEqual(P.handInMissing(m,{...work,ratings:[2,3,1]},true),[],'reflections are written after the review, in Reflect, so they never block a hand-in');
 });
 
 test('free plan: only the first two modules of each level have open tasks',()=>{

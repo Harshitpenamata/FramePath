@@ -152,6 +152,10 @@ case 'video_submit':{
  s.progress[key]={...(s.progress[key]||{}),done:true,at:s.progress[key]?.at||now,source:'hand-in',score:self?.total??null};
  delete s.drafts[key];
  break;}
+// Reflect, after the AI review: what went well and what to change next time, saved on that hand-in (optional).
+case 'video_reflect':{
+ const piece=s.submissions.find((x:any)=>x.id===b.id&&x.handIn);if(!piece)throw new Error('That piece is no longer in My Work.');
+ piece.reflections={well:safeText(b.well||'',600),change:safeText(b.change||'',600)};piece.updatedAt=now;break;}
 case 'submission_remove':{
  const piece=s.submissions.find((x:any)=>x.id===b.id);if(!piece)throw new Error('That piece is no longer in My Work.');
  s.submissions=s.submissions.filter((x:any)=>x.id!==piece.id);s.portfolio.ids=s.portfolio.ids.filter((x:string)=>x!==piece.id);
