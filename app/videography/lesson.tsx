@@ -1,12 +1,13 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,BookOpen,ThumbsUp,ThumbsDown,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
+import {ArrowLeft,ArrowRight,ChevronDown,BookOpen,ThumbsUp,ThumbsDown,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import './lesson.css';
 import {useLearning,Go,Action,Panel,Badge,Gate,UploadField,Photo} from '../ui';
 import {blockingModule,moduleHref,moduleInfo} from '../learning-rules';
 import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
+import {taskFaq,noGear} from './task-faq';
 import {LessonsTab,PathwayStrip,canPractise,taskLabel,useDeadVideos} from './module-context';
 import {waitingTips,lessonsFor,lessonsStatus,requireLessonsForTask} from './lessons';
 import {LevelClosure} from './closure';
@@ -66,6 +67,20 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
  </div>;
 }
 
+// "Before you start": what to hand in, common mistakes, no gear, handing in again (pilot of 24 Oct 2026).
+function TaskFaq({moduleId}:{moduleId:string}){
+ const f=taskFaq[moduleId];if(!f)return null;
+ const qs:[string,React.ReactNode][]=[
+  ['What exactly do I hand in?',<p>{f.handIn}</p>],
+  ['Common mistakes',<ul>{f.mistakes.map(x=><li key={x}>{x}</li>)}</ul>],
+  ['What if I don’t have the gear or the people?',<p>{noGear}</p>],
+  ['Can I hand in again?',<p>Yes. Each hand-in is saved as a new piece in My Work, so nothing is lost. Each module includes 2 AI reviews, so read the review before you try again.</p>],
+ ];
+ return <section className="vg-task-faq" aria-labelledby="task-faq-title"><h3 id="task-faq-title">Before you start</h3>
+  {qs.map(([q,a],i)=><details key={q} open={i<2}><summary>{q}<ChevronDown size={16} aria-hidden/></summary><div>{a}</div></details>)}
+ </section>;
+}
+
 function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:string)=>void}){
  const {s,mutate,busy}=useLearning();
  const m=parseVideoKey(key)!.module,lesson=moduleLesson(m,projectLabel(s.programme));
@@ -93,7 +108,8 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
  return <Gate><div className="vg-make">
   <section className="vg-task-brief"><Photo slot="make" className="ls-make-photo"/><span className="eyebrow">{taskLabel(m.id)}</span><h2>{m.taskName}</h2><p className="vg-task-do">{lesson.do}</p>
    <div className="vg-task-meta"><div><strong>Good work looks like this</strong><p>{m.evidence}</p></div><div><strong>How it’s checked</strong><ul>{lesson.checks.map(c=><li key={c}>{c}</li>)}</ul></div></div>
-   {handedIn>0&&<p className="small">You have handed this in {handedIn} time{handedIn>1?'s':''}. Handing in again adds a new piece to My Work. Each module includes 2 AI reviews in total.</p>}</section>
+   <TaskFaq moduleId={m.id}/>
+   {handedIn>0&&<p className="small">You have handed this in {handedIn} time{handedIn>1?'s':''}.</p>}</section>
 
   <Panel className="vg-form-block vg-handin"><h2><FileText size={18}/> {m.handIn==='text'?'1. Write your answer':'1. Hand in your work'}</h2>
    {m.handIn==='text'&&<label>Your answer <span className="small">({draft.answer.trim().length}/80 characters minimum)</span><textarea rows={9} maxLength={6000} value={draft.answer} onChange={e=>update({answer:e.target.value})} placeholder="Write your answer here. You don’t need to upload a document."/></label>}
