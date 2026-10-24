@@ -155,25 +155,20 @@ export function VideoPanel({videos:all,watched=[],onWatched,under,side}:{videos:
  const frameEl=v&&<div className="vg-video-frame">{playing
    ?<iframe ref={frame} src={embedUrl(v)} title={v.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen loading="lazy"/>
    :<button type="button" className="vg-video-cover" onClick={()=>setPlaying(true)} style={v.youtubeId?{backgroundImage:`url(https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg)`}:undefined} aria-label={'Play '+v.title}><span className="vg-play"><Play size={30}/></span></button>}</div>;
- const state=onWatched&&v&&<>
-  <p className={'small vg-watch-state'+(seen(v)?' ok':'')}>{seen(v)?<><Check size={14}/> Watched</>:fallback.blocked?'Your browser is blocking the player’s progress, so we can’t tick this off by itself.':'Watch most of this video to tick it off.'}</p>
-  {!seen(v)&&fallback.blocked&&<Button size="sm" variant="outline" disabled={!fallback.ready} onClick={()=>onWatched(videoId(v))}>{fallback.ready?'I’ve watched it':'I’ve watched it (available in '+fallback.wait+')'}</Button>}</>;
  if(side){
   const host=(u?:string)=>{try{return new URL(u||'').hostname.replace(/^www\./,'')}catch{return ''}};
   const isPage=!!cur?.url,framed=isPage&&canFrame(cur!.url);
   const stage=v?frameEl:cur&&<div className={'vg-video-frame mv-page'+(framed?'':' mv-page-out')}>{framed
    ?<iframe src={cur.url} title={cur.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/>
    :<div className="mv-page-card"><span>Guide on {host(cur.url)}</span><strong>{cur.title}</strong><p>{cur.focus}</p><a className="mv-page-open" href={cur.url} target="_blank" rel="noopener noreferrer" onClick={()=>onWatched?.(videoId(cur))}>Open on {host(cur.url)}<ExternalLink size={16} aria-hidden/></a><small>This site doesn’t allow being shown inside Framepath, so it opens in a new tab.</small></div>}</div>;
-  const about=cur&&<div className="mv-videodesc">
-   <div className="mv-videodesc-head"><strong>{cur.title}</strong><span className="small">{cur.creator}{cur.section?' · '+cur.section:''}{v?.start?' · starts at '+clock(v.start):''}{framed?<> · <a className="text-link" href={cur.url} target="_blank" rel="noopener noreferrer">Open on {host(cur.url)}</a></>:null}</span></div>
-   <p className="vg-video-focus"><Lightbulb size={16}/> {isPage?'Read for':'Watch for'}: {cur.focus}</p>
-   {v?state:onWatched&&<p className={'small vg-watch-state'+(seen(cur)?' ok':'')}>{seen(cur)?<><Check size={14}/> Opened</>:'Open it to tick it off.'}</p>}</div>;
+  // Only shown when a browser blocks the player's progress: the way to tick the video off by hand.
+  const blocked=onWatched&&v&&!seen(v)&&fallback.blocked&&<div className="mv-blocked"><p className="small">Your browser is blocking the player’s progress, so we can’t tick this off by itself.</p><Button size="sm" variant="outline" disabled={!fallback.ready} onClick={()=>onWatched(videoId(v))}>{fallback.ready?'I’ve watched it':'I’ve watched it (available in '+fallback.wait+')'}</Button></div>;
   return <div className="mv-stage">
-  <div className="mv-main"><div className="vg-video">{stage}{underNode(about)}</div></div>
+  <div className="mv-main"><div className="vg-video">{stage}{underNode(null)}</div></div>
   <aside className="mv-side" aria-label="Lessons">{side({
    list:items.length>0&&<ol className="mv-vlist" aria-label="Videos and guides in this lesson">{items.map((x,i)=><li key={x.title+i}><button type="button" className={[x===cur&&'active',onWatched&&seen(x)&&'watched'].filter(Boolean).join(' ')} aria-current={x===cur?'true':undefined} onClick={()=>{setActive(i);setPlaying(false)}}>
-     <span className="mv-play">{x.url?<FileText size={12} aria-hidden/>:<Play size={11} aria-hidden/>}</span><span className="mv-n">{String(i+1).padStart(2,'0')}</span><span className="mv-item-title">{x.title}<small>{x.creator}{x.url?' · guide':''}</small></span>{onWatched&&seen(x)&&<Check className="mv-done" size={16} aria-label={x.url?'opened':'watched'}/>}</button></li>)}</ol>,
-  })}</aside>
+     <span className="mv-play">{x.url?<FileText size={12} aria-hidden/>:<Play size={11} aria-hidden/>}</span><span className="mv-n">{String(i+1).padStart(2,'0')}</span><span className="mv-item-title">{x.title}<small>{x.creator}{x.url?' · guide':''}{x===cur&&v?.start?' · starts at '+clock(v.start):''}</small>{x===cur&&x.focus&&<small className="mv-focus">{x.url?'Read for':'Watch for'}: {x.focus}</small>}</span>{onWatched&&seen(x)&&<Check className="mv-done" size={16} aria-label={x.url?'opened':'watched'}/>}</button>{x===cur&&framed&&<a className="mv-open-site" href={x.url} target="_blank" rel="noopener noreferrer">Open on {host(x.url)}<ExternalLink size={13} aria-hidden/></a>}</li>)}</ol>,
+  })}{blocked}</aside>
  </div>;}
  // The player, a strip of the lesson's videos under it, then the open video's title and what to watch for.
  // Lessons on other sites follow as cards.

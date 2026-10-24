@@ -22,11 +22,11 @@ tabs and videos, then the idea and questions.
 ## Second walkthrough (24 Oct 2026)
 - More space in the title area and between the title and the stage strip; looser line spacing in the lesson card.
 - The open lesson tab shows the lesson's name; the others show their number.
-- Under the player: the open video's or guide's title, creator and what to watch or read for, then the lesson's
-  idea. The "About this video" dropdown is gone.
+- "Watch for" (or "Read for" on a guide) sits under the open item's name in the lesson list; under the player only
+  the lesson's idea. The "About this video" dropdown and the description block are gone. If a browser blocks the
+  player's progress, the "I've watched it" button shows in the sidebar.
 - Guides (web pages) are listed with the videos and open in the player area, not in a pop-up or a new tab, with an
   "Open on <site>" link under the player. A site that refuses to be shown inside another site gets a card in the
   player with an "Open on <site>" button (a new tab is the only way to show those).
-- Checked: the 26 guide links used in lessons; four sites load inside the player. adobe.com (12 links) blocks
-  automated browsers, so it could not be checked here; if it refuses to be shown inside for learners too, add it to
-  `noFrameHosts` in `module-context.tsx` and those guides switch to the "Open on adobe.com" card.
+- Checked: all 26 guide links used in lessons load inside the player (adobe.com confirmed in a normal browser; it
+  blocks automated test browsers).

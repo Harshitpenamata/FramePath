@@ -343,11 +343,6 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .mv-vlist .mv-play svg{margin-left:0}
 
 .mv-describe{display:grid;gap:14px;padding:16px 0 4px}
-.mv-videodesc{display:grid;gap:6px}
-.mv-videodesc-head{display:grid;gap:3px}
-.mv-videodesc-head strong{font-size:1.02rem;line-height:1.35}
-.mv-videodesc .vg-video-focus{margin:2px 0 0;line-height:1.5}
-.mv-videodesc .vg-watch-state{margin:0}
 .mv-idea{display:grid;gap:4px;padding-top:12px;border-top:var(--soft-line)}
 .mv-idea .vg-idea{margin:0;font-size:1.05rem;line-height:1.55;color:var(--foreground)}
 .mv-idea .vg-optional{margin:0}
@@ -360,3 +355,12 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .mv-main .vg-lesson-foot{padding-top:8px}
 .mv-main .vg-part-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .mv-main .vg-part-head .vg-lesson-progress{display:flex;align-items:center;gap:10px}
+/* "Watch for" sits under the open item's name in the list; no description block under the player. */
+.mv-vlist .mv-focus{margin-top:3px;font-size:.82rem;line-height:1.4;color:#1f1f1d}
+.mv-vlist button:not(.active) .mv-focus{color:var(--foreground)}
+.mv-open-site{display:inline-flex;align-items:center;gap:6px;margin:6px 0 2px 52px;font-size:.82rem;font-weight:600;color:var(--primary);text-decoration:none}
+.mv-open-site:hover{text-decoration:underline}
+.mv-blocked{display:grid;gap:8px;justify-items:start}
+.mv-blocked p{margin:0}
+.mv-describe{padding-top:12px}
+.mv-idea{border-top:0;padding-top:0}
