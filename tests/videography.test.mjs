@@ -224,6 +224,8 @@ test('every task has its Before you start FAQ: what to hand in and 2-3 common mi
  const F=load(path.join(root,'app/videography/task-faq.ts'));
  for(const m of P.curriculumModules){const f=F.taskFaq[m.id];assert.ok(f,m.id);assert.ok(f.handIn.length>40,m.id+' hand-in');assert.ok(f.mistakes.length>=2&&f.mistakes.length<=3,m.id+' mistakes');}
  assert.equal(Object.keys(F.taskFaq).length,P.curriculumModules.length);
+});
+
 test('AI reviews: every module has a director lens, and the house guide has its dos and donts',()=>{
  const G=load(path.join(root,'app/videography/review-guide.ts'));
  for(const m of P.curriculumModules){const l=G.directorLens(m.id);assert.ok(l&&l.role&&l.see.length>40&&l.watchFor.length>15,m.id)}
