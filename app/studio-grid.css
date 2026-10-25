@@ -342,3 +342,9 @@ p,li{text-wrap:pretty}
 .db-stages li{align-items:center;text-align:center;padding-inline:36px}
 /* Footer links: a 44px tap height on touch screens. */
 .footer>div a{display:inline-flex;align-items:center;min-height:44px}
+
+/* Scroll (25 Oct 2026): links within a page glide there, unless the learner prefers reduced motion (the site's own
+   reduced-motion setting still wins); sideways strips scroll on their own without dragging the page or triggering
+   the browser's swipe-back. */
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+.mv-tabbar,.vg-track,.vg-spot.timeline,.vg-show-thumbs{overscroll-behavior-x:contain}
