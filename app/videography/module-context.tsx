@@ -237,7 +237,9 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  // Videos still online; the questions open once they are all watched. Next lesson waits until the lesson is finished
  // (a style extra lesson never holds the learner back).
  const live=videos.filter(v=>!dead.includes(videoId(v))),watched=(v:ModuleVideo)=>!!mark?.v.includes(videoId(v)),allWatched=live.every(watched),locked=!!user&&open&&!done(at)&&!item?.style;
- const go=(i:number)=>{setIndex(i);document.getElementById('vg-lesson-top')?.scrollIntoView({behavior:'smooth',block:'start'})};
+ // Bring the lesson into view only when the learner is below it (e.g. Next lesson at the bottom); a tab click
+ // at the top must not move the page.
+ const go=(i:number)=>{setIndex(i);const top=document.getElementById('vg-lesson-top');if(top&&top.getBoundingClientRect().top<0)top.scrollIntoView({behavior:'smooth',block:'start'})};
  // Videos still online across every lesson of the module, for the label over the lesson list.
  const moduleVideos=lessons.reduce((n,_,i)=>n+lessonVideos(m.id,i,pathway).filter(v=>!dead.includes(videoId(v))).length,0);
  const nowRow=<div className="mv-now"><h2>{String(at+1).padStart(2,'0')} / {item?.title}</h2><p>Lesson {at+1} of {lessons.length}</p></div>;
