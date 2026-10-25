@@ -1,13 +1,13 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,BookOpen,ThumbsUp,ThumbsDown,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
+import {ArrowDown,ArrowUp,ArrowLeft,ArrowRight,BookOpen,ThumbsUp,ThumbsDown,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import './lesson.css';
-import {useLearning,Go,Action,Panel,Badge,Gate,UploadField,Photo} from '../ui';
+import {useLearning,Go,Action,Panel,Badge,Gate,UploadField} from '../ui';
 import {blockingModule,moduleHref,moduleInfo} from '../learning-rules';
 import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
-import {LessonsTab,PathwayStrip,canPractise,taskLabel,useDeadVideos} from './module-context';
+import {LessonsTab,LessonSketch,PathwayStrip,canPractise,taskLabel,useDeadVideos} from './module-context';
 import {waitingTips,lessonsFor,lessonsStatus,requireLessonsForTask} from './lessons';
 import {LevelClosure} from './closure';
 import {ReportProblem} from '../support';
@@ -24,6 +24,18 @@ const toHandIn=(d:Draft):HandIn=>({answer:d.answer,notes:d.notes,url:d.url,uploa
 // A Videography module: Lessons (Watch + Reflect each), then the Task (hand in), then Feedback (AI review).
 // The last module of a level also has Finish, which closes the level.
 const oldTabs:Record<string,string>={watch:'lessons',make:'task',reflect:'feedback'};
+// A green arrow in the bottom-right corner: it points down while there is more page below (and scrolls one screen),
+// and turns into "Back to top" at the bottom. Hidden when the page fits on one screen.
+function ScrollCue(){
+ const [state,setState]=useState<'down'|'top'|'none'>('none');
+ useEffect(()=>{const check=()=>{const max=document.documentElement.scrollHeight-window.innerHeight;setState(max<40?'none':window.scrollY>=max-24?'top':'down')};
+  check();window.addEventListener('scroll',check,{passive:true});window.addEventListener('resize',check);const t=setInterval(check,1000);
+  return ()=>{window.removeEventListener('scroll',check);window.removeEventListener('resize',check);clearInterval(t)}},[]);
+ if(state==='none')return null;
+ const top=state==='top';
+ return <button type="button" className={'scroll-cue'+(top?' top':'')} aria-label={top?'Back to the top of the page':'Scroll down for more'} onClick={()=>window.scrollTo({top:top?0:window.scrollY+window.innerHeight*0.8,behavior:'smooth'})}>{top?<><ArrowUp size={20} aria-hidden/><span>Back to top</span></>:<ArrowDown size={22} aria-hidden/>}</button>;
+}
+
 export function VideoLesson({moduleKey:key}:{moduleKey:string}){
  const {s,loaded,mutate}=useLearning();
  const parsed=parseVideoKey(key)!;
@@ -53,14 +65,15 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
   <header className="mv-head"><h1>{lesson.title}</h1><p className="ls-meta">Module {parsed.index+1} of {mods.length} <span>·</span> {parsed.module.hours} h <span>·</span> {parsed.module.stageLabel}</p></header>
   <Tabs value={tab} onValueChange={setTab}>
    <div className="mv-toolbar">
-    <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons">Watch</TabsTrigger><TabsTrigger value="task">Make</TabsTrigger><TabsTrigger value="feedback">Reflect</TabsTrigger>{last&&<TabsTrigger value="finish">Finish</TabsTrigger>}</TabsList>
     <PathwayStrip current={parsed.module.stageLabel} done={stagesDone}/>
+    <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons">Watch</TabsTrigger><TabsTrigger value="task">Make</TabsTrigger><TabsTrigger value="feedback">Reflect</TabsTrigger>{last&&<TabsTrigger value="finish">Finish</TabsTrigger>}</TabsList>
    </div>
    <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}} onLesson={(index,count)=>setLessonAt({index,count})}/></TabsContent>
    <TabsContent value="task">{loaded&&<TaskTab moduleKey={key} onHandedIn={id=>{setReviewNow(id);setTab('feedback')}}/>}</TabsContent>
    <TabsContent value="feedback">{loaded&&<FeedbackTab moduleKey={key} requestFor={reviewNow} onFinish={last?()=>setTab('finish'):undefined}/>}</TabsContent>
    {last&&<TabsContent value="finish">{loaded&&<LevelClosure level={parsed.level}/>}</TabsContent>}
   </Tabs>
+  <ScrollCue/>
   <div className="ls-support"><ReportProblem moduleKey={key} lesson={tab==='lessons'&&lessonAt?lessonAt.index+1:undefined} variant="ghost" label="Report a problem with this module"/></div>
   <div className="button-row between">{prev?<Go outline href={moduleHref(prev)}><ArrowLeft size={16}/>Previous module</Go>:<span/>}{next&&(atLastLesson||s.progress?.[key])?<Go outline href={moduleHref(next)}>Next module<ArrowRight size={16}/></Go>:<span/>}</div>
  </div>;
@@ -91,7 +104,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
   setDraft(emptyDraft());onHandedIn(piece?.id||'');
  }
  return <Gate><div className="vg-make">
-  <section className="vg-task-brief"><Photo slot="make" className="ls-make-photo"/><span className="eyebrow">{taskLabel(m.id)}</span><h2>{m.taskName}</h2><p className="vg-task-do">{lesson.do}</p>
+  <section className="vg-task-brief"><LessonSketch src={'/sketches/'+m.id+'-1'} title={m.taskName}/><span className="eyebrow">{taskLabel(m.id)}</span><h2>{m.taskName}</h2><p className="vg-task-do">{lesson.do}</p>
    <div className="vg-task-meta"><div><strong>Good work looks like this</strong><p>{m.evidence}</p></div><div><strong>How it’s checked</strong><ul>{lesson.checks.map(c=><li key={c}>{c}</li>)}</ul></div></div>
    {handedIn>0&&<p className="small">You have handed this in {handedIn} time{handedIn>1?'s':''}. Handing in again adds a new piece to My Work. Each module includes 2 AI reviews in total.</p>}</section>
 
