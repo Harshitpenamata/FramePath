@@ -16,7 +16,7 @@ test('module text uses short, simple sentences (20 words or fewer)',()=>{
 
 test('every module has three assessment checks and becomes a scoreable lesson',()=>{
  for(const m of P.curriculumModules){const l=P.moduleLesson(m);assert.equal(l.checks.length,3,m.id);assert.ok(l.checks.every(c=>c.length>10));assert.equal(l.do,m.assignment)}
- assert.equal(P.videoPaths.length,3);assert.ok(P.videoPaths.every(p=>p.lessons.length===15));
+ const real=P.videoPaths.filter(p=>p.id!=='video-test');assert.equal(real.length,3);assert.ok(real.every(p=>p.lessons.length===15));
 });
 
 const best=q=>q.options.reduce((b,o,i,a)=>o.score>a[b].score?i:b,0),worst=q=>q.options.reduce((b,o,i,a)=>o.score<a[b].score?i:b,0);
@@ -376,4 +376,11 @@ test('adapting the plan: skill areas, live skill levels, behind and catch-up dat
  const done={[k0]:{done:true}},start2=P.catchUpStart(late,done);
  assert.ok(start2<P.today(),'hours done count as time spent');
  assert.equal(P.behindBy({...late,schedule:{...late.schedule,startDate:start2}},done),null,'after catching up, not behind');
+});
+
+test('the admin test pathway is three real Beginner modules, never offered to learners',()=>{
+ assert.deepEqual(P.modulesFor('test').map(m=>m.id),['B01','B05','B14']);assert.ok(!P.levels.includes('test'));
+ const p=P.buildTestProgramme(['wedding']);assert.equal(p.level,'test');assert.equal(p.schedule.level,'test');assert.equal(p.name,'Test pathway');
+ assert.equal(p.schedule.totalHours,P.modulesFor('test').reduce((n,m)=>n+m.hours,0));
+ assert.equal(P.parseVideoKey('video-test-2').module.id,'B14');assert.equal(P.parseVideoKey('video-test-3'),null);assert.ok(P.isFreeModule('video-test-2'));
 });

@@ -9,7 +9,7 @@ import {normalizeProfile} from '../../profile-validation';
 import {buildPersonalPlan,isPersonalized} from '../../personalization';
 import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../selfpaced-curriculum';
 import {validateReview} from '../../assignment-review';
-import {buildProgramme,planName,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,maxPlans,styleModuleKeys,type Level} from '../../videography/programme';
+import {buildProgramme,buildTestProgramme,planName,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,maxPlans,styleModuleKeys,type Level} from '../../videography/programme';
 // Public portfolio data: only the pieces the learner picked to share.
 // What a shared portfolio shows. File names stay private; only each file's id and type are shared, so images and videos can be shown.
 function publicPortfolio(s:any){const items=s.portfolio.ids.map((x:string)=>s.submissions.find((v:any)=>v.id===x)).filter(Boolean).map((v:any)=>({id:v.id,key:v.key,moduleId:v.moduleId||'',createdAt:v.createdAt,notes:v.notes,answer:v.answer||'',url:v.url,uploadId:v.uploadId,uploadIds:v.uploadIds||[],uploads:(v.uploads||[]).map((f:any)=>({id:f.id,type:f.type})),status:v.status,total:v.total}));return JSON.stringify({title:s.portfolio.title,bio:s.portfolio.bio,name:s.profile?.name||'Framepath learner',items,simulatedReviews:true})}
@@ -30,7 +30,7 @@ import {logEvent,today as dayNow} from '../../events';
 import {questionsForVideos,lessonVideos} from '../../videography/lessons';
 import {behindBy,catchUpStart,rhythm,schedule} from '../../videography/programme';
 // Reflect question banks, loaded only when a learner tests out of a module.
-const reflectBanks={beginner:()=>import('../../videography/reflect/beginner.json'),intermediate:()=>import('../../videography/reflect/intermediate.json'),advanced:()=>import('../../videography/reflect/advanced.json')};
+const reflectBanks={beginner:()=>import('../../videography/reflect/beginner.json'),intermediate:()=>import('../../videography/reflect/intermediate.json'),advanced:()=>import('../../videography/reflect/advanced.json'),test:()=>import('../../videography/reflect/beginner.json')};
 import {isAdmin} from '../admin/health/route';
 import type {StepName} from '../../events-shared';
 import {identity,readState,saveState,usage,checkOrigin,safeText,safeUrl,mentorFor,requireLesson,activeExplore,craftEnrolled,db,errorResponse} from '../../service';
@@ -95,6 +95,10 @@ case 'consent_save':{if(!['adult','guardian'].includes(b.age))throw new Error('C
 case 'programme_save':{if(['adult','guardian'].includes(b.programme?.age))s.consent={age:b.programme.age,at:now};if(!s.consent)throw new Error('Tell us your age group first.');
  if(s.plans.length>=maxPlans)throw new Error('You have '+maxPlans+' plans already. Delete one to make another.');
  const plan={...buildProgramme(b.programme,null),id:id()};await ensureCourseId(user.userId,plan);s.plans.push(plan);openPlan(s,plan);steps.push(['plan_created',{courseId:plan.courseId,level:plan.level,pathway:plan.primaryPathway},'']);break;}
+// Admins only: a three-module test plan (B01, B05, B14) to walk the whole course end to end.
+case 'test_plan':{if(!isAdmin(user.email))throw new Error('Only admins can start a test pathway.');
+ if(s.plans.length>=maxPlans)throw new Error('You have '+maxPlans+' plans already. Delete one to make another.');
+ const plan={...buildTestProgramme(s.programme?.interests||['wedding']),id:id()};await ensureCourseId(user.userId,plan);s.plans.push(plan);openPlan(s,plan);break;}
 // Behind on the plan's dates: move the open plan's remaining modules forward from today (hours already done count
 // as time spent). The server works the new start date out, so it may be in the past.
 case 'plan_reschedule':{if(!s.programme||s.programme.id!==b.id)throw new Error('Open this plan first.');const p=s.programme;
@@ -107,7 +111,7 @@ case 'lesson_testout':{
  if(!isFreeModule(key)&&!activeExplore(s)&&!craftEnrolled(s))throw new Error('This module’s practice is part of Self-paced.');
  s.testOuts=s.testOuts||{};if(s.testOuts[key]===dayNow())throw new Error('You’ve already tried this today. Work through the lessons, or try again tomorrow.');
  s.testOuts[key]=dayNow();
- const pathway=s.programme?.primaryPathway||'Documentary',bank:any=(await reflectBanks[video.level as 'beginner'|'intermediate'|'advanced']()).default;
+ const pathway=s.programme?.primaryPathway||'Documentary',bank:any=(await reflectBanks[video.level]()).default;
  const picks=b.answers&&typeof b.answers==='object'?b.answers:{};let right=true,checked=0;const passed:number[]=[];
  lessonsFor(video.module.id).forEach((_:any,i:number)=>{const qs=questionsForVideos(bank[video.module.id]?.[i]||[],lessonVideos(video.module.id,i,pathway));if(!qs.length)return;
   const mine=Array.isArray(picks[i])?picks[i]:[];qs.forEach((_q:any,n:number)=>{checked++;if(mine[n]!==0)right=false});if(right)passed.push(i)});

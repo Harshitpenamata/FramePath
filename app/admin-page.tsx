@@ -1,6 +1,6 @@
 'use client';
 import React,{useEffect,useState} from 'react';
-import {Panel,PageHead,Badge} from './ui';
+import {Panel,PageHead,Badge,useLearning} from './ui';
 import {Button} from '@/components/ui/button';
 import './videography/studio.css';
 import {categoryLabel,statusLabel,replyMax} from './support-shared';
@@ -26,6 +26,7 @@ export function AdminHealth(){
   <FlaggedReviews/>
   <ReportedComments/>
   <FindLearner/>
+  <TestPathway/>
   <Panel><h2>AI</h2>
    <p>{d.ai.ok?<Badge tone="green">Running</Badge>:<Badge>{d.ai.reason==='credits'?'Paused: provider has no credit':'Paused: daily cap reached'}</Badge>} Today ${d.ai.spent.toFixed(2)} of ${d.ai.budget} cap ({pct}%){pct>=80&&' · close to the cap'}</p>
    <p>{d.queuedReviews} reviews and {d.pendingComments} comments waiting in the queue.</p>
@@ -98,6 +99,14 @@ function ReportedComments(){
 }
 
 // Find a learner by email: their plans, hand-ins, reviews, storage and portfolio.
+// A three-module plan (B01 photo, B05 video, B14 final) on your own account, to test the course end to end.
+function TestPathway(){
+ const {mutate,busy}=useLearning();
+ return <Panel><h2>Test pathway</h2><p className="small">Three real Beginner modules: a photo task, a video task and the final project. Only admins can start it; it opens as a new plan on your account.</p>
+  <Button disabled={busy} onClick={async()=>{const saved:any=await mutate('test_plan');if(saved)window.location.assign(saved.programme?.id?'/workspace/'+saved.programme.id:'/workspace')}}>Start a test pathway</Button>
+ </Panel>;
+}
+
 function FindLearner(){
  const [q,setQ]=useState(''),[users,setUsers]=useState<any[]|null>(null),[error,setError]=useState('');
  async function find(e:React.FormEvent){e.preventDefault();setError('');try{setUsers((await get('section=users&email='+encodeURIComponent(q))).users)}catch(e:any){setError(e.message)}}
