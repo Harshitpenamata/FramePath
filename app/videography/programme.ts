@@ -293,10 +293,12 @@ export const selfCheckFromBeginnerModule=4;
 export const needsSelfCheck=(key:string)=>{const v=parseVideoKey(key);return !!v&&(v.level!=='beginner'||v.index+1>=selfCheckFromBeginnerModule)};
 export type HandIn={answer:string;notes:string;url:string;uploadIds:string[];ratings:number[];reflections:{well:string;change:string}};
 // What is still missing before work can be handed in ([] when ready). Used by the Make form and the server.
+// A Google Doc link (written work: a script, shot list or brief): the AI review reads it as plain text.
+export const googleDocId=(u:string)=>String(u||'').match(/^https:\/\/docs\.google\.com\/document\/d\/([\w-]{20,})/)?.[1]||'';
 export function handInMissing(m:CurriculumModule,h:HandIn,selfCheck=true):string[]{
  const missing:string[]=[];
  if(m.handIn==='text'){if(h.answer.trim().length<80)missing.push('write your answer (at least 80 characters)')}
- else{if(!h.uploadIds.length&&!h.url.trim())missing.push('upload your work or add a video link');if(h.notes.trim().length<20)missing.push('add a short note about your work (at least 20 characters)')}
+ else{if(!h.uploadIds.length&&!h.url.trim())missing.push('upload your work or add a link');if(h.notes.trim().length<20)missing.push('add a short note about your work (at least 20 characters)')}
  if(h.uploadIds.length>maxHandInFiles)missing.push('use up to '+maxHandInFiles+' files');
  if(selfCheck){
   if(h.ratings.length!==3||h.ratings.some(r=>!Number.isInteger(r)||r<0||r>4))missing.push('rate your work on all three checks');

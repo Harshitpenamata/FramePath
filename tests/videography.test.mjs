@@ -384,3 +384,8 @@ test('the admin test pathway is three real Beginner modules, never offered to le
  assert.equal(p.schedule.totalHours,P.modulesFor('test').reduce((n,m)=>n+m.hours,0));
  assert.equal(P.parseVideoKey('video-test-2').module.id,'B14');assert.equal(P.parseVideoKey('video-test-3'),null);assert.ok(P.isFreeModule('video-test-2'));
 });
+
+test('Google Doc hand-in links: only https docs.google.com/document links count',()=>{
+ assert.equal(P.googleDocId('https://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/edit?usp=sharing'),'1AbCdEfGhIjKlMnOpQrStUvWxYz012345');
+ for(const u of ['http://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/edit','https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/view','https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345','https://evil.com/?https://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345','',undefined])assert.equal(P.googleDocId(u),'',String(u));
+});
