@@ -32,6 +32,7 @@ import {behindBy,catchUpStart,rhythm,schedule} from '../../videography/programme
 // Reflect question banks, loaded only when a learner tests out of a module.
 const reflectBanks={beginner:()=>import('../../videography/reflect/beginner.json'),intermediate:()=>import('../../videography/reflect/intermediate.json'),advanced:()=>import('../../videography/reflect/advanced.json')};
 import {isAdmin} from '../admin/health/route';
+import {linkProblem} from '../../handin-links';
 import type {StepName} from '../../events-shared';
 import {identity,readState,saveState,usage,checkOrigin,safeText,safeUrl,mentorFor,requireLesson,activeExplore,craftEnrolled,db,errorResponse} from '../../service';
 export const dynamic='force-dynamic';
@@ -143,6 +144,7 @@ case 'video_submit':{
  const ids:string[]=Array.isArray(b.uploadIds)?[...new Set<string>(b.uploadIds.map((x:unknown)=>safeText(x,100,1)))]:[];
  const handIn={answer:safeText(b.answer||'',6000),notes:safeText(b.notes||'',2000),url:safeUrl(b.url||''),uploadIds:ids,ratings:Array.isArray(b.ratings)?b.ratings:[],reflections:{well:safeText(b.reflections?.well||'',600),change:safeText(b.reflections?.change||'',600)}};
  const selfCheck=needsSelfCheck(key),missing=handInMissing(video.module,handIn,selfCheck);if(missing.length)throw new Error('Before you hand in: '+missing.join(', ')+'.');
+ {const why=await linkProblem(handIn.url);if(why)throw new Error(why)}
  const uploads:any[]=[];for(const uploadId of ids){const own:any=await db().prepare('SELECT id,name,type FROM uploads WHERE id=? AND user_id=?').bind(uploadId,user.userId).first();if(!own)throw new Error('That upload is not available in your account.');uploads.push({id:own.id,name:own.name,type:own.type})}
  if(s.submissions.length>=100)throw new Error('My Work is full (100 pieces). Remove a piece you no longer need, then hand in again.');
  const self=selfCheck?scoreAttempt(key,handIn.ratings,s.profile):null,attempt=s.submissions.filter((x:any)=>x.key===key).length+1;

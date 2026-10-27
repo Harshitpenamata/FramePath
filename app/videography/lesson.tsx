@@ -102,6 +102,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
     {draft.files.length<maxHandInFiles&&<UploadField lessonKey={key} value={null} onUpload={(f:any)=>update({files:[...draft.files,{id:f.id,name:f.name,type:f.type}]})}/>}
     <p className="small">Need more than 3 pictures? Put them into one image (a collage), or add a link to a folder.</p>
     <label>Link to your work (YouTube, Google Drive, or a Google Doc for written work)<input type="url" value={draft.url} onChange={e=>update({url:e.target.value})} placeholder="https://"/></label>
+    <p className="small">Google Doc: click Share and set General access to “Anyone with the link”, or the AI can’t open it. YouTube videos must be Public or Unlisted.</p>
    </div>
    <label>{m.handIn==='text'?'Anything else to add? (optional)':'Tell us about your work'}<textarea rows={3} maxLength={2000} value={draft.notes} onChange={e=>update({notes:e.target.value})} placeholder="What did you make? What did you try?"/></label>
   </Panel>

@@ -1,10 +1,25 @@
-# Google Doc links as hand-ins
+# Google Doc links as hand-ins, and no review for work the AI can't open
 
-Written work (scripts, shot lists, briefs, idea write-ups) can be handed in as a Google Doc link in the existing link field.
+## Google Docs
 
-- The AI review reads the doc's plain-text export (`/export?format=txt`), with no sign-in, cut to 20,000 characters. Claude gets it as `handInDocument` and treats it as data, never as instructions.
-- The doc must be shared as "Anyone with the link can view". Otherwise Google returns a sign-in or 404 page, and the review says the doc couldn't be read.
-- Only `https://docs.google.com/document/d/<id>` links count (`googleDocId` in `app/videography/programme.ts`). Sheets, Slides and Drive files are not read as documents.
-- Cost: text only, roughly 300–700 tokens a page, and no storage. PDFs (for storyboards, where pictures matter) are not supported yet.
+- Written work or photos can be handed in as a Google Doc link in the existing link field.
+- The doc is exported as **PDF** (`/export?format=pdf`), with no sign-in, so Claude sees its pictures as well as its text. The cap is 15 MB.
+- The doc must be shared with General access set to "Anyone with the link" (Viewer is enough). Otherwise Google returns a sign-in page.
+- Only `https://docs.google.com/document/d/<id>` links count (`googleDocId` in `app/videography/programme.ts`).
 
-Files: `app/api/review/route.ts`, `app/videography/programme.ts`, `app/videography/lesson.tsx`, `tests/videography.test.mjs`.
+## Links are checked before a review is used
+
+`app/handin-links.ts` (`linkProblem`) checks a hand-in link when the work is handed in, and again before an AI review is counted:
+
+| Link | Openable when |
+|---|---|
+| Google Doc | the PDF export downloads |
+| YouTube | it is Public or Unlisted (oEmbed answers) |
+| Google Drive | it downloads as a video |
+| anything else (Vimeo, websites) | never: the learner is told to upload, or use one of the three |
+
+Uploaded files are also checked to still be in storage. If anything can't be opened, the hand-in or review is refused with what to fix, and the review allowance is not used.
+
+The Make tab has a note under the link field on sharing.
+
+Files: `app/handin-links.ts`, `app/api/review/route.ts`, `app/api/state/route.ts`, `app/videography/programme.ts`, `app/videography/lesson.tsx`, `tests/videography.test.mjs`.
