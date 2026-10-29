@@ -9,12 +9,16 @@
       ""
      ],
      [
-      "Which camera and lens would he like me to use?",
-      "Gear choices come later and depend on what the reel needs to achieve."
+      "How many pieces of jewellery does he want to show, and in what order?",
+      "Content comes after the goal is clear."
      ],
      [
-      "Which trending song would he like in the reel?",
-      "Music is a style choice, and you cannot pick it well until you know the goal."
+      "What does he want people to feel when they finish watching it?",
+      "Feeling is a creative choice made once the audience and action are clear."
+     ],
+     [
+      "Which customers can I film, and are they happy to appear on camera?",
+      "Practical, but it comes after the goal."
      ]
     ],
     "why": "Knowing the viewer and the result you want lets you judge every later choice, from shots to music to length.",
@@ -28,12 +32,16 @@
       ""
      ],
      [
-      "A slow drone shot of the venue, since it looks very grand",
-      "It looks impressive, but it shows the venue, not why a couple should call this planner."
+      "A stylish montage of the planner's decorated mandaps and venues",
+      "It looks good but doesn't give couples a reason to book a call."
      ],
      [
-      "A close detail shot of the flowers and the table decor",
-      "Pretty decor does not tell a couple what working with this planner feels like."
+      "The planner at work, setting up tables and chairs early in the morning",
+      "It shows effort but not what couples care about: trust and calm."
+     ],
+     [
+      "The planner explaining her years of experience to the camera",
+      "Claims from her are weaker than a couple's own words."
      ]
     ],
     "why": "A real couple speaking about the experience talks straight to the viewers you want and gives them a reason to call.",
@@ -49,12 +57,16 @@
       ""
      ],
      [
-      "Film her wheel, her kiln and her shelves in good light",
-      "These are lovely shots of her world, but nothing in them changes."
+      "Film a day in her life, from opening the studio to closing it",
+      "A day gives a sequence, not stakes or a question."
      ],
      [
-      "Interview her about the long history of pottery in town",
-      "History gives background, but it does not put anything at stake for her now."
+      "Interview her about why she took up pottery and how long she has worked",
+      "Background gives information, not a story that moves."
+     ],
+     [
+      "Film her wheel, her kiln and her shelves in good light",
+      "These make a subject, not a story."
      ]
     ],
     "why": "A deadline she might miss creates tension and change, which is what turns a person into a story.",
@@ -68,12 +80,16 @@
       ""
      ],
      [
-      "Add more voiceover so the audience never misses the point",
-      "Explaining everything in words is the opposite of telling the story with images."
+      "Make each shot beautiful and balanced first, and let meaning follow",
+      "Beautiful shots alone don't carry meaning."
      ],
      [
-      "Use the most beautiful shots, even if they add no meaning",
-      "The video is about images that tell the story, not images that only look good."
+      "Add more voiceover so the audience never misses the point",
+      "Telling the point removes the viewer's own thinking."
+     ],
+     [
+      "Cut quickly between many images so viewers have no time to question them",
+      "Rushing leaves no time to work out meaning."
      ]
     ],
     "why": "The video shows how a planned, image-led approach lets shots do the telling, which keeps viewers engaged.",
@@ -90,11 +106,15 @@
      ],
      [
       "From the front row, as a clean, steady shot of the principal",
-      "A clean front view is nice, but it leaves the child and shows the event like any guest would."
+      "That is the principal's point of view, not the child's."
+     ],
+     [
+      "From the back of the hall, a wide shot showing the whole audience",
+      "A neutral view of the event, when the film is about the child."
      ],
      [
       "Cut evenly between the child, the parents and the teachers",
-      "Sharing time equally spreads the view across many people and weakens the child's experience."
+      "The film should stay with the child, not split attention."
      ]
     ],
     "why": "Filming from where the child is keeps us inside their nerves, even during a moment about someone else.",
@@ -109,11 +129,15 @@
      ],
      [
       "It is mostly about keeping the frame balanced and tidy",
-      "Balance can matter, but the video stresses that framing carries ideas and emotion."
+      "Placement is about meaning and feeling, not just tidiness."
      ],
      [
       "It should follow the same fixed rules in every scene",
-      "The video shows framing changing with what the scene needs to say, not fixed rules."
+      "Rules are tools; the right placement depends on the scene."
+     ],
+     [
+      "It matters less than what the person is saying",
+      "Where we put someone changes how we feel about what they say."
      ]
     ],
     "why": "Composition, meaning how the frame is arranged, tells the viewer how to read a person. For example, someone small in a big empty frame can feel alone.",
@@ -130,11 +154,15 @@
      ],
      [
       "Keep the cloth shot and speed up the other clips a little",
-      "Speeding up useful clips to save a pretty but empty shot makes the whole video weaker."
+      "Speeding up everything makes the whole promo feel rushed."
      ],
      [
       "Move the cloth shot to the opening, since starts should look nice",
-      "An opening shot should pull viewers in with meaning, not just look attractive."
+      "Looks aren't enough; the opening should show the service."
+     ],
+     [
+      "Shorten the cloth shot to two seconds and cut the customer shot",
+      "The customer shows the service; the cloth is decoration."
      ]
     ],
     "why": "The measuring shot tells viewers what the tailor does and how he works, while the cloth shot adds nothing they did not know.",
@@ -149,11 +177,15 @@
      ],
      [
       "A second wide shot of the stall from across the lane",
-      "Another wide repeats what the viewer has already seen."
+      "A second wide shot repeats what you already have."
      ],
      [
-      "A sunset timelapse over the rooftops nearby",
-      "It looks lovely, but it tells us nothing about him or his work."
+      "A medium shot of his face as he smiles at the customers",
+      "Fine later, but the action detail is what the viewer wants next."
+     ],
+     [
+      "A shot of the menu board above the stall",
+      "It adds information but not the action that makes the scene."
      ]
     ],
     "why": "The close-up shows his skill and speed, which the wide shot could not, so the viewer learns something.",
@@ -170,11 +202,15 @@
      ],
      [
       "Right at the start, to hook viewers in the first seconds",
-      "Using your biggest problem first leaves nothing bigger to come, so the middle feels flat."
+      "Starting with the injury loses the build-up of worry."
      ],
      [
       "Leave it out, since it makes the film feel too sad",
-      "The injury is the hardest test she faces, and cutting it removes the strongest pressure."
+      "It is the main obstacle; without it there is no tension."
+     ],
+     [
+      "In the middle, then show her recovering straight away",
+      "Resolving it at once releases the tension too early."
      ]
     ],
     "why": "Putting the worst setback near the end, after smaller problems, makes the pressure grow and the trial matter more.",
@@ -189,11 +225,15 @@
      ],
      [
       "Add livelier music under the middle part of the video",
-      "Music can lift energy for a moment, but it cannot fix a structure that runs downhill."
+      "Music doesn't fix the order of the stories."
      ],
      [
       "Trim all three stories so they are exactly the same length",
-      "Equal length does not change the order, so the video still gets weaker as it goes."
+      "Equal lengths don't change the order that loses viewers."
+     ],
+     [
+      "Put the toughest story in the middle, between the two easier ones",
+      "That hides the strongest story instead of building to it."
      ]
     ],
     "why": "When each part feels more serious than the one before, viewers sense rising pressure and keep watching.",
@@ -210,11 +250,15 @@
      ],
      [
       "Keep the fast song and add a warm colour filter on top",
-      "A warm filter helps a little, but fast music and cuts still push the mood toward party energy."
+      "A filter can't change the pace and feeling."
      ],
      [
       "Add even more quick cuts so the day feels full of life",
-      "More quick cuts make it more energetic, which moves further away from tender."
+      "Quick cuts fight a tender mood."
+     ],
+     [
+      "Keep the clips and just lower the volume of the song",
+      "Quick cuts still fight the tender mood."
      ]
     ],
     "why": "Holding moments longer and using softer music gives viewers time to feel, which creates a tender mood.",
@@ -229,11 +273,15 @@
      ],
      [
       "Each version was made from different footage of the scene",
-      "The point of the video is that the same footage can be read two ways."
+      "The video shows the same footage cut two ways."
      ],
      [
       "Only the colour grading was changed between the two cuts",
-      "The video shows structure, music and spacing doing the work, not colour alone."
+      "The big differences come from order, music and pauses."
+     ],
+     [
+      "One editor used many more effects and transitions than the other",
+      "The difference is in the editing choices, not in effects."
      ]
     ],
     "why": "The editors show that arranging the same material differently, with different music and spacing, changes how viewers understand it.",
@@ -251,12 +299,16 @@
       ""
      ],
      [
-      "Show the studio looking modern and bright with slow-motion dance shots.",
-      "This describes how the video looks, not who it is for or what they should do."
+      "Make the academy look like the best place to learn dance in Pune.",
+      "That is not measurable and has no audience or action."
      ],
      [
-      "Make a reel so good that everyone in the city shares it.",
-      "\"Everyone\" is not a real viewer, and shares alone do not tell you if the video worked."
+      "Get more people to follow the academy's Instagram page this month.",
+      "Followers are not bookings."
+     ],
+     [
+      "Show parents how modern and well-equipped the academy's new studio is.",
+      "That says what to show, not what the video should achieve."
      ]
     ],
     "why": "It names a specific group of people and one action you can count later. That makes it easy to plan shots and check results.",
@@ -270,12 +322,16 @@
       ""
      ],
      [
+      "The look, the music, the transitions and the colour of the final edit.",
+      "Those creative choices come after the brief."
+     ],
+     [
       "The camera, lenses, lighting kit and crew list for the shoot day.",
-      "These are production details that come later, once the brief is agreed."
+      "Gear and crew are planned after the brief."
      ],
      [
       "The final script, the music track and the full edit timeline.",
-      "These are made after the brief, not written into it."
+      "The edit comes after the brief."
      ]
     ],
     "why": "The video covers objectives, audience, deliverables and scope. Agreeing on these early keeps the whole team working toward the same result.",
@@ -291,12 +347,16 @@
       ""
      ],
      [
+      "Which of your best-selling pieces should be shown first?",
+      "Useful for the content, but it won't save you a reshoot."
+     ],
+     [
       "Would you like some drone shots of the shop?",
-      "This is about technique and can be decided later, once the goal is clear."
+      "That is a creative extra, not a risk to the shoot."
      ],
      [
       "What song would you like playing in the background?",
-      "Music can be picked later and rarely forces a reshoot."
+      "Music is easy to change later; approval problems are not."
      ]
     ],
     "why": "If a partner or family elder sees the video only at the end, they may ask for big changes. Knowing who signs off lets you include them early.",
@@ -311,11 +371,15 @@
      ],
      [
       "Promise about a week and adjust later if needed.",
-      "A guess can clash with their real date and cause stress for both of you."
+      "A guess you may have to break."
      ],
      [
       "Say yes and fit it in when your schedule frees up.",
-      "Without a fixed date you may deliver after the moment they needed it."
+      "You don't know what 'soon' means to them."
+     ],
+     [
+      "Ask what budget they have for the video.",
+      "Budget matters, but 'soon' is a question about time first."
      ]
     ],
     "why": "\"Soon\" means different things to different people. A real date, tied to a reason, lets you plan the shoot and edit properly.",
@@ -332,11 +396,15 @@
      ],
      [
       "Show all 40 sweets quickly so no product is missed.",
-      "A fast list of sweets buries the gift box message the client actually needs."
+      "Forty items in 60 seconds leaves viewers remembering none."
      ],
      [
       "Give each topic about ten seconds so everything fits.",
-      "Splitting time five ways means no topic is strong enough to make people act."
+      "Spreading time evenly leaves no clear message."
+     ],
+     [
+      "Lead with the history since 1952 and mention the boxes at the end.",
+      "History is not the goal; the Diwali boxes are."
      ]
     ],
     "why": "Office buyers need one clear reason to order. The other topics can become their own short videos.",
@@ -351,11 +419,15 @@
      ],
      [
       "Keep it as the opening because it looks expensive.",
-      "A pretty shot that is off topic wastes the first seconds, when viewers decide to stay."
+      "Looking good doesn't help viewers understand the app."
      ],
      [
       "Trim the other shots to make room for it.",
-      "This weakens the useful shots to fit in one that adds nothing to the message."
+      "You'd cut useful shots for one that doesn't help."
+     ],
+     [
+      "Keep it but shorten it to two seconds.",
+      "Shorter doesn't make it relevant."
      ]
     ],
     "why": "In a short video every second must earn its place. A shot you love is still wrong if it does not serve the message.",
@@ -372,11 +444,15 @@
      ],
      [
       "Take that as approval and mix ideas from all five clips.",
-      "Five different styles mixed together can look messy and may not be what she pictured."
+      "You don't know which parts she liked; mixing may please nobody."
      ],
      [
       "Pick your own favourite of the five and start planning.",
-      "You are still guessing what she wants, so you may disagree after the shoot."
+      "Your taste isn't hers."
+     ],
+     [
+      "Ask her to rank them from one to five and follow the top one.",
+      "A ranking doesn't tell you why she liked it."
      ]
     ],
     "why": "Liking a clip is not the same as agreeing on a look. Pinning down the exact things she likes gives you a clear target before filming.",
@@ -391,11 +467,15 @@
      ],
      [
       "To list the budget, crew rates and payment schedule for the project.",
-      "Money details go in a quote or contract, not in the treatment."
+      "Those go in the quote or budget."
      ],
      [
       "To give a shot-by-shot technical plan for the camera team.",
-      "That is a shot list, which comes after the creative idea is agreed."
+      "That is a shot list, a later document."
+     ],
+     [
+      "To show the client your past work and the gear you own.",
+      "A treatment describes this film, not your history."
      ]
     ],
     "why": "The treatment sells and explains the idea. It helps the client feel the mood and story before anything is filmed.",
@@ -412,11 +492,15 @@
      ],
      [
       "Charged a higher price up front to cover any extra requests.",
-      "A higher price without a clear list still leaves both sides arguing about what is included."
+      "A hidden buffer doesn't set what's included."
      ],
      [
       "Shared all the raw footage so they could make their own reels.",
-      "This hands over your work without fixing the real problem of an unclear agreement."
+      "Raw footage isn't the product, and it gives up your work."
+     ],
+     [
+      "Agreed to do whatever they asked, to keep the client happy.",
+      "That invites endless extras without pay."
      ]
     ],
     "why": "A clear list of versions, sizes and revisions shows both sides what is included. Extra requests can then be quoted as extra work.",
@@ -431,11 +515,15 @@
      ],
      [
       "So the client cannot ask for any changes once filming starts.",
-      "A brief sets direction, but changes still happen and need to be planned for."
+      "A brief doesn't stop changes; it sets how to handle them."
      ],
      [
       "So you can choose the gear and crew size before anything else.",
-      "Gear choices follow from the brief's aims; they are not the reason for it."
+      "Gear and crew follow the aims."
+     ],
+     [
+      "So you can charge more for the extra work they request later.",
+      "The brief is about agreement, not billing more."
      ]
     ],
     "why": "Business clients often have several people with opinions. A shared brief keeps everyone on the same plan and protects you from surprises later.",
@@ -454,11 +542,15 @@
      ],
      [
       "Note it down and plan to sort out charging when you arrive on the shoot day.",
-      "Leaving it for the day means you may run out of battery in the middle of the shoot."
+      "Leaving it to the day risks a dead battery mid-interview."
      ],
      [
       "Plan to unplug the sewing machine whenever you need to charge a battery.",
-      "This disturbs the owner's work, and nobody has agreed to it."
+      "The owner needs the machine to work."
+     ],
+     [
+      "Bring a single power bank and skip the extension cord.",
+      "One power bank may not last; ask the owner and bring backups."
      ]
     ],
     "why": "Asking first and packing cords and batteries means power can't stop your shoot. You solve the problem days before it can hurt you.",
@@ -473,11 +565,15 @@
      ],
      [
       "The café staff may be busier and slower to serve tea to your crew.",
-      "Slow tea is a small comfort issue; it does not spoil your picture or sound."
+      "A minor issue next to traffic noise and sun."
      ],
      [
       "Your camera may behave differently in the evening than in the morning.",
-      "The camera works the same way; the place around it is what changes."
+      "The camera behaves the same; the light and sound change."
+     ],
+     [
+      "Other customers may arrive and ask what you are filming.",
+      "Possible, but traffic and sun affect picture and sound much more."
      ]
     ],
     "why": "Light and noise change a lot over a day. A morning visit tells you little about 6 pm traffic or where the sun will sit.",
@@ -492,11 +588,15 @@
      ],
      [
       "It is mainly about choosing the best angles for the poster and thumbnail.",
-      "Picking good-looking angles is part of the first scout, not the technical one."
+      "A scout checks practical needs, not poster angles."
      ],
      [
       "It is mainly a chance to bargain a lower rent with the location owner.",
-      "Money talks may happen, but the tech scout is about practical working conditions."
+      "Money is not the main point of a scout."
+     ],
+     [
+      "It is a quick visit to take photos of the place for the director.",
+      "Photos show how it looks, not whether the crew can work there."
      ]
     ],
     "why": "A place can look perfect and still fail on noise, power or getting gear in. The tech scout tests those practical needs before production.",
@@ -513,11 +613,15 @@
      ],
      [
       "Slow slider shots of the cakes to set the mood before she sits down.",
-      "These look nice, but the video still works without them; her answers can't be replaced."
+      "The interview is the part that can't be redone if she leaves."
      ],
      [
       "A wide shot outside the shop so the video can open on the street.",
-      "You can get the outside shot any time, even after she leaves."
+      "That can be filmed after she leaves."
+     ],
+     [
+      "The ovens and trays being loaded, while she is still working.",
+      "Those can be filmed after she leaves; the interview can't."
      ]
     ],
     "why": "Her words are the heart of the video and only she can give them. Film what you can't replace first, and add the extras later.",
@@ -532,11 +636,15 @@
      ],
      [
       "To list every possible angle so you never have to make choices on set.",
-      "A shot list is a set of choices, not every angle anyone could think of."
+      "A shot list is a plan, not every option."
      ],
      [
       "To replace the script once filming starts so the crew needs only one page.",
-      "The shot list works alongside the script; it does not replace it."
+      "It supports the script; it doesn't replace it."
+     ],
+     [
+      "To record every shot you actually filmed, for the editor.",
+      "A shot list is made before filming; a log is made after."
      ]
     ],
     "why": "The director decides how each scene will be covered. The shot list writes that plan down so camera and crew work from the same page.",
@@ -553,11 +661,15 @@
      ],
      [
       "Tell the director tonight and let the news spread to the others.",
-      "Passing it along by word of mouth often misses someone or gets the details wrong."
+      "News passed along by chance may not reach everyone."
      ],
      [
       "Keep the old plan and explain the change to everyone when they arrive.",
-      "People will go to the wrong place first and lose time in the morning."
+      "The crew would go to the wrong place at 7 am."
+     ],
+     [
+      "Post the new address in the crew group chat and assume everyone will read it.",
+      "Assuming isn't confirming."
      ]
     ],
     "why": "One clear written update reaches everyone with the same details. Checking that each person read it stops anyone going to the old address.",
@@ -576,7 +688,11 @@
      ],
      [
       "Each person's fee for the day and the overall project budget.",
-      "Money details are private and do not help people get to set."
+      "Money details are private and not part of the call sheet."
+     ],
+     [
+      "The shot list, the storyboard and the mood images.",
+      "Those go in the shoot plan, not the call sheet."
      ]
     ],
     "why": "A call sheet gives practical day information: who to call, where to go, what to expect and how to stay safe. Creative and money details live elsewhere.",
@@ -593,11 +709,15 @@
      ],
      [
       "Tell the operator to follow the uncle, since he is part of the family.",
-      "Now the camera person has two bosses, and the director's plan falls apart."
+      "Two people giving directions makes it worse."
      ],
      [
       "Ignore the uncle completely and hope he gets tired and walks away.",
-      "This can upset the family; someone still needs to listen to him."
+      "Ignoring a family member can cause bigger problems."
+     ],
+     [
+      "Let the operator decide which of the uncle's suggestions to follow.",
+      "The operator needs one source of instructions."
      ]
     ],
     "why": "One person should speak with the family and give camera its directions. That keeps the operator focused and the family feeling heard.",
@@ -612,11 +732,15 @@
      ],
      [
       "The camera person stops recording at once without telling anyone.",
-      "Camera should not decide on takes alone; it confuses the speaker and the director."
+      "Stopping without telling anyone confuses the crew."
      ],
      [
       "Nobody says anything, and you try to clean the horn out in the edit.",
-      "A horn over speech is very hard to remove later; it is easier to record again."
+      "A horn over speech can't be cleaned out cleanly."
+     ],
+     [
+      "The sound person asks the speaker to repeat the answer directly.",
+      "The director decides, so the crew don't give instructions directly."
      ]
     ],
     "why": "Sound hears the problem, and the director decides on the take. Each person doing their own part fixes it quickly and calmly.",
@@ -633,11 +757,15 @@
      ],
      [
       "A gimbal, a handheld stabiliser, for smooth walking shots in the market.",
-      "Smooth shots are nice, but shaky footage is easier to live with than unclear voices."
+      "Bad sound ruins interviews more than a little shake."
      ],
      [
       "A second fast lens for a softer background behind each shop owner.",
-      "A soft background is a bonus; the interviews fail if people can't be heard."
+      "A softer background doesn't fix noisy market sound."
+     ],
+     [
+      "A set of LED lights to brighten dim shop interiors.",
+      "Sound problems in markets are bigger than light problems."
      ]
     ],
     "why": "In a noisy market, clear voices are the hardest thing to rescue later. A clip-on mic close to the mouth solves that at the source.",
@@ -652,11 +780,15 @@
      ],
      [
       "The price of the most expensive camera he hopes to use on the film.",
-      "Starting with gear prices skips the basic facts that drive every other cost."
+      "Costs come after the assumptions."
      ],
      [
       "The client's total amount, split evenly across every category.",
-      "Splitting money evenly ignores what the film actually needs."
+      "Splitting evenly ignores what each category needs."
+     ],
+     [
+      "The names of the crew he wants to hire for each role.",
+      "Names are filled in later; assumptions come first."
      ]
     ],
     "why": "Costs come from facts like days, people and places. Writing those down first makes every number easy to check and change.",
@@ -671,11 +803,15 @@
      ],
      [
       "The writer, director and lead actors who shape the film creatively.",
-      "Those key creative people are above the line, not below it."
+      "That is above the line."
      ],
      [
       "Extra costs you can cut first if the money starts running low.",
-      "Below the line is a category of costs, not a list of optional extras."
+      "That describes contingency, not the line."
+     ],
+     [
+      "Costs that the client pays directly, outside your budget.",
+      "Below the line costs are part of your production budget."
      ]
     ],
     "why": "Budgets split key creative people (above the line) from the crew and practical costs of making the film (below the line).",
@@ -692,11 +828,15 @@
      ],
      [
       "Get your main camera serviced and trust that it will not fail.",
-      "Servicing helps, but any camera can still fail and you would have nothing."
+      "Servicing doesn't remove the risk of failure."
      ],
      [
       "Tell the client that if the camera fails, the event can't be filmed.",
-      "This passes the risk to the client instead of solving it."
+      "The client expects you to have a plan."
+     ],
+     [
+      "Bring extra batteries and cards for the same camera and nothing else.",
+      "Batteries don't help if the camera itself fails."
      ]
     ],
     "why": "A tested spare that everyone knows about means a failure costs you minutes, not the whole event. Deciding it early keeps you calm on the day.",
@@ -711,11 +851,15 @@
      ],
      [
       "Wait until the shoot day and find someone at the market if he is away.",
-      "Searching on the day wastes crew time and you may find nobody suitable."
+      "Finding a replacement on the day is risky."
      ],
      [
       "Move the whole shoot to a later month without checking his dates.",
-      "This delays everything for a problem that may never happen."
+      "You might lose the client's deadline, and his dates may not work either."
+     ],
+     [
+      "Ask the client to pick a replacement once the weaver cancels.",
+      "That wastes time; line up the backup now."
      ]
     ],
     "why": "Having another person ready keeps the shoot on track either way. Telling the client early means nobody is surprised.",
@@ -732,11 +876,15 @@
      ],
      [
       "Accept them all, since the tool has already worked it out.",
-      "The tool doesn’t know every real-world limit."
+      "The tool doesn't know your crew, location or limits."
      ],
      [
       "Ignore them and stick to the schedule you made yourself.",
-      "Some suggestions can save real time. Check them."
+      "Some suggestions may genuinely help; check each one."
+     ],
+     [
+      "Accept the ones that save money and ignore the rest.",
+      "Saving money isn't enough if it breaks the scene or crew limits."
      ]
     ],
     "why": "AI suggestions are proposals. You approve them.",
@@ -750,12 +898,16 @@
       ""
      ],
      [
-      "There’s no problem. A day saved is good.",
-      "Saving a day isn’t worth losing the scene."
+      "There's no problem. A day saved is good.",
+      "A scene that only works at night can't be moved."
      ],
      [
       "Mornings are harder to light.",
-      "The bigger issue is that the scene no longer matches the script."
+      "That may be true, but the real problem is the scene itself."
+     ],
+     [
+      "The tool can't change a schedule without asking the client first.",
+      "The problem here is the scene, not permission."
      ]
     ],
     "why": "Check that changes keep what the story needs.",
@@ -774,11 +926,15 @@
      ],
      [
       "1/50 of a second",
-      "That suits 25 frames a second. At 50 frames it gives more blur than looks natural."
+      "That is the 180-degree rule for 25 frames; at 50 frames it is 1/100."
      ],
      [
-      "1/1000 of a second",
-      "Such a fast shutter freezes each frame, so the movement looks jerky."
+      "1/200 of a second",
+      "A shutter faster than twice the frame rate looks choppy."
+     ],
+     [
+      "1/25 of a second",
+      "That is too slow, so movement blurs."
      ]
     ],
     "why": "At 50 frames a second, a shutter of 1/100 gives each frame the right amount of motion blur, so the dancing looks smooth.",
@@ -793,11 +949,15 @@
      ],
      [
       "Record at 24 or 25 frames, then slow it down in the edit",
-      "There are too few frames to stretch, so the slowed clip looks jerky."
+      "There aren't enough frames, so slow motion looks jerky."
      ],
      [
       "Keep the normal frame rate and use a faster shutter",
-      "A faster shutter changes blur, not speed, so it cannot create slow motion."
+      "A faster shutter doesn't change how many frames you record."
+     ],
+     [
+      "Record at a high frame rate and play it at the same high rate",
+      "It would play at normal speed, not slow."
      ]
     ],
     "why": "Recording more frames each second and playing them at the normal rate spreads the action over more time, which gives smooth slow motion.",
@@ -814,11 +974,15 @@
      ],
      [
       "Leave it on auto and fix each clip in the edit later",
-      "Clips that change colour in the middle of a shot are slow to fix and rarely match well."
+      "Auto shifts colour between shots, which is hard to match."
      ],
      [
       "Switch to the daylight preset for cleaner, brighter colours",
-      "A daylight setting under yellow bulbs makes everything look very orange."
+      "Daylight setting leaves the bulbs looking orange."
+     ],
+     [
+      "Set 5600K once and fix the orange in the edit",
+      "The orange is baked into the footage and hard to correct."
      ]
     ],
     "why": "K stands for Kelvin, a number for the colour of light. A fixed value that suits the bulbs stops the camera from guessing again on every shot.",
@@ -833,11 +997,15 @@
      ],
      [
       "Too blue or cold",
-      "Blue comes from a low Kelvin setting in daylight, which is the opposite case."
+      "A daylight setting under warm bulbs leaves the picture orange, not blue."
      ],
      [
       "Natural and correct",
-      "5600K matches daylight, not tungsten bulbs, so the colour will be off."
+      "The setting does not match the light."
+     ],
+     [
+      "Too green",
+      "Mismatched tungsten light looks orange, not green."
      ]
     ],
     "why": "Tungsten light is much warmer, around 3200K, so a daylight setting leaves its warm colour uncorrected and the image looks orange.",
@@ -854,11 +1022,15 @@
      ],
      [
       "Expose for the bright street so it keeps all its detail",
-      "The face will stay dark, and the face is what the viewer needs to see."
+      "That makes the face even darker."
      ],
      [
       "Raise exposure until the face is bright and ignore the doorway",
-      "The street will turn pure white with no detail, which looks careless."
+      "The doorway will blow out to white."
+     ],
+     [
+      "Switch to a wider lens so the doorway looks smaller",
+      "The lens doesn't fix the exposure difference."
      ]
     ],
     "why": "Reducing the gap in brightness between the face and the background lets you show the face well without losing the bright area behind.",
@@ -873,11 +1045,15 @@
      ],
      [
       "Bright areas always add a lot of grain to the picture",
-      "Grain mostly shows up in dark areas and at high ISO, not in highlights."
+      "Grain is mostly in dark areas."
      ],
      [
       "Highlights decide the white balance of the whole shot",
-      "White balance is set separately and does not depend on how bright the highlights are."
+      "White balance is a separate setting."
+     ],
+     [
+      "Highlights are the first part of the picture to lose sharpness",
+      "Highlights lose detail, not sharpness."
      ]
     ],
     "why": "Clipped highlights hold no information, so no edit can recover them. That is why tools like zebras (striped warning lines on the screen) are used to check them while shooting.",
@@ -894,11 +1070,15 @@
      ],
      [
       "A lens around 85mm pushed into a corner",
-      "An 85mm lens shows only a narrow slice, so you would see one counter at best."
+      "85mm is too tight to show the whole workspace."
      ],
      [
       "A 50mm lens and several pans across the room",
-      "Panning shows the room in parts, not in one clear shot as the client wants."
+      "Pans don't show the whole space in one shot."
+     ],
+     [
+      "A 35mm lens from the corner of the kitchen",
+      "35mm is not wide enough to show the whole workspace."
      ]
     ],
     "why": "A short focal length takes in a broad view, so you can show a whole small room even with your back to the wall.",
@@ -913,11 +1093,15 @@
      ],
      [
       "Stand close to the couple with a 24mm lens",
-      "A wide lens up close makes the background look smaller and further away."
+      "A wide lens makes the temple smaller and farther."
      ],
      [
       "Stay where you are and crop in during the edit",
-      "Cropping loses quality and does not change how near the background feels."
+      "Cropping doesn't change the space between them and the temple."
+     ],
+     [
+      "Use a 50mm lens from a medium distance",
+      "That gives a natural look, not the compressed look."
      ]
     ],
     "why": "A long lens used from a distance squeezes the space, so the background looks larger and closer to the subject.",
@@ -934,11 +1118,15 @@
      ],
      [
       "Turn on tracking autofocus and select the jewellery",
-      "Tracking can still jump to the hand when it comes closer or covers the piece."
+      "Tracking can still jump when a hand enters."
      ],
      [
       "Open the aperture wider so the hand goes soft",
-      "A wider aperture makes the sharp area thinner, so any jump becomes more obvious."
+      "A wide aperture makes focus even more sensitive."
+     ],
+     [
+      "Add a second light so the camera has more to focus on",
+      "More light doesn't tell the camera what to focus on."
      ]
     ],
     "why": "Manual focus stays on the product no matter what enters the frame, which a fixed product shot needs.",
@@ -953,11 +1141,15 @@
      ],
      [
       "Close the aperture so the man and the phone both stay sharp",
-      "With both sharp, nothing guides the viewer's eye towards the phone."
+      "Both stay sharp, so there is no shift of attention."
      ],
      [
       "Zoom in quickly towards the phone as it starts to ring",
-      "A fast zoom feels rough and leaves the phone soft if focus is still on the man."
+      "Zooming changes size, not focus."
+     ],
+     [
+      "Open the aperture fully so the whole scene goes soft",
+      "Everything goes soft, so nothing guides the eye."
      ]
     ],
     "why": "This is a rack focus. Moving focus from one subject to another tells the viewer exactly where to look.",
@@ -974,11 +1166,15 @@
      ],
      [
       "Turn up the phone's screen brightness before you start",
-      "Screen brightness only changes your view, not the recorded video."
+      "Screen brightness doesn't change the recording."
      ],
      [
       "Walk more slowly so the phone adjusts more gently",
-      "The phone will still change brightness and colour, just more slowly."
+      "It still adjusts, just more slowly."
+     ],
+     [
+      "Film in 4K so the phone has more detail to adjust",
+      "Resolution doesn't stop it changing exposure and colour."
      ]
     ],
     "why": "When exposure and white balance stay fixed, the phone stops adjusting as the scene changes, so the shot looks even.",
@@ -993,11 +1189,15 @@
      ],
      [
       "Both cameras on auto so each one adjusts to the light",
-      "Each camera will make different choices, so colour and brightness will not match."
+      "Auto lets each camera drift to a different look."
      ],
      [
       "The same resolution, with the other settings left free",
-      "Matching resolution alone leaves motion and colour different between the cameras."
+      "Matching resolution alone leaves colour and motion mismatched."
+     ],
+     [
+      "The same brand and model of camera on both",
+      "The same model doesn't ensure the same settings."
      ]
     ],
     "why": "Matching motion and colour settings by hand on both cameras makes the shots look like one sequence when you cut between them.",
@@ -1016,11 +1216,15 @@
      ],
      [
       "The cut in one long close-up so you never miss the knife moving",
-      "You only get the cake, so the edit has nothing to show how people felt about it."
+      "One close-up misses the faces and reactions that make the moment."
      ],
      [
       "The cut from three angles: wide, medium and close-up on the knife",
-      "These all show the same event, and none of them shows how the family responded."
+      "A cut happens once; one camera can't get three angles."
+     ],
+     [
+      "A slow zoom in on the cake from the back of the room, held through the cut",
+      "The zoom drifts and misses the reactions, which are the story."
      ]
     ],
     "why": "The cake cut tells us what happened. The faces of the people watching tell us why the moment meant something, and give you shots to cut between.",
@@ -1035,11 +1239,15 @@
      ],
      [
       "Shoot every angle you can think of so the editor has lots of choice",
-      "Shooting without a plan wastes time, and you may run out before the key shots."
+      "With one hour you'd miss the essential shots."
      ],
      [
       "Write a long, detailed list and try to get through every single shot",
-      "A long list with no order means you may miss the shots the scene truly needs."
+      "A long list can't be finished; priorities matter."
+     ],
+     [
+      "Write a short list ordered by location to save walking time",
+      "When time is short, priority matters more than location."
      ]
     ],
     "why": "A limited, ranked list makes sure the shots the story depends on get filmed first, even if time runs out.",
@@ -1056,11 +1264,15 @@
      ],
      [
       "Add a quick white flash between the two clips so the jump feels planned",
-      "A flash draws attention to the edit instead of hiding it."
+      "A flash draws attention to the cut."
      ],
      [
       "Leave the jump in, since viewers know interviews are always edited",
-      "A visible jump in the face looks careless in this kind of interview."
+      "A visible jump looks careless when a cutaway could cover it."
+     ],
+     [
+      "Slow the clip down slightly across the join to smooth the jump",
+      "Slowing changes her voice and the face still jumps."
      ]
     ],
     "why": "Covering the join with a related detail shot hides the cut, and her voice carries on so the answer still flows.",
@@ -1075,11 +1287,15 @@
      ],
      [
       "More angles of his face while he chats, to give you extra choices later",
-      "More talking shots will not help you hide cuts in his talking."
+      "You already have his face; you need cutaways."
      ],
      [
       "Wide shots of the busy street outside to show where the shop is",
-      "One wide street shot is useful, but it does not show the details of his work."
+      "The street isn't what he talked about."
+     ],
+     [
+      "A long take of the shop from the doorway, left running while he works",
+      "A wide static take gives little usable cutaway."
      ]
     ],
     "why": "Details of his work and the things he mentions give you shots to cover edits and to show what he is describing.",
@@ -1096,11 +1312,15 @@
      ],
      [
       "Cross to the other side of the road to get the shops in the background",
-      "From the other side the procession will move right to left and seem to turn back."
+      "That crosses the line and reverses the procession."
      ],
      [
       "Move to any side you like, since the music will keep the edit connected",
-      "Sound does not fix confusing direction, and viewers will still feel lost."
+      "Music doesn't fix a flipped direction."
+     ],
+     [
+      "Cross over for the next shot and flip the image in the edit",
+      "Flipping fixes direction but reverses signs and text."
      ]
     ],
     "why": "Staying on one side keeps the procession moving the same way on screen, so viewers feel it is still heading to the same place.",
@@ -1115,11 +1335,15 @@
      ],
      [
       "When the shots are short enough that viewers will not notice the flip",
-      "Short shots do not hide a flip, and viewers still feel the change in direction."
+      "Viewers notice a flip even in short shots."
      ],
      [
       "When the scene is fast, since quick action hides the change of side",
-      "Fast action does not stop the flip from confusing people about where things are."
+      "Speed doesn't hide a reversed direction."
+     ],
+     [
+      "When the shot after the cross is much wider than the one before",
+      "A change of size doesn't stop the flip."
      ]
     ],
     "why": "A deliberate crossing, like a camera move across the line that viewers can see, keeps them oriented while changing the feel of the scene.",
@@ -1136,11 +1360,15 @@
      ],
      [
       "Have her look towards the right side too, so the two shots match",
-      "If both look right, they will seem to be looking away from each other."
+      "Both would look the same way, as if not talking to each other."
      ],
      [
       "Have her look straight into the lens for a strong, direct feeling",
-      "Looking into the lens makes her talk to the viewer, not to the man."
+      "Looking into the lens breaks the conversation."
+     ],
+     [
+      "Move the camera to the other side of them and film her looking right",
+      "That crosses the line."
      ]
     ],
     "why": "Opposite sides of the frame make the two people seem to face each other when you cut between them.",
@@ -1155,11 +1383,15 @@
      ],
      [
       "Both look straight ahead at lens height so the close-ups look even",
-      "Level looks lose the height difference, so they won't seem to see each other."
+      "They'd look at the audience, not at each other."
      ],
      [
       "The son looks down and the father looks up, to make them feel equal",
-      "This flips their real positions and confuses the viewer."
+      "Reversed directions make the eyelines miss."
+     ],
+     [
+      "Both look off to the right at the same level",
+      "Their different heights need different eyelines."
      ]
     ],
     "why": "The angle of the look should match where the other person really is, including height, so the two shots connect.",
@@ -1176,11 +1408,15 @@
      ],
      [
       "That both clips are about the same length on the timeline",
-      "Clip length does not affect whether the movement lines up at the join."
+      "Length doesn't affect the match."
      ],
      [
       "That the close-up is a little brighter so it stands out from the wide",
-      "A brightness change makes the join more visible, not smoother."
+      "A brightness change makes the cut more obvious."
+     ],
+     [
+      "That the cut happens just after the flip finishes",
+      "Cutting during the action is the point; match its position."
      ]
     ],
     "why": "The cut feels smooth only if the action carries on from the exact same point. If the roti jumps position, the eye catches the join.",
@@ -1195,11 +1431,15 @@
      ],
      [
       "In the close shot, just do the last part where the shutter goes up",
-      "Without the full action you have no overlap to pick a cut point."
+      "The edit needs the whole action to cut in the middle."
      ],
      [
       "Try it a little differently each time so you have more variety",
-      "If the action changes, the movement will not match across the cut."
+      "Different actions won't match at the cut."
+     ],
+     [
+      "Skip the middle in the close shot, since the wide shot shows it",
+      "Gaps make the cut jump."
      ]
     ],
     "why": "Repeating the same full action gives you overlap in both shots, so you can cut at the exact same moment of movement.",
@@ -1216,11 +1456,15 @@
      ],
      [
       "Keep a gentle slider move going through the whole interview",
-      "Constant movement has no link to the story, so it adds nothing at the key moment."
+      "A constant move loses its effect when the moment arrives."
      ],
      [
       "Pan around the room to show the looms while she talks about it",
-      "Moving away from her face loses the feeling at the most emotional point."
+      "Moving away loses the emotion on her face."
+     ],
+     [
+      "Cut to a wide shot of her looms at the moment she tells it",
+      "Going wide at the emotional moment pulls away from her."
      ]
     ],
     "why": "A slow move closer at that moment draws the viewer into her feeling. The move has a reason, so it lands.",
@@ -1235,11 +1479,15 @@
      ],
      [
       "It adds energy, so it suits most scenes that feel a little slow",
-      "The guide links movement to story and feeling, not to fixing slow scenes."
+      "Movement without a reason distracts."
      ],
      [
       "It replaces cutaways, so you need fewer shots later in the edit",
-      "The guide ties tracking to following a character, not to saving shots."
+      "A tracking shot doesn't replace cutaways."
+     ],
+     [
+      "It turns the camera on the spot to show what is around the character",
+      "That is a pan, not a tracking shot."
      ]
     ],
     "why": "Following a character keeps us with them through space, which gives both information and emotion. A still shot is often better when a move adds nothing.",
@@ -1258,11 +1506,15 @@
      ],
      [
       "Keep the tube on and add a light right next to the camera, at her eye level.",
-      "A light from the camera fills the eyes but makes the face flat, with no shape."
+      "Light from the camera is flat and the tube's shadows stay."
      ],
      [
       "Switch off the tube and place your light low, below her chin, pointing up.",
-      "Light from below makes a face look strange and spooky, not natural."
+      "Light from below looks unnatural."
+     ],
+     [
+      "Keep the tube on and place a soft light high above her, pointing straight down.",
+      "Top light deepens the eye sockets."
      ]
     ],
     "why": "The overhead tube causes the eye shadows, so it goes off. A soft light from an angle, slightly high, gives the face gentle shape.",
@@ -1277,11 +1529,15 @@
      ],
      [
       "The whole face is evenly bright, with no shadow on either cheek.",
-      "Even, shadowless light is a flat look, not Rembrandt."
+      "That is flat light, not Rembrandt."
      ],
      [
       "The person is a dark shape against a bright background.",
-      "That describes the silhouette setup, a different look in the video."
+      "That is a silhouette, not Rembrandt lighting."
+     ],
+     [
+      "A bright line of light down the nose and chin only.",
+      "Rembrandt shows a small triangle on the far cheek."
      ]
     ],
     "why": "Rembrandt lighting puts the key high and to one side, so only a small triangle of light reaches the far cheek. That triangle is the quick check.",
@@ -1298,11 +1554,15 @@
      ],
      [
       "Lower the ISO and close the aperture so the bright patch is less strong.",
-      "This darkens the image, but the hard edges and shadows stay the same."
+      "The patch is still hard and now the rest is darker."
      ],
      [
       "Move her closer to the window so the patch covers her whole face.",
-      "Closer to direct sun means more harsh light, not softer light."
+      "Closer makes the light harder and brighter."
+     ],
+     [
+      "Close the blinds fully and raise ISO to compensate.",
+      "You'd lose the only light and add noise."
      ]
     ],
     "why": "A thin white cloth turns the small, hard sun into a large, even source. Exposure settings change brightness, not hardness.",
@@ -1317,11 +1577,15 @@
      ],
      [
       "Keep the window behind him and raise exposure until his face looks right.",
-      "The window will blow out to pure white before his face looks good."
+      "The window will blow out to white."
      ],
      [
       "Keep the window behind him and close the curtain on it fully.",
-      "Closing it fully removes your only good light and leaves him dull."
+      "Closing the window removes the light you need."
+     ],
+     [
+      "Add a lamp behind the camera and leave the window behind him.",
+      "The lamp would have to beat the window, and the face looks flat."
      ]
     ],
     "why": "Window light works best when it falls on the face, not behind it. Turning the subject uses the free light instead of fighting it.",
@@ -1338,11 +1602,15 @@
      ],
      [
       "A black cloth on his right side, close to his face, to keep it clean.",
-      "Black cloth takes light away, so the dark side gets even darker."
+      "Black adds darkness; the right side needs fill."
      ],
      [
       "Move the LED closer and make it brighter so more light spills around.",
-      "A brighter key also brightens the lit side, so the dark side still looks dark next to it."
+      "A closer light makes the shadow harder."
+     ],
+     [
+      "A mirror on his right side, aimed at his face.",
+      "A mirror bounces hard glare, not soft fill."
      ]
     ],
     "why": "A white surface catches the main light and bounces it into the shadows. It fills the dark side without a second lamp.",
@@ -1357,11 +1625,15 @@
      ],
      [
       "The light will become harder, so move the lamp further from the wall.",
-      "Bouncing off a wall makes light softer, not harder. Colour is the real issue."
+      "Bounced light stays soft; its colour is the problem."
      ],
      [
       "Nothing changes, because bounced light always keeps its original colour.",
-      "Bounced light takes on the colour of the surface it hits."
+      "Bounced light picks up the colour of the wall."
+     ],
+     [
+      "The wall will absorb all the light, so none reaches her.",
+      "A yellow wall still bounces light, just yellow."
      ]
     ],
     "why": "Bounced light carries the colour of the surface. A white or neutral surface keeps skin tones natural.",
@@ -1378,11 +1650,15 @@
      ],
      [
       "Brighten the whole shot in the edit so his face matches the doorway.",
-      "Lifting everything also lifts the doorway, which then turns pure white."
+      "Brightening everything keeps the doorway brighter than his face."
      ],
      [
       "Add a light on the wall around the doorway so the scene looks even.",
-      "More light on the background makes it pull attention even more."
+      "More light on the wall doesn't make the doorway darker."
+     ],
+     [
+      "Raise the exposure until the doorway looks natural.",
+      "His face would be overexposed."
      ]
     ],
     "why": "The eye goes to the brightest part of the frame. Reducing the background light is quicker and cleaner than trying to outshine it.",
@@ -1397,11 +1673,15 @@
      ],
      [
       "It bounces extra light into the shadow side, so the face looks even.",
-      "Black material absorbs light. A white reflector is what bounces light in."
+      "A black flag removes light; it doesn't add any."
      ],
      [
       "It hides the light stand, so the key can sit right in front of the face.",
-      "A key placed straight in front flattens the face and removes the shadow side."
+      "A flag shapes light; it isn't a hiding cloth."
+     ],
+     [
+      "It adds a cool colour cast to the shadow side.",
+      "Black adds no colour; it only takes light away."
      ]
     ],
     "why": "Black material absorbs light bouncing off walls and ceilings. This is called negative fill, and it gives the face more shape and mood.",
@@ -1418,11 +1698,15 @@
      ],
      [
       "Raise exposure so the lamp and the face both look bright and lively.",
-      "That makes the lamp even more blown out and overexposes the face."
+      "The lamp stays blown out and the face is overexposed."
      ],
      [
       "Lower exposure until the lamp shows detail, then brighten the face in the edit.",
-      "The face is now too dark, and lifting it later adds noise and looks muddy."
+      "The face loses detail in the dark."
+     ],
+     [
+      "Turn the lamp off and add a brighter overhead light.",
+      "You lose the lamp's glow and the scene's mood."
      ]
     ],
     "why": "A lamp in the shot should glow, not burn out. Dimming the lamp itself keeps detail in the shade and lets the face stay correctly exposed.",
@@ -1437,11 +1721,15 @@
      ],
      [
       "Turn the lamp brighter so it reads as a halo behind her head.",
-      "A bright lamp behind the head is even more distracting."
+      "A brighter lamp is a distraction."
      ],
      [
       "Blur the background more and leave the lamp where it is now.",
-      "A blurred lamp still sits behind her head and still distracts."
+      "Blurring doesn't remove the shape growing from her head."
+     ],
+     [
+      "Switch the lamp off and add no other light.",
+      "She loses the light and the mood in the room."
      ]
     ],
     "why": "Objects lined up behind a head look odd. A small change in position keeps the lamp adding mood without fighting the face.",
@@ -1458,11 +1746,15 @@
      ],
      [
       "Add a stronger light straight from the camera position onto him.",
-      "Front light flattens his face and does not create an edge."
+      "Front light flattens him and doesn't separate him from the wall."
      ],
      [
       "Raise exposure in the edit until he finally stands out.",
-      "This lifts the wall too, so he still blends in."
+      "The wall brightens too, so he still blends in."
+     ],
+     [
+      "Move him closer to the wall so its light bounces onto him.",
+      "A dark wall doesn't bounce any light."
      ]
     ],
     "why": "Light from behind draws a bright edge around the person. That edge stands out against a dark background.",
@@ -1477,11 +1769,15 @@
      ],
      [
       "So the key light can be placed behind the camera for even light.",
-      "The video moves the subject to control the background, not to flatten the key."
+      "The distance has nothing to do with the key light's position."
      ],
      [
       "So the room looks smaller and more private on camera.",
-      "Distance from the background makes a room feel deeper, not smaller."
+      "More distance makes the room look bigger."
+     ],
+     [
+      "So the camera can be closer to the subject.",
+      "The camera's position doesn't depend on the background distance."
      ]
     ],
     "why": "Space between subject and background lets you shape each one separately. That control creates depth and keeps the person clearly apart.",
@@ -1500,11 +1796,15 @@
      ],
      [
       "The camera's built-in mic, with you walking two steps behind",
-      "The camera mic is far from his mouth and will pick up mostly market noise."
+      "The mic is too far and picks up the whole market."
      ],
      [
       "A boom mic held high above the crowd, out of shot",
-      "A boom is hard to keep pointed at a moving speaker in a crowded lane."
+      "A boom held that high is far from his mouth, so market noise gets in."
+     ],
+     [
+      "A shotgun mic on the camera, aimed at him from a metre away",
+      "Too far from his mouth, and it picks up the market noise."
      ]
     ],
     "why": "A lav moves with the speaker and stays near the mouth, so his voice stays strong over the market noise even while he walks.",
@@ -1519,11 +1819,15 @@
      ],
      [
       "In the edit, using noise reduction and EQ tools",
-      "Editing tools can help a little, but they cannot fully repair a poorly placed mic or a noisy room."
+      "Those tools can only partly repair bad recording."
      ],
      [
       "After a test screening, once you know what bothers viewers",
-      "By then the shoot is over, and the only fix is an expensive reshoot."
+      "Too late; the recording is already finished."
+     ],
+     [
+      "During the mix, with a sound editor's tools",
+      "Mixing can't fully fix a poor recording."
      ]
     ],
     "why": "The video stresses fixing sound at the source on location. Good placement and careful listening on set save hours of repair work later.",
@@ -1540,11 +1844,15 @@
      ],
      [
       "Leave it, and turn the clip down later in the edit",
-      "Sound that hits 0 is clipped (cut off and distorted), and lowering it later does not remove the distortion."
+      "Clipped sound is distorted and can't be repaired."
      ],
      [
       "Ask him to step back from the mic while he talks",
-      "This disturbs the event and makes the sound thinner and more echoey."
+      "It changes his delivery; set the level instead."
+     ],
+     [
+      "Lower the gain until his loudest words sit near −40",
+      "That is too low and adds hiss when you raise it later."
      ]
     ],
     "why": "Gain is the input volume. Peaks around −15 to −9 leave room for loud moments without distortion, while staying well above background hiss.",
@@ -1559,11 +1867,15 @@
      ],
      [
       "Keep going, since the meter shows the levels are still in a good range",
-      "Meters show loudness, not quality, so a hum can sit under good levels and ruin the take."
+      "The meter doesn't show a hum."
      ],
      [
       "Raise the gain a little so the voice stays clearly above the hum",
-      "Higher gain lifts the hum by the same amount, so it stays just as noticeable."
+      "The hum rises with the gain too."
+     ],
+     [
+      "Note the time and ask the editor to remove the hum",
+      "Hum under speech is hard to remove cleanly."
      ]
     ],
     "why": "Hums and buzzes are only caught by listening. Stopping to remove the cause is far easier than trying to clean it out in the edit.",
@@ -1580,11 +1892,15 @@
      ],
      [
       "Turn the gain down so the rustle becomes quieter",
-      "This lowers her voice by the same amount, so the rustle stays just as noticeable."
+      "The voice gets quieter too, and the rustle stays."
      ],
      [
       "Ask her to keep her arms still during the talk",
-      "People forget within minutes, and a stiff posture looks unnatural on camera."
+      "It won't look or sound natural."
+     ],
+     [
+      "Clip it higher, nearer her chin, still on the loose fabric",
+      "It would still rub."
      ]
     ],
     "why": "Rustle comes from cloth or cable moving against the mic. Securing it in a calmer spot and testing with real movement fixes the cause.",
@@ -1599,11 +1915,15 @@
      ],
      [
       "The mic being too far from the mouth to hear speech",
-      "Distance matters, but the hiding steps focus on stopping the mic from moving against fabric."
+      "Careful hiding is about rubbing noise, not distance."
      ],
      [
       "Radio signal drop-outs between the transmitter and receiver",
-      "That is a wireless range issue, not what the concealment method is solving."
+      "Signal drop-outs aren't caused by where you hide the mic."
+     ],
+     [
+      "Echo from the room bouncing around the speaker",
+      "Hiding a mic doesn't change the room's echo."
      ]
     ],
     "why": "A hidden lav sits under clothing, so it must be fixed in place. Taping and looping the cable stops fabric from rubbing the mic during movement.",
@@ -1620,11 +1940,15 @@
      ],
      [
       "Raise the gain so the voice rises above the rumble",
-      "Higher gain makes the wind rumble louder too and may cause distortion."
+      "The rumble rises with the gain too."
      ],
      [
       "Record anyway and remove the wind with noise reduction",
-      "Wind rumble is loud and uneven, and cleaning it often leaves the voice sounding damaged."
+      "Wind rumble can't be removed cleanly."
+     ],
+     [
+      "Hold the mic closer to the speaker's mouth and keep the same spot",
+      "Closer helps, but wind still rumbles without a windshield."
      ]
     ],
     "why": "Wind noise is air hitting the mic itself. A fluffy cover and a sheltered spot stop the air before it reaches the mic, which no edit can fully do.",
@@ -1639,11 +1963,15 @@
      ],
      [
       "Use the camera mic and add noise reduction later",
-      "The camera mic is far away, and heavy noise reduction makes the voice sound watery."
+      "The camera mic is too far and noise reduction harms the voice."
      ],
      [
       "Turn up the gain so his voice beats the traffic",
-      "Gain raises the traffic as much as the voice, so the balance does not improve."
+      "The traffic gets louder too."
+     ],
+     [
+      "Move closer with the camera and ask him to speak up",
+      "The traffic is still louder than the voice."
      ]
     ],
     "why": "A closer mic makes the voice much louder than the background, and a quieter spot lowers the noise itself. Both help before anything is recorded.",
@@ -1660,11 +1988,15 @@
      ],
      [
       "A short clip of the sewing machine on its own, up close",
-      "That gives a separate sound, not the background that sits behind the speech."
+      "Room tone is the sound of the whole room with the same mic."
      ],
      [
       "A few quiet wide shots of the shop for the editor to use",
-      "Shots help the picture edit, but the editor still has no matching background sound for audio gaps."
+      "Pictures don't fill sound gaps."
+     ],
+     [
+      "About 30 seconds of the shop in silence, using the camera's built-in mic",
+      "Room tone must be recorded with the same mic as the interview."
      ]
     ],
     "why": "The editor needs the exact background of that space, recorded with the same setup, to fill gaps and smooth cuts.",
@@ -1679,11 +2011,15 @@
      ],
      [
       "Add soft background music to cover the jumps",
-      "Music can hide some problems, but it changes the mood and is not right for every film."
+      "Music changes the mood; the gaps need the room's own sound."
      ],
      [
       "Lower the whole interview volume so the gaps are less clear",
-      "The hiss still drops in and out, just more quietly, and the voice gets weaker."
+      "A quieter interview doesn't remove the gaps."
+     ],
+     [
+      "Add the sound of a different shop from a free library",
+      "A different room sounds different, and viewers feel the mismatch."
      ]
     ],
     "why": "The quiet recording made on location has the same hiss as the interview, so placing it in the gaps makes the background sound continuous.",
@@ -1700,11 +2036,15 @@
      ],
      [
       "Start recording right away so he does not get more nervous",
-      "Rushing in keeps him tense, and the first answers usually sound stiff and short."
+      "A stiff person with an audience won't loosen up."
      ],
      [
       "Hand him the exact questions so he can memorise answers",
-      "Memorised answers sound rehearsed and lose the natural feeling you want."
+      "Memorised answers sound stiff."
+     ],
+     [
+      "Ask the family to stay and cheer him on",
+      "An audience adds pressure."
      ]
     ],
     "why": "An audience adds pressure, and an easy talk first builds trust. He will then answer the camera questions more naturally.",
@@ -1719,11 +2059,15 @@
      ],
      [
       "Move on to the next question on your list to save time",
-      "You lose the story behind the short answer, which is often the best part."
+      "A short answer is a chance to ask more."
      ],
      [
       "Ask 'Was it your best year ever?' to get a stronger answer",
-      "This is another yes-or-no question and will likely get another short reply."
+      "A closed question leads him to a yes or no."
+     ],
+     [
+      "Ask 'Was the year good because of business?' to guide the answer",
+      "That puts the answer in his mouth."
      ]
     ],
     "why": "Open questions invite the person to explain. Listening closely and following up turns short replies into complete, usable answers.",
@@ -1738,11 +2082,15 @@
      ],
      [
       "Record first, then ask permission once you see what they said",
-      "Consent should come before recording, so the person decides with full knowledge."
+      "Consent comes before recording."
      ],
      [
       "Assume agreement because they already agreed to meet you",
-      "Agreeing to meet is not the same as understanding and agreeing to how the footage is used."
+      "Meeting isn't consent to be filmed and shared."
+     ],
+     [
+      "Get agreement from his manager, since it's his workplace",
+      "Consent has to be personal, not given by someone else."
      ]
     ],
     "why": "Informed consent means the person knows how the footage will be used and what risks it may bring. They agree freely before you start recording.",
@@ -1761,11 +2109,15 @@
      ],
      [
       "In the Footage folder, since it was recorded on the shoot.",
-      "Footage is for camera clips, so a sound file there is hard for others to find."
+      "Footage holds pictures; sound goes in Audio."
      ],
      [
       "In the Project folder, next to the edit file that uses it.",
-      "The Project folder holds edit files, not media, so sound gets lost there."
+      "Project holds the edit file, not source media."
+     ],
+     [
+      "On the desktop until the edit needs it.",
+      "Loose files get lost and mixed up."
      ]
     ],
     "why": "Room tone is a quiet recording of the room's sound, so it is audio. Putting each type of file in the same place every time means anyone can find it.",
@@ -1780,11 +2132,15 @@
      ],
      [
       "Import all the clips again and rebuild the edit from scratch.",
-      "Rebuilding wastes hours, and the files only need to be reconnected."
+      "That loses all your work."
      ],
      [
       "Delete the offline clips from the timeline and carry on.",
-      "This throws away your edit work when the media can be found and relinked."
+      "You'd lose the edit."
+     ],
+     [
+      "Rename the offline clips in the project panel to match the new folder.",
+      "Renaming doesn't link the files."
      ]
     ],
     "why": "Relinking tells the project where the files now live, so all your cuts come back as they were.",
@@ -1799,11 +2155,15 @@
      ],
      [
       "Convert the originals to low quality and delete the big files.",
-      "You lose your full quality footage for good, which you need for the final export."
+      "You'd lose quality for the final export."
      ],
      [
       "Edit as it is and just export the film at a lower resolution.",
-      "A lower export does not fix the stutter while you edit."
+      "The stuttering is while editing, which export size doesn't fix."
+     ],
+     [
+      "Edit in a smaller timeline size and export the proxies.",
+      "You should export from the originals for quality."
      ]
     ],
     "why": "A proxy is a lighter copy of a clip that plays smoothly while editing. Premiere switches back to the full files when you export.",
@@ -1820,11 +2180,15 @@
      ],
      [
       "Format the card right away, since the copy showed no error.",
-      "Copies can fail silently, so no error message does not prove the files are whole."
+      "A copy without errors can still have missing or damaged files."
      ],
      [
       "Look for thumbnails in the folder, then format the card.",
-      "A thumbnail can show even when the rest of the file is broken or cut short."
+      "Thumbnails can appear for files that won't play."
+     ],
+     [
+      "Check the last clip plays, then format the card.",
+      "One clip doesn't show whether the rest copied."
      ]
     ],
     "why": "Matching the count and size shows nothing is missing, and playing clips shows the files actually work.",
@@ -1839,11 +2203,15 @@
      ],
      [
       "As soon as the first copy has finished on the laptop.",
-      "One unchecked copy is a single point of failure if that drive or file is bad."
+      "One copy isn't safe, and it isn't checked."
      ],
      [
       "Before the next day's shoot, whatever the copies show.",
-      "Needing an empty card is not a reason to risk losing a whole day of footage."
+      "You need the copies checked first."
+     ],
+     [
+      "After the backup drive finishes copying, without checking the files.",
+      "A finished copy still needs checking."
      ]
     ],
     "why": "The card is your original. Keep it until you know every copy is complete and plays.",
@@ -1860,11 +2228,15 @@
      ],
      [
       "SweetShop_OwnerInt_T02",
-      "There is no date, so you cannot tell which day's take two this is."
+      "It has no date, so it can't be found by date."
      ],
      [
       "2025-03-11_SweetShop_good_final",
-      "Words like good and final do not tell you which take it was."
+      "'good' and 'final' don't say which take it is."
+     ],
+     [
+      "SweetShop_11-03-2025_OwnerInt_T02",
+      "A date in the middle of the name doesn't sort files by date."
      ]
     ],
     "why": "This name holds the day, the project, the shot and the take, so a search finds it at once.",
@@ -1879,11 +2251,15 @@
      ],
      [
       "It is the only date format that cameras will accept.",
-      "Cameras do not care how you rename files on your computer."
+      "Cameras accept many formats; it is a naming choice."
      ],
      [
       "It makes the file name shorter and easier to type.",
-      "Both formats have the same number of characters."
+      "Both formats have the same length."
+     ],
+     [
+      "It saves the editor from typing the century.",
+      "Year first is about sorting, not saving typing."
      ]
     ],
     "why": "Computers sort names letter by letter, so year, then month, then day puts clips in the right order.",
@@ -1900,11 +2276,15 @@
      ],
      [
       "One bin for each shoot day, in the order you filmed.",
-      "Each scene is split across both days, so you must search two bins every time."
+      "Cutting is by scene, not by day."
      ],
      [
       "One bin for each camera card, as the files came off.",
-      "Card order says nothing about content, so finding a shot stays slow."
+      "Cards don't tell you what is in a scene."
+     ],
+     [
+      "One bin for each type of file, such as video, audio and graphics.",
+      "Editing is organised by scene, not by file type."
      ]
     ],
     "why": "Bins by scene put every take of the same moment side by side, so comparing and picking the best one is quick.",
@@ -1919,11 +2299,15 @@
      ],
      [
       "Scrub along the audio waveform looking for the loudest parts.",
-      "Loud parts are not always good answers, and this is slow for a long interview."
+      "Loud isn't the same as useful."
      ],
      [
       "Let the automatic transcript build the final cut on its own.",
-      "The transcript helps you find lines, but you still judge and shape the edit."
+      "The transcript doesn't choose good answers."
+     ],
+     [
+      "Search for the interviewee's name and cut around each match.",
+      "A name is rarely said where the good lines are."
      ]
     ],
     "why": "Text-based editing lets you search and pick answers by reading, which is much faster than watching the whole interview.",
@@ -1940,11 +2324,15 @@
      ],
      [
       "Line up both files by where each recording begins.",
-      "The camera and recorder were almost never started at the same moment."
+      "They didn't start at the same moment."
      ],
      [
       "Play both together and nudge them by ear until it sounds close.",
-      "Close by ear is often a few frames off, which viewers notice on faces."
+      "By ear is slow and may be a little out."
+     ],
+     [
+      "Sync them using the clock times of the two devices.",
+      "The devices' clocks are rarely exact."
      ]
     ],
     "why": "The camera sound has the same speech shape as the recorder, so the waveforms line up. Then a visual check confirms it.",
@@ -1959,11 +2347,15 @@
      ],
      [
       "It needs matching timecode, so both devices must be linked.",
-      "The waveform method works even when the devices share no timecode."
+      "It doesn't need linked devices."
      ],
      [
       "It lines clips up by the time each file was created.",
-      "File times are rarely exact enough to sync speech."
+      "Creation times aren't accurate enough."
+     ],
+     [
+      "It uses the speaker's mouth movements to match the sound.",
+      "It reads the audio, not the picture."
      ]
     ],
     "why": "Both devices heard the same sounds, so Premiere can match the peaks and dips of the waveforms.",
@@ -1980,11 +2372,15 @@
      ],
      [
       "Change the current sequence and rely on undo if needed.",
-      "Undo history is lost when you close the project, so the old cut can vanish."
+      "Undo won't take you back after closing the project."
      ],
      [
       "Export the current cut, then delete the old sequence.",
-      "An exported file cannot be edited, so you cannot rework that cut later."
+      "The exported cut is not editable."
+     ],
+     [
+      "Edit the current sequence and write the changes in a notes file.",
+      "The original is changed and lost."
      ]
     ],
     "why": "The first cut stays untouched, so if the client prefers it, you can return in seconds.",
@@ -1999,11 +2395,15 @@
      ],
      [
       "Promo_final, then Promo_final_new when it changes",
-      "Names like final and new soon pile up and do not show which came when."
+      "'Final' names tell you nothing about which is which."
      ],
      [
       "Promo, saved over the same file each time",
-      "Saving over one file means Thursday's cut no longer exists."
+      "Saving over loses the old versions."
+     ],
+     [
+      "Promo_Thursday_cut, then Promo_Friday_cut",
+      "Day names repeat each week and don't sort."
      ]
     ],
     "why": "A rising number with a date shows the order of every cut, so you can open the right one at once.",
@@ -2020,11 +2420,15 @@
      ],
      [
       "Use every result in the edit.",
-      "Search returns near-misses as well as good shots."
+      "Results may include clips you don't need."
      ],
      [
-      "Delete the clips the search didn’t find.",
-      "Search misses things. Those clips may still be useful."
+      "Delete the clips the search didn't find.",
+      "The search can miss good clips."
+     ],
+     [
+      "Use only the results with the highest match score.",
+      "A score isn't your judgement."
      ]
     ],
     "why": "Search narrows things down. You still choose.",
@@ -2039,11 +2443,15 @@
      ],
      [
       "Use the 6 and move on.",
-      "You might miss the best ring shot."
+      "You might be missing good moments."
      ],
      [
       "Assume the others were deleted.",
-      "More likely they just weren’t tagged well."
+      "They are probably there, just not found."
+     ],
+     [
+      "Search with other words until you get 20 results.",
+      "The number of results isn't the goal; finding the right clips is."
      ]
     ],
     "why": "Use search to start, not to finish.",
@@ -2062,11 +2470,15 @@
      ],
      [
       "Keep everything in order so no part of the day is missed.",
-      "Long stretches with nothing happening make viewers lose interest fast."
+      "Treating every minute as equal buries the strongest moment."
+     ],
+     [
+      "Open with the chair setup as a long scene and put the grandmother clip last.",
+      "Viewers may lose interest before the emotional moment."
      ],
      [
       "Keep the chair setup because it shows how the day began.",
-      "A few seconds can set the scene, but ten minutes of setup carries no feeling."
+      "Ten minutes of chairs drowns out the moment that matters."
      ]
     ],
     "why": "The grandmother's tears carry emotion the family will remember. Setup with no action can shrink to a quick shot or go entirely.",
@@ -2081,11 +2493,15 @@
      ],
      [
       "The tools and shortcuts the editing software offers.",
-      "The video talks about the editor's thinking, not the software controls."
+      "Software helps; it doesn't decide where to cut."
      ],
      [
       "A fixed rule about how long each shot should last.",
-      "The video shows choices coming from reactions to the footage, not from set lengths."
+      "Fixed lengths ignore what is happening in each shot."
+     ],
+     [
+      "The script or shot list written before the shoot.",
+      "Plans don't reflect what was actually filmed."
      ]
     ],
     "why": "The video explains that editors trust their own response to each moment. If a moment moves you, it will likely move the audience.",
@@ -2102,11 +2518,15 @@
      ],
      [
       "Start with a slow tour of every item on her shelves.",
-      "Pretty shots alone give viewers no reason to keep watching."
+      "A tour has no goal to follow."
      ],
      [
       "Start with her full life history from childhood.",
-      "A long background at the start delays the part people care about."
+      "History delays the story; viewers need her goal early."
+     ],
+     [
+      "Open with a customer praising her bread.",
+      "Praise doesn't set up what she wants."
      ]
     ],
     "why": "A clear goal near the start gives viewers something to wonder about. They keep watching to find out if she makes it.",
@@ -2121,11 +2541,15 @@
      ],
      [
       "Keep it, because viewers enjoy a break from the main topic.",
-      "A long side trip makes viewers forget what they were following."
+      "A break that has nothing to do with the goal loses the viewer."
      ],
      [
       "Move it to the end so it plays after the main story.",
-      "Placing it at the end still leaves an unrelated part hanging after the payoff."
+      "It would still add nothing to her story."
+     ],
+     [
+      "Shorten it to one minute and keep it in the middle.",
+      "Shorter, it is still off-topic."
      ]
     ],
     "why": "Every section should move the main thread forward. Side stories, even good ones, make the film harder to follow.",
@@ -2142,11 +2566,15 @@
      ],
      [
       "Add a slow dissolve between the two parts of her answer.",
-      "A dissolve on a talking face looks odd and still shows the cut."
+      "A dissolve blends the faces and looks ghostly."
      ],
      [
       "Leave the jump, since viewers will not notice it.",
-      "A jump in a talking face is easy to see and looks like a mistake."
+      "Viewers do notice a face jumping."
+     ],
+     [
+      "Speed up the second part slightly so the jump looks like movement.",
+      "Speeding changes how she speaks and the face still jumps."
      ]
     ],
     "why": "A related shot over the join hides the jump while her voice keeps flowing. It also shows the work she is talking about.",
@@ -2161,11 +2589,15 @@
      ],
      [
       "Never, so that every edit in her answer stays hidden.",
-      "Viewers need to see her sometimes to connect with her as a person."
+      "Her face is the most powerful picture of her feeling."
      ],
      [
       "Every ten seconds, at a fixed and steady rhythm.",
-      "A fixed timer ignores what she is saying and may miss her best moments."
+      "Fixed timing ignores what she is saying."
+     ],
+     [
+      "At the end of every sentence, as she finishes speaking.",
+      "A fixed pattern ignores the emotion in her words."
      ]
     ],
     "why": "Her face carries the feeling behind her words. Save it for the moments where her expression adds something the pictures cannot.",
@@ -2182,11 +2614,15 @@
      ],
      [
       "Make every shot even shorter to add more energy.",
-      "More of the same speed makes the tiredness worse, not better."
+      "Constant speed is tiring."
      ],
      [
       "Make every shot three seconds long for a calm feel.",
-      "One even speed all through is still flat, just slower."
+      "Equal long shots are flat and slow."
+     ],
+     [
+      "Add a drum beat under every shot to keep energy up.",
+      "Sound doesn't fix a pace that tires the eye."
      ]
     ],
     "why": "Changing speed gives viewers a moment to breathe. The fast parts then feel more exciting by contrast.",
@@ -2201,11 +2637,15 @@
      ],
      [
       "A standard shot length that suits most types of video.",
-      "The video shows pace changing with the scene, not following one set length."
+      "No standard length fits every scene."
      ],
      [
       "Cutting as quickly as possible to keep attention high.",
-      "The video ties pace to purpose, and speed with no reason soon tires viewers."
+      "Constant fast cutting tires viewers."
+     ],
+     [
+      "The length of the music track you have chosen.",
+      "Music supports the pace; the scene decides it."
      ]
     ],
     "why": "The video links each pacing choice to its purpose. Tempo changes are planned to serve the story, not added at random.",
@@ -2222,11 +2662,15 @@
      ],
      [
       "Mute the market sound for the first few seconds.",
-      "Silence in a busy market feels strange and breaks the mood."
+      "The market loses its energy and then jumps in."
      ],
      [
       "Add a fade to black between the two scenes.",
-      "A fade slows things down and still leaves the noise starting abruptly."
+      "A fade doesn't ease the noise and may feel like an ending."
+     ],
+     [
+      "Make the market sound quieter for the whole scene.",
+      "The scene loses the energy of the market."
      ]
     ],
     "why": "Letting the new sound begin early prepares the viewer. The change feels smooth and draws them into the next place.",
@@ -2241,11 +2685,15 @@
      ],
      [
       "Cut picture and sound at the exact same frame.",
-      "A hard cut on both can chop off the feeling of his last line."
+      "That makes the audio jump with the picture."
      ],
      [
       "Remove his voice and add music over the new shots.",
-      "You lose the line you loved, which was the point of the moment."
+      "You lose the line you wanted to keep."
+     ],
+     [
+      "Cut his voice just before the picture changes to the lock-up.",
+      "That makes the line end abruptly instead of carrying over."
      ]
     ],
     "why": "Keeping his voice under the new picture links his words to his actions. This is called an L-cut, where sound from one shot runs into the next.",
@@ -2262,11 +2710,15 @@
      ],
      [
       "Pause and explain that a better part is coming soon.",
-      "Viewers online will not have you there to explain, so the problem stays."
+      "Viewers won't be there to explain it to."
      ],
      [
       "Ignore it and just ask her at the end if she liked it.",
-      "People often say they liked it to be polite, so you lose the real signal."
+      "She may be polite and you'd miss where it dragged."
+     ],
+     [
+      "Ask her what she would remove, then remove it.",
+      "Viewers can notice a problem but rarely fix it."
      ]
     ],
     "why": "Where attention drops is honest feedback. Finding that exact spot tells you what to trim or tighten.",
@@ -2281,11 +2733,15 @@
      ],
      [
       "A weak scene usually needs new footage to be fixed.",
-      "The video uses the same material both times, so reshooting was not needed."
+      "The video shows what editing alone can change."
      ],
      [
       "There is one correct cut that skilled editors always find.",
-      "Both edits work. They simply create different structures and tones."
+      "The video shows many cuts are possible, with different moods."
+     ],
+     [
+      "Only music can change the mood of a scene.",
+      "Order and timing change the mood too."
      ]
     ],
     "why": "The same footage can feel tense or calm depending on the edit. So when feedback says a part feels wrong, you can often fix it by re-cutting.",
@@ -2301,12 +2757,16 @@
       ""
      ],
      [
-      "Nothing. The AI’s angle switches are final once it’s done.",
-      "The AI follows who’s talking, not what matters."
+      "Nothing. The AI's angle switches are final once it's done.",
+      "The AI doesn't know reactions or timing."
      ],
      [
       "Only the colour, so each angle matches the others.",
-      "Colour helps, but the switches still need editing."
+      "Colour matters, but the cuts need refining first."
+     ],
+     [
+      "The labels on each angle so you can find them later.",
+      "Labels don't improve the edit."
      ]
     ],
     "why": "The AI makes a first pass. The editor makes it work.",
@@ -2321,11 +2781,15 @@
      ],
      [
       "Stay on the speaker, as the AI chose, until they finish.",
-      "You lose a reaction that makes the moment fun."
+      "The AI misses the reaction that makes the joke."
      ],
      [
       "Cut to the wide shot so you can see both people at once.",
-      "The laugh is clearer on the host’s angle."
+      "The laugh is the moment; a wide shot buries it."
+     ],
+     [
+      "Zoom in on the speaker to make the joke feel bigger.",
+      "The laugh is the moment, not the zoom."
      ]
     ],
     "why": "Edit for reactions and story, not just for who’s talking.",
@@ -2344,11 +2808,15 @@
      ],
      [
       "Push noise reduction very hard until the hum is completely gone.",
-      "Heavy noise reduction makes a voice sound watery and robotic, which is worse than a faint hum."
+      "Too much reduction makes the voice thin and robotic."
      ],
      [
       "Add background music loud enough to cover the hum and boom.",
-      "Music does not fix the voice, and it makes her words harder to hear."
+      "Music covers noise but also competes with the voice."
+     ],
+     [
+      "Use gentle noise reduction, then boost the high end to bring her voice forward.",
+      "Boosting highs doesn't fix boominess; cut the low end."
      ]
     ],
     "why": "Noise reduction handles steady sounds like hum. EQ (changing the balance of low and high tones) fixes boom. A light touch with each keeps the voice natural.",
@@ -2363,11 +2831,15 @@
      ],
      [
       "Normalising",
-      "Normalising sets a whole clip to one target loudness. It does not react to speech."
+      "Normalising sets the overall level; it doesn't react to speech."
      ],
      [
       "Noise gating",
-      "A noise gate cuts quiet sounds on a track. It does not lower music under a voice."
+      "A gate silences quiet sounds; it doesn't lower music for speech."
+     ],
+     [
+      "Compression",
+      "Compression evens out loudness; it doesn't respond to speech."
      ]
     ],
     "why": "Ducking dips the music under speech and brings it back up in the gaps, so the voice always stays clear.",
@@ -2384,11 +2856,15 @@
      ],
      [
       "Blend the two clips over two full seconds so it is smooth.",
-      "A long overlap makes both takes play at once, and the words turn into mush."
+      "Two seconds is far too long and would blur the words."
      ],
      [
       "Lower the volume of both clips around the join.",
-      "The click is still there, and now the voice also dips in volume."
+      "That creates a dip but doesn't remove the click."
+     ],
+     [
+      "Trim one frame from each clip and leave a hard cut.",
+      "A hard cut can still click."
      ]
     ],
     "why": "A crossfade of a few frames removes the sudden jump in the sound wave that causes the click, without anyone noticing the blend.",
@@ -2403,11 +2879,15 @@
      ],
      [
       "In the middle of a word, where the waveform is tall.",
-      "Cutting through loud sound creates pops and chopped words."
+      "Cutting in a word creates a clipped sound."
      ],
      [
       "Wherever the picture looks best, ignoring the waveform.",
-      "A good picture cut can still leave a harsh jump in the audio."
+      "The sound needs clean cuts; the waveform shows where."
+     ],
+     [
+      "At the loudest peak of the umm so it stops cleanly.",
+      "Cutting at a peak leaves a pop."
      ]
     ],
     "why": "Near-silent spots give the cleanest joins. Cutting through loud sound is the most common cause of clicks.",
@@ -2424,11 +2904,15 @@
      ],
      [
       "Some extra close-up shots of the decorations and flowers.",
-      "Useful footage, but it does nothing to smooth the sound between cuts."
+      "Pictures don't fill sound gaps."
      ],
      [
       "A quick mic test with each guest saying their name.",
-      "This checks the mic, but gives you nothing to fill gaps in the edit."
+      "That records voices, not the quiet of the room."
+     ],
+     [
+      "A recording of one person speaking softly across the room.",
+      "You need the room's sound without voices."
      ]
     ],
     "why": "This recording, called room tone, is the quiet sound of the space. Laid under the edit, it fills the gaps when you trim pauses.",
@@ -2443,11 +2927,15 @@
      ],
      [
       "Remove all the crowd noise with strong noise reduction.",
-      "The voice ends up sounding strange and empty, as if the market vanished."
+      "The interview loses its place and sounds artificial."
      ],
      [
       "Add a quick fade out and fade in at every single cut.",
-      "The noise now dips at each cut, which still draws attention to the edits."
+      "Fades make the noise dip at each cut."
+     ],
+     [
+      "Lower the crowd noise on all shots to the same level.",
+      "A matching level doesn't remove the jumps."
      ]
     ],
     "why": "A continuous layer of crowd sound hides the jumps, so the cuts feel smooth and the place feels real.",
@@ -2464,11 +2952,15 @@
      ],
      [
       "Use the dance track as it is, since the client picked it.",
-      "The cheerful music will clash with the story and confuse viewers."
+      "The music works against the story; the client needs advice."
      ],
      [
       "Use the dance track but keep it very low in the mix.",
-      "Even quietly, the bright rhythm still pulls against the serious mood."
+      "Quiet upbeat music still sends the wrong mood."
+     ],
+     [
+      "Slow the dance track down until it feels gentler.",
+      "Slowing it changes its pitch and doesn't make the mood right."
      ]
     ],
     "why": "Music tells viewers how to feel. Part of your job is to guide clients toward music that supports their message.",
@@ -2483,11 +2975,15 @@
      ],
      [
       "It plays at about the same level as the voice to add energy.",
-      "Music at voice level competes with the words, and viewers miss what is said."
+      "Equal levels make the voice hard to understand."
      ],
      [
       "It is switched off completely every time anyone says a word.",
-      "Cutting music off and on constantly sounds choppy and draws attention."
+      "Switching off completely makes the sound jump in and out."
+     ],
+     [
+      "It fades out slowly and returns only after the speech is finished.",
+      "The music should stay under the speech, not leave."
      ]
     ],
     "why": "The music stays present but clearly underneath, so it supports the scene without covering the dialogue.",
@@ -2504,11 +3000,15 @@
      ],
      [
       "Add a dramatic whoosh sound as the batter is poured.",
-      "A whoosh does not match what we see, so the moment feels fake."
+      "A whoosh doesn't match what viewers see."
      ],
      [
       "Leave that part silent and let the music carry it.",
-      "Without the sizzle, the food loses the sound that makes it feel real."
+      "Silence loses the sound that sells the dosa."
+     ],
+     [
+      "Add a sizzle that plays for the whole length of the clip.",
+      "The sizzle should happen when the batter lands."
      ]
     ],
     "why": "A real sound that matches the action, in perfect sync, makes the image feel solid and appetising.",
@@ -2523,11 +3023,15 @@
      ],
      [
       "It needs more bass so it feels heavier and more real.",
-      "Extra bass usually makes a mismatched sound stand out even more."
+      "Bass doesn't make it fit the room."
      ],
      [
       "It should be spread wide across left and right speakers.",
-      "Wide spreading does not fix a sound that does not match the room."
+      "Spreading wide doesn't match a door in one spot."
+     ],
+     [
+      "It needs a higher pitch so it sounds more like a real door.",
+      "Pitch isn't the problem; level and room echo are."
      ]
     ],
     "why": "Effects must match the level and echo of the place on screen. Lower it and add a little room sound so it blends.",
@@ -2544,11 +3048,15 @@
      ],
      [
       "Raise the speech to 0 dB so it sits above the music.",
-      "0 dB is the very top limit, so the voice will distort and clip."
+      "Going to 0 dB risks distortion."
      ],
      [
       "Leave both, since viewers can turn up the volume.",
-      "Turning up raises the music too, so the words stay hard to hear."
+      "The speech won't be clear for a viewer who can't turn it up."
+     ],
+     [
+      "Lower the speech to -24 dB so it blends with the music.",
+      "The speech should stay the strongest sound."
      ]
     ],
     "why": "The speech should lead, with music roughly 10 dB or more below it, so every word comes through.",
@@ -2563,11 +3071,15 @@
      ],
      [
       "So the final video file exports faster from the editor.",
-      "Track layout is about control of the mix, not export speed."
+      "Tracks don't change export speed."
      ],
      [
       "So one volume setting can be applied to every sound.",
-      "It is the opposite: each layer needs its own level and treatment."
+      "The point is to adjust each type separately."
+     ],
+     [
+      "So the sound stays in sync when the clips are moved.",
+      "Separate tracks don't keep sync; they keep control."
      ]
     ],
     "why": "Separate tracks let you shape the speech first, then place music and effects underneath it on purpose.",
@@ -2582,11 +3094,15 @@
      ],
      [
       "Boost the whole mix a little so it sounds stronger.",
-      "Making everything louder does not tell you if the balance works for viewers."
+      "Boosting can cause distortion."
      ],
      [
       "Deliver it, since good headphones show the true sound.",
-      "Most people watch on phones, where music can easily bury the speech."
+      "Most viewers don't use good headphones."
+     ],
+     [
+      "Check it on a second pair of good headphones.",
+      "You need to hear it as viewers do, on small speakers."
      ]
     ],
     "why": "Checking on the devices your audience uses shows whether the speech stays clear above the music.",
@@ -2603,11 +3119,15 @@
      ],
      [
       "Only the loudness.",
-      "Loudness is one part. Artefacts and room sound matter too."
+      "Loudness alone doesn't show if the voice sounds natural."
      ],
      [
       "Nothing. Repaired audio is always better.",
-      "Over-processing can sound worse than the original."
+      "Repair can leave artefacts."
+     ],
+     [
+      "Only whether the hiss is gone.",
+      "A clean-sounding clip can still sound unnatural."
      ]
     ],
     "why": "Fix, compare and keep it natural.",
@@ -2622,11 +3142,15 @@
      ],
      [
       "Remove the echo from every clip.",
-      "The sound should still feel like the place on screen."
+      "That would make the whole film sound dead."
      ],
      [
       "Add music over it.",
-      "That hides the problem without fixing it."
+      "Music doesn't match the voice to the room."
+     ],
+     [
+      "Add heavy reverb so it sounds like the hall again.",
+      "Too much reverb sounds artificial."
      ]
     ],
     "why": "Sound should match the space on screen.",
@@ -2645,11 +3169,15 @@
      ],
      [
       "Lower the strength of the look on the second clip until it seems right.",
-      "The base difference is still there, and the two clips no longer share one style."
+      "The mismatch comes from the clip, not the look."
      ],
      [
       "Build a separate new look for the second clip from scratch.",
-      "This takes more time, and the two clips will not share one style."
+      "Two different looks won't match each other."
+     ],
+     [
+      "Paste the look and fix the orange with the saturation slider.",
+      "Lowering saturation is a rough fix that leaves a muddy cast."
      ]
     ],
     "why": "One look gives the same result only when clips start from a similar, neutral base. Correct each clip on its own, then the shared look works on both.",
@@ -2664,11 +3192,15 @@
      ],
      [
       "Try a stronger LUT so the new look covers the muddy areas.",
-      "A stronger look on a dark clip only makes the mud worse."
+      "A stronger LUT makes it worse."
      ],
      [
       "Keep the LUT and add sharpening so the clip looks cleaner.",
-      "Sharpening does not fix brightness and can add noise to dark areas."
+      "Sharpening doesn't fix the colour or brightness."
+     ],
+     [
+      "Brighten the clip after the LUT so it stops looking muddy.",
+      "A LUT expects correct footage before it is added."
      ]
     ],
     "why": "A LUT expects a normal starting image. If the clip is wrong underneath, correct that first and the LUT will look as intended.",
@@ -2685,11 +3217,15 @@
      ],
      [
       "Leave it as it is, because it looks fine on your screen right now.",
-      "Room light and screen settings change what you see, so the clip may look dark elsewhere."
+      "A bright room fools your eyes."
      ],
      [
       "Turn your laptop brightness up until the face looks bright enough.",
-      "This changes only your screen, not the video, so viewers will still see it dark."
+      "That changes your screen, not your footage."
+     ],
+     [
+      "Check it on your phone in the same sunny room and trust it.",
+      "The phone is fooled by the bright room too."
      ]
     ],
     "why": "A waveform measures the real brightness of the video. Your view depends on your screen and room, which can mislead you.",
@@ -2704,11 +3240,15 @@
      ],
      [
       "To give each shot its own different creative look for variety.",
-      "Different looks on each shot would make the sequence feel broken, not consistent."
+      "That is grading; first correct and match."
      ],
      [
       "To push saturation up so all the footage looks more lively.",
-      "The demonstration is about correcting and matching, not simply adding more colour."
+      "Saturation alone doesn't correct anything."
+     ],
+     [
+      "To apply the final creative look to the entire film.",
+      "That comes after correction."
      ]
     ],
     "why": "The video shows correction and matching as the main job of the colour tools, so the sequence plays as one smooth piece.",
@@ -2725,11 +3265,15 @@
      ],
      [
       "Leave it, since viewers accept that each angle looks a bit different.",
-      "Viewers notice when cutting between angles makes the colour jump."
+      "Viewers see a colour change at each cut."
      ],
      [
       "Make both cameras much warmer so the blue difference is hidden.",
-      "Warming both keeps the gap between them and adds a new problem."
+      "Warming both leaves the mismatch."
+     ],
+     [
+      "Match camera B to camera A by eye using the whole frame.",
+      "Use the face, which viewers judge most."
      ]
     ],
     "why": "When you cut between angles, both should feel like the same room and moment. Comparing the same face gives a clear reference.",
@@ -2744,11 +3288,15 @@
      ],
      [
       "It adds a ready-made film look to every clip at the same time.",
-      "That describes a preset or LUT, not a matching tool."
+      "That is a LUT or preset."
      ],
      [
       "It sets the brightest and darkest points of a single shot.",
-      "That is closer to what Curves or levels do on one shot."
+      "That is setting black and white points, not matching."
+     ],
+     [
+      "It copies the white balance setting from the camera into the editor.",
+      "Color Match works on the footage, not the camera settings."
      ]
     ],
     "why": "Color Match uses a neighbouring or reference image as a target, then shifts the colour of your shot towards it.",
@@ -2765,11 +3313,15 @@
      ],
      [
       "Raise saturation so her face looks more colourful and alive.",
-      "More saturation makes the green stronger, not weaker."
+      "More colour makes the green stronger."
      ],
      [
       "Warm the whole shot strongly until the green is gone.",
-      "Heavy warming pushes skin towards orange instead of fixing the green."
+      "A strong warm shift changes the whole look."
+     ],
+     [
+      "Cool the whole shot so the green blends into blue.",
+      "Cooling moves further from natural skin."
      ]
     ],
     "why": "Tint controls the green to magenta balance. A small move towards magenta cancels the green that tube lights often add.",
@@ -2784,11 +3336,15 @@
      ],
      [
       "Skin pulled to the centre so it shows almost no colour at all.",
-      "The centre means grey, so skin there would look lifeless."
+      "Skin should keep its natural colour."
      ],
      [
       "Darker skin moved away from the line to make it look fairer.",
-      "All healthy skin tones sit near the same line, so this makes skin look unnatural."
+      "The line is the same for every complexion."
+     ],
+     [
+      "Skin pulled out to the edge to make it vivid.",
+      "Over-saturated skin looks unnatural."
      ]
     ],
     "why": "Skin of every complexion falls close to one guide line on the vectorscope. Only brightness differs, so the line is a reliable check.",
@@ -2805,11 +3361,15 @@
      ],
      [
       "Keep it strong, since bold looks make ads feel modern.",
-      "If the product looks unappetising, the ad fails no matter how stylish it is."
+      "Food that looks grey-blue puts people off."
      ],
      [
       "Use the look on only some shots to add some variety.",
-      "Mixing graded and ungraded shots makes the ad look inconsistent."
+      "Shots would no longer match."
+     ],
+     [
+      "Raise saturation on the whole video to bring the cakes back.",
+      "That also boosts the teal."
      ]
     ],
     "why": "The grade should help sell the cakes. A gentle look keeps the food appealing and keeps attention on the product.",
@@ -2824,11 +3384,15 @@
      ],
      [
       "Add any LUT that looks good and adjust things from there.",
-      "A random LUT may not suit your camera's format and can clip colours."
+      "A LUT on wrongly read footage gives wrong colour."
      ],
      [
       "Raise contrast and saturation by hand until it looks right.",
-      "Guessing by hand is slow and rarely gets the colours accurate."
+      "That is guesswork and may break the footage."
+     ],
+     [
+      "Turn the footage to black and white and add colour back.",
+      "That throws away the colour you need."
      ]
     ],
     "why": "The video explains that correct input and colour management settings show the footage properly before any creative work.",
@@ -2847,11 +3411,15 @@
      ],
      [
       "Make the white letters thinner and more stylish",
-      "Thin letters are even harder to see on a bright background."
+      "Thin letters vanish even more against a bright sky."
      ],
      [
       "Leave it, since viewers can pause the video",
-      "Most people will not pause, so they will just miss the title."
+      "Viewers shouldn't have to pause to read a title."
+     ],
+     [
+      "Change the title colour to light yellow",
+      "Light yellow on a bright sky is still low contrast."
      ]
     ],
     "why": "White on a bright sky has almost no contrast. A shadow or dark band separates the words from the background so they stand out.",
@@ -2866,11 +3434,15 @@
      ],
      [
       "Keep the spot but use a fancier script font for style",
-      "A fancy font is harder to read and does not fix the edge or timing problem."
+      "A fancy font is harder to read in the time you give it."
      ],
      [
       "Keep the timing but make the letters smaller and neater",
-      "Smaller text is harder to read, and one second is still too fast."
+      "Smaller letters are harder to read."
+     ],
+     [
+      "Move it to the middle of the screen and hold it for 10 seconds",
+      "That covers the picture and holds far longer than needed."
      ]
     ],
     "why": "Text near the edge can be cut off or hidden by app buttons. Viewers need a few seconds to read a number, ideally twice.",
@@ -2887,11 +3459,15 @@
      ],
      [
       "Meena",
-      "A first name alone does not tell viewers who she is to the couple."
+      "A first name alone doesn't say who she is."
      ],
      [
       "Meena Iyer, who came from Chennai to bless the couple",
-      "This is too long to read before the title disappears."
+      "Too long to read while she speaks."
+     ],
+     [
+      "Aunt Meena",
+      "It doesn't give her full name or whose aunt she is."
      ]
     ],
     "why": "A full name plus one short role tells the viewer everything they need, fast.",
@@ -2906,11 +3482,15 @@
      ],
      [
       "Keep every role but shrink the font to make it fit",
-      "Tiny text with many words is hard to read in a few seconds."
+      "A tiny font is hard to read on a phone."
      ],
      [
       "Keep every role and split it over three lines",
-      "Three lines is still too much to read while he is talking."
+      "Three lines of titles crowd the picture."
+     ],
+     [
+      "Keep the first two roles and cut the rest",
+      "Two roles are still too many; pick the one that matters here."
      ]
     ],
     "why": "One clear role is easy to read. Extra details can go in the voiceover or description.",
@@ -2927,11 +3507,15 @@
      ],
      [
       "Leave it, since early captions give more reading time",
-      "Captions that run ahead confuse viewers and can spoil what comes next."
+      "Captions that lead the voice confuse viewers."
      ],
      [
       "Make every line longer so the gap is less noticeable",
-      "Longer lines are harder to read and the timing is still wrong."
+      "Longer lines are harder to read and the timing is still off."
+     ],
+     [
+      "Delay every caption by one second so viewers can hear first",
+      "Late captions are as confusing as early ones."
      ]
     ],
     "why": "Captions should appear with the spoken words. Then viewers can read and listen together.",
@@ -2946,11 +3530,15 @@
      ],
      [
       "Pick the caption font and colour straight away",
-      "Styling comes later. Mistakes in the text matter more."
+      "Style comes after the words are right."
      ],
      [
       "Trust the transcript and move on to the timing",
-      "Automatic transcripts often get names and local words wrong."
+      "Automatic transcripts often get names and words wrong."
+     ],
+     [
+      "Split the transcript into caption lines before reading it",
+      "Fix the words first, then split them into lines."
      ]
     ],
     "why": "The workflow goes from transcription to captions to styling. Fixing the text early means every caption is correct.",
@@ -2967,11 +3555,15 @@
      ],
      [
       "Leave it, since most of the shots look fine",
-      "One cut-off price can lose the whole message of the ad."
+      "One cut-off price board makes the shot useless."
      ],
      [
       "Go back and shrink the whole video with black bars",
-      "Black bars waste the vertical screen and make everything small."
+      "Black bars waste the vertical screen."
+     ],
+     [
+      "Stretch the picture sideways so the board fits",
+      "Stretching distorts everything in the frame."
      ]
     ],
     "why": "A new shape can hide different things in each shot. Fix the shots that need it, one by one.",
@@ -2986,11 +3578,15 @@
      ],
      [
       "Run the automatic tool again until it gets it right",
-      "Running it again usually gives the same result."
+      "It will likely make the same mistake."
      ],
      [
       "Delete that part of the clip from the vertical version",
-      "Cutting the clip loses content when a simple adjustment would work."
+      "You'd lose part of the story."
+     ],
+     [
+      "Switch off the automatic crop and centre every shot",
+      "Centring ignores where the subject is."
      ]
     ],
     "why": "Keyframes are markers that set the frame's position and size at a moment. They let you guide the crop by hand where the tool misses.",
@@ -3007,11 +3603,15 @@
      ],
      [
       "The first 15 seconds of the ad, exactly as it is",
-      "You lose the shop name and the best moment at the end."
+      "The first 15 seconds are an opening for a longer story, not a short ad."
      ],
      [
       "A fast montage of as many shots as will fit",
-      "Too many quick shots and no clear ending leave viewers confused."
+      "Many shots flash by and leave nothing to remember."
+     ],
+     [
+      "The last 15 seconds of the ad, ending with the offer",
+      "It starts mid-story with no hook for new viewers."
      ]
     ],
     "why": "A short cut still needs a start that grabs, the moment that sells and a clear finish.",
@@ -3026,11 +3626,15 @@
      ],
      [
       "The opening shots, so the film gets going faster",
-      "The opening is what makes people keep watching."
+      "The opening sets up the film; cutting it loses context."
      ],
      [
       "The last emotional moment, since it runs the longest",
-      "That moment is the payoff the whole film leads to."
+      "The ending is usually what viewers remember."
+     ],
+     [
+      "Every shot with people talking, to keep it quick",
+      "Speech often carries the story."
      ]
     ],
     "why": "Repeated shots add time but not story. Cutting them keeps the start, the big moment and the ending.",
@@ -3047,11 +3651,15 @@
      ],
      [
       "The same 16:9 file, since Instagram will adjust it",
-      "Instagram shows it small with empty space, not filling the phone screen."
+      "It will be shown small with black bars."
      ],
      [
       "A 4K 16:9 file, so the quality stays high",
-      "Higher resolution does not fix the wrong shape for a vertical Reel."
+      "Higher quality doesn't fix the wrong shape."
+     ],
+     [
+      "A square 1080 by 1080 file, which fits every feed",
+      "Reels are tall, so square leaves empty space."
      ]
     ],
     "why": "Reels use a 9:16 vertical shape. Exporting at that size fills the phone screen.",
@@ -3066,11 +3674,15 @@
      ],
      [
       "They send a long email listing all their notes",
-      "Email notes are hard to match to the exact frame they mean."
+      "Emails make it hard to find the exact spot."
      ],
      [
       "They download the file and mark it up themselves",
-      "The video shows comments made right on the uploaded version."
+      "That is slower and harder to share."
+     ],
+     [
+      "They describe the problem in a voice note",
+      "A voice note can't point to the exact moment."
      ]
     ],
     "why": "Timecoded comments are linked to an exact point in the video. You jump straight there, fix it and upload a new version.",
@@ -3088,12 +3700,16 @@
       ""
      ],
      [
-      "Keep the 3-minute film and send him a link he can forward.",
-      "Status viewers watch on phones for a few seconds, so a long film will not get the offer seen."
+      "Keep the 3-minute film and send him a link he can forward",
+      "Status viewers scroll fast; a long wide film won't be watched."
      ],
      [
-      "Keep the plan but add more slow motion shots of the sweets.",
-      "Nicer shots do not fix a video that is the wrong length and shape for where it plays."
+      "Keep the plan but add more slow motion shots of the sweets",
+      "Slow motion makes a long film longer."
+     ],
+     [
+      "Keep it wide and cinematic but add subtitles",
+      "Wide video shows small on a phone; WhatsApp status is tall."
      ]
     ],
     "why": "Where the video plays and what the owner needs from it should shape length, framing and what goes first. A plan made before knowing this often has to change.",
@@ -3107,12 +3723,16 @@
       ""
      ],
      [
-      "So the couple can approve each camera angle before the guests arrive.",
-      "Couples rarely approve angles; the real reason is that key moments cannot be repeated."
+      "So the couple can approve each camera angle before the guests arrive",
+      "That isn't why positions are set before the ceremony."
      ],
      [
-      "Because staying in fixed spots makes colour grading much easier later.",
-      "Positions are about not missing moments, not about saving time in the grade."
+      "Because staying in fixed spots makes colour grading much easier later",
+      "Position doesn't affect grading."
+     ],
+     [
+      "So the crew can be seated before the guests arrive",
+      "The reason is catching moments that happen once."
      ]
     ],
     "why": "A ceremony cannot be paused or redone. Planning positions ahead means you capture each unrepeatable moment cleanly.",
@@ -3126,12 +3746,16 @@
       ""
      ],
      [
-      "You can skip establishing shots when the day's timeline looks tight.",
-      "Establishing shots set the scene; good timing lets you fit them in, not drop them."
+      "You can skip establishing shots when the day's timeline looks tight",
+      "Establishing shots are still needed; plan when to film them."
      ],
      [
-      "You can leave all the wide shots until after the event has ended.",
-      "After the event the decor, light and mood are gone, so the shots will not match."
+      "You can leave all the wide shots until after the event has ended",
+      "The venue looks different when it's empty or after guests leave."
+     ],
+     [
+      "You can plan all your close-up shots of the venue in advance",
+      "The research helps with when to film wide establishing shots."
      ]
     ],
     "why": "Knowing the people, place and schedule lets you plan short windows to grab the wide shots that set the scene.",
@@ -3147,12 +3771,16 @@
       ""
      ],
      [
-      "Slow motion shots of parents clapping and cheering in the crowd.",
-      "Crowd reactions are nice extras, but the family mainly wants his performance."
+      "Slow motion shots of parents clapping and cheering in the crowd",
+      "Reactions come after you have the dance."
      ],
      [
-      "A wide shot of the school building and the decorated gate outside.",
-      "Useful for context, but it can be filmed any time, unlike his three minutes on stage."
+      "A wide shot of the school building and the decorated gate outside",
+      "That can be filmed any time; the dance happens once."
+     ],
+     [
+      "A wide shot of the whole stage showing all the dancers",
+      "It doesn't show him clearly, and sound matters too."
      ]
     ],
     "why": "The one thing that cannot be redone is his performance. Secure it with good sound before anything else.",
@@ -3166,12 +3794,16 @@
       ""
      ],
      [
-      "A smooth slider move for the opening, then the interview if time is left.",
-      "A fancy opening is useless if the interview, the heart of the video, is rushed or missed."
+      "A smooth slider move for the opening, then the interview if time is left",
+      "The interview is the part you can't skip."
      ],
      [
-      "Creative B-roll first while the light is good, then a quick interview.",
-      "B-roll (extra shots to cut over the talk) supports the interview but cannot replace it."
+      "Creative B-roll first while the light is good, then a quick interview",
+      "The interview is the essential part."
+     ],
+     [
+      "Quick shots of the shop first, since the interview can be done any time",
+      "With 20 minutes, the interview is the priority."
      ]
     ],
     "why": "Under time pressure, capture the shots the video cannot work without. Extras only come after.",
@@ -3187,12 +3819,16 @@
       ""
      ],
      [
-      "Colour grade every clip first so all the footage looks consistent.",
-      "Grading clips you will later cut out wastes hours; colour comes near the end."
+      "Colour grade every clip first so all the footage looks consistent",
+      "Grading unused clips wastes hours."
      ],
      [
-      "Choose the music and add transitions before placing any clips.",
-      "Transitions and polish cannot fix a film whose basic flow is not yet built."
+      "Choose the music and add transitions before placing any clips",
+      "Music and transitions follow the story."
+     ],
+     [
+      "Add titles and names to every clip before arranging them",
+      "Titles come after the structure."
      ]
     ],
     "why": "A rough cut that shows the main events in a clear order comes first. Pace, sound and colour all depend on it.",
@@ -3206,12 +3842,16 @@
       ""
      ],
      [
-      "At the very start, so both edits can grow side by side together.",
-      "Editing two cuts in parallel means every story change has to be done twice."
+      "At the very start, so both edits can grow side by side together",
+      "Two edits built together will drift."
      ],
      [
-      "Before colour work, since phone screens hide most colour problems.",
-      "Phone viewers notice poor colour too, and the Reel should match the main film."
+      "Before colour work, since phone screens hide most colour problems",
+      "Colour should be done once and copied."
+     ],
+     [
+      "Right after the shoot, from the raw footage",
+      "The Reel should come from the finished main edit."
      ]
     ],
     "why": "Making extra formats from a finished, approved edit saves rework and keeps every version consistent.",
@@ -3229,12 +3869,16 @@
       ""
      ],
      [
-      "Accept it and plan a general video that tries to please every age group.",
-      "A video made for everyone usually speaks clearly to no one."
+      "Accept it and plan a general video that tries to please every age group",
+      "A video for everyone speaks to no one."
      ],
      [
-      "Leave the viewer open for now and decide once you see which footage looks best.",
-      "The viewer should shape the shoot, not be picked after it."
+      "Leave the viewer open for now and decide once you see which footage looks best",
+      "The viewer should be decided before filming."
+     ],
+     [
+      "Choose the youngest customers, since social media is for the young",
+      "That assumes; ask who her customers are."
      ]
     ],
     "why": "A clear main viewer guides the tone, music and length. Agreeing on it now saves you from wasted shooting or a reshoot later.",
@@ -3248,12 +3892,16 @@
       ""
      ],
      [
-      "The audience, which describes who will watch the finished video.",
-      "Audience shapes the content but does not set limits on the work."
+      "The audience, which describes who will watch the finished video",
+      "The audience doesn't limit the work you do."
      ],
      [
-      "The objectives, which describe what the client wants the video to do.",
-      "Objectives explain the purpose, but they do not fence in the amount of work."
+      "The objectives, which describe what the client wants the video to do",
+      "Objectives don't list what is and isn't included."
+     ],
+     [
+      "The tone, which describes the mood of the video",
+      "Tone doesn't limit the work."
      ]
     ],
     "why": "Scope sets the boundaries of the job. When the client asks for more later, you can point to it and discuss extra time or cost.",
@@ -3269,12 +3917,16 @@
       ""
      ],
      [
-      "Note the light as it looks now, since the room and the window will not move.",
-      "The sun moves, so the light at 4 pm can be very different from 10 am."
+      "Note the light as it looks now, since the room and the window will not move",
+      "The light moves through the day, so 10 am doesn't show 4 pm."
      ],
      [
-      "Plan to close the curtains fully, so the time of day will not matter at all.",
-      "This throws away a useful light source without first knowing if it is a problem."
+      "Plan to close the curtains fully, so the time of day will not matter at all",
+      "Closing curtains changes the look and needs lights."
+     ],
+     [
+      "Plan to shoot at 10 am instead, since the light is nicer",
+      "The interview is booked for 4 pm."
      ]
     ],
     "why": "Light changes through the day. You need to see or predict the light at the real shoot time, not the scout time.",
@@ -3288,12 +3940,16 @@
       ""
      ],
      [
-      "So you can put the camera right next to a socket and skip carrying batteries.",
-      "The point is knowing the load and cable runs, not tying the camera to one spot."
+      "So you can put the camera right next to a socket and skip carrying batteries",
+      "The scout checks power for lights and chargers, not to skip batteries."
      ],
      [
-      "So you can decide which camera lens to use in each part of the location.",
-      "Lens choice depends on space and framing, not on where the sockets are."
+      "So you can decide which camera lens to use in each part of the location",
+      "Lenses aren't decided by sockets."
+     ],
+     [
+      "So you can choose where to place the interview chair",
+      "The chair depends on light and sound, not sockets."
      ]
     ],
     "why": "A tripped circuit or a missing extension cord can stop a shoot. Knowing the power setup lets you plan cables, batteries and load in advance.",
@@ -3309,12 +3965,16 @@
       ""
      ],
      [
-      "Give both a phone to film extra angles of whatever looks interesting to them.",
-      "Untargeted extra footage is hard to edit and leaves sound and gear unwatched."
+      "Give both a phone to film extra angles of whatever looks interesting to them",
+      "Extra angles without a plan create footage that is hard to use."
      ],
      [
-      "Tell both to stay close and help with whatever you need at each moment.",
-      "Vague help means you keep giving orders and things still get missed."
+      "Tell both to stay close and help with whatever you need at each moment",
+      "Vague help leaves audio and cards unattended."
+     ],
+     [
+      "Let both watch the mic in turns so the sound is always covered",
+      "Splitting one job leaves batteries and cards unchecked."
      ]
     ],
     "why": "A fixed task for each person means sound and gear are always covered, and you can focus on the camera.",
@@ -3328,12 +3988,16 @@
       ""
      ],
      [
-      "Thank them for helping with lights and fix the audio problems later in the edit.",
-      "Clipped audio usually cannot be repaired properly in the edit."
+      "Thank them for helping with lights and fix the audio problems later in the edit",
+      "Clipped audio can't be repaired."
      ],
      [
-      "Take over the sound yourself so they can keep helping with the lights.",
-      "You now juggle camera and sound, which spreads your own attention too thin."
+      "Take over the sound yourself so they can keep helping with the lights",
+      "You can't operate the camera and monitor sound well."
+     ],
+     [
+      "Stop the shoot for the day and start again tomorrow",
+      "Too drastic; a quick role change fixes it."
      ]
     ],
     "why": "Keeping each person on their own task stops gaps like clipped audio. Calmly reset roles as soon as they drift.",
@@ -3349,12 +4013,16 @@
       ""
      ],
      [
-      "Finish everything first so the client sees only your best and most complete work.",
-      "If they want story changes, all the polish time on those parts is wasted."
+      "Finish everything first so the client sees only your best and most complete work",
+      "A late surprise can mean a lot of rework."
      ],
      [
-      "Wait until the client asks to see progress, so you are not disturbing them.",
-      "Waiting delays feedback and makes late changes more likely and more costly."
+      "Wait until the client asks to see progress, so you are not disturbing them",
+      "Waiting risks late changes."
+     ],
+     [
+      "Send a few stills from the edit instead of a video",
+      "Stills don't show the story and order."
      ]
     ],
     "why": "A quick check-in at the rough cut stage catches big changes early, when they are cheap to make.",
@@ -3368,12 +4036,16 @@
       ""
      ],
      [
-      "Guess which part they mean, change it, and send a fresh file on WhatsApp.",
-      "Guessing can change the wrong part and mixes up which version is current."
+      "Guess which part they mean, change it, and send a fresh file on WhatsApp",
+      "A guess may fix the wrong part."
      ],
      [
-      "Call them and write their notes in a notebook while you both play the video.",
-      "Notes taken this way are loose and not tied to exact moments or versions."
+      "Call them and write their notes in a notebook while you both play the video",
+      "Notes written by hand can lose the exact moment."
+     ],
+     [
+      "Ask them to describe it in a voice note",
+      "A voice note can't point to the exact moment."
      ]
     ],
     "why": "Timecoded comments (notes linked to an exact point in the video) remove guessing, and new versions stay in one place for easy comparison.",
@@ -3387,12 +4059,16 @@
       ""
      ],
      [
-      "Cut every shot shorter so the whole video moves faster from start to end.",
-      "Uniform fast cutting can feel just as flat as uniform slow cutting."
+      "Cut every shot shorter so the whole video moves faster from start to end",
+      "Constant speed is tiring."
      ],
      [
-      "Make all the shots the same length so the video has a steady rhythm.",
-      "An even rhythm is exactly what makes a cut feel flat and predictable."
+      "Make all the shots the same length so the video has a steady rhythm",
+      "Same-length shots make a flat rhythm."
+     ],
+     [
+      "Add a faster song and keep the cut as it is",
+      "Music doesn't fix a flat rhythm in the cut."
      ]
     ],
     "why": "Changing pace gives the viewer contrast. Slower moments let things land, and faster parts lift the energy.",
@@ -3409,11 +4085,15 @@
      ],
      [
       "Making the whole film without a camera.",
-      "The case study mixes AI with filmed material."
+      "The video uses AI to support real footage, not replace it."
      ],
      [
       "Only the music.",
-      "It covers much more than music."
+      "AI is used for planning and extra shots too."
+     ],
+     [
+      "Replacing the actors and locations with generated ones.",
+      "The film stays real; AI supports it."
      ]
     ],
     "why": "AI supports the film. Real footage carries it.",
@@ -3428,11 +4108,15 @@
      ],
      [
       "Making them as dramatic as possible.",
-      "Dramatic shots that don’t match stand out badly."
+      "Drama that doesn't match the footage stands out."
      ],
      [
       "Adding them anywhere.",
-      "Shots need to fit the sequence."
+      "Randomly placed shots break the story."
+     ],
+     [
+      "Using the newest AI model for the best-looking result.",
+      "Fitting in matters more than the model."
      ]
     ],
     "why": "Added shots must look like they belong.",
@@ -3451,11 +4135,15 @@
      ],
      [
       "Which camera they want you to use.",
-      "That’s a later detail."
+      "Gear is decided after you know the problem."
      ],
      [
       "How fast you can deliver.",
-      "Speed matters less than solving the right problem."
+      "Speed matters later; first understand the problem."
+     ],
+     [
+      "Which videos they like on social media.",
+      "Their taste is useful, but the problem comes first."
      ]
     ],
     "why": "Diagnose first, then suggest the fix.",
@@ -3470,11 +4158,15 @@
      ],
      [
       "Showing the whole menu.",
-      "That doesn’t fix the empty lunches."
+      "A long menu doesn't bring in empty weekday lunches."
      ],
      [
       "Looking as stylish as possible.",
-      "Style helps only if it serves the goal."
+      "Style doesn't fill tables."
+     ],
+     [
+      "Getting more followers on the restaurant's page.",
+      "Followers aren't the same as lunch customers."
      ]
     ],
     "why": "The real problem decides what you make.",
@@ -3491,11 +4183,15 @@
      ],
      [
       "A full budget breakdown, line by line, for the client.",
-      "That usually goes in the proposal, not the treatment."
+      "That belongs in a quote."
      ],
      [
       "A list of crew names and the gear each person brings.",
-      "The treatment is about the idea."
+      "That is a production plan."
+     ],
+     [
+      "A schedule of the shoot days for the crew.",
+      "A treatment shares the idea, not the schedule."
      ]
     ],
     "why": "A treatment sells the idea and the feeling.",
@@ -3510,11 +4206,15 @@
      ],
      [
       "More reference images, so the look is even clearer.",
-      "More pictures won’t explain the choice."
+      "Images show a look but not why it fits."
      ],
      [
       "Your camera and lens list, to show the quality.",
-      "Gear doesn’t sell the idea."
+      "Gear doesn't explain why the idea fits."
+     ],
+     [
+      "A longer list of music tracks you might use.",
+      "Music options don't explain why the approach fits."
      ]
     ],
     "why": "Always connect your idea to the client’s goal.",
@@ -3531,11 +4231,15 @@
      ],
      [
       "Make every change exactly as written.",
-      "Notes can clash or miss the real issue."
+      "Unclear notes may hide a different worry."
      ],
      [
       "Ignore the ones you disagree with.",
-      "That damages trust."
+      "That loses the client's trust."
+     ],
+     [
+      "Do the changes you understand and skip the rest.",
+      "The unclear ones may matter most."
      ]
     ],
     "why": "Clarify first, then revise.",
@@ -3550,11 +4254,15 @@
      ],
      [
       "Add effects and faster cuts all through the video.",
-      "That may not be what they meant."
+      "You'd be guessing."
      ],
      [
       "Explain politely that it already pops as it is.",
-      "That ends the conversation without solving anything."
+      "Telling them they're wrong ends the conversation."
+     ],
+     [
+      "Send three versions and let them choose.",
+      "That's more work without understanding the problem."
      ]
     ],
     "why": "Turn vague notes into specific ones with questions.",
@@ -3571,11 +4279,15 @@
      ],
      [
       "The seller apologises and lowers it.",
-      "That signals the price wasn’t real."
+      "Apologising signals the price isn't fair."
      ],
      [
       "The seller avoids saying a number.",
-      "That creates confusion and doubt."
+      "Avoiding the price causes confusion."
+     ],
+     [
+      "The seller adds a discount before the client reacts.",
+      "Cutting the price early loses value."
      ]
     ],
     "why": "Say the price clearly and own it.",
@@ -3590,11 +4302,15 @@
      ],
      [
       "The same three videos at ₹25,000, to win the client.",
-      "You undervalue your work and set a pattern."
+      "You'd work for less than they're worth."
      ],
      [
       "Nothing. Walk away, since the budget is too low.",
-      "You might find a version that works for both of you."
+      "A smaller scope can still work for both."
+     ],
+     [
+      "Keep ₹40,000 and quietly lower the quality to save cost.",
+      "Hidden quality cuts break trust."
      ]
     ],
     "why": "Change the scope to fit the budget, not your price.",
@@ -3611,11 +4327,15 @@
      ],
      [
       "Posting as often as possible.",
-      "Without a target, posting is random."
+      "Frequency without an audience in mind is wasted."
      ],
      [
       "Buying ads straight away.",
-      "Ads without a plan waste money."
+      "Ads without a target waste money."
+     ],
+     [
+      "Choosing the platforms that are most popular right now.",
+      "Where your clients are matters more than what's popular."
      ]
     ],
     "why": "Know your audience before you plan posts.",
@@ -3630,11 +4350,15 @@
      ],
      [
       "One long post about your cameras, lenses and editing setup.",
-      "Couples want to see weddings, not gear."
+      "Clients care about results, not gear."
      ],
      [
       "Posts whenever you remember, on any topic that comes up.",
-      "Steady posting builds trust."
+      "No plan means no steady message."
+     ],
+     [
+      "Daily posts of the same highlight reel on every platform.",
+      "Repeating one reel doesn't show range or build trust."
      ]
     ],
     "why": "Small, regular posts aimed at one audience work best.",
