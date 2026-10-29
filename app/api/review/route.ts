@@ -1,4 +1,4 @@
-import {youtubeLink,driveId,driveDownload,readDoc,linkProblem} from '../../handin-links';
+import {youtubeLink,driveId,driveDownload,driveVideo,readDoc,linkProblem} from '../../handin-links';
 import {googleDocId,parseVideoKey,moduleLesson} from '../../videography/programme';
 import {reviewGuide,directorLens} from '../../videography/review-guide';
 import {moduleHref} from '../../learning-rules';
@@ -23,8 +23,8 @@ const maxWatched=2;
 // Public Google Drive video links ("Anyone with the link"): the file is streamed from Drive to Gemini.
 async function watchDrive(url:string,focus=''):Promise<VideoWatch>{
  try{const r=await fetch(driveDownload(url),{redirect:'follow'});
-  const type=r.headers.get('content-type')||'',size=Number(r.headers.get('content-length'));
-  if(!r.ok||!r.body||!type.startsWith('video/')){await r.body?.cancel();return {ok:false,reason:'The Drive link isn’t a public video. Share it as “Anyone with the link”.'}}
+  const type=driveVideo(r).mime,size=Number(r.headers.get('content-length'));
+  if(!r.ok||!r.body||!type){await r.body?.cancel();return {ok:false,reason:'The Drive link isn’t a public video. Share it as “Anyone with the link”.'}}
   if(!(size>0)||size>1024*1024*1024){await r.body.cancel();return {ok:false,reason:'The Drive video is too large to watch (over 1 GB).'}}
   return await watchVideo({stream:r.body,size,mime:type,name:'drive-video'},focus);
  }catch{return {ok:false,reason:'The Drive video could not be opened.'}}
