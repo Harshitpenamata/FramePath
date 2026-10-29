@@ -409,4 +409,8 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 /* After a review: a way back to the task while there is a chance left */
 .vg-retry{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;padding:var(--s4) var(--s5);border:1.5px solid var(--primary);border-radius:18px;background:#d3ee960d}
 .vg-retry p{margin:var(--s1) 0 0}
+/* Review progress while the AI checks clips and photos */
+.vg-wait-bar{height:10px;border-radius:999px;background:#2a2a27;overflow:hidden;margin:var(--s2) 0}
+.vg-wait-bar span{display:block;height:100%;border-radius:inherit;background:var(--primary);transition:width 1s linear}
+@media(prefers-reduced-motion:reduce){.vg-wait-bar span{transition:none}}
 

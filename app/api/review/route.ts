@@ -1,4 +1,4 @@
-import {inTurns,youtubeLink,driveId,driveFolderId,driveFolderVideos,driveDownload,driveVideo,readDoc,linkProblem} from '../../handin-links';
+import {inTurns,youtubeLink,driveId,driveFolderId,driveFolderFiles,watchableName,isPhotoName,driveDownload,driveVideo,readDoc,linkProblem} from '../../handin-links';
 import {partsFor} from '../../videography/task-parts';
 import {googleDocId,parseVideoKey,moduleLesson} from '../../videography/programme';
 import {reviewGuide,directorLens} from '../../videography/review-guide';
@@ -20,8 +20,9 @@ import {lessonsFor,lessonVideos} from '../../videography/lessons';
 export const dynamic='force-dynamic';
 const imageTypes=['image/jpeg','image/png','image/webp'];
 // Up to two video files and a YouTube link are watched by Gemini for each review.
-// A sequence task asks for 5 to 8 shots, so up to 8 clips are watched, 3 at a time.
-const maxWatched=8,watchAtOnce=3;
+// Every clip and photo in the hand-in is checked, 8 at a time (each takes about a minute and a half, mostly Google
+// processing the upload), up to a safety limit per review.
+const maxWatched=40,watchAtOnce=8;
 
 // Public Google Drive video links ("Anyone with the link"): the file is streamed from Drive to Gemini.
 async function watchDrive(url:string,focus=''):Promise<VideoWatch>{
@@ -52,8 +53,8 @@ export async function POST(req:Request){try{checkOrigin(req);const u=await ident
 const waiting=(id:string)=>Response.json({queued:true,id},{status:202,headers:{'Cache-Control':'no-store'}});
 export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promise<Response>{let jobId='';try{
  const key=safeText(b.lessonKey,80,1);if(!isCourseKey(key)&&!isScenarioKey(key)&&!isVisualKey(key)&&!isVideoKey(key))throw new Error('Choose a self-paced assignment.');const {state:s}=await readState(u.userId);const info=requireLesson(s,key);const id=safeText(b.requestId,100,12);
- let notes:string,imageIds:string[],submissionId='',videoFiles:any[]=[],videoLink='',driveLinks:string[]=[],docLink='';
- if(isVideoKey(key)){submissionId=safeText(b.submissionId,100,1);const piece=s.submissions.find((x:any)=>x.id===submissionId&&x.key===key);if(!piece)throw new Error('Hand in your work first, then ask for a review.');notes=handInText(piece);imageIds=(piece.uploads||[]).filter((f:any)=>imageTypes.includes(f.type)).slice(0,3).map((f:any)=>f.id);videoFiles=(piece.uploads||[]).filter((f:any)=>String(f.type).startsWith('video/')).slice(0,maxWatched);videoLink=youtubeLink(piece.url)?piece.url:'';driveLinks=driveId(piece.url)?[piece.url]:driveFolderId(piece.url)?await driveFolderVideos(piece.url,maxWatched):[];docLink=googleDocId(piece.url)?piece.url:'';
+ let notes:string,imageIds:string[],submissionId='',videoFiles:any[]=[],videoLink='',driveFiles:{url:string;name:string}[]=[],notOpened:string[]=[],overLimit=0,docLink='';
+ if(isVideoKey(key)){submissionId=safeText(b.submissionId,100,1);const piece=s.submissions.find((x:any)=>x.id===submissionId&&x.key===key);if(!piece)throw new Error('Hand in your work first, then ask for a review.');notes=handInText(piece);imageIds=(piece.uploads||[]).filter((f:any)=>imageTypes.includes(f.type)).slice(0,3).map((f:any)=>f.id);videoFiles=[...(piece.uploads||[]).filter((f:any)=>String(f.type).startsWith('video/')),...(piece.uploads||[]).filter((f:any)=>imageTypes.includes(f.type)).slice(3)].slice(0,maxWatched);videoLink=youtubeLink(piece.url)?piece.url:'';if(driveId(piece.url))driveFiles=[{url:piece.url,name:''}];else if(driveFolderId(piece.url)){const all=await driveFolderFiles(piece.url),media=all.filter(f=>watchableName(f.name));driveFiles=media.slice(0,maxWatched);overLimit=media.length-driveFiles.length;notOpened=all.filter(f=>!watchableName(f.name)).map(f=>f.name)}docLink=googleDocId(piece.url)?piece.url:'';
   // Nothing the AI can't open reaches a review: the learner fixes it first and the review isn't used.
   if(!fromQueue){const why=await linkProblem(piece.url);if(why)throw new Error(why+' Your AI review wasn’t used.');
    for(const f of piece.uploads||[])if(!await bucket().head(f.id))throw new Error('“'+f.name+'” is no longer available. Hand in again with the file. Your AI review wasn’t used.')}}
@@ -94,11 +95,13 @@ export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promi
   ...videoFiles.map((f:any)=>twice(async()=>{const own:any=await db().prepare('SELECT type FROM uploads WHERE id=? AND user_id=?').bind(f.id,u.userId).first();const obj=own?await bucket().get(f.id):null;
    return {what:'video file '+f.name,result:obj?await watchVideo({stream:obj.body,size:obj.size,mime:own.type,name:f.name},lens?.watchFor):{ok:false as const,reason:'The file is unavailable.'}}})),
   ...(videoLink?[twice(async()=>({what:'video link '+videoLink,result:await watchVideo({youtubeUrl:videoLink},lens?.watchFor)}))]:[]),
-  ...driveLinks.map((l,i)=>twice(async()=>({what:driveLinks.length>1?`Google Drive clip ${i+1} of ${driveLinks.length} (in folder order)`:'Google Drive video '+l,result:await watchDrive(l,lens?.watchFor)})))],watchAtOnce);
+  ...driveFiles.map((d,i)=>twice(async()=>({what:driveFiles.length>1?`Google Drive ${isPhotoName(d.name)?'photo':'clip'} ${i+1} of ${driveFiles.length}, “${d.name}” (in folder order)`:'Google Drive file '+(d.name||d.url),result:await watchDrive(d.url,lens?.watchFor)})))],watchAtOnce);
  // Gemini was busy: rather than reviewing without the video, the review waits in the queue (once; a second
  // busy spell from the queue goes ahead and says the video couldn't be watched).
  if(!fromQueue&&watched.some(w=>!w.result.ok&&(w.result as any).retry)){await db().prepare("UPDATE ai_jobs SET status='queued',answer=? WHERE id=? AND status='pending'").bind(JSON.stringify({request:b}),id).run();return waiting(id)}
- const videoWatch=watched.map(w=>w.result.ok?{video:w.what,watched:'the whole video, picture and sound',duration:w.result.duration,hasSpeech:w.result.hasSpeech,notes:w.result.notes}:{video:w.what,watched:'could not be watched',reason:w.result.reason});
+ const videoWatch=[...watched.map(w=>w.result.ok?{video:w.what,watched:/photo/.test(w.what)||!w.result.duration?'the whole photo':'the whole video, picture and sound',duration:w.result.duration,hasSpeech:w.result.hasSpeech,notes:w.result.notes}:{video:w.what,watched:'could not be watched',reason:w.result.reason}),
+  ...notOpened.map(n=>({video:'Google Drive file “'+n+'”',watched:'not opened',reason:'Not a video or photo, so the AI did not open it.'})),
+  ...(overLimit>0?[{video:overLimit+' more files in the folder',watched:'not checked',reason:'Over the limit of '+maxWatched+' files per review.'}]:[])];
  const watchedCount=watched.filter(w=>w.result.ok).length;
  if(videoWatch.length){const first=JSON.parse(content[content.length-1].text);first.videoWatch=videoWatch;first.evidence=[imageIds.length&&imageIds.length+' attached image(s)',watchedCount&&watchedCount+' video(s) described in videoWatch','learner-written text'].filter(Boolean).join(', ')+'.';content[content.length-1]={type:'text',text:JSON.stringify(first)}}
  if(docLink){const doc=await readDoc(docLink),last=JSON.parse(content[content.length-1].text);

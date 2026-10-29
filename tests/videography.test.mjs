@@ -427,3 +427,15 @@ test('watching clips: at most n at a time, results in the original order',async(
  const jobs=[30,5,20,10,1,15,8].map((ms,i)=>async()=>{running++;peak=Math.max(peak,running);await new Promise(r=>setTimeout(r,ms));running--;return i});
  assert.deepEqual(await H.inTurns(jobs,3),[0,1,2,3,4,5,6]);assert.equal(peak,3);
 });
+
+test('Drive files: videos and photos are opened by type or by file name, MKV and documents are not',()=>{
+ const H=load(path.join(root,'app/handin-links.ts'));
+ const res=(type,name)=>({headers:{get:h=>h==='content-type'?type:h==='content-disposition'?`attachment; filename="${name}"`:null}});
+ assert.equal(H.driveVideo(res('application/octet-stream','IMG_9281.MOV')).mime,'video/quicktime');
+ assert.equal(H.driveVideo(res('application/octet-stream','frame.JPG')).mime,'image/jpeg');
+ assert.equal(H.driveVideo(res('image/png','a.png')).mime,'image/png');
+ assert.equal(H.driveVideo(res('application/octet-stream','clip.mkv')).mkv,true);
+ assert.equal(H.driveVideo(res('application/octet-stream','clip.mkv')).mime,'');
+ assert.ok(H.watchableName('IMG_9289.MOV')&&H.watchableName('still.heic')&&!H.watchableName('shotlist.pdf')&&!H.watchableName('take.mkv'));
+ assert.ok(H.isPhotoName('a.jpeg')&&!H.isPhotoName('a.mp4'));
+});

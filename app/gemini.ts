@@ -21,6 +21,9 @@ Write plain, factual notes. Use MM:SS timestamps. Cover:
 - what a director would notice, still as description: what each shot is for, where the eye goes first, whether the light seems to come from a real source, whether cuts land on movement or on a beat, and the moment the video is strongest and weakest
 Describe, don't judge or score. If something can't be told, say so.
 Sound: only report sounds you actually hear. If the video has no sound or only silence, write "No sound" and set hasSpeech to false. Never guess speech from text or pictures on screen.`;
+const photoInstructions=`You look at one still photo made by an adult learning videography, and report exactly what you see, so a tutor can review it without seeing it.
+Write plain, factual notes. Cover: what is in the frame and the shot size (wide, medium, close), where the eye goes first, composition and what sits at the edges, camera height and angle, focus and what is sharp, exposure (too dark, too bright, clipped highlights), white balance or colour casts, light direction and quality, and anything distracting.
+Describe, don't judge or score. Set duration to "" and hasSpeech to false.`;
 const schema={type:'object',properties:{
  duration:{type:'string',description:'Total length as MM:SS.'},
  hasSpeech:{type:'boolean'},
@@ -57,7 +60,7 @@ export async function watchVideo(src:Source,focus=''):Promise<VideoWatch>{
  try{
   const part='youtubeUrl' in src?{file_data:{file_uri:src.youtubeUrl}}:(file=await upload(src.stream,src.size,src.mime,src.name),{file_data:{mime_type:file.mimeType,file_uri:file.uri}});
   const r=await call(`/v1beta/models/${geminiModel()}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-   contents:[{parts:[part,{text:instructions+(focus?'\nFor this task, pay extra attention to: '+focus+'.':'')}]}],
+   contents:[{parts:[part,{text:('mime' in src&&src.mime.startsWith('image/')?photoInstructions:instructions)+(focus?'\nFor this task, pay extra attention to: '+focus+'.':'')}]}],
    generationConfig:{responseMimeType:'application/json',responseJsonSchema:schema,temperature:0.2}})},3);
   const j:any=await r.json();
   const um=j.usageMetadata||{};await recordUsage('google',geminiModel(),'video-watch',um.promptTokenCount||0,(um.candidatesTokenCount||0)+(um.thoughtsTokenCount||0));

@@ -175,10 +175,17 @@ function PartsPanel({moduleKey,list,draft,update}:{moduleKey:string;list:TaskPar
  </Panel>;
 }
 
-function WaitingTips(){
- const [i,setI]=useState(()=>Math.floor(Math.random()*waitingTips.length));
- useEffect(()=>{const t=setInterval(()=>setI(n=>(n+1)%waitingTips.length),7000);return ()=>clearInterval(t)},[]);
- return <Panel className="vg-waiting"><p role="status"><span className="vg-spinner" aria-hidden="true"/>AI is reviewing your work. This can take up to a minute…</p><p className="vg-tip"><span className="eyebrow">While you wait</span>{waitingTips[i]}</p></Panel>;
+// While a review runs: a bar that fills over the expected time (about a minute for each 8 clips or photos, checked
+// together, plus the writing),
+// slowing near the end rather than promising a finish time.
+function WaitingTips({media=0}:{media?:number}){
+ const [i,setI]=useState(()=>Math.floor(Math.random()*waitingTips.length)),[t,setT]=useState(0);
+ useEffect(()=>{const a=setInterval(()=>setI(n=>(n+1)%waitingTips.length),7000),b=setInterval(()=>setT(s=>s+1),1000);return ()=>{clearInterval(a);clearInterval(b)}},[]);
+ const expected=40+Math.ceil(media/8)*60,share=t<expected?t/expected*0.9:0.9+0.08*(1-Math.exp(-(t-expected)/60));
+ const step=media>0&&t<expected-25?`Checking your ${media} ${media===1?'clip or photo':'clips and photos'}`:'Writing your review';
+ return <Panel className="vg-waiting"><p role="status"><span className="vg-spinner" aria-hidden="true"/>{step}…</p>
+  <div className="vg-wait-bar" role="progressbar" aria-label="Review progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(share*100)}><span style={{width:Math.round(share*100)+'%'}}/></div>
+  <p className="small">{t>expected+30?'This one is taking longer than usual. It is still working, so please keep this page open.':'Please keep this page open. Your review will appear here.'}</p><p className="vg-tip"><span className="eyebrow">While you wait</span>{waitingTips[i]}</p></Panel>;
 }
 
 type Flag={reason:string;status:'open'|'fine'|'refunded';note:string};
@@ -226,7 +233,7 @@ function FeedbackTab({moduleKey:key,requestFor,onRetry,onFinish}:{moduleKey:stri
  const canReview=allowance?.eligible&&allowance.used<allowance.limit;
  const rated=Array.isArray(piece.selfRatings);
  return <div className="vg-reflect">
-  {status&&<WaitingTips/>}
+  {status&&<WaitingTips media={piece?.media||0}/>}
   {!review&&allowance?.queued>0&&<p className="notice" role="status">Your AI review is in the queue. AI is paused for a short while, so it will run soon and show up here, usually within a few hours. You don’t need to do anything.</p>}
   {review?<Panel className="vg-ai-review">
    <div className="row between"><h2><Sparkles size={20}/> AI review</h2>{(()=>{const rs=review.review.criteria.map(c=>c.rating),all=rs.every(r=>r!==null),sum=(a:(number|null)[])=>a.reduce<number>((n,r)=>n+(r||0),0),was=prev?.review.criteria.map(c=>c.rating);

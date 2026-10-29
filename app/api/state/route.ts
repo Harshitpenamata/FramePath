@@ -10,6 +10,12 @@ import {buildPersonalPlan,isPersonalized} from '../../personalization';
 import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../selfpaced-curriculum';
 import {validateReview} from '../../assignment-review';
 import {partsFor,composeAnswer} from '../../videography/task-parts';
+import {driveFolderId,driveFolderFiles,watchableName,driveId,youtubeLink} from '../../handin-links';
+// How many clips and photos a review of this hand-in will look at (shown as a progress estimate while it runs).
+async function mediaCount(url:string,uploads:{type:string}[]){
+ const files=uploads.filter(f=>/^(video|image)\//.test(f.type)).length;
+ try{return files+(driveFolderId(url)?(await driveFolderFiles(url)).filter(f=>watchableName(f.name)).length:driveId(url)||youtubeLink(url)?1:0)}catch{return files}
+}
 import {buildProgramme,buildTestProgramme,planName,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,maxPlans,styleModuleKeys,type Level} from '../../videography/programme';
 // Public portfolio data: only the pieces the learner picked to share.
 // What a shared portfolio shows. File names stay private; only each file's id and type are shared, so images and videos can be shown.
@@ -157,7 +163,7 @@ case 'video_submit':{
  const uploads:any[]=[];for(const uploadId of ids){const own:any=await db().prepare('SELECT id,name,type FROM uploads WHERE id=? AND user_id=?').bind(uploadId,user.userId).first();if(!own)throw new Error('That upload is not available in your account.');uploads.push({id:own.id,name:own.name,type:own.type})}
  if(s.submissions.length>=100)throw new Error('My Work is full (100 pieces). Remove a piece you no longer need, then hand in again.');
  const self=selfCheck?scoreAttempt(key,handIn.ratings,s.profile):null,attempt=s.submissions.filter((x:any)=>x.key===key).length+1;
- s.submissions.unshift({id:id(),key,moduleId:video.module.id,...(styleModuleKeys.includes(key)&&s.programme?{pathway:s.programme.primaryPathway}:{}),handIn:true,attempt,answer:handIn.answer,...(handIn.parts?{parts:handIn.parts}:{}),notes:handIn.notes,url:handIn.url,uploads,uploadId:uploads[0]?.id||'',uploadIds:ids,selfRatings:self?handIn.ratings:null,selfScore:self?self.total:null,reflections:selfCheck?handIn.reflections:null,status:'saved',feedback:'',scores:null,createdAt:now,updatedAt:now});
+ s.submissions.unshift({id:id(),key,moduleId:video.module.id,...(styleModuleKeys.includes(key)&&s.programme?{pathway:s.programme.primaryPathway}:{}),handIn:true,attempt,media:await mediaCount(handIn.url,uploads),answer:handIn.answer,...(handIn.parts?{parts:handIn.parts}:{}),notes:handIn.notes,url:handIn.url,uploads,uploadId:uploads[0]?.id||'',uploadIds:ids,selfRatings:self?handIn.ratings:null,selfScore:self?self.total:null,reflections:selfCheck?handIn.reflections:null,status:'saved',feedback:'',scores:null,createdAt:now,updatedAt:now});
  // Handing in unlocks the next module; the AI score in Reflect is feedback, not a gate.
  steps.push(['handin',{module:key},'']);if(!s.progress[key]?.done)steps.push(['module_done',{module:key},`module_done:${user.userId}:${key}`]);
  s.progress[key]={...(s.progress[key]||{}),done:true,at:s.progress[key]?.at||now,source:'hand-in',score:self?.total??null};
