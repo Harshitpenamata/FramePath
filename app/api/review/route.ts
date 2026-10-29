@@ -1,4 +1,4 @@
-import {youtubeLink,driveId,driveDownload,driveVideo,readDoc,linkProblem} from '../../handin-links';
+import {youtubeLink,driveId,driveFolderId,driveFolderVideos,driveDownload,driveVideo,readDoc,linkProblem} from '../../handin-links';
 import {googleDocId,parseVideoKey,moduleLesson} from '../../videography/programme';
 import {moduleHref} from '../../learning-rules';
 import {isVisualKey,visualLesson} from '../../lessons/content';
@@ -29,7 +29,7 @@ async function watchDrive(url:string):Promise<VideoWatch>{
  }catch{return {ok:false,reason:'The Drive video could not be opened.'}}
 }
 // What the AI sees from a Videography hand-in. Self-ratings and reflections are left out so they don't bias the review.
-function handInText(piece:any){const files=(piece.uploads||[]).map((f:any)=>f.name+' ('+f.type+')');const videos=(piece.uploads||[]).filter((f:any)=>!imageTypes.includes(f.type)).length;return ['Written answer:',piece.answer||'(none)','Learner notes:',piece.notes||'(none)','Files: '+(files.join(', ')||'none')+(videos?'. Video files are described in videoWatch when they could be watched.':''),'Link: '+(piece.url?(googleDocId(piece.url)?'a Google Doc, attached as a PDF (handInDocument)':youtubeLink(piece.url)?'a YouTube link, described in videoWatch when it could be watched':driveId(piece.url)?'a Google Drive link, described in videoWatch when it could be watched':'given, not opened'):'none')].join('\n')}
+function handInText(piece:any){const files=(piece.uploads||[]).map((f:any)=>f.name+' ('+f.type+')');const videos=(piece.uploads||[]).filter((f:any)=>!imageTypes.includes(f.type)).length;return ['Written answer:',piece.answer||'(none)','Learner notes:',piece.notes||'(none)','Files: '+(files.join(', ')||'none')+(videos?'. Video files are described in videoWatch when they could be watched.':''),'Link: '+(piece.url?(googleDocId(piece.url)?'a Google Doc, attached as a PDF (handInDocument)':youtubeLink(piece.url)?'a YouTube link, described in videoWatch when it could be watched':driveId(piece.url)||driveFolderId(piece.url)?'a Google Drive link or folder, described in videoWatch when it could be watched':'given, not opened'):'none')].join('\n')}
 async function access(userId:string,s:any,lessonKey:string){
  await db().prepare("UPDATE ai_jobs SET status='failed' WHERE user_id=? AND status='pending' AND created_at<?").bind(userId,Date.now()-120000).run();
  // Videography modules: 2 AI reviews per module (Free on the first two modules; Self-paced or Mentor-led for the rest).
@@ -48,8 +48,8 @@ export async function POST(req:Request){try{checkOrigin(req);const u=await ident
 const waiting=(id:string)=>Response.json({queued:true,id},{status:202,headers:{'Cache-Control':'no-store'}});
 export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promise<Response>{let jobId='';try{
  const key=safeText(b.lessonKey,80,1);if(!isCourseKey(key)&&!isScenarioKey(key)&&!isVisualKey(key)&&!isVideoKey(key))throw new Error('Choose a self-paced assignment.');const {state:s}=await readState(u.userId);const info=requireLesson(s,key);const id=safeText(b.requestId,100,12);
- let notes:string,imageIds:string[],submissionId='',videoFiles:any[]=[],videoLink='',driveLink='',docLink='';
- if(isVideoKey(key)){submissionId=safeText(b.submissionId,100,1);const piece=s.submissions.find((x:any)=>x.id===submissionId&&x.key===key);if(!piece)throw new Error('Hand in your work first, then ask for a review.');notes=handInText(piece);imageIds=(piece.uploads||[]).filter((f:any)=>imageTypes.includes(f.type)).slice(0,3).map((f:any)=>f.id);videoFiles=(piece.uploads||[]).filter((f:any)=>String(f.type).startsWith('video/')).slice(0,maxWatched);videoLink=youtubeLink(piece.url)?piece.url:'';driveLink=driveId(piece.url)?piece.url:'';docLink=googleDocId(piece.url)?piece.url:'';
+ let notes:string,imageIds:string[],submissionId='',videoFiles:any[]=[],videoLink='',driveLinks:string[]=[],docLink='';
+ if(isVideoKey(key)){submissionId=safeText(b.submissionId,100,1);const piece=s.submissions.find((x:any)=>x.id===submissionId&&x.key===key);if(!piece)throw new Error('Hand in your work first, then ask for a review.');notes=handInText(piece);imageIds=(piece.uploads||[]).filter((f:any)=>imageTypes.includes(f.type)).slice(0,3).map((f:any)=>f.id);videoFiles=(piece.uploads||[]).filter((f:any)=>String(f.type).startsWith('video/')).slice(0,maxWatched);videoLink=youtubeLink(piece.url)?piece.url:'';driveLinks=driveId(piece.url)?[piece.url]:driveFolderId(piece.url)?await driveFolderVideos(piece.url):[];docLink=googleDocId(piece.url)?piece.url:'';
   // Nothing the AI can't open reaches a review: the learner fixes it first and the review isn't used.
   if(!fromQueue){const why=await linkProblem(piece.url);if(why)throw new Error(why+' Your AI review wasn’t used.');
    for(const f of piece.uploads||[])if(!await bucket().head(f.id))throw new Error('“'+f.name+'” is no longer available. Hand in again with the file. Your AI review wasn’t used.')}}
@@ -86,7 +86,7 @@ export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promi
   ...videoFiles.map(async(f:any)=>{const own:any=await db().prepare('SELECT type FROM uploads WHERE id=? AND user_id=?').bind(f.id,u.userId).first();const obj=own?await bucket().get(f.id):null;
    return {what:'video file '+f.name,result:obj?await watchVideo({stream:obj.body,size:obj.size,mime:own.type,name:f.name}):{ok:false as const,reason:'The file is unavailable.'}}}),
   ...(videoLink?[(async()=>({what:'video link '+videoLink,result:await watchVideo({youtubeUrl:videoLink})}))()]:[]),
-  ...(driveLink?[(async()=>({what:'Google Drive video '+driveLink,result:await watchDrive(driveLink)}))()]:[])]);
+  ...driveLinks.map(l=>(async()=>({what:'Google Drive video '+l,result:await watchDrive(l)}))())]);
  // Gemini was busy: rather than reviewing without the video, the review waits in the queue (once; a second
  // busy spell from the queue goes ahead and says the video couldn't be watched).
  if(!fromQueue&&watched.some(w=>!w.result.ok&&(w.result as any).retry)){await db().prepare("UPDATE ai_jobs SET status='queued',answer=? WHERE id=? AND status='pending'").bind(JSON.stringify({request:b}),id).run();return waiting(id)}
