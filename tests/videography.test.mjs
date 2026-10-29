@@ -422,3 +422,8 @@ test('task parts: every module lists its parts, and a hand-in names each empty o
  const list=T.partsFor('B01');assert.equal(T.composeAnswer(list,{text:{notes:'Both start with a problem.',lines:'I want people to see the care.'},files:{}}).split('\n\n').length,2);
 });
 
+test('watching clips: at most n at a time, results in the original order',async()=>{
+ const H=load(path.join(root,'app/handin-links.ts'));let running=0,peak=0;
+ const jobs=[30,5,20,10,1,15,8].map((ms,i)=>async()=>{running++;peak=Math.max(peak,running);await new Promise(r=>setTimeout(r,ms));running--;return i});
+ assert.deepEqual(await H.inTurns(jobs,3),[0,1,2,3,4,5,6]);assert.equal(peak,3);
+});
