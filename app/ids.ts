@@ -12,7 +12,7 @@ export async function nextNumber(name:'user'|'course'|'ticket'){
 }
 
 export const courseCodes:Record<string,string>={videography:'VID'};
-export const levelLetter=(level:string)=>({beginner:'B',intermediate:'I',advanced:'A'} as Record<string,string>)[level]||'X';
+export const levelLetter=(level:string)=>({beginner:'B',intermediate:'I',advanced:'A',test:'T'} as Record<string,string>)[level]||'X';
 
 // The learner's User ID, made once. A second request racing this one keeps whichever ID was saved first.
 export async function ensureUserId(userId:string):Promise<string>{

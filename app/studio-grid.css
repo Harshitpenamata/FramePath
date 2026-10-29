@@ -342,3 +342,14 @@ p,li{text-wrap:pretty}
 .db-stages li{align-items:center;text-align:center;padding-inline:36px}
 /* Footer links: a 44px tap height on touch screens. */
 .footer>div a{display:inline-flex;align-items:center;min-height:44px}
+
+/* The learner's plan (Free, Self-paced, Membership) beside My account; the two sit together in the header. */
+.topbar .account-group{display:flex;align-items:center;justify-self:end}
+@media(max-width:760px){.topbar .account-group{order:2}}
+.topbar .plan-badge{display:inline-flex;align-items:center;height:30px;padding:0 12px;margin-right:10px;border-radius:999px;border:1.5px solid #0b0b0b;color:#0b0b0b;font-size:.8rem;font-weight:700;white-space:nowrap}
+@media(max-width:760px){.topbar .plan-badge{order:2;margin-right:6px;height:26px;padding:0 9px;font-size:.72rem}}
+/* Scroll (25 Oct 2026): links within a page glide there, unless the learner prefers reduced motion (the site's own
+   reduced-motion setting still wins); sideways strips scroll on their own without dragging the page or triggering
+   the browser's swipe-back. */
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+.mv-tabbar,.vg-track,.vg-spot.timeline,.vg-show-thumbs{overscroll-behavior-x:contain}
