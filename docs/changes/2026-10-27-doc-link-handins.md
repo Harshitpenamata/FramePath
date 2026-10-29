@@ -31,3 +31,7 @@ The learner-facing "What the AI couldn't check" line is removed from the review 
 ## Google Drive videos
 
 Drive often labels a video file as a generic download, which the first version of the check refused. The check (`driveVideo` in `app/handin-links.ts`) now accepts a video by its file name too (MP4, MOV, WebM, AVI, MPG, WMV, 3GP). MKV files (what OBS and many screen recorders save) are refused with a message to save as MP4, because Gemini cannot watch MKV. Drive folders, photos and PDFs are still not read; upload photos and use a Google Doc for written work.
+
+## Drive folders
+
+A shared Drive folder link also works (`driveFolderVideos` in `app/handin-links.ts`): the public folder view lists its files without sign-in, and the review watches the first two videos (MP4, MOV, WebM, AVI, MPG, WMV, 3GP), the same limit as uploads. A folder with no such videos is refused with a message. Photos and documents in a folder are not read.

@@ -12,6 +12,13 @@ export function driveVideo(r:Response){
  const mime=type.startsWith('video/')&&type!=='video/x-matroska'?type:/^(application|binary)\/octet-stream$/.test(type)?watchable[ext]||'':'';
  return {mime,mkv:ext==='mkv'||type==='video/x-matroska'};
 }
+export const driveFolderId=(u:string)=>String(u||'').match(/drive\.google\.com\/drive\/(?:u\/\d+\/)?folders\/([\w-]{20,})/)?.[1]||'';
+// The videos in a shared Drive folder, from its public folder view (no sign-in), up to what a review watches.
+export async function driveFolderVideos(url:string,max=2):Promise<string[]>{
+ const r=await fetch('https://drive.google.com/embeddedfolderview?id='+driveFolderId(url));const page=r.ok?await r.text():'',out:string[]=[];
+ for(const m of page.matchAll(/<a href="https:\/\/drive\.google\.com\/file\/d\/([\w-]{20,})[^"]*"[^>]*>[\s\S]*?<div class="flip-entry-title">([^<]*)<\/div>/g))if(/\.(mp4|m4v|mov|webm|avi|mpe?g|wmv|3gp)$/i.test(m[2].trim()))out.push('https://drive.google.com/file/d/'+m[1]+'/view');
+ return out.slice(0,max);
+}
 export const driveDownload=(u:string)=>'https://drive.usercontent.google.com/download?export=download&confirm=t&id='+driveId(u);
 const docMax=15*1024*1024,notShared='The Google Doc isn’t shared. In Google Docs, click Share and set General access to “Anyone with the link”, then hand in again.';
 // A Google Doc exported as PDF. Claude fetches the export link itself, so the file is never held in this worker (a
@@ -31,8 +38,13 @@ export async function linkProblem(url:string):Promise<string>{
  try{
   if(googleDocId(url)){const doc=await readDoc(url);return doc.ok?'':doc.reason}
   if(youtubeLink(url)){const r=await fetch('https://www.youtube.com/oembed?format=json&url='+encodeURIComponent(url));await r.body?.cancel();return r.ok?'':'That YouTube video can’t be opened. Set it to Public or Unlisted, then hand in again.'}
-  if(driveId(url)){const r=await fetch(driveDownload(url),{redirect:'follow'});await r.body?.cancel();const v=r.ok?driveVideo(r):{mime:'',mkv:false};
-   return v.mime?'':v.mkv?'The AI can’t watch MKV files. Save the video as MP4 (most phones and editors can), upload it again, then hand in again.':'That Google Drive link isn’t a shared video the AI can open. Share the video file as “Anyone with the link” (a MP4, MOV or WebM works best), then hand in again.'}
+  if(driveFolderId(url)){const vids=await driveFolderVideos(url);if(!vids.length)return 'The AI found no videos in that Drive folder. Share the folder as “Anyone with the link”, and put MP4 or MOV videos in it (MKV can’t be watched).';
+   for(const v of vids){const why=await driveFileProblem(v);if(why)return why}return ''}
+  if(driveId(url))return await driveFileProblem(url);
  }catch{return 'That link could not be opened. Check it, then hand in again.'}
- return 'The AI review can only open YouTube links, Google Drive videos and Google Docs. Upload your work, or use one of those.';
+ return 'The AI review can only open YouTube links, Google Drive videos or folders, and Google Docs. Upload your work, or use one of those.';
+}
+async function driveFileProblem(url:string):Promise<string>{
+  {const r=await fetch(driveDownload(url),{redirect:'follow'});await r.body?.cancel();const v=r.ok?driveVideo(r):{mime:'',mkv:false};
+   return v.mime?'':v.mkv?'The AI can’t watch MKV files. Save the video as MP4 (most phones and editors can), upload it again, then hand in again.':'That Google Drive link isn’t a shared video the AI can open. Share the video file as “Anyone with the link” (a MP4, MOV or WebM works best), then hand in again.'}
 }
