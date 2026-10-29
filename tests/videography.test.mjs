@@ -398,3 +398,14 @@ test('Reflect answer order: the right answer lands evenly on A, B, C and D in ev
   for(const c of pos)assert.ok(c/n>0.15&&c/n<0.35,lv+': right answer position share '+pos.map(x=>Math.round(100*x/n)+'%').join(' '));
  }
 });
+
+test('resume: a module opens at the first lesson whose questions are not solved, and at the task once all are',()=>{
+ const L=load(path.join(root,'app/videography/lessons.ts')),n=L.lessonsFor('B01','Documentary').filter(l=>!l.optional&&!l.style).length;
+ const done=k=>Object.fromEntries([...Array(k).keys()].map(i=>[i,{v:[],t:true}]));
+ assert.equal(L.resumeLesson('B01','Documentary',undefined),0);
+ assert.equal(L.resumeLesson('B01','Documentary',done(2)),2);
+ assert.equal(L.resumeLesson('B01','Documentary',done(n)),-1);
+ assert.equal(L.continueHref('/m','B01','Documentary',done(2)),'/m?tab=watch&lesson=3');
+ assert.equal(L.continueHref('/m','B01','Documentary',done(0)),'/m');
+ assert.equal(L.continueHref('/m','B01','Documentary',done(n)),'/m?tab=make');
+});

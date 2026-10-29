@@ -6,7 +6,7 @@ import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
 import {stageOrder,parseVideoKey,moduleLesson,projectLabel,isFreeModule,type Pathway} from './programme';
 import {videosFor,type ModuleVideo} from './media';
-import {lessonsFor,sketchId,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
+import {lessonsFor,resumeLesson,sketchId,lessonVideos,videoId,watchShare,lessonsStatus,requireLessonsForTask,type LessonMark} from './lessons';
 import {ReflectStep,TestOut} from './reflect';
 import {moduleResources} from './module-resources';
 
@@ -216,10 +216,12 @@ function SelfPacedLock({moduleKey,what}:{moduleKey:string;what:string}){
 
 // Lessons tab: module intro, then each lesson's Watch and Reflect, then a pointer to the task.
 export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:()=>void;onLesson?:(index:number,count:number)=>void}){
- const {s,user,mutate,busy}=useLearning();
+ const {s,user,loaded,mutate,busy}=useLearning();
  const parsed=parseVideoKey(moduleKey);
  const [index,setIndex]=useState(0);
- useEffect(()=>{const n=Number(new URLSearchParams(window.location.search).get('lesson'));if(n>0)setIndex(n-1)},[]);
+ // Open the lesson the link names; otherwise pick up where the learner left off (once their progress has loaded).
+ useEffect(()=>{if(!loaded)return;const n=Number(new URLSearchParams(window.location.search).get('lesson'));if(n>0){setIndex(n-1);return}
+  if(!parsed||!user)return;const at=resumeLesson(parsed.module.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[moduleKey]);if(at>0)setIndex(at)},[loaded]);
  // Tells the module page which lesson is open, so Next module only shows on the last one.
  useEffect(()=>{if(parsed)onLesson?.(index,lessonsFor(parsed.module.id,s.programme?.primaryPathway).length)},[index,moduleKey,s.programme?.primaryPathway]);
  if(!parsed)return null;

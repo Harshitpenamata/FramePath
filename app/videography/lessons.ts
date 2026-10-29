@@ -1021,6 +1021,16 @@ export function lessonFinished(moduleId:string,index:number,pathway:Pathway,mark
  return !!mark?.t&&lessonNeeds(moduleId,index,pathway,dead).every(id=>mark.v.includes(id));
 }
 // How far a learner is through a module's lessons (marks come from state.lessonProgress[moduleKey]).
+// Where a learner left off in a module: the first required lesson whose questions aren't solved yet (they come after
+// the videos), or -1 when every required lesson is done.
+export function resumeLesson(moduleId:string,pathway:Pathway,marks:Record<string,LessonMark>|undefined){
+ return lessonsFor(moduleId,pathway).findIndex((l,i)=>!l.optional&&!l.style&&!marks?.[i]?.t);
+}
+// The link that continues a module: its first unfinished lesson, or the task once every lesson is done.
+export function continueHref(base:string,moduleId:string,pathway:Pathway,marks:Record<string,LessonMark>|undefined){
+ const at=resumeLesson(moduleId,pathway,marks);
+ return at<0?base+'?tab=make':at>0?base+'?tab=watch&lesson='+(at+1):base;
+}
 export function lessonsStatus(moduleId:string,pathway:Pathway,marks:Record<string,LessonMark>|undefined,dead:string[]=[]){
  const lessons=lessonsFor(moduleId,pathway),finished=lessons.map((_,i)=>lessonFinished(moduleId,i,pathway,marks?.[i],dead));
  // Optional lessons show their ticks but aren't needed to finish the module.
