@@ -23,3 +23,7 @@ Uploaded files are also checked to still be in storage. If anything can't be ope
 The Make tab has a note under the link field on sharing.
 
 Files: `app/handin-links.ts`, `app/api/review/route.ts`, `app/api/state/route.ts`, `app/videography/programme.ts`, `app/videography/lesson.tsx`, `tests/videography.test.mjs`.
+
+## Review page
+
+The learner-facing "What the AI couldn't check" line is removed from the review (the admin page still shows it for flagged reviews).
