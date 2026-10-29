@@ -231,12 +231,14 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  // Progress is saved to the account (signed-in learners on a plan that covers this module).
  const marks:Record<string,LessonMark>=s.lessonProgress?.[moduleKey]||{};
  const dead=useDeadVideos();
- const status=lessonsStatus(m.id,pathway,marks,dead),done=(i:number)=>status.finished[i];
+ // The admin test pathway skips the watch rule: a lesson is finished once its questions are solved.
+ const skipWatch=moduleKey.startsWith('video-test-');
+ const status=lessonsStatus(m.id,pathway,marks,dead),done=(i:number)=>skipWatch?!!marks[i]?.t:status.finished[i];
  const save=(body:any)=>{if(user&&open)void mutate('lesson_progress',{key:moduleKey,index:at,...body})};
  const mark=marks[at],videos=lessonVideos(m.id,at,pathway);
  // Videos still online; the questions open once they are all watched. Next lesson waits until the lesson is finished
  // (a style extra lesson never holds the learner back).
- const live=videos.filter(v=>!dead.includes(videoId(v))),watched=(v:ModuleVideo)=>!!mark?.v.includes(videoId(v)),allWatched=live.every(watched),locked=!!user&&open&&!done(at)&&!item?.style;
+ const live=videos.filter(v=>!dead.includes(videoId(v))),watched=(v:ModuleVideo)=>skipWatch||!!mark?.v.includes(videoId(v)),allWatched=live.every(watched),locked=!!user&&open&&!done(at)&&!item?.style;
  // Bring the lesson into view only when the learner is below it (e.g. Next lesson at the bottom); a tab click
  // at the top must not move the page.
  const go=(i:number)=>{const top=document.getElementById('vg-lesson-top'),below=!!top&&top.getBoundingClientRect().top<0;setIndex(i);

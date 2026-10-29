@@ -22,3 +22,7 @@ Admin panel → **Test pathway** → **Start a test pathway**. It adds a new pla
 ## Files
 
 `app/videography/programme.ts` (level, modules, `buildTestProgramme`), `app/api/state/route.ts` (`test_plan`, Reflect bank), `app/admin-page.tsx` (panel), `app/videography/closure.tsx`, `app/ids.ts` (letter T), `tests/videography.test.mjs`.
+
+## No watch rule
+
+On the test pathway the "watch 70% of each video" rule is off: every video counts as watched, so the questions open at once and a lesson is finished when its questions are solved (`skipWatch` in `app/videography/module-context.tsx`). Other plans are unchanged.
