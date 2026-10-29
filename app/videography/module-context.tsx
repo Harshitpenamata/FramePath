@@ -1,6 +1,6 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,Check,ChevronDown,ClipboardList,Clapperboard,ExternalLink,FileText,Lightbulb,ListChecks,LockKeyhole,Maximize2,Play,Scissors,Users,Video,Waypoints,X} from 'lucide-react';
+import {ArrowDown,ArrowLeft,ArrowRight,Check,ChevronDown,ClipboardList,Clapperboard,ExternalLink,FileText,Lightbulb,ListChecks,LockKeyhole,Maximize2,Play,Scissors,Users,Video,Waypoints,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {useLearning,Badge,Go,isExplore} from '../ui';
 import {moduleHref} from '../learning-rules';
@@ -59,7 +59,7 @@ const clock=(s:number)=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
 
 // Counts how long an embedded YouTube or Vimeo video really plays (skipping ahead doesn't count) and calls
 // onWatched once it reaches watchShare of the video, from its start time to the end.
-function useWatchTracker(iframe:React.RefObject<HTMLIFrameElement|null>,v:ModuleVideo|undefined,on:boolean,onWatched:()=>void){
+function useWatchTracker(iframe:React.RefObject<HTMLIFrameElement|null>,v:ModuleVideo|undefined,on:boolean,onWatched:()=>void,onEnded?:()=>void){
  useEffect(()=>{
   if(!on||!v)return;
   let played=0,last=-1,duration=0,done=false;
@@ -73,14 +73,15 @@ function useWatchTracker(iframe:React.RefObject<HTMLIFrameElement|null>,v:Module
   const onMessage=(e:MessageEvent)=>{
    if(!/youtube(-nocookie)?\.com$|vimeo\.com$/.test(new URL(e.origin).hostname))return;
    let d:any;try{d=typeof e.data==='string'?JSON.parse(e.data):e.data}catch{return}
-   if(d?.event==='infoDelivery'&&d.info){if(typeof d.info.playerState==='number')state=d.info.playerState;if(typeof d.info.currentTime==='number')add(d.info.currentTime,d.info.duration||0,state===1)}
+   if(d?.event==='infoDelivery'&&d.info){if(typeof d.info.playerState==='number'){if(d.info.playerState===0&&state!==0)onEnded?.();state=d.info.playerState}if(typeof d.info.currentTime==='number')add(d.info.currentTime,d.info.duration||0,state===1)}
    if(d?.event==='timeupdate'&&d.data)add(d.data.seconds,d.data.duration,true);
+   if(d?.event==='ended')onEnded?.();
   };
   window.addEventListener('message',onMessage);
   // Ask the player to report its progress; repeat until it is ready.
   const hello=setInterval(()=>{const w=iframe.current?.contentWindow;if(!w)return;
    if(v.youtubeId)w.postMessage(JSON.stringify({event:'listening',id:'fp',channel:'widget'}),'*');
-   else w.postMessage(JSON.stringify({method:'addEventListener',value:'timeupdate'}),'*');},1000);
+   else{w.postMessage(JSON.stringify({method:'addEventListener',value:'timeupdate'}),'*');w.postMessage(JSON.stringify({method:'addEventListener',value:'ended'}),'*')}},1000);
   return ()=>{window.removeEventListener('message',onMessage);clearInterval(hello)};
  },[on,v&&videoId(v)]);
 }
@@ -134,7 +135,7 @@ function useTrackingFallback(frame:React.RefObject<HTMLIFrameElement|null>,v:Mod
 // In the sidebar layout (side) videos and web pages share one list and one player area: a page opens in the player,
 // like a video; a site that refuses to be shown inside another site gets a card there with a link to it.
 // under can be a function: it receives the open item's description to place under the player.
-export function VideoPanel({videos:all,watched=[],onWatched,under,side}:{videos:ModuleVideo[];watched?:string[];onWatched?:(id:string)=>void;under?:React.ReactNode|((about:React.ReactNode)=>React.ReactNode);side?:(parts:{list:React.ReactNode})=>React.ReactNode}){
+export function VideoPanel({videos:all,watched=[],onWatched,onEnded,under,side}:{videos:ModuleVideo[];watched?:string[];onWatched?:(id:string)=>void;onEnded?:()=>void;under?:React.ReactNode|((about:React.ReactNode)=>React.ReactNode);side?:(parts:{list:React.ReactNode})=>React.ReactNode}){
  const dead=useDeadVideos(),videos=all.filter(v=>!dead.includes(videoId(v)));
  const playable=videos.filter(v=>v.youtubeId||v.vimeoId),links=videos.filter(v=>v.url);
  const [active,setActive]=useState(0),[playing,setPlaying]=useState(false),[reader,setReader]=useState<ModuleVideo|null>(null);
@@ -146,7 +147,7 @@ export function VideoPanel({videos:all,watched=[],onWatched,under,side}:{videos:
  // made while another is in flight is dropped; it stops once the page is in `watched`, or after 5 tries if saving fails.
  const tries=useRef<Record<string,number>>({});
  useEffect(()=>{if(!side||!cur?.url||!canFrame(cur.url)||watched.includes(videoId(cur))||!onWatched)return;const id=videoId(cur);if((tries.current[id]=(tries.current[id]||0)+1)<=5)onWatched(id)},[side&&cur?.url,onWatched,watched.length]);
- useWatchTracker(frame,v,playing&&!!onWatched,()=>v&&onWatched?.(videoId(v)));
+ useWatchTracker(frame,v,playing&&!!onWatched,()=>v&&onWatched?.(videoId(v)),onEnded);
  const fallback=useTrackingFallback(frame,v,playing&&!!onWatched);
  const underNode=(about:React.ReactNode)=>typeof under==='function'?under(about):under;
  if(!videos.length)return under?<div className="vg-video">{underNode(null)}</div>:null;
@@ -218,10 +219,11 @@ function SelfPacedLock({moduleKey,what}:{moduleKey:string;what:string}){
 export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:()=>void;onLesson?:(index:number,count:number)=>void}){
  const {s,user,loaded,mutate,busy}=useLearning();
  const parsed=parseVideoKey(moduleKey);
- const [index,setIndex]=useState(0);
+ const [index,setIndex]=useState(0),[landed,setLanded]=useState(false);
  // Open the lesson the link names; otherwise pick up where the learner left off (once their progress has loaded).
- useEffect(()=>{if(!loaded)return;const n=Number(new URLSearchParams(window.location.search).get('lesson'));if(n>0){setIndex(n-1);return}
-  if(!parsed||!user)return;const at=resumeLesson(parsed.module.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[moduleKey]);if(at>0)setIndex(at)},[loaded]);
+ useEffect(()=>{if(!loaded)return;const n=Number(new URLSearchParams(window.location.search).get('lesson'));
+  if(n>0)setIndex(n-1);else if(parsed&&user){const at=resumeLesson(parsed.module.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[moduleKey]);if(at>0)setIndex(at)}
+  setLanded(true)},[loaded]);
  // Tells the module page which lesson is open, so Next module only shows on the last one.
  useEffect(()=>{if(parsed)onLesson?.(index,lessonsFor(parsed.module.id,s.programme?.primaryPathway).length)},[index,moduleKey,s.programme?.primaryPathway]);
  if(!parsed)return null;
@@ -241,6 +243,12 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  // Videos still online; the questions open once they are all watched. Next lesson waits until the lesson is finished
  // (a style extra lesson never holds the learner back).
  const live=videos.filter(v=>!dead.includes(videoId(v))),watched=(v:ModuleVideo)=>skipWatch||!!mark?.v.includes(videoId(v)),allWatched=live.every(watched),locked=!!user&&open&&!done(at)&&!item?.style;
+ // The questions are open and waiting below: scroll to them when landing on the lesson or when its last video ends,
+ // and show a cue while they are out of view.
+ const ready=!!user&&open&&!!item&&allWatched&&!mark?.t,readyRef=useRef(false),landedScroll=useRef(false),[qBelow,setQBelow]=useState(false);readyRef.current=ready;
+ const toQuestions=()=>document.getElementById('vg-questions')?.scrollIntoView({behavior:'smooth',block:'start'});
+ useEffect(()=>{if(!landed||landedScroll.current)return;landedScroll.current=true;if(readyRef.current)setTimeout(toQuestions,600)},[landed]);
+ useEffect(()=>{if(!ready){setQBelow(false);return}const el=document.getElementById('vg-questions');if(!el)return;const io=new IntersectionObserver(([e])=>setQBelow(!e.isIntersecting&&e.boundingClientRect.top>0),{threshold:.1});io.observe(el);return ()=>io.disconnect()},[ready,at]);
  // Bring the lesson into view only when the learner is below it (e.g. Next lesson at the bottom); a tab click
  // at the top must not move the page.
  const go=(i:number)=>{const top=document.getElementById('vg-lesson-top'),below=!!top&&top.getBoundingClientRect().top<0;setIndex(i);
@@ -252,7 +260,7 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
  const idea=item&&<div className="mv-idea"><span className="eyebrow">The idea</span>{item.optional&&<p className="vg-optional">Optional · {item.optional}. Watch if you can; you don’t need it to finish the module.</p>}{item.style&&<p className="vg-optional">An extra lesson for {item.style}: what your style does differently here. You don’t need it to finish the module.</p>}<p className="vg-idea">{item.idea}</p></div>;
  // Under the player, like a video's description: the lesson's idea, its questions and the way on.
  const lessonCard=item&&<article className="vg-lesson-card">
-    <section className="vg-lesson-part"><div className="vg-part-head"><h3>Think it through</h3>{live.length>0&&<div className="vg-lesson-progress"><span className="vg-dots" aria-hidden="true">{live.map(v=><i key={videoId(v)} className={watched(v)?'done':''}/>)}</span><span className="small">{live.filter(watched).length} of {live.length} {live.length===1?'video or guide':'videos and guides'} done</span></div>}</div><p className="small vg-part-lede">{live.length?'Turn what you watched into a practical decision.':'Put the idea into practice.'}</p>
+    <section className="vg-lesson-part" id="vg-questions"><div className="vg-part-head"><h3>Think it through</h3>{live.length>0&&<div className="vg-lesson-progress"><span className="vg-dots" aria-hidden="true">{live.map(v=><i key={videoId(v)} className={watched(v)?'done':''}/>)}</span><span className="small">{live.filter(watched).length} of {live.length} {live.length===1?'video or guide':'videos and guides'} done</span></div>}</div><p className="small vg-part-lede">{live.length?'Turn what you watched into a practical decision.':'Put the idea into practice.'}</p>
      {!open?<SelfPacedLock moduleKey={moduleKey} what="Think it through questions"/>
       :user&&!allWatched?<div className="vg-locked-inline"><LockKeyhole size={20}/><div><strong>Finish {live.length===1?'the video or guide':`all ${live.length} videos and guides`} to open these questions.</strong><p className="small">{live.filter(watched).length} of {live.length} done so far.</p></div></div>
       :<ReflectStep moduleId={m.id} index={at} tool={item.tool} videos={videos} onSolved={()=>{if(!mark?.t)save({tool:true})}}/>}</section>
@@ -269,12 +277,13 @@ export function LessonsTab({moduleKey,onTask,onLesson}:{moduleKey:string;onTask:
   <p className="mv-desc">{m.outcome}</p>
   <div className="ls-tags"><Badge>{m.id} · {m.stageLabel}</Badge></div></>;
  return <div className="vg-context">
+  {qBelow&&<button type="button" className="q-cue" onClick={toQuestions}><ArrowDown size={18} aria-hidden="true"/>Questions are ready</button>}
   {m.stage==='selected-pathway'&&<p className="notice">Your course: <strong>{pathway}</strong>. Switch between your styles under My courses on your Journey page.</p>}
 
   {item?<section className="vg-lessons" id="vg-lesson-top">
    {/* Everything in the first screen: the player with the lesson's idea and questions under it; the lessons as tabs,
        the open lesson's videos and the video's description beside it. */}
-   {videos.length>0?<VideoPanel key={m.id+'-'+at} videos={videos} watched={mark?.v||[]} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined} under={under} side={side}/>
+   {videos.length>0?<VideoPanel key={m.id+'-'+at} videos={videos} watched={mark?.v||[]} onEnded={()=>{setTimeout(()=>{if(readyRef.current)toQuestions()},1200)}} onWatched={user&&open?(id=>{if(!mark?.v.includes(id))save({video:id})}):undefined} under={under} side={side}/>
     // A lesson without a video yet (some style extras): the idea takes the player's place.
     :<div className="mv-stage"><div className="mv-main"><div className="vg-video"><div className="vg-video-frame mv-novideo"><div><span>Practice lesson</span><p>{item.idea}</p><small>Try the question below to put it into practice.</small></div></div>{under(null)}</div></div>
      <aside className="mv-side" aria-label="Lessons">{side({list:<p className="small">This lesson has no video yet.</p>})}</aside></div>}
