@@ -11,7 +11,7 @@ export function LevelClosure({level}:{level:Level}){
  const {s,mutate}=useLearning();
  const reviews=useVideoReviews();
  const mods=modulesFor(level),done=mods.filter((_,i)=>s.progress?.[moduleKey(level,i)]).length,all=done===mods.length;
- const next=levels[levels.indexOf(level)+1];
+ const at=levels.indexOf(level),next=at<0?undefined:levels[at+1]; // the test pathway (not in levels) has no next level
  const best=s.submissions.filter((x:any)=>x.handIn&&x.key.startsWith('video-'+level)&&reviews?.[x.id]?.review?.total!=null)
   .sort((a:any,b:any)=>reviews![b.id].review.total-reviews![a.id].review.total).slice(0,3);
  return <div className="vg-closure">

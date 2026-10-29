@@ -1,6 +1,6 @@
 'use client';
 import React,{useEffect,useState} from 'react';
-import {Panel,PageHead,Badge} from './ui';
+import {Panel,PageHead,Badge,useLearning} from './ui';
 import {Button} from '@/components/ui/button';
 import './videography/studio.css';
 import {categoryLabel,statusLabel,replyMax} from './support-shared';
@@ -16,7 +16,9 @@ export function AdminHealth(){
  const pct=Math.round(d.ai.spent/d.ai.budget*100),when=(t:number)=>t?new Date(t).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}):'never';
  const list=(rows:any[])=>rows.length?<ul className="admin-list">{rows.map(v=><li key={v.id}><strong>{v.title||v.id}</strong> · {v.creator}<br/><span className="small">{v.detail} · lessons {v.lessons.join(', ')} · checked {when(v.checkedAt)}</span></li>)}</ul>:<p className="small">None.</p>;
  return <>
-  <PageHead eyebrow="ADMIN" title="Health"/>
+  <PageHead eyebrow="ADMIN" title="Admin"/>
+  {/* Support tickets live only here (24 Oct 2026); they come first because they need answering. */}
+  <SupportQueue/>
   <Panel className={d.job.stale?'admin-alert':''}><h2>Hourly job</h2>
    {d.job.stale?<p><strong>{d.job.lastRun?'The hourly job hasn’t run since '+when(d.job.lastRun.at)+'.':'The hourly job has never run.'}</strong> Lesson videos aren’t being checked, and reviews and comments waiting in the queue won’t run until it does. If it has never run, the schedule isn’t registered: open Workers &amp; Pages in the Cloudflare dashboard once, then redeploy.</p>
     :<p><Badge tone="green">Running</Badge> Last run {when(d.job.lastRun.at)}: {d.job.lastRun.videos.checked} videos checked, {d.job.lastRun.reviews} queued reviews run, {d.job.lastRun.comments} comments checked{d.job.lastRun.aiPaused?' (AI was paused)':''}.</p>}
@@ -24,6 +26,7 @@ export function AdminHealth(){
   <FlaggedReviews/>
   <ReportedComments/>
   <FindLearner/>
+  <TestPathway/>
   <Panel><h2>AI</h2>
    <p>{d.ai.ok?<Badge tone="green">Running</Badge>:<Badge>{d.ai.reason==='credits'?'Paused: provider has no credit':'Paused: daily cap reached'}</Badge>} Today ${d.ai.spent.toFixed(2)} of ${d.ai.budget} cap ({pct}%){pct>=80&&' · close to the cap'}</p>
    <p>{d.queuedReviews} reviews and {d.pendingComments} comments waiting in the queue.</p>
@@ -31,7 +34,6 @@ export function AdminHealth(){
   </Panel>
   <WhatsAppAdmin/>
   <PilotFunnel/>
-  <SupportQueue/>
   <Storage/>
 <EmailChecks/>
   <Look/>
@@ -97,6 +99,14 @@ function ReportedComments(){
 }
 
 // Find a learner by email: their plans, hand-ins, reviews, storage and portfolio.
+// A three-module plan (B01 photo, B05 video, B14 final) on your own account, to test the course end to end.
+function TestPathway(){
+ const {mutate,busy}=useLearning();
+ return <Panel><h2>Test pathway</h2><p className="small">Three real Beginner modules: a photo task, a video task and the final project. Only admins can start it; it opens as a new plan on your account.</p>
+  <Button disabled={busy} onClick={async()=>{const saved:any=await mutate('test_plan');if(saved)window.location.assign(saved.programme?.id?'/workspace/'+saved.programme.id:'/workspace')}}>Start a test pathway</Button>
+ </Panel>;
+}
+
 function FindLearner(){
  const [q,setQ]=useState(''),[users,setUsers]=useState<any[]|null>(null),[error,setError]=useState('');
  async function find(e:React.FormEvent){e.preventDefault();setError('');try{setUsers((await get('section=users&email='+encodeURIComponent(q))).users)}catch(e:any){setError(e.message)}}
