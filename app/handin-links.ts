@@ -5,13 +5,15 @@ export const youtubeLink=(u:string)=>/^https:\/\/(www\.|m\.)?(youtube\.com\/(wat
 export const driveId=(u:string)=>String(u||'').match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:[^#]*&)?id=)([\w-]{20,})/)?.[1]||'';
 export const driveDownload=(u:string)=>'https://drive.usercontent.google.com/download?export=download&confirm=t&id='+driveId(u);
 const docMax=15*1024*1024,notShared='The Google Doc isn’t shared. In Google Docs, click Share and set General access to “Anyone with the link”, then hand in again.';
-// A Google Doc exported as PDF, so the review sees its pictures as well as its text. A doc that isn't shared
-// redirects to Google sign-in (an HTML page), so anything but a PDF means it isn't shared.
-export async function readDoc(url:string):Promise<{ok:true;base64:string}|{ok:false;reason:string}>{
- try{const r=await fetch('https://docs.google.com/document/d/'+googleDocId(url)+'/export?format=pdf',{redirect:'follow'});
-  if(!r.ok||!(r.headers.get('content-type')||'').startsWith('application/pdf')){await r.body?.cancel();return {ok:false,reason:notShared}}
-  const bytes=new Uint8Array(await r.arrayBuffer());if(bytes.length>docMax)return {ok:false,reason:'The Google Doc is too large for the AI review (over 15 MB). Use fewer or smaller pictures.'};
-  let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));return {ok:true,base64:btoa(binary)};
+// A Google Doc exported as PDF. Claude fetches the export link itself, so the file is never held in this worker (a
+// 10 MB PDF as base64 overran the worker's memory). Checked here that the link really gives a PDF: a doc that isn't
+// shared redirects to Google sign-in (an HTML page).
+export async function readDoc(url:string):Promise<{ok:true;pdfUrl:string}|{ok:false;reason:string}>{
+ const pdfUrl='https://docs.google.com/document/d/'+googleDocId(url)+'/export?format=pdf';
+ try{const r=await fetch(pdfUrl,{redirect:'follow'});const size=Number(r.headers.get('content-length')||0);await r.body?.cancel();
+  if(!r.ok||!(r.headers.get('content-type')||'').startsWith('application/pdf'))return {ok:false,reason:notShared};
+  if(size>docMax)return {ok:false,reason:'The Google Doc is too large for the AI review (over 15 MB). Use fewer or smaller pictures.'};
+  return {ok:true,pdfUrl};
  }catch{return {ok:false,reason:'The Google Doc could not be opened. Check the link, then hand in again.'}}
 }
 // '' when the AI review can open the link, otherwise what the learner should fix.
