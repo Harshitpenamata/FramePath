@@ -273,8 +273,8 @@ test('Reflect: every lesson has 2 or 3 sound questions about the lesson or its v
    assert.ok(qs.length>=2&&qs.length<=3,id+' lesson '+(i+1)+': 2 or 3 questions');
    for(const q of qs){
     assert.ok(q.q.length>15&&q.why.length>10,id+': question and explanation are written');
-    assert.equal(q.options.length,3,id+': three answers');
-    assert.equal(new Set(q.options.map(o=>o[0])).size,3,id+': answers differ');
+    assert.equal(q.options.length,4,id+': four answers');
+    assert.equal(new Set(q.options.map(o=>o[0])).size,4,id+': answers differ');
     for(const [text,feedback] of q.options.slice(1))assert.ok(text&&feedback,id+': wrong answers have feedback');
     assert.ok(!q.options.some(o=>/(all|none) of the above/i.test(o[0])),id+': no all/none of the above');
     // The right answer must not stand out by length.
@@ -388,4 +388,13 @@ test('the admin test pathway is three real Beginner modules, never offered to le
 test('Google Doc hand-in links: only https docs.google.com/document links count',()=>{
  assert.equal(P.googleDocId('https://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/edit?usp=sharing'),'1AbCdEfGhIjKlMnOpQrStUvWxYz012345');
  for(const u of ['http://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/edit','https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/view','https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345','https://evil.com/?https://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345','',undefined])assert.equal(P.googleDocId(u),'',String(u));
+});
+
+test('Reflect answer order: the right answer lands evenly on A, B, C and D in every level',()=>{
+ const L=load(path.join(root,'app/videography/lessons.ts'));
+ for(const lv of ['beginner','intermediate','advanced']){
+  const bank=JSON.parse(fs.readFileSync(path.join(root,'app/videography/reflect/'+lv+'.json'),'utf8')),pos=[0,0,0,0];let n=0;
+  for(const lessons of Object.values(bank))for(const qs of lessons)for(const q of qs){const o=L.answerOrder(q.options.length,q.q);assert.deepEqual([...o].sort(),[0,1,2,3]);pos[o.indexOf(0)]++;n++}
+  for(const c of pos)assert.ok(c/n>0.15&&c/n<0.35,lv+': right answer position share '+pos.map(x=>Math.round(100*x/n)+'%').join(' '));
+ }
 });
