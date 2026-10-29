@@ -364,3 +364,14 @@ test('adapting the plan: skill areas, live skill levels, behind and catch-up dat
  assert.ok(start2<P.today(),'hours done count as time spent');
  assert.equal(P.behindBy({...late,schedule:{...late.schedule,startDate:start2}},done),null,'after catching up, not behind');
 });
+
+test('resume: a module opens at the first lesson whose questions are not solved, and at the task once all are',()=>{
+ const L=load(path.join(root,'app/videography/lessons.ts')),n=L.lessonsFor('B01','Documentary').filter(l=>!l.optional&&!l.style).length;
+ const done=k=>Object.fromEntries([...Array(k).keys()].map(i=>[i,{v:[],t:true}]));
+ assert.equal(L.resumeLesson('B01','Documentary',undefined),0);
+ assert.equal(L.resumeLesson('B01','Documentary',done(2)),2);
+ assert.equal(L.resumeLesson('B01','Documentary',done(n)),-1);
+ assert.equal(L.continueHref('/m','B01','Documentary',done(2)),'/m?tab=watch&lesson=3');
+ assert.equal(L.continueHref('/m','B01','Documentary',done(0)),'/m');
+ assert.equal(L.continueHref('/m','B01','Documentary',done(n)),'/m?tab=make');
+});
