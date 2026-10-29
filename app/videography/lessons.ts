@@ -1007,6 +1007,11 @@ export type LessonMark={v:string[];t:boolean};
 // Style project lessons (B13, I13, A13) show different videos for each style, and some lesson videos were
 // replaced, so a question about a video the learner can't watch is left out (audit F05).
 const titleKey=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+// The order a question's answers are shown in (the right one is stored first). Fixed per question, and even across
+// A to D: an FNV hash of the question seeds a Fisher-Yates shuffle.
+export function answerOrder(n:number,seed:string):number[]{let h=2166136261;for(const c of seed){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}
+ const rand=()=>{h=(h+0x6D2B79F5)|0;let t=Math.imul(h^(h>>>15),1|h);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296};
+ const out=[...Array(n).keys()];for(let i=n-1;i>0;i--){const j=Math.floor(rand()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out}
 export function questionsForVideos<Q extends {video:string}>(questions:Q[],videos:{title:string}[]):Q[]{
  const titles=videos.map(v=>titleKey(v.title));
  return questions.filter(q=>{if(!q.video)return true;const v=titleKey(q.video);return titles.some(t=>t===v||t.includes(v)||v.includes(t))});
