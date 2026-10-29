@@ -369,3 +369,9 @@ test('Google Doc hand-in links: only https docs.google.com/document links count'
  assert.equal(P.googleDocId('https://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/edit?usp=sharing'),'1AbCdEfGhIjKlMnOpQrStUvWxYz012345');
  for(const u of ['http://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/edit','https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/view','https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345','https://evil.com/?https://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345','',undefined])assert.equal(P.googleDocId(u),'',String(u));
 });
+
+test('watching clips: at most n at a time, results in the original order',async()=>{
+ const H=load(path.join(root,'app/handin-links.ts'));let running=0,peak=0;
+ const jobs=[30,5,20,10,1,15,8].map((ms,i)=>async()=>{running++;peak=Math.max(peak,running);await new Promise(r=>setTimeout(r,ms));running--;return i});
+ assert.deepEqual(await H.inTurns(jobs,3),[0,1,2,3,4,5,6]);assert.equal(peak,3);
+});

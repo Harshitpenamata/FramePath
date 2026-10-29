@@ -35,3 +35,7 @@ Drive often labels a video file as a generic download, which the first version o
 ## Drive folders
 
 A shared Drive folder link also works (`driveFolderVideos` in `app/handin-links.ts`): the public folder view lists its files without sign-in, and the review watches the first two videos (MP4, MOV, WebM, AVI, MPG, WMV, 3GP), the same limit as uploads. A folder with no such videos is refused with a message. Photos and documents in a folder are not read.
+
+## Watching more clips
+
+A sequence task asks for 5 to 8 shots, but the review watched only the first 2 videos, so it judged a 7-clip folder from 1 or 2 clips. Now up to 8 clips are watched (uploads, or the videos in a Drive folder in folder order), 3 at a time. A clip that fails for a reason other than a busy service is tried once more, and the reason a clip could not be watched is saved with the review so it can be checked later.

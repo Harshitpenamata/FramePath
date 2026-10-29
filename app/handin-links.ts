@@ -48,3 +48,6 @@ async function driveFileProblem(url:string):Promise<string>{
   {const r=await fetch(driveDownload(url),{redirect:'follow'});await r.body?.cancel();const v=r.ok?driveVideo(r):{mime:'',mkv:false};
    return v.mime?'':v.mkv?'The AI can’t watch MKV files. Save the video as MP4 (most phones and editors can), upload it again, then hand in again.':'That Google Drive link isn’t a shared video the AI can open. Share the video file as “Anyone with the link” (a MP4, MOV or WebM works best), then hand in again.'}
 }
+// Runs the jobs at most n at a time, keeping their order.
+export async function inTurns<T>(jobs:(()=>Promise<T>)[],n:number){const out:T[]=new Array(jobs.length);let next=0;
+ await Promise.all(Array.from({length:Math.min(n,jobs.length)},async()=>{while(next<jobs.length){const k=next++;out[k]=await jobs[k]()}}));return out}
