@@ -52,7 +52,7 @@ export async function POST(req:Request){try{checkOrigin(req);const u=await ident
 // ai_jobs row with status 'queued'; the scheduled job runs it later with fromQueue=true. Learners see it as waiting.
 const waiting=(id:string)=>Response.json({queued:true,id},{status:202,headers:{'Cache-Control':'no-store'}});
 export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promise<Response>{let jobId='';try{
- const key=safeText(b.lessonKey,80,1);if(!isCourseKey(key)&&!isScenarioKey(key)&&!isVisualKey(key)&&!isVideoKey(key))throw new Error('Choose a self-paced assignment.');const {state:s}=await readState(u.userId);const info=requireLesson(s,key);const id=safeText(b.requestId,100,12);
+ const key=safeText(b.lessonKey,80,1);if(!isCourseKey(key)&&!isScenarioKey(key)&&!isVisualKey(key)&&!isVideoKey(key))throw new Error('Choose a self-paced assignment.');const {state:s}=await readState(u.userId);const info=requireLesson(s,key);let id=safeText(b.requestId,100,12),queuedRun=fromQueue;
  let notes:string,imageIds:string[],submissionId='',videoFiles:any[]=[],videoLink='',driveFiles:{url:string;name:string}[]=[],notOpened:string[]=[],overLimit=0,docLink='';
  if(isVideoKey(key)){submissionId=safeText(b.submissionId,100,1);const piece=s.submissions.find((x:any)=>x.id===submissionId&&x.key===key);if(!piece)throw new Error('Hand in your work first, then ask for a review.');notes=handInText(piece);imageIds=(piece.uploads||[]).filter((f:any)=>imageTypes.includes(f.type)).slice(0,3).map((f:any)=>f.id);videoFiles=[...(piece.uploads||[]).filter((f:any)=>String(f.type).startsWith('video/')),...(piece.uploads||[]).filter((f:any)=>imageTypes.includes(f.type)).slice(3)].slice(0,maxWatched);videoLink=youtubeLink(piece.url)?piece.url:'';if(driveId(piece.url))driveFiles=[{url:piece.url,name:''}];else if(driveFolderId(piece.url)){const all=await driveFolderFiles(piece.url),media=all.filter(f=>watchableName(f.name));driveFiles=media.slice(0,maxWatched);overLimit=media.length-driveFiles.length;notOpened=all.filter(f=>!watchableName(f.name)).map(f=>f.name)}docLink=googleDocId(piece.url)?piece.url:'';
   // Nothing the AI can't open reaches a review: the learner fixes it first and the review isn't used.
@@ -60,7 +60,10 @@ export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promi
    for(const f of piece.uploads||[])if(!await bucket().head(f.id))throw new Error('“'+f.name+'” is no longer available. Hand in again with the file. Your AI review wasn’t used.')}}
  else{notes=safeText(b.notes,4000,20);const one=safeText(b.uploadId||'',100);imageIds=one?[one]:[];}
  const uploadId=imageIds[0]||'';
- const existing:any=await db().prepare('SELECT * FROM ai_jobs WHERE id=?').bind(id).first();if(existing){if(existing.user_id!==u.userId)throw new Error('Invalid review request.');if(existing.status==='complete'){const saved=JSON.parse(existing.answer);if(saved.type!=='assignment-review-v1'||saved.lessonKey!==key||(submissionId?saved.submissionId!==submissionId:(saved.notes!==notes||saved.uploadId!==uploadId)))throw new Error('This request ID belongs to different work.');return Response.json({...saved,id,allowance:await access(u.userId,s,key)},{headers:{'Cache-Control':'no-store'}})}if(existing.status==='queued'&&!fromQueue)return waiting(id);if(!fromQueue)throw new Error(existing.status==='pending'?'This review is still running.':'This attempt did not use a review. Please retry.')}
+ // This hand-in already has a review waiting in the queue (some clips failed earlier): asking again runs that one
+ // now, instead of using another of the module's reviews.
+ if(!fromQueue&&submissionId){const q:any=await db().prepare("SELECT id FROM ai_jobs WHERE user_id=? AND scope=? AND status='queued' AND json_extract(answer,'$.request.submissionId')=? ORDER BY created_at DESC LIMIT 1").bind(u.userId,'module:'+key,submissionId).first();if(q){id=q.id;queuedRun=true}}
+ const existing:any=await db().prepare('SELECT * FROM ai_jobs WHERE id=?').bind(id).first();if(existing){if(existing.user_id!==u.userId)throw new Error('Invalid review request.');if(existing.status==='complete'){const saved=JSON.parse(existing.answer);if(saved.type!=='assignment-review-v1'||saved.lessonKey!==key||(submissionId?saved.submissionId!==submissionId:(saved.notes!==notes||saved.uploadId!==uploadId)))throw new Error('This request ID belongs to different work.');return Response.json({...saved,id,allowance:await access(u.userId,s,key)},{headers:{'Cache-Control':'no-store'}})}if(existing.status==='queued'&&!queuedRun)return waiting(id);if(!queuedRun)throw new Error(existing.status==='pending'?'This review is still running.':'This attempt did not use a review. Please retry.')}
  // Videography: the module's lessons (so the review can point to one to revisit) and this module's previous
  // review of a different hand-in (so it can say what changed).
  const vmod=isVideoKey(key)?parseVideoKey(key):null,vpath=s.programme?.primaryPathway||'Documentary';
@@ -74,8 +77,9 @@ export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promi
  if(!claudeKey())throw Object.assign(new Error('AI review is temporarily unavailable. Your work is saved and no review was used.'),{status:503});
  const now=Date.now();await db().prepare("UPDATE ai_jobs SET status='failed' WHERE user_id=? AND status='pending' AND created_at<?").bind(u.userId,now-120000).run();
  const ai=await aiStatus();
+ if(!ai.ok&&queuedRun&&!fromQueue)return waiting(id);
  if(!ai.ok&&!fromQueue){const q=await db().prepare("INSERT INTO ai_jobs(id,user_id,scope,kind,status,created_at,answer) SELECT ?,?,?,'feedback','queued',?,? WHERE (SELECT count(*) FROM ai_jobs WHERE user_id=? AND scope=? AND kind='feedback' AND status IN ('pending','complete','queued') AND id NOT IN (SELECT job_id FROM review_flags WHERE status='refunded') AND created_at>=?)<? AND (SELECT count(*) FROM ai_jobs WHERE user_id=? AND created_at>?)<8 AND (SELECT count(*) FROM ai_jobs WHERE created_at>? AND status IN ('pending','complete','queued') AND id NOT IN (SELECT job_id FROM review_flags WHERE status='refunded'))<200").bind(id,u.userId,allowance.scope,now,JSON.stringify({request:b}),u.userId,allowance.scope,allowance.since,allowance.limit,u.userId,now-3600000,now-86400000).run();if(q.meta.changes)return waiting(id)}
- const reserve=fromQueue?await db().prepare("UPDATE ai_jobs SET status='pending',created_at=? WHERE id=? AND user_id=? AND status='queued'").bind(now,id,u.userId).run()
+ const reserve=queuedRun?await db().prepare("UPDATE ai_jobs SET status='pending',created_at=? WHERE id=? AND user_id=? AND status='queued'").bind(now,id,u.userId).run()
   :await db().prepare("INSERT INTO ai_jobs(id,user_id,scope,kind,status,created_at) SELECT ?,?,?,'feedback','pending',? WHERE (SELECT count(*) FROM ai_jobs WHERE user_id=? AND scope=? AND kind='feedback' AND status IN ('pending','complete','queued') AND id NOT IN (SELECT job_id FROM review_flags WHERE status='refunded') AND created_at>=?)<? AND (SELECT count(*) FROM ai_jobs WHERE user_id=? AND created_at>?)<8 AND (SELECT count(*) FROM ai_jobs WHERE created_at>? AND status IN ('pending','complete','queued') AND id NOT IN (SELECT job_id FROM review_flags WHERE status='refunded'))<200").bind(id,u.userId,allowance.scope,now,u.userId,allowance.scope,allowance.since,allowance.limit,u.userId,now-3600000,now-86400000).run();
  if(!reserve.meta.changes){
   // Say which limit was reached, in plain words. The work itself is already saved.
@@ -88,9 +92,9 @@ export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promi
   throw Object.assign(new Error(message),{status:429});
  }jobId=id;
  // Gemini watches the videos (picture and sound) and returns timestamped notes for Claude to review from.
- // A clip that fails for a reason other than a busy service is tried once more (a Drive download can stall).
+ // A clip that fails is tried twice more (a Drive download can stall, Gemini can be briefly busy): after 4 s, then 12 s.
  type Watch={what:string;result:VideoWatch};
- const twice=(job:()=>Promise<Watch>)=>async()=>{const first=await job();return first.result.ok||(first.result as any).retry?first:await job()};
+ const twice=(job:()=>Promise<Watch>)=>async()=>{let r=await job();for(const wait of [4000,12000]){if(r.result.ok)break;await new Promise(x=>setTimeout(x,wait));r=await job()}return r};
  const watched:Watch[]=await inTurns([
   ...videoFiles.map((f:any)=>twice(async()=>{const own:any=await db().prepare('SELECT type FROM uploads WHERE id=? AND user_id=?').bind(f.id,u.userId).first();const obj=own?await bucket().get(f.id):null;
    return {what:'video file '+f.name,result:obj?await watchVideo({stream:obj.body,size:obj.size,mime:own.type,name:f.name},lens?.watchFor):{ok:false as const,reason:'The file is unavailable.'}}})),
@@ -98,7 +102,8 @@ export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promi
   ...driveFiles.map((d,i)=>twice(async()=>({what:driveFiles.length>1?`Google Drive ${isPhotoName(d.name)?'photo':'clip'} ${i+1} of ${driveFiles.length}, “${d.name}” (in folder order)`:'Google Drive file '+(d.name||d.url),result:await watchDrive(d.url,lens?.watchFor)})))],watchAtOnce);
  // Gemini was busy: rather than reviewing without the video, the review waits in the queue (once; a second
  // busy spell from the queue goes ahead and says the video couldn't be watched).
- if(!fromQueue&&watched.some(w=>!w.result.ok&&(w.result as any).retry)){await db().prepare("UPDATE ai_jobs SET status='queued',answer=? WHERE id=? AND status='pending'").bind(JSON.stringify({request:b}),id).run();return waiting(id)}
+ if(!queuedRun&&watched.some(w=>!w.result.ok&&(w.result as any).retry)){const failed=watched.filter(w=>!w.result.ok).map(w=>({what:w.what,reason:(w.result as any).reason}));console.error('Review queued, clips failed',JSON.stringify(failed).slice(0,500));
+  await db().prepare("UPDATE ai_jobs SET status='queued',answer=? WHERE id=? AND status='pending'").bind(JSON.stringify({request:{...b,requestId:id},failed}),id).run();return waiting(id)}
  const videoWatch=[...watched.map(w=>w.result.ok?{video:w.what,watched:/photo/.test(w.what)||!w.result.duration?'the whole photo':'the whole video, picture and sound',duration:w.result.duration,hasSpeech:w.result.hasSpeech,notes:w.result.notes}:{video:w.what,watched:'could not be watched',reason:w.result.reason}),
   ...notOpened.map(n=>({video:'Google Drive file “'+n+'”',watched:'not opened',reason:'Not a video or photo, so the AI did not open it.'})),
   ...(overLimit>0?[{video:overLimit+' more files in the folder',watched:'not checked',reason:'Over the limit of '+maxWatched+' files per review.'}]:[])];

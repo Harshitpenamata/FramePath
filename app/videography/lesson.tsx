@@ -234,7 +234,7 @@ function FeedbackTab({moduleKey:key,requestFor,onRetry,onFinish}:{moduleKey:stri
  const rated=Array.isArray(piece.selfRatings);
  return <div className="vg-reflect">
   {status&&<WaitingTips media={piece?.media||0}/>}
-  {!review&&allowance?.queued>0&&<p className="notice" role="status">Your AI review is in the queue. AI is paused for a short while, so it will run soon and show up here, usually within a few hours. You don’t need to do anything.</p>}
+  {!review&&!status&&allowance?.queued>0&&<div className="notice vg-queued" role="status"><p>Your review is waiting to run. This happens when some clips couldn’t be checked just now, or the AI is busy. It runs again on its own within the hour, or you can try now. It won’t use another review.</p>{piece&&<Button variant="outline" onClick={()=>{started.current='';requestReview(piece.id)}}><RotateCcw size={16}/>Try again now</Button>}</div>}
   {review?<Panel className="vg-ai-review">
    <div className="row between"><h2><Sparkles size={20}/> AI review</h2>{(()=>{const rs=review.review.criteria.map(c=>c.rating),all=rs.every(r=>r!==null),sum=(a:(number|null)[])=>a.reduce<number>((n,r)=>n+(r||0),0),was=prev?.review.criteria.map(c=>c.rating);
     return all?<div className="vg-ai-score-box"><strong className="vg-ai-score">{sum(rs)}<small> of {rs.length*4}</small></strong>{was&&was.length===rs.length&&was.every(r=>r!==null)&&sum(was)!==sum(rs)&&<span className={'vg-delta '+(sum(rs)>sum(was)?'up':'down')}>{sum(rs)>sum(was)?'Up':'Down'} from {sum(was)} to {sum(rs)}</span>}</div>:<Badge>Not enough to score every check</Badge>})()}</div>

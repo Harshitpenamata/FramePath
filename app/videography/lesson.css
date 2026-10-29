@@ -413,4 +413,5 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .vg-wait-bar{height:10px;border-radius:999px;background:#2a2a27;overflow:hidden;margin:var(--s2) 0}
 .vg-wait-bar span{display:block;height:100%;border-radius:inherit;background:var(--primary);transition:width 1s linear}
 @media(prefers-reduced-motion:reduce){.vg-wait-bar span{transition:none}}
-
+.vg-queued{display:grid;gap:var(--s3);justify-items:start}
+.vg-queued p{margin:0}
