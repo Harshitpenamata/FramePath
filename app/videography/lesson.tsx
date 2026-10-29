@@ -1,6 +1,6 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowDown,ArrowUp,ArrowLeft,ArrowRight,ChevronDown,BookOpen,ThumbsUp,ThumbsDown,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
+import {ArrowDown,ArrowUp,ArrowLeft,ArrowRight,ChevronDown,BookOpen,ThumbsUp,ThumbsDown,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,RotateCcw,Sparkles,Upload,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import './lesson.css';
@@ -78,7 +78,7 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
    </div>
    <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}} onLesson={(index,count)=>setLessonAt({index,count})}/></TabsContent>
    <TabsContent value="task">{loaded&&<TaskTab moduleKey={key} onHandedIn={id=>{setReviewNow(id);setTab('feedback')}}/>}</TabsContent>
-   <TabsContent value="feedback">{loaded&&<FeedbackTab moduleKey={key} requestFor={reviewNow} onFinish={last?()=>setTab('finish'):undefined}/>}</TabsContent>
+   <TabsContent value="feedback">{loaded&&<FeedbackTab moduleKey={key} requestFor={reviewNow} onRetry={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}} onFinish={last?()=>setTab('finish'):undefined}/>}</TabsContent>
    {last&&<TabsContent value="finish">{loaded&&<LevelClosure level={parsed.level}/>}</TabsContent>}
   </Tabs>
   <ScrollCue/>
@@ -200,7 +200,7 @@ function ReflectNotes({piece}:{piece:any}){
  </Panel>;
 }
 
-function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;requestFor:string;onFinish?:()=>void}){
+function FeedbackTab({moduleKey:key,requestFor,onRetry,onFinish}:{moduleKey:string;requestFor:string;onRetry?:()=>void;onFinish?:()=>void}){
  const {s}=useLearning();
  const piece=s.submissions.find((x:any)=>x.key===key);
  const [reviews,setReviews]=useState<Review[]|null>(null),[allowance,setAllowance]=useState<any>(null),[status,setStatus]=useState(''),[error,setError]=useState('');
@@ -236,6 +236,8 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
     return gaps.length>0?<p className="vg-gap-note"><strong>You rated {gaps.length===1?'one check':gaps.length+' checks'} differently from the reviewer.</strong> That is normal: the AI is a first look, not a verdict. The notes below say what it looked for, so you can see it for yourself.</p>:null})()}
    <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>AI</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span></td>{rated&&<td><span className={'vg-level l'+levelOf(mine)}>{levelName(mine)}</span></td>}<td><span className={'vg-level l'+levelOf(c.rating)}>{levelName(c.rating)}</span>{(()=>{const was=prev?.review.criteria[i]?.rating;return c.rating!==null&&was!=null&&was!==c.rating?<span className={'vg-delta '+(c.rating>was?'up':'down')} title={'Last time: '+was+'/4'}>{c.rating>was?'↑':'↓'} from {was}</span>:null})()}</td></tr>})}</tbody></table>
    <div className="vg-review-notes"><p><strong>What worked:</strong> {review.review.strength}</p><p><strong>What to improve:</strong> {review.review.improvement}</p><p><strong>Try next (under 30 minutes):</strong> {review.review.nextStep}</p></div>
+   {canReview&&onRetry&&<div className="vg-retry"><div><strong>Want a higher score? Try the task again.</strong><p className="small">You have {allowance.limit-allowance.used} more {allowance.limit-allowance.used===1?'chance':'chances'} for an AI review on this module. Fix the one thing under “What to improve”, then hand in again.</p></div><Button onClick={onRetry}><RotateCcw size={16}/>Try the task again</Button></div>}
+   {!canReview&&allowance?.eligible&&<p className="small">You’ve used both AI reviews for this module. Your work is saved in My Work.</p>}
    {review.review.progress&&<p className="vg-progress-note"><strong>Since your last hand-in:</strong> {review.review.progress}</p>}
    {review.review.revisit&&<a className="vg-revisit" href={moduleHref(key)+'?tab=watch&lesson='+review.review.revisit}><BookOpen size={18}/><span><strong>Rewatch lesson {review.review.revisit}{lessonTitles[review.review.revisit-1]?': '+lessonTitles[review.review.revisit-1]:''}</strong>{review.review.revisitWhy&&<span className="small">{review.review.revisitWhy}</span>}</span><ArrowRight size={18}/></a>}
    {review.review.criteria.some(c=>c.rating===null)&&<div className="vg-unsure"><p className="small">The AI couldn’t judge every check from what it could see. Not sure this review is right? Ask us and a person will look.</p><ReportProblem moduleKey={key} category="review" variant="outline" label="Ask us about this review"/></div>}

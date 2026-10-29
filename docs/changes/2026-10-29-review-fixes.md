@@ -17,3 +17,7 @@ From a review of the AI review experience.
 - The yellow "You and the AI see this differently" on every row is one calm note above the table: the AI is a first look, not a verdict. The "What the AI couldn't check" line stays removed.
 
 Files: `app/videography/task-parts.ts`, `programme.ts`, `lesson.tsx`, `lesson.css`, `review-guide.ts`, `app/api/state/route.ts`, `app/api/review/route.ts`, `tests/videography.test.mjs`.
+
+## Try again
+
+After an AI review, while the module still has a chance left, the review shows a "Try the task again" card (how many chances are left) with a button back to the Make tab. When both chances are used it says so instead.

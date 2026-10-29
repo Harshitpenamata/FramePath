@@ -406,4 +406,7 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .vg-parts-list>li.done .vg-part-tick{background:var(--primary);color:#0b0b0b}
 .vg-parts-list>li p{margin:0}
 @media(prefers-reduced-motion:reduce){.vg-parts-bar span{transition:none}}
+/* After a review: a way back to the task while there is a chance left */
+.vg-retry{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;padding:var(--s4) var(--s5);border:1.5px solid var(--primary);border-radius:18px;background:#d3ee960d}
+.vg-retry p{margin:var(--s1) 0 0}
 
