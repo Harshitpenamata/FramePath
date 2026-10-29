@@ -9,6 +9,7 @@ import {normalizeProfile} from '../../profile-validation';
 import {buildPersonalPlan,isPersonalized} from '../../personalization';
 import {courseKeys,isCourseKey,levels,recommendedLevel,activeLevel} from '../../selfpaced-curriculum';
 import {validateReview} from '../../assignment-review';
+import {partsFor,composeAnswer} from '../../videography/task-parts';
 import {buildProgramme,buildTestProgramme,planName,parseVideoKey,isFreeModule,handInMissing,needsSelfCheck,levels as videoLevels,modulesFor,moduleKey,today,maxPlans,styleModuleKeys,type Level} from '../../videography/programme';
 // Public portfolio data: only the pieces the learner picked to share.
 // What a shared portfolio shows. File names stay private; only each file's id and type are shared, so images and videos can be shown.
@@ -146,13 +147,17 @@ case 'video_submit':{
  const lessons=lessonsStatus(video.module.id,s.programme?.primaryPathway||'Documentary',s.lessonProgress?.[key],requireLessonsForTask?await deadVideoIds():[]);
  if(requireLessonsForTask&&lessons.done<lessons.total)throw new Error(`Finish the lessons first: ${lessons.done} of ${lessons.total} done. Watch each video and try each practice tool.`);
  const ids:string[]=Array.isArray(b.uploadIds)?[...new Set<string>(b.uploadIds.map((x:unknown)=>safeText(x,100,1)))]:[];
- const handIn={answer:safeText(b.answer||'',6000),notes:safeText(b.notes||'',2000),url:safeUrl(b.url||''),uploadIds:ids,ratings:Array.isArray(b.ratings)?b.ratings:[],reflections:{well:safeText(b.reflections?.well||'',600),change:safeText(b.reflections?.change||'',600)}};
+ // A module whose task has parts: each text part and each file slot is checked on its own, and the text parts become the answer.
+ const partList=partsFor(video.module.id),parts=partList.length&&b.parts&&typeof b.parts==='object'?{
+  text:Object.fromEntries(partList.filter(x=>x.kind==='text').map(x=>[x.id,safeText(b.parts.text?.[x.id]||'',2000)])) as Record<string,string>,
+  files:Object.fromEntries(partList.filter(x=>x.kind==='media').map(x=>[x.id,(Array.isArray(b.parts.files?.[x.id])?b.parts.files[x.id]:[]).map(String).filter((f:string)=>ids.includes(f)).slice(0,6)])) as Record<string,string[]>}:undefined;
+ const handIn={answer:parts?safeText(composeAnswer(partList,parts),6000):safeText(b.answer||'',6000),parts,notes:safeText(b.notes||'',2000),url:safeUrl(b.url||''),uploadIds:ids,ratings:Array.isArray(b.ratings)?b.ratings:[],reflections:{well:safeText(b.reflections?.well||'',600),change:safeText(b.reflections?.change||'',600)}};
  const selfCheck=needsSelfCheck(key),missing=handInMissing(video.module,handIn,selfCheck);if(missing.length)throw new Error('Before you hand in: '+missing.join(', ')+'.');
  {const why=await linkProblem(handIn.url);if(why)throw new Error(why)}
  const uploads:any[]=[];for(const uploadId of ids){const own:any=await db().prepare('SELECT id,name,type FROM uploads WHERE id=? AND user_id=?').bind(uploadId,user.userId).first();if(!own)throw new Error('That upload is not available in your account.');uploads.push({id:own.id,name:own.name,type:own.type})}
  if(s.submissions.length>=100)throw new Error('My Work is full (100 pieces). Remove a piece you no longer need, then hand in again.');
  const self=selfCheck?scoreAttempt(key,handIn.ratings,s.profile):null,attempt=s.submissions.filter((x:any)=>x.key===key).length+1;
- s.submissions.unshift({id:id(),key,moduleId:video.module.id,...(styleModuleKeys.includes(key)&&s.programme?{pathway:s.programme.primaryPathway}:{}),handIn:true,attempt,answer:handIn.answer,notes:handIn.notes,url:handIn.url,uploads,uploadId:uploads[0]?.id||'',uploadIds:ids,selfRatings:self?handIn.ratings:null,selfScore:self?self.total:null,reflections:selfCheck?handIn.reflections:null,status:'saved',feedback:'',scores:null,createdAt:now,updatedAt:now});
+ s.submissions.unshift({id:id(),key,moduleId:video.module.id,...(styleModuleKeys.includes(key)&&s.programme?{pathway:s.programme.primaryPathway}:{}),handIn:true,attempt,answer:handIn.answer,...(handIn.parts?{parts:handIn.parts}:{}),notes:handIn.notes,url:handIn.url,uploads,uploadId:uploads[0]?.id||'',uploadIds:ids,selfRatings:self?handIn.ratings:null,selfScore:self?self.total:null,reflections:selfCheck?handIn.reflections:null,status:'saved',feedback:'',scores:null,createdAt:now,updatedAt:now});
  // Handing in unlocks the next module; the AI score in Reflect is feedback, not a gate.
  steps.push(['handin',{module:key},'']);if(!s.progress[key]?.done)steps.push(['module_done',{module:key},`module_done:${user.userId}:${key}`]);
  s.progress[key]={...(s.progress[key]||{}),done:true,at:s.progress[key]?.at||now,source:'hand-in',score:self?.total??null};

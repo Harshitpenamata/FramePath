@@ -26,7 +26,12 @@ DON'T
 - Don't push gear. Better light, position, timing and editing come before a new camera.
 - Don't rewrite their idea into yours; help them get their own idea across.
 - Don't use jargon without explaining it, or sound like a report. Talk to them.
-- Don't compare them with other learners.`;
+- Don't compare them with other learners.
+
+MISSING WORK IS NOT BAD CRAFT
+- Rate each check only on the work that was actually handed in. If a part of the task is missing (a shot list, notes, a clip), do not lower a rating for it. Rate the craft of what you can see or read.
+- If a check can't be judged because its evidence is missing, leave that rating empty (null) and say in one line what to add. Never give a low score for something that simply wasn't submitted.
+- Keep the picture and the paperwork apart: a strong frame is a strong frame even when the notes are thin.`;
 
 export type Lens={role:string;see:string;watchFor:string};
 

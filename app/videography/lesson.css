@@ -383,3 +383,27 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .q-cue svg{animation:cue-bob 1.4s ease-in-out infinite}
 @keyframes q-pop{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
 @media(prefers-reduced-motion:reduce){.q-cue,.q-cue svg{animation:none}}
+/* AI review: points out of the maximum, levels in words, one calm note when you and the reviewer differ */
+.vg-ai-score-box{display:grid;justify-items:end;gap:4px}
+.vg-ai-score-box .vg-delta{margin:0}
+.vg-level{display:inline-block;padding:4px 12px;border-radius:999px;font-size:.8125rem;font-weight:700;white-space:nowrap;background:#2a2a27;color:var(--foreground)}
+.vg-level.llow{background:#f3a3a026;color:#f3a3a0}
+.vg-level.lmid{background:#f3c87926;color:#f3c879}
+.vg-level.lhigh{background:#d3ee9626;color:var(--primary)}
+.vg-gap-note{margin:0;padding:var(--s3) var(--s4);border-radius:14px;background:#1a1a18;color:var(--muted-foreground);font-size:.9375rem}
+.vg-gap-note strong{color:var(--foreground)}
+/* Hand-in parts: one card each, with a count of what is still missing */
+.vg-parts-top{display:grid;gap:var(--s2)}
+.vg-parts-top p{margin:0}
+.vg-parts-bar{height:8px;border-radius:999px;background:#2a2a27;overflow:hidden}
+.vg-parts-bar span{display:block;height:100%;border-radius:inherit;background:var(--primary);transition:width .3s ease}
+.vg-parts-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.vg-parts-list>li{display:grid;gap:var(--s2);padding:var(--s4);border:var(--soft-line);border-radius:16px;background:#1a1a18}
+.vg-parts-list>li.done{border-color:#d3ee9666}
+.vg-pp-head{display:flex;align-items:center;justify-content:flex-start;gap:var(--s3);text-align:left}
+.vg-pp-head strong{line-height:1.3;text-align:left}
+.vg-part-tick{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#2a2a27;font-size:.8125rem;font-weight:700}
+.vg-parts-list>li.done .vg-part-tick{background:var(--primary);color:#0b0b0b}
+.vg-parts-list>li p{margin:0}
+@media(prefers-reduced-motion:reduce){.vg-parts-bar span{transition:none}}
+

@@ -1,6 +1,7 @@
 import curriculum from './curriculum.json';
 import styleTasks from './style-tasks.json';
 import type {Lesson} from '../catalog';
+import {partsFor,partDone,type PartsData} from './task-parts';
 
 // Phase-1 programme: course selection, interests, level assessment and schedule.
 // Module content comes from Video_Production_Curriculum.xlsx (curriculum.json).
@@ -287,17 +288,20 @@ export const curriculumModules=curriculum;
 // Self-rating scale for the three checks, and the two reflection questions.
 export const ratingScale=['Not yet','Started','Getting there','Good','Great'];
 export const reflectionQuestions=[{id:'well',label:'What went well?'},{id:'change',label:'What would you change next time?'}] as const;
-export const maxHandInFiles=3;
+export const maxHandInFiles=12;
 // Beginners hand in their first three modules without self-rating, so the first tasks stay simple. Self-rating starts at beginner module 4.
 export const selfCheckFromBeginnerModule=4;
 export const needsSelfCheck=(key:string)=>{const v=parseVideoKey(key);return !!v&&(v.level!=='beginner'||v.index+1>=selfCheckFromBeginnerModule)};
-export type HandIn={answer:string;notes:string;url:string;uploadIds:string[];ratings:number[];reflections:{well:string;change:string}};
+export type HandIn={answer:string;notes:string;url:string;uploadIds:string[];ratings:number[];reflections:{well:string;change:string};parts?:PartsData};
 // What is still missing before work can be handed in ([] when ready). Used by the Make form and the server.
 // A Google Doc link (written work: a script, shot list or brief): the AI review reads it as plain text.
 export const googleDocId=(u:string)=>String(u||'').match(/^https:\/\/docs\.google\.com\/document\/d\/([\w-]{20,})/)?.[1]||'';
 export function handInMissing(m:CurriculumModule,h:HandIn,selfCheck=true):string[]{
  const missing:string[]=[];
- if(m.handIn==='text'){if(h.answer.trim().length<80)missing.push('write your answer (at least 80 characters)')}
+ // Each part of the task has its own field or slot: name every part that is still empty.
+ const list=partsFor(m.id);
+ if(list.length&&h.parts){for(const p of list)if(!partDone(p,h.parts,!!h.url.trim()))missing.push('add “'+p.label+'”')}
+ else if(m.handIn==='text'){if(h.answer.trim().length<80)missing.push('write your answer (at least 80 characters)')}
  else{if(!h.uploadIds.length&&!h.url.trim())missing.push('upload your work or add a link');if(h.notes.trim().length<20)missing.push('add a short note about your work (at least 20 characters)')}
  if(h.uploadIds.length>maxHandInFiles)missing.push('use up to '+maxHandInFiles+' files');
  if(selfCheck){

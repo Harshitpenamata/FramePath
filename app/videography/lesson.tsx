@@ -6,6 +6,7 @@ import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import './lesson.css';
 import {useLearning,Go,Action,Panel,Badge,Gate,UploadField} from '../ui';
 import {blockingModule,moduleHref,moduleInfo} from '../learning-rules';
+import {partsFor,partDone,type TaskPart,type PartsData} from './task-parts';
 import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
 import {LessonsTab,LessonSketch,PathwayStrip,canPractise,taskLabel,useDeadVideos} from './module-context';
 import {taskFaq,noGear} from './task-faq';
@@ -15,12 +16,18 @@ import {ReportProblem} from '../support';
 import {track} from '../track';
 
 type FileRef={id:string;name:string;type:string};
-type Draft={answer:string;notes:string;url:string;files:FileRef[];ratings:number[];reflections:{well:string;change:string}};
-const emptyDraft=():Draft=>({answer:'',notes:'',url:'',files:[],ratings:[-1,-1,-1],reflections:{well:'',change:''}});
+type Draft={answer:string;notes:string;url:string;files:FileRef[];ratings:number[];reflections:{well:string;change:string};text:Record<string,string>;partFiles:Record<string,FileRef[]>};
+const emptyDraft=():Draft=>({answer:'',notes:'',url:'',files:[],ratings:[-1,-1,-1],reflections:{well:'',change:''},text:{},partFiles:{}});
 const draftKey=(key:string)=>'fp-handin-'+key;
 function readDraft(key:string):Draft{try{const d=JSON.parse(localStorage.getItem(draftKey(key))||'null');if(d)return {...emptyDraft(),...d}}catch{}return emptyDraft()}
 function writeDraft(key:string,d:Draft){try{localStorage.setItem(draftKey(key),JSON.stringify(d))}catch{}}
-const toHandIn=(d:Draft):HandIn=>({answer:d.answer,notes:d.notes,url:d.url,uploadIds:d.files.map(f=>f.id),ratings:d.ratings,reflections:d.reflections});
+// A module with task parts hands in each part separately; the server writes the text parts into the answer.
+const toHandIn=(d:Draft,moduleId?:string):HandIn=>{
+ const list=moduleId?partsFor(moduleId):[];
+ if(!list.length)return {answer:d.answer,notes:d.notes,url:d.url,uploadIds:d.files.map(f=>f.id),ratings:d.ratings,reflections:d.reflections};
+ const files=Object.fromEntries(list.filter(x=>x.kind==='media').map(x=>[x.id,(d.partFiles[x.id]||[]).map(f=>f.id)]));
+ return {answer:'',notes:d.notes,url:d.url,uploadIds:[...new Set(Object.values(files).flat())],ratings:d.ratings,reflections:d.reflections,parts:{text:d.text,files}};
+};
 
 // A Videography module: Lessons (Watch + Reflect each), then the Task (hand in), then Feedback (AI review).
 // The last module of a level also has Finish, which closes the level.
@@ -103,7 +110,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
  const blocker=blockingModule(s,key);
  const entitled=canPractise(s,key);
  const handedIn=s.submissions.filter((x:any)=>x.key===key).length;
- const selfCheck=needsSelfCheck(key),missing=handInMissing(m,toHandIn(draft),selfCheck);
+ const selfCheck=needsSelfCheck(key),missing=handInMissing(m,toHandIn(draft,m.id),selfCheck);
  if(!entitled)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Choose Self-paced to do this task.</h2><p>On the Free plan, only the tasks in the first two modules are open. Choose the Self-paced plan (₹999/year) to unlock this task and every task after it, with AI reviews and your portfolio. You can still watch this module for free.</p><div className="button-row"><Go href={'/membership?return_to='+encodeURIComponent(moduleHref(key)+'?tab=task')}>Choose Self-paced</Go><Go outline href="/mentors">Learn with a mentor</Go></div></Panel>;
  if(blocker)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Hand in the module before this one first.</h2><p>Finish “{moduleInfo(blocker).lesson.title}” to unlock this task. You can still watch this module.</p><Go href={moduleHref(blocker)+'?tab=task'}>Go to that module</Go></Panel>;
  // The task opens once every lesson in this module is finished (videos watched, practice tools solved).
@@ -112,7 +119,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
  if(requireLessonsForTask&&lessonState.done<lessonState.total)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Finish the lessons to unlock this task.</h2><p>{lessonState.done} of {lessonState.total} lessons done. In each lesson, watch the videos and answer the Reflect questions.</p>
   <ol className="vg-unlock-list">{lessons.map((l,i)=><li key={l.title} className={lessonState.finished[i]?'ok':''}>{lessonState.finished[i]?<Check size={16}/>:<span>{i+1}</span>}<a className="text-link" href={moduleHref(key)+'?lesson='+(i+1)}>{l.title}</a></li>)}</ol></Panel>;
  async function handIn(){
-  const state=await mutate('video_submit',{key,answer:draft.answer,notes:draft.notes,url:draft.url,uploadIds:draft.files.map(f=>f.id),ratings:draft.ratings,reflections:draft.reflections});
+  const h=toHandIn(draft,m.id),state=await mutate('video_submit',{key,answer:h.answer,notes:h.notes,url:h.url,uploadIds:h.uploadIds,parts:h.parts,ratings:draft.ratings,reflections:draft.reflections});
   if(!state)return;
   const piece=state.submissions.find((x:any)=>x.key===key);
   try{localStorage.removeItem(draftKey(key))}catch{}
@@ -124,7 +131,8 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
    <TaskFaq moduleId={m.id}/>
    {handedIn>0&&<p className="small">You have handed this in {handedIn} time{handedIn>1?'s':''}.</p>}</section>
 
-  <Panel className="vg-form-block vg-handin"><h2><FileText size={18}/> {m.handIn==='text'?'1. Write your answer':'1. Hand in your work'}</h2>
+  {partsFor(m.id).length>0&&<PartsPanel moduleKey={key} list={partsFor(m.id)} draft={draft} update={update}/>}
+  {!partsFor(m.id).length&&(<Panel className="vg-form-block vg-handin"><h2><FileText size={18}/> {m.handIn==='text'?'1. Write your answer':'1. Hand in your work'}</h2>
    {m.handIn==='text'&&<label>Your answer <span className="small">({draft.answer.trim().length}/80 characters minimum)</span><textarea rows={9} maxLength={6000} value={draft.answer} onChange={e=>update({answer:e.target.value})} placeholder="Write your answer here. You don’t need to upload a document."/></label>}
    <div className="vg-files"><span className="vg-label">{m.handIn==='text'?'Add photos or files (optional)':'Upload your work: up to 3 photos or videos, or add a link'}</span>
     {draft.files.length>0&&<ul>{draft.files.map(f=><li key={f.id}><Upload size={14}/>{f.name}<button type="button" aria-label={'Remove '+f.name} onClick={()=>update({files:draft.files.filter(x=>x.id!==f.id)})}><X size={14}/></button></li>)}</ul>}
@@ -134,7 +142,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
     <p className="small">Google Doc: click Share and set General access to “Anyone with the link”, or the AI can’t open it. YouTube videos must be Public or Unlisted.</p>
    </div>
    <label>{m.handIn==='text'?'Anything else to add? (optional)':'Tell us about your work'}<textarea rows={3} maxLength={2000} value={draft.notes} onChange={e=>update({notes:e.target.value})} placeholder="What did you make? What did you try?"/></label>
-  </Panel>
+  </Panel>)}
 
   {selfCheck&&<><Panel className="vg-form-block"><h2>2. Rate your own work</h2><p className="small">Be honest. In Feedback, you’ll see how the AI rates the same checks.</p>
    {lesson.checks.map((check,i)=><fieldset key={check} className="vg-rate"><legend>{check}</legend><div>{ratingScale.map((label,v)=><button type="button" key={label} className={draft.ratings[i]===v?'selected':''} aria-pressed={draft.ratings[i]===v} onClick={()=>update({ratings:draft.ratings.map((r,j)=>j===i?v:r)})}><strong>{v}</strong>{label}</button>)}</div></fieldset>)}
@@ -148,6 +156,25 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
  </div></Gate>;
 }
 
+// A task with parts: one field or upload slot for each, with a live count of what is still missing.
+function PartsPanel({moduleKey,list,draft,update}:{moduleKey:string;list:TaskPart[];draft:Draft;update:(p:Partial<Draft>)=>void}){
+ const data:PartsData={text:draft.text,files:Object.fromEntries(list.filter(x=>x.kind==='media').map(x=>[x.id,(draft.partFiles[x.id]||[]).map(f=>f.id)]))};
+ const hasLink=!!draft.url.trim(),n=list.filter(p=>partDone(p,data,hasLink)).length,total=Object.values(draft.partFiles).reduce((c,l)=>c+l.length,0);
+ return <Panel className="vg-form-block vg-handin vg-parts"><h2><FileText size={18}/> 1. What to hand in</h2>
+  <div className="vg-parts-top"><p role="status"><strong>{n} of {list.length}</strong> parts added{n<list.length?'. Add the rest, then hand in.':'. Ready to hand in.'}</p><div className="vg-parts-bar" aria-hidden="true"><span style={{width:Math.round(n/list.length*100)+'%'}}/></div></div>
+  <ol className="vg-parts-list">{list.map((p,i)=>{const ok=partDone(p,data,hasLink),files=draft.partFiles[p.id]||[];return <li key={p.id} className={ok?'done':''}>
+   <div className="vg-pp-head"><span className="vg-part-tick" aria-hidden="true">{ok?<Check size={14}/>:i+1}</span><strong>{p.label}</strong><span className="sr-only">{ok?'Added':'Not added yet'}</span></div>
+   {p.hint&&<p className="small">{p.hint}</p>}
+   {p.kind==='text'?<textarea rows={3} maxLength={2000} value={draft.text[p.id]||''} aria-label={p.label} onChange={e=>update({text:{...draft.text,[p.id]:e.target.value}})} placeholder="Write it here"/>
+    :<div className="vg-files">{files.length>0&&<ul>{files.map(f=><li key={f.id}><Upload size={14}/>{f.name}<button type="button" aria-label={'Remove '+f.name} onClick={()=>update({partFiles:{...draft.partFiles,[p.id]:files.filter(x=>x.id!==f.id)}})}><X size={14}/></button></li>)}</ul>}
+     {files.length<4&&total<maxHandInFiles&&<UploadField lessonKey={moduleKey} value={null} onUpload={(f:any)=>update({partFiles:{...draft.partFiles,[p.id]:[...files,{id:f.id,name:f.name,type:f.type}]}})}/>}</div>}
+  </li>})}</ol>
+  <label>Or one link for your files (YouTube, Google Drive, or a Google Doc)<input type="url" value={draft.url} onChange={e=>update({url:e.target.value})} placeholder="https://"/></label>
+  <p className="small">A link counts for every file slot. Google Doc: click Share and set General access to “Anyone with the link”, or the AI can’t open it. YouTube videos must be Public or Unlisted.</p>
+  <label>Anything else for the reviewer? (optional)<textarea rows={2} maxLength={2000} value={draft.notes} onChange={e=>update({notes:e.target.value})} placeholder="What did you try? What are you unsure about?"/></label>
+ </Panel>;
+}
+
 function WaitingTips(){
  const [i,setI]=useState(()=>Math.floor(Math.random()*waitingTips.length));
  useEffect(()=>{const t=setInterval(()=>setI(n=>(n+1)%waitingTips.length),7000);return ()=>clearInterval(t)},[]);
@@ -155,6 +182,9 @@ function WaitingTips(){
 }
 
 type Flag={reason:string;status:'open'|'fine'|'refunded';note:string};
+// A check's 0 to 4 rating in words: 0-1 Not yet, 2 Getting there, 3-4 Solid.
+const levelOf=(r:number|null|undefined)=>r==null||r<0?'none':r<=1?'low':r===2?'mid':'high';
+const levelName=(r:number|null|undefined)=>({none:'Not scored',low:'Not yet',mid:'Getting there',high:'Solid'})[levelOf(r)];
 type Review={id:string;flag?:Flag|null;rating?:{helpful:number;comment:string}|null;submissionId?:string;createdAt:number;review:{total:number|null;summary:string;strength:string;improvement:string;nextStep:string;evidenceLimit:string;revisit?:number|null;revisitWhy?:string;progress?:string;criteria:{label:string;rating:number|null;feedback:string}[]}};
 // After the review: what went well and what to change next time, written with the feedback in front of you.
 function ReflectNotes({piece}:{piece:any}){
@@ -163,7 +193,7 @@ function ReflectNotes({piece}:{piece:any}){
  useEffect(()=>{setNotes({well:piece.reflections?.well||'',change:piece.reflections?.change||''});setSaved(false)},[piece.id]);
  const changed=notes.well!==(piece.reflections?.well||'')||notes.change!==(piece.reflections?.change||'');
  return <Panel className="vg-form-block vg-reflect-notes"><h2>Think about it</h2>
-  {piece.selfScore!=null&&<p className="small">Your own rating: {piece.selfScore}/100</p>}
+  {Array.isArray(piece.selfRatings)&&<p className="small">Your own rating: {piece.selfRatings.reduce((n:number,r:number)=>n+(r>0?r:0),0)} of {piece.selfRatings.length*4}</p>}
   <p className="small">With the review in front of you. Optional, saved with this piece in My Work.</p>
   {reflectionQuestions.map(q=><label key={q.id}>{q.label}<textarea rows={2} maxLength={600} value={notes[q.id]} onChange={e=>{setNotes({...notes,[q.id]:e.target.value});setSaved(false)}}/></label>)}
   <div className="button-row"><Button variant="outline" disabled={busy||!changed} onClick={async()=>{if(await mutate('video_reflect',{id:piece.id,...notes}))setSaved(true)}}>Save</Button>{saved&&<span className="small" role="status"><Check size={14}/> Saved</span>}</div>
@@ -199,9 +229,12 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
   {status&&<WaitingTips/>}
   {!review&&allowance?.queued>0&&<p className="notice" role="status">Your AI review is in the queue. AI is paused for a short while, so it will run soon and show up here, usually within a few hours. You don’t need to do anything.</p>}
   {review?<Panel className="vg-ai-review">
-   <div className="row between"><h2><Sparkles size={20}/> AI review</h2>{review.review.total!==null?<strong className="vg-ai-score">{Math.round(review.review.total)}<small>/100</small></strong>:<Badge>Not enough to score every check</Badge>}</div>
+   <div className="row between"><h2><Sparkles size={20}/> AI review</h2>{(()=>{const rs=review.review.criteria.map(c=>c.rating),all=rs.every(r=>r!==null),sum=(a:(number|null)[])=>a.reduce<number>((n,r)=>n+(r||0),0),was=prev?.review.criteria.map(c=>c.rating);
+    return all?<div className="vg-ai-score-box"><strong className="vg-ai-score">{sum(rs)}<small> of {rs.length*4}</small></strong>{was&&was.length===rs.length&&was.every(r=>r!==null)&&sum(was)!==sum(rs)&&<span className={'vg-delta '+(sum(rs)>sum(was)?'up':'down')}>{sum(rs)>sum(was)?'Up':'Down'} from {sum(was)} to {sum(rs)}</span>}</div>:<Badge>Not enough to score every check</Badge>})()}</div>
    <p>{review.review.summary}</p>
-   <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>AI</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label} className={gap?'gap':''}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span>{gap&&<span className="small vg-gap">You and the AI see this differently. Read the note above and try again.</span>}</td>{rated&&<td>{mine??'–'}/4</td>}<td>{c.rating??'–'}/4{(()=>{const was=prev?.review.criteria[i]?.rating;return c.rating!==null&&was!=null&&was!==c.rating?<span className={'vg-delta '+(c.rating>was?'up':'down')} title={'Last time: '+was+'/4'}>{c.rating>was?'↑':'↓'} from {was}</span>:null})()}</td></tr>})}</tbody></table>
+   {(()=>{const gaps=review.review.criteria.filter((c,i)=>{const mine=piece.selfRatings?.[i];return rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2});
+    return gaps.length>0?<p className="vg-gap-note"><strong>You rated {gaps.length===1?'one check':gaps.length+' checks'} differently from the reviewer.</strong> That is normal: the AI is a first look, not a verdict. The notes below say what it looked for, so you can see it for yourself.</p>:null})()}
+   <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>AI</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span></td>{rated&&<td><span className={'vg-level l'+levelOf(mine)}>{levelName(mine)}</span></td>}<td><span className={'vg-level l'+levelOf(c.rating)}>{levelName(c.rating)}</span>{(()=>{const was=prev?.review.criteria[i]?.rating;return c.rating!==null&&was!=null&&was!==c.rating?<span className={'vg-delta '+(c.rating>was?'up':'down')} title={'Last time: '+was+'/4'}>{c.rating>was?'↑':'↓'} from {was}</span>:null})()}</td></tr>})}</tbody></table>
    <div className="vg-review-notes"><p><strong>What worked:</strong> {review.review.strength}</p><p><strong>What to improve:</strong> {review.review.improvement}</p><p><strong>Try next (under 30 minutes):</strong> {review.review.nextStep}</p></div>
    {review.review.progress&&<p className="vg-progress-note"><strong>Since your last hand-in:</strong> {review.review.progress}</p>}
    {review.review.revisit&&<a className="vg-revisit" href={moduleHref(key)+'?tab=watch&lesson='+review.review.revisit}><BookOpen size={18}/><span><strong>Rewatch lesson {review.review.revisit}{lessonTitles[review.review.revisit-1]?': '+lessonTitles[review.review.revisit-1]:''}</strong>{review.review.revisitWhy&&<span className="small">{review.review.revisitWhy}</span>}</span><ArrowRight size={18}/></a>}

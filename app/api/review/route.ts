@@ -1,4 +1,5 @@
 import {youtubeLink,driveId,driveFolderId,driveFolderVideos,driveDownload,driveVideo,readDoc,linkProblem} from '../../handin-links';
+import {partsFor} from '../../videography/task-parts';
 import {googleDocId,parseVideoKey,moduleLesson} from '../../videography/programme';
 import {reviewGuide,directorLens} from '../../videography/review-guide';
 import {moduleHref} from '../../learning-rules';
@@ -30,7 +31,7 @@ async function watchDrive(url:string,focus=''):Promise<VideoWatch>{
  }catch{return {ok:false,reason:'The Drive video could not be opened.'}}
 }
 // What the AI sees from a Videography hand-in. Self-ratings and reflections are left out so they don't bias the review.
-function handInText(piece:any){const files=(piece.uploads||[]).map((f:any)=>f.name+' ('+f.type+')');const videos=(piece.uploads||[]).filter((f:any)=>!imageTypes.includes(f.type)).length;return ['Written answer:',piece.answer||'(none)','Learner notes:',piece.notes||'(none)','Files: '+(files.join(', ')||'none')+(videos?'. Video files are described in videoWatch when they could be watched.':''),'Link: '+(piece.url?(googleDocId(piece.url)?'a Google Doc, attached as a PDF (handInDocument)':youtubeLink(piece.url)?'a YouTube link, described in videoWatch when it could be watched':driveId(piece.url)||driveFolderId(piece.url)?'a Google Drive link or folder, described in videoWatch when it could be watched':'given, not opened'):'none')].join('\n')}
+function handInText(piece:any){const files=(piece.uploads||[]).map((f:any)=>f.name+' ('+f.type+')');const videos=(piece.uploads||[]).filter((f:any)=>!imageTypes.includes(f.type)).length;return ['Written answer:',piece.answer||'(none)','Learner notes:',piece.notes||'(none)','Files: '+(files.join(', ')||'none')+(videos?'. Video files are described in videoWatch when they could be watched.':''),'Link: '+(piece.url?(googleDocId(piece.url)?'a Google Doc, attached as a PDF (handInDocument)':youtubeLink(piece.url)?'a YouTube link, described in videoWatch when it could be watched':driveId(piece.url)||driveFolderId(piece.url)?'a Google Drive link or folder, described in videoWatch when it could be watched':'given, not opened'):'none'),...(piece.parts?['Files by part: '+partsFor(piece.moduleId).filter(x=>x.kind==='media').map(x=>x.label+' ('+(piece.parts.files?.[x.id]?.length||0)+' file'+((piece.parts.files?.[x.id]?.length||0)===1?'':'s')+')').join('; ')]:[])].join('\n')}
 async function access(userId:string,s:any,lessonKey:string){
  await db().prepare("UPDATE ai_jobs SET status='failed' WHERE user_id=? AND status='pending' AND created_at<?").bind(userId,Date.now()-120000).run();
  // Videography modules: 2 AI reviews per module (Free on the first two modules; Self-paced or Mentor-led for the rest).

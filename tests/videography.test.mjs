@@ -135,7 +135,7 @@ test('hand-in: written tasks need an answer; media tasks need a file or link and
  assert.deepEqual(P.handInMissing(textModule,{...base,answer:'x'.repeat(80)}),[],'no upload needed for a written task');
  assert.ok(P.handInMissing(mediaModule,{...base,notes:'I filmed three shots.'}).some(x=>x.includes('upload your work')));
  assert.deepEqual(P.handInMissing(mediaModule,{...base,notes:'I filmed three shots today.',url:'https://example.com/v'}),[]);
- assert.ok(P.handInMissing(mediaModule,{...base,notes:'I filmed three shots today.',uploadIds:['a','b','c','d']}).some(x=>x.includes('up to 3')));
+ assert.ok(P.handInMissing(mediaModule,{...base,notes:'I filmed three shots today.',uploadIds:Array.from({length:13},(_,i)=>'f'+i)}).some(x=>x.includes('up to 12')));
 });
 
 test('self-check: beginner modules 1–3 skip it; it starts at beginner module 4 and is always on for higher levels',()=>{
@@ -409,3 +409,16 @@ test('resume: a module opens at the first lesson whose questions are not solved,
  assert.equal(L.continueHref('/m','B01','Documentary',done(0)),'/m');
  assert.equal(L.continueHref('/m','B01','Documentary',done(n)),'/m?tab=make');
 });
+
+test('task parts: every module lists its parts, and a hand-in names each empty one',()=>{
+ const T=load(path.join(root,'app/videography/task-parts.ts'));
+ for(const m of P.curriculumModules){const list=T.partsFor(m.id);assert.ok(list.length>=2,m.id+': at least two parts');assert.equal(new Set(list.map(x=>x.id)).size,list.length,m.id+': part ids differ');assert.ok(list.every(x=>x.label.length>5),m.id)}
+ const m=P.curriculumModules.find(x=>x.id==='B05'),base={answer:'',notes:'',url:'',uploadIds:[],ratings:[],reflections:{well:'',change:''}};
+ let miss=P.handInMissing(m,{...base,parts:{text:{shotlist:'wide, action, close'},files:{clips:[]}}},false);
+ assert.deepEqual(miss,['add “Your 5 to 8 clips”'],'the clips slot is empty');
+ assert.deepEqual(P.handInMissing(m,{...base,url:'https://youtu.be/dQw4w9WgXcQ',parts:{text:{shotlist:'wide, action, close'},files:{clips:[]}}},false),[],'a link covers the file slots');
+ miss=P.handInMissing(m,{...base,uploadIds:['a'],parts:{text:{shotlist:''},files:{clips:['a']}}},false);
+ assert.deepEqual(miss,['add “Your shot list”']);
+ const list=T.partsFor('B01');assert.equal(T.composeAnswer(list,{text:{notes:'Both start with a problem.',lines:'I want people to see the care.'},files:{}}).split('\n\n').length,2);
+});
+
