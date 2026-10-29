@@ -1,13 +1,14 @@
 'use client';
 import React,{useEffect,useRef,useState} from 'react';
-import {ArrowLeft,ArrowRight,BookOpen,ThumbsUp,ThumbsDown,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
+import {ArrowDown,ArrowUp,ArrowLeft,ArrowRight,ChevronDown,BookOpen,ThumbsUp,ThumbsDown,Check,Clapperboard,Clock,FileText,Flag,LockKeyhole,MessageCircle,Sparkles,Upload,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import './lesson.css';
-import {useLearning,Go,Action,Panel,Badge,Gate,UploadField,Photo} from '../ui';
+import {useLearning,Go,Action,Panel,Badge,Gate,UploadField} from '../ui';
 import {blockingModule,moduleHref,moduleInfo} from '../learning-rules';
 import {parseVideoKey,moduleLesson,projectLabel,modulesFor,moduleKey,ratingScale,reflectionQuestions,maxHandInFiles,handInMissing,needsSelfCheck,type HandIn,plansOf,planTitle,maxPlans} from './programme';
-import {LessonsTab,PathwayStrip,canPractise,taskLabel,useDeadVideos} from './module-context';
+import {LessonsTab,LessonSketch,PathwayStrip,canPractise,taskLabel,useDeadVideos} from './module-context';
+import {taskFaq,noGear} from './task-faq';
 import {waitingTips,lessonsFor,lessonsStatus,requireLessonsForTask} from './lessons';
 import {LevelClosure} from './closure';
 import {ReportProblem} from '../support';
@@ -24,6 +25,18 @@ const toHandIn=(d:Draft):HandIn=>({answer:d.answer,notes:d.notes,url:d.url,uploa
 // A Videography module: Lessons (Watch + Reflect each), then the Task (hand in), then Feedback (AI review).
 // The last module of a level also has Finish, which closes the level.
 const oldTabs:Record<string,string>={watch:'lessons',make:'task',reflect:'feedback'};
+// A green arrow in the bottom-right corner: it points down while there is more page below (and scrolls one screen),
+// and turns into "Back to top" at the bottom. Hidden when the page fits on one screen.
+function ScrollCue(){
+ const [state,setState]=useState<'down'|'top'|'none'>('none');
+ useEffect(()=>{const check=()=>{const max=document.documentElement.scrollHeight-window.innerHeight;setState(max<40?'none':window.scrollY>=max-24?'top':'down')};
+  check();window.addEventListener('scroll',check,{passive:true});window.addEventListener('resize',check);const t=setInterval(check,1000);
+  return ()=>{window.removeEventListener('scroll',check);window.removeEventListener('resize',check);clearInterval(t)}},[]);
+ if(state==='none')return null;
+ const top=state==='top';
+ return <button type="button" className={'scroll-cue'+(top?' top':'')} aria-label={top?'Back to the top of the page':'Scroll down for more'} onClick={()=>window.scrollTo({top:top?0:window.scrollY+window.innerHeight*0.8,behavior:'smooth'})}>{top?<><ArrowUp size={20} aria-hidden/><span>Back to top</span></>:<ArrowDown size={22} aria-hidden/>}</button>;
+}
+
 export function VideoLesson({moduleKey:key}:{moduleKey:string}){
  const {s,loaded,mutate}=useLearning();
  const parsed=parseVideoKey(key)!;
@@ -53,17 +66,32 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
   <header className="mv-head"><h1>{lesson.title}</h1><p className="ls-meta">Module {parsed.index+1} of {mods.length} <span>·</span> {parsed.module.hours} h <span>·</span> {parsed.module.stageLabel}</p></header>
   <Tabs value={tab} onValueChange={setTab}>
    <div className="mv-toolbar">
-    <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons">Watch</TabsTrigger><TabsTrigger value="task">Make</TabsTrigger><TabsTrigger value="feedback">Reflect</TabsTrigger>{last&&<TabsTrigger value="finish">Finish</TabsTrigger>}</TabsList>
     <PathwayStrip current={parsed.module.stageLabel} done={stagesDone}/>
+    <TabsList className={'learning-tabs'+(last?' four':'')}><TabsTrigger value="lessons">Watch</TabsTrigger><TabsTrigger value="task">Make</TabsTrigger><TabsTrigger value="feedback">Reflect</TabsTrigger>{last&&<TabsTrigger value="finish">Finish</TabsTrigger>}</TabsList>
    </div>
    <TabsContent value="lessons"><LessonsTab moduleKey={key} onTask={()=>{setTab('task');window.scrollTo({top:0,behavior:'smooth'})}} onLesson={(index,count)=>setLessonAt({index,count})}/></TabsContent>
    <TabsContent value="task">{loaded&&<TaskTab moduleKey={key} onHandedIn={id=>{setReviewNow(id);setTab('feedback')}}/>}</TabsContent>
    <TabsContent value="feedback">{loaded&&<FeedbackTab moduleKey={key} requestFor={reviewNow} onFinish={last?()=>setTab('finish'):undefined}/>}</TabsContent>
    {last&&<TabsContent value="finish">{loaded&&<LevelClosure level={parsed.level}/>}</TabsContent>}
   </Tabs>
+  <ScrollCue/>
   <div className="ls-support"><ReportProblem moduleKey={key} lesson={tab==='lessons'&&lessonAt?lessonAt.index+1:undefined} variant="ghost" label="Report a problem with this module"/></div>
   <div className="button-row between">{prev?<Go outline href={moduleHref(prev)}><ArrowLeft size={16}/>Previous module</Go>:<span/>}{next&&(atLastLesson||s.progress?.[key])?<Go outline href={moduleHref(next)}>Next module<ArrowRight size={16}/></Go>:<span/>}</div>
  </div>;
+}
+
+// "Before you start": what to hand in, common mistakes, no gear, handing in again (pilot of 24 Oct 2026).
+function TaskFaq({moduleId}:{moduleId:string}){
+ const f=taskFaq[moduleId];if(!f)return null;
+ const qs:[string,React.ReactNode][]=[
+  ['What exactly do I hand in?',<p>{f.handIn}</p>],
+  ['Common mistakes',<ul>{f.mistakes.map(x=><li key={x}>{x}</li>)}</ul>],
+  ['What if I don’t have the gear or the people?',<p>{noGear}</p>],
+  ['Can I hand in again?',<p>Yes. Each hand-in is saved as a new piece in My Work, so nothing is lost. Each module includes 2 AI reviews, so read the review before you try again.</p>],
+ ];
+ return <section className="vg-task-faq" aria-labelledby="task-faq-title"><h3 id="task-faq-title">Before you start</h3>
+  {qs.map(([q,a],i)=><details key={q} open={i<2}><summary>{q}<ChevronDown size={16} aria-hidden/></summary><div>{a}</div></details>)}
+ </section>;
 }
 
 function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:string)=>void}){
@@ -91,17 +119,19 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
   setDraft(emptyDraft());onHandedIn(piece?.id||'');
  }
  return <Gate><div className="vg-make">
-  <section className="vg-task-brief"><Photo slot="make" className="ls-make-photo"/><span className="eyebrow">{taskLabel(m.id)}</span><h2>{m.taskName}</h2><p className="vg-task-do">{lesson.do}</p>
+  <section className="vg-task-brief"><LessonSketch src={'/sketches/'+m.id+'-1'} title={m.taskName}/><span className="eyebrow">{taskLabel(m.id)}</span><h2>{m.taskName}</h2><p className="vg-task-do">{lesson.do}</p>
    <div className="vg-task-meta"><div><strong>Good work looks like this</strong><p>{m.evidence}</p></div><div><strong>How it’s checked</strong><ul>{lesson.checks.map(c=><li key={c}>{c}</li>)}</ul></div></div>
-   {handedIn>0&&<p className="small">You have handed this in {handedIn} time{handedIn>1?'s':''}. Handing in again adds a new piece to My Work. Each module includes 2 AI reviews in total.</p>}</section>
+   <TaskFaq moduleId={m.id}/>
+   {handedIn>0&&<p className="small">You have handed this in {handedIn} time{handedIn>1?'s':''}.</p>}</section>
 
   <Panel className="vg-form-block vg-handin"><h2><FileText size={18}/> {m.handIn==='text'?'1. Write your answer':'1. Hand in your work'}</h2>
    {m.handIn==='text'&&<label>Your answer <span className="small">({draft.answer.trim().length}/80 characters minimum)</span><textarea rows={9} maxLength={6000} value={draft.answer} onChange={e=>update({answer:e.target.value})} placeholder="Write your answer here. You don’t need to upload a document."/></label>}
-   <div className="vg-files"><span className="vg-label">{m.handIn==='text'?'Add photos or files (optional)':'Upload your work: up to 3 photos or videos, or add a video link'}</span>
+   <div className="vg-files"><span className="vg-label">{m.handIn==='text'?'Add photos or files (optional)':'Upload your work: up to 3 photos or videos, or add a link'}</span>
     {draft.files.length>0&&<ul>{draft.files.map(f=><li key={f.id}><Upload size={14}/>{f.name}<button type="button" aria-label={'Remove '+f.name} onClick={()=>update({files:draft.files.filter(x=>x.id!==f.id)})}><X size={14}/></button></li>)}</ul>}
     {draft.files.length<maxHandInFiles&&<UploadField lessonKey={key} value={null} onUpload={(f:any)=>update({files:[...draft.files,{id:f.id,name:f.name,type:f.type}]})}/>}
     <p className="small">Need more than 3 pictures? Put them into one image (a collage), or add a link to a folder.</p>
-    <label>Video or folder link (YouTube, Vimeo, Google Drive…)<input type="url" value={draft.url} onChange={e=>update({url:e.target.value})} placeholder="https://"/></label>
+    <label>Link to your work (YouTube, Google Drive, or a Google Doc for written work)<input type="url" value={draft.url} onChange={e=>update({url:e.target.value})} placeholder="https://"/></label>
+    <p className="small">Google Doc: click Share and set General access to “Anyone with the link”, or the AI can’t open it. YouTube videos must be Public or Unlisted.</p>
    </div>
    <label>{m.handIn==='text'?'Anything else to add? (optional)':'Tell us about your work'}<textarea rows={3} maxLength={2000} value={draft.notes} onChange={e=>update({notes:e.target.value})} placeholder="What did you make? What did you try?"/></label>
   </Panel>
@@ -110,9 +140,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
    {lesson.checks.map((check,i)=><fieldset key={check} className="vg-rate"><legend>{check}</legend><div>{ratingScale.map((label,v)=><button type="button" key={label} className={draft.ratings[i]===v?'selected':''} aria-pressed={draft.ratings[i]===v} onClick={()=>update({ratings:draft.ratings.map((r,j)=>j===i?v:r)})}><strong>{v}</strong>{label}</button>)}</div></fieldset>)}
   </Panel>
 
-  <Panel className="vg-form-block"><h2>3. Think about it</h2>
-   {reflectionQuestions.map(q=><label key={q.id}>{q.label}<textarea rows={2} maxLength={600} value={draft.reflections[q.id]} onChange={e=>update({reflections:{...draft.reflections,[q.id]:e.target.value}})}/></label>)}
-  </Panel></>}
+</>}
 
   {missing.length>0&&<p className="small" role="status">To hand in: {missing.join(' · ')}.</p>}
   <Action disabled={missing.length>0||busy} onClick={handIn}>Hand in my work</Action>
@@ -128,6 +156,20 @@ function WaitingTips(){
 
 type Flag={reason:string;status:'open'|'fine'|'refunded';note:string};
 type Review={id:string;flag?:Flag|null;rating?:{helpful:number;comment:string}|null;submissionId?:string;createdAt:number;review:{total:number|null;summary:string;strength:string;improvement:string;nextStep:string;evidenceLimit:string;revisit?:number|null;revisitWhy?:string;progress?:string;criteria:{label:string;rating:number|null;feedback:string}[]}};
+// After the review: what went well and what to change next time, written with the feedback in front of you.
+function ReflectNotes({piece}:{piece:any}){
+ const {mutate,busy}=useLearning();
+ const [notes,setNotes]=useState({well:piece.reflections?.well||'',change:piece.reflections?.change||''}),[saved,setSaved]=useState(false);
+ useEffect(()=>{setNotes({well:piece.reflections?.well||'',change:piece.reflections?.change||''});setSaved(false)},[piece.id]);
+ const changed=notes.well!==(piece.reflections?.well||'')||notes.change!==(piece.reflections?.change||'');
+ return <Panel className="vg-form-block vg-reflect-notes"><h2>Think about it</h2>
+  {piece.selfScore!=null&&<p className="small">Your own rating: {piece.selfScore}/100</p>}
+  <p className="small">With the review in front of you. Optional, saved with this piece in My Work.</p>
+  {reflectionQuestions.map(q=><label key={q.id}>{q.label}<textarea rows={2} maxLength={600} value={notes[q.id]} onChange={e=>{setNotes({...notes,[q.id]:e.target.value});setSaved(false)}}/></label>)}
+  <div className="button-row"><Button variant="outline" disabled={busy||!changed} onClick={async()=>{if(await mutate('video_reflect',{id:piece.id,...notes}))setSaved(true)}}>Save</Button>{saved&&<span className="small" role="status"><Check size={14}/> Saved</span>}</div>
+ </Panel>;
+}
+
 function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;requestFor:string;onFinish?:()=>void}){
  const {s}=useLearning();
  const piece=s.submissions.find((x:any)=>x.key===key);
@@ -160,7 +202,7 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
    <div className="row between"><h2><Sparkles size={20}/> AI review</h2>{review.review.total!==null?<strong className="vg-ai-score">{Math.round(review.review.total)}<small>/100</small></strong>:<Badge>Not enough to score every check</Badge>}</div>
    <p>{review.review.summary}</p>
    <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>AI</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label} className={gap?'gap':''}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span>{gap&&<span className="small vg-gap">You and the AI see this differently. Read the note above and try again.</span>}</td>{rated&&<td>{mine??'–'}/4</td>}<td>{c.rating??'–'}/4{(()=>{const was=prev?.review.criteria[i]?.rating;return c.rating!==null&&was!=null&&was!==c.rating?<span className={'vg-delta '+(c.rating>was?'up':'down')} title={'Last time: '+was+'/4'}>{c.rating>was?'↑':'↓'} from {was}</span>:null})()}</td></tr>})}</tbody></table>
-   <div className="vg-review-notes"><p><strong>What worked:</strong> {review.review.strength}</p><p><strong>What to improve:</strong> {review.review.improvement}</p><p><strong>Try next (under 30 minutes):</strong> {review.review.nextStep}</p><p className="small"><strong>What the AI couldn’t check:</strong> {review.review.evidenceLimit}</p></div>
+   <div className="vg-review-notes"><p><strong>What worked:</strong> {review.review.strength}</p><p><strong>What to improve:</strong> {review.review.improvement}</p><p><strong>Try next (under 30 minutes):</strong> {review.review.nextStep}</p></div>
    {review.review.progress&&<p className="vg-progress-note"><strong>Since your last hand-in:</strong> {review.review.progress}</p>}
    {review.review.revisit&&<a className="vg-revisit" href={moduleHref(key)+'?tab=watch&lesson='+review.review.revisit}><BookOpen size={18}/><span><strong>Rewatch lesson {review.review.revisit}{lessonTitles[review.review.revisit-1]?': '+lessonTitles[review.review.revisit-1]:''}</strong>{review.review.revisitWhy&&<span className="small">{review.review.revisitWhy}</span>}</span><ArrowRight size={18}/></a>}
    {review.review.criteria.some(c=>c.rating===null)&&<div className="vg-unsure"><p className="small">The AI couldn’t judge every check from what it could see. Not sure this review is right? Ask us and a person will look.</p><ReportProblem moduleKey={key} category="review" variant="outline" label="Ask us about this review"/></div>}
@@ -170,8 +212,8 @@ function FeedbackTab({moduleKey:key,requestFor,onFinish}:{moduleKey:string;reque
    {error&&<p role="alert" className="notice">{error}</p>}
    {canReview?<><p>Get feedback on the work you handed in.</p><Button onClick={()=>requestReview(piece.id)}>Get my AI review</Button></>:allowance&&<p>{allowance.eligible?'You’ve used both AI reviews for this module, so this hand-in won’t get one. It’s saved in My Work.':'AI reviews for this module are part of Self-paced. Your work is saved in My Work.'}{rated?' Your own rating is below.':''}</p>}
   </Panel>}
-  {rated&&<Panel><h2>What you said</h2><p className="small">Your rating: {piece.selfScore}/100</p><p><strong>What went well:</strong> {piece.reflections?.well}</p><p><strong>What you would change:</strong> {piece.reflections?.change}</p></Panel>}
-  {allowance&&<p className="small">AI reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} The AI reads your text and photos, and watches your videos and YouTube or Google Drive links, picture and sound.</p>}
+  <ReflectNotes piece={piece}/>
+  {allowance&&<p className="small">AI reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} The AI reads your text and photos, watches your videos and YouTube or Google Drive links (picture and sound), and reads Google Docs shared as “Anyone with the link”.</p>}
   <div className="button-row"><Go href={'/portfolio?from='+encodeURIComponent(key)} outline>See it in My Work</Go>{onFinish&&<Button onClick={onFinish}><Flag size={16}/>Finish the level</Button>}</div>
  </div>;
 }

@@ -16,7 +16,7 @@ test('module text uses short, simple sentences (20 words or fewer)',()=>{
 
 test('every module has three assessment checks and becomes a scoreable lesson',()=>{
  for(const m of P.curriculumModules){const l=P.moduleLesson(m);assert.equal(l.checks.length,3,m.id);assert.ok(l.checks.every(c=>c.length>10));assert.equal(l.do,m.assignment)}
- assert.equal(P.videoPaths.length,3);assert.ok(P.videoPaths.every(p=>p.lessons.length===15));
+ const real=P.videoPaths.filter(p=>p.id!=='video-test');assert.equal(real.length,3);assert.ok(real.every(p=>p.lessons.length===15));
 });
 
 const best=q=>q.options.reduce((b,o,i,a)=>o.score>a[b].score?i:b,0),worst=q=>q.options.reduce((b,o,i,a)=>o.score<a[b].score?i:b,0);
@@ -145,6 +145,7 @@ test('self-check: beginner modules 1–3 skip it; it starts at beginner module 4
  const m=P.curriculumModules.find(x=>x.id==='B01');const work={answer:'',notes:'I put six photos in order.',url:'https://example.com/v',uploadIds:[],ratings:[],reflections:{well:'',change:''}};
  assert.deepEqual(P.handInMissing(m,work,false),[],'no ratings or reflections needed when self-check is off');
  assert.ok(P.handInMissing(m,work,true).some(x=>x.includes('rate your work')));
+ assert.deepEqual(P.handInMissing(m,{...work,ratings:[2,3,1]},true),[],'reflections are written after the review, in Reflect, so they never block a hand-in');
 });
 
 test('free plan: only the first two modules of each level have open tasks',()=>{
@@ -219,6 +220,18 @@ test('style extra lessons have their own sketch, named by style so two styles ne
  assert.equal(seen.size,52);
 });
 
+test('every task has its Before you start FAQ: what to hand in and 2-3 common mistakes',()=>{
+ const F=load(path.join(root,'app/videography/task-faq.ts'));
+ for(const m of P.curriculumModules){const f=F.taskFaq[m.id];assert.ok(f,m.id);assert.ok(f.handIn.length>40,m.id+' hand-in');assert.ok(f.mistakes.length>=2&&f.mistakes.length<=3,m.id+' mistakes');}
+ assert.equal(Object.keys(F.taskFaq).length,P.curriculumModules.length);
+});
+
+test('AI reviews: every module has a director lens, and the house guide has its dos and donts',()=>{
+ const G=load(path.join(root,'app/videography/review-guide.ts'));
+ for(const m of P.curriculumModules){const l=G.directorLens(m.id);assert.ok(l&&l.role&&l.see.length>40&&l.watchFor.length>15,m.id)}
+ assert.ok(G.reviewGuide.includes('\nDO\n')&&G.reviewGuide.includes("\nDON'T\n"));
+});
+
 test('every lesson has its sketchbook clip and poster',()=>{
  for(const m of P.curriculumModules)Les.lessonsFor(m.id).forEach((_,i)=>{for(const ext of ['mp4','webp']){const f=path.join(root,'public/sketches',`${m.id}-${i+1}.${ext}`);assert.ok(fs.existsSync(f),f);assert.ok(fs.statSync(f).size<300000,f+' is too big')}});
 });
@@ -260,8 +273,8 @@ test('Reflect: every lesson has 2 or 3 sound questions about the lesson or its v
    assert.ok(qs.length>=2&&qs.length<=3,id+' lesson '+(i+1)+': 2 or 3 questions');
    for(const q of qs){
     assert.ok(q.q.length>15&&q.why.length>10,id+': question and explanation are written');
-    assert.equal(q.options.length,3,id+': three answers');
-    assert.equal(new Set(q.options.map(o=>o[0])).size,3,id+': answers differ');
+    assert.equal(q.options.length,4,id+': four answers');
+    assert.equal(new Set(q.options.map(o=>o[0])).size,4,id+': answers differ');
     for(const [text,feedback] of q.options.slice(1))assert.ok(text&&feedback,id+': wrong answers have feedback');
     assert.ok(!q.options.some(o=>/(all|none) of the above/i.test(o[0])),id+': no all/none of the above');
     // The right answer must not stand out by length.
@@ -363,4 +376,36 @@ test('adapting the plan: skill areas, live skill levels, behind and catch-up dat
  const done={[k0]:{done:true}},start2=P.catchUpStart(late,done);
  assert.ok(start2<P.today(),'hours done count as time spent');
  assert.equal(P.behindBy({...late,schedule:{...late.schedule,startDate:start2}},done),null,'after catching up, not behind');
+});
+
+test('the admin test pathway is three real Beginner modules, never offered to learners',()=>{
+ assert.deepEqual(P.modulesFor('test').map(m=>m.id),['B01','B05','B14']);assert.ok(!P.levels.includes('test'));
+ const p=P.buildTestProgramme(['wedding']);assert.equal(p.level,'test');assert.equal(p.schedule.level,'test');assert.equal(p.name,'Test pathway');
+ assert.equal(p.schedule.totalHours,P.modulesFor('test').reduce((n,m)=>n+m.hours,0));
+ assert.equal(P.parseVideoKey('video-test-2').module.id,'B14');assert.equal(P.parseVideoKey('video-test-3'),null);assert.ok(P.isFreeModule('video-test-2'));
+});
+
+test('Google Doc hand-in links: only https docs.google.com/document links count',()=>{
+ assert.equal(P.googleDocId('https://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/edit?usp=sharing'),'1AbCdEfGhIjKlMnOpQrStUvWxYz012345');
+ for(const u of ['http://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/edit','https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/view','https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345','https://evil.com/?https://docs.google.com/document/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345','',undefined])assert.equal(P.googleDocId(u),'',String(u));
+});
+
+test('Reflect answer order: the right answer lands evenly on A, B, C and D in every level',()=>{
+ const L=load(path.join(root,'app/videography/lessons.ts'));
+ for(const lv of ['beginner','intermediate','advanced']){
+  const bank=JSON.parse(fs.readFileSync(path.join(root,'app/videography/reflect/'+lv+'.json'),'utf8')),pos=[0,0,0,0];let n=0;
+  for(const lessons of Object.values(bank))for(const qs of lessons)for(const q of qs){const o=L.answerOrder(q.options.length,q.q);assert.deepEqual([...o].sort(),[0,1,2,3]);pos[o.indexOf(0)]++;n++}
+  for(const c of pos)assert.ok(c/n>0.15&&c/n<0.35,lv+': right answer position share '+pos.map(x=>Math.round(100*x/n)+'%').join(' '));
+ }
+});
+
+test('resume: a module opens at the first lesson whose questions are not solved, and at the task once all are',()=>{
+ const L=load(path.join(root,'app/videography/lessons.ts')),n=L.lessonsFor('B01','Documentary').filter(l=>!l.optional&&!l.style).length;
+ const done=k=>Object.fromEntries([...Array(k).keys()].map(i=>[i,{v:[],t:true}]));
+ assert.equal(L.resumeLesson('B01','Documentary',undefined),0);
+ assert.equal(L.resumeLesson('B01','Documentary',done(2)),2);
+ assert.equal(L.resumeLesson('B01','Documentary',done(n)),-1);
+ assert.equal(L.continueHref('/m','B01','Documentary',done(2)),'/m?tab=watch&lesson=3');
+ assert.equal(L.continueHref('/m','B01','Documentary',done(0)),'/m');
+ assert.equal(L.continueHref('/m','B01','Documentary',done(n)),'/m?tab=make');
 });
