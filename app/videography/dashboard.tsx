@@ -7,6 +7,7 @@ import {useLearning,Panel,Go,Badge,isExplore,Photo,confirmAction} from '../ui';
 import './dashboard.css';
 import {stageOrder,liveSkills,behindBy,moduleArea,levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,defaultPlanTitle,courseId,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
+import {lessonsFor,resumeLesson,continueHref} from './lessons';
 import {ReportProblem} from '../support';
 import {track} from '../track';
 
@@ -109,11 +110,11 @@ function TodayCard(){
  const {s}=useLearning();const p=s.programme as Programme|undefined;if(!p)return null;
  const mods=modulesFor(p.level),i=mods.findIndex((_,k)=>!s.progress?.[moduleKey(p.level,k)]);
  if(i<0)return <section className="db-today"><span className="kicker">Today</span><h2>You’ve finished every module of {planTitle(p)}.</h2><Go href={'/workspace/'+p.id}>See your plan<ArrowRight size={18}/></Go></section>;
- const m=mods[i],key=moduleKey(p.level,i),marks=s.lessonProgress?.[key]||{},lesson=m.topics.findIndex((_:string,n:number)=>!marks[n]?.t);
+ const m=mods[i],key=moduleKey(p.level,i),marks=s.lessonProgress?.[key]||{},lessons=lessonsFor(m.id,p.primaryPathway),lesson=resumeLesson(m.id,p.primaryPathway,marks);
  const late=behindBy(p,s.progress),minutes=Math.round(m.hours*60/(m.topics.length+1)/5)*5;
  const href=`/explore/video-${p.level}/${i}`+(lesson<0?'?tab=make':`?tab=watch&lesson=${lesson+1}`);
  return <section className="db-today"><span className="kicker">Today · {planTitle(p)}</span>
-  <h2>{lesson<0?<>Hand in: {m.taskName}</>:<>Lesson {lesson+1} of {m.topics.length}: {m.topics[lesson]}</>}</h2>
+  <h2>{lesson<0?<>Hand in: {m.taskName}</>:<>Lesson {lesson+1} of {lessons.length}: {lessons[lesson].title}</>}</h2>
   <p className="small">{m.id} · {m.title} · about {lesson<0?Math.round(m.hours*60/(m.topics.length+1)/5)*5:minutes} min{late?<> · <a className="text-link" href={'/workspace/'+p.id}>{late.days} {late.days===1?'day':'days'} behind: update your dates</a></>:null}</p>
   <Go href={href} onClick={()=>track('today_clicked',{module:key,lesson:lesson+1})}>{lesson<0?'Go to the task':'Start this lesson'}<ArrowRight size={18}/></Go>
  </section>;
@@ -192,7 +193,7 @@ function ProgrammeDashboard(){
     <p className="db-meta"><PlayCircle size={18}/>{done}/{mods.length} modules done · {p.schedule.totalHours} hours · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</p>
     {/* One-line button labels: the module's name sits above the button. */}
     {nextIndex>=0&&<p className="db-next">Next up: <strong>{moduleLesson(mods[nextIndex],projectLabel(p)).title}</strong></p>}
-    <div className="button-row">{nextIndex>=0&&<Go href={`/explore/${'video-'+p.level}/${nextIndex}`}>{done?'Continue':'Start'}<ArrowRight size={18}/></Go>}
+    <div className="button-row">{nextIndex>=0&&<Go href={continueHref(`/explore/${'video-'+p.level}/${nextIndex}`,mods[nextIndex].id,p.primaryPathway,s.lessonProgress?.[moduleKey(p.level,nextIndex)])}>{done?'Continue':'Start'}<ArrowRight size={18}/></Go>}
      {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
      <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div>
    </div>
