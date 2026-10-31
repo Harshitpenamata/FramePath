@@ -373,3 +373,13 @@ test('Reflect answer order: the right answer lands evenly on A, B, C and D in ev
   for(const c of pos)assert.ok(c/n>0.15&&c/n<0.35,lv+': right answer position share '+pos.map(x=>Math.round(100*x/n)+'%').join(' '));
  }
 });
+
+test('Reflect answers: the right answer is never clearly the longest, and is the longest in at most 40% of questions',()=>{
+ for(const lv of ['beginner','intermediate','advanced']){
+  const bank=JSON.parse(fs.readFileSync(path.join(root,'app/videography/reflect/'+lv+'.json'),'utf8'));let n=0,longest=0;
+  for(const [id,lessons] of Object.entries(bank))lessons.forEach((qs,i)=>qs.forEach((q,k)=>{
+   const lens=q.options.map(o=>o[0].length),wrong=Math.max(...lens.slice(1));n++;if(lens[0]===Math.max(...lens))longest++;
+   assert.ok(lens[0]<=wrong*1.10,`${id} lesson ${i+1} question ${k+1}: the right answer is clearly the longest`)}));
+  assert.ok(longest/n<=0.40,lv+': right answer is the longest in '+Math.round(100*longest/n)+'% of questions');
+ }
+});
