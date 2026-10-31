@@ -18,3 +18,7 @@ All 553 questions (177 Beginner, 181 Intermediate, 195 Advanced) now have **four
 ## Known limit
 
 The right answer is still the longest option more often than chance (Beginner 52%, Intermediate 71%, Advanced 76%, against 83-89% before). A learner can use that as a clue. Fixing it means lengthening wrong answers one by one, which is a later pass.
+
+## Update: the length clue is gone
+
+The right answer used to be the longest option in 52% (Beginner), 71% (Intermediate) and 76% (Advanced) of questions, often clearly. Wrong answers were lengthened (same meaning, same feedback; right answers untouched) in two passes: every question where the right answer was more than 10% longer than every wrong one (181), then the closest cases until the share came down. Now the right answer is the longest in 32%, 33% and 33% of questions (a quarter would be pure chance) and never clearly longer. A test keeps it that way: no right answer more than 10% longer than the longest wrong one, and the longest in at most 40% of questions per level.
