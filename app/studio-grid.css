@@ -10,7 +10,7 @@
 :root[data-photos=colour]{--photo-filter:none}
 /* One system for the whole site: spacing steps, type scale, button and icon sizes, and the page grid.
    Every page uses these, so the same thing looks the same everywhere. */
-:root{--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;
+:root{--field-edge:#7d7b73;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;
  --gutter:26px;--frame:min(1460px,calc(100% - 40px));
  --t-display:clamp(3.25rem,6.6vw,6.75rem);--t-h1:clamp(3rem,6vw,6rem);--t-h2:clamp(2.25rem,4.2vw,4rem);--t-card:clamp(1.5rem,2.2vw,2.125rem);--t-lede:clamp(1.0625rem,1.5vw,1.3125rem);
  --lh-h1:.92;--lh-h2:.95;--lh-card:1.02;
@@ -71,7 +71,8 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 .badge.green{background:var(--primary);color:#0b0b0b;border-color:var(--primary)}
 
 /* Forms */
-input:not([type=radio]):not([type=checkbox]):not([type=file]),textarea,select{background:#141414;border:1px solid #5a5953;border-radius:14px;color:var(--foreground)}
+/* Field edges at 3:1 or more against the dark surfaces they sit on, so a text box reads as a box. */
+input:not([type=radio]):not([type=checkbox]):not([type=file]),textarea,select{background:#141414;border:1px solid var(--field-edge);border-radius:14px;color:var(--foreground)}
 input:focus,textarea:focus,select:focus{border-color:var(--foreground)}
 label{font-family:var(--body);font-weight:500}
 
@@ -353,3 +354,5 @@ p,li{text-wrap:pretty}
    the browser's swipe-back. */
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 .mv-tabbar,.vg-track,.vg-spot.timeline,.vg-show-thumbs{overscroll-behavior-x:contain}
+/* Nothing on a page can push it wider than the window (clip, not hidden, so sticky headers still work). */
+html,body{overflow-x:clip}

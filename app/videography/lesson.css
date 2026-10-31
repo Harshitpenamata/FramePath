@@ -179,7 +179,7 @@
 main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .vg-lesson .breadcrumbs{margin:0 0 12px}
 .vg-lesson .mv-head{display:grid;gap:4px;margin:2px 0 0}
-.vg-lesson .mv-head h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(2.5rem,4.8vw,5rem);line-height:.98;letter-spacing:.005em;margin:0}
+.vg-lesson .mv-head h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(2.5rem,4.8vw,5rem);line-height:1.02;letter-spacing:.005em;margin:0}
 .vg-lesson .mv-head .ls-meta{margin:0}
 .vg-lesson .mv-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 32px;flex-wrap:wrap;padding:0 0 18px;margin:4px 0 22px;border-bottom:var(--soft-line)}
 .vg-lesson .mv-toolbar [data-slot=tabs-list]{margin:0!important}
@@ -415,3 +415,5 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 @media(prefers-reduced-motion:reduce){.vg-wait-bar span{transition:none}}
 .vg-queued{display:grid;gap:var(--s3);justify-items:start}
 .vg-queued p{margin:0}
+/* The bouncing arrow stops while the pointer or keyboard focus is on it. */
+.scroll-cue:hover,.scroll-cue:focus-visible{animation-play-state:paused}
