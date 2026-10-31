@@ -179,7 +179,7 @@
 main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .vg-lesson .breadcrumbs{margin:0 0 12px}
 .vg-lesson .mv-head{display:grid;gap:4px;margin:2px 0 0}
-.vg-lesson .mv-head h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(2.5rem,4.8vw,5rem);line-height:.98;letter-spacing:.005em;margin:0}
+.vg-lesson .mv-head h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(2.5rem,4.8vw,5rem);line-height:1.02;letter-spacing:.005em;margin:0}
 .vg-lesson .mv-head .ls-meta{margin:0}
 .vg-lesson .mv-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 32px;flex-wrap:wrap;padding:0 0 18px;margin:4px 0 22px;border-bottom:var(--soft-line)}
 .vg-lesson .mv-toolbar [data-slot=tabs-list]{margin:0!important}
@@ -204,30 +204,16 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .mv-now p{margin:6px 0 0;color:var(--foreground);font-size:1.02rem}
 .mv-side{display:grid;gap:16px;align-content:start}
 .mv-side-label{font-size:.78rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--foreground)}
-.mv-picker{border:1px solid #4a4944;border-radius:10px;overflow:hidden}
-.mv-picker-btn,.mv-picker-list button{display:flex;align-items:center;gap:16px;width:100%;background:transparent;border:0;color:var(--foreground);font:inherit;text-align:left;cursor:pointer}
-.mv-picker-btn{padding:15px 18px;font-size:1.05rem}
 .mv-chev{margin-left:auto;flex:none;transition:transform .18s ease}
-.mv-picker.open .mv-chev{transform:rotate(180deg)}
-.mv-picker-list{list-style:none;margin:0;padding:0;border-top:1px solid #4a4944}
-.mv-picker-list li+li{border-top:1px solid #3a3935}
-.mv-picker-list button{min-height:58px;padding:12px 18px;font-size:1rem}
-.mv-picker-list button:hover{background:#141414}
-.mv-picker-list button.current{background:var(--primary);color:#0b0b0b}
-.mv-picker-list .vg-optional-tag{margin-left:8px}
 .mv-play{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid currentColor}
 .mv-play svg{margin-left:2px;fill:currentColor}
-.mv-picker-list button.current .mv-play{background:#0b0b0b;border-color:#0b0b0b;color:var(--primary)}
 .mv-item-title{flex:1;min-width:0}
 .mv-done{flex:none;margin-left:auto}
-.mv-picker-btn:focus-visible,.mv-picker-list button:focus-visible{outline:2px solid var(--primary);outline-offset:-3px}
-.mv-picker-list button.current:focus-visible{outline-color:#0b0b0b}
 .mv-desc{margin:4px 0 0;color:var(--foreground);font-size:1.05rem;line-height:1.5}
 /* Short laptop screens: a smaller title so the player can stay large. */
 @media(min-width:1001px) and (max-height:820px){main:has(.vg-lesson){padding-top:14px}.vg-lesson .mv-head h1{font-size:clamp(2.2rem,3.4vw,3.3rem)}.vg-lesson .mv-toolbar{margin-bottom:16px;padding-bottom:14px}.vg-lesson{--mv-above:395px}.mv-now h2{font-size:1.35rem}}
 /* Phones and tablets: the lesson list comes straight after the player and its title, before the video notes. */
 @media(max-width:1000px){.mv-stage{display:flex;flex-direction:column;gap:18px}.mv-main,.mv-main .vg-video{display:contents}.mv-main .vg-video-frame{order:1;width:100%;align-self:stretch}.mv-now{order:2}.mv-side{order:3;margin:6px 0}.mv-main .vg-video>:not(.vg-video-frame):not(.mv-now){order:4}.vg-lesson .mv-toolbar{align-items:flex-start}}
-@media(max-width:600px){.mv-now{flex-wrap:wrap}.mv-pathway li{font-size:.75rem}.mv-stage-arrow{margin:0 6px 0 1px}.mv-picker-list button{min-height:52px}}
 
 /* Free resources to learn more (inside each module; the separate Resources page is retired) */
 .mv-resources{display:grid;gap:14px;border-top:var(--soft-line);padding-top:var(--s6)}
@@ -253,4 +239,181 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .mv-novideo span{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary)}
 .mv-novideo p{margin:0;font-size:clamp(1.15rem,1.8vw,1.6rem);line-height:1.35;color:var(--foreground)}
 .mv-novideo small{color:var(--muted-foreground)}
+
+/* Module page, round two (24 Oct 2026): a smaller title; the stage strip on the left of the toolbar and the tabs on
+   the right; the lessons as browser-style tabs beside the player with the open lesson's videos and a description
+   dropdown; the lesson's idea and questions straight under the player; a scroll arrow. */
+.vg-lesson .mv-head h1{font-size:clamp(2rem,3.4vw,3.4rem)}
+.vg-lesson .mv-toolbar{align-items:center}
+.mv-stage{grid-template-columns:minmax(0,1.9fr) minmax(300px,1fr);gap:32px}
+.mv-main .vg-video{display:grid;gap:14px}
+/* The player gives way so the top of the lesson card (the idea and Think it through) shows in the first screen. */
+@media(min-width:1001px){.mv-main .vg-video-frame{width:min(100%,calc((100svh - 560px)*16/9));min-width:min(100%,520px)}}
+.mv-now{display:block}
+.mv-now h2{font-size:clamp(1.2rem,1.7vw,1.6rem)}
+.mv-now p{margin:4px 0 0;font-size:.95rem;color:var(--muted-foreground)}
+.mv-main .vg-lesson-card{padding:22px}
+.mv-main .vg-lesson-intro{grid-template-columns:minmax(0,1fr) auto}
+.mv-side{position:sticky;top:16px;gap:14px}
+
+.mv-tabs{display:grid}
+.mv-tabbar{display:flex;gap:4px;align-items:flex-end;overflow-x:auto;scrollbar-width:none}
+.mv-tabbar button{position:relative;display:inline-flex;align-items:center;gap:5px;min-width:52px;justify-content:center;padding:10px 14px 9px;border:1px solid #3a3935;border-bottom:0;border-radius:10px 10px 0 0;background:#141413;color:var(--muted-foreground);font:inherit;font-size:.95rem;font-weight:600;cursor:pointer}
+.mv-tabbar button:hover{color:var(--foreground)}
+.mv-tabbar button.active{background:#1c1c1a;color:var(--primary);border-color:#4a4944;z-index:1;margin-bottom:-1px;padding-bottom:10px}
+.mv-tabbar button.done:not(.active){color:var(--foreground)}
+.mv-tabbar button.extra{font-style:italic}
+.mv-tabbar button:focus-visible{outline:2px solid var(--primary);outline-offset:-3px}
+.mv-tabpanel{display:grid;gap:12px;padding:16px;border:1px solid #4a4944;border-radius:0 12px 12px 12px;background:#1c1c1a}
+.mv-tabpanel h3{margin:0;font-family:var(--body);font-weight:600;text-transform:none;letter-spacing:0;font-size:1.05rem;line-height:1.3}
+.mv-tabpanel h3 .vg-optional-tag{margin-left:8px}
+.mv-vlist{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.mv-vlist button{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border:1px solid #3a3935;border-radius:10px;background:transparent;color:var(--foreground);font:inherit;text-align:left;cursor:pointer}
+.mv-vlist button:hover{border-color:#6a6862}
+.mv-vlist button.active{background:var(--primary);border-color:var(--primary);color:#0b0b0b}
+.mv-vlist button.active .mv-play{background:#0b0b0b;border-color:#0b0b0b;color:var(--primary)}
+.mv-vlist button.active small{color:#2b2b2b}
+.mv-vlist button:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.mv-vlist .mv-item-title{display:grid;gap:2px;font-size:.92rem;line-height:1.3}
+.mv-vlist small{color:var(--muted-foreground);font-size:.78rem}
+.mv-tabpanel .vg-video-links{display:grid;gap:6px}
+.mv-side .vg-watch-state{margin:0}
+.mv-side .mv-desc{font-size:.95rem;margin:0}
+
+/* Make: lesson 1's sketch in place of the photo */
+.vg-task-brief .vg-sketch{width:100%;aspect-ratio:16/9;object-fit:cover}
+
+/* Scroll cue */
+.scroll-cue{position:fixed;right:clamp(16px,2.4vw,32px);bottom:clamp(16px,2.4vw,32px);z-index:40;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:52px;height:52px;padding:0 14px;border:0;border-radius:999px;background:var(--primary);color:#0b0b0b;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.scroll-cue:not(.top){animation:cue-bob 1.8s ease-in-out infinite}
+.scroll-cue.top{padding:0 18px}
+.scroll-cue:focus-visible{outline:3px solid #f2eee4;outline-offset:3px}
+@keyframes cue-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@media(prefers-reduced-motion:reduce){.scroll-cue{animation:none!important}}
+
+
+@media(max-width:1000px){.mv-side{position:static}}
+/* A tighter lesson card under the player, so "Think it through" starts in the first screen. */
+.mv-main .vg-lesson-card{padding:18px 22px;display:grid;gap:12px}
+.mv-main .vg-lesson-intro{padding-bottom:12px;gap:16px}
+.mv-main .vg-lesson-part{margin:0}
+.mv-main .vg-lesson-part h3{font-size:1.5rem;margin:0}
+.mv-main .vg-part-lede{margin:2px 0 8px}
+@media(min-width:1001px){.mv-main .vg-video-frame{width:min(100%,calc((100svh - 620px)*16/9))}}
+/* Phones and tablets: player, lesson title, the lesson tabs and videos, then the idea and questions. */
+@media(max-width:1000px){
+ .mv-stage{display:flex;flex-direction:column;gap:16px}
+ .mv-main,.mv-main .vg-video{display:contents}
+ .mv-main .vg-video-frame{order:1;width:100%}
+ .mv-now{order:2}
+ .mv-side{order:3;position:static}
+ .mv-main .vg-lesson-card{order:4}
+}
+/* Desktop: the left column is exactly as wide as the player (sized by the window's height), the sidebar takes the rest. */
+@media(min-width:1001px){
+ .mv-stage{grid-template-columns:minmax(560px,calc((100svh - 500px)*16/9)) minmax(320px,1fr)}
+ .mv-main .vg-video-frame{width:100%;min-width:0}
+}
+
+/* Round three (24 Oct 2026, second walkthrough): more room in the title area, lesson tabs that name the open lesson,
+   guides shown in the player, the open item's description and the lesson idea under the player. */
+.vg-lesson .mv-head{gap:10px;margin:0 0 6px}
+.vg-lesson .mv-head h1{line-height:1}
+.vg-lesson .mv-head .ls-meta{line-height:1.4}
+.vg-lesson .mv-toolbar{margin:14px 0 24px;padding-bottom:20px;align-items:flex-end}
+.vg-lesson .mv-toolbar [data-slot=tabs-list]{align-self:flex-end}
+.mv-pathway{gap:12px}
+.mv-pathway h2{line-height:1.3}
+
+.mv-tabbar button.active{max-width:min(100%,300px)}
+.mv-tab-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.mv-tab-tags{margin:0;display:flex;gap:6px}
+.mv-tabpanel{gap:10px}
+
+.mv-page{background:#f7f4ec}
+.mv-page iframe{width:100%;height:100%;border:0;background:#fff}
+.mv-page-out{display:grid;place-items:center;background:#141413}
+.mv-page-card{display:grid;gap:10px;justify-items:start;max-width:46ch;padding:clamp(20px,4vw,40px)}
+.mv-page-card span{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--primary)}
+.mv-page-card strong{font-size:clamp(1.2rem,1.8vw,1.6rem);line-height:1.25;color:var(--foreground)}
+.mv-page-card p{margin:0;color:var(--foreground);line-height:1.5}
+.mv-page-card small{color:var(--muted-foreground);line-height:1.45}
+.mv-page-open{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;background:var(--primary);color:#0b0b0b;font-weight:700;text-decoration:none}
+.mv-page-open:focus-visible{outline:2px solid var(--foreground);outline-offset:3px}
+.mv-vlist .mv-play svg{margin-left:0}
+
+.mv-describe{display:grid;gap:14px;padding:16px 0 4px}
+.mv-idea{display:grid;gap:4px;padding-top:12px;border-top:var(--soft-line)}
+.mv-idea .vg-idea{margin:0;font-size:1.05rem;line-height:1.55;color:var(--foreground)}
+.mv-idea .vg-optional{margin:0}
+
+/* The lesson card now holds the progress and the questions, with room to breathe. */
+.mv-main .vg-lesson-card{gap:16px;padding:22px 24px}
+.mv-main .vg-lesson-intro{grid-template-columns:minmax(0,1fr);justify-items:end;padding-bottom:0}
+.mv-main .vg-lesson-part h3{margin:0 0 4px}
+.mv-main .vg-part-lede{margin:0 0 14px;line-height:1.5}
+.mv-main .vg-lesson-foot{padding-top:8px}
+.mv-main .vg-part-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.mv-main .vg-part-head .vg-lesson-progress{display:flex;align-items:center;gap:10px}
+/* "Watch for" sits under the open item's name in the list; no description block under the player. */
+.mv-vlist .mv-focus{margin-top:3px;font-size:.82rem;line-height:1.4;color:#1f1f1d}
+.mv-vlist button:not(.active) .mv-focus{color:var(--foreground)}
+.mv-open-site{display:inline-flex;align-items:center;gap:6px;margin:6px 0 2px 52px;font-size:.82rem;font-weight:600;color:var(--primary);text-decoration:none}
+.mv-open-site:hover{text-decoration:underline}
+.mv-blocked{display:grid;gap:8px;justify-items:start}
+.mv-blocked p{margin:0}
+.mv-describe{padding-top:12px}
+.mv-idea{border-top:0;padding-top:0}
 .mv-picker-list button.current .vg-optional-tag{color:#0b0b0b;border-color:#0b0b0b}
+
+/* Make: "Before you start" FAQ under the task brief (pilot, 24 Oct 2026) */
+.vg-task-faq{display:grid;gap:8px;border-top:var(--soft-line);padding-top:18px}
+.vg-task-faq h3{margin:0 0 4px;font-family:var(--body);font-weight:700;text-transform:none;letter-spacing:0;font-size:1.05rem}
+.vg-task-faq details{border:1px solid #3a3935;border-radius:12px;padding:0 14px}
+.vg-task-faq summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;cursor:pointer;list-style:none;font-weight:600;color:var(--foreground)}
+.vg-task-faq summary::-webkit-details-marker{display:none}
+.vg-task-faq summary svg{flex:none;transition:transform .18s ease}
+.vg-task-faq details[open] summary svg{transform:rotate(180deg)}
+.vg-task-faq summary:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:6px}
+.vg-task-faq details>div{padding:0 0 14px;color:var(--foreground);line-height:1.55}
+.vg-task-faq p{margin:0}
+.vg-task-faq ul{margin:0;padding-left:18px;display:grid;gap:6px}
+/* "Questions are ready": shown while the open lesson's questions wait below the fold */
+.q-cue{position:fixed;left:50%;bottom:clamp(16px,3vw,28px);z-index:41;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border:0;border-radius:999px;background:var(--primary);color:#0b0b0b;font:inherit;font-weight:700;box-shadow:0 8px 28px #000a;cursor:pointer;transform:translateX(-50%);animation:q-pop .4s ease both}
+.q-cue svg{animation:cue-bob 1.4s ease-in-out infinite}
+@keyframes q-pop{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(prefers-reduced-motion:reduce){.q-cue,.q-cue svg{animation:none}}
+/* AI review: points out of the maximum, levels in words, one calm note when you and the reviewer differ */
+.vg-ai-score-box{display:grid;justify-items:end;gap:4px}
+.vg-ai-score-box .vg-delta{margin:0}
+.vg-level{display:inline-block;padding:4px 12px;border-radius:999px;font-size:.8125rem;font-weight:700;white-space:nowrap;background:#2a2a27;color:var(--foreground)}
+.vg-level.llow{background:#f3a3a026;color:#f3a3a0}
+.vg-level.lmid{background:#f3c87926;color:#f3c879}
+.vg-level.lhigh{background:#d3ee9626;color:var(--primary)}
+.vg-gap-note{margin:0;padding:var(--s3) var(--s4);border-radius:14px;background:#1a1a18;color:var(--muted-foreground);font-size:.9375rem}
+.vg-gap-note strong{color:var(--foreground)}
+/* Hand-in parts: one card each, with a count of what is still missing */
+.vg-parts-top{display:grid;gap:var(--s2)}
+.vg-parts-top p{margin:0}
+.vg-parts-bar{height:8px;border-radius:999px;background:#2a2a27;overflow:hidden}
+.vg-parts-bar span{display:block;height:100%;border-radius:inherit;background:var(--primary);transition:width .3s ease}
+.vg-parts-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.vg-parts-list>li{display:grid;gap:var(--s2);padding:var(--s4);border:var(--soft-line);border-radius:16px;background:#1a1a18}
+.vg-parts-list>li.done{border-color:#d3ee9666}
+.vg-pp-head{display:flex;align-items:center;justify-content:flex-start;gap:var(--s3);text-align:left}
+.vg-pp-head strong{line-height:1.3;text-align:left}
+.vg-part-tick{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#2a2a27;font-size:.8125rem;font-weight:700}
+.vg-parts-list>li.done .vg-part-tick{background:var(--primary);color:#0b0b0b}
+.vg-parts-list>li p{margin:0}
+@media(prefers-reduced-motion:reduce){.vg-parts-bar span{transition:none}}
+/* After a review: a way back to the task while there is a chance left */
+.vg-retry{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;padding:var(--s4) var(--s5);border:1.5px solid var(--primary);border-radius:18px;background:#d3ee960d}
+.vg-retry p{margin:var(--s1) 0 0}
+/* Review progress while the AI checks clips and photos */
+.vg-wait-bar{height:10px;border-radius:999px;background:#2a2a27;overflow:hidden;margin:var(--s2) 0}
+.vg-wait-bar span{display:block;height:100%;border-radius:inherit;background:var(--primary);transition:width 1s linear}
+@media(prefers-reduced-motion:reduce){.vg-wait-bar span{transition:none}}
+.vg-queued{display:grid;gap:var(--s3);justify-items:start}
+.vg-queued p{margin:0}
+/* The bouncing arrow stops while the pointer or keyboard focus is on it. */
+.scroll-cue:hover,.scroll-cue:focus-visible{animation-play-state:paused}

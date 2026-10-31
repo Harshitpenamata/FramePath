@@ -3,7 +3,7 @@ import React,{useEffect,useMemo,useState} from 'react';
 import {ArrowRight,Check,PlayCircle,X} from 'lucide-react';
 import {LessonTool} from './tools';
 import {Button} from '@/components/ui/button';
-import {questionsForVideos,type Tool} from './lessons';
+import {questionsForVideos,answerOrder,type Tool} from './lessons';
 
 // Reflect: two or three questions about the lesson and its videos, then the hands-on simulator where the
 // lesson has one. The lesson's Reflect counts as done once every question is answered right and the
@@ -15,12 +15,11 @@ const loaders:Record<string,()=>Promise<{default:Bank}>>={B:()=>import('./reflec
 function bankFor(moduleId:string){const k=moduleId[0];return banks[k]||=loaders[k]?.().then(m=>m.default)??Promise.resolve({})}
 export const simulatorKinds=['exposure','whitebalance','mix','frame'];
 
-// The right answer is stored first; each question shows its answers in its own fixed order.
-function order(n:number,seed:string){let h=0;for(const c of seed)h=(h*31+c.charCodeAt(0))|0;const out=[...Array(n).keys()];for(let i=n-1;i>0;i--){h=(h*1103515245+12345)|0;const j=Math.abs(h)%(i+1);[out[i],out[j]]=[out[j],out[i]]}return out}
+// The right answer is stored first; answerOrder gives each question its own fixed, even display order.
 
 function Question({item,n,total,onRight}:{item:ReflectQuestion;n:number;total:number;onRight:()=>void}){
  const [picked,setPicked]=useState<number|null>(null);
- const shown=useMemo(()=>order(item.options.length,item.q),[item]);
+ const shown=useMemo(()=>answerOrder(item.options.length,item.q),[item]);
  const right=picked===0;
  return <div className="vg-tool">
   <p className="vg-tool-prompt">{item.q}</p>
@@ -61,7 +60,7 @@ export function TestOut({moduleId,moduleKey,lessonCount,videosFor,mutate,busy,re
  if(!open)return <div className="vg-testout"><span><strong>Already know this module?</strong> Answer all its questions. Get every one right first time and you can skip to the task.</span><button type="button" className="text-link" onClick={()=>setOpen(true)}>Answer the questions</button></div>;
  return <form className="vg-testout open" onSubmit={async e=>{e.preventDefault();const answers:Record<number,number[]>={};sets!.forEach((qs,i)=>{if(qs.length)answers[i]=qs.map((_,n)=>picks[i+'-'+n])});await mutate('lesson_testout',{key:moduleKey,answers})}}>
   <h3>Quick check: {total||'…'} questions</h3><p className="small">One try a day. No hints until you send your answers.</p>
-  {!sets?<p className="small" role="status">Loading questions…</p>:sets.map((qs,i)=>qs.map((q,n)=>{const id=i+'-'+n,shown=order(q.options.length,q.q);return <fieldset key={id} className="vg-testout-q"><legend>{q.q}</legend>
+  {!sets?<p className="small" role="status">Loading questions…</p>:sets.map((qs,i)=>qs.map((q,n)=>{const id=i+'-'+n,shown=answerOrder(q.options.length,q.q);return <fieldset key={id} className="vg-testout-q"><legend>{q.q}</legend>
    {shown.map((o,k)=><label key={o}><input type="radio" name={'to-'+id} checked={picks[id]===o} onChange={()=>setPicks(p=>({...p,[id]:o}))}/><span className="vg-letter" aria-hidden="true">{'ABCDE'[k]}</span><span>{q.options[o][0]}</span></label>)}</fieldset>}))}
   <div className="button-row"><Button type="submit" disabled={busy||!sets||answered<total}>{busy?'Checking…':`Check my answers (${answered} of ${total})`}</Button><Button type="button" variant="outline" onClick={()=>setOpen(false)}>Not now</Button></div>
  </form>;

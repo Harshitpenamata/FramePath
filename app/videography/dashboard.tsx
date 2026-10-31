@@ -5,8 +5,9 @@ import {Button} from '@/components/ui/button';
 import {toast} from 'sonner';
 import {useLearning,Panel,Go,Badge,isExplore,Photo,confirmAction} from '../ui';
 import './dashboard.css';
-import {stageOrder,liveSkills,behindBy,moduleArea,levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,defaultPlanTitle,courseId,courseNames,type Programme,type Level,type Mode} from './programme';
+import {stageOrder,liveSkills,behindBy,moduleArea,levelNames,levelSummary,levels,skillAreas,interestFor,pathwayOutcomes,finalProject,modulesFor,moduleKey,moduleLesson,projectLabel,freeModuleCount,isFreeModule,maxHoursPerWeek,addDays,today,schedule,maxPlans,plansOf,planTitle,defaultPlanTitle,courseId,courseNames,type Programme,type Level,type Mode} from './programme';
 import {formatDate} from './start';
+import {lessonsFor,resumeLesson,continueHref} from './lessons';
 import {ReportProblem} from '../support';
 import {track} from '../track';
 
@@ -109,11 +110,11 @@ function TodayCard(){
  const {s}=useLearning();const p=s.programme as Programme|undefined;if(!p)return null;
  const mods=modulesFor(p.level),i=mods.findIndex((_,k)=>!s.progress?.[moduleKey(p.level,k)]);
  if(i<0)return <section className="db-today"><span className="kicker">Today</span><h2>You’ve finished every module of {planTitle(p)}.</h2><Go href={'/workspace/'+p.id}>See your plan<ArrowRight size={18}/></Go></section>;
- const m=mods[i],key=moduleKey(p.level,i),marks=s.lessonProgress?.[key]||{},lesson=m.topics.findIndex((_:string,n:number)=>!marks[n]?.t);
+ const m=mods[i],key=moduleKey(p.level,i),marks=s.lessonProgress?.[key]||{},lessons=lessonsFor(m.id,p.primaryPathway),lesson=resumeLesson(m.id,p.primaryPathway,marks);
  const late=behindBy(p,s.progress),minutes=Math.round(m.hours*60/(m.topics.length+1)/5)*5;
  const href=`/explore/video-${p.level}/${i}`+(lesson<0?'?tab=make':`?tab=watch&lesson=${lesson+1}`);
  return <section className="db-today"><span className="kicker">Today · {planTitle(p)}</span>
-  <h2>{lesson<0?<>Hand in: {m.taskName}</>:<>Lesson {lesson+1} of {m.topics.length}: {m.topics[lesson]}</>}</h2>
+  <h2>{lesson<0?<>Hand in: {m.taskName}</>:<>Lesson {lesson+1} of {lessons.length}: {lessons[lesson].title}</>}</h2>
   <p className="small">{m.id} · {m.title} · about {lesson<0?Math.round(m.hours*60/(m.topics.length+1)/5)*5:minutes} min{late?<> · <a className="text-link" href={'/workspace/'+p.id}>{late.days} {late.days===1?'day':'days'} behind: update your dates</a></>:null}</p>
   <Go href={href} onClick={()=>track('today_clicked',{module:key,lesson:lesson+1})}>{lesson<0?'Go to the task':'Start this lesson'}<ArrowRight size={18}/></Go>
  </section>;
@@ -162,13 +163,19 @@ export function PlanPage({id}:{id:string}){
  return <ProgrammeDashboard/>;
 }
 
+// A progress ring: filled share of value/total, with the count in the middle.
+function Ring({value,total,label}:{value:number;total:number;label:string}){
+ const r=46,c=2*Math.PI*r,share=total?value/total:0;
+ return <svg viewBox="0 0 120 120" className="dash-ring" role="img" aria-label={label}><circle cx="60" cy="60" r={r} className="track"/><circle cx="60" cy="60" r={r} className="fill" strokeDasharray={`${c*share} ${c}`} transform="rotate(-90 60 60)"/><text x="60" y="58" textAnchor="middle" className="n">{value}<tspan className="of">/{total}</tspan></text><text x="60" y="80" textAnchor="middle" className="u">modules</text></svg>;
+}
+
 function ProgrammeDashboard(){
  const {s,user,loaded,mutate,busy}=useLearning();
  // The latest AI review of each module, so skill levels and suggestions keep up with the learner.
  const [byModule,setByModule]=useState<Record<string,any>>({});
  React.useEffect(()=>{if(user)fetch('/api/review?all=video').then(r=>r.ok?r.json():{reviews:{}}).then((d:any)=>{const out:Record<string,any>={};for(const r of Object.values(d.reviews||{}) as any[])if(r.lessonKey&&(!out[r.lessonKey]||out[r.lessonKey].createdAt<r.createdAt))out[r.lessonKey]={...r,ratings:r.review?.ratings||r.review?.criteria?.map((c:any)=>c.rating)||[]};setByModule(out)}).catch(()=>{})},[user]);
  const [hours,setHours]=useState<number|null>(null);
- const [upgrading,setUpgrading]=useState(false);
+ const [upgrading,setUpgrading]=useState(false),[editing,setEditing]=useState(false);
  if(!loaded)return <Panel><p role="status">Opening your plan…</p></Panel>;
  const p:Programme|undefined=s.programme;
  if(!p)return <Panel className="vg-empty"><span className="eyebrow">MY COURSES</span><h1>{user?'Build your learning pathway.':'Start your learning pathway.'}</h1><p className="lede">Pick what you like to film, answer 12 quick questions and set your time. Your report will show here.</p><div className="button-row"><Go href="/start">Start with Videography</Go></div></Panel>;
@@ -185,38 +192,67 @@ function ProgrammeDashboard(){
  const rank:Record<Mode,number>={free:0,self:1,mentor:2},current:Mode=paid?'self':'free';
  const shown=decided?modes.filter(m=>rank[m.id]>rank[current]):modes;
  const preview=(hours:number)=>schedule(p.level,hours,p.schedule.startDate,p.schedule.daysPerWeek);
- return <div className="vg-dashboard">
+  const hoursDone=mods.reduce((n,m,i)=>n+(s.progress?.[moduleKey(p.level,i)]?m.hours:0),0),late=behindBy(p,s.progress);
+  const elapsed=Math.max(0,Math.min(1,(Date.parse(today())-Date.parse(p.schedule.startDate))/Math.max(1,Date.parse(p.schedule.endDate)-Date.parse(p.schedule.startDate))));
+  const next=nextIndex>=0?mods[nextIndex]:null,nextHref=nextIndex>=0?continueHref(`/explore/${'video-'+p.level}/${nextIndex}`,mods[nextIndex].id,p.primaryPathway,s.lessonProgress?.[moduleKey(p.level,nextIndex)]):'';
+  const tl=stageTimeline(p);
+  const band=(score:number)=>score>=70?'Advanced':score>=40?'Intermediate':'Beginner';
+  return <div className="vg-dashboard dash">
   <div className="breadcrumbs db-crumbs"><a href="/workspace">My courses</a><span>/</span><span>{planTitle(p)}</span></div>
-  <section className="db-hero">
-   <div className="db-hero-text"><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><PlanName p={p}/><p className="lede">{levelSummary[p.level]}</p>
-    <p className="db-meta"><PlayCircle size={18}/>{done}/{mods.length} modules done · {p.schedule.totalHours} hours · {formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</p>
-    {/* One-line button labels: the module's name sits above the button. */}
-    {nextIndex>=0&&<p className="db-next">Next up: <strong>{moduleLesson(mods[nextIndex],projectLabel(p)).title}</strong></p>}
-    <div className="button-row">{nextIndex>=0&&<Go href={`/explore/${'video-'+p.level}/${nextIndex}`}>{done?'Continue':'Start'}<ArrowRight size={18}/></Go>}
-     {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
-     <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div>
-   </div>
-   <Photo slot="project" className="db-hero-photo"/>
-  </section>
-  {/* Progress, not navigation: finished stages are filled, the current one is outlined, the rest wait. */}
-  {(()=>{const rows=stageOrder.map(st=>{const ms=mods.map((m,k)=>({m,k})).filter(x=>x.m.stageLabel===st);return {st,ms,all:ms.length>0&&ms.every(x=>s.progress?.[moduleKey(p.level,x.k)])}}).filter(r=>r.ms.length);
-   const now=rows.findIndex(r=>!r.all);
-   return <ol className="db-stages" aria-label="Your progress through the stages">{rows.map((r,i)=><li key={r.st} className={r.all?'done':i===now?'now':''} aria-current={i===now?'step':undefined}>
-    <span className="display">{String(i+1).padStart(2,'0')}</span><strong>{r.st}</strong>
-    {r.all?<span className="db-stage-mark"><Check size={16}/><span className="sr-only">Finished</span></span>:i===now?<span className="db-stage-now">Now</span>:null}</li>)}</ol>})()}
+  <header className="dash-head">
+   <div><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><PlanName p={p}/><p className="lede">{levelSummary[p.level]}</p></div>
+   <div className="button-row">{next&&<Go href={nextHref}>{done?'Continue':'Start'}<ArrowRight size={18}/></Go>}
+    {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
+    <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div>
+  </header>
+  <div className="dash-grid">
+   <section className="dash-tile span-3" aria-label="Progress"><h2 className="dash-k">Progress</h2>
+    <Ring value={done} total={mods.length} label={`${done} of ${mods.length} modules done`}/><p className="dash-sub">{done===mods.length?'Every module finished':`${mods.length-done} to go`}</p></section>
+   <section className="dash-tile span-3" aria-label="Hours"><h2 className="dash-k">Hours</h2>
+    <p className="dash-num"><strong>{hoursDone}</strong><span> / {p.schedule.totalHours} h</span></p>
+    <div className="dash-bar" role="img" aria-label={`${hoursDone} of ${p.schedule.totalHours} hours done`}><span style={{width:Math.round(hoursDone/p.schedule.totalHours*100)+'%'}}/></div>
+    <p className="dash-sub">{p.schedule.hoursPerWeek} h a week · about {p.schedule.minutesPerDay} min a day, {p.schedule.daysPerWeek} days</p></section>
+   <section className="dash-tile span-3" aria-label="Dates"><h2 className="dash-k">Dates</h2>
+    <p className="dash-num"><strong>{p.schedule.weeks}</strong><span> {p.schedule.weeks===1?'week':'weeks'}</span></p>
+    <div className="dash-bar dash-time" role="img" aria-label={`${formatDate(p.schedule.startDate)} to ${formatDate(p.schedule.endDate)}`}><span style={{width:Math.round(elapsed*100)+'%'}}/></div>
+    <p className="dash-sub">{formatDate(p.schedule.startDate)} → {formatDate(p.schedule.endDate)}</p>
+    <p className={'dash-chip '+(late?'late':'ok')}>{late?`${late.days} ${late.days===1?'day':'days'} behind`:'On track'}</p>
+    <button type="button" className="vg-link" aria-expanded={editing} onClick={()=>setEditing(e=>!e)}>{editing?'Close':'Change hours or start date'}</button></section>
+   <section className="dash-tile span-3 dash-next" aria-label="Next up"><h2 className="dash-k">Next up</h2>
+    {next?<><p className="dash-next-id">{next.id} · {next.stageLabel}</p><p className="dash-next-title">{moduleLesson(next,projectLabel(p)).title}</p><p className="dash-sub">{next.hours} h · Task: {next.taskName}</p><Go href={nextHref}>{done?'Continue':'Start'}<ArrowRight size={18}/></Go></>
+     :<><p className="dash-next-title">All modules finished</p><p className="dash-sub">Well done. Look back at your work in My Work.</p></>}</section>
 
-  <PlanNudges p={p} live={live} reviews={byModule} mods={mods}/>
-  <details className="sg-acc" open><summary><Target size={20}/>What you’ll be able to do</summary><PathwayOutcome p={p}/></details>
-  <details className="sg-acc"><summary><BookOpen size={20}/>Your learning plan</summary><p>{overview(p)}</p><PathwayInfographic p={p}/></details>
-  <details className="sg-acc"><summary><Sparkles size={20}/>Your level in each skill</summary><HeatMap p={p} live={live}/><p className="small">Starts from your 12 answers, then each AI-reviewed task in a skill counts as much again.</p></details>
-  <details className="sg-acc"><summary><CalendarClock size={20}/>Your dates</summary>
-    <div className="vg-dates"><div><span className="small">Start</span><strong>{formatDate(p.schedule.startDate)}</strong></div><ArrowRight/><div><span className="small">End</span><strong>{formatDate(p.schedule.endDate)}</strong></div></div>
-    <p className="small">{p.schedule.totalHours} hours · {p.schedule.hoursPerWeek} h/week (recommended {p.schedule.recommendedHoursPerWeek}) · {p.schedule.weeks} weeks · ≈ {p.schedule.minutesPerDay} min/day over {p.schedule.daysPerWeek} days</p>
+   <div className="dash-wide"><PlanNudges p={p} live={live} reviews={byModule} mods={mods}/></div>
+   {editing&&<section className="dash-tile span-12 dash-edit" aria-label="Change your dates">
     <label className="vg-field">Hours per week: <strong>{hours??p.schedule.hoursPerWeek} h</strong> → ends {formatDate(preview(hours??p.schedule.hoursPerWeek).endDate)}
-     <input type="range" min={p.schedule.recommendedHoursPerWeek} max={maxHoursPerWeek} value={hours??p.schedule.hoursPerWeek} disabled={busy} onChange={e=>setHours(Number(e.target.value))}/></label>
+     <input type="range" min={p.schedule.recommendedHoursPerWeek} max={maxHoursPerWeek} value={hours??p.schedule.hoursPerWeek} disabled={busy} onChange={e=>setHours(Number(e.target.value))}/><span className="small">Recommended: {p.schedule.recommendedHoursPerWeek} h a week. You can add hours, not go below.</span></label>
     {hours!==null&&hours!==p.schedule.hoursPerWeek&&<div className="button-row"><Button size="sm" disabled={busy} onClick={async()=>{if(await update({hoursPerWeek:hours}))setHours(null)}}>Save {hours} h/week</Button><Button size="sm" variant="outline" onClick={()=>setHours(null)}>Cancel</Button></div>}
-    <StartDate p={p} busy={busy} update={update}/>
-  </details>
+    <StartDate p={p} busy={busy} update={update}/></section>}
+
+   <section className="dash-tile span-7" aria-label="Your level in each skill"><h2 className="dash-k">Your level in each skill</h2>
+    <ul className="dash-skills">{skillAreas.map(a=>{const l=live[a.id],gain=l.evidence?l.now-l.start:0;return <li key={a.id}>
+     <span className="dash-skill-name">{a.label}</span>
+     <span className="dash-skill-bar" role="img" aria-label={`${a.label}: ${l.now} out of 100, ${band(l.now)} level`}><i style={{width:l.now+'%'}}/><b style={{left:'40%'}}/><b style={{left:'70%'}}/></span>
+     <span className="dash-skill-val"><strong>{l.now}</strong><small>{band(l.now)}</small>{gain!==0&&<em className={gain>0?'up':'down'}>{gain>0?'+':''}{gain}</em>}</span></li>})}</ul>
+    <p className="dash-legend" aria-hidden="true"><i/><span>Beginner</span><span>Intermediate · 40+</span><span>Advanced · 70+</span><i/></p>
+    <p className="small">Starts from your 12 answers. Each AI-reviewed task in a skill counts as much again.</p></section>
+
+   <section className="dash-tile span-5" aria-label="Your stages"><h2 className="dash-k">Your stages</h2>
+    <div className="dash-stack" aria-hidden="true">{tl.filter(x=>x.hours).map(x=><span key={x.stage} style={{flexGrow:x.hours,background:stageColor[x.stage]}}/>)}</div>
+    <ol className="dash-stages">{tl.filter(x=>x.modules.length).map(x=>{const dn=x.modules.filter(m=>s.progress?.[moduleKey(p.level,mods.findIndex(y=>y.id===m.id))]).length,all=dn===x.modules.length;return <li key={x.stage} className={all?'done':''}>
+     <span className="vg-dot" style={{background:stageColor[x.stage]}}/><strong>{x.stage}</strong><span className="small">{dn}/{x.modules.length} · {x.hours} h · wk {x.startWeek}{x.endWeek>x.startWeek?'–'+x.endWeek:''}</span>{all&&<Check size={14} aria-label="Finished"/>}</li>})}</ol></section>
+
+   <section className="dash-tile span-12" aria-label="Your modules"><h2 className="dash-k">Your modules · {levelNames[p.level]}</h2>
+    <ol className="dash-mods">{mods.map((m,i)=>{const key=moduleKey(p.level,i),dn=!!s.progress?.[key],open=isFreeModule(key)||isExplore(s)||['paid','active'].includes(s.craft?.status);return <li key={m.id} className={(dn?'done ':'')+(i===nextIndex?'now':'')}>
+     <a href={`/explore/video-${p.level}/${i}`}><span className="dash-mod-id" style={{background:stageColor[m.stageLabel]}}>{dn?<Check size={14}/>:m.id}</span>
+      <span className="dash-mod-title">{moduleLesson(m,projectLabel(p)).title}</span>
+      <span className="dash-mod-meta">{m.stageLabel} · {m.hours} h</span>
+      <span className="dash-mod-task">{dn?'Done':open?'Task open':<><Lock size={11}/> Task in Self-paced</>}</span></a></li>})}</ol></section>
+
+   <section className="dash-tile span-12" aria-label="What you will be able to do"><h2 className="dash-k">What you’ll be able to do</h2>
+    <p className="dash-lede">By the end, you will make {pathwayOutcomes[p.primaryPathway]}, and {finalProject[p.level]}.</p>
+    <ul className="dash-outcomes">{['Ideas','Planning','Filming','Editing'].map(st=>mods.filter(m=>m.stageLabel===st).sort((x,y)=>y.hours-x.hours)[0]).filter(Boolean).map(m=><li key={m.id}><Check size={16}/><span><strong>{m.stageLabel}</strong>{m.outcome}</span></li>)}</ul></section>
+  </div>
 
   {(!decided||upgrading)&&shown.length>0&&<section id="vg-modes"><span className="eyebrow">How you learn</span><h2>{decided?'Upgrade your learning':'How do you want to learn?'}</h2>
    <div className="vg-modes">{shown.map(m=>{const active=m.id==='self'?paid:true;const chosen=p.mode===m.id;return <Panel key={m.id} className={'vg-mode '+(chosen?'chosen':'')}><div className="vg-mode-body">
@@ -229,7 +265,6 @@ function ProgrammeDashboard(){
    {decided&&<Button variant="ghost" onClick={()=>setUpgrading(false)}>Not now</Button>}
   </section>}
 
-  <ModuleList p={p}/>
   <div className="db-foot-actions"><ReportProblem planId={p.id} variant="ghost" label="Report a problem with this plan"/><DeletePlan p={p}/></div>
  </div>;
 }
