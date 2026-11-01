@@ -417,3 +417,6 @@ main:has(>.vg-lesson),main:has(.vg-lesson){padding-top:24px}
 .vg-queued p{margin:0}
 /* The bouncing arrow stops while the pointer or keyboard focus is on it. */
 .scroll-cue:hover,.scroll-cue:focus-visible{animation-play-state:paused}
+/* What the module teaches, under its title */
+.mv-goal{margin:var(--s2) 0 0;max-width:70ch;font-size:1.0625rem;color:var(--foreground)}
+.mv-goal strong{color:var(--primary)}

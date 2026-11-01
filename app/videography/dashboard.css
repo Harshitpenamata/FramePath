@@ -198,3 +198,7 @@
 @media(max-width:1100px){.dash-tile.span-3{grid-column:span 6}.dash-tile.span-5,.dash-tile.span-7{grid-column:span 12}}
 @media(max-width:640px){.dash-tile.span-3{grid-column:span 6}.dash-tile.dash-next{grid-column:span 12;order:-1}.dash-tile{padding:var(--s4)}.dash-ring{width:104px;height:104px}.dash-num strong{font-size:2.25rem}.dash-mods{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}.dash-mods a{padding:var(--s3)}.dash-mod-title{font-size:.9375rem}.dash-skills li{grid-template-columns:1fr auto}.dash-skill-bar{grid-column:1/-1;order:3}.dash-legend{display:none}.dash-stages li{grid-template-columns:auto minmax(0,1fr) auto}.dash-stages .small{grid-column:2/-1}}
 @media(prefers-reduced-motion:reduce){.dash-ring .fill{transition:none}}
+/* What the pathway leads to, under its name */
+.dash-goal{display:flex;gap:var(--s3);align-items:flex-start;margin:var(--s4) 0 0;max-width:62ch;padding:var(--s3) var(--s4);border-radius:14px;background:#d3ee960f;border:1px solid #d3ee9640}
+.dash-goal svg{flex:none;margin-top:3px;color:var(--primary)}
+.dash-goal strong{color:var(--primary)}

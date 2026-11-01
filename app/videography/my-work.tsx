@@ -5,7 +5,7 @@ import {toast} from 'sonner';
 import {Button} from '@/components/ui/button';
 import {useLearning,Panel,Go,Action,CheckField,Gate,PageHead,DateText,confirmAction} from '../ui';
 import {moduleHref} from '../learning-rules';
-import {levelNames,modulesFor,moduleKey,type Level} from './programme';
+import {levelNames,modulesFor,moduleKey,plansOf,planTitle,parseVideoKey,courseNames,type Level,type Programme} from './programme';
 import {useVideoReviews,WorkFolders} from './work-folders';
 import './studio.css';
 
@@ -43,7 +43,7 @@ function StatusCard({level,reviews}:{level:Level;reviews:Record<string,any>|null
   <div className="st-stats">
    <div><span className="st-label">Modules</span><strong>{pad(done)}<small> / {pad(mods.length)}</small></strong><span className="small">finished</span></div>
    <div><span className="st-label">Tasks</span><strong>{pad(handed)}<small> / {pad(mods.length)}</small></strong><span className="small">handed in so far</span></div>
-   <div><span className="st-label">Score</span><strong>{avg??'—'}<small>{avg!=null?' / 100':''}</small></strong><span className="st-bar" aria-hidden="true"><span style={{width:(avg??0)+'%'}}/></span><span className="small">average AI score</span></div>
+   <div><span className="st-label">Score</span><strong>{avg??'—'}<small>{avg!=null?' / 100':''}</small></strong><span className="st-bar" aria-hidden="true"><span style={{width:(avg??0)+'%'}}/></span><span className="small">average review score</span></div>
    <div><span className="st-label">Hours</span><strong>{hoursDone}<small> / {hoursAll}</small></strong><span className="small">learning time done</span></div>
   </div>
  </section>;
@@ -66,8 +66,8 @@ function ModuleCard({level,index,reviews,ids,setIds,isNext}:{level:Level;index:n
  return <article className="st-card st-module done">
   {head}
   <div className="st-ai">
-   <div className="st-row"><span><Sparkles size={15}/> AI feedback / score</span>{review?.total!=null&&<strong>{Math.round(review.total)}<small>/100</small></strong>}</div>
-   <p className="small">{review?review.summary:'No AI review for this piece yet.'}</p>
+   <div className="st-row"><span><Sparkles size={15}/> Review and score</span>{review?.total!=null&&<strong>{Math.round(review.total)}<small>/100</small></strong>}</div>
+   <p className="small">{review?review.summary:'No Framepath review for this piece yet.'}</p>
    <a className="text-link" href={moduleHref(key)+'?tab=feedback'}>{review?'See detailed review':'Get it in Reflect'} →</a>
   </div>
   <div className="st-block"><span className="st-label">Hand-ins</span>
@@ -109,31 +109,54 @@ function PortfolioPanel({ids}:{ids:string[]}){
    <span className="small">Sharing: <strong>{sharing}</strong>{dirty?' · save your changes first':''}</span>
    <Go href="/my-portfolio">Open your portfolio page →</Go>
   </div>
-  <p className="small">This is practice work. AI reviews are not official qualifications.</p>
+  <p className="small">This is practice work. Framepath reviews are not official qualifications.</p>
  </section>;
 }
 
+// My Work starts like My courses: one card per plan. Opening a plan (?plan=<id>) shows its status and module grid.
+// A link from a module (?from=<module key>) opens the plan that module belongs to and scrolls to its card.
 export function MyWorkStudio(){
  const {s,user,loaded}=useLearning();
  const reviews=useVideoReviews();
  const [ids,setIds]=useState<string[]>(s.portfolio.ids||[]);
  useEffect(()=>{setIds(s.portfolio.ids||[])},[(s.portfolio.ids||[]).join()]);
- const level:Level=s.programme?.level||'beginner';
- const mods=modulesFor(level),nextIndex=mods.findIndex((_,i)=>!s.submissions.some((p:any)=>p.key===moduleKey(level,i)&&p.handIn));
- const other=s.submissions.filter((p:any)=>!String(p.key).startsWith('video-'+level));
- // Opening from a module ("See it in My Work") scrolls to that module's card.
- useEffect(()=>{const from=new URLSearchParams(window.location.search).get('from');if(from)document.getElementById('mod-'+from)?.scrollIntoView({block:'start'})},[]);
+ const plans=plansOf(s) as Programme[];
+ const [planId,setPlanId]=useState<string|null>(null);
+ useEffect(()=>{if(!loaded)return;const q=new URLSearchParams(window.location.search),id=q.get('plan'),from=q.get('from');
+  if(id){setPlanId(id);return}
+  const lv=from?parseVideoKey(from)?.level:undefined;const p=lv&&(plans.find(x=>x.level===lv&&x.id===s.programme?.id)||plans.find(x=>x.level===lv));if(p)setPlanId(p.id||null)},[loaded]);
+ const plan=plans.find(x=>x.id===planId)||null;
+ useEffect(()=>{const from=new URLSearchParams(window.location.search).get('from');if(from&&plan)document.getElementById('mod-'+from)?.scrollIntoView({block:'start'})},[plan?.id]);
+ const planLevels=new Set(plans.map(x=>'video-'+x.level+'-'));
+ const other=s.submissions.filter((x:any)=>![...planLevels].some(pre=>String(x.key).startsWith(pre)));
  return <div className="st-page">
   <WorkSwitch current="work"/>
-  <div className={'st-hero'+(loaded&&!user?' split':'')}><PageHead eyebrow="YOUR LEARNING SPACE" title="Everything you’ve handed in.">A clear view of your progress, your feedback, and the work you’re ready to share.</PageHead>
+  <div className={'st-hero'+(loaded&&!user?' split':'')}><PageHead eyebrow="YOUR LEARNING SPACE" title={plan?planTitle(plan):'Everything you’ve handed in.'}>{plan?<><a className="text-link" href="/portfolio">All my work</a> · {levelNames[plan.level]} level</>:'Pick a course to see its modules, your hand-ins and their reviews.'}</PageHead>
   {loaded&&!user&&<Gate>{null}</Gate>}</div>
   {(!loaded||user)&&<Gate>
-   <StatusCard level={level} reviews={reviews}/>
-   <section className="st-modules"><div className="st-row"><div><h2>Your modules</h2></div><span className="small">Every hand-in, all in one place.</span></div>
-    <div className="st-module-grid">{mods.map((_,i)=><div id={'mod-'+moduleKey(level,i)} key={i}><ModuleCard level={level} index={i} reviews={reviews} ids={ids} setIds={setIds} isNext={i===nextIndex}/></div>)}</div>
-   </section>
-   {other.length>0&&<section className="st-other"><h2>Other work</h2><p className="small">Hand-ins from other levels and earlier practice.</p><WorkFolders ids={ids} setIds={setIds} keys={[...new Set<string>(other.map((p:any)=>p.key))]}/></section>}
+   {plan?<PlanWork plan={plan} reviews={reviews} ids={ids} setIds={setIds}/>
+    :<section className="st-plans" aria-label="Your courses">{plans.length?plans.map(x=>{const mods=modulesFor(x.level),keys=mods.map((_,i)=>moduleKey(x.level,i));
+      const handed=keys.filter(k=>s.submissions.some((q:any)=>q.key===k&&q.handIn)).length,done=keys.filter(k=>s.progress?.[k]).length;
+      return <a key={x.id} className={'st-plan'+(x.id===s.programme?.id?' open':'')} href={'/portfolio?plan='+x.id}>
+       <span className="st-label">{courseNames[x.course]||x.course} · {levelNames[x.level]}</span><strong>{planTitle(x)}</strong>
+       <span className="st-plan-counts"><span><b>{handed}</b> of {mods.length} tasks handed in</span><span><b>{done}</b> of {mods.length} modules done</span></span>
+       <span className="st-bar" aria-hidden="true"><span style={{width:Math.round(handed/mods.length*100)+'%'}}/></span>
+       <span className="st-plan-open">Open its work<ArrowRight size={16}/></span></a>})
+     :<Panel className="empty"><h2>No courses yet.</h2><p>Make a plan in My courses. Your hand-ins will be kept here, course by course.</p><Go href="/workspace">My courses</Go></Panel>}</section>}
+   {!plan&&other.length>0&&<section className="st-other"><h2>Other work</h2><p className="small">Hand-ins from earlier practice.</p><WorkFolders ids={ids} setIds={setIds} keys={[...new Set<string>(other.map((x:any)=>x.key))]}/></section>}
    <PortfolioPanel ids={ids}/>
   </Gate>}
  </div>;
+}
+
+// One plan's work: its status, then every module with its hand-ins and reviews.
+function PlanWork({plan,reviews,ids,setIds}:{plan:Programme;reviews:Record<string,any>|null;ids:string[];setIds:(fn:(p:string[])=>string[])=>void}){
+ const {s}=useLearning();
+ const level=plan.level,mods=modulesFor(level),nextIndex=mods.findIndex((_,i)=>!s.submissions.some((x:any)=>x.key===moduleKey(level,i)&&x.handIn));
+ return <>
+  <StatusCard level={level} reviews={reviews}/>
+  <section className="st-modules"><div className="st-row"><div><h2>Your modules</h2></div><span className="small">Every hand-in, all in one place.</span></div>
+   <div className="st-module-grid">{mods.map((_,i)=><div id={'mod-'+moduleKey(level,i)} key={i}><ModuleCard level={level} index={i} reviews={reviews} ids={ids} setIds={setIds} isNext={i===nextIndex}/></div>)}</div>
+  </section>
+ </>;
 }

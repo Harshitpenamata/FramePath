@@ -123,3 +123,13 @@
 .st-more{margin-top:var(--s2)}
 .st-more>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:.875rem;font-weight:600;color:var(--foreground)}
 .st-more>.st-handins{margin-top:var(--s2)}
+/* My Work: one card per course plan, like My courses */
+.st-plans{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:var(--s4)}
+.st-plan{display:grid;gap:var(--s3);align-content:start;padding:var(--s5);border:var(--soft-line);border-radius:var(--radius);color:var(--foreground);text-decoration:none;background:var(--surface-raised)}
+.st-plan:hover,.st-plan:focus-visible{border-color:var(--foreground)}
+.st-plan.open{border-color:var(--primary)}
+.st-plan strong{font-size:1.375rem;line-height:1.2}
+.st-plan-counts{display:grid;gap:4px;color:var(--muted-foreground);font-size:.9375rem}
+.st-plan-counts b{color:var(--foreground)}
+.st-plan-open{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--primary)}
+

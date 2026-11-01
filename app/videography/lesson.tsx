@@ -70,7 +70,8 @@ export function VideoLesson({moduleKey:key}:{moduleKey:string}){
   <div className="breadcrumbs"><a href="/workspace">My courses</a><span>/</span><a href={'/workspace/'+own!.id}>{planTitle(own!)}</a></div>
   {/* Video-first module page (23 Oct 2026): a compact title, then one toolbar with the tabs on the left and
       where this module sits in making a video on the right, so the player fits in the first screen. */}
-  <header className="mv-head"><h1>{lesson.title}</h1><p className="ls-meta">Module {parsed.index+1} of {mods.length} <span>·</span> {parsed.module.hours} h <span>·</span> {parsed.module.stageLabel}</p></header>
+  <header className="mv-head"><h1>{lesson.title}</h1><p className="ls-meta">Module {parsed.index+1} of {mods.length} <span>·</span> {parsed.module.hours} h <span>·</span> {parsed.module.stageLabel}</p>
+   {parsed.module.outcome&&<p className="mv-goal"><strong>You’ll be able to:</strong> {parsed.module.outcome.replace(/^./,(c:string)=>c.toLowerCase())}</p>}</header>
   <Tabs value={tab} onValueChange={setTab}>
    <div className="mv-toolbar">
     <PathwayStrip current={parsed.module.stageLabel} done={stagesDone}/>
@@ -94,7 +95,7 @@ function TaskFaq({moduleId}:{moduleId:string}){
   ['What exactly do I hand in?',<p>{f.handIn}</p>],
   ['Common mistakes',<ul>{f.mistakes.map(x=><li key={x}>{x}</li>)}</ul>],
   ['What if I don’t have the gear or the people?',<p>{noGear}</p>],
-  ['Can I hand in again?',<p>Yes. Each hand-in is saved as a new piece in My Work, so nothing is lost. Each module includes 2 AI reviews, so read the review before you try again.</p>],
+  ['Can I hand in again?',<p>Yes. Each hand-in is saved as a new piece in My Work, so nothing is lost. Each module includes 2 Framepath reviews, so read the review before you try again.</p>],
  ];
  return <section className="vg-task-faq" aria-labelledby="task-faq-title"><h3 id="task-faq-title">Before you start</h3>
   {qs.map(([q,a],i)=><details key={q} open={i<2}><summary>{q}<ChevronDown size={16} aria-hidden/></summary><div>{a}</div></details>)}
@@ -111,7 +112,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
  const entitled=canPractise(s,key);
  const handedIn=s.submissions.filter((x:any)=>x.key===key).length;
  const selfCheck=needsSelfCheck(key),missing=handInMissing(m,toHandIn(draft,m.id),selfCheck);
- if(!entitled)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Choose Self-paced to do this task.</h2><p>On the Free plan, only the tasks in the first two modules are open. Choose the Self-paced plan (₹999/year) to unlock this task and every task after it, with AI reviews and your portfolio. You can still watch this module for free.</p><div className="button-row"><Go href={'/membership?return_to='+encodeURIComponent(moduleHref(key)+'?tab=task')}>Choose Self-paced</Go><Go outline href="/mentors">Learn with a mentor</Go></div></Panel>;
+ if(!entitled)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Choose Self-paced to do this task.</h2><p>On the Free plan, only the tasks in the first two modules are open. Choose the Self-paced plan (₹999/year) to unlock this task and every task after it, with Framepath reviews and your portfolio. You can still watch this module for free.</p><div className="button-row"><Go href={'/membership?return_to='+encodeURIComponent(moduleHref(key)+'?tab=task')}>Choose Self-paced</Go><Go outline href="/mentors">Learn with a mentor</Go></div></Panel>;
  if(blocker)return <Panel className="vg-locked"><LockKeyhole size={26}/><h2>Hand in the module before this one first.</h2><p>Finish “{moduleInfo(blocker).lesson.title}” to unlock this task. You can still watch this module.</p><Go href={moduleHref(blocker)+'?tab=task'}>Go to that module</Go></Panel>;
  // The task opens once every lesson in this module is finished (videos watched, practice tools solved).
  const dead=useDeadVideos();
@@ -139,12 +140,12 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
     {draft.files.length<maxHandInFiles&&<UploadField lessonKey={key} value={null} onUpload={(f:any)=>update({files:[...draft.files,{id:f.id,name:f.name,type:f.type}]})}/>}
     <p className="small">Need more than 3 pictures? Put them into one image (a collage), or add a link to a folder.</p>
     <label>Link to your work (YouTube, Google Drive, or a Google Doc for written work)<input type="url" value={draft.url} onChange={e=>update({url:e.target.value})} placeholder="https://"/></label>
-    <p className="small">Google Doc: click Share and set General access to “Anyone with the link”, or the AI can’t open it. YouTube videos must be Public or Unlisted.</p>
+    <p className="small">Google Doc: click Share and set General access to “Anyone with the link”, or Framepath can’t open it. YouTube videos must be Public or Unlisted.</p>
    </div>
    <label>{m.handIn==='text'?'Anything else to add? (optional)':'Tell us about your work'}<textarea rows={3} maxLength={2000} value={draft.notes} onChange={e=>update({notes:e.target.value})} placeholder="What did you make? What did you try?"/></label>
   </Panel>)}
 
-  {selfCheck&&<><Panel className="vg-form-block"><h2>2. Rate your own work</h2><p className="small">Be honest. In Feedback, you’ll see how the AI rates the same checks.</p>
+  {selfCheck&&<><Panel className="vg-form-block"><h2>2. Rate your own work</h2><p className="small">Be honest. In Feedback, you’ll see how the Framepath review rates the same checks.</p>
    {lesson.checks.map((check,i)=><fieldset key={check} className="vg-rate"><legend>{check}</legend><div>{ratingScale.map((label,v)=><button type="button" key={label} className={draft.ratings[i]===v?'selected':''} aria-pressed={draft.ratings[i]===v} onClick={()=>update({ratings:draft.ratings.map((r,j)=>j===i?v:r)})}><strong>{v}</strong>{label}</button>)}</div></fieldset>)}
   </Panel>
 
@@ -170,7 +171,7 @@ function PartsPanel({moduleKey,list,draft,update}:{moduleKey:string;list:TaskPar
      {files.length<4&&total<maxHandInFiles&&<UploadField lessonKey={moduleKey} value={null} onUpload={(f:any)=>update({partFiles:{...draft.partFiles,[p.id]:[...files,{id:f.id,name:f.name,type:f.type}]}})}/>}</div>}
   </li>})}</ol>
   <label>Or one link for your files (YouTube, Google Drive, or a Google Doc)<input type="url" value={draft.url} onChange={e=>update({url:e.target.value})} placeholder="https://"/></label>
-  <p className="small">A link counts for every file slot. Google Doc: click Share and set General access to “Anyone with the link”, or the AI can’t open it. YouTube videos must be Public or Unlisted.</p>
+  <p className="small">A link counts for every file slot. Google Doc: click Share and set General access to “Anyone with the link”, or Framepath can’t open it. YouTube videos must be Public or Unlisted.</p>
   <label>Anything else for the reviewer? (optional)<textarea rows={2} maxLength={2000} value={draft.notes} onChange={e=>update({notes:e.target.value})} placeholder="What did you try? What are you unsure about?"/></label>
  </Panel>;
 }
@@ -216,16 +217,16 @@ function FeedbackTab({moduleKey:key,requestFor,onRetry,onFinish}:{moduleKey:stri
  async function requestReview(submissionId:string){
   if(started.current===submissionId)return;started.current=submissionId;setError('');setStatus('reviewing');
   try{const r=await fetch('/api/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({lessonKey:key,submissionId,requestId:crypto.randomUUID()})});const d:any=await r.json();if(!r.ok)throw Error(d.error);await load()}
-  catch(e:any){setError(e.message||'AI review is not available right now.');started.current=''}finally{setStatus('')}
+  catch(e:any){setError(e.message||'Framepath review is not available right now.');started.current=''}finally{setStatus('')}
  }
  useEffect(()=>{if(piece)load()},[piece?.id]);
- // Straight after a hand-in, ask for the AI review automatically.
- // Only when a review is left; otherwise the learner sees why this piece has no review.
- useEffect(()=>{if(requestFor&&piece?.id===requestFor&&reviews&&allowance?.eligible&&allowance.used<allowance.limit&&!reviews.some(r=>r.submissionId===requestFor))requestReview(requestFor)},[requestFor,reviews,allowance]);
+ // The latest hand-in gets its review on its own: straight after handing in, or on opening Reflect later. Only when a
+ // review is left and none is waiting in the queue; otherwise the learner sees why this piece has no review.
+ useEffect(()=>{if(piece&&reviews&&allowance?.eligible&&allowance.used<allowance.limit&&!allowance.queued&&!reviews.some(r=>r.submissionId===piece.id))requestReview(piece.id)},[piece?.id,reviews,allowance]);
  // Pilot tracker: the learner opened their review (once per review).
  const shownId=piece?reviews?.find(r=>r.submissionId===piece.id)?.id:undefined;
  useEffect(()=>{if(shownId)track('review_opened',{module:key},shownId)},[shownId]);
- if(!piece)return <Panel className="empty"><h2>Nothing to review yet.</h2><p>Hand in your work in Task. Then your AI review shows here.</p></Panel>;
+ if(!piece)return <Panel className="empty"><h2>Nothing to review yet.</h2><p>Hand in your work in Task. Then your Framepath review shows here.</p></Panel>;
  const review=reviews?.find(r=>r.submissionId===piece.id);
  // The review of the hand-in before this one, to show what changed; and the module's lesson titles for 'Rewatch'.
  const prev=review?reviews!.find(r=>r.submissionId!==piece.id&&r.createdAt<review.createdAt):undefined;
@@ -234,28 +235,28 @@ function FeedbackTab({moduleKey:key,requestFor,onRetry,onFinish}:{moduleKey:stri
  const rated=Array.isArray(piece.selfRatings);
  return <div className="vg-reflect">
   {status&&<WaitingTips media={piece?.media||0}/>}
-  {!review&&!status&&allowance?.queued>0&&<div className="notice vg-queued" role="status"><p>Your review is waiting to run. This happens when some clips couldn’t be checked just now, or the AI is busy. It runs again on its own within the hour, or you can try now. It won’t use another review.</p>{piece&&<Button variant="outline" onClick={()=>{started.current='';requestReview(piece.id)}}><RotateCcw size={16}/>Try again now</Button>}</div>}
+  {!review&&!status&&allowance?.queued>0&&<div className="notice vg-queued" role="status"><p>Your review is waiting to run. This happens when some clips couldn’t be checked just now, or the reviewer is busy. It runs again on its own within the hour, or you can try now. It won’t use another review.</p>{piece&&<Button variant="outline" onClick={()=>{started.current='';requestReview(piece.id)}}><RotateCcw size={16}/>Try again now</Button>}</div>}
   {review?<Panel className="vg-ai-review">
-   <div className="row between"><h2><Sparkles size={20}/> AI review</h2>{(()=>{const rs=review.review.criteria.map(c=>c.rating),all=rs.every(r=>r!==null),sum=(a:(number|null)[])=>a.reduce<number>((n,r)=>n+(r||0),0),was=prev?.review.criteria.map(c=>c.rating);
+   <div className="row between"><h2><Sparkles size={20}/> Framepath review</h2>{(()=>{const rs=review.review.criteria.map(c=>c.rating),all=rs.every(r=>r!==null),sum=(a:(number|null)[])=>a.reduce<number>((n,r)=>n+(r||0),0),was=prev?.review.criteria.map(c=>c.rating);
     return all?<div className="vg-ai-score-box"><strong className="vg-ai-score">{sum(rs)}<small> of {rs.length*4}</small></strong>{was&&was.length===rs.length&&was.every(r=>r!==null)&&sum(was)!==sum(rs)&&<span className={'vg-delta '+(sum(rs)>sum(was)?'up':'down')}>{sum(rs)>sum(was)?'Up':'Down'} from {sum(was)} to {sum(rs)}</span>}</div>:<Badge>Not enough to score every check</Badge>})()}</div>
    <p>{review.review.summary}</p>
    {(()=>{const gaps=review.review.criteria.filter((c,i)=>{const mine=piece.selfRatings?.[i];return rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2});
-    return gaps.length>0?<p className="vg-gap-note"><strong>You rated {gaps.length===1?'one check':gaps.length+' checks'} differently from the reviewer.</strong> That is normal: the AI is a first look, not a verdict. The notes below say what it looked for, so you can see it for yourself.</p>:null})()}
-   <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>AI</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span></td>{rated&&<td><span className={'vg-level l'+levelOf(mine)}>{levelName(mine)}</span></td>}<td><span className={'vg-level l'+levelOf(c.rating)}>{levelName(c.rating)}</span>{(()=>{const was=prev?.review.criteria[i]?.rating;return c.rating!==null&&was!=null&&was!==c.rating?<span className={'vg-delta '+(c.rating>was?'up':'down')} title={'Last time: '+was+'/4'}>{c.rating>was?'↑':'↓'} from {was}</span>:null})()}</td></tr>})}</tbody></table>
+    return gaps.length>0?<p className="vg-gap-note"><strong>You rated {gaps.length===1?'one check':gaps.length+' checks'} differently from the reviewer.</strong> That is normal: the review is a first look, not a verdict. The notes below say what it looked for, so you can see it for yourself.</p>:null})()}
+   <table className="vg-compare"><thead><tr><th>Check</th>{rated&&<th>You</th>}<th>Framepath</th></tr></thead><tbody>{review.review.criteria.map((c,i)=>{const mine=piece.selfRatings?.[i];const gap=rated&&c.rating!==null&&mine!==undefined&&Math.abs(c.rating-mine)>=2;return <tr key={c.label}><td><strong>{c.label}</strong><span className="small">{c.feedback}</span></td>{rated&&<td><span className={'vg-level l'+levelOf(mine)}>{levelName(mine)}</span></td>}<td><span className={'vg-level l'+levelOf(c.rating)}>{levelName(c.rating)}</span>{(()=>{const was=prev?.review.criteria[i]?.rating;return c.rating!==null&&was!=null&&was!==c.rating?<span className={'vg-delta '+(c.rating>was?'up':'down')} title={'Last time: '+was+'/4'}>{c.rating>was?'↑':'↓'} from {was}</span>:null})()}</td></tr>})}</tbody></table>
    <div className="vg-review-notes"><p><strong>What worked:</strong> {review.review.strength}</p><p><strong>What to improve:</strong> {review.review.improvement}</p><p><strong>Try next (under 30 minutes):</strong> {review.review.nextStep}</p></div>
-   {canReview&&onRetry&&<div className="vg-retry"><div><strong>Want a higher score? Try the task again.</strong><p className="small">You have {allowance.limit-allowance.used} more {allowance.limit-allowance.used===1?'chance':'chances'} for an AI review on this module. Fix the one thing under “What to improve”, then hand in again.</p></div><Button onClick={onRetry}><RotateCcw size={16}/>Try the task again</Button></div>}
-   {!canReview&&allowance?.eligible&&<p className="small">You’ve used both AI reviews for this module. Your work is saved in My Work.</p>}
+   {canReview&&onRetry&&<div className="vg-retry"><div><strong>Want a higher score? Try the task again.</strong><p className="small">You have {allowance.limit-allowance.used} more {allowance.limit-allowance.used===1?'chance':'chances'} for a Framepath review on this module. Fix the one thing under “What to improve”, then hand in again.</p></div><Button onClick={onRetry}><RotateCcw size={16}/>Try the task again</Button></div>}
+   {!canReview&&allowance?.eligible&&<p className="small">You’ve used both Framepath reviews for this module. Your work is saved in My Work.</p>}
    {review.review.progress&&<p className="vg-progress-note"><strong>Since your last hand-in:</strong> {review.review.progress}</p>}
    {review.review.revisit&&<a className="vg-revisit" href={moduleHref(key)+'?tab=watch&lesson='+review.review.revisit}><BookOpen size={18}/><span><strong>Rewatch lesson {review.review.revisit}{lessonTitles[review.review.revisit-1]?': '+lessonTitles[review.review.revisit-1]:''}</strong>{review.review.revisitWhy&&<span className="small">{review.review.revisitWhy}</span>}</span><ArrowRight size={18}/></a>}
-   {review.review.criteria.some(c=>c.rating===null)&&<div className="vg-unsure"><p className="small">The AI couldn’t judge every check from what it could see. Not sure this review is right? Ask us and a person will look.</p><ReportProblem moduleKey={key} category="review" variant="outline" label="Ask us about this review"/></div>}
+   {review.review.criteria.some(c=>c.rating===null)&&<div className="vg-unsure"><p className="small">The review couldn’t judge every check from what it could see. Not sure this review is right? Ask us and a person will look.</p><ReportProblem moduleKey={key} category="review" variant="outline" label="Ask us about this review"/></div>}
    <ReviewRating review={review}/>
    <ReviewFlag review={review}/>
-  </Panel>:!status&&<Panel><h2>AI review</h2>
+  </Panel>:!status&&<Panel><h2>Framepath review</h2>
    {error&&<p role="alert" className="notice">{error}</p>}
-   {canReview?<><p>Get feedback on the work you handed in.</p><Button onClick={()=>requestReview(piece.id)}>Get my AI review</Button></>:allowance&&<p>{allowance.eligible?'You’ve used both AI reviews for this module, so this hand-in won’t get one. It’s saved in My Work.':'AI reviews for this module are part of Self-paced. Your work is saved in My Work.'}{rated?' Your own rating is below.':''}</p>}
+   {canReview?<><p>Get feedback on the work you handed in.</p><Button onClick={()=>requestReview(piece.id)}>Get my Framepath review</Button></>:allowance&&<p>{allowance.eligible?'You’ve used both Framepath reviews for this module, so this hand-in won’t get one. It’s saved in My Work.':'Framepath reviews for this module are part of Self-paced. Your work is saved in My Work.'}{rated?' Your own rating is below.':''}</p>}
   </Panel>}
   <ReflectNotes piece={piece}/>
-  {allowance&&<p className="small">AI reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} The AI reads your text and photos, watches your videos and YouTube or Google Drive links (picture and sound), and reads Google Docs shared as “Anyone with the link”.</p>}
+  {allowance&&<p className="small">Framepath reviews used for this module: {allowance.used} of {allowance.limit}.{allowance.used<allowance.limit?' Hand in again to use the other one.':''} Framepath reads your text and photos, watches your videos and YouTube or Google Drive links (picture and sound), and reads Google Docs shared as “Anyone with the link”.</p>}
   <div className="button-row"><Go href={'/portfolio?from='+encodeURIComponent(key)} outline>See it in My Work</Go>{onFinish&&<Button onClick={onFinish}><Flag size={16}/>Finish the level</Button>}</div>
  </div>;
 }

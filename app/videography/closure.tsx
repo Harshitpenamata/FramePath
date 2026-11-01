@@ -21,7 +21,7 @@ export function LevelClosure({level}:{level:Level}){
 
   <Panel><h3>What you learned</h3><div className="vg-closure-stages">{stageOrder.map(stage=>{const ms=mods.map((m,i)=>({m,i})).filter(x=>x.m.stageLabel===stage);if(!ms.length)return null;return <div key={stage}><strong>{stage}</strong><ul>{ms.map(({m,i})=>{const ok=!!s.progress?.[moduleKey(level,i)];return <li key={m.id} className={ok?'ok':''}>{ok?<Check size={14}/>:<Circle size={14}/>}<a href={`/explore/video-${level}/${i}`}>{moduleLesson(m,projectLabel(s.programme)).title}</a></li>})}</ul></div>})}</div></Panel>
 
-  <Panel><h3>Your best work</h3>{best.length?<ol className="vg-best">{best.map((x:any)=><li key={x.id}><strong>{reviews![x.id].review.total}/100</strong> · {x.moduleId} · {reviews![x.id].review.summary}</li>)}</ol>:<p className="small">Your AI-reviewed pieces will show here.</p>}
+  <Panel><h3>Your best work</h3>{best.length?<ol className="vg-best">{best.map((x:any)=><li key={x.id}><strong>{reviews![x.id].review.total}/100</strong> · {x.moduleId} · {reviews![x.id].review.summary}</li>)}</ol>:<p className="small">Your reviewed pieces will show here.</p>}
    <div className="button-row"><Go href="/portfolio">Open My Work and share your portfolio</Go></div></Panel>
 
   <Panel><h3>What’s next</h3>{all&&next?<><p>Ready for {levelNames[next]}? {levelSummary[next]}. Your new plan starts today.</p><Action onClick={async()=>{if(await mutate('programme_update',{update:{level:next}}))window.location.assign('/workspace')}}>Start {levelNames[next]}</Action></>

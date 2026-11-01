@@ -68,7 +68,7 @@ function StartDate({p,busy,update}:{p:Programme;busy:boolean;update:(u:any)=>Pro
 
 const modes:{id:Mode;title:string;price:string;Icon:any;points:string[]}[]=[
  {id:'free',title:'Free',price:'₹0',Icon:BookOpen,points:['A learning path made for you','Videos, notes and pictures for every module',`Tasks in the first ${freeModuleCount} modules`]},
- {id:'self',title:'Self-paced',price:'₹999 / year',Icon:Sparkles,points:['Every task, with your work saved','AI checks and feedback on your work','Build a portfolio and track progress']},
+ {id:'self',title:'Self-paced',price:'₹999 / year',Icon:Sparkles,points:['Every task, with your work saved','Framepath reviews of your work','Build a portfolio and track progress']},
 ];
 
 // My courses (/workspace): the learner's plans as tiles, up to three across all courses. Opening one shows its page.
@@ -99,7 +99,7 @@ function PlanNudges({p,live,reviews,mods}:{p:Programme;live:ReturnType<typeof li
  return <section className="db-nudges">
   {late&&<div className="db-nudge late"><CalendarClock size={20}/><div><strong>You’re {late.days} {late.days===1?'day':'days'} behind your dates.</strong><p className="small">That’s fine. Move your remaining modules forward from today, at {p.schedule.hoursPerWeek} hours a week.</p></div><Button disabled={busy} onClick={()=>mutate('plan_reschedule',{id:p.id})}>{busy?'Updating…':'Update my dates'}</Button></div>}
   {latest&&!seen&&<div className="db-nudge done"><Check size={20}/><div><strong>{latest} stage finished.</strong><p className="small">Nice work. Pick your best piece from it for your portfolio.</p></div><div className="button-row"><Go href="/portfolio" outline>Choose for my portfolio</Go><Button variant="ghost" onClick={()=>{try{localStorage.setItem(seenKey,'1')}catch{}setSeen(true)}}>Dismiss</Button></div></div>}
-  {weak.length>0&&<div className="db-nudge tips"><Sparkles size={20}/><div><strong>Suggested for you</strong><p className="small">Your AI reviews show these skills need more practice.</p>
+  {weak.length>0&&<div className="db-nudge tips"><Sparkles size={20}/><div><strong>Suggested for you</strong><p className="small">Your Framepath reviews show these skills need more practice.</p>
    <ul>{weak.map(a=>{const l=lessonFor(a.id);return <li key={a.id}><strong>{a.label}</strong> ({live[a.id].now}){l&&<> · <a className="text-link" href={`/explore/video-${p.level}/${mods.findIndex(m=>m.title===l.title)}?tab=watch&lesson=${l.lesson}`}>Rewatch lesson {l.lesson} of {l.title}</a> · <a className="text-link" href={`/explore/video-${p.level}/${mods.findIndex(m=>m.title===l.title)}?tab=watch#free-resources`}>Free resources</a></>}</li>})}</ul></div></div>}
  </section>;
 }
@@ -200,7 +200,8 @@ function ProgrammeDashboard(){
   return <div className="vg-dashboard dash">
   <div className="breadcrumbs db-crumbs"><a href="/workspace">My courses</a><span>/</span><span>{planTitle(p)}</span></div>
   <header className="dash-head">
-   <div><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><PlanName p={p}/><p className="lede">{levelSummary[p.level]}</p></div>
+   <div><span className="kicker">{courseNames[p.course]||p.course} · {levelNames[p.level]} level</span><PlanName p={p}/><p className="lede">{levelSummary[p.level]}</p>
+    <p className="dash-goal"><Target size={18} aria-hidden="true"/><span><strong>You’ll be able to:</strong> make {pathwayOutcomes[p.primaryPathway]}, and {finalProject[p.level]}.</span></p></div>
    <div className="button-row">{next&&<Go href={nextHref}>{done?'Continue':'Start'}<ArrowRight size={18}/></Go>}
     {decided&&shown.length>0&&<Button variant="outline" onClick={()=>{setUpgrading(true);setTimeout(()=>document.getElementById('vg-modes')?.scrollIntoView({behavior:'smooth'}),50)}}><Sparkles size={16}/>Upgrade to Self-paced</Button>}
     <Button variant="outline" className="vg-soon" onClick={()=>toast.info('Mentorship is coming soon: short and long courses with a fixed curriculum and timeframe.')}><UserRound size={16}/>Mentorship<span>Coming soon</span></Button></div>
@@ -235,7 +236,7 @@ function ProgrammeDashboard(){
      <span className="dash-skill-bar" role="img" aria-label={`${a.label}: ${l.now} out of 100, ${band(l.now)} level`}><i style={{width:l.now+'%'}}/><b style={{left:'40%'}}/><b style={{left:'70%'}}/></span>
      <span className="dash-skill-val"><strong>{l.now}</strong><small>{band(l.now)}</small>{gain!==0&&<em className={gain>0?'up':'down'}>{gain>0?'+':''}{gain}</em>}</span></li>})}</ul>
     <p className="dash-legend" aria-hidden="true"><i/><span>Beginner</span><span>Intermediate · 40+</span><span>Advanced · 70+</span><i/></p>
-    <p className="small">Starts from your 12 answers. Each AI-reviewed task in a skill counts as much again.</p></section>
+    <p className="small">Starts from your 12 answers. Each reviewed task in a skill counts as much again.</p></section>
 
    <section className="dash-tile span-5" aria-label="Your stages"><h2 className="dash-k">Your stages</h2>
     <div className="dash-stack" aria-hidden="true">{tl.filter(x=>x.hours).map(x=><span key={x.stage} style={{flexGrow:x.hours,background:stageColor[x.stage]}}/>)}</div>

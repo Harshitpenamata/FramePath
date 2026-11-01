@@ -63,11 +63,21 @@ function HeroSlides({actions}:{actions:React.ReactNode}){
  </section>;
 }
 
+// Whether this browser last saw a plan: lets the home page show the right button before the account has loaded, so it
+// never shows "Build" and then swaps to "Continue". null until known (first visit, before loading).
+function usePlanHint(loaded:boolean,has:boolean){
+ const [hint,setHint]=useState<boolean|null>(null);
+ useEffect(()=>{try{const v=localStorage.getItem('fp-has-plan');if(v!==null)setHint(v==='1')}catch{}},[]);
+ useEffect(()=>{if(loaded)try{localStorage.setItem('fp-has-plan',has?'1':'0')}catch{}},[loaded,has]);
+ return loaded?has:hint;
+}
+
 export function VideographyHome(){
  const {s,loaded}=useLearning();
- const startHref=loaded&&s.programme?'/workspace':'/start',startLabel=loaded&&s.programme?'Continue my pathway':'Build my free pathway';
+ const hasPlan=usePlanHint(loaded,!!s.programme),wait=hasPlan===null?{visibility:'hidden' as const}:undefined;
+ const startHref=hasPlan?'/workspace':'/start',startLabel=hasPlan?'Continue my pathway':'Build my free pathway';
  return <div className="hm">
-  <HeroSlides actions={<div className="button-row"><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go><Go href="#crafts" outline>Explore courses</Go></div>}/>
+  <HeroSlides actions={<div className="button-row"><span style={wait}><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go></span><Go href="#crafts" outline>Explore courses</Go></div>}/>
 
   <section className="hm-grid" id="crafts" aria-label="Choose your craft">
    <div className="hm-intro"><h2 className="display">Pick your craft. We’ll build the path.</h2><p>Each course runs from beginner to advanced, designed by industry practitioners.</p><a className="sg-arrow" href={startHref} aria-label={startLabel}><ArrowRight size={18}/></a></div>
@@ -77,7 +87,7 @@ export function VideographyHome(){
 
   <section className="hm-ways"><h2 className="display">Learn your way.</h2>
    <div className="hm-way-grid">
-    <article className="hm-way"><span className="hm-num">1</span><h3>Self-paced with AI</h3><p>Learn on your schedule. Get AI-driven assignments and instant, specific feedback on your work.</p><ul>{['AI-driven assignments','Instant feedback on your work','Start any time, go at your pace'].map(x=><li key={x}><Check size={16}/>{x}</li>)}</ul></article>
+    <article className="hm-way"><span className="hm-num">1</span><h3>Self-paced with Framepath reviews</h3><p>Learn on your schedule. Get hands-on assignments and an instant, specific Framepath review of your work.</p><ul>{['Hands-on assignments','Instant feedback on your work','Start any time, go at your pace'].map(x=><li key={x}><Check size={16}/>{x}</li>)}</ul></article>
     <article className="hm-way"><span className="hm-num">2</span><h3>Mentor-led program</h3><p className="hm-soon">Coming soon</p></article>
    </div>
    <p className="small">Not sure which fits? Your pathway report will recommend one.</p>
@@ -87,7 +97,7 @@ export function VideographyHome(){
    <ol>{[['Tell us your craft','Choose the interests you want to build.'],['Check your level','12 quick questions so you start in the right place.'],['Set your time','Tell us your hours per week and we’ll plan around your life.'],['Get your pathway','A personal roadmap with milestones and clear dates.']].map(([t,d],i)=><li key={t}><span className="hm-num">{i+1}</span><strong>{t}</strong><p>{d}</p></li>)}</ol>
   </section>
 
-  <section className="hm-cta"><div><h2 className="display">Ready to find your path?</h2><p>Answer 12 quick questions. Get a pathway built for you, with clear dates.</p></div><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go></section>
+  <section className="hm-cta"><div><h2 className="display">Ready to find your path?</h2><p>Answer 12 quick questions. Get a pathway built for you, with clear dates.</p></div><span style={wait}><Go href={startHref}>{startLabel}<ArrowRight size={18}/></Go></span></section>
  </div>;
 }
 
