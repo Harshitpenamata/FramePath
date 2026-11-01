@@ -1,19 +1,22 @@
 import curriculum from './curriculum.json';
 import styleTasks from './style-tasks.json';
 import type {Lesson} from '../catalog';
+import {partsFor,partDone,type PartsData} from './task-parts';
 
 // Phase-1 programme: course selection, interests, level assessment and schedule.
 // Module content comes from Video_Production_Curriculum.xlsx (curriculum.json).
 
-export type Level='beginner'|'intermediate'|'advanced';
+// 'test' is the admin-only test pathway (three real Beginner modules); it never appears in `levels`, so learners
+// can't pick it, see it in level lists or be placed in it.
+export type Level='beginner'|'intermediate'|'advanced'|'test';
 export type Mode='free'|'self'|'mentor';
 export type CurriculumModule=typeof curriculum[number];
 
 export const levels:Level[]=['beginner','intermediate','advanced'];
-export const levelNames:Record<Level,string>={beginner:'Beginner',intermediate:'Intermediate',advanced:'Advanced'};
-export const levelSummary:Record<Level,string>={beginner:'Learn the basics and make a simple, clear video',intermediate:'Make small videos on your own',advanced:'Lead your own projects in the style you choose'};
+export const levelNames:Record<Level,string>={beginner:'Beginner',intermediate:'Intermediate',advanced:'Advanced',test:'Test'};
+export const levelSummary:Record<Level,string>={beginner:'Learn the basics and make a simple, clear video',intermediate:'Make small videos on your own',advanced:'Lead your own projects in the style you choose',test:'A quick test of the whole course: three short modules, start to finish'};
 // Suggested study rhythm from the curriculum overview sheet.
-export const rhythm:Record<Level,{weeks:number;hoursPerWeek:number;hours:number}>={beginner:{weeks:11,hoursPerWeek:8,hours:85},intermediate:{weeks:17,hoursPerWeek:9,hours:152},advanced:{weeks:25,hoursPerWeek:10,hours:250}};
+export const rhythm:Record<Level,{weeks:number;hoursPerWeek:number;hours:number}>={beginner:{weeks:11,hoursPerWeek:8,hours:85},intermediate:{weeks:17,hoursPerWeek:9,hours:152},advanced:{weeks:25,hoursPerWeek:10,hours:250},test:{weeks:2,hoursPerWeek:15,hours:29}};
 
 export const courses=[
  {id:'videography',title:'Videography',blurb:'Plan, film, edit and share your videos.',active:true},
@@ -61,7 +64,7 @@ export const pathwayOutcomes:Record<Pathway,string>={
  Advertising:'a product video that shows why the product is worth buying',
 };
 // The final project at each level, from the B14 / I14 / A14 tasks.
-export const finalProject:Record<Level,string>={beginner:'a new 60 to 90 second video, made on your own',intermediate:'a main video plus a shorter version, with a production plan',advanced:'a full production with every version, a change log and a case study'};
+export const finalProject:Record<Level,string>={beginner:'a new 60 to 90 second video, made on your own',intermediate:'a main video plus a shorter version, with a production plan',advanced:'a full production with every version, a change log and a case study',test:'a new 60 to 90 second video, made on your own'};
 
 // Skill areas shown on the heat map, tied to curriculum stages.
 export const skillAreas=[
@@ -230,19 +233,25 @@ export function buildProgramme(input:any,previous?:Programme|null):Programme{
  return {version:1,course:'videography',...(name?{name}:{}),...(previous?.courseId?{courseId:previous.courseId}:{}),interests:ids as string[],primaryPathway:active,assessment,level,schedule:schedule(level,input.hoursPerWeek,start,input.daysPerWeek),mode:['free','self'].includes(input.mode)?input.mode:previous?.mode==='mentor'?null:previous?.mode||null,createdAt:previous?.createdAt||now,updatedAt:now};
 }
 
+// The admin-only test pathway. The level check is answered with each first option: it doesn't place anyone here.
+export function buildTestProgramme(interests:string[]):Programme{const answers:Answer[]=[];for(let q=nextQuestion(answers);q;q=nextQuestion(answers))answers.push({q:q.id,a:0});
+ const p=buildProgramme({course:'videography',interests,answers,name:'Test pathway'});return {...p,level:'test',schedule:schedule('test',undefined,p.schedule.startDate)}}
+
 // ---- Modules as lesson paths ----
 export const videoPathId=(level:Level)=>'video-'+level;
-export const videoPathIds=levels.map(videoPathId);
+export const videoPathIds=[...levels,'test' as Level].map(videoPathId);
 export const isVideoPath=(id:string)=>videoPathIds.includes(id);
-export function parseVideoKey(key:string){const m=/^video-(beginner|intermediate|advanced)-(\d{1,2})$/.exec(key);if(!m)return null;const level=m[1] as Level,index=Number(m[2]);const mod=modulesFor(level)[index];return mod?{level,index,module:mod}:null}
+export function parseVideoKey(key:string){const m=/^video-(beginner|intermediate|advanced|test)-(\d{1,2})$/.exec(key);if(!m)return null;const level=m[1] as Level,index=Number(m[2]);const mod=modulesFor(level)[index];return mod?{level,index,module:mod}:null}
 export const isVideoKey=(key:string)=>!!parseVideoKey(key);
-export const modulesFor=(level:Level)=>curriculum.filter(m=>m.level===level);
+// The test pathway: a photo task, a video task (the AI watches it) and the final project, which closes the level.
+export const testModuleIds=['B01','B05','B14'];
+export const modulesFor=(level:Level)=>level==='test'?testModuleIds.map(id=>curriculum.find(m=>m.id===id)!):curriculum.filter(m=>m.level===level);
 // The stages of a plan, in order. Every module belongs to one (its stageLabel).
 export const stageOrder=['Ideas','Planning','Filming','Editing','Your pathway','Working with people','Final project'];
 export const moduleKey=(level:Level,index:number)=>videoPathId(level)+'-'+index;
 // Free tier: assignments on the first two modules of each level.
 export const freeModuleCount=2;
-export const isFreeModule=(key:string)=>{const v=parseVideoKey(key);return !!v&&v.index<freeModuleCount};
+export const isFreeModule=(key:string)=>{const v=parseVideoKey(key);return !!v&&(v.level==='test'||v.index<freeModuleCount)};
 export const stagePhase=(stage:string)=>stage==='concepts'||stage==='preproduction'?'pre' as const:stage==='postproduction'?'post' as const:'production' as const;
 
 // The learner's main project name, from their first interest (e.g. "Wildlife & nature").
@@ -271,27 +280,32 @@ export function moduleLesson(m:CurriculumModule,project?:string):Lesson{
  const title=m.stage==='selected-pathway'&&project?`Your ${project} project`:m.title;
  return {title,minutes:m.hours*60,learn:m.outcome+' '+m.topics.join(', ')+'.',do:styleTask(m.id,project)||m.assignment,checks:[...m.checks],resource:-1};
 }
-export const videoPaths=levels.map(level=>({id:videoPathId(level),title:'Videography · '+levelNames[level],short:levelNames[level],description:levelSummary[level],outcome:levelSummary[level],duration:rhythm[level].weeks+' WEEKS · '+rhythm[level].hours+' HOURS',number:String(levels.indexOf(level)+1).padStart(2,'0'),lessons:modulesFor(level).map(m=>moduleLesson(m))}));
+// Includes the admin-only test path: these are looked up by id, never listed to learners.
+export const videoPaths=[...levels,'test' as Level].map(level=>({id:videoPathId(level),title:'Videography · '+levelNames[level],short:levelNames[level],description:levelSummary[level],outcome:levelSummary[level],duration:rhythm[level].weeks+' WEEKS · '+rhythm[level].hours+' HOURS',number:String(levels.indexOf(level)+1).padStart(2,'0'),lessons:modulesFor(level).map(m=>moduleLesson(m))}));
 export const curriculumModules=curriculum;
 
 // ---- Hand-in (Make) ----
 // Self-rating scale for the three checks, and the two reflection questions.
 export const ratingScale=['Not yet','Started','Getting there','Good','Great'];
 export const reflectionQuestions=[{id:'well',label:'What went well?'},{id:'change',label:'What would you change next time?'}] as const;
-export const maxHandInFiles=3;
+export const maxHandInFiles=12;
 // Beginners hand in their first three modules without self-rating, so the first tasks stay simple. Self-rating starts at beginner module 4.
 export const selfCheckFromBeginnerModule=4;
 export const needsSelfCheck=(key:string)=>{const v=parseVideoKey(key);return !!v&&(v.level!=='beginner'||v.index+1>=selfCheckFromBeginnerModule)};
-export type HandIn={answer:string;notes:string;url:string;uploadIds:string[];ratings:number[];reflections:{well:string;change:string}};
+export type HandIn={answer:string;notes:string;url:string;uploadIds:string[];ratings:number[];reflections:{well:string;change:string};parts?:PartsData};
 // What is still missing before work can be handed in ([] when ready). Used by the Make form and the server.
+// A Google Doc link (written work: a script, shot list or brief): the AI review reads it as plain text.
+export const googleDocId=(u:string)=>String(u||'').match(/^https:\/\/docs\.google\.com\/document\/d\/([\w-]{20,})/)?.[1]||'';
 export function handInMissing(m:CurriculumModule,h:HandIn,selfCheck=true):string[]{
  const missing:string[]=[];
- if(m.handIn==='text'){if(h.answer.trim().length<80)missing.push('write your answer (at least 80 characters)')}
- else{if(!h.uploadIds.length&&!h.url.trim())missing.push('upload your work or add a video link');if(h.notes.trim().length<20)missing.push('add a short note about your work (at least 20 characters)')}
+ // Each part of the task has its own field or slot: name every part that is still empty.
+ const list=partsFor(m.id);
+ if(list.length&&h.parts){for(const p of list)if(!partDone(p,h.parts,!!h.url.trim()))missing.push('add “'+p.label+'”')}
+ else if(m.handIn==='text'){if(h.answer.trim().length<80)missing.push('write your answer (at least 80 characters)')}
+ else{if(!h.uploadIds.length&&!h.url.trim())missing.push('upload your work or add a link');if(h.notes.trim().length<20)missing.push('add a short note about your work (at least 20 characters)')}
  if(h.uploadIds.length>maxHandInFiles)missing.push('use up to '+maxHandInFiles+' files');
  if(selfCheck){
   if(h.ratings.length!==3||h.ratings.some(r=>!Number.isInteger(r)||r<0||r>4))missing.push('rate your work on all three checks');
-  for(const q of reflectionQuestions)if((h.reflections[q.id]||'').trim().length<10)missing.push('answer “'+q.label+'”');
  }
  return missing;
 }

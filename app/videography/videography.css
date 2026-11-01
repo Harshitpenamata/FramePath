@@ -360,7 +360,7 @@
 .vg-show-fallback{display:grid;place-items:center;gap:8px;padding:40px;color:#eee;text-align:center}
 @media (max-width:860px){
  .vg-show-viewer{padding:56px 12px 12px;place-items:start center;overflow-y:auto}
- .vg-show-body{grid-template-columns:1fr;grid-template-rows:auto;height:auto;max-height:none}
+ .vg-show-body{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;height:auto;max-height:none}
  .vg-show-stage{min-height:200px;max-height:60vh}
  .vg-show-thumbs{grid-row:auto;grid-column:1}
  .vg-show-info{grid-row:auto;grid-column:1}
