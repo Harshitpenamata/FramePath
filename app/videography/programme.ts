@@ -310,9 +310,11 @@ export function moduleArea(m:CurriculumModule):SkillArea|null{
 // that area counts once more (its checks' average, 0–4 as 0–100). reviews: the latest review per module key.
 export function liveSkills(p:Programme,reviews:Record<string,{ratings:(number|null)[]}>){
  const out={} as Record<SkillArea,{start:number;now:number;evidence:number}>;
- for(const a of skillAreas){const start=p.assessment.areas[a.id];let sum=start,n=0;
-  modulesFor(p.level).forEach((m,i)=>{const r=reviews[moduleKey(p.level,i)];if(moduleArea(m)!==a.id||!r)return;const got=r.ratings.filter((x):x is number=>x!==null);if(!got.length)return;sum+=got.reduce((x,y)=>x+y,0)/got.length/4*100;n++});
-  out[a.id]={start,now:Math.round(sum/(n+1)),evidence:n}}
+ // A skill never drops below the level check, and a reviewed task can only raise it: the level is the best running
+ // average so far (module by module), so a weaker hand-in is feedback, not a step back.
+ for(const a of skillAreas){const start=p.assessment.areas[a.id];let sum=start,n=0,best=start;
+  modulesFor(p.level).forEach((m,i)=>{const r=reviews[moduleKey(p.level,i)];if(moduleArea(m)!==a.id||!r)return;const got=r.ratings.filter((x):x is number=>x!==null);if(!got.length)return;sum+=got.reduce((x,y)=>x+y,0)/got.length/4*100;n++;best=Math.max(best,Math.round(sum/(n+1)))});
+  out[a.id]={start,now:best,evidence:n}}
  return out;
 }
 // How far behind the plan's dates the learner is: the first unfinished module and how many days past its due date.

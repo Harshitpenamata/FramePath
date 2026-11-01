@@ -357,6 +357,10 @@ test('adapting the plan: skill areas, live skill levels, behind and catch-up dat
  const live=P.liveSkills(p,{[k0]:{ratings:[4,4,null]}});
  assert.equal(live.story.evidence,1);assert.equal(live.story.now,Math.round((start+100)/2),'the review counts as much as the starting check');
  assert.equal(P.liveSkills(p,{}).camera.now,p.assessment.areas.camera,'no reviews: unchanged');
+ // A weak review never takes a skill below the level check, and a later weak one never takes it below its best so far.
+ const weak=P.liveSkills(p,{[k0]:{ratings:[0,0,0]}});assert.equal(weak.story.now,start,'a weak hand-in keeps the starting level');
+ const storyKeys=mods.map((m,i)=>[m,i]).filter(([m])=>P.moduleArea(m)==='story').map(([,i])=>P.moduleKey(p.level,i));
+ if(storyKeys.length>1){const up=P.liveSkills(p,{[storyKeys[0]]:{ratings:[4,4,4]}}).story.now,after=P.liveSkills(p,{[storyKeys[0]]:{ratings:[4,4,4]},[storyKeys[1]]:{ratings:[0,0,0]}}).story.now;assert.equal(after,up,'a weaker later task keeps the best level so far')}
  const late={...p,schedule:{...p.schedule,startDate:P.addDays(P.today(),-60)}};
  const b=P.behindBy(late,{});assert.ok(b&&b.days>0&&b.key===k0);
  assert.equal(P.behindBy(p,{}),null,'a plan starting today is not behind');

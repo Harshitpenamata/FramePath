@@ -166,7 +166,9 @@ function ProgrammeDashboard(){
  const {s,user,loaded,mutate,busy}=useLearning();
  // The latest AI review of each module, so skill levels and suggestions keep up with the learner.
  const [byModule,setByModule]=useState<Record<string,any>>({});
- React.useEffect(()=>{if(user)fetch('/api/review?all=video').then(r=>r.ok?r.json():{reviews:{}}).then((d:any)=>{const out:Record<string,any>={};for(const r of Object.values(d.reviews||{}) as any[])if(r.lessonKey&&(!out[r.lessonKey]||out[r.lessonKey].createdAt<r.createdAt))out[r.lessonKey]={...r,ratings:r.review?.ratings||r.review?.criteria?.map((c:any)=>c.rating)||[]};setByModule(out)}).catch(()=>{})},[user]);
+ // Each module's best review (most points, the newest on a tie), so a weaker redo never pulls a skill level down.
+ const points=(r:any)=>(r.review?.ratings||r.review?.criteria?.map((c:any)=>c.rating)||[]).reduce((n:number,v:any)=>n+(typeof v==='number'?v:0),0);
+ React.useEffect(()=>{if(user)fetch('/api/review?all=video').then(r=>r.ok?r.json():{reviews:{}}).then((d:any)=>{const out:Record<string,any>={};for(const r of Object.values(d.reviews||{}) as any[])if(r.lessonKey&&(!out[r.lessonKey]||points(r)>points(out[r.lessonKey])||points(r)===points(out[r.lessonKey])&&out[r.lessonKey].createdAt<r.createdAt))out[r.lessonKey]={...r,ratings:r.review?.ratings||r.review?.criteria?.map((c:any)=>c.rating)||[]};setByModule(out)}).catch(()=>{})},[user]);
  const [hours,setHours]=useState<number|null>(null);
  const [upgrading,setUpgrading]=useState(false);
  if(!loaded)return <Panel><p role="status">Opening your plan…</p></Panel>;
