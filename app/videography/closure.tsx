@@ -11,7 +11,7 @@ export function LevelClosure({level}:{level:Level}){
  const {s,mutate}=useLearning();
  const reviews=useVideoReviews();
  const mods=modulesFor(level),done=mods.filter((_,i)=>s.progress?.[moduleKey(level,i)]).length,all=done===mods.length;
- const next=levels[levels.indexOf(level)+1];
+ const at=levels.indexOf(level),next=at<0?undefined:levels[at+1]; // the test pathway (not in levels) has no next level
  const best=s.submissions.filter((x:any)=>x.handIn&&x.key.startsWith('video-'+level)&&reviews?.[x.id]?.review?.total!=null)
   .sort((a:any,b:any)=>reviews![b.id].review.total-reviews![a.id].review.total).slice(0,3);
  return <div className="vg-closure">
@@ -21,7 +21,7 @@ export function LevelClosure({level}:{level:Level}){
 
   <Panel><h3>What you learned</h3><div className="vg-closure-stages">{stageOrder.map(stage=>{const ms=mods.map((m,i)=>({m,i})).filter(x=>x.m.stageLabel===stage);if(!ms.length)return null;return <div key={stage}><strong>{stage}</strong><ul>{ms.map(({m,i})=>{const ok=!!s.progress?.[moduleKey(level,i)];return <li key={m.id} className={ok?'ok':''}>{ok?<Check size={14}/>:<Circle size={14}/>}<a href={`/explore/video-${level}/${i}`}>{moduleLesson(m,projectLabel(s.programme)).title}</a></li>})}</ul></div>})}</div></Panel>
 
-  <Panel><h3>Your best work</h3>{best.length?<ol className="vg-best">{best.map((x:any)=><li key={x.id}><strong>{reviews![x.id].review.total}/100</strong> · {x.moduleId} · {reviews![x.id].review.summary}</li>)}</ol>:<p className="small">Your AI-reviewed pieces will show here.</p>}
+  <Panel><h3>Your best work</h3>{best.length?<ol className="vg-best">{best.map((x:any)=><li key={x.id}><strong>{reviews![x.id].review.total}/100</strong> · {x.moduleId} · {reviews![x.id].review.summary}</li>)}</ol>:<p className="small">Your reviewed pieces will show here.</p>}
    <div className="button-row"><Go href="/portfolio">Open My Work and share your portfolio</Go></div></Panel>
 
   <Panel><h3>What’s next</h3>{all&&next?<><p>Ready for {levelNames[next]}? {levelSummary[next]}. Your new plan starts today.</p><Action onClick={async()=>{if(await mutate('programme_update',{update:{level:next}}))window.location.assign('/workspace')}}>Start {levelNames[next]}</Action></>
