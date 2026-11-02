@@ -59,7 +59,7 @@ function PortfolioResume({name,title,bio,items,social=true}:{name:string;title:s
   {modules.length>0&&<div className="cm-skills"><h2>What I’ve practised</h2><ul>{modules.map(([id,t])=><li key={id}><strong>{id}</strong> {t}</li>)}</ul></div>}
   <h2>Work</h2>
   <Showcase items={items} social={social?socialFor:undefined}/>
-  <p className="small">This is practice work. AI reviews are not official qualifications.</p>
+  <p className="small">This is practice work. Framepath reviews are not official qualifications.</p>
  </div>;
 }
 

@@ -9,6 +9,6 @@ export const funnelSteps=[
  ['review_opened','Opened their AI review'],
  ['module_done','Finished a module'],
 ] as const;
-export type StepName=typeof funnelSteps[number][0]|'today_clicked'|'review_rated'|'test_out';
+export type StepName=typeof funnelSteps[number][0]|'today_clicked'|'review_rated'|'test_out'|'ai_check';
 // Steps the browser may record; everything else is recorded by the server where it happens.
 export const browserSteps=['visit','plan_started','review_opened','today_clicked'] as const;

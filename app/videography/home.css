@@ -100,7 +100,7 @@
 /* Home banners (hero-banners.tsx): the designer's banners, live text over flat SVG. The slides sit on top of each other
    in one grid cell and fade; below the designer's CSS (converted to hb- classes) comes the fit into the carousel. */
 .hm-banner{display:grid;gap:var(--s5);padding-top:var(--s5)}
-.hm-banner-frame{display:grid;grid-template-columns:minmax(0,1fr);width:100%;min-width:0;container:hb-stack / inline-size;border-radius:var(--radius);overflow:hidden;border:var(--soft-line);background:#000}
+.hm-banner-frame{display:grid;grid-template-columns:minmax(0,1fr);width:100%;min-width:0;container:hb-stack / inline-size;border-radius:var(--radius);overflow:hidden;background:#000}
 .hb-slide {
   --background: #000;
   --ink: #f2eee4;

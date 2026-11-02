@@ -223,7 +223,8 @@ function safeReturn(value: string | null): string {
     if (url.origin !== "http://localhost" || authPaths.has(url.pathname)) {
       return "/";
     }
-    return `${url.pathname}${url.search}${url.hash}`;
+    const out = `${url.pathname}${url.search}${url.hash}`;
+    return out.startsWith("//") ? "/" : out;
   } catch {
     return "/";
   }

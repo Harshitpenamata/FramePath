@@ -22,22 +22,24 @@ function Feedback({result}:{result:Result}){
 }
 
 export function LessonTool({tool,onSolved}:Props){
- const [result,setResult]=useState<Result>(null);
- const report=(r:Result)=>{setResult(r);if(r?.ok)onSolved()};
+ const [result,setResult]=useState<Result>(null),[fails,setFails]=useState(0);
+ const report=(r:Result)=>{setResult(r);if(r&&!r.ok)setFails(n=>n+1);if(r?.ok)onSolved()};
  const body=(()=>{switch(tool.kind){
   case 'order':return <OrderTool tool={tool} report={report}/>;
   case 'sort':return <SortTool tool={tool} report={report}/>;
   case 'pick':return <PickTool tool={tool} report={report}/>;
   case 'spot':return <SpotTool tool={tool} report={report}/>;
-  case 'exposure':return <ExposureTool tool={tool} report={report}/>;
-  case 'whitebalance':return <WhiteBalanceTool tool={tool} report={report}/>;
-  case 'mix':return <MixTool tool={tool} report={report}/>;
-  case 'frame':return <FrameTool tool={tool} report={report}/>;
+  case 'exposure':return <ExposureTool tool={tool} report={report} fails={fails}/>;
+  case 'whitebalance':return <WhiteBalanceTool tool={tool} report={report} fails={fails}/>;
+  case 'mix':return <MixTool tool={tool} report={report} fails={fails}/>;
+  case 'frame':return <FrameTool tool={tool} report={report} fails={fails}/>;
  }})();
  return <div className="vg-tool"><p className="vg-tool-prompt">{tool.prompt}</p>{body}<Feedback result={result}/></div>;
 }
 
-type R={report:(r:Result)=>void};
+type R={report:(r:Result)=>void;fails?:number};
+// After three wrong checks on a slider exercise, the answer can be shown (it counts as done so no one is stuck).
+const Reveal=({fails=0,onClick}:{fails?:number;onClick:()=>void})=>fails>=3?<Button type="button" variant="outline" onClick={onClick}>Show me the answer</Button>:null;
 
 function OrderTool({tool,report}:{tool:Extract<Tool,{kind:'order'}>}&R){
  const [items,setItems]=useState(()=>shuffled(tool.items,tool.prompt));
@@ -78,7 +80,7 @@ function SpotTool({tool,report}:{tool:Extract<Tool,{kind:'spot'}>}&R){
 // Exposure in stops: aperture f/1.8 (brightest) to f/16, shutter 1/30 to 1/1000, ISO 100 to 6400.
 const apertures=['f/1.8','f/2.8','f/4','f/5.6','f/8','f/11','f/16'],shutters=['1/30','1/60','1/125','1/250','1/500','1/1000'],isos=['100','200','400','800','1600','3200','6400'];
 const sceneLight=9;
-function ExposureTool({tool,report}:{tool:Extract<Tool,{kind:'exposure'}>}&R){
+function ExposureTool({tool,report,fails}:{tool:Extract<Tool,{kind:'exposure'}>}&R){
  const [a,setA]=useState(3),[sh,setSh]=useState(2),[iso,setIso]=useState(0);
  const off=(6-a)+(5-sh)+iso-sceneLight;
  const blur=tool.goal==='moving'?Math.max(0,3-sh)*1.6:0;
@@ -88,6 +90,7 @@ function ExposureTool({tool,report}:{tool:Extract<Tool,{kind:'exposure'}>}&R){
   if(tool.goal==='clean'&&iso>2)return report({ok:false,text:'Bright enough, but very grainy. Lower ISO and let in light with the aperture or shutter.'});
   report({ok:true,text:'Well balanced! '+(tool.goal==='moving'?'Fast shutter freezes motion; the wide aperture and ISO make up the light.':'Low ISO keeps it clean; the aperture and shutter do the work.')});
  }
+ function reveal(){for(let i=0;i<isos.length;i++)for(let x=0;x<apertures.length;x++)for(let y=0;y<shutters.length;y++){if(Math.abs((6-x)+(5-y)+i-sceneLight)>1||(tool.goal==='moving'&&y<3)||(tool.goal==='clean'&&i>2))continue;setA(x);setSh(y);setIso(i);return report({ok:true,text:'Answer shown: these settings balance the light'+(tool.goal==='moving'?' and freeze the runner.':tool.goal==='clean'?' with low grain.':'.')})}}
  const slider=(label:string,values:string[],v:number,set:(n:number)=>void,hint:string)=><label className="vg-slider">{label}: <strong>{values[v]}</strong><span className="small">{hint}</span><input type="range" min={0} max={values.length-1} value={v} onChange={e=>{set(Number(e.target.value));report(null)}}/></label>;
  return <><div className="vg-sim" aria-label="Picture preview">
    <img src="/lessons/story-01-960.webp" width={960} height={640} alt="" style={{filter:`brightness(${Math.pow(2,off*0.55).toFixed(2)}) blur(${blur}px)`}}/>
@@ -96,21 +99,21 @@ function ExposureTool({tool,report}:{tool:Extract<Tool,{kind:'exposure'}>}&R){
   {slider('Aperture',apertures,a,setA,'Lower number = more light, blurrier background')}
   {slider('Shutter speed',shutters,sh,setSh,'Faster = sharper motion, less light')}
   {slider('ISO',isos,iso,setIso,'Higher = brighter, more grain')}
-  <Button type="button" onClick={check}>Check my settings</Button></>;
+  <Button type="button" onClick={check}>Check my settings</Button> <Reveal fails={fails} onClick={reveal}/></>;
 }
 
-function WhiteBalanceTool({tool,report}:{tool:Extract<Tool,{kind:'whitebalance'}>}&R){
+function WhiteBalanceTool({tool,report,fails}:{tool:Extract<Tool,{kind:'whitebalance'}>}&R){
  const scene=tool.cast==='warm'?3200:7500;
  const [k,setK]=useState(5600);
  const t=Math.max(-1,Math.min(1,(k-scene)/2500));
  function check(){report(Math.abs(k-scene)<=400?{ok:true,text:`Natural colour at about ${k}K. The camera now matches the light in the room.`}:{ok:false,text:t>0?'Still too orange. Move the slider left (cooler).':'Now too blue. Move the slider right (warmer).'})}
  return <><div className="vg-sim"><img src="/lessons/story-01-960.webp" width={960} height={640} alt=""/><span className="vg-tint" style={{background:t>0?'#ff8a00':'#2f6dff',opacity:Math.abs(t)*0.38}}/></div>
   <label className="vg-slider">White balance: <strong>{k}K</strong><span className="small">Left = cooler (bluer), right = warmer (more orange)</span><input type="range" min={2500} max={9000} step={100} value={k} onChange={e=>{setK(Number(e.target.value));report(null)}}/></label>
-  <Button type="button" onClick={check}>Check colour</Button></>;
+  <Button type="button" onClick={check}>Check colour</Button> <Reveal fails={fails} onClick={()=>{setK(scene);report({ok:true,text:`Answer shown: about ${scene}K matches the light in the room.`})}}/></>;
 }
 
 function Meter({db}:{db:number}){return <span className="vg-meter" aria-hidden="true"><span style={{width:Math.max(0,(db+40)/40*100)+'%'}} className={db>-6?'hot':db>=-15?'good':''}/></span>}
-function MixTool({tool,report}:{tool:Extract<Tool,{kind:'mix'}>}&R){
+function MixTool({tool,report,fails}:{tool:Extract<Tool,{kind:'mix'}>}&R){
  const [voice,setVoice]=useState(-28),[music,setMusic]=useState(-6);
  function check(){
   if(voice>-9)return report({ok:false,text:'The voice is too loud. It may crackle. Bring it down a little.'});
@@ -119,12 +122,12 @@ function MixTool({tool,report}:{tool:Extract<Tool,{kind:'mix'}>}&R){
   report({ok:true,text:tool.music?'Clear words with music underneath. Nice mix.':'Good level. Loud enough, with room to spare.'});
  }
  const fader=(label:string,v:number,set:(n:number)=>void)=><label className="vg-slider">{label}: <strong>{v} dB</strong><Meter db={v}/><input type="range" min={-40} max={0} value={v} onChange={e=>{set(Number(e.target.value));report(null)}}/></label>;
- return <>{fader('Voice',voice,setVoice)}{tool.music&&fader('Music',music,setMusic)}<p className="small">Green is the good zone for speech. Red means it is too loud.</p><Button type="button" onClick={check}>Check the level</Button></>;
+ return <>{fader('Voice',voice,setVoice)}{tool.music&&fader('Music',music,setMusic)}<p className="small">Green is the good zone for speech. Red means it is too loud.</p><Button type="button" onClick={check}>Check the level</Button> <Reveal fails={fails} onClick={()=>{setVoice(-12);setMusic(-26);report({ok:true,text:tool.music?'Answer shown: voice around -12 dB, music at least 10 below it.':'Answer shown: voice around -12 dB, in the green zone.'})}}/></>;
 }
 
 // The cup sits at about 56% across and 70% down the picture.
 const subject={x:.56,y:.70};
-function FrameTool({tool,report}:{tool:Extract<Tool,{kind:'frame'}>}&R){
+function FrameTool({tool,report,fails}:{tool:Extract<Tool,{kind:'frame'}>}&R){
  const [zoom,setZoom]=useState(1),[px,setPx]=useState(50),[py,setPy]=useState(50);
  const sx=subject.x*zoom-(zoom-1)*px/100,sy=subject.y*zoom-(zoom-1)*py/100;
  function check(){
@@ -133,8 +136,10 @@ function FrameTool({tool,report}:{tool:Extract<Tool,{kind:'frame'}>}&R){
   const near=[1/3,2/3].some(gx=>Math.abs(sx-gx)<.07)&&[1/3,2/3].some(gy=>Math.abs(sy-gy)<.07);
   report(near?{ok:true,text:'The cup sits on a crossing. The picture feels balanced.'}:{ok:false,text:'Move the frame until the cup sits where two grid lines cross.'});
  }
+ // Puts the cup at the centre (close shot) or on a grid crossing, whatever the zoom: px = (subject*zoom - target)/(zoom-1).
+ function reveal(){const z=tool.goal==='close'?2.6:1.6,tx=tool.goal==='close'?.5:2/3,ty=tool.goal==='close'?.5:2/3;setZoom(z);setPx(Math.round((subject.x*z-tx)/(z-1)*100));setPy(Math.round((subject.y*z-ty)/(z-1)*100));report({ok:true,text:tool.goal==='close'?'Answer shown: zoomed in with the cup in the middle.':'Answer shown: the cup sits where two grid lines cross.'})}
  const s=(label:string,v:number,set:(n:number)=>void,min:number,max:number,step=1)=><label className="vg-slider">{label}<input type="range" min={min} max={max} step={step} value={v} onChange={e=>{set(Number(e.target.value));report(null)}}/></label>;
  return <><div className="vg-sim vg-frame" style={{backgroundImage:'url(/lessons/story-01-960.webp)',backgroundSize:zoom*100+'%',backgroundPosition:`${px}% ${py}%`}} aria-label="Camera frame"><span className="vg-grid"/></div>
   {s('Zoom',zoom,setZoom,1,3,.1)}{s('Move left / right',px,setPx,0,100)}{s('Move up / down',py,setPy,0,100)}
-  <div className="button-row"><Button type="button" onClick={check}>Check my frame</Button><Button type="button" variant="ghost" onClick={()=>{setZoom(1);setPx(50);setPy(50);report(null)}}><RotateCcw size={14}/>Reset</Button></div></>;
+  <div className="button-row"><Button type="button" onClick={check}>Check my frame</Button><Button type="button" variant="ghost" onClick={()=>{setZoom(1);setPx(50);setPy(50);report(null)}}><RotateCcw size={14}/>Reset</Button><Reveal fails={fails} onClick={reveal}/></div></>;
 }

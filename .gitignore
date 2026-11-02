@@ -54,3 +54,6 @@ next-env.d.ts
 # Built preview of the lesson sketches (rebuild with the animate skill)
 pieces/*/index.html
 .taste-skill/
+
+# Hallmark design audits (screenshots and records)
+.hallmark/
