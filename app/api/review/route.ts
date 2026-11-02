@@ -125,4 +125,6 @@ export async function runReview(u:{userId:string},b:any,fromQueue:boolean):Promi
  }catch(e:any){
   if(jobId&&e instanceof AIUnavailable&&e.noCredit){await db().prepare("UPDATE ai_jobs SET status='queued',answer=? WHERE id=? AND status='pending'").bind(JSON.stringify({request:b}),jobId).run().catch(()=>{});return waiting(jobId)}
   if(jobId)await db().prepare("UPDATE ai_jobs SET status='failed' WHERE id=? AND status='pending'").bind(jobId).run().catch(()=>{});
+  // A queued review that stops before it is reserved (hand-in removed, no longer eligible) would stay at the head of the queue for ever.
+  else if(fromQueue)await db().prepare("UPDATE ai_jobs SET status='failed' WHERE id=? AND status='queued'").bind(String(b.requestId||'')).run().catch(()=>{});
   if(fromQueue)throw e;return errorResponse(e)}}

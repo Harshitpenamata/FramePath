@@ -1,4 +1,5 @@
 import {askClaude,claudeKey,imageBlock,AIRefused,AIUnavailable} from '../../claude';
+import {aiStatus} from '../../ai-budget';
 import {isScenarioProfile} from '../../scenario-engine';
 import {freeLessonKey,buildPersonalPlan,isPersonalized,curatedLesson} from '../../personalization';
 import {activeLevel,pathsForLevel,levelHours,levelOutcome} from '../../selfpaced-curriculum';
@@ -14,6 +15,7 @@ if(!['question','plan','feedback'].includes(b.kind)||!['explore','craft'].includ
 const starterPath=b.scope==='explore'&&typeof b.lessonKey==='string'&&freeLessonKey(s,b.lessonKey)?moduleInfo(b.lessonKey).pathId:null;const starter=!!starterPath&&!activeExplore(s);const billingScope=starter?'starter-help:'+starterPath:b.scope;if(starter&&b.kind==='feedback')throw new Error('Use the assignment review for your free feedback checks.');
 if(b.scope==='explore'&&!starter&&!activeExplore(s))throw new Error('Activate Explore to use its AI allowance.');if(b.scope==='craft'&&!craftEnrolled(s))throw new Error('Enrol in Craft to use its AI allowance.');
 if(b.scope==='craft'&&s.craft.endsAt&&new Date(s.craft.endsAt).getTime()<=Date.now())throw new Error('The 12-week Craft AI allowance has ended. Your saved lessons and work remain available.');if(!claudeKey())throw Object.assign(new Error('AI is not configured yet. Lessons and saved work are still available.'),{status:503});
+if(!(await aiStatus()).ok)throw Object.assign(new Error('Framepath is taking a short break. Your lessons and saved work are still here. Please try again later.'),{status:503});
 const id=safeText(b.requestId,100,12);const existing:any=await db().prepare('SELECT * FROM ai_jobs WHERE id=?').bind(id).first();if(existing){if(existing.user_id!==u.userId||existing.kind!==b.kind||existing.scope!==billingScope)throw new Error('Invalid request.');if(existing.status==='complete')return Response.json({answer:existing.answer,usage:await usage(u.userId,s)});throw new Error(existing.status==='pending'?'This AI request is still running.':'This attempt did not use your allowance. Please submit a new request.')}
 const prompt=safeText(b.prompt,4000,5);const limit=starter?(b.kind==='question'?12:2):b.kind==='question'?120:b.kind==='plan'?12:b.scope==='craft'?24:12;const since=starter?0:new Date(b.scope==='explore'?s.membership.startsAt:s.craft.paidAt).getTime();
 const now=Date.now();await db().prepare("UPDATE ai_jobs SET status='failed' WHERE user_id=? AND status='pending' AND created_at<?").bind(u.userId,now-600000).run();
