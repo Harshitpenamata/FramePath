@@ -2,6 +2,7 @@ import {db,fail,checkOrigin,identity,readState,safeText,errorResponse} from '../
 import {getUser} from '../../user';
 import {askClaude,AIRefused,AIUnavailable} from '../../claude';
 import {aiStatus} from '../../ai-budget';
+import {limitChecks} from '../../events';
 export const dynamic='force-dynamic';
 const noStore={headers:{'Cache-Control':'no-store'}};
 const commentsPerDay=30;
@@ -57,7 +58,7 @@ export async function POST(req:Request){try{
   const today:any=await db().prepare('SELECT COUNT(*) AS n FROM portfolio_comments WHERE user_id=? AND created_at>?').bind(user.userId,Date.now()-86400000).first();
   if(today.n>=commentsPerDay)return fail('You’ve posted '+commentsPerDay+' comments today. You can post more tomorrow.',429);
   // While AI is paused, the comment waits (status 'pending') and the scheduled job checks it later.
-  const ai=await aiStatus();const check=ai.ok?await screenComment(body):{allowed:false,reason:'',wait:true};
+  const ai=await aiStatus();if(ai.ok)await limitChecks(user.userId,'comment',commentsPerDay,86400000,'You’ve tried '+commentsPerDay+' comments today. You can post more tomorrow.');const check=ai.ok?await screenComment(body):{allowed:false,reason:'',wait:true};
   if(!check.allowed&&!check.wait)return fail('This comment wasn’t posted: '+(check.reason||'it doesn’t follow the community rules.'),422);
   const {state}=await readState(user.userId);const author=String(state.profile?.name||user.displayName.split(' ')[0]||'Learner').slice(0,60);
   const id=crypto.randomUUID(),now=Date.now(),status=check.wait?'pending':'visible';
