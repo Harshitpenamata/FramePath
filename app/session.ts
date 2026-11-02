@@ -34,5 +34,6 @@ export function cookie(name:string,value:string,url:string,maxAge:number){const 
 
 export function safeReturnTo(value:string|null):string{
   if(!value||!value.startsWith('/')||value.startsWith('//'))return '/';
-  try{const url=new URL(value,'https://app.local');if(url.origin!=='https://app.local'||url.pathname.startsWith('/auth/'))return '/';return url.pathname+url.search+url.hash}catch{return '/'}
+  try{const url=new URL(value,'https://app.local');// Check the cleaned-up path, not just the input: '/.//evil.com' cleans up to '//evil.com', which browsers treat as another site.
+  const out=url.pathname+url.search+url.hash;if(url.origin!=='https://app.local'||url.pathname.startsWith('/auth/')||out.startsWith('//'))return '/';return out}catch{return '/'}
 }
