@@ -100,7 +100,7 @@ export function reviewReadyAlert(userId:string,jobId:string,lessonKey:string){
   const mod=parseVideoKey(lessonKey);
   await sendEmail({to:l.email,userId,kind:'review_ready',dedupe:`review_ready:${jobId}`,
    subject:'Your feedback is ready',heading:'Your feedback is ready',
-   lines:[mod?`The AI review of your work for ${moduleLesson(mod.module,'').title} is in.`:'The AI review of your work is in.','It has what worked, what to fix, and what to try next.'],
+   lines:[mod?`The Framepath review of your work for ${moduleLesson(mod.module,'').title} is in.`:'The Framepath review of your work is in.','It has what worked, what to fix, and what to try next.'],
    button:{label:'Read my feedback',href:moduleUrl(lessonKey)}});
  })());
 }

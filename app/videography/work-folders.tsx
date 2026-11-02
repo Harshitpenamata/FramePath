@@ -23,7 +23,7 @@ function useFromKey(){const [from,setFrom]=useState('');useEffect(()=>{const k=n
 
 function PieceReview({review,open}:{review:any;open:boolean}){
  const r=review.review;
- return <details className="vg-piece-review" open={open}><summary><Sparkles size={15}/> AI feedback{r.total!=null&&<strong>{Math.round(r.total)}/100</strong>}</summary>
+ return <details className="vg-piece-review" open={open}><summary><Sparkles size={15}/> Framepath review{r.total!=null&&<strong>{Math.round(r.total)}/100</strong>}</summary>
   <p>{r.summary}</p>
   <ul>{r.criteria.map((c:any)=><li key={c.label}><strong>{c.label}: {c.rating??'–'}/4.</strong> {c.feedback}</li>)}</ul>
   <p><strong>What worked:</strong> {r.strength}</p><p><strong>What to improve:</strong> {r.improvement}</p><p><strong>Try next:</strong> {r.nextStep}</p>
@@ -47,7 +47,7 @@ export function WorkHeader(){
   <div className="vg-stats">
    <div><strong>{done}/{mods.length}</strong><span>modules done</span></div>
    <div><strong>{pieces.length}</strong><span>pieces handed in</span></div>
-   <div><strong>{avg??'–'}</strong><span>average AI score</span></div>
+   <div><strong>{avg??'–'}</strong><span>average review score</span></div>
    <div><strong>{hoursDone}/{hoursAll} h</strong><span>course hours done</span></div>
   </div>
   <div className="vg-progress" role="progressbar" aria-valuenow={done} aria-valuemin={0} aria-valuemax={mods.length} aria-label="Modules done"><span style={{width:done/mods.length*100+'%'}}/></div>
@@ -71,7 +71,7 @@ export function WorkFolders({ids,setIds,keys:only}:{ids:string[];setIds:(fn:(pre
     {p.answer&&<p className="prewrap">{p.answer}</p>}
     {p.notes&&<p className="prewrap small">{p.notes}</p>}
     {(p.uploads?.length>0||p.url)&&<ul>{p.uploads?.map((f:any)=><li key={f.id}><a className="text-link" href={'/api/file/'+f.id} target="_blank" rel="noreferrer">{f.name}</a><Button variant="ghost" size="sm" disabled={busy} aria-label={'Remove '+f.name} onClick={()=>removeFile(p.id,f.id)}><X size={14}/></Button></li>)}{p.url&&<li><a className="text-link" href={p.url} target="_blank" rel="noreferrer">Watch video link</a></li>}</ul>}
-    {reviews?.[p.id]?<PieceReview review={reviews[p.id]} open={from===key&&p===pieces[0]}/>:reviews&&<p className="small">No AI feedback yet. <a className="text-link" href={moduleHref(key)+'?tab=feedback'}>Get it in Reflect</a></p>}
+    {reviews?.[p.id]?<PieceReview review={reviews[p.id]} open={from===key&&p===pieces[0]}/>:reviews&&<p className="small">No review yet. <a className="text-link" href={moduleHref(key)+'?tab=feedback'}>Get it in Reflect</a></p>}
    </>:<SubmissionCard sub={p}/>}
    <div><Button variant="outline" size="sm" className="sg-danger" disabled={busy} onClick={()=>removePiece(p.id)}><Trash2 size={14}/>Remove from My Work</Button></div>
   </div>)}</div>

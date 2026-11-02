@@ -182,7 +182,7 @@ export const banners:Banner[]=[
 <div className="hb-copy">
       <p className="hb-eyebrow">Learn your way.</p>
       <H className="hb-head">Learn with <span>AI.</span><br/>{' '}Or learn with a mentor.</H>
-      <p className="hb-desc">Self-paced with AI-driven assignments and feedback, or a mentor-led program.</p>
+      <p className="hb-desc">Self-paced with hands-on assignments and Framepath reviews, or a mentor-led program.</p>
     </div>
 
     <svg className="hb-art" viewBox="1280 150 640 480" aria-hidden="true" focusable="false">
