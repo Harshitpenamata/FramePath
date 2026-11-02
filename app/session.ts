@@ -25,8 +25,13 @@ export async function verify<T>(token:string|undefined):Promise<T|null>{
   try{const ok=await crypto.subtle.verify('HMAC',await hmacKey(),fromB64url(mac),enc.encode(body));if(!ok)return null;const data=JSON.parse(new TextDecoder().decode(fromB64url(body)));if(typeof data.exp!=='number'||data.exp<Date.now()/1000)return null;return data as T}catch{return null}
 }
 
-export async function createSession(user:SessionUser){return sign({...user,exp:Math.floor(Date.now()/1000)+SESSION_TTL})}
-export async function readSession(token:string|undefined):Promise<SessionUser|null>{const p=await verify<Payload>(token);return p?{userId:p.userId,email:p.email,fullName:p.fullName}:null}
+export async function createSession(user:SessionUser){return sign({...user,typ:'session',exp:Math.floor(Date.now()/1000)+SESSION_TTL})}
+// Only a real session counts: other signed tokens (sign-in flow, unsubscribe links) have no user id, and older sessions have no typ.
+// 'Sign out everywhere' and account deletion record a time; sessions issued before it no longer work.
+export async function readSession(token:string|undefined):Promise<SessionUser|null>{const p=await verify<Payload&{typ?:string}>(token);if(!p||(p.typ!==undefined&&p.typ!=='session')||typeof p.userId!=='string'||typeof p.email!=='string')return null;
+  try{const r:any=await env.DB?.prepare('SELECT value FROM app_flags WHERE key=?').bind('sessions_after:'+p.userId).first();if(r&&Number(r.value)>=(p.exp-SESSION_TTL)*1000)return null}catch{}
+  return {userId:p.userId,email:p.email,fullName:p.fullName}}
+export async function endAllSessions(userId:string){const now=Date.now();if(!env.DB)return;await env.DB.prepare('INSERT INTO app_flags(key,value,updated_at) VALUES(?,?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value,updated_at=excluded.updated_at').bind('sessions_after:'+userId,String(now),now).run()}
 
 export function readCookie(header:string|null,name:string){for(const part of (header||'').split(';')){const i=part.indexOf('=');if(i>0&&part.slice(0,i).trim()===name)return part.slice(i+1).trim()}return undefined}
 // Secure everywhere except plain-http local dev, so a cookie can never be issued over http in production.
