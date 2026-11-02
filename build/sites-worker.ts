@@ -3,6 +3,18 @@ import { runWithConnectorBinding } from "../lib/connector-context";
 import { logError, runWithRequest } from "../app/errors";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
 
+// Browser safety headers on every page: no framing by other sites, no MIME guessing, HTTPS only, minimal referrers.
+function secured(res: Response): Response {
+  if (res.status === 101) return res;
+  const out = new Response(res.body, res);
+  out.headers.set("X-Frame-Options", "DENY");
+  out.headers.set("Content-Security-Policy", "frame-ancestors 'none'");
+  out.headers.set("X-Content-Type-Options", "nosniff");
+  out.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  out.headers.set("Strict-Transport-Security", "max-age=31536000");
+  return out;
+}
+
 export default {
   fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
     // Self-hosted: never serve the app (or set session cookies) over plain http.
@@ -37,7 +49,7 @@ export default {
       };
     }
     // Crashes that escape the app are logged for the daily error email, then answered with a plain 500.
-    return runWithRequest(request, () => Promise.resolve(runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx))).catch(async (e: unknown) => {
+    return runWithRequest(request, () => Promise.resolve(runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx))).then(secured).catch(async (e: unknown) => {
       await logError("worker", e, 500);
       return new Response("Something went wrong. Please try again.", { status: 500, headers: { "Content-Type": "text/plain; charset=utf-8" } });
     }));

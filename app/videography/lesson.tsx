@@ -18,9 +18,9 @@ import {track} from '../track';
 type FileRef={id:string;name:string;type:string};
 type Draft={answer:string;notes:string;url:string;files:FileRef[];ratings:number[];reflections:{well:string;change:string};text:Record<string,string>;partFiles:Record<string,FileRef[]>};
 const emptyDraft=():Draft=>({answer:'',notes:'',url:'',files:[],ratings:[-1,-1,-1],reflections:{well:'',change:''},text:{},partFiles:{}});
-const draftKey=(key:string)=>'fp-handin-'+key;
-function readDraft(key:string):Draft{try{const d=JSON.parse(localStorage.getItem(draftKey(key))||'null');if(d)return {...emptyDraft(),...d}}catch{}return emptyDraft()}
-function writeDraft(key:string,d:Draft){try{localStorage.setItem(draftKey(key),JSON.stringify(d))}catch{}}
+const draftKey=(owner:string,key:string)=>'fp-handin-'+owner+'-'+key;
+function readDraft(owner:string,key:string):Draft{try{localStorage.removeItem('fp-handin-'+key);if(!owner)return emptyDraft();const d=JSON.parse(localStorage.getItem(draftKey(owner,key))||'null');if(d)return {...emptyDraft(),...d}}catch{}return emptyDraft()}
+function writeDraft(owner:string,key:string,d:Draft){if(!owner)return;try{localStorage.setItem(draftKey(owner,key),JSON.stringify(d))}catch{}}
 // A module with task parts hands in each part separately; the server writes the text parts into the answer.
 const toHandIn=(d:Draft,moduleId?:string):HandIn=>{
  const list=moduleId?partsFor(moduleId):[];
@@ -103,11 +103,11 @@ function TaskFaq({moduleId}:{moduleId:string}){
 }
 
 function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:string)=>void}){
- const {s,mutate,busy}=useLearning();
+ const {s,mutate,busy,user}=useLearning();const owner=String(user?.publicId||'');
  const m=parseVideoKey(key)!.module,lesson=moduleLesson(m,projectLabel(s.programme));
  const [draft,setDraft]=useState<Draft>(emptyDraft);
- useEffect(()=>setDraft(readDraft(key)),[key]);
- const update=(patch:Partial<Draft>)=>setDraft(prev=>{const next={...prev,...patch};writeDraft(key,next);return next});
+ useEffect(()=>setDraft(readDraft(owner,key)),[key,owner]);
+ const update=(patch:Partial<Draft>)=>setDraft(prev=>{const next={...prev,...patch};writeDraft(owner,key,next);return next});
  const blocker=blockingModule(s,key);
  const entitled=canPractise(s,key);
  const handedIn=s.submissions.filter((x:any)=>x.key===key).length;
@@ -123,7 +123,7 @@ function TaskTab({moduleKey:key,onHandedIn}:{moduleKey:string;onHandedIn:(id:str
   const h=toHandIn(draft,m.id),state=await mutate('video_submit',{key,answer:h.answer,notes:h.notes,url:h.url,uploadIds:h.uploadIds,parts:h.parts,ratings:draft.ratings,reflections:draft.reflections});
   if(!state)return;
   const piece=state.submissions.find((x:any)=>x.key===key);
-  try{localStorage.removeItem(draftKey(key))}catch{}
+  try{localStorage.removeItem(draftKey(owner,key))}catch{}
   setDraft(emptyDraft());onHandedIn(piece?.id||'');
  }
  return <Gate><div className="vg-make">
